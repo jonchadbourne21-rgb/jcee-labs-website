@@ -24,7 +24,7 @@ import {
 
 export default function Home() {
   const [email, setEmail] = useState("");
-  const [activeTab, setActiveTab] = useState<"mirrored" | "musaia">("mirrored");
+  const [activeTab, setActiveTab] = useState<"mirrored" | "bidindustrial">("mirrored");
   const [bidValue, setBidValue] = useState(14250);
   const [overheadPercent, setOverheadPercent] = useState(12);
   const [profitPercent, setProfitPercent] = useState(18);
@@ -59,7 +59,7 @@ export default function Home() {
     });
   };
 
-  // Live calculation for Musaia Bid Simulator
+  // Live calculation for BidIndustrial Bid Simulator
   const rawCost = bidValue;
   const overhead = Math.round(rawCost * (overheadPercent / 100));
   const profit = Math.round(rawCost * (profitPercent / 100));
@@ -267,14 +267,14 @@ export default function Home() {
                 Mirrored
               </button>
               <button 
-                onClick={() => setActiveTab("musaia")}
+                onClick={() => setActiveTab("bidindustrial")}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                  activeTab === "musaia" 
+                  activeTab === "bidindustrial" 
                     ? "bg-teal-600 text-white shadow-lg shadow-teal-600/20" 
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
-                Musaia Estimator
+                BidIndustrial Estimator
               </button>
             </div>
           </div>
@@ -350,10 +350,10 @@ export default function Home() {
                     <TrendingUp className="w-3 h-3" /> B2B Intelligence
                   </div>
                   <h3 className="text-3xl md:text-4xl font-display font-bold">
-                    Musaia
+                    BidIndustrial
                   </h3>
                   <p className="text-muted-foreground leading-relaxed text-lg">
-                    The intelligent bidding estimator. Musaia is designed for commercial operators and contractors who need to deliver hyper-accurate bids at lightning speed. Using smart calculations and historical models, Musaia streamlines your bidding pipeline and maximizes win rates.
+                    The intelligent bidding estimator. BidIndustrial is designed for commercial operators and contractors who need to deliver hyper-accurate bids at lightning speed. Using smart calculations and historical models, BidIndustrial streamlines your bidding pipeline and maximizes win rates.
                   </p>
                   
                   {/* LIVE DEMO SLIDER WIDGET */}
@@ -397,8 +397,8 @@ export default function Home() {
                   </div>
 
                   <div className="pt-2 flex flex-wrap gap-4">
-                    <Button onClick={() => handleDemoAction("Musaia")} className="rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-medium shadow-lg shadow-teal-500/20 active:scale-97 transition-all">
-                      Schedule Musaia Pilot
+                    <Button onClick={() => handleDemoAction("BidIndustrial")} className="rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-medium shadow-lg shadow-teal-500/20 active:scale-97 transition-all">
+                      Schedule BidIndustrial Pilot
                     </Button>
                     <Link href="/faq">
                       <Button variant="ghost" className="rounded-xl text-teal-300 hover:text-teal-200 hover:bg-teal-500/5">
@@ -412,7 +412,7 @@ export default function Home() {
                   <div className="relative w-full max-w-[400px] aspect-square rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-teal-500/5 group">
                     <img 
                       src="https://d2xsxph8kpxj0f.cloudfront.net/310519663398434536/PGyQHKFdSR7kZkQyzRA9uW/musaia-app-ARtTfHsXSsnXnnYUZAw92g.webp" 
-                      alt="Musaia Blueprint" 
+                      alt="BidIndustrial Blueprint" 
                       className="w-full h-full object-cover transform scale-105 group-hover:scale-100 transition-transform duration-700 ease-out"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#090514] via-transparent to-transparent opacity-40" />
@@ -546,7 +546,7 @@ export default function Home() {
             <div className="glass-panel p-6 rounded-2xl border border-white/5 relative group hover:border-teal-500/20 transition-all duration-300">
               <div className="absolute top-4 right-4 text-xs font-mono text-teal-400 bg-teal-500/10 px-2 py-0.5 rounded-full">Phase 2</div>
               <div className="text-xs font-mono text-muted-foreground mb-2">Q3 2026</div>
-              <h4 className="font-display font-bold text-lg text-white mb-2">Musaia Launch</h4>
+              <h4 className="font-display font-bold text-lg text-white mb-2">BidIndustrial Launch</h4>
               <p className="text-muted-foreground text-sm leading-relaxed">Releasing the intelligent bidding estimator to selected contractor pilot cohorts.</p>
             </div>
 
@@ -583,7 +583,7 @@ export default function Home() {
             </h2>
             
             <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-              Be the first to know when private betas for <strong>Mirrored</strong>, <strong>Musaia</strong>, and other upcoming HOWM HOLDINGS LLC innovations go live.
+              Be the first to know when private betas for <strong>Mirrored</strong>, <strong>BidIndustrial</strong>, and other upcoming HOWM HOLDINGS LLC innovations go live.
             </p>
 
             {isSubmitted ? (
@@ -637,7 +637,7 @@ export default function Home() {
               <h5 className="font-display font-bold text-sm text-white tracking-wider uppercase">Incubator Products</h5>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><button onClick={() => { setActiveTab("mirrored"); document.getElementById("products")?.scrollIntoView({ behavior: "smooth" }); }} className="hover:text-purple-300 transition-colors">Mirrored App</button></li>
-                <li><button onClick={() => { setActiveTab("musaia"); document.getElementById("products")?.scrollIntoView({ behavior: "smooth" }); }} className="hover:text-teal-300 transition-colors">Musaia Estimator</button></li>
+                <li><button onClick={() => { setActiveTab("bidindustrial"); document.getElementById("products")?.scrollIntoView({ behavior: "smooth" }); }} className="hover:text-teal-300 transition-colors">BidIndustrial Estimator</button></li>
                 <li className="text-white/30">More coming soon...</li>
               </ul>
             </div>

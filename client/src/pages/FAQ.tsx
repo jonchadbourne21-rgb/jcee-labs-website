@@ -76,10 +76,10 @@ export default function FAQ() {
 
             <AccordionItem value="item-4" className="border-b border-white/5">
               <AccordionTrigger className="text-left font-display font-semibold text-lg py-4 hover:text-purple-300 hover:no-underline transition-colors">
-                What is "Musaia"?
+                What is "BidIndustrial"?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground leading-relaxed pt-2 pb-4">
-                <strong>Musaia</strong> is our intelligent bidding estimator tool. Designed for contractors, service providers, and business owners, Musaia leverages predictive intelligence to generate hyper-accurate cost estimates, analyze bid competitive dynamics, and dramatically reduce takeoff overhead.
+                <strong>BidIndustrial</strong> is our intelligent bidding estimator tool. Designed for contractors, service providers, and business owners, BidIndustrial leverages predictive intelligence to generate hyper-accurate cost estimates, analyze bid competitive dynamics, and dramatically reduce takeoff overhead.
               </AccordionContent>
             </AccordionItem>
 
@@ -97,7 +97,7 @@ export default function FAQ() {
                 Are these products available to the public?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground leading-relaxed pt-2 pb-4">
-                Yes, our applications roll out in phased launches. Mirrored is currently entering private beta, while Musaia is undergoing active industry pilot testing. You can register your interest or request early access directly on our homepage to secure your spot.
+                Yes, our applications roll out in phased launches. Mirrored is currently entering private beta, while BidIndustrial is undergoing active industry pilot testing. You can register your interest or request early access directly on our homepage to secure your spot.
               </AccordionContent>
             </AccordionItem>
           </Accordion>
