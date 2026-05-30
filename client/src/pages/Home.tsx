@@ -68,10 +68,10 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#090514] text-[#E2E8F0] relative overflow-x-hidden flex flex-col justify-between">
       
-      {/* BACKGROUND ORBS & AURORAS */}
-      <div className="absolute top-[-10%] left-[-5%] w-[600px] h-[600px] rounded-full bg-purple-600/10 blur-[150px] pointer-events-none animate-pulse duration-5000" />
-      <div className="absolute top-[20%] right-[-10%] w-[700px] h-[700px] rounded-full bg-teal-500/5 blur-[180px] pointer-events-none" />
-      <div className="absolute bottom-[10%] left-[10%] w-[500px] h-[500px] rounded-full bg-indigo-500/10 blur-[130px] pointer-events-none" />
+      {/* OPTIMIZED BACKGROUND AURORAS (GPU Accelerated, non-animated for faster painting) */}
+      <div className="absolute top-[-10%] left-[-5%] w-[450px] h-[450px] rounded-full bg-purple-600/8 blur-[100px] pointer-events-none" />
+      <div className="absolute top-[20%] right-[-10%] w-[500px] h-[500px] rounded-full bg-teal-500/4 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[10%] left-[10%] w-[400px] h-[400px] rounded-full bg-indigo-500/6 blur-[100px] pointer-events-none" />
 
       {/* STICKY HEADER */}
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -411,7 +411,7 @@ export default function Home() {
                 <div className="lg:col-span-6 flex justify-center">
                   <div className="relative w-full max-w-[400px] aspect-square rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-teal-500/5 group">
                     <img 
-                      src="https://d2xsxph8kpxj0f.cloudfront.net/310519663398434536/PGyQHKFdSR7kZkQyzRA9uW/musaia-app-ARtTfHsXSsnXnnYUZAw92g.webp" 
+                      src="https://d2xsxph8kpxj0f.cloudfront.net/310519663398434536/PGyQHKFdSR7kZkQyzRA9uW/bidindustrial-app-LKytJ2jgvAoUG3A6R2Fuzx.webp" 
                       alt="BidIndustrial Blueprint" 
                       className="w-full h-full object-cover transform scale-105 group-hover:scale-100 transition-transform duration-700 ease-out"
                     />
