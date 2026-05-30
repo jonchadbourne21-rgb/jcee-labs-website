@@ -29,3 +29,17 @@
 - [ ] BidIndustrial full product page with detailed feature breakdown
 - [ ] Email marketing integration (Mailchimp / Loops) for lead nurturing
 - [ ] Privacy Policy and Terms of Service pages
+
+## Phase 3 — Performance & Copy Fixes
+- [x] Fix copy: add "LLC" after all "HOWM HOLDINGS" instances in Home.tsx (header tagline + roadmap section)
+- [x] Performance: lazy-load FAQ and NotFound routes via React.lazy + Suspense in App.tsx
+- [x] Performance: reduce aurora blur radii (100-120px → 70-90px) and add will-change/translateZ(0) for GPU compositing
+- [x] Performance: add fetchPriority="high" + decoding="async" + explicit width/height to hero image
+- [x] Performance: remove animate-pulse from static Cpu icon in hero
+- [x] Performance: make Google Fonts non-render-blocking (media=print swap trick)
+- [x] Performance: add prefers-reduced-motion CSS rule to index.css
+- [x] Performance: add glass-panel CSS class with mobile backdrop-filter:none fallback
+- [x] Performance: apply content-visibility:auto to below-fold sections (lab, products, pipeline, roadmap)
+- [x] Performance: remove unused framer-motion package from bundle (~120KB saved)
+- [x] Performance: reduce font weight variants loaded from Google Fonts (fewer network requests)
+- [x] Performance: optimize FAQ page aurora divs (500px/120px blur → 350px/80px)

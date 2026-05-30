@@ -6,9 +6,9 @@ import { ArrowLeft, HelpCircle, Shield, Cpu, Zap } from "lucide-react";
 export default function FAQ() {
   return (
     <div className="min-h-screen bg-[#090514] text-[#E2E8F0] relative overflow-hidden flex flex-col justify-between">
-      {/* Background Orbs */}
-      <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-purple-500/10 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-teal-500/10 blur-[120px] pointer-events-none" />
+      {/* Background Orbs — GPU-composited */}
+      <div className="absolute top-[-10%] left-[-10%] w-[350px] h-[350px] rounded-full bg-purple-500/8 blur-[80px] pointer-events-none" style={{ willChange: 'transform', transform: 'translateZ(0)' }} />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[350px] h-[350px] rounded-full bg-teal-500/8 blur-[80px] pointer-events-none" style={{ willChange: 'transform', transform: 'translateZ(0)' }} />
 
       {/* Header */}
       <header className="border-b border-white/5 bg-card/20 backdrop-blur-md sticky top-0 z-50">

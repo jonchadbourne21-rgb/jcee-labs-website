@@ -150,10 +150,10 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#090514] text-[#E2E8F0] relative overflow-x-hidden flex flex-col justify-between">
 
-      {/* BACKGROUND AURORAS */}
-      <div className="absolute top-[-10%] left-[-5%] w-[450px] h-[450px] rounded-full bg-purple-600/8 blur-[100px] pointer-events-none" />
-      <div className="absolute top-[20%] right-[-10%] w-[500px] h-[500px] rounded-full bg-teal-500/4 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[10%] left-[10%] w-[400px] h-[400px] rounded-full bg-indigo-500/6 blur-[100px] pointer-events-none" />
+      {/* BACKGROUND AURORAS — static, GPU-composited, no animation */}
+      <div className="absolute top-[-10%] left-[-5%] w-[350px] h-[350px] rounded-full bg-purple-600/8 blur-[80px] pointer-events-none" style={{ willChange: 'transform', transform: 'translateZ(0)' }} />
+      <div className="absolute top-[20%] right-[-10%] w-[400px] h-[400px] rounded-full bg-teal-500/4 blur-[90px] pointer-events-none" style={{ willChange: 'transform', transform: 'translateZ(0)' }} />
+      <div className="absolute bottom-[10%] left-[10%] w-[300px] h-[300px] rounded-full bg-indigo-500/6 blur-[80px] pointer-events-none" style={{ willChange: 'transform', transform: 'translateZ(0)' }} />
 
       {/* STICKY HEADER */}
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -169,7 +169,7 @@ export default function Home() {
                 JCEE LABS
               </span>
               <span className="text-[10px] font-mono tracking-widest text-muted-foreground uppercase">
-                by HOWM HOLDINGS
+                by HOWM HOLDINGS LLC
               </span>
             </div>
           </div>
@@ -198,7 +198,7 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 space-y-8">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-mono">
-              <Sparkles className="w-3.5 h-3.5" /> Introducing the Jcee Labs Ecosystem
+              <Sparkles className="w-3.5 h-3.5" aria-hidden="true" /> Introducing the Jcee Labs Ecosystem
             </div>
             <h1 className="text-5xl md:text-7xl font-display font-extrabold leading-[1.05] tracking-tight">
               Crafting the <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Future</span> of Intelligent <span className="bg-gradient-to-r from-teal-400 to-teal-600 bg-clip-text text-transparent">Software</span>
@@ -235,17 +235,21 @@ export default function Home() {
           </div>
 
           <div className="lg:col-span-5 relative flex justify-center">
-            <div className="absolute inset-0 bg-purple-500/20 rounded-full blur-[100px] pointer-events-none scale-75" />
+            <div className="absolute inset-0 bg-purple-500/15 rounded-full blur-[70px] pointer-events-none scale-75" style={{ willChange: 'transform', transform: 'translateZ(0)' }} />
             <div className="relative w-full max-w-[450px] aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-purple-500/10 group">
               <img
                 src="https://d2xsxph8kpxj0f.cloudfront.net/310519663398434536/PGyQHKFdSR7kZkQyzRA9uW/jcee-labs-hero-bzba5vWMjZJYVUUoxCyc5g.webp"
                 alt="Jcee Labs AI Core"
+                width="450"
+                height="450"
+                fetchPriority="high"
+                decoding="async"
                 className="w-full h-full object-cover transform scale-105 group-hover:scale-100 transition-transform duration-700 ease-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#090514] via-transparent to-transparent opacity-60" />
               <div className="absolute bottom-6 left-6 right-6 bg-black/40 backdrop-blur-sm p-4 rounded-2xl border border-white/10 flex items-center gap-3">
                 <div className="w-10 h-10 rounded-lg bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-teal-400">
-                  <Cpu className="w-5 h-5 animate-pulse" />
+                  <Cpu className="w-5 h-5" />
                 </div>
                 <div>
                   <div className="text-xs font-mono text-teal-300 uppercase tracking-wider">Lab Status</div>
@@ -258,7 +262,7 @@ export default function Home() {
       </section>
 
       {/* THE LAB / MISSION */}
-      <section id="lab" className="border-t border-white/5 bg-white/[0.01] py-20 relative z-10">
+      <section id="lab" className="cv-auto border-t border-white/5 bg-white/[0.01] py-20 relative z-10">
         <div className="container">
           <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
             <h2 className="text-3xl md:text-4xl font-display font-extrabold">
@@ -290,7 +294,7 @@ export default function Home() {
       </section>
 
       {/* PRODUCTS SHOWCASE */}
-      <section id="products" className="py-24 relative z-10 border-t border-white/5">
+      <section id="products" className="cv-auto py-24 relative z-10 border-t border-white/5">
         <div className="container">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
             <div className="space-y-4 max-w-2xl">
@@ -321,7 +325,7 @@ export default function Home() {
           </div>
 
           <div className="bg-white/[0.02] p-8 md:p-12 rounded-3xl border border-white/5 relative overflow-hidden">
-            <div className={`absolute top-[-20%] right-[-10%] w-[400px] h-[400px] rounded-full blur-[120px] pointer-events-none transition-all duration-500 ${activeTab === "mirrored" ? "bg-purple-500/15" : "bg-teal-500/15"}`} />
+            <div className={`absolute top-[-20%] right-[-10%] w-[300px] h-[300px] rounded-full blur-[80px] pointer-events-none transition-colors duration-500 ${activeTab === "mirrored" ? "bg-purple-500/12" : "bg-teal-500/12"}`} style={{ willChange: 'transform', transform: 'translateZ(0)' }} />
 
             {/* ── MIRRORED TAB ── */}
             {activeTab === "mirrored" && (
@@ -549,7 +553,7 @@ export default function Home() {
       </section>
 
       {/* AI AGENT PIPELINE */}
-      <section id="pipeline" className="py-20 relative z-10 border-t border-white/5 bg-gradient-to-b from-transparent to-purple-950/10">
+      <section id="pipeline" className="cv-auto py-20 relative z-10 border-t border-white/5 bg-gradient-to-b from-transparent to-purple-950/10">
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-5 space-y-6">
@@ -618,14 +622,14 @@ export default function Home() {
       </section>
 
       {/* ROADMAP */}
-      <section className="py-20 border-t border-white/5 relative z-10">
+      <section className="cv-auto py-20 border-t border-white/5 relative z-10">
         <div className="container">
           <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
             <h2 className="text-3xl md:text-4xl font-display font-extrabold text-white">
               The Jcee Labs <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Roadmap</span>
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              We are constantly incubating. Here is a glimpse of where Jcee Labs is heading next under the HOWM HOLDINGS umbrella.
+              We are constantly incubating. Here is a glimpse of where Jcee Labs is heading next under the HOWM HOLDINGS LLC umbrella.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
