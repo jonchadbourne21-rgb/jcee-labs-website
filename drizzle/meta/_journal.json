@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1780150657875,
+      "tag": "0000_condemned_lily_hollister",
+      "breakpoints": true
+    }
+  ]
+}
