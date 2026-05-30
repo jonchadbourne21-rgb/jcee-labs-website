@@ -560,7 +560,7 @@ export default function Home() {
                 Streamlined by <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">AI Agents</span>
               </h2>
               <p className="text-muted-foreground text-lg leading-relaxed">
-                At Jcee Labs, we don't build software the old way. We orchestrate advanced autonomous AI agents (like Manus) to streamline our research, code generation, and deployment pipelines — giving us a compounding advantage in speed and quality — and letting us build faster.
+                At Jcee Labs, we don't build software the old way. We orchestrate advanced autonomous AI agents (like Manus) to streamline our research, code generation, and deployment pipelines — giving us a compounding advantage in speed and quality.
               </p>
               <div className="space-y-4 pt-2">
                 {[
