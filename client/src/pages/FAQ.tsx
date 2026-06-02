@@ -15,9 +15,11 @@ export default function FAQ() {
         <div className="container py-4 flex items-center justify-between">
           <Link href="/">
             <div className="flex items-center gap-2 cursor-pointer group">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-teal-500 flex items-center justify-center font-display font-bold text-white text-sm shadow-lg shadow-purple-500/20 group-hover:scale-105 transition-transform duration-200">
-                JL
-              </div>
+              <img
+                src="/manus-storage/jcee-labs-logo_f25acfb0.png"
+                alt="Jcee Labs Logo"
+                className="w-8 h-8 rounded-lg shadow-lg shadow-purple-500/20 group-hover:scale-105 transition-transform duration-200 object-contain"
+              />
               <span className="font-display font-bold text-lg tracking-wider group-hover:text-purple-300 transition-colors">
                 JCEE LABS
               </span>

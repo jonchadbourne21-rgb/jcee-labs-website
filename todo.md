@@ -43,3 +43,7 @@
 - [x] Performance: remove unused framer-motion package from bundle (~120KB saved)
 - [x] Performance: reduce font weight variants loaded from Google Fonts (fewer network requests)
 - [x] Performance: optimize FAQ page aurora divs (500px/120px blur → 350px/80px)
+
+## Phase 4 — UI Fixes & Logo
+- [x] Fix scroll position: add window.scrollTo(0, 0) on route change in App.tsx
+- [x] Replace logo: upload new 3D geometric logo and replace all JL badge instances in header, footer, and FAQ page

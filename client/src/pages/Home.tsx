@@ -161,9 +161,11 @@ export default function Home() {
       }`}>
         <div className="container flex items-center justify-between">
           <div className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-teal-400 flex items-center justify-center font-display font-extrabold text-white text-base shadow-lg shadow-purple-500/25 group-hover:scale-105 transition-transform duration-300">
-              JL
-            </div>
+            <img
+              src="/manus-storage/jcee-labs-logo_f25acfb0.png"
+              alt="Jcee Labs Logo"
+              className="w-10 h-10 rounded-xl shadow-lg shadow-purple-500/25 group-hover:scale-105 transition-transform duration-300 object-contain"
+            />
             <div className="flex flex-col">
               <span className="font-display font-bold text-lg tracking-wider group-hover:text-purple-300 transition-colors">
                 JCEE LABS
@@ -704,7 +706,11 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
             <div className="md:col-span-5 space-y-4">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-teal-400 flex items-center justify-center font-display font-extrabold text-white text-xs shadow-lg shadow-purple-500/25">JL</div>
+                <img
+                src="/manus-storage/jcee-labs-logo_f25acfb0.png"
+                alt="Jcee Labs Logo"
+                className="w-8 h-8 rounded-lg shadow-lg shadow-purple-500/25 object-contain"
+              />
                 <span className="font-display font-bold text-base tracking-wider text-white">JCEE LABS</span>
               </div>
               <p className="text-muted-foreground text-sm leading-relaxed max-w-sm">
