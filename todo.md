@@ -47,3 +47,15 @@
 ## Phase 4 — UI Fixes & Logo
 - [x] Fix scroll position: add window.scrollTo(0, 0) on route change in App.tsx
 - [x] Replace logo: upload new 3D geometric logo and replace all JL badge instances in header, footer, and FAQ page
+
+## Phase 5 — B2B Services & Inquiry Form
+- [x] Add B2B Services section to Home.tsx with headline and 3 value props (Speed, Quality, Efficiency)
+- [x] Create business_inquiries table in Drizzle schema with all required fields
+- [x] Run pnpm db:push to migrate database
+- [x] Add insertBusinessInquiry and getAllBusinessInquiries helpers to server/db.ts
+- [x] Create business.submitInquiry tRPC procedure with validation and owner notification
+- [x] Create business.list admin-only tRPC procedure
+- [x] Build BusinessInquiryForm component with form fields and validation
+- [x] Integrate BusinessInquiryForm into Home.tsx after Services section
+- [x] Style form with glassmorphism (glass-panel class) to match site design
+- [x] Add success state UI to form with emoji and thank you message

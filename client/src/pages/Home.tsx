@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
+import BusinessInquiryForm from "@/components/BusinessInquiryForm";
 import {
   ArrowUpRight,
   Sparkles,
@@ -259,6 +260,65 @@ export default function Home() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* B2B SERVICES */}
+      <section id="services" className="py-24 relative z-10 border-t border-white/5 bg-gradient-to-b from-transparent to-teal-950/5">
+        <div className="container">
+          <div className="max-w-4xl mx-auto text-center space-y-8 mb-20">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-300 text-xs font-mono">
+              <Zap className="w-3.5 h-3.5" /> Custom Development
+            </div>
+            <h2 className="text-4xl md:text-6xl font-display font-extrabold leading-tight">
+              We offer <span className="bg-gradient-to-r from-teal-400 to-teal-600 bg-clip-text text-transparent">business-to-business website builds</span> + automation at the highest quality, speed, and efficiency
+            </h2>
+            <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl mx-auto">
+              From concept to deployment, we orchestrate AI-powered development pipelines to deliver enterprise-grade solutions faster than traditional agencies.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            {[
+              { icon: Zap, color: "teal", title: "Lightning Speed", desc: "AI-accelerated development cycles cut project timelines by 60%. From requirements to production in weeks, not months." },
+              { icon: Sparkles, color: "purple", title: "Uncompromising Quality", desc: "Every line of code is tested, optimized, and audited. We ship production-ready systems with zero technical debt." },
+              { icon: Cpu, color: "indigo", title: "Autonomous Efficiency", desc: "Our AI agents handle the heavy lifting—code generation, testing, deployment. You get more done with fewer resources." },
+            ].map(({ icon: Icon, color, title, desc }) => (
+              <div key={title} className="glass-panel p-8 rounded-2xl border border-white/5 relative group hover:border-${color}-500/20 transition-all">
+                <div className={`w-12 h-12 rounded-lg bg-${color}-500/10 border border-${color}-500/20 flex items-center justify-center text-${color}-400 mb-4`}>
+                  <Icon className="w-6 h-6" />
+                </div>
+                <h3 className="font-display font-bold text-lg text-white mb-2">{title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <a href="#inquiry">
+              <Button size="lg" className="rounded-xl bg-gradient-to-r from-teal-600 to-teal-500 hover:from-teal-500 hover:to-teal-400 text-white font-semibold shadow-lg shadow-teal-500/20 active:scale-97 transition-all">
+                Start Your Project <ArrowUpRight className="w-4 h-4 ml-2" />
+              </Button>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* BUSINESS INQUIRY FORM */}
+      <section id="inquiry" className="py-24 relative z-10 border-t border-white/5">
+        <div className="container">
+          <div className="max-w-2xl mx-auto">
+            <div className="text-center space-y-4 mb-12">
+              <h3 className="text-3xl md:text-4xl font-display font-extrabold text-white">
+                Ready to <span className="bg-gradient-to-r from-teal-400 to-teal-600 bg-clip-text text-transparent">build together</span>?
+              </h3>
+              <p className="text-muted-foreground text-lg">
+                Tell us about your project and we'll get back to you within 24 hours.
+              </p>
+            </div>
+
+            <BusinessInquiryForm />
           </div>
         </div>
       </section>

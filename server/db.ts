@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, leads, users } from "../drizzle/schema";
+import { InsertUser, leads, users, businessInquiries } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -112,4 +112,34 @@ export async function getAllLeads() {
   const db = await getDb();
   if (!db) return [];
   return db.select().from(leads).orderBy(leads.createdAt);
+}
+
+// Business inquiry helpers
+export async function insertBusinessInquiry(data: {
+  companyName: string;
+  contactName: string;
+  email: string;
+  phone?: string;
+  projectDescription: string;
+  budget?: string;
+  timeline?: string;
+}): Promise<{ success: boolean; id?: number }> {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot insert business inquiry: database not available");
+    return { success: false };
+  }
+  try {
+    const result = await db.insert(businessInquiries).values(data);
+    return { success: true, id: result[0].insertId as number };
+  } catch (err) {
+    console.error("[Database] Failed to insert business inquiry:", err);
+    throw err;
+  }
+}
+
+export async function getAllBusinessInquiries() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(businessInquiries).orderBy(businessInquiries.createdAt);
 }

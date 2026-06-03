@@ -5,7 +5,7 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { invokeLLM } from "./_core/llm";
 import { notifyOwner } from "./_core/notification";
 import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
-import { getAllLeads, insertLead } from "./db";
+import { getAllLeads, insertLead, insertBusinessInquiry, getAllBusinessInquiries } from "./db";
 import { systemRouter } from "./_core/systemRouter";
 
 export const appRouter = router({
@@ -46,6 +46,40 @@ export const appRouter = router({
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required." });
       }
       return getAllLeads();
+    }),
+  }),
+
+  // Business inquiry form — public endpoint
+  business: router({
+    submitInquiry: publicProcedure
+      .input(z.object({
+        companyName: z.string().min(2).max(255),
+        contactName: z.string().min(2).max(255),
+        email: z.string().email(),
+        phone: z.string().max(20).optional(),
+        projectDescription: z.string().min(10).max(5000),
+        budget: z.string().max(64).optional(),
+        timeline: z.string().max(64).optional(),
+      }))
+      .mutation(async ({ input }) => {
+        const result = await insertBusinessInquiry(input);
+        if (!result.success) {
+          throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Could not submit inquiry. Please try again." });
+        }
+        // Notify owner of new business inquiry
+        await notifyOwner({
+          title: "New Business Inquiry",
+          content: `Company: ${input.companyName}\nContact: ${input.contactName} (${input.email})\nPhone: ${input.phone || "Not provided"}\nProject: ${input.projectDescription}\nBudget: ${input.budget || "Not specified"}\nTimeline: ${input.timeline || "Not specified"}`,
+        });
+        return { success: true, message: "Thank you! We'll be in touch shortly." };
+      }),
+
+    // Admin-only: list all inquiries
+    list: protectedProcedure.query(async ({ ctx }) => {
+      if (ctx.user.role !== "admin") {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required." });
+      }
+      return getAllBusinessInquiries();
     }),
   }),
 

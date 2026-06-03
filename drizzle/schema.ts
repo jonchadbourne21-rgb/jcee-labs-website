@@ -35,3 +35,19 @@ export const leads = mysqlTable("leads", {
 
 export type Lead = typeof leads.$inferSelect;
 export type InsertLead = typeof leads.$inferInsert;
+
+// Business inquiry form submissions
+export const businessInquiries = mysqlTable("business_inquiries", {
+  id: int("id").autoincrement().primaryKey(),
+  companyName: varchar("companyName", { length: 255 }).notNull(),
+  contactName: varchar("contactName", { length: 255 }).notNull(),
+  email: varchar("email", { length: 320 }).notNull(),
+  phone: varchar("phone", { length: 20 }),
+  projectDescription: text("projectDescription").notNull(),
+  budget: varchar("budget", { length: 64 }),
+  timeline: varchar("timeline", { length: 64 }),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type BusinessInquiry = typeof businessInquiries.$inferSelect;
+export type InsertBusinessInquiry = typeof businessInquiries.$inferInsert;
