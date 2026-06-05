@@ -331,7 +331,7 @@ export default function Home() {
               Our <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Vision</span> & Philosophy
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              Jcee Labs is built to explore the boundaries of digital intelligence. Under the stewardship of HOWM HOLDINGS LLC, we create products that don't just solve problems—they reshape how we interact with technology.
+              Jcee Labs exists to level the playing field. We empower small businesses to compete with enterprises that have unlimited budgets. Under the stewardship of HOWM HOLDINGS LLC, we build products that automate operations, save time and money, and deliver incredible ROI. Our system might not be the best, but we are the best. Our determination to win won't be stopped.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -367,7 +367,7 @@ export default function Home() {
                 The <span className="bg-gradient-to-r from-teal-400 to-teal-600 bg-clip-text text-transparent">Inventions</span> of Jcee Labs
               </h2>
               <p className="text-muted-foreground text-lg">
-                Explore our debut tools designed to optimize personal introspection and professional business estimating.
+                Explore our suite of tools designed to empower small businesses: personal introspection, professional estimating, and SOP automation.
               </p>
             </div>
             <div className="flex gap-2 bg-white/[0.03] border border-white/5 p-1.5 rounded-xl self-start md:self-auto">
@@ -379,15 +379,21 @@ export default function Home() {
               </button>
               <button
                 onClick={() => setActiveTab("bidindustrial")}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === "bidindustrial" ? "bg-teal-600 text-white shadow-lg shadow-teal-600/20" : "text-muted-foreground hover:text-[#E2E8F0]"}`}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === "bidindustrial" ? "bg-teal-600 text-white shadow-lg shadow-teal-600/20" : "text-muted-foreground hover:text-[#E2E8F0]`}
               >
                 BidIndustrial
+              </button>
+              <button
+                onClick={() => setActiveTab("nicheflow")}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === "nicheflow" ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/20" : "text-muted-foreground hover:text-[#E2E8F0]`}
+              >
+                NicheFlow
               </button>
             </div>
           </div>
 
           <div className="bg-white/[0.02] p-8 md:p-12 rounded-3xl border border-white/5 relative overflow-hidden">
-            <div className={`absolute top-[-20%] right-[-10%] w-[300px] h-[300px] rounded-full blur-[80px] pointer-events-none transition-colors duration-500 ${activeTab === "mirrored" ? "bg-purple-500/12" : "bg-teal-500/12"}`} style={{ willChange: 'transform', transform: 'translateZ(0)' }} />
+            <div className={`absolute top-[-20%] right-[-10%] w-[300px] h-[300px] rounded-full blur-[80px] pointer-events-none transition-colors duration-500 ${activeTab === "mirrored" ? "bg-purple-500/12" : activeTab === "bidindustrial" ? "bg-teal-500/12" : activeTab === "nicheflow" ? "bg-indigo-500/12" : "bg-indigo-500/12"}`} style={{ willChange: 'transform', transform: 'translateZ(0)' }} />
 
             {/* ── MIRRORED TAB ── */}
             {activeTab === "mirrored" && (
@@ -610,6 +616,88 @@ export default function Home() {
                 </div>
               </div>
             )}
+
+            {/* ── NICHEFLOW TAB ── */}
+            {activeTab === "nicheflow" && (
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <div className="lg:col-span-5 space-y-6">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-mono">
+                    <Workflow className="w-3 h-3" /> Niche Automation
+                  </div>
+                  <h3 className="text-3xl md:text-4xl font-display font-bold text-white">NicheFlow</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    The workflow automation platform built for niche industries and small businesses. Create, manage, and automate your standard operating procedures to compete with enterprises. Save time, reduce costs, and unlock incredible ROI.
+                  </p>
+                  <div className="space-y-3">
+                    {["Industry-specific SOP templates (HVAC, Electrical, Plumbing, etc.)", "Drag-and-drop workflow automation with no-code logic", "Team collaboration & real-time execution tracking", "ROI analytics: time saved, cost reduction, efficiency gains"].map((f) => (
+                      <div key={f} className="flex items-center gap-3">
+                        <div className="w-5 h-5 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-300 shrink-0">
+                          <ChevronRight className="w-3 h-3" />
+                        </div>
+                        <span className="text-sm font-medium text-[#E2E8F0]">{f}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex flex-wrap gap-4 pt-2">
+                    <Button onClick={() => handleDemoAction("NicheFlow")} className="rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium shadow-lg shadow-indigo-500/20 active:scale-97 transition-all">
+                      Get Started Free
+                    </Button>
+                    <Link href="/faq">
+                      <Button variant="ghost" className="rounded-xl text-indigo-300 hover:text-indigo-200 hover:bg-indigo-500/5">
+                        Learn More
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+
+                {/* ── NICHEFLOW ROI CALCULATOR ── */}
+                <div className="lg:col-span-7 space-y-4">
+                  <div className="bg-black/30 border border-white/10 rounded-2xl p-6 space-y-6">
+                    <div className="text-xs font-mono text-indigo-300 tracking-wider">ROI CALCULATOR</div>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium text-white mb-2">Team Size</label>
+                        <div className="flex gap-2">
+                          {["1-5", "5-20", "20-50", "50+"].map((size) => (
+                            <button key={size} className="px-3 py-2 rounded-lg text-xs font-medium bg-indigo-600/20 border border-indigo-500/30 text-indigo-300 hover:bg-indigo-600/40 transition-all">
+                              {size}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-white mb-2">Current Manual Hours/Week</label>
+                        <input type="range" min="5" max="100" defaultValue="40" className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-indigo-400" />
+                        <div className="text-xs text-muted-foreground mt-1">~40 hours/week</div>
+                      </div>
+                    </div>
+                    <div className="pt-4 border-t border-white/5 space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">Time Saved/Month:</span>
+                        <span className="font-bold text-indigo-300">~160 hours</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">Cost Reduction:</span>
+                        <span className="font-bold text-emerald-300">~$6,400/month</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">Annual ROI:</span>
+                        <span className="font-bold text-white text-lg">340%</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-gradient-to-br from-indigo-600/20 to-purple-600/20 border border-indigo-500/20 rounded-2xl p-6 space-y-3">
+                    <h4 className="font-display font-bold text-white">Why Small Businesses Choose uSOP</h4>
+                    <ul className="space-y-2 text-sm text-muted-foreground">
+                      <li className="flex gap-2"><span className="text-indigo-400">→</span> <span>Level the playing field against enterprises</span></li>
+                      <li className="flex gap-2"><span className="text-indigo-400">→</span> <span>Automate without expensive consultants</span></li>
+                      <li className="flex gap-2"><span className="text-indigo-400">→</span> <span>Scale operations without hiring</span></li>
+                      <li className="flex gap-2"><span className="text-indigo-400">→</span> <span>Measurable ROI from day one</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -782,7 +870,7 @@ export default function Home() {
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><button onClick={() => { setActiveTab("mirrored"); document.getElementById("products")?.scrollIntoView({ behavior: "smooth" }); }} className="hover:text-purple-300 transition-colors">Mirrored App</button></li>
                 <li><button onClick={() => { setActiveTab("bidindustrial"); document.getElementById("products")?.scrollIntoView({ behavior: "smooth" }); }} className="hover:text-teal-300 transition-colors">BidIndustrial Estimator</button></li>
-                <li className="text-white/30">More coming soon...</li>
+                <li><button onClick={() => { setActiveTab("nicheflow"); document.getElementById("products")?.scrollIntoView({ behavior: "smooth" }); }} className="hover:text-indigo-300 transition-colors">NicheFlow</button></li>
               </ul>
             </div>
             <div className="md:col-span-2 space-y-3">

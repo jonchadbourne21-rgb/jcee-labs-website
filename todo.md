@@ -59,3 +59,13 @@
 - [x] Integrate BusinessInquiryForm into Home.tsx after Services section
 - [x] Style form with glassmorphism (glass-panel class) to match site design
 - [x] Add success state UI to form with emoji and thank you message
+
+## Phase 6 — Small Business Mission & NicheFlow Launch
+- [x] Update Vision & Philosophy section to emphasize small business empowerment and determination
+- [x] Add NicheFlow as third product showcase with ROI metrics and industry templates
+- [x] Create NicheFlow tab in products section with description and features
+- [x] Build NicheFlow ROI Calculator widget showing time saved, cost reduction, annual ROI
+- [x] Add "Why Small Businesses Choose NicheFlow" value prop section
+- [x] Update product suite description to include SOP automation
+- [x] Add NicheFlow button to footer products list
+- [x] Rename uSOP to NicheFlow throughout all references
