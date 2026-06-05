@@ -50,7 +50,7 @@ const MIRROR_STARTERS = [
 export default function Home() {
   // ── UI State ──────────────────────────────────────────────────────────────
   const [scrolled, setScrolled] = useState(false);
-  const [activeTab, setActiveTab] = useState<"mirrored" | "bidindustrial">("mirrored");
+  const [activeTab, setActiveTab] = useState<"mirrored" | "bidindustrial" | "nicheflow">("mirrored");
 
   // ── Lead Capture State ────────────────────────────────────────────────────
   const [email, setEmail] = useState("");
@@ -379,13 +379,13 @@ export default function Home() {
               </button>
               <button
                 onClick={() => setActiveTab("bidindustrial")}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === "bidindustrial" ? "bg-teal-600 text-white shadow-lg shadow-teal-600/20" : "text-muted-foreground hover:text-[#E2E8F0]`}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === "bidindustrial" ? "bg-teal-600 text-white shadow-lg shadow-teal-600/20" : "text-muted-foreground hover:text-[#E2E8F0]"}`}
               >
                 BidIndustrial
               </button>
               <button
                 onClick={() => setActiveTab("nicheflow")}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === "nicheflow" ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/20" : "text-muted-foreground hover:text-[#E2E8F0]`}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === "nicheflow" ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/20" : "text-muted-foreground hover:text-[#E2E8F0]"}`}
               >
                 NicheFlow
               </button>
