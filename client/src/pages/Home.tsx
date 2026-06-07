@@ -50,7 +50,7 @@ const MIRROR_STARTERS = [
 export default function Home() {
   // ── UI State ──────────────────────────────────────────────────────────────
   const [scrolled, setScrolled] = useState(false);
-  const [activeTab, setActiveTab] = useState<"mirrored" | "bidindustrial" | "nicheflow">("mirrored");
+  const [activeTab, setActiveTab] = useState<"mirrored" | "bidindustrial" | "nicheflow" | "qore" | "apex" | "cellular-automata">("mirrored");
 
   // ── Lead Capture State ────────────────────────────────────────────────────
   const [email, setEmail] = useState("");
@@ -405,11 +405,29 @@ export default function Home() {
               >
                 NicheFlow
               </button>
+              <button
+                onClick={() => setActiveTab("qore")}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === "qore" ? "bg-cyan-600 text-white shadow-lg shadow-cyan-600/20" : "text-muted-foreground hover:text-[#E2E8F0]"}`}
+              >
+                QORE
+              </button>
+              <button
+                onClick={() => setActiveTab("apex")}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === "apex" ? "bg-amber-600 text-white shadow-lg shadow-amber-600/20" : "text-muted-foreground hover:text-[#E2E8F0]"}`}
+              >
+                APEX
+              </button>
+              <button
+                onClick={() => setActiveTab("cellular-automata")}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === "cellular-automata" ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20" : "text-muted-foreground hover:text-[#E2E8F0]"}`}
+              >
+                Cellular Automata
+              </button>
             </div>
           </div>
 
           <div className="bg-white/[0.02] p-8 md:p-12 rounded-3xl border border-white/5 relative overflow-hidden">
-            <div className={`absolute top-[-20%] right-[-10%] w-[300px] h-[300px] rounded-full blur-[80px] pointer-events-none transition-colors duration-500 ${activeTab === "mirrored" ? "bg-purple-500/12" : activeTab === "bidindustrial" ? "bg-teal-500/12" : activeTab === "nicheflow" ? "bg-indigo-500/12" : "bg-indigo-500/12"}`} style={{ willChange: 'transform', transform: 'translateZ(0)' }} />
+            <div className={`absolute top-[-20%] right-[-10%] w-[300px] h-[300px] rounded-full blur-[80px] pointer-events-none transition-colors duration-500 ${activeTab === "mirrored" ? "bg-purple-500/12" : activeTab === "bidindustrial" ? "bg-teal-500/12" : activeTab === "nicheflow" ? "bg-indigo-500/12" : activeTab === "qore" ? "bg-cyan-500/12" : activeTab === "apex" ? "bg-amber-500/12" : "bg-blue-500/12"}`} style={{ willChange: 'transform', transform: 'translateZ(0)' }} />
 
             {/* ── MIRRORED TAB ── */}
             {activeTab === "mirrored" && (
@@ -725,6 +743,108 @@ export default function Home() {
                       <li className="flex gap-2"><span className="text-indigo-400">→</span> <span>Scale operations without hiring</span></li>
                       <li className="flex gap-2"><span className="text-indigo-400">→</span> <span>Measurable ROI from day one</span></li>
                     </ul>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* ── QORE TAB ── */}
+            {activeTab === "qore" && (
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <div className="lg:col-span-5 space-y-6">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-xs font-mono">
+                    <Zap className="w-3 h-3" /> Enterprise Paradigm
+                  </div>
+                  <h3 className="text-3xl md:text-4xl font-display font-bold text-white">QORE</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    The Intelligent Automation Fabric for Enterprise Software Development. QORE is not a language—it's the Operating System for Future-Proofing Codebases. Adaptive, self-optimizing code evolution at runtime that eliminates technical debt and accelerates feature velocity by orders of magnitude.
+                  </p>
+                  <div className="space-y-3">
+                    {["Runtime self-optimization & adaptive evolution", "Technical debt elimination at scale", "Seamless enterprise stack integration"].map((f) => (
+                      <div key={f} className="flex items-center gap-3">
+                        <div className="w-5 h-5 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-300 shrink-0">
+                          <ChevronRight className="w-3 h-3" />
+                        </div>
+                        <span className="text-sm font-medium text-[#E2E8F0]">{f}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <Button className="rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-medium shadow-lg shadow-cyan-500/20 active:scale-97 transition-all">
+                    Explore QORE
+                  </Button>
+                </div>
+                <div className="lg:col-span-7 flex items-center justify-center">
+                  <div className="text-center space-y-4">
+                    <div className="text-6xl font-display font-bold text-transparent bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text">QORE</div>
+                    <p className="text-muted-foreground text-sm max-w-xs">Quest-Oriented Runtime Evolution — Code that keeps trying, keeps learning, and keeps proof.</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* ── APEX TAB ── */}
+            {activeTab === "apex" && (
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <div className="lg:col-span-5 space-y-6">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs font-mono">
+                    <BrainCircuit className="w-3 h-3" /> Marketing Strategist
+                  </div>
+                  <h3 className="text-3xl md:text-4xl font-display font-bold text-white">APEX</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    The relentless AI strategist that refuses second place. APEX is a specialized language model configured to embody elite marketing principles, delivering precision-engineered strategy, content, ads, funnels, and competitive analysis—not generic advice.
+                  </p>
+                  <div className="space-y-3">
+                    {["Aggressive positioning & differentiation", "Precision tool matching for your brand", "Elite-level analysis & actionable recommendations"].map((f) => (
+                      <div key={f} className="flex items-center gap-3">
+                        <div className="w-5 h-5 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-300 shrink-0">
+                          <ChevronRight className="w-3 h-3" />
+                        </div>
+                        <span className="text-sm font-medium text-[#E2E8F0]">{f}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <Button className="rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-medium shadow-lg shadow-amber-500/20 active:scale-97 transition-all">
+                    Meet APEX
+                  </Button>
+                </div>
+                <div className="lg:col-span-7 flex items-center justify-center">
+                  <div className="text-center space-y-4">
+                    <div className="text-6xl font-display font-bold text-transparent bg-gradient-to-r from-amber-400 to-amber-600 bg-clip-text">APEX</div>
+                    <p className="text-muted-foreground text-sm max-w-xs">Marketing Dominance — Precision-engineered strategy that drives your brand to elite status.</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* ── CELLULAR AUTOMATA EXPLORER TAB ── */}
+            {activeTab === "cellular-automata" && (
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <div className="lg:col-span-5 space-y-6">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-xs font-mono">
+                    <Sparkles className="w-3 h-3" /> Complexity Science
+                  </div>
+                  <h3 className="text-3xl md:text-4xl font-display font-bold text-white">Cellular Automata Explorer</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Observe how simple rules create complex emergent patterns. Explore 2D cellular automata systems with Moore and Von Neumann neighborhoods, discover unknown rules through automated sweeps, and visualize the intersection of mathematics and emergence.
+                  </p>
+                  <div className="space-y-3">
+                    {["Interactive 1D & 2D rule exploration", "Automated rule discovery via sweep", "Real-time pattern visualization"].map((f) => (
+                      <div key={f} className="flex items-center gap-3">
+                        <div className="w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-300 shrink-0">
+                          <ChevronRight className="w-3 h-3" />
+                        </div>
+                        <span className="text-sm font-medium text-[#E2E8F0]">{f}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <Button className="rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-medium shadow-lg shadow-blue-500/20 active:scale-97 transition-all">
+                    Start Exploring
+                  </Button>
+                </div>
+                <div className="lg:col-span-7 flex items-center justify-center">
+                  <div className="text-center space-y-4">
+                    <div className="text-6xl font-display font-bold text-transparent bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text">CA</div>
+                    <p className="text-muted-foreground text-sm max-w-xs">Cellular Automata — Where simple rules generate infinite complexity and beauty.</p>
                   </div>
                 </div>
               </div>
