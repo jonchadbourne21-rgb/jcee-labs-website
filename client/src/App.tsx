@@ -8,6 +8,12 @@ import { lazy, Suspense, useEffect } from "react";
 
 const FAQ = lazy(() => import("./pages/FAQ"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const Mirrored = lazy(() => import("./pages/Mirrored"));
+const BidIndustrialPage = lazy(() => import("./pages/BidIndustrialPage"));
+const NicheFloPage = lazy(() => import("./pages/NicheFloPage"));
+const QorePage = lazy(() => import("./pages/QorePage"));
+const ApexPage = lazy(() => import("./pages/ApexPage"));
+const CellularAutomataPage = lazy(() => import("./pages/CellularAutomataPage"));
 
 function Router() {
   const [location] = useLocation();
@@ -23,6 +29,12 @@ function Router() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/faq" component={FAQ} />
+        <Route path="/mirrored" component={Mirrored} />
+        <Route path="/bidindustrial" component={BidIndustrialPage} />
+        <Route path="/nicheflo" component={NicheFloPage} />
+        <Route path="/qore" component={QorePage} />
+        <Route path="/apex" component={ApexPage} />
+        <Route path="/cellular-automata" component={CellularAutomataPage} />
         <Route path="/404" component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />
