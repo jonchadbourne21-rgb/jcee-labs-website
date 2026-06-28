@@ -11,7 +11,8 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const Mirrored = lazy(() => import("./pages/Mirrored"));
 const BidIndustrialPage = lazy(() => import("./pages/BidIndustrialPage"));
 const NicheFloPage = lazy(() => import("./pages/NicheFloPage"));
-const QorePage = lazy(() => import("./pages/QorePage"));
+const VowPage = lazy(() => import("./pages/VowPage"));
+const TruckersDreamPage = lazy(() => import("./pages/TruckersDreamPage"));
 const ApexPage = lazy(() => import("./pages/ApexPage"));
 const CellularAutomataPage = lazy(() => import("./pages/CellularAutomataPage"));
 
@@ -32,7 +33,8 @@ function Router() {
         <Route path="/mirrored" component={Mirrored} />
         <Route path="/bidindustrial" component={BidIndustrialPage} />
         <Route path="/nicheflo" component={NicheFloPage} />
-        <Route path="/qore" component={QorePage} />
+        <Route path="/vow" component={VowPage} />
+        <Route path="/truckers-dream" component={TruckersDreamPage} />
         <Route path="/apex" component={ApexPage} />
         <Route path="/cellular-automata" component={CellularAutomataPage} />
         <Route path="/404" component={NotFound} />

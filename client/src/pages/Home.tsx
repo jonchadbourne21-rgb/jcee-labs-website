@@ -50,7 +50,7 @@ const MIRROR_STARTERS = [
 export default function Home() {
   // ── UI State ──────────────────────────────────────────────────────────────
   const [scrolled, setScrolled] = useState(false);
-  const [activeTab, setActiveTab] = useState<"mirrored" | "bidindustrial" | "nicheflow" | "qore" | "apex" | "cellular-automata">("mirrored");
+  const [activeTab, setActiveTab] = useState<"mirrored" | "truckers-dream" | "vow" | "bidindustrial" | "nicheflow" | "apex" | "cellular-automata">("mirrored");
 
   // ── Lead Capture State ────────────────────────────────────────────────────
   const [email, setEmail] = useState("");
@@ -386,13 +386,31 @@ export default function Home() {
                 Explore our suite of tools designed to empower small businesses: personal introspection, professional estimating, and on-demand SOP generation.
               </p>
             </div>
-            <div className="flex gap-2 bg-white/[0.03] border border-white/5 p-1.5 rounded-xl self-start md:self-auto">
+            <div className="flex flex-wrap gap-2 bg-white/[0.03] border border-white/5 p-1.5 rounded-xl self-start md:self-auto">
+              {/* Flagship Products */}
+              <button
+                onClick={() => setActiveTab("vow")}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === "vow" ? "bg-purple-600 text-white shadow-lg shadow-purple-600/20" : "text-muted-foreground hover:text-[#E2E8F0]"}`}
+              >
+                VOW
+              </button>
               <button
                 onClick={() => setActiveTab("mirrored")}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === "mirrored" ? "bg-purple-600 text-white shadow-lg shadow-purple-600/20" : "text-muted-foreground hover:text-[#E2E8F0]"}`}
               >
                 Mirrored
               </button>
+              <button
+                onClick={() => setActiveTab("truckers-dream")}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === "truckers-dream" ? "bg-orange-600 text-white shadow-lg shadow-orange-600/20" : "text-muted-foreground hover:text-[#E2E8F0]"}`}
+              >
+                Trucker$Dream
+              </button>
+              
+              {/* Separator */}
+              <div className="w-px bg-white/10" />
+              
+              {/* Other Products */}
               <button
                 onClick={() => setActiveTab("bidindustrial")}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === "bidindustrial" ? "bg-teal-600 text-white shadow-lg shadow-teal-600/20" : "text-muted-foreground hover:text-[#E2E8F0]"}`}
@@ -404,12 +422,6 @@ export default function Home() {
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === "nicheflow" ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/20" : "text-muted-foreground hover:text-[#E2E8F0]"}`}
               >
                 NicheFlow
-              </button>
-              <button
-                onClick={() => setActiveTab("qore")}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === "qore" ? "bg-cyan-600 text-white shadow-lg shadow-cyan-600/20" : "text-muted-foreground hover:text-[#E2E8F0]"}`}
-              >
-                QORE
               </button>
               <button
                 onClick={() => setActiveTab("apex")}
@@ -427,7 +439,7 @@ export default function Home() {
           </div>
 
           <div className="bg-white/[0.02] p-8 md:p-12 rounded-3xl border border-white/5 relative overflow-hidden">
-            <div className={`absolute top-[-20%] right-[-10%] w-[300px] h-[300px] rounded-full blur-[80px] pointer-events-none transition-colors duration-500 ${activeTab === "mirrored" ? "bg-purple-500/12" : activeTab === "bidindustrial" ? "bg-teal-500/12" : activeTab === "nicheflow" ? "bg-indigo-500/12" : activeTab === "qore" ? "bg-cyan-500/12" : activeTab === "apex" ? "bg-amber-500/12" : "bg-blue-500/12"}`} style={{ willChange: 'transform', transform: 'translateZ(0)' }} />
+            <div className={`absolute top-[-20%] right-[-10%] w-[300px] h-[300px] rounded-full blur-[80px] pointer-events-none transition-colors duration-500 ${activeTab === "mirrored" ? "bg-purple-500/12" : activeTab === "truckers-dream" ? "bg-orange-500/12" : activeTab === "vow" ? "bg-purple-500/12" : activeTab === "bidindustrial" ? "bg-teal-500/12" : activeTab === "nicheflow" ? "bg-indigo-500/12" : activeTab === "apex" ? "bg-amber-500/12" : "bg-blue-500/12"}`} style={{ willChange: 'transform', transform: 'translateZ(0)' }} />
 
             {/* ── MIRRORED TAB ── */}
             {activeTab === "mirrored" && (
@@ -748,35 +760,73 @@ export default function Home() {
               </div>
             )}
 
-            {/* ── QORE TAB ── */}
-            {activeTab === "qore" && (
+            {/* ── VOW TAB ── */}
+            {activeTab === "vow" && (
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
                 <div className="lg:col-span-5 space-y-6">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-xs font-mono">
-                    <Zap className="w-3 h-3" /> Enterprise Paradigm
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-mono">
+                    <Zap className="w-3 h-3" /> Next-Gen PaaS & Language
                   </div>
-                  <h3 className="text-3xl md:text-4xl font-display font-bold text-white">QORE</h3>
+                  <h3 className="text-3xl md:text-4xl font-display font-bold text-white">VOW</h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    The Intelligent Automation Fabric for Enterprise Software Development. QORE is not a language—it's the Operating System for Future-Proofing Codebases. Adaptive, self-optimizing code evolution at runtime that eliminates technical debt and accelerates feature velocity by orders of magnitude.
+                    A revolutionary PaaS and new coding language designed to eliminate complexity and accelerate development. VOW will be open-sourced, empowering developers worldwide to build the future faster.
                   </p>
                   <div className="space-y-3">
-                    {["Runtime self-optimization & adaptive evolution", "Technical debt elimination at scale", "Seamless enterprise stack integration"].map((f) => (
+                    {["Elegant, expressive language syntax", "Performance-first architecture", "Community-driven open source"].map((f) => (
                       <div key={f} className="flex items-center gap-3">
-                        <div className="w-5 h-5 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-300 shrink-0">
+                        <div className="w-5 h-5 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-300 shrink-0">
                           <ChevronRight className="w-3 h-3" />
                         </div>
                         <span className="text-sm font-medium text-[#E2E8F0]">{f}</span>
                       </div>
                     ))}
                   </div>
-                  <Button className="rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-medium shadow-lg shadow-cyan-500/20 active:scale-97 transition-all">
-                    Explore QORE
-                  </Button>
+                  <Link href="/vow">
+                    <Button className="rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-medium shadow-lg shadow-purple-500/20 active:scale-97 transition-all">
+                      Explore VOW
+                    </Button>
+                  </Link>
                 </div>
                 <div className="lg:col-span-7 flex items-center justify-center">
                   <div className="text-center space-y-4">
-                    <div className="text-6xl font-display font-bold text-transparent bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text">QORE</div>
-                    <p className="text-muted-foreground text-sm max-w-xs">Quest-Oriented Runtime Evolution — Code that keeps trying, keeps learning, and keeps proof.</p>
+                    <div className="text-6xl font-display font-bold text-transparent bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text">VOW</div>
+                    <p className="text-muted-foreground text-sm max-w-xs">The future of development. Open-source PaaS and language coming soon.</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* ── TRUCKER$DREAM TAB ── */}
+            {activeTab === "truckers-dream" && (
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <div className="lg:col-span-5 space-y-6">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-300 text-xs font-mono">
+                    <Zap className="w-3 h-3" /> Load Optimization
+                  </div>
+                  <h3 className="text-3xl md:text-4xl font-display font-bold text-white">Trucker$Dream</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Multi-stacking load optimization platform built for owner-operators. Maximize revenue per mile, optimize route efficiency, and stack loads intelligently to grow your trucking business.
+                  </p>
+                  <div className="space-y-3">
+                    {["Revenue maximization per mile", "Intelligent multi-load stacking", "Real-time route optimization"].map((f) => (
+                      <div key={f} className="flex items-center gap-3">
+                        <div className="w-5 h-5 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-300 shrink-0">
+                          <ChevronRight className="w-3 h-3" />
+                        </div>
+                        <span className="text-sm font-medium text-[#E2E8F0]">{f}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <Link href="/truckers-dream">
+                    <Button className="rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-medium shadow-lg shadow-orange-500/20 active:scale-97 transition-all">
+                      Get Started
+                    </Button>
+                  </Link>
+                </div>
+                <div className="lg:col-span-7 flex items-center justify-center">
+                  <div className="text-center space-y-4">
+                    <div className="text-6xl font-display font-bold text-transparent bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text">Trucker$Dream</div>
+                    <p className="text-muted-foreground text-sm max-w-xs">Earn more with smarter load optimization for owner-operators.</p>
                   </div>
                 </div>
               </div>
@@ -1017,10 +1067,12 @@ export default function Home() {
               </p>
             </div>
             <div className="md:col-span-3 space-y-3">
-              <h5 className="font-display font-bold text-sm text-white tracking-wider uppercase">Incubator Products</h5>
+              <h5 className="font-display font-bold text-sm text-white tracking-wider uppercase">Flagship Products</h5>
               <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><button onClick={() => { setActiveTab("vow"); document.getElementById("products")?.scrollIntoView({ behavior: "smooth" }); }} className="hover:text-purple-300 transition-colors">VOW</button></li>
                 <li><button onClick={() => { setActiveTab("mirrored"); document.getElementById("products")?.scrollIntoView({ behavior: "smooth" }); }} className="hover:text-purple-300 transition-colors">Mirrored App</button></li>
-                <li><button onClick={() => { setActiveTab("bidindustrial"); document.getElementById("products")?.scrollIntoView({ behavior: "smooth" }); }} className="hover:text-teal-300 transition-colors">BidIndustrial Estimator</button></li>
+                <li><button onClick={() => { setActiveTab("truckers-dream"); document.getElementById("products")?.scrollIntoView({ behavior: "smooth" }); }} className="hover:text-orange-300 transition-colors">Trucker$Dream</button></li>
+                <li><button onClick={() => { setActiveTab("bidindustrial"); document.getElementById("products")?.scrollIntoView({ behavior: "smooth" }); }} className="hover:text-teal-300 transition-colors">BidIndustrial</button></li>
                 <li><button onClick={() => { setActiveTab("nicheflow"); document.getElementById("products")?.scrollIntoView({ behavior: "smooth" }); }} className="hover:text-indigo-300 transition-colors">NicheFlow</button></li>
               </ul>
             </div>
