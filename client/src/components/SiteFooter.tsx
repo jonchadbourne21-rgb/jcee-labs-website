@@ -39,8 +39,8 @@ export default function SiteFooter() {
           <div className="md:col-span-2 space-y-3">
             <h5 className="font-display font-bold text-sm text-white tracking-wider uppercase">Legal</h5>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><span className="cursor-default">HOWM HOLDINGS LLC</span></li>
-              <li><span className="text-white/40 text-xs">d.b.a: Jcee Labs</span></li>
+              <li><Link href="/privacy"><a className="hover:text-white transition-colors">Privacy Policy</a></Link></li>
+              <li><Link href="/terms"><a className="hover:text-white transition-colors">Terms of Service</a></Link></li>
             </ul>
           </div>
         </div>

@@ -32,11 +32,11 @@
 - [x] All 12 tests passing, zero TypeScript errors
 
 ## Pending / Future
-- [ ] Admin dashboard page to view and export captured leads
+- [x] Admin dashboard page to view and export captured leads
 - [ ] Connect BidIndustrial presets to real industry pricing data API
 - [ ] BidIndustrial full product page with detailed feature breakdown
 - [ ] Email marketing integration (Mailchimp / Loops) for lead nurturing
-- [ ] Privacy Policy and Terms of Service pages
+- [x] Privacy Policy and Terms of Service pages
 
 ## Phase 3 — Performance & Copy Fixes
 - [x] Fix copy: add "LLC" after all "HOWM HOLDINGS" instances in Home.tsx (header tagline + roadmap section)
@@ -100,3 +100,14 @@
 - [x] Polish overall layout and organization
 - [x] All pages use shared SiteNav + SiteFooter for consistent navigation
 - [x] All 12 tests passing, zero TypeScript errors
+
+## Phase 10 — Admin Dashboard & Legal Pages
+- [x] Build Admin Dashboard page at /admin with authentication gate
+- [x] Display leads table with email, source, date columns
+- [x] Display business inquiries table with name, company, email, message, date
+- [x] Add CSV export functionality for leads and inquiries
+- [x] Create Privacy Policy page at /privacy
+- [x] Create Terms of Service page at /terms
+- [x] Add Privacy/Terms links to SiteFooter
+- [x] Add /admin, /privacy, /terms routes to App.tsx
+- [x] All tests passing

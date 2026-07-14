@@ -16,6 +16,9 @@ const TruckersDreamPage = lazy(() => import("./pages/TruckersDreamPage"));
 const ApexPage = lazy(() => import("./pages/ApexPage"));
 const CellularAutomataPage = lazy(() => import("./pages/CellularAutomataPage"));
 const TeamPage = lazy(() => import("./pages/TeamPage"));
+const AdminPage = lazy(() => import("./pages/AdminPage"));
+const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
+const TermsPage = lazy(() => import("./pages/TermsPage"));
 
 function Router() {
   const [location] = useLocation();
@@ -39,6 +42,9 @@ function Router() {
         <Route path="/apex" component={ApexPage} />
         <Route path="/cellular-automata" component={CellularAutomataPage} />
         <Route path="/team" component={TeamPage} />
+        <Route path="/admin" component={AdminPage} />
+        <Route path="/privacy" component={PrivacyPage} />
+        <Route path="/terms" component={TermsPage} />
         <Route path="/404" component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />
