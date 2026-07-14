@@ -6,6 +6,8 @@ import { invokeLLM } from "./_core/llm";
 import { notifyOwner } from "./_core/notification";
 import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
 import { getAllLeads, insertLead, insertBusinessInquiry, getAllBusinessInquiries } from "./db";
+import { getPricing, getAvailableTrades } from "./pricingApi";
+import { syncLeadToLoops, syncInquiryToLoops } from "./emailMarketing";
 import { systemRouter } from "./_core/systemRouter";
 
 export const appRouter = router({
@@ -37,6 +39,8 @@ export const appRouter = router({
           title: "New Jcee Labs Lead",
           content: `New priority queue signup: ${input.email} (source: ${input.source ?? "homepage"})`,
         });
+        // Sync to Loops email marketing (non-blocking)
+        syncLeadToLoops(input.email, input.source ?? "homepage").catch(() => {});
         return { success: true, message: "You're in the queue!" };
       }),
 
@@ -71,6 +75,8 @@ export const appRouter = router({
           title: "New Business Inquiry",
           content: `Company: ${input.companyName}\nContact: ${input.contactName} (${input.email})\nPhone: ${input.phone || "Not provided"}\nProject: ${input.projectDescription}\nBudget: ${input.budget || "Not specified"}\nTimeline: ${input.timeline || "Not specified"}`,
         });
+        // Sync to Loops email marketing (non-blocking)
+        syncInquiryToLoops(input.email, input.contactName, input.companyName).catch(() => {});
         return { success: true, message: "Thank you! We'll be in touch shortly." };
       }),
 
@@ -80,6 +86,18 @@ export const appRouter = router({
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required." });
       }
       return getAllBusinessInquiries();
+    }),
+  }),
+
+  // BidIndustrial pricing API
+  bidIndustrial: router({
+    getPricing: publicProcedure
+      .input(z.object({ trade: z.string(), region: z.string().optional() }))
+      .query(async ({ input }) => {
+        return getPricing(input.trade, input.region);
+      }),
+    getTrades: publicProcedure.query(() => {
+      return getAvailableTrades();
     }),
   }),
 

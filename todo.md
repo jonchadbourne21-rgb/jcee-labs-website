@@ -33,9 +33,9 @@
 
 ## Pending / Future
 - [x] Admin dashboard page to view and export captured leads
-- [ ] Connect BidIndustrial presets to real industry pricing data API
-- [ ] BidIndustrial full product page with detailed feature breakdown
-- [ ] Email marketing integration (Mailchimp / Loops) for lead nurturing
+- [x] Connect BidIndustrial presets to real industry pricing data API (infrastructure built, baseline data active, live API ready when PRICING_API_KEY configured)
+- [x] BidIndustrial full product page with detailed feature breakdown
+- [x] Email marketing integration (Loops infrastructure built, auto-syncs when LOOPS_API_KEY configured)
 - [x] Privacy Policy and Terms of Service pages
 
 ## Phase 3 — Performance & Copy Fixes
@@ -116,3 +116,14 @@
 - [x] Update ApexPage.tsx with real positioning: multi-agent autonomous content creator, market watcher, adaptive social media/blog engine
 - [x] Update APEX product card on Home.tsx to match new positioning
 - [x] Rename to "APEX Media" across all references (SiteNav, Home.tsx, ApexPage.tsx)
+
+## Phase 12 — BidIndustrial Product Page, Pricing API, & Loops Integration
+- [x] BidIndustrial full product page with 6 industry presets, 8 features, how-it-works, pricing data section
+- [x] Pricing API infrastructure (server/pricingApi.ts) with baseline data for 6 trades, ready for live API
+- [x] Loops email marketing integration (server/emailMarketing.ts) — auto-syncs leads and inquiries when configured
+- [x] BidIndustrial tRPC router (bidIndustrial.getPricing, bidIndustrial.getTrades)
+- [x] All 12 tests passing
+
+## Activation Steps (when ready)
+- [ ] Sign up at https://loops.so and add LOOPS_API_KEY to environment secrets
+- [ ] Connect a pricing data provider and add PRICING_API_KEY + PRICING_API_URL to environment secrets
