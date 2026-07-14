@@ -111,3 +111,8 @@
 - [x] Add Privacy/Terms links to SiteFooter
 - [x] Add /admin, /privacy, /terms routes to App.tsx
 - [x] All tests passing
+
+## Phase 11 — APEX Media Positioning Update
+- [x] Update ApexPage.tsx with real positioning: multi-agent autonomous content creator, market watcher, adaptive social media/blog engine
+- [x] Update APEX product card on Home.tsx to match new positioning
+- [x] Rename to "APEX Media" across all references (SiteNav, Home.tsx, ApexPage.tsx)

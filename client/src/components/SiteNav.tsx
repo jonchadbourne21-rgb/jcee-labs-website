@@ -9,7 +9,7 @@ const PRODUCTS = [
   { name: "VOW", href: "/vow", color: "text-pink-300" },
   { name: "BidIndustrial", href: "/bidindustrial", color: "text-teal-300" },
   { name: "NicheFlow", href: "/nicheflo", color: "text-indigo-300" },
-  { name: "APEX", href: "/apex", color: "text-amber-300" },
+  { name: "APEX Media", href: "/apex", color: "text-amber-300" },
 ];
 
 export default function SiteNav() {

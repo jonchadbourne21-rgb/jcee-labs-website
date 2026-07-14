@@ -20,6 +20,7 @@ import {
   TrendingUp,
   Workflow,
   Users,
+  Eye,
 } from "lucide-react";
 
 // ─── Product Cards Data ─────────────────────────────────────────────────────
@@ -59,6 +60,15 @@ const PRODUCTS = [
     icon: TrendingUp,
     href: "/bidindustrial",
     status: "Coming Soon",
+  },
+  {
+    name: "APEX Media",
+    tagline: "Autonomous Content Engine",
+    description: "Multi-agent system that watches your market, creates content, and adapts to what drives results.",
+    color: "amber",
+    icon: Eye,
+    href: "/apex",
+    status: "In Development",
   },
   {
     name: "NicheFlow",
