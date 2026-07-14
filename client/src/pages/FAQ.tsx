@@ -1,40 +1,21 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { ArrowLeft, HelpCircle, Shield, Cpu, Zap } from "lucide-react";
+import { HelpCircle, Shield, Cpu, Zap } from "lucide-react";
+import SiteNav from "@/components/SiteNav";
+import SiteFooter from "@/components/SiteFooter";
 
 export default function FAQ() {
   return (
-    <div className="min-h-screen bg-[#090514] text-[#E2E8F0] relative overflow-hidden flex flex-col justify-between">
+    <div className="min-h-screen bg-[#090514] text-[#E2E8F0] relative overflow-hidden flex flex-col">
       {/* Background Orbs — GPU-composited */}
       <div className="absolute top-[-10%] left-[-10%] w-[350px] h-[350px] rounded-full bg-purple-500/8 blur-[80px] pointer-events-none" style={{ willChange: 'transform', transform: 'translateZ(0)' }} />
       <div className="absolute bottom-[-10%] right-[-10%] w-[350px] h-[350px] rounded-full bg-teal-500/8 blur-[80px] pointer-events-none" style={{ willChange: 'transform', transform: 'translateZ(0)' }} />
 
-      {/* Header */}
-      <header className="border-b border-white/5 bg-card/20 backdrop-blur-md sticky top-0 z-50">
-        <div className="container py-4 flex items-center justify-between">
-          <Link href="/">
-            <div className="flex items-center gap-2 cursor-pointer group">
-              <img
-                src="/manus-storage/jcee-labs-logo_f25acfb0.png"
-                alt="Jcee Labs Logo"
-                className="w-8 h-8 rounded-lg shadow-lg shadow-purple-500/20 group-hover:scale-105 transition-transform duration-200 object-contain"
-              />
-              <span className="font-display font-bold text-lg tracking-wider group-hover:text-purple-300 transition-colors">
-                JCEE LABS
-              </span>
-            </div>
-          </Link>
-          <Link href="/">
-            <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-foreground">
-              <ArrowLeft className="w-4 h-4" /> Back to Home
-            </Button>
-          </Link>
-        </div>
-      </header>
+      <SiteNav />
 
       {/* Main Content */}
-      <main className="container max-w-4xl py-16 md:py-24 flex-grow">
+      <main className="container max-w-4xl pt-32 pb-16 md:pb-24 flex-grow">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-mono mb-4">
             <HelpCircle className="w-3.5 h-3.5" /> FAQ & Information Hub
@@ -131,21 +112,7 @@ export default function FAQ() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-white/5 bg-card/10 py-8">
-        <div className="container flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-muted-foreground text-sm">
-            &copy; {new Date().getFullYear()} Jcee Labs. All rights reserved. Registered d.b.a. of HOWM HOLDINGS LLC.
-          </p>
-          <div className="flex gap-6 text-sm text-muted-foreground">
-            <Link href="/" className="hover:text-purple-300 transition-colors">Home</Link>
-            <span className="text-white/10">|</span>
-            <span className="text-muted-foreground">Privacy Policy</span>
-            <span className="text-white/10">|</span>
-            <span className="text-muted-foreground">Terms of Service</span>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

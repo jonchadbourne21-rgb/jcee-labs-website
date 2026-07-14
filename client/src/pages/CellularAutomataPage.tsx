@@ -1,30 +1,16 @@
 import { Link } from "wouter";
 import { ArrowRight, Microscope, Zap, Grid3x3 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import SiteNav from "@/components/SiteNav";
+import SiteFooter from "@/components/SiteFooter";
 
 export default function CellularAutomataPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#090514] via-[#0f0a1a] to-[#090514]">
-      {/* Navigation */}
-      <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#090514]/80 backdrop-blur-xl">
-        <div className="container flex items-center justify-between py-4">
-          <Link href="/">
-            <a className="flex items-center gap-2 text-xl font-bold">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center text-white font-bold">
-                JL
-              </div>
-              <span>Jcee Labs</span>
-            </a>
-          </Link>
-          <div className="flex items-center gap-4">
-            <Link href="/">
-              <a className="text-sm text-gray-400 hover:text-white transition">Back to Home</a>
-            </Link>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-gradient-to-b from-[#090514] via-[#0f0a1a] to-[#090514] flex flex-col">
+      <SiteNav />
 
       {/* Hero Section */}
-      <section className="relative py-20 px-4">
+      <section className="relative pt-32 pb-20 px-4">
         <div className="container max-w-4xl mx-auto">
           <div className="mb-6 inline-block px-4 py-2 rounded-full border border-blue-500/30 bg-blue-500/5">
             <span className="text-sm text-blue-400">Complexity Science Explorer</span>
@@ -108,24 +94,19 @@ export default function CellularAutomataPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 px-4 border-t border-white/10">
-        <div className="container max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Discover Emergence?</h2>
-          <p className="text-gray-400 mb-8">Explore the mathematics of complexity and see how simple rules create infinite patterns.</p>
-          <Link href="/">
-            <a className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition">
-              Explore Other Products <ArrowRight className="w-4 h-4" />
-            </a>
+      <section className="py-20 px-4 border-t border-white/5">
+        <div className="container max-w-2xl mx-auto text-center space-y-6">
+          <h2 className="text-3xl font-display font-bold text-white">Ready to Discover Emergence?</h2>
+          <p className="text-muted-foreground text-lg">Explore the mathematics of complexity and see how simple rules create infinite patterns.</p>
+          <Link href="/#newsletter">
+            <Button className="rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-semibold shadow-lg shadow-blue-500/20 active:scale-97 transition-all">
+              Join the Waitlist <ArrowRight className="w-4 h-4 ml-2" />
+            </Button>
           </Link>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-white/10 py-8 px-4">
-        <div className="container max-w-4xl mx-auto text-center text-gray-400 text-sm">
-          <p>&copy; 2026 Jcee Labs. All rights reserved.</p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

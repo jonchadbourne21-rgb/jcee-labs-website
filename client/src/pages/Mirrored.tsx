@@ -3,6 +3,8 @@ import { Link } from "wouter";
 import { ArrowRight, Sparkles, MessageCircle, Brain, CheckCircle, Zap, Target, Lightbulb, ChevronRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { trpc } from "@/lib/trpc";
+import SiteNav from "@/components/SiteNav";
+import SiteFooter from "@/components/SiteFooter";
 
 // Onboarding steps
 const ONBOARDING_STEPS = [
@@ -119,27 +121,8 @@ export default function Mirrored() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#090514] via-[#0f0a1a] to-[#090514] relative">
-      {/* Navigation */}
-      <nav className="sticky top-0 z-50 border-b border-white/5 bg-[#090514]/80 backdrop-blur-xl">
-        <div className="container flex items-center justify-between py-4">
-          <Link href="/">
-            <a className="flex items-center gap-2 text-xl font-bold hover:opacity-80 transition">
-              <img
-                src="/manus-storage/jcee-labs-logo_f25acfb0.png"
-                alt="Jcee Labs Logo"
-                className="w-8 h-8 rounded-lg shadow-lg shadow-purple-500/25 object-contain"
-              />
-              <span className="text-white">Jcee Labs</span>
-            </a>
-          </Link>
-          <div className="flex items-center gap-4">
-            <Link href="/">
-              <a className="text-sm text-muted-foreground hover:text-white transition">Back to Home</a>
-            </Link>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-gradient-to-b from-[#090514] via-[#0f0a1a] to-[#090514] relative flex flex-col">
+      <SiteNav />
 
       {/* Onboarding Modal */}
       {showOnboarding && (
@@ -385,46 +368,7 @@ export default function Mirrored() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-white/5 py-12 px-4 relative z-10">
-        <div className="container max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-            <div className="space-y-4">
-              <div className="flex items-center gap-2">
-                <img
-                  src="/manus-storage/jcee-labs-logo_f25acfb0.png"
-                  alt="Jcee Labs Logo"
-                  className="w-6 h-6 rounded-lg shadow-lg shadow-purple-500/25 object-contain"
-                />
-                <span className="font-display font-bold text-white">Jcee Labs</span>
-              </div>
-              <p className="text-muted-foreground text-sm">
-                Crafting the future of intelligent software powered by AI.
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              <h4 className="font-bold text-white text-sm">Product</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="/"><a className="hover:text-white transition">Home</a></Link></li>
-                <li><Link href="/faq"><a className="hover:text-white transition">FAQ</a></Link></li>
-              </ul>
-            </div>
-
-            <div className="space-y-3">
-              <h4 className="font-bold text-white text-sm">Legal</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><span className="cursor-default">Privacy Policy</span></li>
-                <li><span className="cursor-default">Terms of Service</span></li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="pt-8 border-t border-white/5 text-center text-sm text-muted-foreground">
-            <p>&copy; {new Date().getFullYear()} Jcee Labs. All rights reserved. Under HOWM HOLDINGS LLC.</p>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

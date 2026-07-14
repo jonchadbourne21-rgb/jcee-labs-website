@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,51 +10,73 @@ import {
   Sparkles,
   Layers,
   Cpu,
-  TrendingUp,
-  ChevronRight,
   Zap,
-  BrainCircuit,
-  Workflow,
-  Bot,
+  ChevronRight,
   Lock,
-  Send,
   Loader2,
-  HardHat,
-  Wrench,
-  Flame,
-  Droplets,
-  Building2,
-  RotateCcw,
+  Brain,
+  Truck,
+  Code2,
+  TrendingUp,
+  Workflow,
+  Users,
 } from "lucide-react";
 
-// ─── BidIndustrial Industry Presets ──────────────────────────────────────────
-const INDUSTRY_PRESETS = [
-  { id: "hvac", label: "HVAC", icon: Flame, cost: 18500, overhead: 14, profit: 20 },
-  { id: "electrical", label: "Electrical", icon: Zap, cost: 12000, overhead: 12, profit: 18 },
-  { id: "plumbing", label: "Plumbing", icon: Droplets, cost: 9500, overhead: 11, profit: 17 },
-  { id: "general", label: "General Contracting", icon: HardHat, cost: 42000, overhead: 16, profit: 22 },
-  { id: "mechanical", label: "Mechanical", icon: Wrench, cost: 24000, overhead: 13, profit: 19 },
-  { id: "commercial", label: "Commercial Build-Out", icon: Building2, cost: 85000, overhead: 18, profit: 24 },
-];
-
-// ─── Mirrored Chat Types ──────────────────────────────────────────────────────
-type ChatMessage = { role: "user" | "assistant"; content: string };
-
-const MIRROR_STARTERS = [
-  "I've been feeling overwhelmed lately...",
-  "I want to grow but I don't know where to start.",
-  "Something happened today that I can't stop thinking about.",
-  "I feel like I'm not living up to my potential.",
+// ─── Product Cards Data ─────────────────────────────────────────────────────
+const PRODUCTS = [
+  {
+    name: "Mirrored",
+    tagline: "AI Reflection Partner",
+    description: "Personal development through AI-powered journaling, pattern tracking, and intelligent insights.",
+    color: "purple",
+    icon: Brain,
+    href: "/mirrored",
+    status: "Beta",
+  },
+  {
+    name: "Trucker$Dream",
+    tagline: "Load Optimization",
+    description: "Multi-stacking load optimization for owner-operators. Maximize revenue per mile.",
+    color: "orange",
+    icon: Truck,
+    href: "/truckers-dream",
+    status: "Coming Soon",
+  },
+  {
+    name: "VOW",
+    tagline: "PaaS & Language",
+    description: "A revolutionary platform and coding language designed to eliminate complexity. Open-source soon.",
+    color: "purple",
+    icon: Code2,
+    href: "/vow",
+    status: "In Development",
+  },
+  {
+    name: "BidIndustrial",
+    tagline: "Intelligent Bidding",
+    description: "Smart bid estimation for contractors. Hyper-accurate calculations at lightning speed.",
+    color: "teal",
+    icon: TrendingUp,
+    href: "/bidindustrial",
+    status: "Coming Soon",
+  },
+  {
+    name: "NicheFlow",
+    tagline: "SOP Generator",
+    description: "Auto-generates industry-specific standard operating procedures for small businesses.",
+    color: "indigo",
+    icon: Workflow,
+    href: "/nicheflo",
+    status: "Coming Soon",
+  },
 ];
 
 export default function Home() {
-  // ── UI State ──────────────────────────────────────────────────────────────
   const [scrolled, setScrolled] = useState(false);
-  const [activeTab, setActiveTab] = useState<"mirrored" | "truckers-dream" | "vow" | "bidindustrial" | "nicheflow" | "apex" | "cellular-automata">("mirrored");
-
-  // ── Lead Capture State ────────────────────────────────────────────────────
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const subscribeMutation = trpc.leads.subscribe.useMutation({
     onSuccess: (data) => {
       if (data.success) {
@@ -71,59 +93,12 @@ export default function Home() {
     },
   });
 
-  // ── Mirrored Chat State ───────────────────────────────────────────────────
-  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
-    { role: "assistant", content: "Hey, I'm Mirror 👋 — your personal AI reflection companion. Share something on your mind and I'll reflect it back with clarity and depth." },
-  ]);
-  const [chatInput, setChatInput] = useState("");
-  const chatEndRef = useRef<HTMLDivElement>(null);
-  const reflectMutation = trpc.mirrored.reflect.useMutation({
-    onSuccess: (data) => {
-      setChatMessages((prev) => [...prev, { role: "assistant", content: data.reply }]);
-    },
-    onError: () => {
-      setChatMessages((prev) => [...prev, { role: "assistant", content: "I'm here with you. Something went wrong on my end — try again?" }]);
-    },
-  });
-
-  // ── BidIndustrial State ───────────────────────────────────────────────────
-  const [activePreset, setActivePreset] = useState<string | null>(null);
-  const [bidValue, setBidValue] = useState(14250);
-  const [overheadPercent, setOverheadPercent] = useState(12);
-  const [profitPercent, setProfitPercent] = useState(18);
-
-  const overhead = Math.round(bidValue * (overheadPercent / 100));
-  const profit = Math.round(bidValue * (profitPercent / 100));
-  const totalEstimate = bidValue + overhead + profit;
-
-  // NicheFlow ROI Calculator State
-  const [nicheflowTeamSize, setNicheflowTeamSize] = useState("1-5");
-  const [nicheflowHours, setNicheflowHours] = useState(40);
-
-  const teamMultipliers: Record<string, number> = {
-    "1-5": 1,
-    "5-20": 2.5,
-    "20-50": 4,
-    "50+": 6,
-  };
-  const nicheflowTimeSaved = Math.round(nicheflowHours * 4 * teamMultipliers[nicheflowTeamSize]);
-  const hourlyRate = 50;
-  const nicheflowCostReduction = Math.round(nicheflowTimeSaved * hourlyRate);
-  const annualSavings = nicheflowCostReduction * 12;
-  const nicheflowROI = Math.round((annualSavings / 15000) * 100);
-
-  // ── Effects ───────────────────────────────────────────────────────────────
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [chatMessages]);
-
-  // ── Handlers ──────────────────────────────────────────────────────────────
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) { toast.error("Please enter a valid email address."); return; }
@@ -131,188 +106,189 @@ export default function Home() {
     setEmail("");
   };
 
-  const handleSendChat = () => {
-    const msg = chatInput.trim();
-    if (!msg || reflectMutation.isPending) return;
-    const history = chatMessages.slice(-6).map((m) => ({ role: m.role, content: m.content }));
-    setChatMessages((prev) => [...prev, { role: "user", content: msg }]);
-    setChatInput("");
-    reflectMutation.mutate({ message: msg, history });
-  };
-
-  const handleStarterClick = (starter: string) => {
-    setChatInput(starter);
-  };
-
-  const handlePresetSelect = (preset: typeof INDUSTRY_PRESETS[0]) => {
-    setActivePreset(preset.id);
-    setBidValue(preset.cost);
-    setOverheadPercent(preset.overhead);
-    setProfitPercent(preset.profit);
-  };
-
-  const handleResetPreset = () => {
-    setActivePreset(null);
-    setBidValue(14250);
-    setOverheadPercent(12);
-    setProfitPercent(18);
-  };
-
-  const handleDemoAction = (productName: string) => {
-    toast.info(`${productName} beta coming soon!`, {
-      description: "You will be notified as soon as access opens up.",
-    });
-  };
-
   return (
-    <div className="min-h-screen bg-[#090514] text-[#E2E8F0] relative overflow-x-hidden flex flex-col justify-between">
+    <div className="min-h-screen bg-[#090514] text-[#E2E8F0] relative overflow-x-hidden flex flex-col">
 
-      {/* BACKGROUND AURORAS — static, GPU-composited, no animation */}
+      {/* BACKGROUND AURORAS */}
       <div className="absolute top-[-10%] left-[-5%] w-[350px] h-[350px] rounded-full bg-purple-600/8 blur-[80px] pointer-events-none" style={{ willChange: 'transform', transform: 'translateZ(0)' }} />
-      <div className="absolute top-[20%] right-[-10%] w-[400px] h-[400px] rounded-full bg-teal-500/4 blur-[90px] pointer-events-none" style={{ willChange: 'transform', transform: 'translateZ(0)' }} />
-      <div className="absolute bottom-[10%] left-[10%] w-[300px] h-[300px] rounded-full bg-indigo-500/6 blur-[80px] pointer-events-none" style={{ willChange: 'transform', transform: 'translateZ(0)' }} />
+      <div className="absolute top-[40%] right-[-10%] w-[400px] h-[400px] rounded-full bg-teal-500/4 blur-[90px] pointer-events-none" style={{ willChange: 'transform', transform: 'translateZ(0)' }} />
 
-      {/* STICKY HEADER */}
+      {/* ═══════════════════════════════════════════════════════════════════════
+          NAVIGATION
+      ═══════════════════════════════════════════════════════════════════════ */}
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "border-b border-white/5 bg-[#090514]/80 backdrop-blur-xl py-4" : "bg-transparent py-6"
+        scrolled ? "border-b border-white/5 bg-[#090514]/80 backdrop-blur-xl py-3" : "bg-transparent py-5"
       }`}>
         <div className="container flex items-center justify-between">
-          <div className="flex items-center gap-3 group">
-            <img
-              src="/manus-storage/jcee-labs-logo_f25acfb0.png"
-              alt="Jcee Labs Logo"
-              className="w-10 h-10 rounded-xl shadow-lg shadow-purple-500/25 group-hover:scale-105 transition-transform duration-300 object-contain"
-            />
-            <div className="flex flex-col">
-              <span className="font-display font-bold text-lg tracking-wider group-hover:text-purple-300 transition-colors">
-                JCEE LABS
-              </span>
-              <span className="text-[10px] font-mono tracking-widest text-muted-foreground uppercase">
-                by HOWM HOLDINGS LLC
-              </span>
-            </div>
-          </div>
+          <Link href="/">
+            <a className="flex items-center gap-3 group">
+              <img
+                src="/manus-storage/jcee-labs-logo_f25acfb0.png"
+                alt="Jcee Labs Logo"
+                className="w-9 h-9 rounded-xl shadow-lg shadow-purple-500/25 group-hover:scale-105 transition-transform duration-300 object-contain"
+              />
+              <div className="flex flex-col">
+                <span className="font-display font-bold text-base tracking-wider group-hover:text-purple-300 transition-colors">
+                  JCEE LABS
+                </span>
+                <span className="text-[9px] font-mono tracking-widest text-muted-foreground uppercase">
+                  by HOWM HOLDINGS LLC
+                </span>
+              </div>
+            </a>
+          </Link>
 
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-            <a href="#lab" className="text-muted-foreground hover:text-foreground transition-colors">The Lab</a>
-            <a href="#products" className="text-muted-foreground hover:text-foreground transition-colors">Our Suite</a>
-            <a href="#pipeline" className="text-muted-foreground hover:text-foreground transition-colors">AI Orchestration</a>
-            <Link href="/faq" className="text-muted-foreground hover:text-foreground transition-colors">FAQ</Link>
+            <a href="#products" className="text-muted-foreground hover:text-white transition-colors">Products</a>
+            <a href="#services" className="text-muted-foreground hover:text-white transition-colors">Services</a>
+            <Link href="/team"><a className="text-muted-foreground hover:text-white transition-colors">Team</a></Link>
+            <Link href="/faq"><a className="text-muted-foreground hover:text-white transition-colors">FAQ</a></Link>
           </nav>
 
-          <div className="flex items-center gap-4">
-            <a href="#newsletter">
-              <Button size="sm" className="relative group overflow-hidden rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 border-0 text-white font-medium shadow-lg shadow-purple-500/20 active:scale-95 transition-all">
-                <span className="relative z-10 flex items-center gap-1">
-                  Enter Lab <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          <div className="flex items-center gap-3">
+            <a href="#contact">
+              <Button size="sm" className="hidden sm:flex rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 border-0 text-white font-medium shadow-lg shadow-purple-500/20 active:scale-95 transition-all">
+                <span className="flex items-center gap-1">
+                  Get in Touch <ArrowUpRight className="w-3.5 h-3.5" />
                 </span>
               </Button>
             </a>
+            {/* Mobile menu toggle */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden w-9 h-9 flex items-center justify-center rounded-lg border border-white/10 text-white"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {mobileMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
           </div>
         </div>
+
+        {/* Mobile menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t border-white/5 bg-[#090514]/95 backdrop-blur-xl px-6 py-4 space-y-3">
+            <a href="#products" onClick={() => setMobileMenuOpen(false)} className="block text-sm text-muted-foreground hover:text-white transition-colors py-2">Products</a>
+            <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block text-sm text-muted-foreground hover:text-white transition-colors py-2">Services</a>
+            <Link href="/team"><a onClick={() => setMobileMenuOpen(false)} className="block text-sm text-muted-foreground hover:text-white transition-colors py-2">Team</a></Link>
+            <Link href="/faq"><a onClick={() => setMobileMenuOpen(false)} className="block text-sm text-muted-foreground hover:text-white transition-colors py-2">FAQ</a></Link>
+          </div>
+        )}
       </header>
 
-      {/* HERO SECTION */}
-      <section className="container pt-32 pb-20 md:pt-44 md:pb-28 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-7 space-y-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-mono">
-              <Sparkles className="w-3.5 h-3.5" aria-hidden="true" /> Introducing the Jcee Labs Ecosystem
-            </div>
-            <h1 className="text-5xl md:text-7xl font-display font-extrabold leading-[1.05] tracking-tight">
-              Crafting the <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Future</span> of Intelligent <span className="bg-gradient-to-r from-teal-400 to-teal-600 bg-clip-text text-transparent">Software</span>
-            </h1>
-            <p className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl">
-              Jcee Labs is the innovation and creation playground of <strong className="text-white">HOWM HOLDINGS LLC</strong>. We design, engineer, and deploy high-performance applications driven by advanced AI agents to streamline your workflow and keep you ahead of the game.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <a href="#products">
-                <Button size="lg" className="w-full sm:w-auto rounded-xl bg-white text-black hover:bg-slate-200 font-semibold shadow-xl shadow-white/5 active:scale-97 transition-all">
-                  Explore Products
-                </Button>
-              </a>
-              <a href="#pipeline">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto rounded-xl border-white/10 hover:bg-white/5 text-[#E2E8F0] font-medium active:scale-97 transition-all">
-                  How We Build
-                </Button>
-              </a>
-            </div>
-            <div className="grid grid-cols-3 gap-6 pt-8 border-t border-white/5 max-w-lg">
-              <div>
-                <div className="font-display font-bold text-2xl md:text-3xl text-purple-400">1st</div>
-                <div className="text-xs text-muted-foreground uppercase tracking-wider font-mono">Ecosystem Launch</div>
-              </div>
-              <div>
-                <div className="font-display font-bold text-2xl md:text-3xl text-teal-400">3</div>
-                <div className="text-xs text-muted-foreground uppercase tracking-wider font-mono">Core Platforms</div>
-              </div>
-              <div>
-                <div className="font-display font-bold text-2xl md:text-3xl text-indigo-400">100%</div>
-                <div className="text-xs text-muted-foreground uppercase tracking-wider font-mono">AI-Optimized</div>
-              </div>
-            </div>
+      {/* ═══════════════════════════════════════════════════════════════════════
+          HERO
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section className="container pt-32 pb-20 md:pt-40 md:pb-24 relative z-10">
+        <div className="max-w-3xl space-y-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-mono">
+            <Sparkles className="w-3.5 h-3.5" /> AI-Powered Software Studio
           </div>
-
-          <div className="lg:col-span-5 relative flex justify-center">
-            <div className="absolute inset-0 bg-purple-500/15 rounded-full blur-[70px] pointer-events-none scale-75" style={{ willChange: 'transform', transform: 'translateZ(0)' }} />
-            <div className="relative w-full max-w-[450px] aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-purple-500/10 group">
-              <img
-                src="https://d2xsxph8kpxj0f.cloudfront.net/310519663398434536/PGyQHKFdSR7kZkQyzRA9uW/jcee-labs-hero-bzba5vWMjZJYVUUoxCyc5g.webp"
-                alt="Jcee Labs AI Core"
-                width="450"
-                height="450"
-                fetchPriority="high"
-                decoding="async"
-                className="w-full h-full object-cover transform scale-105 group-hover:scale-100 transition-transform duration-700 ease-out"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#090514] via-transparent to-transparent opacity-60" />
-              <div className="absolute bottom-6 left-6 right-6 bg-black/40 backdrop-blur-sm p-4 rounded-2xl border border-white/10 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-teal-400">
-                  <Cpu className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="text-xs font-mono text-teal-300 uppercase tracking-wider">Lab Status</div>
-                  <div className="text-sm font-bold text-white">Ecosystem Engine Online</div>
-                </div>
-              </div>
-            </div>
+          <h1 className="text-5xl md:text-7xl font-display font-extrabold leading-[1.05] tracking-tight">
+            Crafting the <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Future</span> of Intelligent <span className="bg-gradient-to-r from-teal-400 to-teal-600 bg-clip-text text-transparent">Software</span>
+          </h1>
+          <p className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl">
+            Jcee Labs is the innovation studio of <strong className="text-white">HOWM HOLDINGS LLC</strong>. We design, engineer, and deploy AI-driven applications that help businesses operate smarter, faster, and more efficiently.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 pt-2">
+            <a href="#products">
+              <Button size="lg" className="w-full sm:w-auto rounded-xl bg-white text-black hover:bg-slate-200 font-semibold shadow-xl shadow-white/5 active:scale-97 transition-all">
+                Explore Products
+              </Button>
+            </a>
+            <Link href="/team">
+              <Button size="lg" variant="outline" className="w-full sm:w-auto rounded-xl border-white/10 hover:bg-white/5 text-[#E2E8F0] font-medium active:scale-97 transition-all">
+                Meet the Team
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* B2B SERVICES */}
-      <section id="services" className="py-24 relative z-10 border-t border-white/5 bg-gradient-to-b from-transparent to-teal-950/5">
+      {/* ═══════════════════════════════════════════════════════════════════════
+          PRODUCTS
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section id="products" className="py-24 relative z-10 border-t border-white/5">
         <div className="container">
-          <div className="max-w-4xl mx-auto text-center space-y-8 mb-20">
+          <div className="max-w-2xl space-y-4 mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-300 text-xs font-mono">
-              <Zap className="w-3.5 h-3.5" /> Custom Development
+              <Layers className="w-3.5 h-3.5" /> Our Products
             </div>
-            <h2 className="text-4xl md:text-6xl font-display font-extrabold leading-tight">
-              We offer <span className="bg-gradient-to-r from-teal-400 to-teal-600 bg-clip-text text-transparent">business-to-business website builds</span> + automation at the highest quality, speed, and efficiency
+            <h2 className="text-3xl md:text-4xl font-display font-extrabold text-white">
+              The Jcee Labs Suite
             </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl mx-auto">
-              From concept to deployment, we orchestrate AI-powered development pipelines to deliver enterprise-grade solutions faster than traditional agencies.
+            <p className="text-muted-foreground text-lg leading-relaxed">
+              Tools designed to empower small businesses and individuals through intelligent automation.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {PRODUCTS.map((product) => {
+              const Icon = product.icon;
+              return (
+                <Link key={product.name} href={product.href}>
+                  <a className="block bg-white/[0.02] border border-white/5 rounded-2xl p-6 group hover:border-purple-500/20 transition-all duration-300 h-full">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className={`w-11 h-11 rounded-lg bg-${product.color}-500/10 border border-${product.color}-500/20 flex items-center justify-center text-${product.color}-400 group-hover:scale-110 transition-transform`}>
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full bg-${product.color}-500/10 border border-${product.color}-500/20 text-${product.color}-300`}>
+                        {product.status}
+                      </span>
+                    </div>
+                    <h3 className="font-display font-bold text-lg text-white mb-1">{product.name}</h3>
+                    <p className="text-xs font-mono text-muted-foreground mb-3">{product.tagline}</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">{product.description}</p>
+                    <div className="flex items-center gap-1 text-sm font-medium text-purple-300 group-hover:text-purple-200 transition-colors">
+                      Learn more <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </a>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════════
+          SERVICES (B2B)
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section id="services" className="py-24 relative z-10 border-t border-white/5 bg-gradient-to-b from-transparent to-teal-950/5">
+        <div className="container">
+          <div className="max-w-3xl mx-auto text-center space-y-6 mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-300 text-xs font-mono">
+              <Zap className="w-3.5 h-3.5" /> Custom Development
+            </div>
+            <h2 className="text-3xl md:text-4xl font-display font-extrabold text-white">
+              B2B Website Builds & Automation
+            </h2>
+            <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl mx-auto">
+              From concept to deployment, we build enterprise-grade web applications and automation systems at speed and quality that traditional agencies cannot match.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             {[
-              { icon: Zap, color: "teal", title: "Lightning Speed", desc: "AI-accelerated development cycles cut project timelines by 60%. From requirements to production in weeks, not months." },
-              { icon: Sparkles, color: "purple", title: "Uncompromising Quality", desc: "Every line of code is tested, optimized, and audited. We ship production-ready systems with zero technical debt." },
-              { icon: Cpu, color: "indigo", title: "Autonomous Efficiency", desc: "Our AI agents handle the heavy lifting—code generation, testing, deployment. You get more done with fewer resources." },
-            ].map(({ icon: Icon, color, title, desc }) => (
-              <div key={title} className="glass-panel p-8 rounded-2xl border border-white/5 relative group hover:border-${color}-500/20 transition-all">
-                <div className={`w-12 h-12 rounded-lg bg-${color}-500/10 border border-${color}-500/20 flex items-center justify-center text-${color}-400 mb-4`}>
-                  <Icon className="w-6 h-6" />
+              { icon: Zap, title: "Fast Delivery", desc: "AI-accelerated development cuts timelines significantly. From requirements to production in weeks." },
+              { icon: Sparkles, title: "Quality First", desc: "Every project is tested, optimized, and production-ready. We ship clean, maintainable code." },
+              { icon: Cpu, title: "AI-Powered", desc: "We leverage autonomous AI agents to handle code generation, testing, and deployment pipelines." },
+            ].map(({ icon: Icon, title, desc }) => (
+              <div key={title} className="bg-white/[0.02] p-6 rounded-2xl border border-white/5 hover:border-teal-500/20 transition-colors">
+                <div className="w-11 h-11 rounded-lg bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-teal-400 mb-4">
+                  <Icon className="w-5 h-5" />
                 </div>
-                <h3 className="font-display font-bold text-lg text-white mb-2">{title}</h3>
+                <h3 className="font-display font-bold text-base text-white mb-2">{title}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">{desc}</p>
               </div>
             ))}
           </div>
 
           <div className="text-center">
-            <a href="#inquiry">
+            <a href="#contact">
               <Button size="lg" className="rounded-xl bg-gradient-to-r from-teal-600 to-teal-500 hover:from-teal-500 hover:to-teal-400 text-white font-semibold shadow-lg shadow-teal-500/20 active:scale-97 transition-all">
                 Start Your Project <ArrowUpRight className="w-4 h-4 ml-2" />
               </Button>
@@ -321,708 +297,47 @@ export default function Home() {
         </div>
       </section>
 
-      {/* BUSINESS INQUIRY FORM */}
-      <section id="inquiry" className="py-24 relative z-10 border-t border-white/5">
-        <div className="container">
-          <div className="max-w-2xl mx-auto">
-            <div className="text-center space-y-4 mb-12">
-              <h3 className="text-3xl md:text-4xl font-display font-extrabold text-white">
-                Ready to <span className="bg-gradient-to-r from-teal-400 to-teal-600 bg-clip-text text-transparent">build together</span>?
-              </h3>
-              <p className="text-muted-foreground text-lg">
-                Tell us about your project and we'll get back to you within 24 hours.
-              </p>
-            </div>
-
-            <BusinessInquiryForm />
-          </div>
-        </div>
-      </section>
-
-      {/* THE LAB / MISSION */}
-      <section id="lab" className="cv-auto border-t border-white/5 bg-white/[0.01] py-20 relative z-10">
-        <div className="container">
-          <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
-            <h2 className="text-3xl md:text-4xl font-display font-extrabold">
-              Our <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Vision</span> & Philosophy
-            </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed">
-              Jcee Labs exists to level the playing field. We empower small businesses to compete with enterprises that have unlimited budgets. Under the stewardship of HOWM HOLDINGS LLC, we build products that automate operations, save time and money, and deliver incredible ROI. Our system might not be the best, but we are the best. Our determination to win won't be stopped.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { icon: Sparkles, color: "purple", title: "Creativity Unleashed", desc: "We build tools that augment human creativity, turning abstract thoughts into structured realities. Our designs are bespoke, fluid, and visually stunning.", label: "CREATIVE PIPELINE" },
-              { icon: Layers, color: "teal", title: "Modern Architecture", desc: "All applications are scaffolded on lightweight, lightning-fast technology stacks. High-performance rendering and micro-interactions come standard.", label: "ENGINEERING STANDARDS" },
-              { icon: Cpu, color: "indigo", title: "AI-First Streamlining", desc: "We integrate advanced autonomous agents to orchestrate operations. This reduces engineering time, automates testing, and speeds up product delivery.", label: "AGENT ORCHESTRATION" },
-            ].map(({ icon: Icon, color, title, desc, label }) => (
-              <div key={title} className={`bg-white/[0.02] p-8 rounded-2xl border border-white/5 flex flex-col justify-between group hover:border-${color}-500/30 transition-colors duration-300`}>
-                <div className="space-y-4">
-                  <div className={`w-12 h-12 rounded-xl bg-${color}-500/10 border border-${color}-500/20 flex items-center justify-center text-${color}-400 group-hover:scale-110 transition-transform`}>
-                    <Icon className="w-6 h-6" />
-                  </div>
-                  <h3 className="font-display font-bold text-xl text-white">{title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{desc}</p>
-                </div>
-                <div className={`pt-6 font-mono text-xs text-${color}-300 tracking-wider`}>{label} →</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* PRODUCTS SHOWCASE */}
-      <section id="products" className="cv-auto py-24 relative z-10 border-t border-white/5">
-        <div className="container">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-            <div className="space-y-4 max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-300 text-xs font-mono">
-                <Layers className="w-3.5 h-3.5" /> Product Suite v1.0
-              </div>
-              <h2 className="text-3xl md:text-5xl font-display font-extrabold">
-                The <span className="bg-gradient-to-r from-teal-400 to-teal-600 bg-clip-text text-transparent">Inventions</span> of Jcee Labs
-              </h2>
-              <p className="text-muted-foreground text-lg">
-                Explore our suite of tools designed to empower small businesses: personal introspection, professional estimating, and on-demand SOP generation.
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-2 bg-white/[0.03] border border-white/5 p-1.5 rounded-xl self-start md:self-auto">
-              {/* Flagship Products */}
-              <button
-                onClick={() => setActiveTab("vow")}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === "vow" ? "bg-purple-600 text-white shadow-lg shadow-purple-600/20" : "text-muted-foreground hover:text-[#E2E8F0]"}`}
-              >
-                VOW
-              </button>
-              <button
-                onClick={() => setActiveTab("mirrored")}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === "mirrored" ? "bg-purple-600 text-white shadow-lg shadow-purple-600/20" : "text-muted-foreground hover:text-[#E2E8F0]"}`}
-              >
-                Mirrored
-              </button>
-              <button
-                onClick={() => setActiveTab("truckers-dream")}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === "truckers-dream" ? "bg-orange-600 text-white shadow-lg shadow-orange-600/20" : "text-muted-foreground hover:text-[#E2E8F0]"}`}
-              >
-                Trucker$Dream
-              </button>
-              
-              {/* Separator */}
-              <div className="w-px bg-white/10" />
-              
-              {/* Other Products */}
-              <button
-                onClick={() => setActiveTab("bidindustrial")}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === "bidindustrial" ? "bg-teal-600 text-white shadow-lg shadow-teal-600/20" : "text-muted-foreground hover:text-[#E2E8F0]"}`}
-              >
-                BidIndustrial
-              </button>
-              <button
-                onClick={() => setActiveTab("nicheflow")}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === "nicheflow" ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/20" : "text-muted-foreground hover:text-[#E2E8F0]"}`}
-              >
-                NicheFlow
-              </button>
-              <button
-                onClick={() => setActiveTab("apex")}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === "apex" ? "bg-amber-600 text-white shadow-lg shadow-amber-600/20" : "text-muted-foreground hover:text-[#E2E8F0]"}`}
-              >
-                APEX
-              </button>
-              <button
-                onClick={() => setActiveTab("cellular-automata")}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === "cellular-automata" ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20" : "text-muted-foreground hover:text-[#E2E8F0]"}`}
-              >
-                Cellular Automata
-              </button>
-            </div>
-          </div>
-
-          <div className="bg-white/[0.02] p-8 md:p-12 rounded-3xl border border-white/5 relative overflow-hidden">
-            <div className={`absolute top-[-20%] right-[-10%] w-[300px] h-[300px] rounded-full blur-[80px] pointer-events-none transition-colors duration-500 ${activeTab === "mirrored" ? "bg-purple-500/12" : activeTab === "truckers-dream" ? "bg-orange-500/12" : activeTab === "vow" ? "bg-purple-500/12" : activeTab === "bidindustrial" ? "bg-teal-500/12" : activeTab === "nicheflow" ? "bg-indigo-500/12" : activeTab === "apex" ? "bg-amber-500/12" : "bg-blue-500/12"}`} style={{ willChange: 'transform', transform: 'translateZ(0)' }} />
-
-            {/* ── MIRRORED TAB ── */}
-            {activeTab === "mirrored" && (
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-                <div className="lg:col-span-5 space-y-6">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-mono">
-                    <Sparkles className="w-3 h-3" /> Debut Release
-                  </div>
-                  <h3 className="text-3xl md:text-4xl font-display font-bold text-white">Mirrored</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Your digital self, reflected and optimized. Mirrored is an AI-powered personal development and self-reflection application — an interactive digital mirror for journaling, pattern tracking, and personalized intelligent insights.
-                  </p>
-                  <div className="space-y-3">
-                    {["Cognitive journaling with semantic pattern mapping", "AI-guided reflection feedback & personal coach synthesis", "Goal structuring and alignment visualizations"].map((f) => (
-                      <div key={f} className="flex items-center gap-3">
-                        <div className="w-5 h-5 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-300 shrink-0">
-                          <ChevronRight className="w-3 h-3" />
-                        </div>
-                        <span className="text-sm font-medium text-[#E2E8F0]">{f}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="flex flex-wrap gap-4 pt-2">
-                    <Button onClick={() => handleDemoAction("Mirrored")} className="rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-medium shadow-lg shadow-purple-500/20 active:scale-97 transition-all">
-                      Request Early Beta
-                    </Button>
-                    <Link href="/faq">
-                      <Button variant="ghost" className="rounded-xl text-purple-300 hover:text-purple-200 hover:bg-purple-500/5">
-                        Read FAQ
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-
-                {/* ── MIRRORED LIVE CHAT DEMO ── */}
-                <div className="lg:col-span-7">
-                  <div className="bg-black/30 border border-white/10 rounded-2xl overflow-hidden flex flex-col" style={{ height: "420px" }}>
-                    {/* Chat Header */}
-                    <div className="flex items-center gap-3 px-5 py-3 border-b border-white/5 bg-purple-500/5">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white text-xs font-bold">M</div>
-                      <div>
-                        <div className="text-sm font-bold text-white">Mirror AI</div>
-                        <div className="text-xs text-purple-300 flex items-center gap-1">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block" />
-                          Live Demo — Try it now
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Messages */}
-                    <div className="flex-1 overflow-y-auto p-4 space-y-3">
-                      {chatMessages.map((msg, i) => (
-                        <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-                          <div className={`max-w-[80%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
-                            msg.role === "user"
-                              ? "bg-purple-600 text-white rounded-br-sm"
-                              : "bg-white/[0.06] text-[#E2E8F0] border border-white/5 rounded-bl-sm"
-                          }`}>
-                            {msg.content}
-                          </div>
-                        </div>
-                      ))}
-                      {reflectMutation.isPending && (
-                        <div className="flex justify-start">
-                          <div className="bg-white/[0.06] border border-white/5 px-4 py-2.5 rounded-2xl rounded-bl-sm flex items-center gap-2">
-                            <Loader2 className="w-3.5 h-3.5 animate-spin text-purple-400" />
-                            <span className="text-xs text-muted-foreground">Mirror is reflecting...</span>
-                          </div>
-                        </div>
-                      )}
-                      <div ref={chatEndRef} />
-                    </div>
-
-                    {/* Starter prompts (only shown at start) */}
-                    {chatMessages.length === 1 && (
-                      <div className="px-4 pb-2 flex gap-2 flex-wrap">
-                        {MIRROR_STARTERS.slice(0, 2).map((s) => (
-                          <button
-                            key={s}
-                            onClick={() => handleStarterClick(s)}
-                            className="text-xs px-3 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 hover:bg-purple-500/20 transition-colors"
-                          >
-                            {s}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Input */}
-                    <div className="px-4 pb-4 pt-2 border-t border-white/5 flex gap-2">
-                      <input
-                        type="text"
-                        value={chatInput}
-                        onChange={(e) => setChatInput(e.target.value)}
-                        onKeyDown={(e) => e.key === "Enter" && handleSendChat()}
-                        placeholder="Share what's on your mind..."
-                        className="flex-1 bg-white/[0.04] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-[#E2E8F0] placeholder:text-muted-foreground focus:outline-none focus:border-purple-500/50 transition-colors"
-                      />
-                      <button
-                        onClick={handleSendChat}
-                        disabled={!chatInput.trim() || reflectMutation.isPending}
-                        className="w-10 h-10 rounded-xl bg-purple-600 hover:bg-purple-500 disabled:opacity-40 flex items-center justify-center text-white transition-all active:scale-95"
-                      >
-                        <Send className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* ── BIDINDUSTRIAL TAB ── */}
-            {activeTab === "bidindustrial" && (
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-                <div className="lg:col-span-5 space-y-6">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-300 text-xs font-mono">
-                    <TrendingUp className="w-3 h-3" /> B2B Intelligence
-                  </div>
-                  <h3 className="text-3xl md:text-4xl font-display font-bold text-white">BidIndustrial</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    The intelligent bidding estimator. Designed for commercial operators and contractors who need hyper-accurate bids at lightning speed. Smart calculations and historical models streamline your bidding pipeline and maximize win rates.
-                  </p>
-                  <div className="flex flex-wrap gap-4 pt-2">
-                    <Button onClick={() => handleDemoAction("BidIndustrial")} className="rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-medium shadow-lg shadow-teal-500/20 active:scale-97 transition-all">
-                      Schedule BidIndustrial Pilot
-                    </Button>
-                    <Link href="/faq">
-                      <Button variant="ghost" className="rounded-xl text-teal-300 hover:text-teal-200 hover:bg-teal-500/5">
-                        Read FAQ
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-
-                {/* ── BIDINDUSTRIAL LIVE ESTIMATOR ── */}
-                <div className="lg:col-span-7 space-y-4">
-                  {/* Industry Preset Buttons */}
-                  <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-xs font-mono text-teal-300 uppercase tracking-wider">Industry Presets</span>
-                      {activePreset && (
-                        <button onClick={handleResetPreset} className="flex items-center gap-1 text-xs text-muted-foreground hover:text-[#E2E8F0] transition-colors">
-                          <RotateCcw className="w-3 h-3" /> Reset
-                        </button>
-                      )}
-                    </div>
-                    <div className="grid grid-cols-3 gap-2">
-                      {INDUSTRY_PRESETS.map((preset) => {
-                        const Icon = preset.icon;
-                        return (
-                          <button
-                            key={preset.id}
-                            onClick={() => handlePresetSelect(preset)}
-                            className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border text-xs font-medium transition-all active:scale-95 ${
-                              activePreset === preset.id
-                                ? "bg-teal-600/20 border-teal-500/50 text-teal-300"
-                                : "bg-white/[0.02] border-white/5 text-muted-foreground hover:border-teal-500/30 hover:text-[#E2E8F0]"
-                            }`}
-                          >
-                            <Icon className="w-3.5 h-3.5 shrink-0" />
-                            <span className="truncate">{preset.label}</span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  {/* Live Estimator Widget */}
-                  <div className="bg-black/30 border border-white/10 p-5 rounded-2xl space-y-4">
-                    <div className="flex items-center justify-between text-xs font-mono">
-                      <span className="text-teal-300">LIVE INTERACTIVE ESTIMATOR</span>
-                      <span className="text-muted-foreground">BidIndustrial v1</span>
-                    </div>
-
-                    <div className="space-y-2">
-                      <div className="flex justify-between text-sm">
-                        <span className="text-muted-foreground">Direct Materials & Labor:</span>
-                        <span className="font-bold text-white">${bidValue.toLocaleString()}</span>
-                      </div>
-                      <input
-                        type="range" min="1000" max="200000" step="500"
-                        value={bidValue}
-                        onChange={(e) => { setActivePreset(null); setBidValue(Number(e.target.value)); }}
-                        className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-teal-400"
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-1.5">
-                        <div className="flex justify-between text-xs text-muted-foreground">
-                          <span>Overhead</span><span>{overheadPercent}%</span>
-                        </div>
-                        <input
-                          type="range" min="5" max="30" step="1"
-                          value={overheadPercent}
-                          onChange={(e) => { setActivePreset(null); setOverheadPercent(Number(e.target.value)); }}
-                          className="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-orange-400"
-                        />
-                        <div className="text-sm font-semibold text-white">${overhead.toLocaleString()}</div>
-                      </div>
-                      <div className="space-y-1.5">
-                        <div className="flex justify-between text-xs text-muted-foreground">
-                          <span>Target Profit</span><span>{profitPercent}%</span>
-                        </div>
-                        <input
-                          type="range" min="5" max="40" step="1"
-                          value={profitPercent}
-                          onChange={(e) => { setActivePreset(null); setProfitPercent(Number(e.target.value)); }}
-                          className="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-emerald-400"
-                        />
-                        <div className="text-sm font-semibold text-white">${profit.toLocaleString()}</div>
-                      </div>
-                    </div>
-
-                    <div className="pt-3 border-t border-white/5 flex justify-between items-center">
-                      <span className="text-sm font-display font-bold text-teal-300">Total Bid Estimate:</span>
-                      <span className="text-2xl font-display font-extrabold text-white">${totalEstimate.toLocaleString()}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* ── NICHEFLOW TAB ── */}
-            {activeTab === "nicheflow" && (
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-                <div className="lg:col-span-5 space-y-6">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-mono">
-                    <Workflow className="w-3 h-3" /> SOP Machine Generator
-                  </div>
-                  <h3 className="text-3xl md:text-4xl font-display font-bold text-white">NicheFlow</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    The SOP machine generator built for niche industries and small businesses. NicheFlow generates complete, ready-to-run standard operating procedures tailored to your trade — so you can systemize operations, save time and money, and compete with enterprises. Incredible ROI, zero consultants.
-                  </p>
-                  <div className="space-y-3">
-                    {["Auto-generates industry-specific SOPs (HVAC, Electrical, Plumbing, etc.)", "Describe your process — NicheFlow builds the SOP machine", "Team collaboration & real-time execution tracking", "ROI analytics: time saved, cost reduction, efficiency gains"].map((f) => (
-                      <div key={f} className="flex items-center gap-3">
-                        <div className="w-5 h-5 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-300 shrink-0">
-                          <ChevronRight className="w-3 h-3" />
-                        </div>
-                        <span className="text-sm font-medium text-[#E2E8F0]">{f}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="flex flex-wrap gap-4 pt-2">
-                    <Button onClick={() => handleDemoAction("NicheFlow")} className="rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium shadow-lg shadow-indigo-500/20 active:scale-97 transition-all">
-                      Get Started Free
-                    </Button>
-                    <Link href="/faq">
-                      <Button variant="ghost" className="rounded-xl text-indigo-300 hover:text-indigo-200 hover:bg-indigo-500/5">
-                        Learn More
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-
-                {/* ── NICHEFLOW ROI CALCULATOR ── */}
-                <div className="lg:col-span-7 space-y-4">
-                  <div className="bg-black/30 border border-white/10 rounded-2xl p-6 space-y-6">
-                    <div className="text-xs font-mono text-indigo-300 tracking-wider">ROI CALCULATOR</div>
-                    <div className="space-y-4">
-                      <div>
-                        <label className="block text-sm font-medium text-white mb-2">Team Size</label>
-                        <div className="flex gap-2">
-                          {["1-5", "5-20", "20-50", "50+"].map((size) => (
-                            <button
-                              key={size}
-                              onClick={() => setNicheflowTeamSize(size)}
-                              className={`px-3 py-2 rounded-lg text-xs font-medium transition-all ${
-                                nicheflowTeamSize === size
-                                  ? "bg-indigo-600 border border-indigo-400 text-white shadow-lg shadow-indigo-500/20"
-                                  : "bg-indigo-600/20 border border-indigo-500/30 text-indigo-300 hover:bg-indigo-600/40"
-                              }`}
-                            >
-                              {size}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-white mb-2">Current Manual Hours/Week</label>
-                        <input
-                          type="range"
-                          min="5"
-                          max="100"
-                          value={nicheflowHours}
-                          onChange={(e) => setNicheflowHours(Number(e.target.value))}
-                          className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-indigo-400"
-                        />
-                        <div className="text-xs text-muted-foreground mt-1">~{nicheflowHours} hours/week</div>
-                      </div>
-                    </div>
-                    <div className="pt-4 border-t border-white/5 space-y-2">
-                      <div className="flex justify-between text-sm">
-                        <span className="text-muted-foreground">Time Saved/Month:</span>
-                        <span className="font-bold text-indigo-300">~{nicheflowTimeSaved} hours</span>
-                      </div>
-                      <div className="flex justify-between text-sm">
-                        <span className="text-muted-foreground">Cost Reduction:</span>
-                        <span className="font-bold text-emerald-300">~${nicheflowCostReduction.toLocaleString()}/month</span>
-                      </div>
-                      <div className="flex justify-between text-sm">
-                        <span className="text-muted-foreground">Annual ROI:</span>
-                        <span className="font-bold text-white text-lg">{nicheflowROI}%</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-gradient-to-br from-indigo-600/20 to-purple-600/20 border border-indigo-500/20 rounded-2xl p-6 space-y-3">
-                    <h4 className="font-display font-bold text-white">Why Small Businesses Choose NicheFlow</h4>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
-                      <li className="flex gap-2"><span className="text-indigo-400">→</span> <span>Level the playing field against enterprises</span></li>
-                      <li className="flex gap-2"><span className="text-indigo-400">→</span> <span>Automate without expensive consultants</span></li>
-                      <li className="flex gap-2"><span className="text-indigo-400">→</span> <span>Scale operations without hiring</span></li>
-                      <li className="flex gap-2"><span className="text-indigo-400">→</span> <span>Measurable ROI from day one</span></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* ── VOW TAB ── */}
-            {activeTab === "vow" && (
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-                <div className="lg:col-span-5 space-y-6">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-mono">
-                    <Zap className="w-3 h-3" /> Next-Gen PaaS & Language
-                  </div>
-                  <h3 className="text-3xl md:text-4xl font-display font-bold text-white">VOW</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    A revolutionary PaaS and new coding language designed to eliminate complexity and accelerate development. VOW will be open-sourced, empowering developers worldwide to build the future faster.
-                  </p>
-                  <div className="space-y-3">
-                    {["Elegant, expressive language syntax", "Performance-first architecture", "Community-driven open source"].map((f) => (
-                      <div key={f} className="flex items-center gap-3">
-                        <div className="w-5 h-5 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-300 shrink-0">
-                          <ChevronRight className="w-3 h-3" />
-                        </div>
-                        <span className="text-sm font-medium text-[#E2E8F0]">{f}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <Link href="/vow">
-                    <Button className="rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-medium shadow-lg shadow-purple-500/20 active:scale-97 transition-all">
-                      Explore VOW
-                    </Button>
-                  </Link>
-                </div>
-                <div className="lg:col-span-7 flex items-center justify-center">
-                  <div className="text-center space-y-4">
-                    <div className="text-6xl font-display font-bold text-transparent bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text">VOW</div>
-                    <p className="text-muted-foreground text-sm max-w-xs">The future of development. Open-source PaaS and language coming soon.</p>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* ── TRUCKER$DREAM TAB ── */}
-            {activeTab === "truckers-dream" && (
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-                <div className="lg:col-span-5 space-y-6">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-300 text-xs font-mono">
-                    <Zap className="w-3 h-3" /> Load Optimization
-                  </div>
-                  <h3 className="text-3xl md:text-4xl font-display font-bold text-white">Trucker$Dream</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Multi-stacking load optimization platform built for owner-operators. Maximize revenue per mile, optimize route efficiency, and stack loads intelligently to grow your trucking business.
-                  </p>
-                  <div className="space-y-3">
-                    {["Revenue maximization per mile", "Intelligent multi-load stacking", "Real-time route optimization"].map((f) => (
-                      <div key={f} className="flex items-center gap-3">
-                        <div className="w-5 h-5 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-300 shrink-0">
-                          <ChevronRight className="w-3 h-3" />
-                        </div>
-                        <span className="text-sm font-medium text-[#E2E8F0]">{f}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <Link href="/truckers-dream">
-                    <Button className="rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-medium shadow-lg shadow-orange-500/20 active:scale-97 transition-all">
-                      Get Started
-                    </Button>
-                  </Link>
-                </div>
-                <div className="lg:col-span-7 flex items-center justify-center">
-                  <div className="text-center space-y-4">
-                    <div className="text-6xl font-display font-bold text-transparent bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text">Trucker$Dream</div>
-                    <p className="text-muted-foreground text-sm max-w-xs">Earn more with smarter load optimization for owner-operators.</p>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* ── APEX TAB ── */}
-            {activeTab === "apex" && (
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-                <div className="lg:col-span-5 space-y-6">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs font-mono">
-                    <BrainCircuit className="w-3 h-3" /> Marketing Strategist
-                  </div>
-                  <h3 className="text-3xl md:text-4xl font-display font-bold text-white">APEX</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    The relentless AI strategist that refuses second place. APEX is a specialized language model configured to embody elite marketing principles, delivering precision-engineered strategy, content, ads, funnels, and competitive analysis—not generic advice.
-                  </p>
-                  <div className="space-y-3">
-                    {["Aggressive positioning & differentiation", "Precision tool matching for your brand", "Elite-level analysis & actionable recommendations"].map((f) => (
-                      <div key={f} className="flex items-center gap-3">
-                        <div className="w-5 h-5 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-300 shrink-0">
-                          <ChevronRight className="w-3 h-3" />
-                        </div>
-                        <span className="text-sm font-medium text-[#E2E8F0]">{f}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <Button className="rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-medium shadow-lg shadow-amber-500/20 active:scale-97 transition-all">
-                    Meet APEX
-                  </Button>
-                </div>
-                <div className="lg:col-span-7 flex items-center justify-center">
-                  <div className="text-center space-y-4">
-                    <div className="text-6xl font-display font-bold text-transparent bg-gradient-to-r from-amber-400 to-amber-600 bg-clip-text">APEX</div>
-                    <p className="text-muted-foreground text-sm max-w-xs">Marketing Dominance — Precision-engineered strategy that drives your brand to elite status.</p>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* ── CELLULAR AUTOMATA EXPLORER TAB ── */}
-            {activeTab === "cellular-automata" && (
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-                <div className="lg:col-span-5 space-y-6">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-xs font-mono">
-                    <Sparkles className="w-3 h-3" /> Complexity Science
-                  </div>
-                  <h3 className="text-3xl md:text-4xl font-display font-bold text-white">Cellular Automata Explorer</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Observe how simple rules create complex emergent patterns. Explore 2D cellular automata systems with Moore and Von Neumann neighborhoods, discover unknown rules through automated sweeps, and visualize the intersection of mathematics and emergence.
-                  </p>
-                  <div className="space-y-3">
-                    {["Interactive 1D & 2D rule exploration", "Automated rule discovery via sweep", "Real-time pattern visualization"].map((f) => (
-                      <div key={f} className="flex items-center gap-3">
-                        <div className="w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-300 shrink-0">
-                          <ChevronRight className="w-3 h-3" />
-                        </div>
-                        <span className="text-sm font-medium text-[#E2E8F0]">{f}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <Button className="rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-medium shadow-lg shadow-blue-500/20 active:scale-97 transition-all">
-                    Start Exploring
-                  </Button>
-                </div>
-                <div className="lg:col-span-7 flex items-center justify-center">
-                  <div className="text-center space-y-4">
-                    <div className="text-6xl font-display font-bold text-transparent bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text">CA</div>
-                    <p className="text-muted-foreground text-sm max-w-xs">Cellular Automata — Where simple rules generate infinite complexity and beauty.</p>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* AI AGENT PIPELINE */}
-      <section id="pipeline" className="cv-auto py-20 relative z-10 border-t border-white/5 bg-gradient-to-b from-transparent to-purple-950/10">
-        <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-5 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-mono">
-                <Workflow className="w-3.5 h-3.5" /> AI Orchestration
-              </div>
-              <h2 className="text-3xl md:text-5xl font-display font-extrabold leading-tight text-white">
-                Streamlined by <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">AI Agents</span>
-              </h2>
-              <p className="text-muted-foreground text-lg leading-relaxed">
-                At Jcee Labs, we don't build software the old way. We orchestrate advanced autonomous AI agents (like Manus) to streamline our research, code generation, and deployment pipelines — giving us a compounding advantage in speed and quality.
-              </p>
-              <div className="space-y-4 pt-2">
-                {[
-                  { icon: Bot, color: "purple", title: "Autonomous Coding", desc: "Agents write, test, and lint clean React + Tailwind components on the fly." },
-                  { icon: BrainCircuit, color: "teal", title: "Predictive Estimating", desc: "Deep integration of custom LLMs for estimating pricing, bid matching, and risk." },
-                ].map(({ icon: Icon, color, title, desc }) => (
-                  <div key={title} className="flex gap-4">
-                    <div className={`w-10 h-10 rounded-lg bg-${color}-500/10 border border-${color}-500/20 flex items-center justify-center text-${color}-400 shrink-0`}>
-                      <Icon className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-white text-base">{title}</h4>
-                      <p className="text-muted-foreground text-sm">{desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="lg:col-span-7">
-              <div className="bg-white/[0.01] p-6 md:p-8 rounded-3xl border border-white/5 relative overflow-hidden">
-                <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-6">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-xs font-mono text-muted-foreground">AGENT PIPELINE SIMULATOR</span>
-                  </div>
-                  <span className="text-xs font-mono text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-md">Manus Orchestrated</span>
-                </div>
-                <div className="space-y-4">
-                  {[
-                    { num: "01", color: "purple", title: "Idea Ingestion & Strategy", desc: "AI agents parse requirements and draft domain blueprints.", status: "Success", statusColor: "emerald" },
-                    { num: "02", color: "teal", title: "Rapid Frontend Synthesis", desc: "Ethereal layouts and components are written with Tailwind 4.", status: "Active", statusColor: "emerald" },
-                    { num: "03", color: "indigo", title: "Intelligent Optimization", desc: "Custom models evaluate and streamline UI/UX and calculation logic.", status: "Queued", statusColor: "purple" },
-                  ].map(({ num, color, title, desc, status, statusColor }) => (
-                    <div key={num} className={`p-4 rounded-xl bg-white/[0.02] border border-white/5 flex items-center justify-between hover:border-${color}-500/20 transition-colors`}>
-                      <div className="flex items-center gap-3">
-                        <div className={`w-8 h-8 rounded-lg bg-${color}-500/10 flex items-center justify-center font-mono text-xs font-bold text-${color}-300`}>{num}</div>
-                        <div>
-                          <div className="text-sm font-bold text-white">{title}</div>
-                          <div className="text-xs text-muted-foreground">{desc}</div>
-                        </div>
-                      </div>
-                      <span className={`text-xs font-mono text-${statusColor}-400 bg-${statusColor}-500/10 px-2 py-0.5 rounded`}>{status}</span>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-6 pt-4 border-t border-white/5 flex justify-between items-center text-xs text-muted-foreground">
-                  <span>Current Speed: <strong className="text-white">10x Industry Average</strong></span>
-                  <span>Build Cycle: <strong className="text-white">Autonomous</strong></span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ROADMAP */}
-      <section className="cv-auto py-20 border-t border-white/5 relative z-10">
-        <div className="container">
-          <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
+      {/* ═══════════════════════════════════════════════════════════════════════
+          CONTACT / INQUIRY
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section id="contact" className="py-24 relative z-10 border-t border-white/5">
+        <div className="container max-w-2xl">
+          <div className="text-center space-y-4 mb-12">
             <h2 className="text-3xl md:text-4xl font-display font-extrabold text-white">
-              The Jcee Labs <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Roadmap</span>
+              Let's <span className="bg-gradient-to-r from-teal-400 to-teal-600 bg-clip-text text-transparent">Build Together</span>
             </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed">
-              We are constantly incubating. Here is a glimpse of where Jcee Labs is heading next under the HOWM HOLDINGS LLC umbrella.
+            <p className="text-muted-foreground text-lg">
+              Tell us about your project and we'll get back to you within 24 hours.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            {[
-              { phase: "Phase 1", color: "purple", period: "Q2 2026", title: "Mirrored Beta", desc: "Launching our personalized AI journaling and reflection beta for early priority queue users." },
-              { phase: "Phase 2", color: "teal", period: "Q3 2026", title: "BidIndustrial Launch", desc: "Releasing the intelligent bidding estimator to selected contractor pilot cohorts." },
-              { phase: "Phase 3", color: "indigo", period: "Q4 2026", title: "AI Agent Hub", desc: "Introducing a streamlined interface to manage custom autonomous AI agents for small businesses." },
-              { phase: "Phase 4", color: "fuchsia", period: "Q1 2027", title: "Ecosystem API", desc: "Opening Jcee Labs' custom AI intelligence layers via public APIs for developers." },
-            ].map(({ phase, color, period, title, desc }) => (
-              <div key={phase} className={`bg-white/[0.02] p-6 rounded-2xl border border-white/5 relative group hover:border-${color}-500/20 transition-all duration-300`}>
-                <div className={`absolute top-4 right-4 text-xs font-mono text-${color}-400 bg-${color}-500/10 px-2 py-0.5 rounded-full`}>{phase}</div>
-                <div className="text-xs font-mono text-muted-foreground mb-2">{period}</div>
-                <h4 className="font-display font-bold text-lg text-white mb-2">{title}</h4>
-                <p className="text-muted-foreground text-sm leading-relaxed">{desc}</p>
-              </div>
-            ))}
-          </div>
+          <BusinessInquiryForm />
         </div>
       </section>
 
-      {/* NEWSLETTER / CTA */}
+      {/* ═══════════════════════════════════════════════════════════════════════
+          NEWSLETTER / CTA
+      ═══════════════════════════════════════════════════════════════════════ */}
       <section id="newsletter" className="py-24 border-t border-white/5 bg-gradient-to-t from-purple-950/10 to-transparent relative z-10">
-        <div className="container max-w-4xl">
+        <div className="container max-w-3xl">
           <div className="bg-white/[0.02] p-8 md:p-12 rounded-3xl border border-white/5 relative overflow-hidden text-center space-y-6">
             <div className="absolute inset-0 bg-purple-500/5 blur-2xl pointer-events-none" />
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-mono mx-auto">
-              <Sparkles className="w-3.5 h-3.5" /> Secure Your Spot
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-mono mx-auto relative z-10">
+              <Sparkles className="w-3.5 h-3.5" /> Stay Updated
             </div>
-            <h2 className="text-3xl md:text-5xl font-display font-extrabold text-white">
-              Enter the <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Jcee Labs</span> Queue
+            <h2 className="text-3xl md:text-4xl font-display font-extrabold text-white relative z-10">
+              Join the <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Priority Queue</span>
             </h2>
-            <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-              Be the first to know when private betas for <strong className="text-white">Mirrored</strong>, <strong className="text-white">BidIndustrial</strong>, and other upcoming HOWM HOLDINGS LLC innovations go live.
+            <p className="text-muted-foreground text-lg max-w-xl mx-auto relative z-10">
+              Be the first to know when our products launch. Get early access and exclusive updates.
             </p>
 
             {isSubmitted ? (
-              <div className="p-6 rounded-2xl bg-purple-500/10 border border-purple-500/20 max-w-md mx-auto">
-                <p className="text-purple-300 font-bold mb-1">Queue Registration Confirmed!</p>
-                <p className="text-muted-foreground text-sm">We have saved your spot. Check your inbox soon for laboratory updates.</p>
+              <div className="p-6 rounded-2xl bg-purple-500/10 border border-purple-500/20 max-w-md mx-auto relative z-10">
+                <p className="text-purple-300 font-bold mb-1">You're on the list!</p>
+                <p className="text-muted-foreground text-sm">We'll notify you as soon as access opens up.</p>
               </div>
             ) : (
-              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto pt-2">
+              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto pt-2 relative z-10">
                 <Input
                   type="email"
                   placeholder="Enter your email address"
@@ -1035,74 +350,71 @@ export default function Home() {
                   disabled={subscribeMutation.isPending}
                   className="rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold px-6 h-11 shadow-lg shadow-purple-500/20 active:scale-95 transition-all disabled:opacity-60"
                 >
-                  {subscribeMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : "Join Priority Queue"}
+                  {subscribeMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : "Join Queue"}
                 </Button>
               </form>
             )}
 
-            <div className="pt-4 flex justify-center items-center gap-6 text-xs text-muted-foreground font-mono">
-              <span className="flex items-center gap-1"><Lock className="w-3.5 h-3.5" /> Zero Spam</span>
-              <span>&bull;</span>
-              <span>Administered by HOWM HOLDINGS LLC</span>
+            <div className="pt-4 flex justify-center items-center gap-6 text-xs text-muted-foreground font-mono relative z-10">
+              <span className="flex items-center gap-1"><Lock className="w-3.5 h-3.5" /> No spam, ever</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="border-t border-white/5 bg-[#05030c] py-12 relative z-10">
+      {/* ═══════════════════════════════════════════════════════════════════════
+          FOOTER
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <footer className="border-t border-white/5 bg-[#05030c] py-12 relative z-10 mt-auto">
         <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-10">
             <div className="md:col-span-5 space-y-4">
               <div className="flex items-center gap-3">
                 <img
-                src="/manus-storage/jcee-labs-logo_f25acfb0.png"
-                alt="Jcee Labs Logo"
-                className="w-8 h-8 rounded-lg shadow-lg shadow-purple-500/25 object-contain"
-              />
+                  src="/manus-storage/jcee-labs-logo_f25acfb0.png"
+                  alt="Jcee Labs Logo"
+                  className="w-8 h-8 rounded-lg shadow-lg shadow-purple-500/25 object-contain"
+                />
                 <span className="font-display font-bold text-base tracking-wider text-white">JCEE LABS</span>
               </div>
               <p className="text-muted-foreground text-sm leading-relaxed max-w-sm">
-                Jcee Labs is the d.b.a. of <strong className="text-white">HOWM HOLDINGS LLC</strong>, dedicated to building streamlined, AI-optimized applications that enhance creativity and professional efficiency.
+                Jcee Labs is the d.b.a. of <strong className="text-white">HOWM HOLDINGS LLC</strong>. We build AI-optimized applications that enhance creativity and professional efficiency.
               </p>
             </div>
             <div className="md:col-span-3 space-y-3">
-              <h5 className="font-display font-bold text-sm text-white tracking-wider uppercase">Flagship Products</h5>
+              <h5 className="font-display font-bold text-sm text-white tracking-wider uppercase">Products</h5>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><button onClick={() => { setActiveTab("vow"); document.getElementById("products")?.scrollIntoView({ behavior: "smooth" }); }} className="hover:text-purple-300 transition-colors">VOW</button></li>
-                <li><button onClick={() => { setActiveTab("mirrored"); document.getElementById("products")?.scrollIntoView({ behavior: "smooth" }); }} className="hover:text-purple-300 transition-colors">Mirrored App</button></li>
-                <li><button onClick={() => { setActiveTab("truckers-dream"); document.getElementById("products")?.scrollIntoView({ behavior: "smooth" }); }} className="hover:text-orange-300 transition-colors">Trucker$Dream</button></li>
-                <li><button onClick={() => { setActiveTab("bidindustrial"); document.getElementById("products")?.scrollIntoView({ behavior: "smooth" }); }} className="hover:text-teal-300 transition-colors">BidIndustrial</button></li>
-                <li><button onClick={() => { setActiveTab("nicheflow"); document.getElementById("products")?.scrollIntoView({ behavior: "smooth" }); }} className="hover:text-indigo-300 transition-colors">NicheFlow</button></li>
+                <li><Link href="/mirrored"><a className="hover:text-purple-300 transition-colors">Mirrored</a></Link></li>
+                <li><Link href="/truckers-dream"><a className="hover:text-orange-300 transition-colors">Trucker$Dream</a></Link></li>
+                <li><Link href="/vow"><a className="hover:text-purple-300 transition-colors">VOW</a></Link></li>
+                <li><Link href="/bidindustrial"><a className="hover:text-teal-300 transition-colors">BidIndustrial</a></Link></li>
+                <li><Link href="/nicheflo"><a className="hover:text-indigo-300 transition-colors">NicheFlow</a></Link></li>
               </ul>
             </div>
             <div className="md:col-span-2 space-y-3">
-              <h5 className="font-display font-bold text-sm text-white tracking-wider uppercase">Resources</h5>
+              <h5 className="font-display font-bold text-sm text-white tracking-wider uppercase">Company</h5>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="/faq" className="hover:text-purple-300 transition-colors">FAQ Hub</Link></li>
-                <li><a href="#lab" className="hover:text-purple-300 transition-colors">Lab Vision</a></li>
-                <li><a href="#pipeline" className="hover:text-purple-300 transition-colors">AI Pipeline</a></li>
+                <li><Link href="/team"><a className="hover:text-white transition-colors">Team</a></Link></li>
+                <li><Link href="/faq"><a className="hover:text-white transition-colors">FAQ</a></Link></li>
+                <li><a href="#services" className="hover:text-white transition-colors">Services</a></li>
               </ul>
             </div>
             <div className="md:col-span-2 space-y-3">
               <h5 className="font-display font-bold text-sm text-white tracking-wider uppercase">Legal</h5>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><span className="cursor-default">HOWM HOLDINGS LLC</span></li>
-                <li><span className="cursor-default text-xs text-white/40">Registered d.b.a: Jcee Labs</span></li>
-                <li><span className="text-white/20">Privacy Policy</span></li>
-                <li><span className="text-white/20">Terms of Service</span></li>
+                <li><span className="text-white/40 text-xs">d.b.a: Jcee Labs</span></li>
               </ul>
             </div>
           </div>
           <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
-            <p>&copy; {new Date().getFullYear()} Jcee Labs. All rights reserved. Under HOWM HOLDINGS LLC.</p>
+            <p>&copy; {new Date().getFullYear()} Jcee Labs. All rights reserved. HOWM HOLDINGS LLC.</p>
             <p className="flex items-center gap-1">
-              Built with <Zap className="w-3 h-3 text-purple-400" /> & AI Orchestration
+              Built with <Zap className="w-3 h-3 text-purple-400" /> AI Orchestration
             </p>
           </div>
         </div>
       </footer>
-
     </div>
   );
 }
