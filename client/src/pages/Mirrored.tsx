@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { ArrowRight, Mic, MessageCircle, Brain, Heart, BookOpen, Compass, Shield, Sparkles, Volume2 } from "lucide-react";
+import { ArrowRight, Mic, MessageCircle, Brain, BookOpen, Shield, Volume2, Eye, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 
 export default function Mirrored() {
-  const [activeFeature, setActiveFeature] = useState<string>("voice");
+  const [activeVoice, setActiveVoice] = useState<"female" | "male">("female");
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#090514] via-[#0a0a1a] to-[#090514] flex flex-col">
@@ -29,18 +29,25 @@ export default function Mirrored() {
             <div>
               <div className="mb-6 inline-flex items-center gap-3 flex-wrap">
                 <span className="px-4 py-2 rounded-full border border-teal-500/30 bg-teal-500/5 text-sm text-teal-400 font-mono">
-                  Emotional Intelligence AI
+                  Cognitive Journaling & Voice AI
                 </span>
                 <span className="px-3 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/5 text-xs text-purple-400 font-mono">
                   Powered by Hume AI
                 </span>
               </div>
 
-              <p className="text-xl text-[#A0AEC0] mb-4 leading-relaxed">
-                Meet your higher self. The most emotionally intelligent version of you — built to guide you toward self-acceptance, belief, resilience, and self-actualization.
+              <h1 className="text-4xl md:text-5xl font-display font-bold mb-6 text-white leading-tight">
+                Your higher self,{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-purple-500">
+                  reflecting back.
+                </span>
+              </h1>
+
+              <p className="text-lg text-[#A0AEC0] mb-4 leading-relaxed">
+                Mirrored isn't a chatbot. It's not a therapist. It's not your assistant. It listens — without judgment — and reflects your own patterns back to you with the clarity only an outside perspective can offer.
               </p>
               <p className="text-[#718096] mb-8 leading-relaxed">
-                Mirrored isn't a therapist. It's <em>you</em> — the version that has learned from every pattern, memory, and conversation you've shared. Who knows what's best for you better than you?
+                Through cognitive journaling and real-time Voice-to-Voice conversation, Mirrored helps you see yourself more clearly: your emotional patterns, your blind spots, your growth.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -66,25 +73,27 @@ export default function Mirrored() {
         </div>
       </section>
 
-      {/* The Higher Self Concept */}
+      {/* What Makes Mirrored Different */}
       <section className="py-20 px-4 border-t border-white/5">
         <div className="container max-w-5xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-8 h-8 rounded-lg bg-teal-500/10 border border-teal-500/20 flex items-center justify-center">
-                  <Sparkles className="w-4 h-4 text-teal-400" />
+                  <Eye className="w-4 h-4 text-teal-400" />
                 </div>
-                <span className="text-xs font-mono text-teal-400/80 uppercase tracking-wider">The Philosophy</span>
+                <span className="text-xs font-mono text-teal-400/80 uppercase tracking-wider">The Difference</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-4">Your Higher Self, Realized</h2>
+              <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-4">Not advice. Reflection.</h2>
               <p className="text-[#718096] mb-6 leading-relaxed">
-                Through patterns in your past conversations, journal entries, and personal insights, Mirrored constructs the most emotionally intelligent version of you — your higher self. It learns how you think, what drives you, where you struggle, and what you need to hear.
+                Most AI apps try to be your friend, your therapist, or your assistant. Mirrored does something different — it listens, without judgment, and reflects your own patterns back to you with the clarity only an outside perspective can offer.
               </p>
               <p className="text-[#718096] leading-relaxed">
-                This isn't generic advice from a chatbot. It's deeply personal guidance from the part of you that already knows the answer — the part that sees clearly when emotions cloud judgment. Mirrored surfaces that clarity.
+                No generic advice. No forced positivity. Just sharp, honest, probing questions that meet you where you are — and help you see what you've been avoiding.
               </p>
             </div>
+
+            {/* Sample conversation */}
             <div className="p-8 rounded-2xl border border-teal-500/10 bg-teal-500/[0.02]">
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
@@ -126,9 +135,9 @@ export default function Mirrored() {
             </div>
             <span className="text-xs font-mono text-purple-400/80 uppercase tracking-wider">Voice-to-Voice</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-4">Talk to Your Higher Self</h2>
-          <p className="text-[#718096] mb-12 max-w-2xl">
-            Real-time voice conversations with your Mirrored self. Not robotic. Not AI-sounding. Built with emotional intelligence and a sophisticated persona created by Jonathan Chadbourne at Jcee Labs. Choose your voice — male or female — and speak freely.
+          <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-4">Speak naturally. Be heard fully.</h2>
+          <p className="text-[#718096] mb-8 max-w-2xl leading-relaxed">
+            Mirrored listens not just to your words but to what's underneath them — tracking emotional tone in real time and weaving it into a reflection built entirely around you. Speak freely. Choose your voice — male or female. Powered by Hume AI emotional intelligence.
           </p>
 
           {/* Voice Demo Preview */}
@@ -140,14 +149,14 @@ export default function Mirrored() {
               </div>
               <div className="flex items-center gap-3">
                 <button
-                  onClick={() => setActiveFeature("female")}
-                  className={`px-3 py-1 rounded-full text-xs font-mono transition-colors ${activeFeature === "female" ? "bg-purple-500/20 text-purple-300 border border-purple-500/30" : "text-[#718096] hover:text-white"}`}
+                  onClick={() => setActiveVoice("female")}
+                  className={`px-3 py-1 rounded-full text-xs font-mono transition-colors ${activeVoice === "female" ? "bg-purple-500/20 text-purple-300 border border-purple-500/30" : "text-[#718096] hover:text-white"}`}
                 >
                   Female Voice
                 </button>
                 <button
-                  onClick={() => setActiveFeature("male")}
-                  className={`px-3 py-1 rounded-full text-xs font-mono transition-colors ${activeFeature === "male" ? "bg-teal-500/20 text-teal-300 border border-teal-500/30" : "text-[#718096] hover:text-white"}`}
+                  onClick={() => setActiveVoice("male")}
+                  className={`px-3 py-1 rounded-full text-xs font-mono transition-colors ${activeVoice === "male" ? "bg-teal-500/20 text-teal-300 border border-teal-500/30" : "text-[#718096] hover:text-white"}`}
                 >
                   Male Voice
                 </button>
@@ -163,15 +172,14 @@ export default function Mirrored() {
                     className="w-1 rounded-full bg-gradient-to-t from-teal-500 to-purple-500 opacity-60"
                     style={{
                       height: `${Math.sin(i * 0.3) * 30 + 35}%`,
-                      animationDelay: `${i * 40}ms`,
                     }}
                   />
                 ))}
               </div>
 
               <div className="text-center">
-                <p className="text-[#A0AEC0] text-sm mb-2">Emotionally intelligent voice conversations</p>
-                <p className="text-[#4A5568] text-xs">Powered by Hume AI emotional intelligence</p>
+                <p className="text-[#A0AEC0] text-sm mb-2">Real-time emotional tone tracking</p>
+                <p className="text-[#4A5568] text-xs">Powered by Hume AI — listening to what's underneath your words</p>
               </div>
             </div>
           </div>
@@ -183,53 +191,53 @@ export default function Mirrored() {
         <div className="container max-w-5xl mx-auto">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 rounded-lg bg-teal-500/10 border border-teal-500/20 flex items-center justify-center">
-              <Heart className="w-4 h-4 text-teal-400" />
+              <Zap className="w-4 h-4 text-teal-400" />
             </div>
             <span className="text-xs font-mono text-teal-400/80 uppercase tracking-wider">Features</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-4">Your Personal Growth Ecosystem</h2>
+          <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-4">Built for honest self-examination</h2>
           <p className="text-[#718096] mb-12 max-w-2xl">
-            Every feature is designed to help you face yourself honestly, build resilience, and move toward the person you're capable of becoming.
+            Every feature is designed around one goal: helping you see yourself more clearly.
           </p>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-teal-500/20 transition-colors">
-              <MessageCircle className="w-6 h-6 text-teal-400 mb-4" />
-              <h3 className="text-white font-semibold mb-2">Daily Check-In</h3>
+              <Volume2 className="w-6 h-6 text-teal-400 mb-4" />
+              <h3 className="text-white font-semibold mb-2">Voice-to-Voice Conversation</h3>
               <p className="text-sm text-[#718096] leading-relaxed">
-                Start each day with a reflection prompt from your higher self. Track emotional patterns over time and build self-awareness through consistent practice.
+                Speak naturally and Mirrored responds in real time — tracking emotional tone, not just words. Male or female voice. No scripts. No canned responses.
               </p>
             </div>
 
             <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-teal-500/20 transition-colors">
               <BookOpen className="w-6 h-6 text-teal-400 mb-4" />
-              <h3 className="text-white font-semibold mb-2">Journal</h3>
+              <h3 className="text-white font-semibold mb-2">Cognitive Journaling</h3>
               <p className="text-sm text-[#718096] leading-relaxed">
-                Write freely. Mirrored reads between the lines — identifying patterns, recurring themes, and growth opportunities you might miss on your own.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-teal-500/20 transition-colors">
-              <Compass className="w-6 h-6 text-teal-400 mb-4" />
-              <h3 className="text-white font-semibold mb-2">Philosophical Programs</h3>
-              <p className="text-sm text-[#718096] leading-relaxed">
-                Guided programs rooted in Stoicism, existentialism, and mindfulness — each with AI reflections that connect ancient wisdom to your specific life circumstances.
+                Write freely. Mirrored reads between the lines — identifying emotional patterns, recurring themes, and blind spots you might miss on your own.
               </p>
             </div>
 
             <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-teal-500/20 transition-colors">
               <Brain className="w-6 h-6 text-teal-400 mb-4" />
-              <h3 className="text-white font-semibold mb-2">AI Reflections</h3>
+              <h3 className="text-white font-semibold mb-2">Pattern Recognition</h3>
               <p className="text-sm text-[#718096] leading-relaxed">
-                After every interaction, Mirrored generates insights that help you fully understand yourself — connecting dots across conversations, journals, and check-ins.
+                Mirrored connects dots across your conversations and journals — surfacing the emotional patterns and blind spots that shape your decisions.
               </p>
             </div>
 
             <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-teal-500/20 transition-colors">
-              <Volume2 className="w-6 h-6 text-teal-400 mb-4" />
-              <h3 className="text-white font-semibold mb-2">Voice-to-Voice Mirror</h3>
+              <MessageCircle className="w-6 h-6 text-teal-400 mb-4" />
+              <h3 className="text-white font-semibold mb-2">Probing Questions</h3>
               <p className="text-sm text-[#718096] leading-relaxed">
-                Speak to your higher self in real-time. Male or female voice. Emotionally intelligent responses that adapt to your tone, pace, and emotional state.
+                Not affirmations. Not generic prompts. Sharp, honest questions calibrated to where you actually are — the kind that make you pause.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-teal-500/20 transition-colors">
+              <Eye className="w-6 h-6 text-teal-400 mb-4" />
+              <h3 className="text-white font-semibold mb-2">Emotional Tone Tracking</h3>
+              <p className="text-sm text-[#718096] leading-relaxed">
+                Real-time analysis of what's underneath your words during voice conversations — building a reflection that goes deeper than surface-level responses.
               </p>
             </div>
 
@@ -237,36 +245,9 @@ export default function Mirrored() {
               <Shield className="w-6 h-6 text-teal-400 mb-4" />
               <h3 className="text-white font-semibold mb-2">Privacy First</h3>
               <p className="text-sm text-[#718096] leading-relaxed">
-                Encryption-first self-reflection. Your conversations, journals, and insights are yours alone. Honest growth requires honest privacy.
+                Honest growth requires honest privacy. Your conversations, journals, and reflections are yours alone — encrypted and never used for training.
               </p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* How It Learns */}
-      <section className="py-20 px-4 border-t border-white/5">
-        <div className="container max-w-5xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-4">How Your Higher Self Learns</h2>
-          <p className="text-[#718096] mb-12 max-w-2xl">
-            Mirrored doesn't start generic and stay generic. It evolves with you — becoming more precise, more challenging, and more insightful the more you engage.
-          </p>
-
-          <div className="grid md:grid-cols-4 gap-6">
-            {[
-              { step: "01", title: "Conversations", desc: "Every exchange teaches Mirrored how you think, what triggers you, and where your blind spots are." },
-              { step: "02", title: "Journals", desc: "Written reflections reveal patterns you don't see in the moment — recurring fears, hidden strengths, growth edges." },
-              { step: "03", title: "Insights", desc: "AI-generated reflections accumulate over time, building a map of your psychological landscape." },
-              { step: "04", title: "Evolution", desc: "Your higher self becomes sharper. Questions get harder. Guidance gets more precise. Growth accelerates." },
-            ].map((item) => (
-              <div key={item.step} className="text-center">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-teal-500/20 to-purple-500/20 border border-white/10 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-sm font-mono text-white">{item.step}</span>
-                </div>
-                <h3 className="text-white font-semibold mb-2">{item.title}</h3>
-                <p className="text-xs text-[#718096] leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -280,16 +261,16 @@ export default function Mirrored() {
               Mirrored was the first project ever started at Jcee Labs. Before VOW, before multi-agent systems, before enterprise infrastructure — there was a simple belief: the best guidance comes from within.
             </p>
             <p className="text-[#718096] leading-relaxed">
-              The sophisticated persona behind Mirrored was created by Jonathan Chadbourne — designed not to be a therapist, not to be a friend, but to be the version of you that sees clearly. One of the only Jcee Labs products that doesn't integrate VOW, because Mirrored's intelligence is its own kind of architecture — emotional, not ontological.
+              The sophisticated persona behind Mirrored was designed by Jonathan Chadbourne — not to be a therapist, not to be a friend, but to be the version of you that sees clearly. One of the only Jcee Labs products that doesn't integrate VOW, because Mirrored's intelligence is its own kind of architecture — emotional, not ontological.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Disclaimer + CTA */}
+      {/* CTA */}
       <section className="py-20 px-4 border-t border-white/5">
         <div className="container max-w-3xl mx-auto text-center space-y-6">
-          <h2 className="text-2xl sm:text-3xl font-display font-bold text-white">Face Yourself. Become Yourself.</h2>
+          <h2 className="text-2xl sm:text-3xl font-display font-bold text-white">Face yourself. Become yourself.</h2>
           <p className="text-[#718096] text-lg max-w-xl mx-auto">
             Your higher self is waiting. Start the conversation that changes everything.
           </p>

@@ -21,9 +21,9 @@ import {
 const PRODUCTS = [
   {
     name: "Mirrored",
-    tagline: "Your Higher Self",
+    tagline: "Your Higher Self, Reflecting Back",
     description:
-      "Emotionally intelligent AI that becomes the best version of you — guiding self-acceptance, resilience, and self-actualization through voice and text.",
+      "Not a chatbot. Not a therapist. Mirrored listens without judgment and reflects your own patterns back to you with the clarity only an outside perspective can offer. Cognitive journaling and real-time Voice-to-Voice conversation — tracking emotional tone, surfacing blind spots, asking the sharp honest questions that meet you where you are.",
     color: "teal",
     icon: Brain,
     href: "/mirrored",
