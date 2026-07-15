@@ -41,6 +41,7 @@ export default function TeamPage() {
                   alt="Jonathan Chadbourne"
                   className="w-32 h-32 md:w-36 md:h-36 rounded-2xl object-cover object-center shadow-lg shadow-purple-500/20 border border-white/10"
                 />
+                <p className="text-xs text-muted-foreground font-mono tracking-wider uppercase">Connect with me</p>
                 <div className="flex items-center gap-3">
                   <a
                     href="https://www.linkedin.com/in/jonathan-chadbourne-153561410"
