@@ -30,13 +30,13 @@ const PRODUCTS = [
     status: "Beta",
   },
   {
-    name: "Trucker$Dream",
-    tagline: "Load Optimization",
+    name: "TrueRPM",
+    tagline: "Revenue Per Mile",
     description:
-      "Multi-stacking load optimization for owner-operators. Maximize revenue per mile.",
+      "Know your true revenue per mile. Load intelligence and multi-stacking optimization for owner-operators.",
     color: "orange",
     icon: Truck,
-    href: "/truckers-dream",
+    href: "/truerpm",
     status: "Coming Soon",
   },
   {
@@ -466,7 +466,7 @@ export default function Home() {
               </h5>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><Link href="/mirrored"><a className="hover:text-purple-300 transition-colors">Mirrored</a></Link></li>
-                <li><Link href="/truckers-dream"><a className="hover:text-orange-300 transition-colors">Trucker$Dream</a></Link></li>
+                <li><Link href="/truerpm"><a className="hover:text-orange-300 transition-colors">TrueRPM</a></Link></li>
                 <li><Link href="/vow"><a className="hover:text-purple-300 transition-colors">VOW</a></Link></li>
                 <li><Link href="/apex"><a className="hover:text-amber-300 transition-colors">APEX Media</a></Link></li>
                 <li><Link href="/bidindustrial"><a className="hover:text-teal-300 transition-colors">BidIndustrial</a></Link></li>

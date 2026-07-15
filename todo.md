@@ -187,3 +187,10 @@
 ## Phase 20 — Hero Differentiation (Hybrid 1+3: VOW moat + solo-founder story)
 - [x] Rewrite hero headline, subheading, and badge to reflect VOW-as-moat + solo-founder narrative
 - [x] All tests passing
+
+## Phase 21 — Rename Trucker$Dream to TrueRPM (Revenue Per Mile)
+- [x] Rename all "Trucker$Dream" / "Truckers Dream" references to "TrueRPM" across Home.tsx, SiteNav, SiteFooter, App.tsx
+- [x] Update TruckersDreamPage.tsx content to reflect TrueRPM branding and "Revenue Per Mile" positioning for owner-operators
+- [x] Update VowPage.tsx reference (VOW powers TrueRPM)
+- [x] Route renamed to /truerpm
+- [x] All tests passing

@@ -5,7 +5,7 @@ import { ArrowUpRight, ChevronDown } from "lucide-react";
 
 const PRODUCTS = [
   { name: "Mirrored", href: "/mirrored", color: "text-purple-300" },
-  { name: "Trucker$Dream", href: "/truckers-dream", color: "text-orange-300" },
+  { name: "TrueRPM", href: "/truerpm", color: "text-orange-300" },
   { name: "VOW", href: "/vow", color: "text-pink-300" },
   { name: "BidIndustrial", href: "/bidindustrial", color: "text-teal-300" },
   { name: "NicheFlow", href: "/nicheflo", color: "text-indigo-300" },

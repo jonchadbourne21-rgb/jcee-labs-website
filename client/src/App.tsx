@@ -12,7 +12,7 @@ const Mirrored = lazy(() => import("./pages/Mirrored"));
 const BidIndustrialPage = lazy(() => import("./pages/BidIndustrialPage"));
 const NicheFloPage = lazy(() => import("./pages/NicheFloPage"));
 const VowPage = lazy(() => import("./pages/VowPage"));
-const TruckersDreamPage = lazy(() => import("./pages/TruckersDreamPage"));
+const TrueRPMPage = lazy(() => import("./pages/TrueRPMPage"));
 const ApexPage = lazy(() => import("./pages/ApexPage"));
 const CellularAutomataPage = lazy(() => import("./pages/CellularAutomataPage"));
 const ZhipzPage = lazy(() => import("./pages/ZhipzPage"));
@@ -41,7 +41,7 @@ function Router() {
         <Route path="/bidindustrial" component={BidIndustrialPage} />
         <Route path="/nicheflo" component={NicheFloPage} />
         <Route path="/vow" component={VowPage} />
-        <Route path="/truckers-dream" component={TruckersDreamPage} />
+        <Route path="/truerpm" component={TrueRPMPage} />
         <Route path="/apex" component={ApexPage} />
         <Route path="/cellular-automata" component={CellularAutomataPage} />
         <Route path="/zhipz" component={ZhipzPage} />

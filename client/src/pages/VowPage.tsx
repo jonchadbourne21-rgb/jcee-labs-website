@@ -205,10 +205,10 @@ export default function VowPage() {
               </div>
             </Link>
 
-            <Link href="/truckers-dream">
+            <Link href="/truerpm">
               <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-orange-500/20 transition-colors cursor-pointer group">
-                <h3 className="text-white font-semibold mb-2 group-hover:text-orange-400 transition-colors">Trucker$Dream</h3>
-                <p className="text-xs text-orange-400/60 font-mono mb-3">Load Optimization</p>
+                <h3 className="text-white font-semibold mb-2 group-hover:text-orange-400 transition-colors">TrueRPM</h3>
+                <p className="text-xs text-orange-400/60 font-mono mb-3">Revenue Per Mile</p>
                 <p className="text-sm text-[#718096] leading-relaxed">
                   VOW's subsumption logic validates load combinations against weight/route constraints. Deontic gates enforce DOT compliance. Scar memory learns from rejected loads.
                 </p>

@@ -24,7 +24,7 @@ export default function TermsPage() {
             <section className="space-y-4">
               <h2 className="text-xl font-display font-bold text-white">2. Description of Services</h2>
               <p>
-                Jcee Labs provides AI-powered software products and custom B2B development services. Our product suite includes, but is not limited to: Mirrored, Trucker$Dream, VOW, BidIndustrial, NicheFlow, and APEX. Services may be modified, updated, or discontinued at our discretion.
+                Jcee Labs provides AI-powered software products and custom B2B development services. Our product suite includes, but is not limited to: Mirrored, TrueRPM, VOW, BidIndustrial, NicheFlow, and APEX. Services may be modified, updated, or discontinued at our discretion.
               </p>
             </section>
 

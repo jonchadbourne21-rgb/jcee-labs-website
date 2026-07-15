@@ -81,8 +81,8 @@ export default function SiteFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/truckers-dream">
-                  <a className="hover:text-orange-300 transition-colors">Trucker$Dream</a>
+                <Link href="/truerpm">
+                  <a className="hover:text-orange-300 transition-colors">TrueRPM</a>
                 </Link>
               </li>
               <li>
