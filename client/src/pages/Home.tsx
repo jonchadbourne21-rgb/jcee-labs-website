@@ -43,7 +43,7 @@ const PRODUCTS = [
     name: "VOW",
     tagline: "Ontology-Driven PaaS & Language",
     description:
-      "Formally-grounded AI infrastructure with built-in EU AI Act compliance. The brain behind every Jcee Labs product.",
+      "Most agentic AI frameworks treat safety and auditability as an afterthought bolted onto a general-purpose language. VOW is different: it's purpose-built from the ground up so that autonomous agents can take real-world actions — and every one of those actions is transparent, traceable, and gated by explicit permissions. VOW compiles to readable Python rather than hiding logic in a bytecode VM, so what the agent does is never a mystery. Every capability-gated action routes through an auditable guard layer, and the system maintains a persistent 'scar trail' — a record of consequential decisions an agent has made and why. That's not just good engineering practice; it's increasingly a regulatory requirement. VOW's audit architecture maps directly onto the EU AI Act's high-risk system obligations (Articles 9–15), positioning it ahead of the transparency deadlines already taking effect in 2026.",
     color: "purple",
     icon: Code2,
     href: "/vow",
