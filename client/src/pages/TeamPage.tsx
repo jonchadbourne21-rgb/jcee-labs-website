@@ -34,11 +34,11 @@ export default function TeamPage() {
 
           {/* Jonathan Chadbourne */}
           <div className="bg-white/[0.02] border border-white/5 rounded-3xl p-8 md:p-10 hover:border-purple-500/20 transition-colors">
-            <div className="flex flex-col md:flex-row gap-8 items-start">
+            <div className="flex flex-col md:flex-row gap-8 items-center">
               <img
                 src="/manus-storage/jonathan-photo_8a631582.png"
                 alt="Jonathan Chadbourne"
-                className="w-24 h-24 rounded-2xl object-cover object-center shrink-0 shadow-lg shadow-purple-500/20 border border-white/10"
+                className="w-32 h-32 md:w-36 md:h-36 rounded-2xl object-cover object-center shrink-0 shadow-lg shadow-purple-500/20 border border-white/10 mx-auto md:mx-0"
               />
               <div className="space-y-4 flex-1">
                 <div>
