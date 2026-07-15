@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Ship, Globe, Cloud, Route, Brain, Clock, AlertTriangle, BarChart3, Anchor, ArrowRight } from "lucide-react";
+import { Ship, Globe, Cloud, Route, Brain, Clock, AlertTriangle, BarChart3, Anchor, ArrowRight, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
@@ -49,6 +49,157 @@ export default function ZhipzPage() {
                 Back to Home
               </Button>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Proprietary Algorithm Dashboard */}
+      <section className="py-20 px-4 border-t border-white/5">
+        <div className="container max-w-5xl mx-auto">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
+              <Lock className="w-4 h-4 text-cyan-400" />
+            </div>
+            <span className="text-xs font-mono text-cyan-400/80 uppercase tracking-wider">Proprietary Technology</span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-4">The Algorithm</h2>
+          <p className="text-[#718096] mb-8 max-w-2xl">
+            Zhipz is powered by a proprietary algorithm that synthesizes real-time global data into 
+            actionable route predictions. The formula remains our trade secret — what you see are the results.
+          </p>
+
+          {/* Interactive Dashboard Preview */}
+          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#0d0820] to-[#0a0618] overflow-hidden">
+            {/* Dashboard Header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-white/5">
+              <div className="flex items-center gap-3">
+                <div className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse" />
+                <span className="text-sm font-mono text-green-400">LIVE</span>
+                <span className="text-xs text-[#718096] ml-2">Algorithm v3.2 — Last scan: 2 min ago</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">ENCRYPTED</span>
+                <Lock className="w-3.5 h-3.5 text-[#718096]" />
+              </div>
+            </div>
+
+            {/* Dashboard Grid */}
+            <div className="grid md:grid-cols-3 gap-px bg-white/5">
+              {/* Port Status Panel */}
+              <div className="p-6 bg-[#0d0820]">
+                <h4 className="text-xs font-mono text-[#718096] uppercase tracking-wider mb-4">Port Risk Index</h4>
+                <div className="space-y-3">
+                  {[
+                    { port: "Los Angeles", risk: 23, status: "low" },
+                    { port: "Shanghai", risk: 67, status: "elevated" },
+                    { port: "Rotterdam", risk: 12, status: "low" },
+                    { port: "Singapore", risk: 45, status: "moderate" },
+                    { port: "Long Beach", risk: 31, status: "moderate" },
+                  ].map((p) => (
+                    <div key={p.port} className="flex items-center justify-between">
+                      <span className="text-sm text-[#A0AEC0]">{p.port}</span>
+                      <div className="flex items-center gap-2">
+                        <div className="w-16 h-1.5 rounded-full bg-white/5 overflow-hidden">
+                          <div
+                            className={`h-full rounded-full ${
+                              p.status === "low" ? "bg-green-400" :
+                              p.status === "moderate" ? "bg-yellow-400" : "bg-red-400"
+                            }`}
+                            style={{ width: `${p.risk}%` }}
+                          />
+                        </div>
+                        <span className={`text-xs font-mono ${
+                          p.status === "low" ? "text-green-400" :
+                          p.status === "moderate" ? "text-yellow-400" : "text-red-400"
+                        }`}>{p.risk}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Prediction Confidence Panel */}
+              <div className="p-6 bg-[#0d0820]">
+                <h4 className="text-xs font-mono text-[#718096] uppercase tracking-wider mb-4">Route Predictions</h4>
+                <div className="space-y-4">
+                  <div className="text-center">
+                    <div className="text-4xl font-display font-bold text-white mb-1">94.7%</div>
+                    <div className="text-xs text-[#718096]">Prediction Accuracy (30-day)</div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3 mt-4">
+                    <div className="p-3 rounded-lg bg-white/[0.02] border border-white/5 text-center">
+                      <div className="text-lg font-bold text-cyan-400">847</div>
+                      <div className="text-[10px] text-[#718096]">Routes Optimized</div>
+                    </div>
+                    <div className="p-3 rounded-lg bg-white/[0.02] border border-white/5 text-center">
+                      <div className="text-lg font-bold text-green-400">$2.3M</div>
+                      <div className="text-[10px] text-[#718096]">Saved This Month</div>
+                    </div>
+                  </div>
+                  <div className="p-3 rounded-lg bg-white/[0.02] border border-white/5">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-[10px] text-[#718096]">Next disruption probability</span>
+                      <span className="text-xs font-mono text-yellow-400">38%</span>
+                    </div>
+                    <div className="w-full h-1.5 rounded-full bg-white/5">
+                      <div className="h-full w-[38%] rounded-full bg-gradient-to-r from-green-400 via-yellow-400 to-red-400" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Algorithm Activity Panel */}
+              <div className="p-6 bg-[#0d0820]">
+                <h4 className="text-xs font-mono text-[#718096] uppercase tracking-wider mb-4">Agent Activity</h4>
+                <div className="space-y-2.5">
+                  {[
+                    { time: "01:00", action: "Port scan complete — 47 ports analyzed", type: "scan" },
+                    { time: "01:00", action: "Weather alert: Typhoon forming near Taiwan Strait", type: "alert" },
+                    { time: "01:01", action: "Route recalculation triggered for 12 vessels", type: "action" },
+                    { time: "01:01", action: "Alternative routes generated — 3 optimal paths", type: "result" },
+                    { time: "01:02", action: "Client notifications dispatched", type: "notify" },
+                    { time: "02:00", action: "Port scan complete — 47 ports analyzed", type: "scan" },
+                  ].map((log, i) => (
+                    <div key={i} className="flex items-start gap-2">
+                      <span className="text-[10px] font-mono text-[#4A5568] shrink-0 mt-0.5">{log.time}</span>
+                      <div className={`w-1.5 h-1.5 rounded-full shrink-0 mt-1.5 ${
+                        log.type === "scan" ? "bg-blue-400" :
+                        log.type === "alert" ? "bg-red-400" :
+                        log.type === "action" ? "bg-yellow-400" :
+                        log.type === "result" ? "bg-green-400" : "bg-purple-400"
+                      }`} />
+                      <span className="text-xs text-[#A0AEC0] leading-tight">{log.action}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Dashboard Footer */}
+            <div className="px-6 py-3 border-t border-white/5 flex items-center justify-between">
+              <span className="text-[10px] text-[#4A5568] font-mono">Algorithm output is illustrative. Actual predictions delivered to subscribers in real-time.</span>
+              <div className="flex items-center gap-1.5">
+                <Lock className="w-3 h-3 text-[#4A5568]" />
+                <span className="text-[10px] text-[#4A5568] font-mono">Formula classified</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Secret Formula Callout */}
+          <div className="mt-8 p-6 rounded-2xl border border-cyan-500/10 bg-cyan-500/[0.03]">
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center shrink-0">
+                <Lock className="w-5 h-5 text-cyan-400" />
+              </div>
+              <div>
+                <h3 className="text-white font-semibold mb-1">Proprietary Algorithm</h3>
+                <p className="text-sm text-[#718096] leading-relaxed">
+                  Our prediction engine uses a proprietary formula developed through years of research in maritime logistics, 
+                  machine learning, and real-time data synthesis. The algorithm's architecture, weighting system, and 
+                  decision logic remain classified — giving Zhipz subscribers an edge that cannot be replicated.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
