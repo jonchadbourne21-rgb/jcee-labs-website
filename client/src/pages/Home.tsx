@@ -46,8 +46,8 @@ const PRODUCTS = [
   },
   {
     name: "VOW",
-    tagline: "PaaS & Language",
-    description: "A revolutionary platform and coding language designed to eliminate complexity. Open-source soon.",
+    tagline: "Ontology-Driven PaaS & Language",
+    description: "Formally-grounded AI infrastructure with built-in EU AI Act compliance. The brain behind every Jcee Labs product.",
     color: "purple",
     icon: Code2,
     href: "/vow",

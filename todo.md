@@ -157,3 +157,11 @@
 - [x] Display real-time data visualization (ports, risk scores, route predictions)
 - [x] Emphasize proprietary/secret formula messaging
 - [x] All 12 tests passing
+
+## Phase 17 — VOW Page Rewrite (Ontological Architecture + EU AI Act)
+- [x] Rewrite VowPage.tsx with formal ontological foundations (Continuant/Occurrent, Mereology, Subsumption, Deontic Logic)
+- [x] Position VOW as EU AI Act compliance infrastructure (Articles 9, 11, 13, 14, 15 mapped)
+- [x] Show how VOW powers other Jcee Labs products (Zhipz, APEX Media, Mirrored)
+- [x] Added Scar Memory section with code example
+- [x] Update homepage VOW card to reflect new positioning
+- [x] All 12 tests passing
