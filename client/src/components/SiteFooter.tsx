@@ -105,6 +105,11 @@ export default function SiteFooter() {
                   <a className="hover:text-indigo-300 transition-colors">NicheFlow</a>
                 </Link>
               </li>
+              <li>
+                <Link href="/zhipz">
+                  <a className="hover:text-cyan-300 transition-colors">Zhipz</a>
+                </Link>
+              </li>
             </ul>
           </div>
 

@@ -471,6 +471,7 @@ export default function Home() {
                 <li><Link href="/apex"><a className="hover:text-amber-300 transition-colors">APEX Media</a></Link></li>
                 <li><Link href="/bidindustrial"><a className="hover:text-teal-300 transition-colors">BidIndustrial</a></Link></li>
                 <li><Link href="/nicheflo"><a className="hover:text-indigo-300 transition-colors">NicheFlow</a></Link></li>
+                <li><Link href="/zhipz"><a className="hover:text-cyan-300 transition-colors">Zhipz</a></Link></li>
               </ul>
             </div>
 
