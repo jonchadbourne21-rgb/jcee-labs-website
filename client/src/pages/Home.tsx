@@ -267,7 +267,7 @@ export default function Home() {
         <div className="container relative z-10">
           <div className="max-w-3xl space-y-8">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-mono">
-              <Sparkles className="w-3.5 h-3.5" /> Solo-Founded AI Studio
+              <Sparkles className="w-3.5 h-3.5" /> SaaS, PaaS, Venture Architecture
             </div>
             <h1 className="text-5xl md:text-7xl font-display font-extrabold leading-[1.05] tracking-tight">
               One studio.{" "}
