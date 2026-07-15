@@ -124,9 +124,8 @@
 - [x] BidIndustrial tRPC router (bidIndustrial.getPricing, bidIndustrial.getTrades)
 - [x] All 12 tests passing
 
-## Activation Steps (when ready)
-- [ ] Sign up at https://loops.so and add LOOPS_API_KEY to environment secrets
-- [ ] Connect a pricing data provider and add PRICING_API_KEY + PRICING_API_URL to environment secrets
+## Activation Steps (deferred)
+- [ ] Sign up at https://loops.so and add LOOPS_API_KEY to environment secrets (for later)
 
 ## Phase 13 — Custom Pricing Database & Admin Panel
 - [x] Create database schema for materials table (trade, name, category, unit, unitPrice, supplier, partNumber, notes)
@@ -136,4 +135,11 @@
 - [x] Build admin pricing management UI at /admin/pricing with add/edit/delete for materials and labor
 - [x] Connect BidIndustrial pricing API to read from database (falls back to baseline when empty)
 - [x] Link from main Admin page to Pricing Admin
+- [x] All 12 tests passing
+
+## Phase 14 — SupplyChain App
+- [x] Create SupplyChainPage.tsx with multi-agent logistics intelligence positioning
+- [x] Add SupplyChain to homepage product grid
+- [x] Add SupplyChain to SiteNav Products dropdown
+- [x] Add /supplychain route to App.tsx
 - [x] All 12 tests passing

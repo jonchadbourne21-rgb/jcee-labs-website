@@ -10,6 +10,7 @@ const PRODUCTS = [
   { name: "BidIndustrial", href: "/bidindustrial", color: "text-teal-300" },
   { name: "NicheFlow", href: "/nicheflo", color: "text-indigo-300" },
   { name: "APEX Media", href: "/apex", color: "text-amber-300" },
+  { name: "SupplyChain", href: "/supplychain", color: "text-cyan-300" },
 ];
 
 export default function SiteNav() {

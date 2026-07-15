@@ -21,6 +21,7 @@ import {
   Workflow,
   Users,
   Eye,
+  Ship,
 } from "lucide-react";
 
 // ─── Product Cards Data ─────────────────────────────────────────────────────
@@ -78,6 +79,15 @@ const PRODUCTS = [
     icon: Workflow,
     href: "/nicheflo",
     status: "Coming Soon",
+  },
+  {
+    name: "SupplyChain",
+    tagline: "Logistics Intelligence",
+    description: "Multi-agent port monitoring and route optimization. Anticipate disruptions before they cost you.",
+    color: "cyan",
+    icon: Ship,
+    href: "/supplychain",
+    status: "In Development",
   },
 ];
 
