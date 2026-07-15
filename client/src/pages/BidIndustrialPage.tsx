@@ -128,12 +128,12 @@ export default function BidIndustrialPage() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mb-12">
-            <Link href="/#contact">
+            <Link href="/services#contact">
               <Button className="rounded-xl bg-gradient-to-r from-teal-600 to-teal-500 hover:from-teal-500 hover:to-teal-400 text-white font-semibold shadow-lg shadow-teal-500/20 active:scale-97 transition-all">
                 Request Early Access <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
-            <Link href="/#contact">
+            <Link href="/services#contact">
               <Button variant="outline" className="rounded-xl border-white/10 hover:bg-white/5 text-[#E2E8F0] font-medium active:scale-97 transition-all">
                 Schedule a Demo
               </Button>
@@ -277,12 +277,12 @@ export default function BidIndustrialPage() {
             Join contractors who are winning more work with faster, more accurate estimates.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/#contact">
+            <Link href="/services#contact">
               <Button className="rounded-xl bg-gradient-to-r from-teal-600 to-teal-500 hover:from-teal-500 hover:to-teal-400 text-white font-semibold shadow-lg shadow-teal-500/20 active:scale-97 transition-all">
                 Request Early Access <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
-            <Link href="/#newsletter">
+            <Link href="/services#newsletter">
               <Button variant="outline" className="rounded-xl border-white/10 hover:bg-white/5 text-[#E2E8F0] font-medium active:scale-97 transition-all">
                 Join Waitlist
               </Button>

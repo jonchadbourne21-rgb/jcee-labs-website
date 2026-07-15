@@ -34,6 +34,7 @@ export default function SiteFooter() {
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link href="/team"><a className="hover:text-white transition-colors">Team</a></Link></li>
               <li><Link href="/faq"><a className="hover:text-white transition-colors">FAQ</a></Link></li>
+              <li><Link href="/services"><a className="hover:text-white transition-colors">Services</a></Link></li>
             </ul>
           </div>
           <div className="md:col-span-2 space-y-3">

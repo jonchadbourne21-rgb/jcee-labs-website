@@ -29,7 +29,7 @@ export default function ApexPage() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mb-12">
-            <Link href="/#contact">
+            <Link href="/services#contact">
               <a className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 rounded-lg font-semibold hover:shadow-lg hover:shadow-amber-500/50 transition">
                 Get APEX for Your Business <ArrowRight className="w-4 h-4" />
               </a>
@@ -165,7 +165,7 @@ export default function ApexPage() {
           <p className="text-muted-foreground text-lg">
             Stop guessing what content to post. Let APEX watch your market, learn what works, and autonomously grow your brand's presence.
           </p>
-          <Link href="/#contact">
+          <Link href="/services#contact">
             <Button className="rounded-xl bg-gradient-to-r from-amber-600 to-orange-500 hover:from-amber-500 hover:to-orange-400 text-white font-semibold shadow-lg shadow-amber-500/20 active:scale-97 transition-all">
               Get Started <ArrowRight className="w-4 h-4 ml-2" />
             </Button>

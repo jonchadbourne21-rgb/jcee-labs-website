@@ -25,12 +25,12 @@ export default function NicheFloPage() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mb-12">
-            <Link href="/#newsletter">
+            <Link href="/services#newsletter">
               <Button className="rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white font-semibold shadow-lg shadow-indigo-500/20 active:scale-97 transition-all">
                 Join Waitlist <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
-            <Link href="/#contact">
+            <Link href="/services#contact">
               <Button variant="outline" className="rounded-xl border-white/10 hover:bg-white/5 text-[#E2E8F0] font-medium active:scale-97 transition-all">
                 Request Demo
               </Button>
@@ -77,7 +77,7 @@ export default function NicheFloPage() {
         <div className="container max-w-2xl mx-auto text-center space-y-6">
           <h2 className="text-3xl font-display font-bold text-white">Ready to Systemize?</h2>
           <p className="text-muted-foreground text-lg">Stop reinventing the wheel. Let NicheFlow build your SOPs.</p>
-          <Link href="/#newsletter">
+          <Link href="/services#newsletter">
             <Button className="rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white font-semibold shadow-lg shadow-indigo-500/20 active:scale-97 transition-all">
               Join the Waitlist <ArrowRight className="w-4 h-4 ml-2" />
             </Button>

@@ -82,12 +82,13 @@ export default function SiteNav() {
               </div>
             )}
           </div>
+          <Link href="/services"><a className="text-muted-foreground hover:text-white transition-colors">Services</a></Link>
           <Link href="/team"><a className="text-muted-foreground hover:text-white transition-colors">Team</a></Link>
           <Link href="/faq"><a className="text-muted-foreground hover:text-white transition-colors">FAQ</a></Link>
         </nav>
 
         <div className="flex items-center gap-3">
-          <Link href="/#contact">
+          <Link href="/services">
             <Button size="sm" className="hidden sm:flex rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 border-0 text-white font-medium shadow-lg shadow-purple-500/20 active:scale-95 transition-all">
               <span className="flex items-center gap-1">
                 Get in Touch <ArrowUpRight className="w-3.5 h-3.5" />
@@ -124,6 +125,7 @@ export default function SiteNav() {
               ))}
             </div>
           </div>
+          <Link href="/services"><a onClick={() => setMobileMenuOpen(false)} className="block text-sm text-muted-foreground hover:text-white transition-colors py-2">Services</a></Link>
           <Link href="/team"><a onClick={() => setMobileMenuOpen(false)} className="block text-sm text-muted-foreground hover:text-white transition-colors py-2">Team</a></Link>
           <Link href="/faq"><a onClick={() => setMobileMenuOpen(false)} className="block text-sm text-muted-foreground hover:text-white transition-colors py-2">FAQ</a></Link>
         </div>

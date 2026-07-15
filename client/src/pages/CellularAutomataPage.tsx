@@ -98,7 +98,7 @@ export default function CellularAutomataPage() {
         <div className="container max-w-2xl mx-auto text-center space-y-6">
           <h2 className="text-3xl font-display font-bold text-white">Ready to Discover Emergence?</h2>
           <p className="text-muted-foreground text-lg">Explore the mathematics of complexity and see how simple rules create infinite patterns.</p>
-          <Link href="/#newsletter">
+          <Link href="/services#newsletter">
             <Button className="rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-semibold shadow-lg shadow-blue-500/20 active:scale-97 transition-all">
               Join the Waitlist <ArrowRight className="w-4 h-4 ml-2" />
             </Button>

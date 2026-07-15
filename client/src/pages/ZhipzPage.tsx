@@ -39,7 +39,7 @@ export default function ZhipzPage() {
           </p>
 
           <div className="flex flex-wrap gap-4">
-            <Link href="/#contact">
+            <Link href="/services#contact">
               <Button className="rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-medium px-6 py-3 h-auto">
                 Request Early Access <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
@@ -377,7 +377,7 @@ export default function ZhipzPage() {
           <p className="text-[#718096] mb-8 max-w-xl mx-auto">
             Zhipz gives your logistics team the intelligence to reroute before disruptions cost you time and money.
           </p>
-          <Link href="/#contact">
+          <Link href="/services#contact">
             <Button className="rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-medium px-8 py-3 h-auto">
               Get in Touch <ArrowRight className="w-4 h-4 ml-2" />
             </Button>

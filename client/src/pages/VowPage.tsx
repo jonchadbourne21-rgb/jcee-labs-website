@@ -33,7 +33,7 @@ export default function VowPage() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mb-12">
-            <Link href="/#contact">
+            <Link href="/services#contact">
               <Button className="rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white font-semibold shadow-lg shadow-purple-500/20 active:scale-97 transition-all">
                 Request Enterprise Access <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
@@ -259,12 +259,12 @@ export default function VowPage() {
             Whether you're navigating the EU AI Act, building autonomous agents, or need provably safe AI infrastructure — VOW gives you the formal foundation to build with confidence.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/#contact">
+            <Link href="/services#contact">
               <Button className="rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white font-semibold shadow-lg shadow-purple-500/20 active:scale-97 transition-all">
                 Talk to Our Team <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
-            <Link href="/#newsletter">
+            <Link href="/services#newsletter">
               <Button variant="outline" className="rounded-xl border-white/10 hover:bg-white/5 text-[#E2E8F0] font-medium">
                 Get Notified at Launch
               </Button>
