@@ -13,39 +13,49 @@ export default function Mirrored() {
       <SiteNav />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-4">
+      <section className="relative pt-24 pb-20 px-4">
         <div className="container max-w-5xl mx-auto">
-          <div className="mb-6 inline-flex items-center gap-3">
-            <span className="px-4 py-2 rounded-full border border-teal-500/30 bg-teal-500/5 text-sm text-teal-400 font-mono">
-              Emotional Intelligence AI
-            </span>
-            <span className="px-3 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/5 text-xs text-purple-400 font-mono">
-              Powered by Hume AI
-            </span>
-          </div>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Left: Hero Image */}
+            <div className="flex justify-center">
+              <img
+                src="/manus-storage/mirrored-hero_5d8b74ef.png"
+                alt="Mirrored - AI Self-Reflection"
+                className="w-full max-w-md rounded-2xl"
+              />
+            </div>
 
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-purple-500">Mirrored</span>
-          </h1>
+            {/* Right: Text Content */}
+            <div>
+              <div className="mb-6 inline-flex items-center gap-3 flex-wrap">
+                <span className="px-4 py-2 rounded-full border border-teal-500/30 bg-teal-500/5 text-sm text-teal-400 font-mono">
+                  Emotional Intelligence AI
+                </span>
+                <span className="px-3 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/5 text-xs text-purple-400 font-mono">
+                  Powered by Hume AI
+                </span>
+              </div>
 
-          <p className="text-xl text-[#A0AEC0] mb-4 max-w-3xl leading-relaxed">
-            Meet your higher self. The most emotionally intelligent version of you — built to guide you toward self-acceptance, belief, resilience, and self-actualization.
-          </p>
-          <p className="text-[#718096] mb-10 max-w-2xl leading-relaxed">
-            Mirrored isn't a therapist. It's <em>you</em> — the version that has learned from every pattern, memory, and conversation you've shared. Who knows what's best for you better than you? We believe the path to your full potential starts by facing yourself and being asked the questions you normally wouldn't come up with on your own.
-          </p>
+              <p className="text-xl text-[#A0AEC0] mb-4 leading-relaxed">
+                Meet your higher self. The most emotionally intelligent version of you — built to guide you toward self-acceptance, belief, resilience, and self-actualization.
+              </p>
+              <p className="text-[#718096] mb-8 leading-relaxed">
+                Mirrored isn't a therapist. It's <em>you</em> — the version that has learned from every pattern, memory, and conversation you've shared. Who knows what's best for you better than you?
+              </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 mb-12">
-            <Link href="/#contact">
-              <Button className="rounded-xl bg-gradient-to-r from-teal-600 to-purple-500 hover:from-teal-500 hover:to-purple-400 text-white font-semibold shadow-lg shadow-teal-500/20 active:scale-97 transition-all">
-                Request Early Access <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-            </Link>
-            <Link href="/#newsletter">
-              <Button variant="outline" className="rounded-xl border-white/10 hover:bg-white/5 text-[#E2E8F0] font-medium">
-                Get Notified at Launch
-              </Button>
-            </Link>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="/#contact">
+                  <Button className="rounded-xl bg-gradient-to-r from-teal-600 to-purple-500 hover:from-teal-500 hover:to-purple-400 text-white font-semibold shadow-lg shadow-teal-500/20 active:scale-97 transition-all">
+                    Request Early Access <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </Link>
+                <Link href="/#newsletter">
+                  <Button variant="outline" className="rounded-xl border-white/10 hover:bg-white/5 text-[#E2E8F0] font-medium">
+                    Get Notified at Launch
+                  </Button>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
 
