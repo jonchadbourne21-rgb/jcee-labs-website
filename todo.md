@@ -183,3 +183,7 @@
 - [x] Update SiteFooter links accordingly
 - [x] Add /services route to App.tsx
 - [x] All tests passing
+
+## Phase 20 — Hero Differentiation (Hybrid 1+3: VOW moat + solo-founder story)
+- [x] Rewrite hero headline, subheading, and badge to reflect VOW-as-moat + solo-founder narrative
+- [x] All tests passing

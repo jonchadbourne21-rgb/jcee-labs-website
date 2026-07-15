@@ -267,25 +267,24 @@ export default function Home() {
         <div className="container relative z-10">
           <div className="max-w-3xl space-y-8">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-mono">
-              <Sparkles className="w-3.5 h-3.5" /> AI-Powered Software Studio
+              <Sparkles className="w-3.5 h-3.5" /> Solo-Founded AI Studio
             </div>
             <h1 className="text-5xl md:text-7xl font-display font-extrabold leading-[1.05] tracking-tight">
-              Crafting the{" "}
+              One studio.{" "}
               <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
-                Future
+                One language.
               </span>{" "}
-              of Intelligent{" "}
               <span className="bg-gradient-to-r from-teal-400 to-teal-600 bg-clip-text text-transparent">
-                Software
-              </span>
+                Seven products
+              </span>{" "}
+              that prove it works.
             </h1>
             <p className="text-lg md:text-xl leading-relaxed max-w-2xl text-slate-300/90">
-              Jcee Labs is the innovation studio of{" "}
-              <strong className="text-white font-semibold">
-                HOWM HOLDINGS LLC
-              </strong>
-              . We design, engineer, and deploy AI-driven applications that help
-              businesses operate smarter, faster, and more efficiently.
+              Jcee Labs builds AI products on{" "}
+              <Link href="/vow">
+                <a className="text-purple-300 hover:text-purple-200 underline underline-offset-2 decoration-purple-500/40 font-semibold">VOW</a>
+              </Link>
+              , a proprietary ontological language with EU AI Act compliance at the infrastructure level. No bloat, no committees — just obsessive product thinking and a bias toward shipping.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-2">
               <a href="#products">
