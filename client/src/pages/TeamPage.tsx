@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Users, MapPin, Lightbulb, Rocket, Linkedin, Twitter, Instagram } from "lucide-react";
+import { Users, MapPin, Lightbulb, Rocket, Linkedin, Twitter, Instagram, Mail } from "lucide-react";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 
@@ -69,6 +69,14 @@ export default function TeamPage() {
                     aria-label="Instagram"
                   >
                     <Instagram className="w-5 h-5" />
+                  </a>
+                  <a
+                    href="mailto:Jonathan@jceelabs.com"
+                    className="flex items-center gap-1.5 text-xs font-mono px-2.5 py-1 rounded-full border border-white/10 text-muted-foreground hover:text-white hover:border-purple-500/40 transition-colors"
+                    aria-label="Email Me"
+                  >
+                    <Mail className="w-3.5 h-3.5" />
+                    Email Me
                   </a>
                 </div>
               </div>
