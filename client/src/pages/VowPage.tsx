@@ -179,9 +179,9 @@ export default function VowPage() {
             </div>
             <span className="text-xs font-mono text-pink-400/80 uppercase tracking-wider">In Production</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-4">The Brain Behind Every Jcee Labs Product</h2>
+          <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-4">The Brain Behind Our Multi-Agent Systems</h2>
           <p className="text-[#718096] mb-12 max-w-2xl">
-            VOW isn't theoretical — it's the runtime architecture powering our multi-agent systems today. Each product leverages VOW's formal reasoning for its autonomous decision-making.
+            VOW isn't theoretical — it's the runtime architecture powering our autonomous AI products today. Each multi-agent system leverages VOW's formal reasoning for its decision-making.
           </p>
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -205,12 +205,12 @@ export default function VowPage() {
               </div>
             </Link>
 
-            <Link href="/mirrored">
-              <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-blue-500/20 transition-colors cursor-pointer group">
-                <h3 className="text-white font-semibold mb-2 group-hover:text-blue-400 transition-colors">Mirrored</h3>
-                <p className="text-xs text-blue-400/60 font-mono mb-3">AI Reflection</p>
+            <Link href="/truckers-dream">
+              <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-orange-500/20 transition-colors cursor-pointer group">
+                <h3 className="text-white font-semibold mb-2 group-hover:text-orange-400 transition-colors">Trucker$Dream</h3>
+                <p className="text-xs text-orange-400/60 font-mono mb-3">Load Optimization</p>
                 <p className="text-sm text-[#718096] leading-relaxed">
-                  VOW's Continuant/Occurrent distinction separates persistent user insights from temporal conversation events — enabling deep pattern recognition without data confusion.
+                  VOW's subsumption logic validates load combinations against weight/route constraints. Deontic gates enforce DOT compliance. Scar memory learns from rejected loads.
                 </p>
               </div>
             </Link>

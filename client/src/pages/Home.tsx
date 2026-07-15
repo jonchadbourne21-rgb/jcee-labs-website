@@ -28,9 +28,9 @@ import {
 const PRODUCTS = [
   {
     name: "Mirrored",
-    tagline: "AI Reflection Partner",
-    description: "Personal development through AI-powered journaling, pattern tracking, and intelligent insights.",
-    color: "purple",
+    tagline: "Your Higher Self",
+    description: "Emotionally intelligent AI that becomes the best version of you — guiding self-acceptance, resilience, and self-actualization through voice and text.",
+    color: "teal",
     icon: Brain,
     href: "/mirrored",
     status: "Beta",

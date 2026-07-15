@@ -1,370 +1,298 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "wouter";
-import { ArrowRight, Sparkles, MessageCircle, Brain, CheckCircle, Zap, Target, Lightbulb, ChevronRight, Loader2 } from "lucide-react";
+import { ArrowRight, Mic, MessageCircle, Brain, Heart, BookOpen, Compass, Shield, Sparkles, Volume2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { trpc } from "@/lib/trpc";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 
-// Onboarding steps
-const ONBOARDING_STEPS = [
-  {
-    step: 1,
-    title: "Welcome to Mirrored",
-    description: "Your AI reflection partner for deeper thinking and personal growth.",
-    icon: Sparkles,
-    cta: "Let's Begin"
-  },
-  {
-    step: 2,
-    title: "How It Works",
-    description: "Share your thoughts, and Mirrored reflects back insights to help you see situations from new angles.",
-    icon: Brain,
-    cta: "Next"
-  },
-  {
-    step: 3,
-    title: "Start Reflecting",
-    description: "Try a sample reflection to experience the power of AI-guided introspection.",
-    icon: MessageCircle,
-    cta: "Try Demo"
-  }
-];
-
-const MIRROR_STARTERS = [
-  "I'm feeling overwhelmed with my current project...",
-  "I want to improve my decision-making process...",
-  "How can I be more productive?",
-  "I'm struggling with work-life balance...",
-];
-
-const FEATURES = [
-  {
-    icon: Brain,
-    title: "Cognitive Journaling",
-    description: "Semantic pattern mapping that identifies themes and patterns in your thoughts over time."
-  },
-  {
-    icon: Zap,
-    title: "AI-Guided Reflection",
-    description: "Real-time feedback and personalized coaching synthesized from your conversation patterns."
-  },
-  {
-    icon: Target,
-    title: "Goal Alignment",
-    description: "Structure and visualize your goals with intelligent recommendations for achievement."
-  },
-  {
-    icon: Lightbulb,
-    title: "Personal Insights",
-    description: "Discover blind spots and opportunities through deep semantic analysis of your reflections."
-  }
-];
-
 export default function Mirrored() {
-  const [onboardingStep, setOnboardingStep] = useState(0);
-  const [showOnboarding, setShowOnboarding] = useState(true);
-  const [chatMessages, setChatMessages] = useState<Array<{ role: "user" | "assistant"; content: string }>>([
-    { role: "assistant", content: "Hi there! I'm Mirrored, your AI reflection partner. What's on your mind today?" }
-  ]);
-  const [userInput, setUserInput] = useState("");
-  const chatEndRef = useRef<HTMLDivElement>(null);
-  const reflectMutation = trpc.mirrored.reflect.useMutation();
-
-  useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [chatMessages]);
-
-  const handleReflect = async () => {
-    if (!userInput.trim()) return;
-
-    const userMessage = userInput;
-    const newMessages = [...chatMessages, { role: "user" as const, content: userMessage }];
-    setChatMessages(newMessages);
-    setUserInput("");
-
-    try {
-      const response = await reflectMutation.mutateAsync({
-        message: userMessage,
-        history: chatMessages
-      });
-      setChatMessages(prev => [...prev, { role: "assistant", content: response.reply }]);
-    } catch (error) {
-      setChatMessages(prev => [...prev, { role: "assistant", content: "I'm having trouble reflecting right now. Please try again." }]);
-    }
-  };
-
-  const handleStarterPrompt = async (prompt: string) => {
-    const newMessages = [...chatMessages, { role: "user" as const, content: prompt }];
-    setChatMessages(newMessages);
-    try {
-      const response = await reflectMutation.mutateAsync({
-        message: prompt,
-        history: newMessages.slice(0, -1) as Array<{ role: "user" | "assistant"; content: string }>
-      });
-      setChatMessages(prev => [...prev, { role: "assistant", content: response.reply }]);
-    } catch (error) {
-      setChatMessages(prev => [...prev, { role: "assistant", content: "I'm having trouble reflecting right now. Please try again." }]);
-    }
-  };
-
-  const handleOnboardingNext = () => {
-    if (onboardingStep < ONBOARDING_STEPS.length - 1) {
-      setOnboardingStep(onboardingStep + 1);
-    } else {
-      setShowOnboarding(false);
-    }
-  };
-
-  const handleSkipOnboarding = () => {
-    setShowOnboarding(false);
-  };
+  const [activeFeature, setActiveFeature] = useState<string>("voice");
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#090514] via-[#0f0a1a] to-[#090514] relative flex flex-col">
+    <div className="min-h-screen bg-gradient-to-b from-[#090514] via-[#0a0a1a] to-[#090514] flex flex-col">
       <SiteNav />
 
-      {/* Onboarding Modal */}
-      {showOnboarding && (
-        <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-          <div className="bg-white/[0.02] border border-white/10 rounded-3xl p-8 md:p-12 max-w-md w-full glass-panel space-y-6">
-            {/* Progress indicator */}
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-mono text-purple-300">Step {onboardingStep + 1} of {ONBOARDING_STEPS.length}</span>
-              <button
-                onClick={handleSkipOnboarding}
-                className="text-xs text-muted-foreground hover:text-white transition"
-              >
-                Skip
-              </button>
-            </div>
-
-            {/* Content */}
-            <div className="text-center space-y-4">
-              {(() => {
-                const CurrentIcon = ONBOARDING_STEPS[onboardingStep].icon;
-                return (
-                  <>
-                    <div className="flex justify-center">
-                      <div className="w-16 h-16 rounded-full bg-purple-500/20 flex items-center justify-center">
-                        <CurrentIcon className="w-8 h-8 text-purple-300" />
-                      </div>
-                    </div>
-                    <h2 className="text-2xl font-display font-bold text-white">
-                      {ONBOARDING_STEPS[onboardingStep].title}
-                    </h2>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {ONBOARDING_STEPS[onboardingStep].description}
-                    </p>
-                  </>
-                );
-              })()}
-            </div>
-
-            {/* CTA */}
-            <Button
-              onClick={handleOnboardingNext}
-              className="w-full rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-medium shadow-lg shadow-purple-500/20 active:scale-97 transition-all"
-            >
-              {ONBOARDING_STEPS[onboardingStep].cta}
-            </Button>
-          </div>
-        </div>
-      )}
-
       {/* Hero Section */}
-      <section className="relative py-20 px-4">
+      <section className="relative pt-32 pb-20 px-4">
         <div className="container max-w-5xl mx-auto">
-          <div className="space-y-8 mb-16">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-mono">
-              <Sparkles className="w-3 h-3" /> AI Reflection Partner
-            </div>
-
-            <div className="space-y-4">
-              <h1 className="text-5xl md:text-6xl font-display font-bold text-white leading-tight">
-                Your Digital <span className="text-transparent bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text">Mirror</span>
-              </h1>
-              <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
-                Mirrored is an AI-powered reflection partner that helps you think deeper, decide faster, and grow stronger through intelligent journaling and personalized insights.
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button
-                onClick={() => setShowOnboarding(true)}
-                className="rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-medium shadow-lg shadow-purple-500/20 active:scale-97 transition-all"
-              >
-                Try Live Demo
-              </Button>
-              <Link href="/">
-                <Button variant="outline" className="rounded-xl border-white/10 hover:bg-white/5 text-[#E2E8F0] font-medium active:scale-97 transition-all">
-                  Learn More
-                </Button>
-              </Link>
-            </div>
+          <div className="mb-6 inline-flex items-center gap-3">
+            <span className="px-4 py-2 rounded-full border border-teal-500/30 bg-teal-500/5 text-sm text-teal-400 font-mono">
+              Emotional Intelligence AI
+            </span>
+            <span className="px-3 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/5 text-xs text-purple-400 font-mono">
+              Powered by Hume AI
+            </span>
           </div>
 
-          {/* Live Chat Demo */}
-          <div className="bg-white/[0.02] border border-white/5 rounded-3xl overflow-hidden flex flex-col glass-panel" style={{ height: "500px" }}>
-            {/* Chat Header */}
-            <div className="flex items-center gap-3 px-6 py-4 border-b border-white/5 bg-purple-500/5">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white text-xs font-bold">M</div>
-              <div>
-                <div className="text-sm font-bold text-white">Mirror AI</div>
-                <div className="text-xs text-purple-300 flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block" />
-                  Live Demo
-                </div>
-              </div>
-            </div>
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-purple-500">Mirrored</span>
+          </h1>
 
-            {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-6 space-y-4">
-              {chatMessages.map((msg, i) => (
-                <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-                  <div className={`max-w-[75%] px-4 py-3 rounded-2xl text-sm leading-relaxed ${
-                    msg.role === "user"
-                      ? "bg-purple-600 text-white rounded-br-sm"
-                      : "bg-white/[0.06] text-[#E2E8F0] border border-white/5 rounded-bl-sm"
-                  }`}>
-                    {msg.content}
-                  </div>
-                </div>
-              ))}
-              {reflectMutation.isPending && (
-                <div className="flex justify-start">
-                  <div className="bg-white/[0.06] border border-white/5 px-4 py-3 rounded-2xl rounded-bl-sm flex items-center gap-2">
-                    <Loader2 className="w-3.5 h-3.5 animate-spin text-purple-400" />
-                    <span className="text-xs text-muted-foreground">Mirror is reflecting...</span>
-                  </div>
-                </div>
-              )}
-              <div ref={chatEndRef} />
-            </div>
+          <p className="text-xl text-[#A0AEC0] mb-4 max-w-3xl leading-relaxed">
+            Meet your higher self. The most emotionally intelligent version of you — built to guide you toward self-acceptance, belief, resilience, and self-actualization.
+          </p>
+          <p className="text-[#718096] mb-10 max-w-2xl leading-relaxed">
+            Mirrored isn't a therapist. It's <em>you</em> — the version that has learned from every pattern, memory, and conversation you've shared. Who knows what's best for you better than you? We believe the path to your full potential starts by facing yourself and being asked the questions you normally wouldn't come up with on your own.
+          </p>
 
-            {/* Starter prompts (only shown at start) */}
-            {chatMessages.length === 1 && (
-              <div className="px-6 pb-3 flex gap-2 flex-wrap">
-                {MIRROR_STARTERS.slice(0, 2).map((s) => (
-                  <button
-                    key={s}
-                    onClick={() => handleStarterPrompt(s)}
-                    className="text-xs px-3 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 hover:bg-purple-500/20 transition-colors"
-                  >
-                    {s}
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {/* Input */}
-            <div className="border-t border-white/5 p-4 flex gap-2">
-              <input
-                type="text"
-                value={userInput}
-                onChange={(e) => setUserInput(e.target.value)}
-                onKeyPress={(e) => e.key === "Enter" && handleReflect()}
-                placeholder="Share your thoughts..."
-                className="flex-1 bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder-muted-foreground focus:outline-none focus:border-purple-500/50 transition-colors"
-              />
-              <Button
-                onClick={handleReflect}
-                disabled={reflectMutation.isPending || !userInput.trim()}
-                className="rounded-xl bg-purple-600 hover:bg-purple-500 disabled:opacity-50 text-white font-medium active:scale-97 transition-all"
-              >
-                <ArrowRight className="w-4 h-4" />
+          <div className="flex flex-col sm:flex-row gap-4 mb-12">
+            <Link href="/#contact">
+              <Button className="rounded-xl bg-gradient-to-r from-teal-600 to-purple-500 hover:from-teal-500 hover:to-purple-400 text-white font-semibold shadow-lg shadow-teal-500/20 active:scale-97 transition-all">
+                Request Early Access <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
-            </div>
+            </Link>
+            <Link href="/#newsletter">
+              <Button variant="outline" className="rounded-xl border-white/10 hover:bg-white/5 text-[#E2E8F0] font-medium">
+                Get Notified at Launch
+              </Button>
+            </Link>
           </div>
         </div>
 
         {/* Aurora background */}
         <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-          <div className="absolute top-40 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[120px] opacity-20 will-change-transform" style={{ transform: "translateZ(0)" }} />
-          <div className="absolute bottom-40 left-1/4 w-96 h-96 bg-pink-500/20 rounded-full blur-[120px] opacity-20 will-change-transform" style={{ transform: "translateZ(0)" }} />
+          <div className="absolute top-20 right-1/4 w-96 h-96 bg-teal-500/15 rounded-full blur-[120px] opacity-20" style={{ transform: 'translateZ(0)' }} />
+          <div className="absolute bottom-20 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-[120px] opacity-20" style={{ transform: 'translateZ(0)' }} />
         </div>
       </section>
 
-      {/* Features Grid */}
-      <section className="py-24 px-4 border-t border-white/5 relative z-10">
+      {/* The Higher Self Concept */}
+      <section className="py-20 px-4 border-t border-white/5">
         <div className="container max-w-5xl mx-auto">
-          <div className="space-y-12">
-            <div className="text-center space-y-4 max-w-2xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-white">
-                Why Choose <span className="text-transparent bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text">Mirrored</span>?
-              </h2>
-              <p className="text-muted-foreground text-lg">
-                Designed for deep thinking, personal growth, and actionable insights.
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-8 h-8 rounded-lg bg-teal-500/10 border border-teal-500/20 flex items-center justify-center">
+                  <Sparkles className="w-4 h-4 text-teal-400" />
+                </div>
+                <span className="text-xs font-mono text-teal-400/80 uppercase tracking-wider">The Philosophy</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-4">Your Higher Self, Realized</h2>
+              <p className="text-[#718096] mb-6 leading-relaxed">
+                Through patterns in your past conversations, journal entries, and personal insights, Mirrored constructs the most emotionally intelligent version of you — your higher self. It learns how you think, what drives you, where you struggle, and what you need to hear.
+              </p>
+              <p className="text-[#718096] leading-relaxed">
+                This isn't generic advice from a chatbot. It's deeply personal guidance from the part of you that already knows the answer — the part that sees clearly when emotions cloud judgment. Mirrored surfaces that clarity.
               </p>
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {FEATURES.map((feature, idx) => {
-                const Icon = feature.icon;
-                return (
-                  <div key={idx} className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 glass-panel hover:border-purple-500/20 transition-colors group">
-                    <div className="w-12 h-12 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-300 mb-4 group-hover:bg-purple-500/20 transition-colors">
-                      <Icon className="w-6 h-6" />
-                    </div>
-                    <h3 className="text-lg font-bold text-white mb-2">{feature.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
+            <div className="p-8 rounded-2xl border border-teal-500/10 bg-teal-500/[0.02]">
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-full bg-teal-500/20 flex items-center justify-center shrink-0 mt-1">
+                    <span className="text-xs text-teal-400 font-bold">M</span>
                   </div>
-                );
-              })}
+                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5">
+                    <p className="text-sm text-[#A0AEC0] italic">"You've been avoiding this conversation for three weeks. What are you protecting yourself from — the answer, or the question?"</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 justify-end">
+                  <div className="p-3 rounded-xl bg-teal-500/10 border border-teal-500/20">
+                    <p className="text-sm text-teal-200">"I think I'm afraid of what changes if I admit it..."</p>
+                  </div>
+                  <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center shrink-0 mt-1">
+                    <span className="text-xs text-purple-400 font-bold">Y</span>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-full bg-teal-500/20 flex items-center justify-center shrink-0 mt-1">
+                    <span className="text-xs text-teal-400 font-bold">M</span>
+                  </div>
+                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5">
+                    <p className="text-sm text-[#A0AEC0] italic">"Good. That fear means you already know the truth. You're not afraid of change — you're afraid of how much better things could be if you stop settling."</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* How It Works */}
-      <section className="py-24 px-4 border-t border-white/5 relative z-10">
-        <div className="container max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-white text-center mb-16">How Mirrored Works</h2>
+      {/* Voice-to-Voice Feature */}
+      <section className="py-20 px-4 border-t border-white/5">
+        <div className="container max-w-5xl mx-auto">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
+              <Mic className="w-4 h-4 text-purple-400" />
+            </div>
+            <span className="text-xs font-mono text-purple-400/80 uppercase tracking-wider">Voice-to-Voice</span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-4">Talk to Your Higher Self</h2>
+          <p className="text-[#718096] mb-12 max-w-2xl">
+            Real-time voice conversations with your Mirrored self. Not robotic. Not AI-sounding. Built with emotional intelligence and a sophisticated persona created by Jonathan Chadbourne at Jcee Labs. Choose your voice — male or female — and speak freely.
+          </p>
 
-          <div className="space-y-8">
+          {/* Voice Demo Preview */}
+          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#0d0820] to-[#0a0618] overflow-hidden">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-white/5">
+              <div className="flex items-center gap-3">
+                <div className="w-2.5 h-2.5 rounded-full bg-teal-400 animate-pulse" />
+                <span className="text-sm font-mono text-teal-400">Mirrored Voice</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setActiveFeature("female")}
+                  className={`px-3 py-1 rounded-full text-xs font-mono transition-colors ${activeFeature === "female" ? "bg-purple-500/20 text-purple-300 border border-purple-500/30" : "text-[#718096] hover:text-white"}`}
+                >
+                  Female Voice
+                </button>
+                <button
+                  onClick={() => setActiveFeature("male")}
+                  className={`px-3 py-1 rounded-full text-xs font-mono transition-colors ${activeFeature === "male" ? "bg-teal-500/20 text-teal-300 border border-teal-500/30" : "text-[#718096] hover:text-white"}`}
+                >
+                  Male Voice
+                </button>
+              </div>
+            </div>
+
+            <div className="p-8">
+              {/* Waveform visualization */}
+              <div className="flex items-center justify-center gap-1 h-16 mb-6">
+                {Array.from({ length: 48 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="w-1 rounded-full bg-gradient-to-t from-teal-500 to-purple-500 opacity-60"
+                    style={{
+                      height: `${Math.sin(i * 0.3) * 30 + 35}%`,
+                      animationDelay: `${i * 40}ms`,
+                    }}
+                  />
+                ))}
+              </div>
+
+              <div className="text-center">
+                <p className="text-[#A0AEC0] text-sm mb-2">Emotionally intelligent voice conversations</p>
+                <p className="text-[#4A5568] text-xs">Powered by Hume AI emotional intelligence</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Core Features */}
+      <section className="py-20 px-4 border-t border-white/5">
+        <div className="container max-w-5xl mx-auto">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-8 h-8 rounded-lg bg-teal-500/10 border border-teal-500/20 flex items-center justify-center">
+              <Heart className="w-4 h-4 text-teal-400" />
+            </div>
+            <span className="text-xs font-mono text-teal-400/80 uppercase tracking-wider">Features</span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-4">Your Personal Growth Ecosystem</h2>
+          <p className="text-[#718096] mb-12 max-w-2xl">
+            Every feature is designed to help you face yourself honestly, build resilience, and move toward the person you're capable of becoming.
+          </p>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-teal-500/20 transition-colors">
+              <MessageCircle className="w-6 h-6 text-teal-400 mb-4" />
+              <h3 className="text-white font-semibold mb-2">Daily Check-In</h3>
+              <p className="text-sm text-[#718096] leading-relaxed">
+                Start each day with a reflection prompt from your higher self. Track emotional patterns over time and build self-awareness through consistent practice.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-teal-500/20 transition-colors">
+              <BookOpen className="w-6 h-6 text-teal-400 mb-4" />
+              <h3 className="text-white font-semibold mb-2">Journal</h3>
+              <p className="text-sm text-[#718096] leading-relaxed">
+                Write freely. Mirrored reads between the lines — identifying patterns, recurring themes, and growth opportunities you might miss on your own.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-teal-500/20 transition-colors">
+              <Compass className="w-6 h-6 text-teal-400 mb-4" />
+              <h3 className="text-white font-semibold mb-2">Philosophical Programs</h3>
+              <p className="text-sm text-[#718096] leading-relaxed">
+                Guided programs rooted in Stoicism, existentialism, and mindfulness — each with AI reflections that connect ancient wisdom to your specific life circumstances.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-teal-500/20 transition-colors">
+              <Brain className="w-6 h-6 text-teal-400 mb-4" />
+              <h3 className="text-white font-semibold mb-2">AI Reflections</h3>
+              <p className="text-sm text-[#718096] leading-relaxed">
+                After every interaction, Mirrored generates insights that help you fully understand yourself — connecting dots across conversations, journals, and check-ins.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-teal-500/20 transition-colors">
+              <Volume2 className="w-6 h-6 text-teal-400 mb-4" />
+              <h3 className="text-white font-semibold mb-2">Voice-to-Voice Mirror</h3>
+              <p className="text-sm text-[#718096] leading-relaxed">
+                Speak to your higher self in real-time. Male or female voice. Emotionally intelligent responses that adapt to your tone, pace, and emotional state.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-teal-500/20 transition-colors">
+              <Shield className="w-6 h-6 text-teal-400 mb-4" />
+              <h3 className="text-white font-semibold mb-2">Privacy First</h3>
+              <p className="text-sm text-[#718096] leading-relaxed">
+                Encryption-first self-reflection. Your conversations, journals, and insights are yours alone. Honest growth requires honest privacy.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Learns */}
+      <section className="py-20 px-4 border-t border-white/5">
+        <div className="container max-w-5xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-4">How Your Higher Self Learns</h2>
+          <p className="text-[#718096] mb-12 max-w-2xl">
+            Mirrored doesn't start generic and stay generic. It evolves with you — becoming more precise, more challenging, and more insightful the more you engage.
+          </p>
+
+          <div className="grid md:grid-cols-4 gap-6">
             {[
-              { num: "01", title: "Share Your Thoughts", desc: "Start a conversation by sharing what's on your mind, a challenge you're facing, or a decision you need to make." },
-              { num: "02", title: "Receive AI Insights", desc: "Mirrored analyzes your input and provides thoughtful, personalized reflections that help you see new perspectives." },
-              { num: "03", title: "Track Patterns", desc: "Over time, Mirrored identifies patterns in your thinking and offers deeper insights into your decision-making style." },
-              { num: "04", title: "Grow & Improve", desc: "Use these insights to make better decisions, achieve your goals, and develop a deeper understanding of yourself." }
-            ].map((step, idx) => (
-              <div key={idx} className="flex gap-6 items-start">
-                <div className="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-300 font-bold text-sm shrink-0">
-                  {step.num}
+              { step: "01", title: "Conversations", desc: "Every exchange teaches Mirrored how you think, what triggers you, and where your blind spots are." },
+              { step: "02", title: "Journals", desc: "Written reflections reveal patterns you don't see in the moment — recurring fears, hidden strengths, growth edges." },
+              { step: "03", title: "Insights", desc: "AI-generated reflections accumulate over time, building a map of your psychological landscape." },
+              { step: "04", title: "Evolution", desc: "Your higher self becomes sharper. Questions get harder. Guidance gets more precise. Growth accelerates." },
+            ].map((item) => (
+              <div key={item.step} className="text-center">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-teal-500/20 to-purple-500/20 border border-white/10 flex items-center justify-center mx-auto mb-4">
+                  <span className="text-sm font-mono text-white">{item.step}</span>
                 </div>
-                <div className="flex-1 pt-1">
-                  <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{step.desc}</p>
-                </div>
+                <h3 className="text-white font-semibold mb-2">{item.title}</h3>
+                <p className="text-xs text-[#718096] leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 px-4 border-t border-white/5 bg-gradient-to-b from-transparent to-purple-950/10 relative z-10">
-        <div className="container max-w-3xl mx-auto text-center space-y-8">
-          <div className="space-y-4">
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-white">Ready to Start Reflecting?</h2>
-            <p className="text-muted-foreground text-lg">
-              Mirrored is launching soon. Join the waitlist to get early access and exclusive beta features.
+      {/* Origin Story */}
+      <section className="py-20 px-4 border-t border-white/5">
+        <div className="container max-w-3xl mx-auto">
+          <div className="p-8 rounded-2xl border border-teal-500/10 bg-teal-500/[0.02]">
+            <h3 className="text-white font-semibold mb-4">The First Jcee Labs Project</h3>
+            <p className="text-[#718096] leading-relaxed mb-4">
+              Mirrored was the first project ever started at Jcee Labs. Before VOW, before multi-agent systems, before enterprise infrastructure — there was a simple belief: the best guidance comes from within.
+            </p>
+            <p className="text-[#718096] leading-relaxed">
+              The sophisticated persona behind Mirrored was created by Jonathan Chadbourne — designed not to be a therapist, not to be a friend, but to be the version of you that sees clearly. One of the only Jcee Labs products that doesn't integrate VOW, because Mirrored's intelligence is its own kind of architecture — emotional, not ontological.
             </p>
           </div>
+        </div>
+      </section>
 
+      {/* Disclaimer + CTA */}
+      <section className="py-20 px-4 border-t border-white/5">
+        <div className="container max-w-3xl mx-auto text-center space-y-6">
+          <h2 className="text-2xl sm:text-3xl font-display font-bold text-white">Face Yourself. Become Yourself.</h2>
+          <p className="text-[#718096] text-lg max-w-xl mx-auto">
+            Your higher self is waiting. Start the conversation that changes everything.
+          </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              onClick={() => setShowOnboarding(true)}
-              className="rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-medium shadow-lg shadow-purple-500/20 active:scale-97 transition-all"
-            >
-              Try Demo Now
-            </Button>
-            <Link href="/">
-              <Button variant="outline" className="rounded-xl border-white/10 hover:bg-white/5 text-[#E2E8F0] font-medium active:scale-97 transition-all">
-                Back to Home <ChevronRight className="w-4 h-4" />
+            <Link href="/#contact">
+              <Button className="rounded-xl bg-gradient-to-r from-teal-600 to-purple-500 hover:from-teal-500 hover:to-purple-400 text-white font-semibold shadow-lg shadow-teal-500/20 active:scale-97 transition-all">
+                Request Early Access <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
           </div>
+          <p className="text-xs text-[#4A5568] max-w-md mx-auto mt-6">
+            Mirrored is for personal growth and self-reflection. It is not a replacement for professional medical advice, diagnosis, or treatment. If you are in crisis, please contact a professional helpline.
+          </p>
         </div>
       </section>
 
