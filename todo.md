@@ -143,3 +143,11 @@
 - [x] Add SupplyChain to SiteNav Products dropdown
 - [x] Add /supplychain route to App.tsx
 - [x] All 12 tests passing
+
+## Phase 15 — Rename SupplyChain to Zhipz
+- [x] Rename SupplyChainPage.tsx to ZhipzPage.tsx
+- [x] Update all "SupplyChain" references to "Zhipz" in the product page
+- [x] Update Home.tsx product card name to Zhipz
+- [x] Update SiteNav Products dropdown to Zhipz
+- [x] Update App.tsx route to /zhipz
+- [x] All 12 tests passing

@@ -15,7 +15,7 @@ const VowPage = lazy(() => import("./pages/VowPage"));
 const TruckersDreamPage = lazy(() => import("./pages/TruckersDreamPage"));
 const ApexPage = lazy(() => import("./pages/ApexPage"));
 const CellularAutomataPage = lazy(() => import("./pages/CellularAutomataPage"));
-const SupplyChainPage = lazy(() => import("./pages/SupplyChainPage"));
+const ZhipzPage = lazy(() => import("./pages/ZhipzPage"));
 const TeamPage = lazy(() => import("./pages/TeamPage"));
 const AdminPage = lazy(() => import("./pages/AdminPage"));
 const PricingAdmin = lazy(() => import("./pages/PricingAdmin"));
@@ -43,7 +43,7 @@ function Router() {
         <Route path="/truckers-dream" component={TruckersDreamPage} />
         <Route path="/apex" component={ApexPage} />
         <Route path="/cellular-automata" component={CellularAutomataPage} />
-        <Route path="/supplychain" component={SupplyChainPage} />
+        <Route path="/zhipz" component={ZhipzPage} />
         <Route path="/team" component={TeamPage} />
         <Route path="/admin" component={AdminPage} />
         <Route path="/admin/pricing" component={PricingAdmin} />

@@ -81,12 +81,12 @@ const PRODUCTS = [
     status: "Coming Soon",
   },
   {
-    name: "SupplyChain",
+    name: "Zhipz",
     tagline: "Logistics Intelligence",
     description: "Multi-agent port monitoring and route optimization. Anticipate disruptions before they cost you.",
     color: "cyan",
     icon: Ship,
-    href: "/supplychain",
+    href: "/zhipz",
     status: "In Development",
   },
 ];

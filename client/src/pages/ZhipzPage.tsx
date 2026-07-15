@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 
-export default function SupplyChainPage() {
+export default function ZhipzPage() {
   return (
     <div className="min-h-screen bg-[#090514] flex flex-col">
       <SiteNav />
@@ -27,7 +27,7 @@ export default function SupplyChainPage() {
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white leading-tight mb-6">
-            SupplyChain
+            Zhipz
           </h1>
           <p className="text-xl text-[#A0AEC0] max-w-2xl mb-4">
             Autonomous port monitoring and route optimization for global logistics.
@@ -224,7 +224,7 @@ export default function SupplyChainPage() {
             Stop Reacting. Start Anticipating.
           </h2>
           <p className="text-[#718096] mb-8 max-w-xl mx-auto">
-            SupplyChain gives your logistics team the intelligence to reroute before disruptions cost you time and money.
+            Zhipz gives your logistics team the intelligence to reroute before disruptions cost you time and money.
           </p>
           <Link href="/#contact">
             <Button className="rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-medium px-8 py-3 h-auto">
