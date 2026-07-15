@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Users, MapPin, Lightbulb, Rocket } from "lucide-react";
+import { Users, MapPin, Lightbulb, Rocket, Linkedin, Twitter, Instagram } from "lucide-react";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 
@@ -35,11 +35,42 @@ export default function TeamPage() {
           {/* Jonathan Chadbourne */}
           <div className="bg-white/[0.02] border border-white/5 rounded-3xl p-8 md:p-10 hover:border-purple-500/20 transition-colors">
             <div className="flex flex-col md:flex-row gap-8 items-center">
-              <img
-                src="/manus-storage/jonathan-photo_8a631582.png"
-                alt="Jonathan Chadbourne"
-                className="w-32 h-32 md:w-36 md:h-36 rounded-2xl object-cover object-center shrink-0 shadow-lg shadow-purple-500/20 border border-white/10 mx-auto md:mx-0"
-              />
+              <div className="flex flex-col items-center gap-3 shrink-0">
+                <img
+                  src="/manus-storage/jonathan-photo_8a631582.png"
+                  alt="Jonathan Chadbourne"
+                  className="w-32 h-32 md:w-36 md:h-36 rounded-2xl object-cover object-center shadow-lg shadow-purple-500/20 border border-white/10"
+                />
+                <div className="flex items-center gap-3">
+                  <a
+                    href="https://www.linkedin.com/in/jonathan-chadbourne-153561410"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-blue-400 transition-colors"
+                    aria-label="LinkedIn"
+                  >
+                    <Linkedin className="w-5 h-5" />
+                  </a>
+                  <a
+                    href="https://x.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-white transition-colors"
+                    aria-label="X (Twitter)"
+                  >
+                    <Twitter className="w-5 h-5" />
+                  </a>
+                  <a
+                    href="https://instagram.com/jonchadbourne"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-pink-400 transition-colors"
+                    aria-label="Instagram"
+                  >
+                    <Instagram className="w-5 h-5" />
+                  </a>
+                </div>
+              </div>
               <div className="space-y-4 flex-1">
                 <div>
                   <h2 className="text-2xl font-display font-bold text-white">Jonathan Chadbourne</h2>
