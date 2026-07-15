@@ -17,6 +17,7 @@ const ApexPage = lazy(() => import("./pages/ApexPage"));
 const CellularAutomataPage = lazy(() => import("./pages/CellularAutomataPage"));
 const TeamPage = lazy(() => import("./pages/TeamPage"));
 const AdminPage = lazy(() => import("./pages/AdminPage"));
+const PricingAdmin = lazy(() => import("./pages/PricingAdmin"));
 const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
 const TermsPage = lazy(() => import("./pages/TermsPage"));
 
@@ -43,6 +44,7 @@ function Router() {
         <Route path="/cellular-automata" component={CellularAutomataPage} />
         <Route path="/team" component={TeamPage} />
         <Route path="/admin" component={AdminPage} />
+        <Route path="/admin/pricing" component={PricingAdmin} />
         <Route path="/privacy" component={PrivacyPage} />
         <Route path="/terms" component={TermsPage} />
         <Route path="/404" component={NotFound} />

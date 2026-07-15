@@ -1,4 +1,4 @@
-import { int, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
+import { decimal, int, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
 
 /**
  * Core user table backing auth flow.
@@ -51,3 +51,37 @@ export const businessInquiries = mysqlTable("business_inquiries", {
 
 export type BusinessInquiry = typeof businessInquiries.$inferSelect;
 export type InsertBusinessInquiry = typeof businessInquiries.$inferInsert;
+
+// BidIndustrial — Materials pricing database
+export const materials = mysqlTable("materials", {
+  id: int("id").autoincrement().primaryKey(),
+  trade: varchar("trade", { length: 64 }).notNull(), // hvac, electrical, plumbing, mechanical, general, commercial
+  name: varchar("name", { length: 255 }).notNull(),
+  category: varchar("category", { length: 128 }).notNull(),
+  unit: varchar("unit", { length: 64 }).notNull(), // linear ft, each, sq ft, lb, etc.
+  unitPrice: decimal("unitPrice", { precision: 10, scale: 2 }).notNull(),
+  supplier: varchar("supplier", { length: 255 }),
+  partNumber: varchar("partNumber", { length: 128 }),
+  notes: text("notes"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Material = typeof materials.$inferSelect;
+export type InsertMaterial = typeof materials.$inferInsert;
+
+// BidIndustrial — Labor rates database
+export const laborRates = mysqlTable("labor_rates", {
+  id: int("id").autoincrement().primaryKey(),
+  trade: varchar("trade", { length: 64 }).notNull(),
+  role: varchar("role", { length: 128 }).notNull(), // Journeyman, Apprentice, Foreman, etc.
+  hourlyRate: decimal("hourlyRate", { precision: 8, scale: 2 }).notNull(),
+  overtimeRate: decimal("overtimeRate", { precision: 8, scale: 2 }).notNull(),
+  region: varchar("region", { length: 128 }).default("National Avg").notNull(),
+  notes: text("notes"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type LaborRate = typeof laborRates.$inferSelect;
+export type InsertLaborRate = typeof laborRates.$inferInsert;

@@ -5,7 +5,7 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { invokeLLM } from "./_core/llm";
 import { notifyOwner } from "./_core/notification";
 import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
-import { getAllLeads, insertLead, insertBusinessInquiry, getAllBusinessInquiries } from "./db";
+import { getAllLeads, insertLead, insertBusinessInquiry, getAllBusinessInquiries, getAllMaterials, insertMaterial, updateMaterial, deleteMaterial, getAllLaborRates, insertLaborRate, updateLaborRate, deleteLaborRate } from "./db";
 import { getPricing, getAvailableTrades } from "./pricingApi";
 import { syncLeadToLoops, syncInquiryToLoops } from "./emailMarketing";
 import { systemRouter } from "./_core/systemRouter";
@@ -99,6 +99,94 @@ export const appRouter = router({
     getTrades: publicProcedure.query(() => {
       return getAvailableTrades();
     }),
+
+    // Admin: Materials CRUD
+    listMaterials: protectedProcedure
+      .input(z.object({ trade: z.string().optional() }).optional())
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+        return getAllMaterials(input?.trade);
+      }),
+    addMaterial: protectedProcedure
+      .input(z.object({
+        trade: z.string(),
+        name: z.string().min(1).max(255),
+        category: z.string().min(1).max(128),
+        unit: z.string().min(1).max(64),
+        unitPrice: z.string(), // decimal as string
+        supplier: z.string().max(255).optional(),
+        partNumber: z.string().max(128).optional(),
+        notes: z.string().optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+        return insertMaterial(input);
+      }),
+    updateMaterial: protectedProcedure
+      .input(z.object({
+        id: z.number(),
+        trade: z.string().optional(),
+        name: z.string().min(1).max(255).optional(),
+        category: z.string().min(1).max(128).optional(),
+        unit: z.string().min(1).max(64).optional(),
+        unitPrice: z.string().optional(),
+        supplier: z.string().max(255).optional(),
+        partNumber: z.string().max(128).optional(),
+        notes: z.string().optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+        const { id, ...data } = input;
+        return updateMaterial(id, data);
+      }),
+    deleteMaterial: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+        return deleteMaterial(input.id);
+      }),
+
+    // Admin: Labor Rates CRUD
+    listLaborRates: protectedProcedure
+      .input(z.object({ trade: z.string().optional() }).optional())
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+        return getAllLaborRates(input?.trade);
+      }),
+    addLaborRate: protectedProcedure
+      .input(z.object({
+        trade: z.string(),
+        role: z.string().min(1).max(128),
+        hourlyRate: z.string(),
+        overtimeRate: z.string(),
+        region: z.string().max(128).optional(),
+        notes: z.string().optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+        return insertLaborRate({ ...input, region: input.region ?? "National Avg" });
+      }),
+    updateLaborRate: protectedProcedure
+      .input(z.object({
+        id: z.number(),
+        trade: z.string().optional(),
+        role: z.string().min(1).max(128).optional(),
+        hourlyRate: z.string().optional(),
+        overtimeRate: z.string().optional(),
+        region: z.string().max(128).optional(),
+        notes: z.string().optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+        const { id, ...data } = input;
+        return updateLaborRate(id, data);
+      }),
+    deleteLaborRate: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+        return deleteLaborRate(input.id);
+      }),
   }),
 
   // Mirrored AI reflection chat — public (no login required to try the demo)

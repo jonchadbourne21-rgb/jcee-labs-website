@@ -15,6 +15,13 @@
       "when": 1780387694072,
       "tag": "0001_mixed_infant_terrible",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1784078872783,
+      "tag": "0002_massive_maestro",
+      "breakpoints": true
     }
   ]
 }

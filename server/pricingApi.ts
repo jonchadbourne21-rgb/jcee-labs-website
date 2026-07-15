@@ -1,17 +1,12 @@
 /**
  * BidIndustrial Pricing API Service
  * 
- * This module provides the infrastructure to connect to external pricing data APIs.
- * When a pricing API key is configured (PRICING_API_KEY env var), it will fetch
- * real-time material pricing. Otherwise, it returns industry-standard baseline data.
- * 
- * Supported future integrations:
- * - RSMeans (construction cost data)
- * - Craftsman (national estimator)
- * - Custom supplier APIs
+ * This module provides pricing data for bid calculations.
+ * Primary source: Your own database (managed via /admin/pricing)
+ * Fallback: Baseline data (used only when database has no entries for a trade)
  */
 
-import { ENV } from "./_core/env";
+import { getAllMaterials, getAllLaborRates } from "./db";
 
 // Types for pricing data
 export interface MaterialPrice {
@@ -21,7 +16,9 @@ export interface MaterialPrice {
   unit: string;
   unitPrice: number;
   lastUpdated: string;
-  source: "live" | "baseline";
+  source: "database" | "baseline";
+  supplier?: string;
+  partNumber?: string;
 }
 
 export interface LaborRate {
@@ -31,55 +28,78 @@ export interface LaborRate {
   overtimeRate: number;
   region: string;
   lastUpdated: string;
-  source: "live" | "baseline";
+  source: "database" | "baseline";
 }
 
 export interface PricingResponse {
   materials: MaterialPrice[];
   labor: LaborRate[];
-  dataSource: "live_api" | "baseline";
+  dataSource: "database" | "baseline";
   lastUpdated: string;
 }
 
-// Check if a live pricing API is configured
-function hasLivePricingApi(): boolean {
-  return !!(process.env.PRICING_API_KEY && process.env.PRICING_API_URL);
-}
+/**
+ * Get pricing data for a specific trade.
+ * Uses database entries first. Falls back to baseline only if database is empty for that trade.
+ */
+export async function getPricing(trade: string, _region?: string): Promise<PricingResponse> {
+  const normalizedTrade = trade.toLowerCase().replace(/\s+/g, "");
+  const tradeKey = normalizedTrade === "commercialbuild-out" ? "commercial" : normalizedTrade;
 
-// Fetch live pricing from external API (when configured)
-async function fetchLivePricing(trade: string, _region?: string): Promise<PricingResponse | null> {
-  const apiKey = process.env.PRICING_API_KEY;
-  const apiUrl = process.env.PRICING_API_URL;
+  // Try database first
+  const dbMaterials = await getAllMaterials(tradeKey);
+  const dbLabor = await getAllLaborRates(tradeKey);
 
-  if (!apiKey || !apiUrl) return null;
+  const hasDbData = dbMaterials.length > 0 || dbLabor.length > 0;
 
-  try {
-    const response = await fetch(`${apiUrl}/v1/pricing?trade=${encodeURIComponent(trade)}`, {
-      headers: {
-        "Authorization": `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (!response.ok) {
-      console.warn(`[PricingAPI] Live API returned ${response.status}`);
-      return null;
-    }
-
-    const data = await response.json();
+  if (hasDbData) {
     return {
-      materials: data.materials ?? [],
-      labor: data.labor ?? [],
-      dataSource: "live_api",
+      materials: dbMaterials.map((m) => ({
+        id: `db-${m.id}`,
+        name: m.name,
+        category: m.category,
+        unit: m.unit,
+        unitPrice: parseFloat(m.unitPrice),
+        lastUpdated: m.updatedAt ? new Date(m.updatedAt).toISOString() : new Date().toISOString(),
+        source: "database" as const,
+        supplier: m.supplier ?? undefined,
+        partNumber: m.partNumber ?? undefined,
+      })),
+      labor: dbLabor.map((l) => ({
+        trade: l.trade,
+        role: l.role,
+        hourlyRate: parseFloat(l.hourlyRate),
+        overtimeRate: parseFloat(l.overtimeRate),
+        region: l.region,
+        lastUpdated: l.updatedAt ? new Date(l.updatedAt).toISOString() : new Date().toISOString(),
+        source: "database" as const,
+      })),
+      dataSource: "database",
       lastUpdated: new Date().toISOString(),
     };
-  } catch (err) {
-    console.warn("[PricingAPI] Failed to fetch live pricing:", err);
-    return null;
   }
+
+  // Fall back to baseline data when database is empty for this trade
+  const materials = BASELINE_MATERIALS[tradeKey] ?? BASELINE_MATERIALS.general ?? [];
+  const labor = BASELINE_LABOR[tradeKey] ?? BASELINE_LABOR.general ?? [];
+
+  return {
+    materials,
+    labor,
+    dataSource: "baseline",
+    lastUpdated: "2026-07-01T00:00:00Z",
+  };
 }
 
-// Industry-standard baseline pricing data (used when no live API is configured)
+/**
+ * Get all available trades
+ */
+export function getAvailableTrades(): string[] {
+  return ["hvac", "electrical", "plumbing", "mechanical", "general", "commercial"];
+}
+
+// ─── Baseline Data (fallback when database has no entries) ────────────────────
+
 const BASELINE_MATERIALS: Record<string, MaterialPrice[]> = {
   hvac: [
     { id: "hvac-001", name: "Copper Refrigerant Line Set (3/8\" x 3/4\")", category: "Piping", unit: "linear ft", unitPrice: 8.50, lastUpdated: "2026-07-01", source: "baseline" },
@@ -157,36 +177,3 @@ const BASELINE_LABOR: Record<string, LaborRate[]> = {
     { trade: "Commercial", role: "Project Manager", hourlyRate: 95.00, overtimeRate: 142.50, region: "National Avg", lastUpdated: "2026-07-01", source: "baseline" },
   ],
 };
-
-/**
- * Get pricing data for a specific trade.
- * Attempts live API first (if configured), falls back to baseline data.
- */
-export async function getPricing(trade: string, region?: string): Promise<PricingResponse> {
-  const normalizedTrade = trade.toLowerCase().replace(/\s+/g, "");
-
-  // Try live API first
-  if (hasLivePricingApi()) {
-    const liveData = await fetchLivePricing(normalizedTrade, region);
-    if (liveData) return liveData;
-  }
-
-  // Fall back to baseline data
-  const tradeKey = normalizedTrade === "commercialbuild-out" ? "commercial" : normalizedTrade;
-  const materials = BASELINE_MATERIALS[tradeKey] ?? BASELINE_MATERIALS.general ?? [];
-  const labor = BASELINE_LABOR[tradeKey] ?? BASELINE_LABOR.general ?? [];
-
-  return {
-    materials,
-    labor,
-    dataSource: "baseline",
-    lastUpdated: "2026-07-01T00:00:00Z",
-  };
-}
-
-/**
- * Get all available trades
- */
-export function getAvailableTrades(): string[] {
-  return ["hvac", "electrical", "plumbing", "mechanical", "general", "commercial"];
-}

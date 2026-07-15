@@ -127,3 +127,13 @@
 ## Activation Steps (when ready)
 - [ ] Sign up at https://loops.so and add LOOPS_API_KEY to environment secrets
 - [ ] Connect a pricing data provider and add PRICING_API_KEY + PRICING_API_URL to environment secrets
+
+## Phase 13 — Custom Pricing Database & Admin Panel
+- [x] Create database schema for materials table (trade, name, category, unit, unitPrice, supplier, partNumber, notes)
+- [x] Create database schema for labor_rates table (trade, role, hourlyRate, overtimeRate, region, notes)
+- [x] Run db:push to sync schema
+- [x] Build tRPC CRUD procedures for materials and labor rates (admin-only)
+- [x] Build admin pricing management UI at /admin/pricing with add/edit/delete for materials and labor
+- [x] Connect BidIndustrial pricing API to read from database (falls back to baseline when empty)
+- [x] Link from main Admin page to Pricing Admin
+- [x] All 12 tests passing

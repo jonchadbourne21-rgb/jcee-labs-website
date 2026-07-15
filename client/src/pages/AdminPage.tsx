@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Download, Users, Briefcase, Shield, Loader2 } from "lucide-react";
+import { Download, Users, Briefcase, Shield, Loader2, DollarSign } from "lucide-react";
 import SiteNav from "@/components/SiteNav";
 
 export default function AdminPage() {
@@ -133,6 +133,13 @@ export default function AdminPage() {
               <Briefcase className="w-4 h-4" />
               Inquiries ({inquiries?.length ?? 0})
             </button>
+            <a
+              href="/admin/pricing"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-white hover:bg-white/5 transition-colors ml-auto"
+            >
+              <DollarSign className="w-4 h-4" />
+              Manage Pricing
+            </a>
           </div>
 
           {/* Leads Table */}
