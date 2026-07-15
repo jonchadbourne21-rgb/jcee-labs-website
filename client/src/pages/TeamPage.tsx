@@ -36,9 +36,9 @@ export default function TeamPage() {
           <div className="bg-white/[0.02] border border-white/5 rounded-3xl p-8 md:p-10 hover:border-purple-500/20 transition-colors">
             <div className="flex flex-col md:flex-row gap-8 items-start">
               <img
-                src="/manus-storage/jonathan-headshot_1d483ebd.png"
+                src="/manus-storage/jonathan-photo_8a631582.png"
                 alt="Jonathan Chadbourne"
-                className="w-24 h-24 rounded-2xl object-cover object-top shrink-0 shadow-lg shadow-purple-500/20 border border-white/10"
+                className="w-24 h-24 rounded-2xl object-cover object-center shrink-0 shadow-lg shadow-purple-500/20 border border-white/10"
               />
               <div className="space-y-4 flex-1">
                 <div>
