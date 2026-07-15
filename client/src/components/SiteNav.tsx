@@ -43,7 +43,7 @@ export default function SiteNav() {
         <Link href="/">
           <a className="flex items-center gap-3 group">
             <img
-              src="/manus-storage/jcee-labs-logo_f25acfb0.png"
+              src="/manus-storage/jcee-labs-logo_d242d7a5.png"
               alt="Jcee Labs Logo"
               className="w-9 h-9 rounded-xl shadow-lg shadow-purple-500/25 group-hover:scale-105 transition-transform duration-300 object-contain"
             />

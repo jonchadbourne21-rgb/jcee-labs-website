@@ -143,7 +143,7 @@ export default function Home() {
           <Link href="/">
             <a className="flex items-center gap-3 group">
               <img
-                src="/manus-storage/jcee-labs-logo_f25acfb0.png"
+                src="/manus-storage/jcee-labs-logo_d242d7a5.png"
                 alt="Jcee Labs Logo"
                 className="w-9 h-9 rounded-xl shadow-lg shadow-purple-500/25 group-hover:scale-105 transition-transform duration-300 object-contain"
               />
@@ -203,28 +203,43 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════════════════════
           HERO
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="container pt-32 pb-20 md:pt-40 md:pb-24 relative z-10">
-        <div className="max-w-3xl space-y-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-mono">
-            <Sparkles className="w-3.5 h-3.5" /> AI-Powered Software Studio
-          </div>
-          <h1 className="text-5xl md:text-7xl font-display font-extrabold leading-[1.05] tracking-tight">
-            Crafting the <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Future</span> of Intelligent <span className="bg-gradient-to-r from-teal-400 to-teal-600 bg-clip-text text-transparent">Software</span>
-          </h1>
-          <p className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl">
-            Jcee Labs is the innovation studio of <strong className="text-white">HOWM HOLDINGS LLC</strong>. We design, engineer, and deploy AI-driven applications that help businesses operate smarter, faster, and more efficiently.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 pt-2">
-            <a href="#products">
-              <Button size="lg" className="w-full sm:w-auto rounded-xl bg-white text-black hover:bg-slate-200 font-semibold shadow-xl shadow-white/5 active:scale-97 transition-all">
-                Explore Products
-              </Button>
-            </a>
-            <Link href="/team">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto rounded-xl border-white/10 hover:bg-white/5 text-[#E2E8F0] font-medium active:scale-97 transition-all">
-                Meet the Team
-              </Button>
-            </Link>
+      <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 z-10 overflow-hidden">
+        {/* Logo as background element */}
+        <div className="absolute inset-0 flex items-center justify-end pointer-events-none">
+          <img
+            src="/manus-storage/jcee-labs-logo_d242d7a5.png"
+            alt=""
+            className="w-[500px] md:w-[650px] lg:w-[750px] opacity-20 mr-[-5%] md:mr-[2%] select-none"
+            style={{ filter: 'brightness(1.2) contrast(1.1)' }}
+          />
+          {/* Gradient overlay to blend logo edges */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#090514] via-[#090514]/70 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#090514] via-transparent to-[#090514]/50" />
+        </div>
+
+        <div className="container relative z-10">
+          <div className="max-w-3xl space-y-8">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-mono">
+              <Sparkles className="w-3.5 h-3.5" /> AI-Powered Software Studio
+            </div>
+            <h1 className="text-5xl md:text-7xl font-display font-extrabold leading-[1.05] tracking-tight">
+              Crafting the <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Future</span> of Intelligent <span className="bg-gradient-to-r from-teal-400 to-teal-600 bg-clip-text text-transparent">Software</span>
+            </h1>
+            <p className="text-lg md:text-xl leading-relaxed max-w-2xl text-slate-300/90">
+              Jcee Labs is the innovation studio of <strong className="text-white font-semibold">HOWM HOLDINGS LLC</strong>. We design, engineer, and deploy AI-driven applications that help businesses operate smarter, faster, and more efficiently.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 pt-2">
+              <a href="#products">
+                <Button size="lg" className="w-full sm:w-auto rounded-xl bg-white text-black hover:bg-slate-200 font-semibold shadow-xl shadow-white/5 active:scale-97 transition-all">
+                  Explore Products
+                </Button>
+              </a>
+              <Link href="/team">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto rounded-xl border-white/10 hover:bg-white/5 text-[#E2E8F0] font-medium active:scale-97 transition-all">
+                  Meet the Team
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -391,7 +406,7 @@ export default function Home() {
             <div className="md:col-span-5 space-y-4">
               <div className="flex items-center gap-3">
                 <img
-                  src="/manus-storage/jcee-labs-logo_f25acfb0.png"
+                  src="/manus-storage/jcee-labs-logo_d242d7a5.png"
                   alt="Jcee Labs Logo"
                   className="w-8 h-8 rounded-lg shadow-lg shadow-purple-500/25 object-contain"
                 />
