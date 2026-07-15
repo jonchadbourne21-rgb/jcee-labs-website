@@ -284,7 +284,7 @@ export default function Home() {
               <Link href="/vow">
                 <a className="text-purple-300 hover:text-purple-200 underline underline-offset-2 decoration-purple-500/40 font-semibold">VOW</a>
               </Link>
-              , a proprietary ontological language with EU AI Act compliance at the infrastructure level. No bloat, no committees — just obsessive product thinking and a bias toward shipping.
+              . VOW is a domain-specific language that makes agentic AI systems auditable by design — every action an agent takes compiles to readable Python and leaves a trail, not a black box. It's built with regulatory transparency in mind, ahead of EU AI Act requirements already landing in 2026.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-2">
               <a href="#products">
