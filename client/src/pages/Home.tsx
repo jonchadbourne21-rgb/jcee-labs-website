@@ -4,8 +4,6 @@ import { Button } from "@/components/ui/button";
 import {
   ArrowUpRight,
   Sparkles,
-  Zap,
-  Mail,
 } from "lucide-react";
 import SiteFooter from "@/components/SiteFooter";
 
@@ -193,16 +191,15 @@ export default function Home() {
                 One language.
               </span>{" "}
               <span className="bg-gradient-to-r from-teal-400 to-teal-600 bg-clip-text text-transparent">
-                Nine products
-              </span>{" "}
-              that prove it works.
+                Nine products.
+              </span>
             </h1>
             <p className="text-lg md:text-xl leading-relaxed max-w-2xl text-slate-300/90">
               Jcee Labs builds AI products on{" "}
               <Link href="/vow">
                 <a className="text-purple-300 hover:text-purple-200 underline underline-offset-2 decoration-purple-500/40 font-semibold">VOW</a>
               </Link>
-              . VOW is a domain-specific language that makes agentic AI systems auditable by design — every action an agent takes compiles to readable Python and leaves a trail, not a black box. It's built with regulatory transparency in mind, ahead of EU AI Act requirements already landing in 2026.
+              {" "}— our formally-grounded language where every agent action compiles to auditable Python and leaves a causal trail, not a black box. Built for regulatory transparency before the EU AI Act makes it mandatory.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-2">
               <Link href="/products">
@@ -211,6 +208,15 @@ export default function Home() {
                   className="w-full sm:w-auto rounded-xl bg-white text-black hover:bg-slate-200 font-semibold shadow-xl shadow-white/5 active:scale-97 transition-all"
                 >
                   Explore Products
+                </Button>
+              </Link>
+              <Link href="/services">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="w-full sm:w-auto rounded-xl border-purple-500/30 hover:bg-purple-500/10 text-purple-300 font-medium active:scale-97 transition-all"
+                >
+                  Services
                 </Button>
               </Link>
               <Link href="/team">
@@ -224,6 +230,20 @@ export default function Home() {
               </Link>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════════
+          TAGLINE
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section className="py-16 border-t border-white/5">
+        <div className="container text-center max-w-2xl mx-auto space-y-3">
+          <p className="text-sm text-muted-foreground tracking-wide">
+            Jcee Labs is the d.b.a. of HOWM HOLDINGS LLC.
+          </p>
+          <p className="text-lg text-slate-300/80 font-medium">
+            We architect formally-verified AI systems. Everything else is just software.
+          </p>
         </div>
       </section>
 
