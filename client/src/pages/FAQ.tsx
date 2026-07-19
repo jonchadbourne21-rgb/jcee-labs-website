@@ -14,23 +14,23 @@ export default function FAQ() {
       <SiteNav />
 
       {/* Main Content */}
-      <main className="container max-w-4xl pt-32 pb-16 md:pb-24 flex-grow">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[rgba(212,168,67,0.1)] border border-[rgba(212,168,67,0.2)] text-[#d4a843] text-xs font-mono mb-4">
-            <HelpCircle className="w-3.5 h-3.5" /> FAQ & Information Hub
+      <main className="container max-w-4xl pt-24 md:pt-32 pb-12 md:pb-24 flex-grow px-4 md:px-6">
+        <div className="text-center mb-8 md:mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[rgba(212,168,67,0.1)] border border-[rgba(212,168,67,0.2)] text-[#d4a843] text-[10px] md:text-xs font-mono mb-3 md:mb-4">
+            <HelpCircle className="w-3 h-3 md:w-3.5 md:h-3.5" /> FAQ & Information Hub
           </div>
-          <h1 className="text-4xl md:text-5xl font-display font-extrabold mb-4">
+          <h1 className="text-2xl sm:text-3xl md:text-5xl font-display font-extrabold mb-3 md:mb-4">
             Frequently Asked <span className="bg-gradient-to-r from-[#d4a843] to-[#e8c56d] bg-clip-text text-transparent">Questions</span>
           </h1>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-sm md:text-lg max-w-2xl mx-auto">
             Everything you need to know about Jcee Labs, VOW, and our suite of nine AI products.
           </p>
         </div>
 
-        <div className="glass-panel p-6 md:p-8 rounded-2xl border border-[#2a3a5a]/50 relative">
+        <div className="glass-panel p-4 md:p-8 rounded-xl md:rounded-2xl border border-[#2a3a5a]/50 relative">
           <Accordion type="single" collapsible className="w-full space-y-4">
             <AccordionItem value="item-1" className="border-b border-white/5">
-              <AccordionTrigger className="text-left font-display font-semibold text-lg py-4 hover:text-[#d4a843] hover:no-underline transition-colors">
+              <AccordionTrigger className="text-left font-display font-semibold text-base md:text-lg py-3 md:py-4 hover:text-[#d4a843] hover:no-underline transition-colors">
                 What is Jcee Labs?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground leading-relaxed pt-2 pb-4">
@@ -39,7 +39,7 @@ export default function FAQ() {
             </AccordionItem>
 
             <AccordionItem value="item-2" className="border-b border-white/5">
-              <AccordionTrigger className="text-left font-display font-semibold text-lg py-4 hover:text-[#d4a843] hover:no-underline transition-colors">
+              <AccordionTrigger className="text-left font-display font-semibold text-base md:text-lg py-3 md:py-4 hover:text-[#d4a843] hover:no-underline transition-colors">
                 What is VOW?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground leading-relaxed pt-2 pb-4">
@@ -48,7 +48,7 @@ export default function FAQ() {
             </AccordionItem>
 
             <AccordionItem value="item-3" className="border-b border-white/5">
-              <AccordionTrigger className="text-left font-display font-semibold text-lg py-4 hover:text-[#d4a843] hover:no-underline transition-colors">
+              <AccordionTrigger className="text-left font-display font-semibold text-base md:text-lg py-3 md:py-4 hover:text-[#d4a843] hover:no-underline transition-colors">
                 What is the relationship with HOWM HOLDINGS LLC?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground leading-relaxed pt-2 pb-4">
@@ -57,7 +57,7 @@ export default function FAQ() {
             </AccordionItem>
 
             <AccordionItem value="item-4" className="border-b border-white/5">
-              <AccordionTrigger className="text-left font-display font-semibold text-lg py-4 hover:text-[#d4a843] hover:no-underline transition-colors">
+              <AccordionTrigger className="text-left font-display font-semibold text-base md:text-lg py-3 md:py-4 hover:text-[#d4a843] hover:no-underline transition-colors">
                 What products does Jcee Labs build?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground leading-relaxed pt-2 pb-4">
@@ -66,7 +66,7 @@ export default function FAQ() {
             </AccordionItem>
 
             <AccordionItem value="item-5" className="border-b border-white/5">
-              <AccordionTrigger className="text-left font-display font-semibold text-lg py-4 hover:text-[#d4a843] hover:no-underline transition-colors">
+              <AccordionTrigger className="text-left font-display font-semibold text-base md:text-lg py-3 md:py-4 hover:text-[#d4a843] hover:no-underline transition-colors">
                 What is "Mirrored"?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground leading-relaxed pt-2 pb-4">
@@ -75,7 +75,7 @@ export default function FAQ() {
             </AccordionItem>
 
             <AccordionItem value="item-6" className="border-b border-white/5">
-              <AccordionTrigger className="text-left font-display font-semibold text-lg py-4 hover:text-[#d4a843] hover:no-underline transition-colors">
+              <AccordionTrigger className="text-left font-display font-semibold text-base md:text-lg py-3 md:py-4 hover:text-[#d4a843] hover:no-underline transition-colors">
                 Are these products available to the public?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground leading-relaxed pt-2 pb-4">
@@ -84,7 +84,7 @@ export default function FAQ() {
             </AccordionItem>
 
             <AccordionItem value="item-7" className="border-b border-white/5">
-              <AccordionTrigger className="text-left font-display font-semibold text-lg py-4 hover:text-[#d4a843] hover:no-underline transition-colors">
+              <AccordionTrigger className="text-left font-display font-semibold text-base md:text-lg py-3 md:py-4 hover:text-[#d4a843] hover:no-underline transition-colors">
                 Who is behind Jcee Labs?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground leading-relaxed pt-2 pb-4">
@@ -93,7 +93,7 @@ export default function FAQ() {
             </AccordionItem>
 
             <AccordionItem value="item-8" className="border-b border-white/5">
-              <AccordionTrigger className="text-left font-display font-semibold text-lg py-4 hover:text-[#d4a843] hover:no-underline transition-colors">
+              <AccordionTrigger className="text-left font-display font-semibold text-base md:text-lg py-3 md:py-4 hover:text-[#d4a843] hover:no-underline transition-colors">
                 How can I get in touch?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground leading-relaxed pt-2 pb-4">

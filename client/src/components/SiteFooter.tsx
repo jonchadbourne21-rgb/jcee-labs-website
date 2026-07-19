@@ -11,12 +11,12 @@ function InstagramIcon({ className }: { className?: string }) {
 
 export default function SiteFooter() {
   return (
-    <footer className="border-t border-[#2a3a5a]/50 bg-[#060a14] py-12 relative z-10 mt-auto">
-      <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-10">
+    <footer className="border-t border-[#2a3a5a]/50 bg-[#060a14] py-8 md:py-12 relative z-10 mt-auto">
+      <div className="container px-4 md:px-6">
+        <div className="grid grid-cols-2 md:grid-cols-12 gap-6 md:gap-8 mb-8 md:mb-10">
 
           {/* Column 1 — Brand */}
-          <div className="md:col-span-5 space-y-4">
+          <div className="col-span-2 md:col-span-5 space-y-3 md:space-y-4">
             <div className="flex items-center gap-3">
               <img
                 src="/manus-storage/jcee-labs-new-logo_cd2cbbaa.jpg"
@@ -69,11 +69,11 @@ export default function SiteFooter() {
           </div>
 
           {/* Column 2 — Products */}
-          <div className="md:col-span-3 space-y-3">
+          <div className="col-span-1 md:col-span-3 space-y-2 md:space-y-3">
             <h5 className="font-display font-bold text-sm text-[#c0c8d8] tracking-wider uppercase">
               Products
             </h5>
-            <ul className="space-y-2 text-sm text-[#7a8aaa]">
+            <ul className="space-y-1.5 md:space-y-2 text-xs md:text-sm text-[#7a8aaa]">
               <li><Link href="/vow" className="hover:text-[#d4a843] transition-colors">VOW</Link></li>
               <li><Link href="/mirrored" className="hover:text-[#c0c8d8] transition-colors">Mirrored</Link></li>
               <li><Link href="/truerpm" className="hover:text-[#c0c8d8] transition-colors">TrueRPM</Link></li>
@@ -87,11 +87,11 @@ export default function SiteFooter() {
           </div>
 
           {/* Column 3 — Company */}
-          <div className="md:col-span-2 space-y-3">
+          <div className="col-span-1 md:col-span-2 space-y-2 md:space-y-3">
             <h5 className="font-display font-bold text-sm text-[#c0c8d8] tracking-wider uppercase">
               Company
             </h5>
-            <ul className="space-y-2 text-sm text-[#7a8aaa]">
+            <ul className="space-y-1.5 md:space-y-2 text-xs md:text-sm text-[#7a8aaa]">
               <li><Link href="/team" className="hover:text-[#e8ecf4] transition-colors">Team</Link></li>
               <li><Link href="/faq" className="hover:text-[#e8ecf4] transition-colors">FAQ</Link></li>
               <li><Link href="/services" className="hover:text-[#e8ecf4] transition-colors">Services</Link></li>
@@ -99,7 +99,7 @@ export default function SiteFooter() {
           </div>
 
           {/* Column 4 — Legal */}
-          <div className="md:col-span-2 space-y-3">
+          <div className="col-span-2 md:col-span-2 space-y-2 md:space-y-3">
             <h5 className="font-display font-bold text-sm text-[#c0c8d8] tracking-wider uppercase">
               Legal
             </h5>
@@ -111,7 +111,7 @@ export default function SiteFooter() {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-8 border-t border-[#2a3a5a]/50 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#7a8aaa]">
+        <div className="pt-6 md:pt-8 border-t border-[#2a3a5a]/50 flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4 text-[10px] md:text-xs text-[#7a8aaa]">
           <p>
             &copy; {new Date().getFullYear()} Jcee Labs. All rights reserved.
             HOWM HOLDINGS LLC.

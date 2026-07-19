@@ -277,3 +277,14 @@
 - [x] SiteNav.tsx: Enhance "Get in Touch" button hover
 - [x] ServicesPage.tsx: Enhance CTA buttons hover
 - [x] All tests passing
+
+## Phase 32 — Mobile Responsive Polish
+- [x] Home.tsx: Reduce hero heading size on mobile, tighten spacing, optimize background image
+- [x] Home.tsx: Stack buttons vertically on mobile with full-width tap targets
+- [x] SiteNav.tsx: Ensure mobile menu is well-spaced with good tap targets
+- [x] ProductsPage.tsx: Single-column cards on mobile, tighter spacing
+- [x] ServicesPage.tsx: Tighter spacing and readable cards on mobile
+- [x] FAQ.tsx: Mobile-friendly accordion spacing
+- [x] TeamPage.tsx: Mobile-optimized layout (already responsive)
+- [x] SiteFooter.tsx: Mobile-friendly footer columns (2-col grid on mobile)
+- [x] All tests passing (12/12)

@@ -36,22 +36,22 @@ export default function Home() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "border-b border-[#2a3a5a]/50 bg-[#080c18]/80 backdrop-blur-xl py-3"
-            : "bg-transparent py-5"
+            ? "border-b border-[#2a3a5a]/50 bg-[#080c18]/80 backdrop-blur-xl py-2 md:py-3"
+            : "bg-transparent py-3 md:py-5"
         }`}
       >
         <div className="container flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link href="/" className="flex items-center gap-2 md:gap-3 group">
               <img
                 src="/manus-storage/jcee-labs-new-logo_cd2cbbaa.jpg"
                 alt="Jcee Labs Logo"
-                className="w-9 h-9 rounded-xl shadow-lg shadow-[#8ba4d8]/15 group-hover:scale-105 transition-transform duration-300 object-contain"
+                className="w-8 h-8 md:w-9 md:h-9 rounded-xl shadow-lg shadow-[#8ba4d8]/15 group-hover:scale-105 transition-transform duration-300 object-contain"
               />
               <div className="flex flex-col">
-                <span className="font-display font-bold text-base tracking-wider text-[#e8ecf4] group-hover:text-[#c0c8d8] transition-colors">
+                <span className="font-display font-bold text-sm md:text-base tracking-wider text-[#e8ecf4] group-hover:text-[#c0c8d8] transition-colors">
                   JCEE LABS
                 </span>
-                <span className="text-[9px] font-mono tracking-widest text-[#7a8aaa] uppercase">
+                <span className="text-[8px] md:text-[9px] font-mono tracking-widest text-[#7a8aaa] uppercase">
                   by HOWM HOLDINGS LLC
                 </span>
               </div>
@@ -108,38 +108,25 @@ export default function Home() {
 
         {/* Mobile menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-[#2a3a5a]/50 bg-[#080c18]/95 backdrop-blur-xl px-6 py-4 space-y-3">
-            <Link href="/products">
-              <a
-                onClick={() => setMobileMenuOpen(false)}
-                className="block text-sm text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors py-2"
-              >
-                Products
-              </a>
+          <div className="md:hidden border-t border-[#2a3a5a]/50 bg-[#080c18]/95 backdrop-blur-xl px-6 py-4 space-y-1">
+            <Link href="/products" onClick={() => setMobileMenuOpen(false)} className="block text-base text-[#e8ecf4] hover:text-[#8ba4d8] transition-colors py-3 border-b border-[#2a3a5a]/30">
+              Products
             </Link>
-            <Link href="/services">
-              <a
-                onClick={() => setMobileMenuOpen(false)}
-                className="block text-sm text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors py-2"
-              >
-                Services
-              </a>
+            <Link href="/services" onClick={() => setMobileMenuOpen(false)} className="block text-base text-[#e8ecf4] hover:text-[#8ba4d8] transition-colors py-3 border-b border-[#2a3a5a]/30">
+              Services
             </Link>
-            <Link href="/team">
-              <a
-                onClick={() => setMobileMenuOpen(false)}
-                className="block text-sm text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors py-2"
-              >
-                Team
-              </a>
+            <Link href="/team" onClick={() => setMobileMenuOpen(false)} className="block text-base text-[#e8ecf4] hover:text-[#8ba4d8] transition-colors py-3 border-b border-[#2a3a5a]/30">
+              Team
             </Link>
-            <Link href="/faq">
-              <a
-                onClick={() => setMobileMenuOpen(false)}
-                className="block text-sm text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors py-2"
-              >
-                FAQ
-              </a>
+            <Link href="/faq" onClick={() => setMobileMenuOpen(false)} className="block text-base text-[#e8ecf4] hover:text-[#8ba4d8] transition-colors py-3">
+              FAQ
+            </Link>
+            <Link href="/services" onClick={() => setMobileMenuOpen(false)} className="block mt-3">
+              <Button size="sm" className="w-full rounded-xl bg-[#e0e6f0] text-[#080c18] font-medium">
+                <span className="flex items-center justify-center gap-1">
+                  Get in Touch <ArrowUpRight className="w-3.5 h-3.5" />
+                </span>
+              </Button>
             </Link>
           </div>
         )}
@@ -148,25 +135,25 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════════════════════
           HERO — Full viewport, static, intriguing
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative flex-1 flex items-center justify-center min-h-screen z-10 overflow-hidden">
+      <section className="relative flex-1 flex items-center justify-center min-h-screen z-10 overflow-hidden px-4 md:px-0">
         {/* Hero background image */}
         <div className="absolute inset-0 pointer-events-none">
           <img
             src="/manus-storage/jcee-labs-hero-bg_104c4860.png"
             alt=""
-            className="w-full h-full object-cover opacity-40 select-none"
+            className="w-full h-full object-cover object-left md:object-center opacity-30 md:opacity-40 select-none"
           />
           {/* Gradient overlays to blend with content */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#080c18] via-[#080c18]/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#080c18] via-[#080c18]/70 md:via-[#080c18]/60 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#080c18] via-transparent to-[#080c18]/40" />
         </div>
 
-        <div className="container relative z-10">
-          <div className="max-w-3xl space-y-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#8ba4d8]/10 border border-[#8ba4d8]/20 text-[#8ba4d8] text-xs font-mono">
-              <Sparkles className="w-3.5 h-3.5" /> SaaS, PaaS, Venture Architecture
+        <div className="container relative z-10 pt-20 md:pt-0">
+          <div className="max-w-3xl space-y-5 md:space-y-8">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#8ba4d8]/10 border border-[#8ba4d8]/20 text-[#8ba4d8] text-[10px] md:text-xs font-mono">
+              <Sparkles className="w-3 h-3 md:w-3.5 md:h-3.5" /> SaaS, PaaS, Venture Architecture
             </div>
-            <h1 className="text-5xl md:text-7xl font-display font-extrabold leading-[1.05] tracking-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-display font-extrabold leading-[1.1] md:leading-[1.05] tracking-tight">
               <span className="text-[#8ba4d8]">One studio.</span>{" "}
               <span className="text-[#d4a843]">
                 One language.
@@ -175,12 +162,12 @@ export default function Home() {
                 Nine products.
               </span>
             </h1>
-            <p className="text-lg md:text-xl leading-relaxed max-w-2xl text-[#f0f4fa]">
+            <p className="text-base md:text-lg lg:text-xl leading-relaxed max-w-2xl text-[#f0f4fa]">
               Jcee Labs builds AI products on{" "}
               <Link href="/vow" className="text-[#d4a843] hover:text-[#e8c56d] underline underline-offset-2 decoration-[#d4a843]/40 font-semibold">VOW</Link>
               {" "}— our formally-grounded language where every agent action compiles to auditable Python and leaves a causal trail, not a black box. Built for regulatory transparency before the EU AI Act makes it mandatory.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 pt-2">
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-2">
               <Link href="/products">
                 <Button
                   size="lg"
@@ -213,12 +200,12 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════════════════════
           TAGLINE
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="py-16 border-t border-[#2a3a5a]/50">
-        <div className="container text-center max-w-2xl mx-auto space-y-3">
-          <p className="text-sm text-[#7a8aaa] tracking-wide">
+      <section className="py-10 md:py-16 border-t border-[#2a3a5a]/50">
+        <div className="container text-center max-w-2xl mx-auto space-y-3 px-6">
+          <p className="text-xs md:text-sm text-[#7a8aaa] tracking-wide">
             Jcee Labs is the d.b.a. of HOWM HOLDINGS LLC.
           </p>
-          <p className="text-lg text-[#c0c8d8] font-medium">
+          <p className="text-base md:text-lg text-[#c0c8d8] font-medium">
             We architect formally-verified AI systems. Everyone else is just shipping software.
           </p>
         </div>
@@ -227,20 +214,20 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════════════════════
           STATS
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="py-16 border-t border-[#2a3a5a]/50">
-        <div className="container max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-2xl p-6 text-center">
-              <div className="text-3xl font-display font-bold text-[#c0c8d8] mb-2">9+</div>
-              <p className="text-sm text-[#7a8aaa]">Products Live & Building</p>
+      <section className="py-10 md:py-16 border-t border-[#2a3a5a]/50">
+        <div className="container max-w-4xl mx-auto px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+            <div className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-2xl p-5 md:p-6 text-center">
+              <div className="text-2xl md:text-3xl font-display font-bold text-[#c0c8d8] mb-1 md:mb-2">9+</div>
+              <p className="text-xs md:text-sm text-[#7a8aaa]">Products Live & Building</p>
             </div>
-            <div className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-2xl p-6 text-center">
-              <div className="text-3xl font-display font-bold text-[#8ba4d8] mb-2">March 2026</div>
-              <p className="text-sm text-[#7a8aaa]">Founded</p>
+            <div className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-2xl p-5 md:p-6 text-center">
+              <div className="text-2xl md:text-3xl font-display font-bold text-[#8ba4d8] mb-1 md:mb-2">March 2026</div>
+              <p className="text-xs md:text-sm text-[#7a8aaa]">Founded</p>
             </div>
-            <div className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-2xl p-6 text-center">
-              <div className="text-lg md:text-xl font-display font-bold text-[#c0c8d8] mb-2 leading-tight">Human-Creative Architecture,<br/>Agentic AI-Driven</div>
-              <p className="text-sm text-[#7a8aaa]">Development Approach</p>
+            <div className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-2xl p-5 md:p-6 text-center">
+              <div className="text-sm md:text-lg lg:text-xl font-display font-bold text-[#c0c8d8] mb-1 md:mb-2 leading-tight">Human-Creative Architecture,<br/>Agentic AI-Driven</div>
+              <p className="text-xs md:text-sm text-[#7a8aaa]">Development Approach</p>
             </div>
           </div>
         </div>

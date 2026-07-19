@@ -135,18 +135,18 @@ export default function ServicesPage() {
       <SiteNav />
 
       {/* Hero */}
-      <section className="pt-32 pb-8 text-center">
-        <div className="max-w-[720px] mx-auto px-6">
-          <div className="inline-block text-[12px] font-semibold tracking-[0.1em] uppercase px-5 py-2 rounded-3xl border border-[#2a3a5a] text-[#d4a843] mb-6">
+      <section className="pt-24 md:pt-32 pb-6 md:pb-8 text-center">
+        <div className="max-w-[720px] mx-auto px-5 md:px-6">
+          <div className="inline-block text-[11px] md:text-[12px] font-semibold tracking-[0.1em] uppercase px-4 md:px-5 py-1.5 md:py-2 rounded-3xl border border-[#2a3a5a] text-[#d4a843] mb-4 md:mb-6">
             Autonomous Systems Built on VOW
           </div>
-          <h2 className="text-[36px] font-extrabold leading-[1.2] tracking-[-0.02em] mb-4">
+          <h2 className="text-2xl md:text-[36px] font-extrabold leading-[1.2] tracking-[-0.02em] mb-3 md:mb-4">
             Autonomous Systems{" "}
             <span className="bg-gradient-to-r from-[#d4a843] to-[#e8c56d] bg-clip-text text-transparent">
               Built on VOW
             </span>
           </h2>
-          <p className="text-[17px] text-[#7a8aaa] max-w-[600px] mx-auto leading-[1.7]">
+          <p className="text-sm md:text-[17px] text-[#7a8aaa] max-w-[600px] mx-auto leading-[1.7]">
             We don't just build software. We architect formally-verified AI
             systems that learn from failure, leave audit trails, and comply with
             regulatory frameworks before they become law.
@@ -173,25 +173,25 @@ export default function ServicesPage() {
               return (
                 <div
                   key={service.name}
-                  className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-[20px] p-7 relative overflow-hidden group hover:border-[#8ba4d8]/30 hover:-translate-y-0.5 transition-all duration-300"
+                  className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-xl md:rounded-[20px] p-5 md:p-7 relative overflow-hidden group hover:border-[#8ba4d8]/30 hover:-translate-y-0.5 transition-all duration-300"
                 >
                   {/* Top gradient line on hover */}
                   <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#d4a843] to-[#e8c56d] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-[14px] bg-[rgba(212,168,67,0.1)] border border-[rgba(212,168,67,0.15)] flex items-center justify-center flex-shrink-0">
-                      <Icon className="w-5 h-5 text-[#d4a843]" />
+                  <div className="flex items-start gap-3 md:gap-4 mb-3 md:mb-4">
+                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-[14px] bg-[rgba(212,168,67,0.1)] border border-[rgba(212,168,67,0.15)] flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-4 h-4 md:w-5 md:h-5 text-[#d4a843]" />
                     </div>
                     <div className="flex-1">
-                      <span className="text-[10px] font-bold tracking-[0.12em] text-[#d4a843] uppercase block mb-1">
+                      <span className="text-[9px] md:text-[10px] font-bold tracking-[0.12em] text-[#d4a843] uppercase block mb-1">
                         {service.tag}
                       </span>
-                      <h4 className="text-[18px] font-bold text-[#e8ecf4]">
+                      <h4 className="text-base md:text-[18px] font-bold text-[#e8ecf4]">
                         {service.name}
                       </h4>
                     </div>
                   </div>
-                  <p className="text-[15px] text-[#7a8aaa] leading-[1.7] pl-16 max-sm:pl-0 max-sm:mt-3">
+                  <p className="text-[13px] md:text-[15px] text-[#7a8aaa] leading-[1.6] md:leading-[1.7] pl-0 md:pl-16">
                     {service.description}
                   </p>
                 </div>
@@ -217,16 +217,16 @@ export default function ServicesPage() {
             {PROCESS_STEPS.map((step) => (
               <div
                 key={step.number}
-                className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-[20px] p-7 flex gap-5 items-start hover:border-[#8ba4d8]/30 transition-all duration-300 max-sm:flex-col"
+                className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-xl md:rounded-[20px] p-5 md:p-7 flex gap-3 md:gap-5 items-start hover:border-[#8ba4d8]/30 transition-all duration-300 max-sm:flex-col"
               >
-                <div className="w-12 h-12 rounded-[14px] bg-[rgba(212,168,67,0.1)] border border-[rgba(212,168,67,0.2)] flex items-center justify-center flex-shrink-0 text-[16px] font-bold font-mono text-[#d4a843]">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-[14px] bg-[rgba(212,168,67,0.1)] border border-[rgba(212,168,67,0.2)] flex items-center justify-center flex-shrink-0 text-[14px] md:text-[16px] font-bold font-mono text-[#d4a843]">
                   {step.number}
                 </div>
                 <div>
-                  <h4 className="text-[18px] font-bold text-[#e8ecf4] mb-2">
+                  <h4 className="text-base md:text-[18px] font-bold text-[#e8ecf4] mb-1.5 md:mb-2">
                     {step.title}
                   </h4>
-                  <p className="text-[15px] text-[#7a8aaa] leading-[1.7]">
+                  <p className="text-[13px] md:text-[15px] text-[#7a8aaa] leading-[1.6] md:leading-[1.7]">
                     {step.description}
                   </p>
                 </div>

@@ -131,44 +131,41 @@ export default function ProductsPage() {
       <SiteNav />
 
       {/* Hero */}
-      <section className="pt-32 pb-8 text-center">
-        <div className="max-w-[720px] mx-auto px-6">
-          <div className="inline-block text-[12px] font-semibold tracking-[0.1em] uppercase px-5 py-2 rounded-3xl border border-[#d4a843]/20 text-[#d4a843] mb-6">
+      <section className="pt-24 md:pt-32 pb-6 md:pb-8 text-center">
+        <div className="max-w-[720px] mx-auto px-5 md:px-6">
+          <div className="inline-block text-[11px] md:text-[12px] font-semibold tracking-[0.1em] uppercase px-4 md:px-5 py-1.5 md:py-2 rounded-3xl border border-[#d4a843]/20 text-[#d4a843] mb-4 md:mb-6">
             9 Products — Built on VOW
           </div>
-          <h2 className="text-[36px] font-extrabold leading-[1.2] tracking-[-0.02em] mb-4">
+          <h2 className="text-2xl md:text-[36px] font-extrabold leading-[1.2] tracking-[-0.02em] mb-3 md:mb-4">
             Products
           </h2>
-          <p className="text-[17px] text-[#7a8aaa] max-w-[600px] mx-auto leading-[1.7]">
+          <p className="text-sm md:text-[17px] text-[#7a8aaa] max-w-[600px] mx-auto leading-[1.7]">
             Every product learns from failure, explains every decision, and compiles to code you can actually read.
           </p>
         </div>
       </section>
 
       {/* Product Cards */}
-      <section className="pb-20">
-        <div className="max-w-[720px] mx-auto px-6">
-          <div className="flex flex-col gap-4">
+      <section className="pb-12 md:pb-20">
+        <div className="max-w-[720px] mx-auto px-4 md:px-6">
+          <div className="flex flex-col gap-3 md:gap-4">
             {PRODUCTS.map((product) => {
               const Icon = product.icon;
               return (
-                <Link key={product.name} href={product.href}>
-                  <a
-                    className={`block bg-[#0d1424] border border-[#2a3a5a]/50 rounded-2xl p-7 group hover:border-[#8ba4d8]/30 hover:-translate-y-px transition-all duration-300 relative overflow-hidden${
+                <Link key={product.name} href={product.href} className={`block bg-[#0d1424] border border-[#2a3a5a]/50 rounded-xl md:rounded-2xl p-5 md:p-7 group hover:border-[#8ba4d8]/30 hover:-translate-y-px transition-all duration-300 relative overflow-hidden${
                       product.name === "VOW"
                         ? " border-[rgba(212,168,67,0.15)] bg-gradient-to-b from-[rgba(212,168,67,0.04)] to-[#0d1424] hover:border-[rgba(212,168,67,0.3)]"
                         : ""
-                    }`}
-                  >
+                    }`}>
                     {/* Header: name + status badge */}
-                    <div className="flex items-start justify-between gap-3 mb-3.5">
+                    <div className="flex items-start justify-between gap-2 md:gap-3 mb-2.5 md:mb-3.5">
                       <div className="flex-1 min-w-0">
                         {product.poweredByVow && product.name !== "VOW" && (
                           <span className="text-[10px] font-bold tracking-[0.12em] text-[#d4a843] uppercase mb-1 block">
                             POWERED BY VOW
                           </span>
                         )}
-                        <h3 className="text-lg font-bold text-[#e8ecf4] tracking-[-0.01em]">
+                        <h3 className="text-base md:text-lg font-bold text-[#e8ecf4] tracking-[-0.01em]">
                           {product.name}
                         </h3>
                       </div>
@@ -186,18 +183,17 @@ export default function ProductsPage() {
                     </div>
 
                     {/* Description */}
-                    <p className="text-[15px] text-[#7a8aaa] leading-[1.7] mb-4 whitespace-pre-line">
+                    <p className="text-[13px] md:text-[15px] text-[#7a8aaa] leading-[1.6] md:leading-[1.7] mb-3 md:mb-4 whitespace-pre-line">
                       {product.description}
                     </p>
 
                     {/* Meta line */}
-                    <div className="flex items-center gap-2.5">
+                    <div className="flex items-center gap-2">
                       <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${product.name === "VOW" ? "bg-[#d4a843]" : "bg-[#8ba4d8]"}`} />
-                      <span className="text-[13px] text-[#7a8aaa]/70">
+                      <span className="text-[11px] md:text-[13px] text-[#7a8aaa]/70">
                         {product.meta}
                       </span>
                     </div>
-                  </a>
                 </Link>
               );
             })}
