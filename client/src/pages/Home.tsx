@@ -136,12 +136,19 @@ export default function Home() {
           HERO — Full viewport, static, intriguing
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="relative flex-1 flex items-center justify-center min-h-screen z-10 overflow-hidden px-4 md:px-0">
-        {/* Hero background image */}
+        {/* Hero background image — different for mobile vs desktop */}
         <div className="absolute inset-0 pointer-events-none">
+          {/* Mobile background (centered logo version) */}
+          <img
+            src="/manus-storage/jcee-labs-hero-mobile_72385c22.png"
+            alt=""
+            className="md:hidden w-full h-full object-cover object-center opacity-30 select-none"
+          />
+          {/* Desktop background (widescreen light-ray version) */}
           <img
             src="/manus-storage/jcee-labs-hero-bg_104c4860.png"
             alt=""
-            className="w-full h-full object-cover object-left md:object-center opacity-30 md:opacity-40 select-none"
+            className="hidden md:block w-full h-full object-cover object-center opacity-40 select-none"
           />
           {/* Gradient overlays to blend with content */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#080c18] via-[#080c18]/70 md:via-[#080c18]/60 to-transparent" />
