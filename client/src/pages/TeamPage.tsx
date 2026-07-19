@@ -156,50 +156,22 @@ export default function TeamPage() {
             <div className="flex items-start gap-3 bg-white/[0.02] border border-[#2a3a5a]/50 rounded-xl p-4 hover:border-[#8ba4d8]/30 transition-colors">
               <span className="text-[#8ba4d8] mt-1">•</span>
               <div>
-                <p className="text-muted-foreground leading-relaxed">Failure is unacceptable when you can choose a lesson and the next step</p>
-                <p className="text-sm text-white/40 mt-1">Every setback feeds VOW's scar memory — we encode what went wrong so the system never repeats it.</p>
+                <p className="text-muted-foreground leading-relaxed">We build for operators, not demo days.</p>
+                <p className="text-sm text-white/40 mt-1">Every product solves a specific pain point for real people running real businesses — truckers, HVAC contractors, marketers, founders.</p>
               </div>
             </div>
             <div className="flex items-start gap-3 bg-white/[0.02] border border-[#2a3a5a]/50 rounded-xl p-4 hover:border-[#8ba4d8]/30 transition-colors">
               <span className="text-[#8ba4d8] mt-1">•</span>
               <div>
-                <p className="text-muted-foreground leading-relaxed">Our hope is problems, our faith is solutions</p>
-                <p className="text-sm text-white/40 mt-1">We actively seek broken workflows and inefficient industries because that's where the highest-impact products live.</p>
+                <p className="text-muted-foreground leading-relaxed">We try what others dismiss. The results speak.</p>
+                <p className="text-sm text-white/40 mt-1">Nine products, one language, no VC runway — built from first principles by a team that refuses to accept "impossible."</p>
               </div>
             </div>
             <div className="flex items-start gap-3 bg-white/[0.02] border border-[#2a3a5a]/50 rounded-xl p-4 hover:border-[#8ba4d8]/30 transition-colors">
               <span className="text-[#8ba4d8] mt-1">•</span>
               <div>
-                <p className="text-muted-foreground leading-relaxed">Turn ideas into solutions for the agentic AI boom</p>
-                <p className="text-sm text-white/40 mt-1">We ship production-ready autonomous systems while others are still debating frameworks.</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3 bg-white/[0.02] border border-[#2a3a5a]/50 rounded-xl p-4 hover:border-[#8ba4d8]/30 transition-colors">
-              <span className="text-[#8ba4d8] mt-1">•</span>
-              <div>
-                <p className="text-muted-foreground leading-relaxed">We don't have a niche. <em className="text-white">We ARE the niche</em></p>
-                <p className="text-sm text-white/40 mt-1">Nine products across trucking, wellness, supply chain, marketing, and DeFi — unified by one language and one standard of quality.</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3 bg-white/[0.02] border border-[#2a3a5a]/50 rounded-xl p-4 hover:border-[#8ba4d8]/30 transition-colors">
-              <span className="text-[#8ba4d8] mt-1">•</span>
-              <div>
-                <p className="text-muted-foreground leading-relaxed">Innovation is our quest. Fixing industry problems is our goal</p>
-                <p className="text-sm text-white/40 mt-1">We don't build technology for technology's sake — every product solves a specific pain point for real operators.</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3 bg-white/[0.02] border border-[#2a3a5a]/50 rounded-xl p-4 hover:border-[#8ba4d8]/30 transition-colors">
-              <span className="text-[#8ba4d8] mt-1">•</span>
-              <div>
-                <p className="text-muted-foreground leading-relaxed">Attitude and belief — anything is possible until it isn't — we engrave into the culture</p>
-                <p className="text-sm text-white/40 mt-1">We attempt what others dismiss as impossible, and let the results speak for themselves.</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3 bg-white/[0.02] border border-[#2a3a5a]/50 rounded-xl p-4 hover:border-[#8ba4d8]/30 transition-colors">
-              <span className="text-[#8ba4d8] mt-1">•</span>
-              <div>
-                <p className="text-muted-foreground leading-relaxed">We always stay young in our thinking to stay years ahead</p>
-                <p className="text-sm text-white/40 mt-1">No legacy assumptions, no "we've always done it this way" — every decision is made fresh from first principles.</p>
+                <p className="text-muted-foreground leading-relaxed">No sacred cows. Every decision starts from first principles.</p>
+                <p className="text-sm text-white/40 mt-1">No legacy assumptions, no "we've always done it this way" — if the reasoning doesn't hold, the approach changes.</p>
               </div>
             </div>
 
