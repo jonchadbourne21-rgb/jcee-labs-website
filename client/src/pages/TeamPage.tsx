@@ -91,16 +91,16 @@ export default function TeamPage() {
                   <span>Age 34</span>
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
-                  Jonathan doesn't think like most people in tech. He doesn't have a CS degree, a decade in Big Tech, or a pedigree from Stanford or MIT. What he has is a mind that refuses to accept "this is just how it's done" — and the stubbornness to build something better when the existing answers don't fit the question.
+                  Jonathan doesn't think like most people in tech. He doesn't have a CS degree, a decade in Big Tech, or a pedigree from Stanford or MIT. What he has is a mind that refuses to accept "this is just how it's done" and the stubbornness to build something better when the existing answers don't fit the question.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  VOW wasn't born in a research lab. It was born from watching AI systems fail, lie, and leave no trace — then hearing the industry say "that's just how AI works." Jonathan asked a question most engineers never ask: <em className="text-purple-300/80">What if the language itself could enforce accountability? What if goals, proofs, and memory weren't features you add later — but foundations you start with?</em>
+                  VOW wasn't born in a research lab. It was born from watching AI systems fail, lie, and leave no trace, then hearing the industry say "that's just how AI works." Jonathan asked a question most engineers never ask: <em className="text-purple-300/80">What if the language itself could enforce accountability? What if goals, proofs, and memory weren't features you add later, but foundations you start with?</em>
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
                   He started building with no formal training, just a belief that anything is possible if you refuse to quit. Manus was the tool. VOW was the vision. The scar memory, the formal ontology, the compile-time enforcement — these aren't academic concepts he borrowed. They're solutions he arrived at by thinking from first principles, refusing to accept that small teams can't build what enterprises claim only they can.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  At 33, Jonathan experienced a fundamental shift. A self-actualization that changed everything: <em className="text-slate-200">life doesn't happen to you, it happens for you. There is no failure — only lessons.</em> This wasn't motivational poster talk. It was a complete restructuring of how he saw himself and the world. He developed new philosophical frameworks, internal systems for facing the hard questions most people spend their lives avoiding.
+                  At 33, Jonathan experienced a fundamental shift. A self-actualization that changed everything: <em className="text-slate-200">life doesn't happen to you, it happens for you. There is no failure — only lessons.</em> This wasn't motivational poster talk. It was a complete restructuring of how he saw himself and the world. He developed new philosophical frameworks, internal systems for facing the hard questions most people spend their lives avoiding. <em className="text-slate-200">"As within, so without"</em> — the belief that how you see yourself internally is the way reality will reflect back to you was something he put into practice, and once the results started showing the sky was the limit. A new mind frame and unstoppable belief in himself took him to a new level of living and thinking.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
                   Mirrored — his first app — came from that place. Not from a product roadmap, but from a genuine need to help others do what he had done: face themselves. He built an AI that doesn't just respond, but reflects. Profound, intellectual, unflinching — the kind of mirror that shows you what you need to see, not what you want to see. Creative prompting became philosophical architecture. The app became a tool for self-confrontation.
@@ -141,18 +141,53 @@ export default function TeamPage() {
         </div>
       </section>
 
-      {/* Company Vision */}
+      {/* What Makes Us Different */}
       <section className="py-16 px-4 border-t border-white/5">
-        <div className="container max-w-3xl mx-auto text-center space-y-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-mono mx-auto">
-            <Lightbulb className="w-3.5 h-3.5" /> Our Mission
+        <div className="container max-w-3xl mx-auto space-y-8">
+          <div className="text-center space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-mono mx-auto">
+              <Lightbulb className="w-3.5 h-3.5" /> What Makes Us Different
+            </div>
+            <h2 className="text-3xl md:text-4xl font-display font-extrabold text-white">
+              Our <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Mission</span>
+            </h2>
           </div>
-          <h2 className="text-3xl md:text-4xl font-display font-extrabold text-white">
-            Building for the <span className="bg-gradient-to-r from-teal-400 to-teal-600 bg-clip-text text-transparent">Underdog</span>
-          </h2>
-          <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl mx-auto">
-            Jcee Labs exists to give small businesses, independent operators, and ambitious individuals access to the same intelligent tools that billion-dollar companies take for granted. We build practical, revenue-focused software — not vaporware.
-          </p>
+          <div className="space-y-4">
+            <div className="flex items-start gap-3 bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-purple-500/20 transition-colors">
+              <span className="text-purple-400 mt-0.5">•</span>
+              <p className="text-muted-foreground leading-relaxed">Failure is unacceptable when you can choose a lesson and the next step</p>
+            </div>
+            <div className="flex items-start gap-3 bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-purple-500/20 transition-colors">
+              <span className="text-purple-400 mt-0.5">•</span>
+              <p className="text-muted-foreground leading-relaxed">Our hope is problems, our faith is solutions</p>
+            </div>
+            <div className="flex items-start gap-3 bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-purple-500/20 transition-colors">
+              <span className="text-purple-400 mt-0.5">•</span>
+              <p className="text-muted-foreground leading-relaxed">VOW built with faith, faith turned into solutions</p>
+            </div>
+            <div className="flex items-start gap-3 bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-purple-500/20 transition-colors">
+              <span className="text-purple-400 mt-0.5">•</span>
+              <p className="text-muted-foreground leading-relaxed">We don't have a niche. <em className="text-white">We ARE the niche</em></p>
+            </div>
+            <div className="flex items-start gap-3 bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-purple-500/20 transition-colors">
+              <span className="text-purple-400 mt-0.5">•</span>
+              <p className="text-muted-foreground leading-relaxed">Innovation is our quest. Fixing industry problems is our goal</p>
+            </div>
+            <div className="flex items-start gap-3 bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-purple-500/20 transition-colors">
+              <span className="text-purple-400 mt-0.5">•</span>
+              <p className="text-muted-foreground leading-relaxed">Attitude and belief — anything is possible until it isn't — we engrave into the culture</p>
+            </div>
+            <div className="flex items-start gap-3 bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-purple-500/20 transition-colors">
+              <span className="text-purple-400 mt-0.5">•</span>
+              <p className="text-muted-foreground leading-relaxed">We always stay young in our thinking to stay years ahead</p>
+            </div>
+            <div className="flex items-start gap-3 bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-purple-500/20 transition-colors">
+              <span className="text-purple-400 mt-0.5">•</span>
+              <p className="text-muted-foreground leading-relaxed">A strong attitude and mindset makes us different and the company you want backing you and your systems</p>
+            </div>
+          </div>
+
+          {/* Stats row */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8">
             <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 text-center">
               <div className="text-3xl font-display font-bold text-purple-400 mb-2">9+</div>
