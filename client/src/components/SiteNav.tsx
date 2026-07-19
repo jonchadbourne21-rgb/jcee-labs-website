@@ -7,7 +7,7 @@ const PRODUCTS = [
   { name: "VOW", href: "/vow", color: "text-purple-300" },
   { name: "Mirrored", href: "/mirrored", color: "text-teal-300" },
   { name: "TrueRPM", href: "/truerpm", color: "text-orange-300" },
-  { name: "KlawNiche", href: "/klawniche", color: "text-cyan-300" },
+  { name: "NicheFlo", href: "/nicheflo", color: "text-cyan-300" },
   { name: "FloCraft", href: "/flocraft", color: "text-teal-300" },
   { name: "Rooh", href: "/rooh", color: "text-amber-300" },
   { name: "Revel", href: "/revel", color: "text-teal-300" },

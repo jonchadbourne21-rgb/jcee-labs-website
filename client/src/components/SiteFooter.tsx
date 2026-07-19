@@ -91,8 +91,8 @@ export default function SiteFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/klawniche">
-                  <a className="hover:text-cyan-300 transition-colors">KlawNiche</a>
+                <Link href="/nicheflo">
+                  <a className="hover:text-cyan-300 transition-colors">NicheFlo</a>
                 </Link>
               </li>
               <li>

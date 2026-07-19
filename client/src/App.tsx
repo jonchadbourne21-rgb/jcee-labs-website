@@ -11,7 +11,7 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const Mirrored = lazy(() => import("./pages/Mirrored"));
 const VowPage = lazy(() => import("./pages/VowPage"));
 const TrueRPMPage = lazy(() => import("./pages/TrueRPMPage"));
-const KlawNichePage = lazy(() => import("./pages/KlawNichePage"));
+const NicheFloPage = lazy(() => import("./pages/NicheFloPage"));
 const FloCraftPage = lazy(() => import("./pages/FloCraftPage"));
 const RoohPage = lazy(() => import("./pages/RoohPage"));
 const RevelPage = lazy(() => import("./pages/RevelPage"));
@@ -41,7 +41,7 @@ function Router() {
         <Route path="/vow" component={VowPage} />
         <Route path="/mirrored" component={Mirrored} />
         <Route path="/truerpm" component={TrueRPMPage} />
-        <Route path="/klawniche" component={KlawNichePage} />
+        <Route path="/nicheflo" component={NicheFloPage} />
         <Route path="/flocraft" component={FloCraftPage} />
         <Route path="/rooh" component={RoohPage} />
         <Route path="/revel" component={RevelPage} />

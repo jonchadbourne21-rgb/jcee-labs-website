@@ -61,13 +61,13 @@ const PRODUCTS = [
     meta: "Releases August 1",
   },
   {
-    name: "KlawNiche",
+    name: "NicheFlo",
     tagline: "Financial intelligence",
     description:
       "Autonomous GPU arbitrage intelligence and RWAiFi yield optimization. Real-time signals. AI-powered execution.",
     color: "cyan",
     icon: Cpu,
-    href: "/klawniche",
+    href: "/nicheflo",
     status: "BETA",
     poweredByVow: false,
     meta: "Financial intelligence",
@@ -534,7 +534,7 @@ export default function Home() {
                 <li><Link href="/vow"><a className="hover:text-purple-300 transition-colors">VOW</a></Link></li>
                 <li><Link href="/mirrored"><a className="hover:text-teal-300 transition-colors">Mirrored</a></Link></li>
                 <li><Link href="/truerpm"><a className="hover:text-orange-300 transition-colors">TrueRPM</a></Link></li>
-                <li><Link href="/klawniche"><a className="hover:text-cyan-300 transition-colors">KlawNiche</a></Link></li>
+                <li><Link href="/nicheflo"><a className="hover:text-cyan-300 transition-colors">NicheFlo</a></Link></li>
                 <li><Link href="/flocraft"><a className="hover:text-teal-300 transition-colors">FloCraft</a></Link></li>
                 <li><Link href="/rooh"><a className="hover:text-amber-300 transition-colors">Rooh</a></Link></li>
                 <li><Link href="/revel"><a className="hover:text-teal-300 transition-colors">Revel</a></Link></li>
