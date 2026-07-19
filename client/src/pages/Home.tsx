@@ -186,7 +186,7 @@ export default function Home() {
               <Sparkles className="w-3.5 h-3.5" /> SaaS, PaaS, Venture Architecture
             </div>
             <h1 className="text-5xl md:text-7xl font-display font-extrabold leading-[1.05] tracking-tight">
-              One studio.{" "}
+              <span className="text-[#8ba4d8]">One studio.</span>{" "}
               <span className="text-[#d4a843]">
                 One language.
               </span>{" "}
