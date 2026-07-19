@@ -19,7 +19,7 @@ const PRODUCTS = [
     name: "VOW",
     tagline: "Domain-specific language",
     description:
-      "The first quest-oriented programming language: goals, proofs, and scar memory built into the syntax itself. Code that remembers what hurt, knows why, and never tries the same failing path twice.",
+      "Programming language built around quests, proofs, and scar memory. Code that learns from failure — remembers what hurt, knows why, and never repeats the same failing path.",
     color: "purple",
     icon: Code2,
     href: "/vow",
