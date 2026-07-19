@@ -42,26 +42,24 @@ export default function SiteNav() {
       scrolled ? "border-b border-[#2a3a5a]/50 bg-[#080c18]/80 backdrop-blur-xl py-3" : "bg-transparent py-5"
     }`}>
       <div className="container flex items-center justify-between">
-        <Link href="/">
-          <a className="flex items-center gap-3 group">
-            <img
-              src="/manus-storage/jcee-labs-new-logo_cd2cbbaa.jpg"
-              alt="Jcee Labs Logo"
-              className="w-9 h-9 rounded-xl shadow-lg shadow-[#8ba4d8]/15 group-hover:scale-105 transition-transform duration-300 object-contain"
-            />
-            <div className="flex flex-col">
-              <span className="font-display font-bold text-base tracking-wider text-[#e8ecf4] group-hover:text-[#c0c8d8] transition-colors">
-                JCEE LABS
-              </span>
-              <span className="text-[9px] font-mono tracking-widest text-[#7a8aaa] uppercase">
-                by HOWM HOLDINGS LLC
-              </span>
-            </div>
-          </a>
+        <Link href="/" className="flex items-center gap-3 group">
+          <img
+            src="/manus-storage/jcee-labs-new-logo_cd2cbbaa.jpg"
+            alt="Jcee Labs Logo"
+            className="w-9 h-9 rounded-xl shadow-lg shadow-[#8ba4d8]/15 group-hover:scale-105 transition-transform duration-300 object-contain"
+          />
+          <div className="flex flex-col">
+            <span className="font-display font-bold text-base tracking-wider text-[#e8ecf4] group-hover:text-[#c0c8d8] transition-colors">
+              JCEE LABS
+            </span>
+            <span className="text-[9px] font-mono tracking-widest text-[#7a8aaa] uppercase">
+              by HOWM HOLDINGS LLC
+            </span>
+          </div>
         </Link>
 
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-          <Link href="/"><a className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">Home</a></Link>
+          <Link href="/" className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">Home</Link>
           <div ref={dropdownRef} className="relative">
             <button
               onClick={() => setProductsOpen(!productsOpen)}
@@ -72,31 +70,30 @@ export default function SiteNav() {
             {productsOpen && (
               <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-48 py-2 rounded-xl border border-[#2a3a5a] bg-[#0d1424]/95 backdrop-blur-xl shadow-xl shadow-black/40">
                 {PRODUCTS.map((product) => (
-                  <Link key={product.href} href={product.href}>
-                    <a
-                      onClick={() => setProductsOpen(false)}
-                      className={`block px-4 py-2 text-sm text-[#7a8aaa] hover:${product.color} hover:bg-[#2a3a5a]/30 transition-colors`}
-                    >
-                      {product.name}
-                    </a>
+                  <Link
+                    key={product.href}
+                    href={product.href}
+                    onClick={() => setProductsOpen(false)}
+                    className={`block px-4 py-2 text-sm text-[#7a8aaa] hover:${product.color} hover:bg-[#2a3a5a]/30 transition-colors`}
+                  >
+                    {product.name}
                   </Link>
                 ))}
                 <div className="border-t border-[#2a3a5a] mt-1 pt-1">
-                  <Link href="/products">
-                    <a
-                      onClick={() => setProductsOpen(false)}
-                      className="block px-4 py-2 text-sm text-[#8ba4d8] hover:text-[#c0c8d8] hover:bg-[#2a3a5a]/30 transition-colors font-medium"
-                    >
-                      View All Products
-                    </a>
+                  <Link
+                    href="/products"
+                    onClick={() => setProductsOpen(false)}
+                    className="block px-4 py-2 text-sm text-[#8ba4d8] hover:text-[#c0c8d8] hover:bg-[#2a3a5a]/30 transition-colors font-medium"
+                  >
+                    View All Products
                   </Link>
                 </div>
               </div>
             )}
           </div>
-          <Link href="/services"><a className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">Services</a></Link>
-          <Link href="/team"><a className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">Team</a></Link>
-          <Link href="/faq"><a className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">FAQ</a></Link>
+          <Link href="/services" className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">Services</Link>
+          <Link href="/team" className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">Team</Link>
+          <Link href="/faq" className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">FAQ</Link>
         </nav>
 
         <div className="flex items-center gap-3">
@@ -124,22 +121,20 @@ export default function SiteNav() {
 
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-[#2a3a5a]/50 bg-[#080c18]/95 backdrop-blur-xl px-6 py-4 space-y-1">
-          <Link href="/"><a onClick={() => setMobileMenuOpen(false)} className="block text-sm text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors py-2">Home</a></Link>
+          <Link href="/" onClick={() => setMobileMenuOpen(false)} className="block text-sm text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors py-2">Home</Link>
           <div className="py-2">
             <span className="text-xs font-mono text-[#7a8aaa]/60 uppercase tracking-wider">Products</span>
             <div className="mt-1 pl-3 space-y-1 border-l border-[#2a3a5a]">
               {PRODUCTS.map((product) => (
-                <Link key={product.href} href={product.href}>
-                  <a onClick={() => setMobileMenuOpen(false)} className="block text-sm text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors py-1.5">
-                    {product.name}
-                  </a>
+                <Link key={product.href} href={product.href} onClick={() => setMobileMenuOpen(false)} className="block text-sm text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors py-1.5">
+                  {product.name}
                 </Link>
               ))}
             </div>
           </div>
-          <Link href="/services"><a onClick={() => setMobileMenuOpen(false)} className="block text-sm text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors py-2">Services</a></Link>
-          <Link href="/team"><a onClick={() => setMobileMenuOpen(false)} className="block text-sm text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors py-2">Team</a></Link>
-          <Link href="/faq"><a onClick={() => setMobileMenuOpen(false)} className="block text-sm text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors py-2">FAQ</a></Link>
+          <Link href="/services" onClick={() => setMobileMenuOpen(false)} className="block text-sm text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors py-2">Services</Link>
+          <Link href="/team" onClick={() => setMobileMenuOpen(false)} className="block text-sm text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors py-2">Team</Link>
+          <Link href="/faq" onClick={() => setMobileMenuOpen(false)} className="block text-sm text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors py-2">FAQ</Link>
         </div>
       )}
     </header>

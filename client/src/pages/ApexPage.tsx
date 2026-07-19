@@ -29,10 +29,8 @@ export default function ApexPage() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mb-12">
-            <Link href="/services#contact">
-              <a className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 rounded-lg font-semibold hover:shadow-lg hover:shadow-amber-500/50 transition">
+            <Link href="/services#contact" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 rounded-lg font-semibold hover:shadow-lg hover:shadow-amber-500/50 transition">
                 Get APEX for Your Business <ArrowRight className="w-4 h-4" />
-              </a>
             </Link>
           </div>
         </div>

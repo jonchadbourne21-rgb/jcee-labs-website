@@ -41,8 +41,7 @@ export default function Home() {
         }`}
       >
         <div className="container flex items-center justify-between">
-          <Link href="/">
-            <a className="flex items-center gap-3 group">
+          <Link href="/" className="flex items-center gap-3 group">
               <img
                 src="/manus-storage/jcee-labs-new-logo_cd2cbbaa.jpg"
                 alt="Jcee Labs Logo"
@@ -56,30 +55,13 @@ export default function Home() {
                   by HOWM HOLDINGS LLC
                 </span>
               </div>
-            </a>
           </Link>
 
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-            <Link href="/products">
-              <a className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">
-                Products
-              </a>
-            </Link>
-            <Link href="/services">
-              <a className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">
-                Services
-              </a>
-            </Link>
-            <Link href="/team">
-              <a className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">
-                Team
-              </a>
-            </Link>
-            <Link href="/faq">
-              <a className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">
-                FAQ
-              </a>
-            </Link>
+            <Link href="/products" className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">Products</Link>
+            <Link href="/services" className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">Services</Link>
+            <Link href="/team" className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">Team</Link>
+            <Link href="/faq" className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">FAQ</Link>
           </nav>
 
           <div className="flex items-center gap-3">
@@ -196,9 +178,7 @@ export default function Home() {
             </h1>
             <p className="text-lg md:text-xl leading-relaxed max-w-2xl text-[#f0f4fa]">
               Jcee Labs builds AI products on{" "}
-              <Link href="/vow">
-                <a className="text-[#d4a843] hover:text-[#e8c56d] underline underline-offset-2 decoration-[#d4a843]/40 font-semibold">VOW</a>
-              </Link>
+              <Link href="/vow" className="text-[#d4a843] hover:text-[#e8c56d] underline underline-offset-2 decoration-[#d4a843]/40 font-semibold">VOW</Link>
               {" "}— our formally-grounded language where every agent action compiles to auditable Python and leaves a causal trail, not a black box. Built for regulatory transparency before the EU AI Act makes it mandatory.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-2">

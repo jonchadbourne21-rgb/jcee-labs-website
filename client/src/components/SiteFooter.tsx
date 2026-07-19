@@ -74,51 +74,15 @@ export default function SiteFooter() {
               Products
             </h5>
             <ul className="space-y-2 text-sm text-[#7a8aaa]">
-              <li>
-                <Link href="/vow">
-                  <a className="hover:text-[#d4a843] transition-colors">VOW</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/mirrored">
-                  <a className="hover:text-[#c0c8d8] transition-colors">Mirrored</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/truerpm">
-                  <a className="hover:text-[#c0c8d8] transition-colors">TrueRPM</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/nicheflo">
-                  <a className="hover:text-[#c0c8d8] transition-colors">NicheFlo</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/flocraft">
-                  <a className="hover:text-[#c0c8d8] transition-colors">FloCraft</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/rooh">
-                  <a className="hover:text-[#c0c8d8] transition-colors">Baus Time Media</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/revel">
-                  <a className="hover:text-[#c0c8d8] transition-colors">Bourne Aire Industries</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/sopforge">
-                  <a className="hover:text-[#c0c8d8] transition-colors">SOPForge</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/babodie">
-                  <a className="hover:text-[#c0c8d8] transition-colors">Babodie</a>
-                </Link>
-              </li>
+              <li><Link href="/vow" className="hover:text-[#d4a843] transition-colors">VOW</Link></li>
+              <li><Link href="/mirrored" className="hover:text-[#c0c8d8] transition-colors">Mirrored</Link></li>
+              <li><Link href="/truerpm" className="hover:text-[#c0c8d8] transition-colors">TrueRPM</Link></li>
+              <li><Link href="/nicheflo" className="hover:text-[#c0c8d8] transition-colors">NicheFlo</Link></li>
+              <li><Link href="/flocraft" className="hover:text-[#c0c8d8] transition-colors">FloCraft</Link></li>
+              <li><Link href="/rooh" className="hover:text-[#c0c8d8] transition-colors">Baus Time Media</Link></li>
+              <li><Link href="/revel" className="hover:text-[#c0c8d8] transition-colors">Bourne Aire Industries</Link></li>
+              <li><Link href="/sopforge" className="hover:text-[#c0c8d8] transition-colors">SOPForge</Link></li>
+              <li><Link href="/babodie" className="hover:text-[#c0c8d8] transition-colors">Babodie</Link></li>
             </ul>
           </div>
 
@@ -128,21 +92,9 @@ export default function SiteFooter() {
               Company
             </h5>
             <ul className="space-y-2 text-sm text-[#7a8aaa]">
-              <li>
-                <Link href="/team">
-                  <a className="hover:text-[#e8ecf4] transition-colors">Team</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/faq">
-                  <a className="hover:text-[#e8ecf4] transition-colors">FAQ</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/services">
-                  <a className="hover:text-[#e8ecf4] transition-colors">Services</a>
-                </Link>
-              </li>
+              <li><Link href="/team" className="hover:text-[#e8ecf4] transition-colors">Team</Link></li>
+              <li><Link href="/faq" className="hover:text-[#e8ecf4] transition-colors">FAQ</Link></li>
+              <li><Link href="/services" className="hover:text-[#e8ecf4] transition-colors">Services</Link></li>
             </ul>
           </div>
 
@@ -152,16 +104,8 @@ export default function SiteFooter() {
               Legal
             </h5>
             <ul className="space-y-2 text-sm text-[#7a8aaa]">
-              <li>
-                <Link href="/privacy">
-                  <a className="hover:text-[#e8ecf4] transition-colors">Privacy Policy</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/terms">
-                  <a className="hover:text-[#e8ecf4] transition-colors">Terms of Service</a>
-                </Link>
-              </li>
+              <li><Link href="/privacy" className="hover:text-[#e8ecf4] transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="hover:text-[#e8ecf4] transition-colors">Terms of Service</Link></li>
             </ul>
           </div>
         </div>
