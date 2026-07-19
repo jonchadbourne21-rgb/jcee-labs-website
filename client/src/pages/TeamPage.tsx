@@ -112,7 +112,7 @@ export default function TeamPage() {
                   <p className="text-teal-300 font-mono text-sm">Partner & Chief Strategy Officer</p>
                 </div>
                 <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                  <span className="flex items-center gap-1.5"><Rocket className="w-3.5 h-3.5" /> Joined June 2025</span>
+                  <span className="flex items-center gap-1.5"><Rocket className="w-3.5 h-3.5" /> Joined June 2026</span>
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
                   George was brought on to help take Jcee Labs to the next level. With deep expertise in sales, marketing, and a creative approach to business strategy, his ability to identify niche opportunities and develop unconventional go-to-market strategies made him a natural fit for the team.
@@ -140,15 +140,15 @@ export default function TeamPage() {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8">
             <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 text-center">
-              <div className="text-3xl font-display font-bold text-purple-400 mb-2">5+</div>
-              <p className="text-sm text-muted-foreground">Products in Development</p>
+              <div className="text-3xl font-display font-bold text-purple-400 mb-2">9+</div>
+              <p className="text-sm text-muted-foreground">Products Live & Building</p>
             </div>
             <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 text-center">
-              <div className="text-3xl font-display font-bold text-teal-400 mb-2">2025</div>
+              <div className="text-3xl font-display font-bold text-teal-400 mb-2">March 2026</div>
               <p className="text-sm text-muted-foreground">Founded</p>
             </div>
             <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 text-center">
-              <div className="text-3xl font-display font-bold text-indigo-400 mb-2">AI-First</div>
+              <div className="text-lg md:text-xl font-display font-bold text-indigo-400 mb-2 leading-tight">Creative Human Thinking<br/>+ Agentic AI Perfection</div>
               <p className="text-sm text-muted-foreground">Development Approach</p>
             </div>
           </div>
