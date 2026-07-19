@@ -205,3 +205,12 @@
 - [x] Update Home.tsx footer products column
 - [x] Remove old products no longer in lineup (NicheFlow, APEX Media, Magellan/Zhipz, BidIndustrial)
 - [x] All tests passing
+
+## Phase 23 — Products Section Wireframe Alignment
+- [x] Update hero text: "Seven products" → "Nine products"
+- [x] Update product statuses to match wireframe: VOW=BETA, Mirrored=BUILDING, TrueRPM=BUILDING, KlawNiche=BETA, FloCraft=BETA, Rooh=BETA, Revel=BUILDING, SOPForge=BETA, Babodie=BETA — WAITLIST
+- [x] Add "Powered by VOW" badge to: VOW, FloCraft, Rooh, SOPForge, Babodie
+- [x] Add status badge color coding: BETA=purple/indigo, BUILDING=amber/yellow, BETA — WAITLIST=pink
+- [x] Update product card layout to 2-column grid matching wireframe
+- [x] Add meta/category line to each card (Domain-specific language, App Store launch, etc.)
+- [x] All tests passing

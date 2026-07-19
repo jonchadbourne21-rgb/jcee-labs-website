@@ -26,93 +26,111 @@ import {
 const PRODUCTS = [
   {
     name: "VOW",
-    tagline: "Quest-Oriented Programming Language",
+    tagline: "Domain-specific language",
     description:
       "The first quest-oriented programming language: goals, proofs, and scar memory built into the syntax itself. Code that remembers what hurt, knows why, and never tries the same failing path twice.",
     color: "purple",
     icon: Code2,
     href: "/vow",
-    status: "In Development",
+    status: "BETA",
+    poweredByVow: true,
+    meta: "Domain-specific language",
   },
   {
-    name: "Mirrored",
+    name: "Mirrored — AI Higher Self",
     tagline: "AI Higher Self",
     description:
       "An AI self-reflection companion with emotional intelligence and a unique voice-to-voice experience. Not a chatbot — a sophisticated AI built with no script. Not a coach, not a therapist: your Higher Self, made possible by a custom persona prompt, EVI, and a proprietary RAG system. Our first app.",
     color: "teal",
     icon: Brain,
     href: "/mirrored",
-    status: "Ready for Launch — App Store Within a Month",
+    status: "BUILDING",
+    poweredByVow: false,
+    meta: "App Store launch within a month",
   },
   {
     name: "TrueRPM",
     tagline: "True Revenue Per Mile",
     description:
-      "AI-powered multi-load stacking board for owner-operators. Optimizes routes to simplify workflow and eliminate deadhead miles, with in-app navigation via Google Maps, live diesel prices, and a built-in ledger — three apps replaced by one, driven by multi-agent intelligence.",
+      "AI-powered multi-load stacking board for owner-operators. Optimizes routes to simplify workflow and eliminate deadhead miles, with in-app navigation via Google Maps, live diesel prices, and a built-in ledger — three apps replaced by one, driven by multi-agent intelligence. (True Revenue Per Mile — the app and brand say TrueRPM.)",
     color: "orange",
     icon: Truck,
     href: "/truerpm",
-    status: "Beta — Releases August 1",
+    status: "BUILDING",
+    poweredByVow: false,
+    meta: "Releases August 1",
   },
   {
     name: "KlawNiche",
-    tagline: "GPU Arbitrage Intelligence",
+    tagline: "Financial intelligence",
     description:
       "Autonomous GPU arbitrage intelligence and RWAiFi yield optimization. Real-time signals. AI-powered execution.",
     color: "cyan",
     icon: Cpu,
     href: "/klawniche",
-    status: "Beta",
+    status: "BETA",
+    poweredByVow: false,
+    meta: "Financial intelligence",
   },
   {
     name: "FloCraft",
-    tagline: "Supply Chain Intelligence",
+    tagline: "Supply chain optimization",
     description:
       "Supply chain intelligence, powered by VOW. FloCraft uses VOW's intelligent brain to solve supply chain problems in real time — alternate routes and corrective solutions that directly improve ROI.",
     color: "teal",
     icon: Ship,
     href: "/flocraft",
-    status: "Beta",
+    status: "BETA",
+    poweredByVow: true,
+    meta: "Supply chain optimization",
   },
   {
     name: "Rooh",
-    tagline: "Autonomous Marketing Team — Powered by VOW",
+    tagline: "Autonomous marketing",
     description:
       "An autonomous multi-agent marketing team working asynchronously every day, each agent focused on its own niche. It studies strategies and learns from what works, tracks daily news in your industry, drafts content on a posting schedule, and pings your phone when a blog or social post is ready to send — with a human in the loop whenever you want one.",
     color: "amber",
     icon: Bot,
     href: "/rooh",
-    status: "Beta",
+    status: "BETA",
+    poweredByVow: true,
+    meta: "Autonomous marketing",
   },
   {
     name: "Revel",
-    tagline: "Industrial Bid Management",
+    tagline: "Industrial workflow automation",
     description:
       "Industrial equipment bid management built specifically for HVAC wholesalers and resellers. Automates the entire workflow — from receiving a bid request (PDF spec sheet or email) to sending RFQs to vendors and comparing quotes.",
     color: "teal",
     icon: Factory,
     href: "/revel",
-    status: "Building",
+    status: "BUILDING",
+    poweredByVow: false,
+    meta: "Industrial workflow automation",
   },
   {
     name: "SOPForge",
-    tagline: "Autonomous SOP Platform — Powered by VOW",
+    tagline: "SOP automation",
     description:
-      "Autonomous AI platform for standard operating procedures. Powered by VOW.",
+      "Autonomous AI platform for standard operating procedures.",
     color: "indigo",
     icon: FileText,
     href: "/sopforge",
-    status: "Beta",
+    status: "BETA",
+    poweredByVow: true,
+    meta: "SOP automation",
   },
   {
     name: "Babodie",
-    tagline: "Autonomous Neuro-OS",
+    tagline: "Neuro-OS",
     description:
       "The world's first autonomous Neuro-OS. Powered by VOW v1.0. Run Quests. Build Beliefs. Persist Memory.",
     color: "purple",
     icon: Orbit,
     href: "/babodie",
-    status: "Beta — Waitlist",
+    status: "BETA — WAITLIST",
+    poweredByVow: true,
+    meta: "Neuro-OS",
   },
 ];
 
@@ -300,7 +318,7 @@ export default function Home() {
                 One language.
               </span>{" "}
               <span className="bg-gradient-to-r from-teal-400 to-teal-600 bg-clip-text text-transparent">
-                Seven products
+                Nine products
               </span>{" "}
               that prove it works.
             </h1>
@@ -342,49 +360,72 @@ export default function Home() {
         className="py-24 relative z-10 border-t border-white/5"
       >
         <div className="container">
-          <div className="max-w-2xl space-y-4 mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-300 text-xs font-mono">
-              <Layers className="w-3.5 h-3.5" /> Our Products
-            </div>
+          <div className="text-center space-y-3 mb-16">
             <h2 className="text-3xl md:text-4xl font-display font-extrabold text-white">
-              The Jcee Labs Suite
+              Products
             </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed">
-              Tools designed to empower small businesses and individuals through
-              intelligent automation.
+            <p className="text-muted-foreground text-base">
+              Built on VOW. Auditable by design.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {PRODUCTS.map((product) => {
               const Icon = product.icon;
+              // Static class maps to avoid dynamic Tailwind interpolation issues
+              const statusStyles = {
+                BETA: {
+                  badge: "bg-indigo-500/10 border-indigo-500/30 text-indigo-400",
+                  powered: "text-indigo-400",
+                  hover: "hover:border-indigo-500/30",
+                },
+                BUILDING: {
+                  badge: "bg-amber-500/10 border-amber-500/30 text-amber-400",
+                  powered: "text-amber-400",
+                  hover: "hover:border-amber-500/30",
+                },
+                "BETA \u2014 WAITLIST": {
+                  badge: "bg-pink-500/10 border-pink-500/30 text-pink-400",
+                  powered: "text-pink-400",
+                  hover: "hover:border-pink-500/30",
+                },
+              } as const;
+              const styles = statusStyles[product.status as keyof typeof statusStyles] || statusStyles.BETA;
               return (
                 <Link key={product.name} href={product.href}>
-                  <a className="block bg-white/[0.02] border border-white/5 rounded-2xl p-6 group hover:border-purple-500/20 transition-all duration-300 h-full">
-                    <div className="flex items-start justify-between mb-4">
-                      <div
-                        className={`w-11 h-11 rounded-lg bg-${product.color}-500/10 border border-${product.color}-500/20 flex items-center justify-center text-${product.color}-400 group-hover:scale-110 transition-transform`}
-                      >
-                        <Icon className="w-5 h-5" />
+                  <a className={`block bg-[#111118] border border-white/[0.08] rounded-2xl p-6 group ${styles.hover} transition-all duration-300 h-full relative overflow-hidden${
+                    product.name === "VOW" ? " border-t-2 border-t-indigo-500" : ""
+                  }`}>
+                    {/* Header: name + status badge */}
+                    <div className="flex items-start justify-between mb-1">
+                      <div>
+                        {product.poweredByVow && (
+                          <span className={`text-[10px] font-bold tracking-wider ${styles.powered} uppercase mb-1 block`}>
+                            POWERED BY VOW
+                          </span>
+                        )}
+                        <h3 className="font-display font-bold text-base text-white">
+                          {product.name}
+                        </h3>
                       </div>
                       <span
-                        className={`text-[10px] font-mono px-2 py-0.5 rounded-full bg-${product.color}-500/10 border border-${product.color}-500/20 text-${product.color}-300`}
+                        className={`text-[10px] font-mono font-bold px-2.5 py-1 rounded-full border ${styles.badge} whitespace-nowrap`}
                       >
                         {product.status}
                       </span>
                     </div>
-                    <h3 className="font-display font-bold text-lg text-white mb-1">
-                      {product.name}
-                    </h3>
-                    <p className="text-xs font-mono text-muted-foreground mb-3">
-                      {product.tagline}
-                    </p>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+
+                    {/* Description */}
+                    <p className="text-sm text-[#9a9aaa] leading-relaxed mt-3 mb-4">
                       {product.description}
                     </p>
-                    <div className="flex items-center gap-1 text-sm font-medium text-purple-300 group-hover:text-purple-200 transition-colors">
-                      Learn more{" "}
-                      <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+
+                    {/* Meta line */}
+                    <div className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
+                      <span className="text-[11px] text-[#6b6b7b] font-mono">
+                        {product.meta}
+                      </span>
                     </div>
                   </a>
                 </Link>
