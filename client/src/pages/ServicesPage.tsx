@@ -67,7 +67,28 @@ const PROCESS_STEPS = [
   },
 ];
 
-const VALUE_PROPS = [
+const VOW_DIFFERENCE = [
+  {
+    icon: "🧬",
+    title: "Scar Memory — Formal Failure Ontology",
+    description:
+      "Not logs. Not RLHF. VOW's <code>continuant ScarMemory</code> categorizes every failure by ontology, preserves its causal chain, and propagates lessons to downstream decisions without retraining. This is not debugging — it's structured, queryable, permanent organizational knowledge.",
+  },
+  {
+    icon: "⚖️",
+    title: "Compile-Time Category Enforcement",
+    description:
+      "VOW's type system catches ontological mismatches, temporal violations, and causal loops before runtime. <code>// Cannot mutate continuant without sync</code> — this error is impossible in Python, JavaScript, or any traditional language.",
+  },
+  {
+    icon: "🎯",
+    title: "Quests as First-Class Constructs",
+    description:
+      "Goals and proofs built into the syntax itself, not bolted on as frameworks. An agent's purpose is declared, verified, and traced — not inferred from prompt engineering or reward hacking.",
+  },
+];
+
+const WHY_VOW = [
   {
     icon: "🛡️",
     title: "Provable Safety",
@@ -198,6 +219,40 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      {/* The VOW Difference */}
+      <section>
+        <div className="max-w-[720px] mx-auto px-6">
+          <div className="pt-12 pb-6">
+            <h3 className="text-[28px] font-bold mb-3 text-[#e8e4f0]">
+              The VOW Difference
+            </h3>
+            <p className="text-[15px] text-[#6b6580] leading-[1.6]">
+              What exists nowhere else.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            {VOW_DIFFERENCE.map((item) => (
+              <div
+                key={item.title}
+                className="bg-[#161326] border border-white/[0.06] rounded-[20px] p-7 hover:border-[rgba(167,139,250,0.2)] transition-all duration-300"
+              >
+                <div className="w-12 h-12 rounded-[14px] bg-[rgba(167,139,250,0.1)] border border-[rgba(167,139,250,0.15)] flex items-center justify-center text-xl mb-4">
+                  {item.icon}
+                </div>
+                <h4 className="text-lg font-bold mb-2 text-[#e8e4f0]">
+                  {item.title}
+                </h4>
+                <p
+                  className="text-[15px] text-[#9a94b0] leading-[1.7] [&>code]:bg-[rgba(167,139,250,0.1)] [&>code]:px-1.5 [&>code]:py-0.5 [&>code]:rounded [&>code]:font-mono [&>code]:text-[13px] [&>code]:text-[#a78bfa]"
+                  dangerouslySetInnerHTML={{ __html: item.description }}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Why VOW */}
       <section>
         <div className="max-w-[720px] mx-auto px-6">
@@ -211,7 +266,7 @@ export default function ServicesPage() {
           </div>
 
           <div className="flex flex-col gap-4">
-            {VALUE_PROPS.map((prop) => (
+            {WHY_VOW.map((prop) => (
               <div
                 key={prop.title}
                 className="bg-[#161326] border border-white/[0.06] rounded-[20px] p-7 hover:border-[rgba(167,139,250,0.2)] transition-all duration-300"
@@ -252,7 +307,7 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA */}
-      <section id="contact" className="py-12 pb-20 text-center">
+      <section id="contact" className="pt-12 pb-8 text-center">
         <div className="max-w-[720px] mx-auto px-6 flex flex-col items-center gap-4">
           <a
             href="mailto:jonathan@jceelabs.com"
