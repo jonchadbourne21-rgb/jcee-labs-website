@@ -56,7 +56,7 @@ export default function SiteNav() {
       }`}>
         <div className="container flex items-center justify-between px-4 md:px-6 relative">
           {/* Spacer for mobile to balance hamburger on right */}
-          <div className="w-9 md:hidden" aria-hidden="true" />
+          <div className="w-11 md:hidden" aria-hidden="true" />
 
           {/* Logo — centered on mobile, left-aligned on desktop */}
           <Link href="/" className="flex items-center gap-2.5 md:gap-3 group absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0">
@@ -125,19 +125,19 @@ export default function SiteNav() {
             {/* Hamburger button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden w-9 h-9 flex items-center justify-center rounded-lg border border-[#2a3a5a] text-[#e8ecf4] hover:bg-[#2a3a5a]/30 active:scale-95 transition-all duration-150 relative"
+              className="md:hidden w-11 h-11 flex items-center justify-center rounded-xl border border-[#c0c8d8]/30 bg-[#080c18]/60 backdrop-blur-sm text-white hover:bg-[#2a3a5a]/50 hover:border-[#c0c8d8]/50 active:scale-95 transition-all duration-150 relative shadow-sm shadow-black/20"
               aria-label="Toggle menu"
             >
-              <div className="w-5 h-5 flex flex-col items-center justify-center gap-[5px]">
-                <span className={`block w-4.5 h-[2px] bg-current rounded-full transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] ${
-                  mobileMenuOpen ? "rotate-45 translate-y-[7px]" : ""
-                }`} style={{ width: "18px" }} />
-                <span className={`block h-[2px] bg-current rounded-full transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+              <div className="w-6 h-6 flex flex-col items-center justify-center gap-[6px]">
+                <span className={`block h-[2.5px] bg-current rounded-full transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+                  mobileMenuOpen ? "rotate-45 translate-y-[8.5px]" : ""
+                }`} style={{ width: "22px" }} />
+                <span className={`block h-[2.5px] bg-current rounded-full transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] ${
                   mobileMenuOpen ? "opacity-0 scale-x-0" : "opacity-100"
-                }`} style={{ width: "18px" }} />
-                <span className={`block h-[2px] bg-current rounded-full transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] ${
-                  mobileMenuOpen ? "-rotate-45 -translate-y-[7px]" : ""
-                }`} style={{ width: "18px" }} />
+                }`} style={{ width: "22px" }} />
+                <span className={`block h-[2.5px] bg-current rounded-full transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+                  mobileMenuOpen ? "-rotate-45 -translate-y-[8.5px]" : ""
+                }`} style={{ width: "22px" }} />
               </div>
             </button>
           </div>
