@@ -194,7 +194,7 @@ export default function Home() {
                 Nine products.
               </span>
             </h1>
-            <p className="text-lg md:text-xl leading-relaxed max-w-2xl text-[#7a8aaa]">
+            <p className="text-lg md:text-xl leading-relaxed max-w-2xl text-[#f0f4fa]">
               Jcee Labs builds AI products on{" "}
               <Link href="/vow">
                 <a className="text-[#d4a843] hover:text-[#e8c56d] underline underline-offset-2 decoration-[#d4a843]/40 font-semibold">VOW</a>
