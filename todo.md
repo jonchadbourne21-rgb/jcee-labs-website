@@ -254,3 +254,9 @@
 - [x] Update ProductsPage.tsx
 - [x] Update RoohPage.tsx hero title + VowPage.tsx reference
 - [x] All tests passing
+
+## Phase 29 — Update FAQ Page
+- [x] Remove outdated "BidIndustrial" question
+- [x] Update FAQ questions and answers to reflect current 9-product lineup and VOW positioning
+- [x] Ensure all product names match current names (Baus Time Media, Bourne Aire Industries, etc.)
+- [x] All tests passing
