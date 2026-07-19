@@ -34,7 +34,7 @@ export default function FAQ() {
                 What is Jcee Labs?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground leading-relaxed pt-2 pb-4">
-                Jcee Labs is an AI product studio and the registered d.b.a. of HOWM HOLDINGS LLC, founded in March 2026. We build formally-verified AI systems on VOW — our proprietary programming language where every agent action compiles to auditable Python and leaves a causal trail. One studio, one language, nine products.
+                Jcee Labs is an AI product studio and the registered d.b.a. of HOWM HOLDINGS LLC, founded in March 2026. We build formally-verified AI systems on VOW, our proprietary programming language where every agent action compiles to auditable Python and leaves a causal trail. One studio, one language, nine products.
               </AccordionContent>
             </AccordionItem>
 
@@ -43,7 +43,7 @@ export default function FAQ() {
                 What is VOW?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground leading-relaxed pt-2 pb-4">
-                <strong>VOW</strong> is our formally-grounded programming language built around quests, proofs, and scar memory. Code that learns from failure — remembers what hurt, knows why, and never repeats the same failing path. It compiles to auditable Python and is designed for regulatory transparency before the EU AI Act makes it mandatory. VOW powers seven of our nine products.
+                <strong>VOW</strong> is our formally-grounded programming language built around quests, proofs, and scar memory. Code that learns from failure. It remembers what hurt, knows why, and never repeats the same failing path. It compiles to auditable Python and is designed for regulatory transparency before the EU AI Act makes it mandatory. VOW powers seven of our nine products.
               </AccordionContent>
             </AccordionItem>
 
@@ -52,7 +52,7 @@ export default function FAQ() {
                 What is the relationship with HOWM HOLDINGS LLC?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground leading-relaxed pt-2 pb-4">
-                HOWM HOLDINGS LLC is the parent legal entity. Jcee Labs operates as the registered d.b.a. (Doing Business As) and creative arm — managing product design, software engineering, and AI architecture for all products launched under the holding company.
+                HOWM HOLDINGS LLC is the parent legal entity. Jcee Labs operates as the registered d.b.a. (Doing Business As) and creative arm, managing product design, software engineering, and AI architecture for all products launched under the holding company.
               </AccordionContent>
             </AccordionItem>
 
@@ -70,7 +70,7 @@ export default function FAQ() {
                 What is "Mirrored"?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground leading-relaxed pt-2 pb-4">
-                <strong>Mirrored</strong> is your AI higher self — a voice-to-voice personal development app with daily check-ins, profound AI reflections, and memory systems that create a deeply personalized experience. It helps you toward self-actualization through guided programs and pattern recognition. Visit <a href="https://mirroredapp.com" className="text-[#8ba4d8] hover:underline" target="_blank" rel="noopener noreferrer">mirroredapp.com</a> to learn more.
+                <strong>Mirrored</strong> is your AI higher self. A voice-to-voice personal development app with daily check-ins, profound AI reflections, and memory systems that create a deeply personalized experience. It helps you toward self-actualization through guided programs and pattern recognition. Visit <a href="https://mirroredapp.com" className="text-[#8ba4d8] hover:underline" target="_blank" rel="noopener noreferrer">mirroredapp.com</a> to learn more.
               </AccordionContent>
             </AccordionItem>
 
@@ -88,7 +88,7 @@ export default function FAQ() {
                 Who is behind Jcee Labs?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground leading-relaxed pt-2 pb-4">
-                Jcee Labs was founded by <strong>Jonathan Chadbourne</strong> — a first-principles thinker who built VOW and all nine products without a CS degree. The studio proves that formally-verified AI doesn't need Fortune 500 budgets. George Taylor serves as advisor.
+                Jcee Labs was founded by <strong>Jonathan Chadbourne</strong>, a first-principles thinker who built VOW and all nine products without a CS degree. The studio proves that formally-verified AI doesn't need Fortune 500 budgets. George Taylor serves as advisor.
               </AccordionContent>
             </AccordionItem>
 

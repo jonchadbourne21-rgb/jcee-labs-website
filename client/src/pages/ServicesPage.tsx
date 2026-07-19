@@ -22,7 +22,7 @@ const CORE_SERVICES = [
     tag: "VOW-Native",
     name: "Agentic AI Applications",
     description:
-      "Autonomous systems with goals, proofs, and persistent memory built into the architecture. Not black-box AI — systems that remember what hurt, know why, and never try the same failing path twice.",
+      "Autonomous systems with goals, proofs, and persistent memory built into the architecture. Not black-box AI. Systems that remember what hurt, know why, and never try the same failing path twice.",
   },
   {
     icon: Landmark,
@@ -36,7 +36,7 @@ const CORE_SERVICES = [
     tag: "Self-Improving",
     name: "Self-Improving Automation",
     description:
-      "Automation pipelines that don't just execute — they learn. Each failure is structured into permanent organizational knowledge, its lessons propagated to every downstream decision without retraining.",
+      "Automation pipelines that don't just execute. They learn. Each failure is structured into permanent organizational knowledge, its lessons propagated to every downstream decision without retraining.",
   },
   {
     icon: Sparkles,
@@ -59,7 +59,7 @@ const PROCESS_STEPS = [
     number: "01",
     title: "Domain Formalization",
     description:
-      "We model your business domain in formal structure. Entities, relationships, constraints, and failure modes — defined before a single line of agent code is written.",
+      "We model your business domain in formal structure. Entities, relationships, constraints, and failure modes defined before a single line of agent code is written.",
   },
   {
     number: "02",
@@ -86,7 +86,7 @@ const VOW_DIFFERENCE = [
     icon: Dna,
     title: "Structured Failure Memory",
     description:
-      "Not logs. Not RLHF. VOW structures every failure into queryable, permanent organizational knowledge — categorized, traced, and propagated without model retraining. This is not debugging. It's institutional memory that compounds.",
+      "Not logs. Not RLHF. VOW structures every failure into queryable, permanent organizational knowledge. Categorized, traced, and propagated without model retraining. This is not debugging. It's institutional memory that compounds.",
   },
   {
     icon: Scale,
@@ -98,7 +98,7 @@ const VOW_DIFFERENCE = [
     icon: Crosshair,
     title: "Objectives as First-Class Constructs",
     description:
-      "Goals and constraints built into the system's foundation, not bolted on as frameworks. An agent's purpose is declared, verified, and traced — not inferred from prompt engineering or reward hacking.",
+      "Goals and constraints built into the system's foundation, not bolted on as frameworks. An agent's purpose is declared, verified, and traced. Not inferred from prompt engineering or reward hacking.",
   },
 ];
 
@@ -107,25 +107,25 @@ const WHY_VOW = [
     icon: Shield,
     title: "Provable Safety",
     description:
-      "Every agent decision leaves a causal trail. Not logs — formal proofs that can be audited, verified, and presented to regulators.",
+      "Every agent decision leaves a causal trail. Formal proofs that can be audited, verified, and presented to regulators.",
   },
   {
     icon: ClipboardList,
     title: "Regulatory Pre-Compliance",
     description:
-      "Built for 2026 EU AI Act requirements. High-risk AI systems need audit trails, human oversight, and risk management — VOW generates this by design, not as an afterthought.",
+      "Built for 2026 EU AI Act requirements. High-risk AI systems need audit trails, human oversight, and risk management. VOW generates this by design, not as an afterthought.",
   },
   {
     icon: RefreshCw,
     title: "Self-Improving Systems",
     description:
-      "Structured memory means failures teach, not break. The system accumulates knowledge, classifies errors, and avoids repeating them — without model retraining or downtime.",
+      "Structured memory means failures teach, not break. The system accumulates knowledge, classifies errors, and avoids repeating them without model retraining or downtime.",
   },
   {
     icon: CheckCircle,
     title: "Formal Verification",
     description:
-      "Structural errors caught at build time, not runtime. The formal foundation enforces constraints that would be invisible bugs in traditional code — ontological mismatches, temporal violations, causal loops.",
+      "Structural errors caught at build time, not runtime. The formal foundation enforces constraints that would be invisible bugs in traditional code: ontological mismatches, temporal violations, causal loops.",
   },
 ];
 
@@ -209,7 +209,7 @@ export default function ServicesPage() {
               How It Works
             </h3>
             <p className="text-[15px] text-[#7a8aaa] leading-[1.6]">
-              The VOW engagement process — formal from day one.
+              The VOW engagement process. Formal from day one.
             </p>
           </div>
 
@@ -319,7 +319,7 @@ export default function ServicesPage() {
               Custom Web Development
             </h4>
             <p className="text-[15px] text-[#7a8aaa] leading-[1.7]">
-              Full-stack web applications, APIs, and traditional automation —
+              Full-stack web applications, APIs, and traditional automation,
               built with the same quality standards. React, Next.js, Node.js,
               tRPC. Responsive, accessible, production-ready. This is our
               foundation while the VOW ecosystem scales.

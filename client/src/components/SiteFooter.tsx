@@ -30,7 +30,7 @@ export default function SiteFooter() {
             <p className="text-[#7a8aaa] text-sm leading-relaxed max-w-sm">
               Jcee Labs is the d.b.a. of{" "}
               <strong className="text-[#e8ecf4]">HOWM HOLDINGS LLC</strong>. We
-              build formally-verified AI systems on VOW — one studio, one language, nine products.
+              build formally-verified AI systems on VOW. One studio, one language, nine products.
             </p>
 
             {/* Social icons */}

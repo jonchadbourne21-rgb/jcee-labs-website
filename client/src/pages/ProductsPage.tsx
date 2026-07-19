@@ -19,7 +19,7 @@ const PRODUCTS = [
     name: "VOW",
     tagline: "Domain-specific language",
     description:
-      "Programming language built around quests, proofs, and scar memory. Code that learns from failure — remembers what hurt, knows why, and never repeats the same failing path.",
+      "Programming language built around quests, proofs, and scar memory. Code that learns from failure, remembers what hurt, knows why, and never repeats the same failing path.",
     color: "purple",
     icon: Code2,
     href: "/vow",
@@ -28,10 +28,10 @@ const PRODUCTS = [
     meta: "Domain-specific language",
   },
   {
-    name: "Mirrored — Your AI Higher Self",
+    name: "Mirrored",
     tagline: "AI Higher Self",
     description:
-      "Everyone talks to themselves. Mirrored makes that conversation useful. It's an AI self-reflection companion you can actually talk to — voice-to-voice, no typing required — that remembers your journey and reflects it back with honesty. Not a chatbot. Not a coach, not a therapist. Your Higher Self, on demand.\n\nDaily check-ins, guided growth programs, journaling, profound AI reflections to help you to self-actualization and memory systems to make the user get a personalized experience.\n\nUnder the hood: a custom persona architecture, emotional voice intelligence, and a proprietary memory system.",
+      "Everyone talks to themselves. Mirrored makes that conversation useful. It's an AI self-reflection companion you can actually talk to (voice-to-voice, no typing required) that remembers your journey and reflects it back with honesty. Not a chatbot. Not a coach, not a therapist. Your Higher Self, on demand.\n\nDaily check-ins, guided growth programs, journaling, profound AI reflections to help you to self-actualization and memory systems to make the user get a personalized experience.\n\nUnder the hood: a custom persona architecture, emotional voice intelligence, and a proprietary memory system.",
     color: "teal",
     icon: Brain,
     href: "/mirrored",
@@ -43,7 +43,7 @@ const PRODUCTS = [
     name: "TrueRPM",
     tagline: "True Revenue Per Mile",
     description:
-      "AI-powered multi-load stacking board for owner-operators. Optimizes routes to simplify workflow and eliminate deadhead miles, with in-app navigation via Google Maps, live diesel prices, and a built-in ledger — three apps replaced by one, driven by multi-agent intelligence. (True Revenue Per Mile — the app and brand say TrueRPM.)",
+      "AI-powered multi-load stacking board for owner-operators. Optimizes routes to simplify workflow and eliminate deadhead miles, with in-app navigation via Google Maps, live diesel prices, and a built-in ledger. Three apps replaced by one, driven by multi-agent intelligence.",
     color: "orange",
     icon: Truck,
     href: "/truerpm",
@@ -67,7 +67,7 @@ const PRODUCTS = [
     name: "FloCraft",
     tagline: "Supply chain optimization",
     description:
-      "Supply chain intelligence, powered by VOW. FloCraft uses VOW's intelligent brain to solve supply chain problems in real time — alternate routes and corrective solutions that directly improve ROI.",
+      "Supply chain intelligence, powered by VOW. FloCraft uses VOW's intelligent brain to solve supply chain problems in real time. Alternate routes and corrective solutions that directly improve ROI.",
     color: "teal",
     icon: Ship,
     href: "/flocraft",
@@ -79,7 +79,7 @@ const PRODUCTS = [
     name: "Baus Time Media",
     tagline: "Autonomous marketing",
     description:
-      "An autonomous multi-agent marketing team working asynchronously every day, each agent focused on its own niche. It studies strategies and learns from what works, tracks daily news in your industry, drafts content on a posting schedule, and pings your phone when a blog or social post is ready to send — with a human in the loop whenever you want one.",
+      "An autonomous multi-agent marketing team working asynchronously every day, each agent focused on its own niche. It studies strategies and learns from what works, tracks daily news in your industry, drafts content on a posting schedule, and pings your phone when a blog or social post is ready to send, with a human in the loop whenever you want one.",
     color: "amber",
     icon: Bot,
     href: "/rooh",
@@ -91,7 +91,7 @@ const PRODUCTS = [
     name: "Bourne Aire Industries",
     tagline: "Industrial workflow automation",
     description:
-      "Industrial equipment bid management built specifically for HVAC wholesalers and resellers. Automates the entire workflow — from receiving a bid request (PDF spec sheet or email) to sending RFQs to vendors and comparing quotes.",
+      "Industrial equipment bid management built specifically for HVAC wholesalers and resellers. Automates the entire workflow from receiving a bid request (PDF spec sheet or email) to sending RFQs to vendors and comparing quotes.",
     color: "teal",
     icon: Factory,
     href: "/revel",
@@ -119,7 +119,7 @@ const PRODUCTS = [
     color: "purple",
     icon: Orbit,
     href: "/babodie",
-    status: "BETA — WAITLIST",
+    status: "BETA WAITLIST",
     poweredByVow: true,
     meta: "Neuro-OS",
   },
@@ -134,7 +134,7 @@ export default function ProductsPage() {
       <section className="pt-24 md:pt-32 pb-6 md:pb-8 text-center">
         <div className="max-w-[720px] mx-auto px-5 md:px-6">
           <div className="inline-block text-[11px] md:text-[12px] font-semibold tracking-[0.1em] uppercase px-4 md:px-5 py-1.5 md:py-2 rounded-3xl border border-[#d4a843]/20 text-[#d4a843] mb-4 md:mb-6">
-            9 Products — Built on VOW
+            9 Products Built on VOW
           </div>
           <h2 className="text-2xl md:text-[36px] font-extrabold leading-[1.2] tracking-[-0.02em] mb-3 md:mb-4">
             Products
