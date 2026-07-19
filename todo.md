@@ -232,3 +232,11 @@
 - [x] ServicesPage.tsx — All purple references replaced with gold: hero badge, gradient text, card hover borders, icon containers, process step numbers, CTA button
 - [x] VowPage.tsx — Already fully gold-themed (done in earlier phase)
 - [x] All 12 tests passing
+
+## Phase 26 — Rename Revel to Revel Industries
+- [x] Update ProductsPage.tsx product name from "Revel" to "Revel Industries"
+- [x] Update RevelPage.tsx page title/references from "Revel" to "Revel Industries"
+- [x] Update SiteNav products dropdown
+- [x] Update SiteFooter products column
+- [x] Update Home.tsx if any reference exists (none found — no change needed)
+- [x] All tests passing

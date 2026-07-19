@@ -18,7 +18,7 @@ export default function RevelPage() {
             </span>
           </div>
           <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 text-white leading-tight">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-500">Revel</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-500">Revel Industries</span>
           </h1>
           <p className="text-lg md:text-xl text-[#A0AEC0] max-w-2xl mx-auto mb-8 leading-relaxed">
             Industrial equipment bid management built specifically for HVAC wholesalers and resellers. Automates the entire workflow — from receiving a bid request (PDF spec sheet or email) to sending RFQs to vendors and comparing quotes.
