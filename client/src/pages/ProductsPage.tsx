@@ -31,7 +31,7 @@ const PRODUCTS = [
     name: "Mirrored — Your AI Higher Self",
     tagline: "AI Higher Self",
     description:
-      "Everyone talks to themselves. Mirrored makes that conversation useful. It's an AI self-reflection companion you can actually talk to — voice-to-voice, no typing required — that remembers your journey and reflects it back with honesty. Not a chatbot. Not a coach, not a therapist. Your Higher Self, on demand.\n\nDaily check-ins, guided growth programs, journaling, and memory reflections that show you how far you've come.\n\nUnder the hood: a custom persona architecture, emotional voice intelligence, and a proprietary memory system. Our first app.",
+      "Everyone talks to themselves. Mirrored makes that conversation useful. It's an AI self-reflection companion you can actually talk to — voice-to-voice, no typing required — that remembers your journey and reflects it back with honesty. Not a chatbot. Not a coach, not a therapist. Your Higher Self, on demand.\n\nDaily check-ins, guided growth programs, journaling, profound AI reflections to help you to self-actualization and memory systems to make the user get a personalized experience.\n\nUnder the hood: a custom persona architecture, emotional voice intelligence, and a proprietary memory system.",
     color: "teal",
     icon: Brain,
     href: "/mirrored",
