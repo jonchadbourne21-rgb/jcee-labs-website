@@ -28,10 +28,10 @@ const PRODUCTS = [
     meta: "Domain-specific language",
   },
   {
-    name: "Mirrored — AI Higher Self",
+    name: "Mirrored — Your AI Higher Self",
     tagline: "AI Higher Self",
     description:
-      "An AI self-reflection companion with emotional intelligence and a unique voice-to-voice experience. Not a chatbot — a sophisticated AI built with no script. Not a coach, not a therapist: your Higher Self, made possible by a custom persona prompt, EVI, and a proprietary RAG system. Our first app.",
+      "Everyone talks to themselves. Mirrored makes that conversation useful. It's an AI self-reflection companion you can actually talk to — voice-to-voice, no typing required — that remembers your journey and reflects it back with honesty. Not a chatbot. Not a coach, not a therapist. Your Higher Self, on demand.\n\nDaily check-ins, guided growth programs, journaling, and memory reflections that show you how far you've come.\n\nUnder the hood: a custom persona architecture, emotional voice intelligence, and a proprietary memory system. Our first app.",
     color: "teal",
     icon: Brain,
     href: "/mirrored",
@@ -187,7 +187,7 @@ export default function ProductsPage() {
                     </div>
 
                     {/* Description */}
-                    <p className="text-[15px] text-[#9a94b0] leading-[1.7] mb-4">
+                    <p className="text-[15px] text-[#9a94b0] leading-[1.7] mb-4 whitespace-pre-line">
                       {product.description}
                     </p>
 
