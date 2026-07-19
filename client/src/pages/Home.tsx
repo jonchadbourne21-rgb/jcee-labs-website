@@ -213,8 +213,7 @@ export default function Home() {
               <Link href="/services">
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="w-full sm:w-auto rounded-xl border-[#2a3a5a] hover:border-[#8ba4d8]/50 hover:bg-[#8ba4d8]/10 hover:shadow-lg hover:shadow-[#8ba4d8]/10 hover:-translate-y-0.5 text-[#8ba4d8] font-medium active:scale-97 transition-all duration-200"
+                  className="w-full sm:w-auto rounded-xl bg-[#e0e6f0] text-[#080c18] hover:bg-[#c0c8d8] hover:shadow-2xl hover:shadow-[#8ba4d8]/20 hover:-translate-y-0.5 font-semibold shadow-xl shadow-[#8ba4d8]/5 active:scale-97 transition-all duration-200"
                 >
                   Services
                 </Button>
@@ -222,8 +221,7 @@ export default function Home() {
               <Link href="/team">
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="w-full sm:w-auto rounded-xl border-[#2a3a5a] hover:border-[#c0c8d8]/30 hover:bg-[#2a3a5a]/30 hover:shadow-lg hover:shadow-[#c0c8d8]/5 hover:-translate-y-0.5 text-[#c0c8d8] font-medium active:scale-97 transition-all duration-200"
+                  className="w-full sm:w-auto rounded-xl bg-[#e0e6f0] text-[#080c18] hover:bg-[#c0c8d8] hover:shadow-2xl hover:shadow-[#8ba4d8]/20 hover:-translate-y-0.5 font-semibold shadow-xl shadow-[#8ba4d8]/5 active:scale-97 transition-all duration-200"
                 >
                   Meet the Team
                 </Button>
