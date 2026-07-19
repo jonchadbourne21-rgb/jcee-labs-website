@@ -76,7 +76,7 @@ const PRODUCTS = [
     meta: "Supply chain optimization",
   },
   {
-    name: "Rooh",
+    name: "Baus Time Media",
     tagline: "Autonomous marketing",
     description:
       "An autonomous multi-agent marketing team working asynchronously every day, each agent focused on its own niche. It studies strategies and learns from what works, tracks daily news in your industry, drafts content on a posting schedule, and pings your phone when a blog or social post is ready to send — with a human in the loop whenever you want one.",

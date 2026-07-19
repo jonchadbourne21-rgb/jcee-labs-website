@@ -102,7 +102,7 @@ export default function SiteFooter() {
               </li>
               <li>
                 <Link href="/rooh">
-                  <a className="hover:text-amber-300 transition-colors">Rooh</a>
+                  <a className="hover:text-amber-300 transition-colors">Baus Time Media</a>
                 </Link>
               </li>
               <li>

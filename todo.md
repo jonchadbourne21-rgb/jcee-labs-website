@@ -247,3 +247,10 @@
 - [x] Update ProductsPage.tsx
 - [x] Update RevelPage.tsx hero title
 - [x] All tests passing
+
+## Phase 28 — Rename Rooh to Baus Time Media
+- [x] Update SiteNav.tsx
+- [x] Update SiteFooter.tsx
+- [x] Update ProductsPage.tsx
+- [x] Update RoohPage.tsx hero title + VowPage.tsx reference
+- [x] All tests passing

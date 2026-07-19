@@ -9,7 +9,7 @@ const PRODUCTS = [
   { name: "TrueRPM", href: "/truerpm", color: "text-orange-300" },
   { name: "NicheFlo", href: "/nicheflo", color: "text-cyan-300" },
   { name: "FloCraft", href: "/flocraft", color: "text-teal-300" },
-  { name: "Rooh", href: "/rooh", color: "text-amber-300" },
+  { name: "Baus Time Media", href: "/rooh", color: "text-amber-300" },
   { name: "Bourne Aire Industries", href: "/revel", color: "text-teal-300" },
   { name: "SOPForge", href: "/sopforge", color: "text-indigo-300" },
   { name: "Babodie", href: "/babodie", color: "text-purple-300" },

@@ -21,7 +21,7 @@ export default function RoohPage() {
             </span>
           </div>
           <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 text-white leading-tight">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">Rooh</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">Baus Time Media</span>
           </h1>
           <p className="text-lg md:text-xl text-[#A0AEC0] max-w-2xl mx-auto mb-8 leading-relaxed">
             An autonomous multi-agent marketing team working asynchronously every day, each agent focused on its own niche. It studies strategies and learns from what works, tracks daily news in your industry, drafts content on a posting schedule, and pings your phone when a blog or social post is ready to send — with a human in the loop whenever you want one.
