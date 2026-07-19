@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import { Dna, ShieldCheck, Crosshair } from "lucide-react";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 
@@ -69,19 +70,19 @@ const PROCESS_STEPS = [
 
 const VOW_DIFFERENCE = [
   {
-    icon: "🧬",
+    icon: "dna",
     title: "Scar Memory — Formal Failure Ontology",
     description:
       "Not logs. Not RLHF. VOW's <code>continuant ScarMemory</code> categorizes every failure by ontology, preserves its causal chain, and propagates lessons to downstream decisions without retraining. This is not debugging — it's structured, queryable, permanent organizational knowledge.",
   },
   {
-    icon: "⚖️",
+    icon: "shield",
     title: "Compile-Time Category Enforcement",
     description:
       "VOW's type system catches ontological mismatches, temporal violations, and causal loops before runtime. <code>// Cannot mutate continuant without sync</code> — this error is impossible in Python, JavaScript, or any traditional language.",
   },
   {
-    icon: "🎯",
+    icon: "crosshair",
     title: "Quests as First-Class Constructs",
     description:
       "Goals and proofs built into the syntax itself, not bolted on as frameworks. An agent's purpose is declared, verified, and traced — not inferred from prompt engineering or reward hacking.",
@@ -232,13 +233,15 @@ export default function ServicesPage() {
           </div>
 
           <div className="flex flex-col gap-4">
-            {VOW_DIFFERENCE.map((item) => (
+            {VOW_DIFFERENCE.map((item) => {
+              const IconComponent = item.icon === "dna" ? Dna : item.icon === "shield" ? ShieldCheck : Crosshair;
+              return (
               <div
                 key={item.title}
                 className="bg-[#161326] border border-white/[0.06] rounded-[20px] p-7 hover:border-[rgba(167,139,250,0.2)] transition-all duration-300"
               >
-                <div className="w-12 h-12 rounded-[14px] bg-[rgba(167,139,250,0.1)] border border-[rgba(167,139,250,0.15)] flex items-center justify-center text-xl mb-4">
-                  {item.icon}
+                <div className="w-12 h-12 rounded-[14px] bg-[rgba(167,139,250,0.1)] border border-[rgba(167,139,250,0.15)] flex items-center justify-center mb-4">
+                  <IconComponent className="w-5 h-5 text-[#a78bfa]" />
                 </div>
                 <h4 className="text-lg font-bold mb-2 text-[#e8e4f0]">
                   {item.title}
@@ -248,7 +251,8 @@ export default function ServicesPage() {
                   dangerouslySetInnerHTML={{ __html: item.description }}
                 />
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
