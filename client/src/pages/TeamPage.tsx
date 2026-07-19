@@ -163,7 +163,7 @@ export default function TeamPage() {
             </div>
             <div className="flex items-start gap-3 bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-purple-500/20 transition-colors">
               <span className="text-purple-400 mt-0.5">•</span>
-              <p className="text-muted-foreground leading-relaxed">VOW built with faith, faith turned into solutions</p>
+              <p className="text-muted-foreground leading-relaxed">Turn ideas into solutions for the agentic AI boom</p>
             </div>
             <div className="flex items-start gap-3 bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-purple-500/20 transition-colors">
               <span className="text-purple-400 mt-0.5">•</span>
@@ -181,10 +181,7 @@ export default function TeamPage() {
               <span className="text-purple-400 mt-0.5">•</span>
               <p className="text-muted-foreground leading-relaxed">We always stay young in our thinking to stay years ahead</p>
             </div>
-            <div className="flex items-start gap-3 bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-purple-500/20 transition-colors">
-              <span className="text-purple-400 mt-0.5">•</span>
-              <p className="text-muted-foreground leading-relaxed">A strong attitude and mindset makes us different and the company you want backing you and your systems</p>
-            </div>
+
           </div>
 
           {/* Stats row */}
