@@ -11,7 +11,14 @@ export default function VowPage() {
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 px-4">
-        <div className="container max-w-5xl mx-auto">
+        {/* Background image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
+          style={{ backgroundImage: `url('/manus-storage/vow-hero_7db8ee7c.png')` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#090514]/70 via-[#090514]/50 to-[#090514]" />
+
+        <div className="container max-w-5xl mx-auto relative">
           <div className="mb-6 inline-flex items-center gap-3">
             <span className="px-4 py-2 rounded-full border border-purple-500/30 bg-purple-500/5 text-sm text-purple-400 font-mono">
               Ontology-Driven PaaS & Language
@@ -43,8 +50,10 @@ export default function VowPage() {
             </Button>
           </div>
         </div>
+      </section>
 
-        {/* Aurora background */}
+      {/* Note: Aurora removed since we now use the hero image */}
+      <section className="relative">
         <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
           <div className="absolute top-20 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[120px] opacity-20" style={{ transform: 'translateZ(0)' }} />
           <div className="absolute bottom-20 left-1/4 w-96 h-96 bg-pink-500/10 rounded-full blur-[120px] opacity-20" style={{ transform: 'translateZ(0)' }} />
@@ -185,32 +194,32 @@ export default function VowPage() {
           </p>
 
           <div className="grid md:grid-cols-3 gap-6">
-            <Link href="/zhipz">
-              <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-cyan-500/20 transition-colors cursor-pointer group">
-                <h3 className="text-white font-semibold mb-2 group-hover:text-cyan-400 transition-colors">Zhipz</h3>
-                <p className="text-xs text-cyan-400/60 font-mono mb-3">Logistics Intelligence</p>
-                <p className="text-sm text-[#718096] leading-relaxed">
-                  VOW's deontic gates control which routes agents can recommend. Scar memory learns from past disruptions. Dry-run mode simulates rerouting before committing.
-                </p>
-              </div>
-            </Link>
-
-            <Link href="/apex">
-              <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-amber-500/20 transition-colors cursor-pointer group">
-                <h3 className="text-white font-semibold mb-2 group-hover:text-amber-400 transition-colors">APEX Media</h3>
-                <p className="text-xs text-amber-400/60 font-mono mb-3">Autonomous Content</p>
-                <p className="text-sm text-[#718096] leading-relaxed">
-                  Multi-agent tournament system uses VOW's mereology for strategy composition. Subsumption logic validates content against brand guidelines at compile time.
-                </p>
-              </div>
-            </Link>
-
             <Link href="/truerpm">
               <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-orange-500/20 transition-colors cursor-pointer group">
                 <h3 className="text-white font-semibold mb-2 group-hover:text-orange-400 transition-colors">TrueRPM</h3>
                 <p className="text-xs text-orange-400/60 font-mono mb-3">Revenue Per Mile</p>
                 <p className="text-sm text-[#718096] leading-relaxed">
                   VOW's subsumption logic validates load combinations against weight/route constraints. Deontic gates enforce DOT compliance. Scar memory learns from rejected loads.
+                </p>
+              </div>
+            </Link>
+
+            <Link href="/flocraft">
+              <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-cyan-500/20 transition-colors cursor-pointer group">
+                <h3 className="text-white font-semibold mb-2 group-hover:text-cyan-400 transition-colors">FloCraft</h3>
+                <p className="text-xs text-cyan-400/60 font-mono mb-3">Supply Chain Intelligence</p>
+                <p className="text-sm text-[#718096] leading-relaxed">
+                  VOW's intelligent brain solves supply chain problems in real time — alternate routes and corrective solutions that directly improve ROI.
+                </p>
+              </div>
+            </Link>
+
+            <Link href="/rooh">
+              <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-pink-500/20 transition-colors cursor-pointer group">
+                <h3 className="text-white font-semibold mb-2 group-hover:text-pink-400 transition-colors">Rooh</h3>
+                <p className="text-xs text-pink-400/60 font-mono mb-3">Autonomous Marketing</p>
+                <p className="text-sm text-[#718096] leading-relaxed">
+                  Multi-agent marketing team powered by VOW. Each agent focused on its niche, learning from what works, with human-in-the-loop when you want it.
                 </p>
               </div>
             </Link>
