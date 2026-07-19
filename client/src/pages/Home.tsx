@@ -150,6 +150,8 @@ export default function Home() {
             alt=""
             className="hidden md:block w-full h-full object-cover object-center opacity-40 select-none"
           />
+          {/* Mobile-only dark overlay for text readability */}
+          <div className="absolute inset-0 bg-[#080c18]/40 md:hidden" />
           {/* Gradient overlays to blend with content */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#080c18] via-[#080c18]/70 md:via-[#080c18]/60 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#080c18] via-transparent to-[#080c18]/40" />
