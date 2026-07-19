@@ -57,7 +57,7 @@ const PRODUCTS = [
     icon: Truck,
     href: "/truerpm",
     status: "BUILDING",
-    poweredByVow: false,
+    poweredByVow: true,
     meta: "Releases August 1",
   },
   {
@@ -69,7 +69,7 @@ const PRODUCTS = [
     icon: Cpu,
     href: "/nicheflo",
     status: "BETA",
-    poweredByVow: false,
+    poweredByVow: true,
     meta: "Financial intelligence",
   },
   {
@@ -105,7 +105,7 @@ const PRODUCTS = [
     icon: Factory,
     href: "/revel",
     status: "BUILDING",
-    poweredByVow: false,
+    poweredByVow: true,
     meta: "Industrial workflow automation",
   },
   {
@@ -357,19 +357,19 @@ export default function Home() {
       ═══════════════════════════════════════════════════════════════════════ */}
       <section
         id="products"
-        className="py-24 relative z-10 border-t border-white/5"
+        className="py-12 pb-20 relative z-10 border-t border-white/5"
       >
-        <div className="container">
-          <div className="text-center space-y-3 mb-16">
-            <h2 className="text-3xl md:text-4xl font-display font-extrabold text-white">
+        <div className="max-w-[720px] mx-auto px-6">
+          <div className="text-center space-y-2 mb-8">
+            <h2 className="text-[28px] font-display font-bold text-[#e8e4f0]">
               Products
             </h2>
-            <p className="text-muted-foreground text-base">
+            <p className="text-[15px] text-[#6b6580]">
               Built on VOW. Auditable by design.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="flex flex-col gap-4">
             {PRODUCTS.map((product) => {
               const Icon = product.icon;
               // Static class maps to avoid dynamic Tailwind interpolation issues
@@ -393,37 +393,43 @@ export default function Home() {
               const styles = statusStyles[product.status as keyof typeof statusStyles] || statusStyles.BETA;
               return (
                 <Link key={product.name} href={product.href}>
-                  <a className={`block bg-[#111118] border border-white/[0.08] rounded-2xl p-6 group ${styles.hover} transition-all duration-300 h-full relative overflow-hidden${
-                    product.name === "VOW" ? " border-t-2 border-t-indigo-500" : ""
+                  <a className={`block bg-[#161326] border border-white/[0.06] rounded-2xl p-7 group hover:border-[rgba(167,139,250,0.2)] hover:-translate-y-px transition-all duration-300 relative overflow-hidden${
+                    product.name === "VOW" ? " border-[rgba(167,139,250,0.15)] bg-gradient-to-b from-[rgba(167,139,250,0.04)] to-[#161326]" : ""
                   }`}>
                     {/* Header: name + status badge */}
-                    <div className="flex items-start justify-between mb-1">
-                      <div>
-                        {product.poweredByVow && (
-                          <span className={`text-[10px] font-bold tracking-wider ${styles.powered} uppercase mb-1 block`}>
+                    <div className="flex items-start justify-between gap-3 mb-3.5">
+                      <div className="flex-1 min-w-0">
+                        {product.poweredByVow && product.name !== "VOW" && (
+                          <span className="text-[10px] font-bold tracking-[0.12em] text-[#a78bfa] uppercase mb-1 block">
                             POWERED BY VOW
                           </span>
                         )}
-                        <h3 className="font-display font-bold text-base text-white">
+                        <h3 className="text-lg font-bold text-[#e8e4f0] tracking-[-0.01em]">
                           {product.name}
                         </h3>
                       </div>
                       <span
-                        className={`text-[10px] font-mono font-bold px-2.5 py-1 rounded-full border ${styles.badge} whitespace-nowrap`}
+                        className={`text-[10px] font-bold tracking-[0.08em] uppercase px-3.5 py-1.5 rounded-full border whitespace-nowrap flex-shrink-0 mt-0.5 ${
+                          product.status === "BUILDING"
+                            ? "bg-[rgba(251,191,36,0.12)] text-[#fbbf24] border-[rgba(251,191,36,0.2)]"
+                            : product.status === "BETA \u2014 WAITLIST"
+                            ? "bg-[rgba(244,114,182,0.12)] text-[#f472b6] border-[rgba(244,114,182,0.2)]"
+                            : "bg-[rgba(167,139,250,0.12)] text-[#a78bfa] border-[rgba(167,139,250,0.2)]"
+                        }`}
                       >
                         {product.status}
                       </span>
                     </div>
 
                     {/* Description */}
-                    <p className="text-sm text-[#9a9aaa] leading-relaxed mt-3 mb-4">
+                    <p className="text-[15px] text-[#9a94b0] leading-[1.7] mb-4">
                       {product.description}
                     </p>
 
                     {/* Meta line */}
-                    <div className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
-                      <span className="text-[11px] text-[#6b6b7b] font-mono">
+                    <div className="flex items-center gap-2.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#a78bfa] flex-shrink-0" />
+                      <span className="text-[13px] text-[#6b6580]">
                         {product.meta}
                       </span>
                     </div>
