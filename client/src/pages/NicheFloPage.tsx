@@ -21,7 +21,7 @@ export default function NicheFloPage() {
             Niche<span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-teal-500">Flo</span>
           </h1>
           <p className="text-lg md:text-xl text-[#A0AEC0] max-w-2xl mx-auto mb-8 leading-relaxed">
-            Autonomous GPU arbitrage intelligence and RWAiFi yield optimization. Real-time signals. AI-powered execution.
+            Autonomous GPU arbitrage intelligence and DeFi yield optimization. Real-time signals. AI-powered execution.
           </p>
           <Link href="/services#contact">
             <Button className="rounded-xl bg-gradient-to-r from-cyan-600 to-teal-500 hover:from-cyan-500 hover:to-teal-400 text-white font-semibold shadow-lg shadow-cyan-500/20 active:scale-97 transition-all">
@@ -48,9 +48,9 @@ export default function NicheFloPage() {
             </div>
             <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02]">
               <TrendingUp className="w-6 h-6 text-cyan-400 mb-4" />
-              <h3 className="text-white font-semibold mb-2">RWAiFi Yield</h3>
+              <h3 className="text-white font-semibold mb-2">DeFi Yield</h3>
               <p className="text-sm text-[#718096] leading-relaxed">
-                Optimize real-world asset yields with AI-powered signal processing and execution strategies.
+                Optimize DeFi yields with AI-powered signal processing and execution strategies.
               </p>
             </div>
             <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02]">

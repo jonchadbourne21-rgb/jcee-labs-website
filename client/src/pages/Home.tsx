@@ -64,7 +64,7 @@ const PRODUCTS = [
     name: "NicheFlo",
     tagline: "Financial intelligence",
     description:
-      "Autonomous GPU arbitrage intelligence and RWAiFi yield optimization. Real-time signals. AI-powered execution.",
+      "Autonomous GPU arbitrage intelligence and DeFi yield optimization. Real-time signals. AI-powered execution.",
     color: "cyan",
     icon: Cpu,
     href: "/nicheflo",
