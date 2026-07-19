@@ -127,7 +127,7 @@ const PRODUCTS = [
 
 export default function ProductsPage() {
   return (
-    <div className="min-h-screen bg-[#0d0b14] text-[#e8e4f0] flex flex-col">
+    <div className="min-h-screen bg-[#080c18] text-[#e8ecf4] flex flex-col">
       <SiteNav />
 
       {/* Hero */}
@@ -139,7 +139,7 @@ export default function ProductsPage() {
           <h2 className="text-[36px] font-extrabold leading-[1.2] tracking-[-0.02em] mb-4">
             Products
           </h2>
-          <p className="text-[17px] text-[#9a94b0] max-w-[600px] mx-auto leading-[1.7]">
+          <p className="text-[17px] text-[#7a8aaa] max-w-[600px] mx-auto leading-[1.7]">
             Built on VOW. Auditable by design. Every product in our portfolio
             compiles to readable Python and leaves a decision trail.
           </p>
@@ -155,9 +155,9 @@ export default function ProductsPage() {
               return (
                 <Link key={product.name} href={product.href}>
                   <a
-                    className={`block bg-[#161326] border border-white/[0.06] rounded-2xl p-7 group hover:border-[rgba(212,168,67,0.2)] hover:-translate-y-px transition-all duration-300 relative overflow-hidden${
+                    className={`block bg-[#0d1424] border border-[#2a3a5a]/50 rounded-2xl p-7 group hover:border-[#8ba4d8]/30 hover:-translate-y-px transition-all duration-300 relative overflow-hidden${
                       product.name === "VOW"
-                        ? " border-[rgba(212,168,67,0.15)] bg-gradient-to-b from-[rgba(212,168,67,0.04)] to-[#161326] hover:border-[rgba(212,168,67,0.3)]"
+                        ? " border-[rgba(212,168,67,0.15)] bg-gradient-to-b from-[rgba(212,168,67,0.04)] to-[#0d1424] hover:border-[rgba(212,168,67,0.3)]"
                         : ""
                     }`}
                   >
@@ -169,7 +169,7 @@ export default function ProductsPage() {
                             POWERED BY VOW
                           </span>
                         )}
-                        <h3 className="text-lg font-bold text-[#e8e4f0] tracking-[-0.01em]">
+                        <h3 className="text-lg font-bold text-[#e8ecf4] tracking-[-0.01em]">
                           {product.name}
                         </h3>
                       </div>
@@ -187,14 +187,14 @@ export default function ProductsPage() {
                     </div>
 
                     {/* Description */}
-                    <p className="text-[15px] text-[#9a94b0] leading-[1.7] mb-4 whitespace-pre-line">
+                    <p className="text-[15px] text-[#7a8aaa] leading-[1.7] mb-4 whitespace-pre-line">
                       {product.description}
                     </p>
 
                     {/* Meta line */}
                     <div className="flex items-center gap-2.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#d4a843] flex-shrink-0" />
-                      <span className="text-[13px] text-[#6b6580]">
+                      <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${product.name === "VOW" ? "bg-[#d4a843]" : "bg-[#8ba4d8]"}`} />
+                      <span className="text-[13px] text-[#7a8aaa]/70">
                         {product.meta}
                       </span>
                     </div>

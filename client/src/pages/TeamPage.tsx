@@ -5,17 +5,17 @@ import SiteFooter from "@/components/SiteFooter";
 
 export default function TeamPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#090514] via-[#0f0a1a] to-[#090514] text-[#E2E8F0] flex flex-col">
+    <div className="min-h-screen bg-gradient-to-b from-[#080c18] via-[#0a1020] to-[#080c18] text-[#e8ecf4] flex flex-col">
       <SiteNav />
 
       {/* Hero */}
       <section className="relative pt-32 pb-16 px-4">
         <div className="container max-w-4xl mx-auto text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-mono mx-auto">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#8ba4d8]/10 border border-[#8ba4d8]/20 text-[#8ba4d8] text-xs font-mono mx-auto">
             <Users className="w-3.5 h-3.5" /> Leadership
           </div>
           <h1 className="text-4xl md:text-6xl font-display font-extrabold">
-            The <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Team</span> Behind Jcee Labs
+            The <span className="text-[#c0c8d8]">Team</span> Behind Jcee Labs
           </h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
             A small, focused team building intelligent software that empowers businesses to operate smarter.
@@ -24,7 +24,7 @@ export default function TeamPage() {
 
         {/* Aurora background */}
         <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-[120px] opacity-30" style={{ transform: 'translateZ(0)' }} />
+          <div className="absolute top-20 left-1/4 w-96 h-96 bg-[#8ba4d8]/10 rounded-full blur-[120px] opacity-30" style={{ transform: 'translateZ(0)' }} />
         </div>
       </section>
 
@@ -33,13 +33,13 @@ export default function TeamPage() {
         <div className="container max-w-4xl mx-auto space-y-12">
 
           {/* Jonathan Chadbourne */}
-          <div className="bg-white/[0.02] border border-white/5 rounded-3xl p-8 md:p-10 hover:border-purple-500/20 transition-colors">
+          <div className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-3xl p-8 md:p-10 hover:border-[#8ba4d8]/30 transition-colors">
             <div className="flex flex-col md:flex-row gap-8 items-center">
               <div className="flex flex-col items-center gap-3 shrink-0">
                 <img
                   src="/manus-storage/jonathan-photo_8a631582.png"
                   alt="Jonathan Chadbourne"
-                  className="w-32 h-32 md:w-36 md:h-36 rounded-2xl object-cover object-center shadow-lg shadow-purple-500/20 border border-white/10"
+                  className="w-32 h-32 md:w-36 md:h-36 rounded-2xl object-cover object-center shadow-lg shadow-[#8ba4d8]/15 border border-[#2a3a5a]"
                 />
                 <p className="text-xs text-muted-foreground font-mono tracking-wider uppercase">Connect with me</p>
                 <div className="flex items-center gap-3">
@@ -72,7 +72,7 @@ export default function TeamPage() {
                   </a>
                   <a
                     href="mailto:Jonathan@jceelabs.com"
-                    className="flex items-center gap-1.5 text-xs font-mono px-2.5 py-1 rounded-full border border-white/10 text-muted-foreground hover:text-white hover:border-purple-500/40 transition-colors"
+                    className="flex items-center gap-1.5 text-xs font-mono px-2.5 py-1 rounded-full border border-[#2a3a5a] text-[#7a8aaa] hover:text-[#e8ecf4] hover:border-[#8ba4d8]/40 transition-colors"
                     aria-label="Email Me"
                   >
                     <Mail className="w-3.5 h-3.5" />
@@ -83,7 +83,7 @@ export default function TeamPage() {
               <div className="space-y-4 flex-1">
                 <div>
                   <h2 className="text-2xl font-display font-bold text-white">Jonathan Chadbourne</h2>
-                  <p className="text-purple-300 font-mono text-sm">Founder, CEO & Lead Architect</p>
+                  <p className="text-[#8ba4d8] font-mono text-sm">Founder, CEO & Lead Architect</p>
                 </div>
                 <div className="flex items-center gap-4 text-sm text-muted-foreground">
                   <span className="flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5" /> Dallas, Texas</span>
@@ -94,7 +94,7 @@ export default function TeamPage() {
                   Jonathan doesn't think like most people in tech. He doesn't have a CS degree, a decade in Big Tech, or a pedigree from Stanford or MIT. What he has is a mind that refuses to accept "this is just how it's done" and the stubbornness to build something better when the existing answers don't fit the question.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  VOW wasn't born in a research lab. It was born from watching AI systems fail, lie, and leave no trace, then hearing the industry say "that's just how AI works." Jonathan asked a question most engineers never ask: <em className="text-purple-300/80">What if the language itself could enforce accountability? What if goals, proofs, and memory weren't features you add later, but foundations you start with?</em>
+                  VOW wasn't born in a research lab. It was born from watching AI systems fail, lie, and leave no trace, then hearing the industry say "that's just how AI works." Jonathan asked a question most engineers never ask: <em className="text-[#c0c8d8]">What if the language itself could enforce accountability? What if goals, proofs, and memory weren't features you add later, but foundations you start with?</em>
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
                   He started building with no formal training, just a belief that anything is possible if you refuse to quit. Manus was the tool. VOW was the vision. The scar memory, the formal ontology, the compile-time enforcement — these aren't academic concepts he borrowed. They're solutions he arrived at by thinking from first principles, refusing to accept that small teams can't build what enterprises claim only they can.
@@ -116,15 +116,15 @@ export default function TeamPage() {
           </div>
 
           {/* George Taylor */}
-          <div className="bg-white/[0.02] border border-white/5 rounded-3xl p-8 md:p-10 hover:border-teal-500/20 transition-colors">
+          <div className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-3xl p-8 md:p-10 hover:border-[#8ba4d8]/30 transition-colors">
             <div className="flex flex-col md:flex-row gap-8 items-start">
-              <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center text-white text-3xl font-display font-bold shrink-0 shadow-lg shadow-teal-500/20">
+              <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-[#8ba4d8] to-[#5a7ab8] flex items-center justify-center text-white text-3xl font-display font-bold shrink-0 shadow-lg shadow-[#8ba4d8]/20">
                 GT
               </div>
               <div className="space-y-4 flex-1">
                 <div>
                   <h2 className="text-2xl font-display font-bold text-white">George Taylor</h2>
-                  <p className="text-teal-300 font-mono text-sm">Partner & Chief Strategy Officer</p>
+                  <p className="text-[#8ba4d8] font-mono text-sm">Partner & Chief Strategy Officer</p>
                 </div>
                 <div className="flex items-center gap-4 text-sm text-muted-foreground">
                   <span className="flex items-center gap-1.5"><Rocket className="w-3.5 h-3.5" /> Joined June 2026</span>
@@ -142,61 +142,61 @@ export default function TeamPage() {
       </section>
 
       {/* What Makes Us Different */}
-      <section className="py-16 px-4 border-t border-white/5">
+      <section className="py-16 px-4 border-t border-[#2a3a5a]/50">
         <div className="container max-w-3xl mx-auto space-y-8">
           <div className="text-center space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-mono mx-auto">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#8ba4d8]/10 border border-[#8ba4d8]/20 text-[#8ba4d8] text-xs font-mono mx-auto">
               <Lightbulb className="w-3.5 h-3.5" /> What Makes Us Different
             </div>
             <h2 className="text-3xl md:text-4xl font-display font-extrabold text-white">
-              Our <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Mission</span>
+              Our <span className="text-[#c0c8d8]">Mission</span>
             </h2>
           </div>
           <div className="space-y-4">
-            <div className="flex items-start gap-3 bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-purple-500/20 transition-colors">
-              <span className="text-purple-400 mt-1">•</span>
+            <div className="flex items-start gap-3 bg-white/[0.02] border border-[#2a3a5a]/50 rounded-xl p-4 hover:border-[#8ba4d8]/30 transition-colors">
+              <span className="text-[#8ba4d8] mt-1">•</span>
               <div>
                 <p className="text-muted-foreground leading-relaxed">Failure is unacceptable when you can choose a lesson and the next step</p>
                 <p className="text-sm text-white/40 mt-1">Every setback feeds VOW's scar memory — we encode what went wrong so the system never repeats it.</p>
               </div>
             </div>
-            <div className="flex items-start gap-3 bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-purple-500/20 transition-colors">
-              <span className="text-purple-400 mt-1">•</span>
+            <div className="flex items-start gap-3 bg-white/[0.02] border border-[#2a3a5a]/50 rounded-xl p-4 hover:border-[#8ba4d8]/30 transition-colors">
+              <span className="text-[#8ba4d8] mt-1">•</span>
               <div>
                 <p className="text-muted-foreground leading-relaxed">Our hope is problems, our faith is solutions</p>
                 <p className="text-sm text-white/40 mt-1">We actively seek broken workflows and inefficient industries because that's where the highest-impact products live.</p>
               </div>
             </div>
-            <div className="flex items-start gap-3 bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-purple-500/20 transition-colors">
-              <span className="text-purple-400 mt-1">•</span>
+            <div className="flex items-start gap-3 bg-white/[0.02] border border-[#2a3a5a]/50 rounded-xl p-4 hover:border-[#8ba4d8]/30 transition-colors">
+              <span className="text-[#8ba4d8] mt-1">•</span>
               <div>
                 <p className="text-muted-foreground leading-relaxed">Turn ideas into solutions for the agentic AI boom</p>
                 <p className="text-sm text-white/40 mt-1">We ship production-ready autonomous systems while others are still debating frameworks.</p>
               </div>
             </div>
-            <div className="flex items-start gap-3 bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-purple-500/20 transition-colors">
-              <span className="text-purple-400 mt-1">•</span>
+            <div className="flex items-start gap-3 bg-white/[0.02] border border-[#2a3a5a]/50 rounded-xl p-4 hover:border-[#8ba4d8]/30 transition-colors">
+              <span className="text-[#8ba4d8] mt-1">•</span>
               <div>
                 <p className="text-muted-foreground leading-relaxed">We don't have a niche. <em className="text-white">We ARE the niche</em></p>
                 <p className="text-sm text-white/40 mt-1">Nine products across trucking, wellness, supply chain, marketing, and DeFi — unified by one language and one standard of quality.</p>
               </div>
             </div>
-            <div className="flex items-start gap-3 bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-purple-500/20 transition-colors">
-              <span className="text-purple-400 mt-1">•</span>
+            <div className="flex items-start gap-3 bg-white/[0.02] border border-[#2a3a5a]/50 rounded-xl p-4 hover:border-[#8ba4d8]/30 transition-colors">
+              <span className="text-[#8ba4d8] mt-1">•</span>
               <div>
                 <p className="text-muted-foreground leading-relaxed">Innovation is our quest. Fixing industry problems is our goal</p>
                 <p className="text-sm text-white/40 mt-1">We don't build technology for technology's sake — every product solves a specific pain point for real operators.</p>
               </div>
             </div>
-            <div className="flex items-start gap-3 bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-purple-500/20 transition-colors">
-              <span className="text-purple-400 mt-1">•</span>
+            <div className="flex items-start gap-3 bg-white/[0.02] border border-[#2a3a5a]/50 rounded-xl p-4 hover:border-[#8ba4d8]/30 transition-colors">
+              <span className="text-[#8ba4d8] mt-1">•</span>
               <div>
                 <p className="text-muted-foreground leading-relaxed">Attitude and belief — anything is possible until it isn't — we engrave into the culture</p>
                 <p className="text-sm text-white/40 mt-1">We attempt what others dismiss as impossible, and let the results speak for themselves.</p>
               </div>
             </div>
-            <div className="flex items-start gap-3 bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-purple-500/20 transition-colors">
-              <span className="text-purple-400 mt-1">•</span>
+            <div className="flex items-start gap-3 bg-white/[0.02] border border-[#2a3a5a]/50 rounded-xl p-4 hover:border-[#8ba4d8]/30 transition-colors">
+              <span className="text-[#8ba4d8] mt-1">•</span>
               <div>
                 <p className="text-muted-foreground leading-relaxed">We always stay young in our thinking to stay years ahead</p>
                 <p className="text-sm text-white/40 mt-1">No legacy assumptions, no "we've always done it this way" — every decision is made fresh from first principles.</p>
@@ -207,16 +207,16 @@ export default function TeamPage() {
 
           {/* Stats row */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8">
-            <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 text-center">
-              <div className="text-3xl font-display font-bold text-purple-400 mb-2">9+</div>
+            <div className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-2xl p-6 text-center">
+              <div className="text-3xl font-display font-bold text-[#c0c8d8] mb-2">9+</div>
               <p className="text-sm text-muted-foreground">Products Live & Building</p>
             </div>
-            <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 text-center">
-              <div className="text-3xl font-display font-bold text-teal-400 mb-2">March 2026</div>
+            <div className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-2xl p-6 text-center">
+              <div className="text-3xl font-display font-bold text-[#8ba4d8] mb-2">March 2026</div>
               <p className="text-sm text-muted-foreground">Founded</p>
             </div>
-            <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 text-center">
-              <div className="text-lg md:text-xl font-display font-bold text-indigo-400 mb-2 leading-tight">Human-Creative Architecture,<br/>Agentic AI-Driven</div>
+            <div className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-2xl p-6 text-center">
+              <div className="text-lg md:text-xl font-display font-bold text-[#c0c8d8] mb-2 leading-tight">Human-Creative Architecture,<br/>Agentic AI-Driven</div>
               <p className="text-sm text-muted-foreground">Development Approach</p>
             </div>
           </div>

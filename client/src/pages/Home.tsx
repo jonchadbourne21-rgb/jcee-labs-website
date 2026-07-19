@@ -18,15 +18,15 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#090514] text-[#E2E8F0] relative overflow-x-hidden flex flex-col">
+    <div className="min-h-screen bg-[#080c18] text-[#e8ecf4] relative overflow-x-hidden flex flex-col">
 
-      {/* BACKGROUND AURORAS */}
+      {/* BACKGROUND AURORAS — navy/silver tones */}
       <div
-        className="absolute top-[-10%] left-[-5%] w-[350px] h-[350px] rounded-full bg-purple-600/8 blur-[80px] pointer-events-none"
+        className="absolute top-[-10%] left-[-5%] w-[350px] h-[350px] rounded-full bg-[#8ba4d8]/8 blur-[80px] pointer-events-none"
         style={{ willChange: "transform", transform: "translateZ(0)" }}
       />
       <div
-        className="absolute top-[40%] right-[-10%] w-[400px] h-[400px] rounded-full bg-teal-500/4 blur-[90px] pointer-events-none"
+        className="absolute top-[40%] right-[-10%] w-[400px] h-[400px] rounded-full bg-[#2a3a5a]/20 blur-[90px] pointer-events-none"
         style={{ willChange: "transform", transform: "translateZ(0)" }}
       />
 
@@ -36,7 +36,7 @@ export default function Home() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "border-b border-white/5 bg-[#090514]/80 backdrop-blur-xl py-3"
+            ? "border-b border-[#2a3a5a]/50 bg-[#080c18]/80 backdrop-blur-xl py-3"
             : "bg-transparent py-5"
         }`}
       >
@@ -46,13 +46,13 @@ export default function Home() {
               <img
                 src="/manus-storage/jcee-labs-logo_d242d7a5.png"
                 alt="Jcee Labs Logo"
-                className="w-9 h-9 rounded-xl shadow-lg shadow-purple-500/25 group-hover:scale-105 transition-transform duration-300 object-contain"
+                className="w-9 h-9 rounded-xl shadow-lg shadow-[#8ba4d8]/15 group-hover:scale-105 transition-transform duration-300 object-contain"
               />
               <div className="flex flex-col">
-                <span className="font-display font-bold text-base tracking-wider group-hover:text-purple-300 transition-colors">
+                <span className="font-display font-bold text-base tracking-wider text-[#e8ecf4] group-hover:text-[#c0c8d8] transition-colors">
                   JCEE LABS
                 </span>
-                <span className="text-[9px] font-mono tracking-widest text-muted-foreground uppercase">
+                <span className="text-[9px] font-mono tracking-widest text-[#7a8aaa] uppercase">
                   by HOWM HOLDINGS LLC
                 </span>
               </div>
@@ -61,22 +61,22 @@ export default function Home() {
 
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
             <Link href="/products">
-              <a className="text-muted-foreground hover:text-white transition-colors">
+              <a className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">
                 Products
               </a>
             </Link>
             <Link href="/services">
-              <a className="text-muted-foreground hover:text-white transition-colors">
+              <a className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">
                 Services
               </a>
             </Link>
             <Link href="/team">
-              <a className="text-muted-foreground hover:text-white transition-colors">
+              <a className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">
                 Team
               </a>
             </Link>
             <Link href="/faq">
-              <a className="text-muted-foreground hover:text-white transition-colors">
+              <a className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">
                 FAQ
               </a>
             </Link>
@@ -86,7 +86,7 @@ export default function Home() {
             <Link href="/services">
               <Button
                 size="sm"
-                className="hidden sm:flex rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 border-0 text-white font-medium shadow-lg shadow-purple-500/20 active:scale-95 transition-all"
+                className="hidden sm:flex rounded-xl bg-[#e0e6f0] text-[#080c18] hover:bg-[#c0c8d8] border-0 font-medium shadow-lg shadow-[#8ba4d8]/10 active:scale-95 transition-all"
               >
                 <span className="flex items-center gap-1">
                   Get in Touch <ArrowUpRight className="w-3.5 h-3.5" />
@@ -96,7 +96,7 @@ export default function Home() {
             {/* Mobile menu toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden w-9 h-9 flex items-center justify-center rounded-lg border border-white/10 text-white"
+              className="md:hidden w-9 h-9 flex items-center justify-center rounded-lg border border-[#2a3a5a] text-[#e8ecf4]"
             >
               <svg
                 className="w-5 h-5"
@@ -126,11 +126,11 @@ export default function Home() {
 
         {/* Mobile menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-white/5 bg-[#090514]/95 backdrop-blur-xl px-6 py-4 space-y-3">
+          <div className="md:hidden border-t border-[#2a3a5a]/50 bg-[#080c18]/95 backdrop-blur-xl px-6 py-4 space-y-3">
             <Link href="/products">
               <a
                 onClick={() => setMobileMenuOpen(false)}
-                className="block text-sm text-muted-foreground hover:text-white transition-colors py-2"
+                className="block text-sm text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors py-2"
               >
                 Products
               </a>
@@ -138,7 +138,7 @@ export default function Home() {
             <Link href="/services">
               <a
                 onClick={() => setMobileMenuOpen(false)}
-                className="block text-sm text-muted-foreground hover:text-white transition-colors py-2"
+                className="block text-sm text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors py-2"
               >
                 Services
               </a>
@@ -146,7 +146,7 @@ export default function Home() {
             <Link href="/team">
               <a
                 onClick={() => setMobileMenuOpen(false)}
-                className="block text-sm text-muted-foreground hover:text-white transition-colors py-2"
+                className="block text-sm text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors py-2"
               >
                 Team
               </a>
@@ -154,7 +154,7 @@ export default function Home() {
             <Link href="/faq">
               <a
                 onClick={() => setMobileMenuOpen(false)}
-                className="block text-sm text-muted-foreground hover:text-white transition-colors py-2"
+                className="block text-sm text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors py-2"
               >
                 FAQ
               </a>
@@ -176,25 +176,25 @@ export default function Home() {
             style={{ filter: "brightness(1.2) contrast(1.1)" }}
           />
           {/* Gradient overlay to blend logo edges */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#090514] via-[#090514]/70 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#090514] via-transparent to-[#090514]/50" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#080c18] via-[#080c18]/70 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#080c18] via-transparent to-[#080c18]/50" />
         </div>
 
         <div className="container relative z-10">
           <div className="max-w-3xl space-y-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-mono">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#8ba4d8]/10 border border-[#8ba4d8]/20 text-[#8ba4d8] text-xs font-mono">
               <Sparkles className="w-3.5 h-3.5" /> SaaS, PaaS, Venture Architecture
             </div>
             <h1 className="text-5xl md:text-7xl font-display font-extrabold leading-[1.05] tracking-tight">
               One studio.{" "}
-              <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
+              <span className="text-[#c0c8d8]">
                 One language.
               </span>{" "}
-              <span className="bg-gradient-to-r from-teal-400 to-teal-600 bg-clip-text text-transparent">
+              <span className="text-[#8ba4d8]">
                 Nine products.
               </span>
             </h1>
-            <p className="text-lg md:text-xl leading-relaxed max-w-2xl text-slate-300/90">
+            <p className="text-lg md:text-xl leading-relaxed max-w-2xl text-[#7a8aaa]">
               Jcee Labs builds AI products on{" "}
               <Link href="/vow">
                 <a className="text-[#d4a843] hover:text-[#e8c56d] underline underline-offset-2 decoration-[#d4a843]/40 font-semibold">VOW</a>
@@ -205,7 +205,7 @@ export default function Home() {
               <Link href="/products">
                 <Button
                   size="lg"
-                  className="w-full sm:w-auto rounded-xl bg-white text-black hover:bg-slate-200 font-semibold shadow-xl shadow-white/5 active:scale-97 transition-all"
+                  className="w-full sm:w-auto rounded-xl bg-[#e0e6f0] text-[#080c18] hover:bg-[#c0c8d8] font-semibold shadow-xl shadow-[#8ba4d8]/5 active:scale-97 transition-all"
                 >
                   Explore Products
                 </Button>
@@ -214,7 +214,7 @@ export default function Home() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="w-full sm:w-auto rounded-xl border-purple-500/30 hover:bg-purple-500/10 text-purple-300 font-medium active:scale-97 transition-all"
+                  className="w-full sm:w-auto rounded-xl border-[#2a3a5a] hover:bg-[#8ba4d8]/10 text-[#8ba4d8] font-medium active:scale-97 transition-all"
                 >
                   Services
                 </Button>
@@ -223,7 +223,7 @@ export default function Home() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="w-full sm:w-auto rounded-xl border-white/10 hover:bg-white/5 text-[#E2E8F0] font-medium active:scale-97 transition-all"
+                  className="w-full sm:w-auto rounded-xl border-[#2a3a5a] hover:bg-[#2a3a5a]/30 text-[#c0c8d8] font-medium active:scale-97 transition-all"
                 >
                   Meet the Team
                 </Button>
@@ -236,12 +236,12 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════════════════════
           TAGLINE
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="py-16 border-t border-white/5">
+      <section className="py-16 border-t border-[#2a3a5a]/50">
         <div className="container text-center max-w-2xl mx-auto space-y-3">
-          <p className="text-sm text-muted-foreground tracking-wide">
+          <p className="text-sm text-[#7a8aaa] tracking-wide">
             Jcee Labs is the d.b.a. of HOWM HOLDINGS LLC.
           </p>
-          <p className="text-lg text-slate-300/80 font-medium">
+          <p className="text-lg text-[#c0c8d8] font-medium">
             We architect formally-verified AI systems. Everyone else is just shipping software.
           </p>
         </div>
@@ -250,20 +250,20 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════════════════════
           STATS
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="py-16 border-t border-white/5">
+      <section className="py-16 border-t border-[#2a3a5a]/50">
         <div className="container max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 text-center">
-              <div className="text-3xl font-display font-bold text-purple-400 mb-2">9+</div>
-              <p className="text-sm text-muted-foreground">Products Live & Building</p>
+            <div className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-2xl p-6 text-center">
+              <div className="text-3xl font-display font-bold text-[#c0c8d8] mb-2">9+</div>
+              <p className="text-sm text-[#7a8aaa]">Products Live & Building</p>
             </div>
-            <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 text-center">
-              <div className="text-3xl font-display font-bold text-teal-400 mb-2">March 2026</div>
-              <p className="text-sm text-muted-foreground">Founded</p>
+            <div className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-2xl p-6 text-center">
+              <div className="text-3xl font-display font-bold text-[#8ba4d8] mb-2">March 2026</div>
+              <p className="text-sm text-[#7a8aaa]">Founded</p>
             </div>
-            <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 text-center">
-              <div className="text-lg md:text-xl font-display font-bold text-indigo-400 mb-2 leading-tight">Human-Creative Architecture,<br/>Agentic AI-Driven</div>
-              <p className="text-sm text-muted-foreground">Development Approach</p>
+            <div className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-2xl p-6 text-center">
+              <div className="text-lg md:text-xl font-display font-bold text-[#c0c8d8] mb-2 leading-tight">Human-Creative Architecture,<br/>Agentic AI-Driven</div>
+              <p className="text-sm text-[#7a8aaa]">Development Approach</p>
             </div>
           </div>
         </div>

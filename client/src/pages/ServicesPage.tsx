@@ -131,13 +131,13 @@ const WHY_VOW = [
 
 export default function ServicesPage() {
   return (
-    <div className="min-h-screen bg-[#0d0b14] text-[#e8e4f0] flex flex-col">
+    <div className="min-h-screen bg-[#080c18] text-[#e8ecf4] flex flex-col">
       <SiteNav />
 
       {/* Hero */}
       <section className="pt-32 pb-8 text-center">
         <div className="max-w-[720px] mx-auto px-6">
-          <div className="inline-block text-[12px] font-semibold tracking-[0.1em] uppercase px-5 py-2 rounded-3xl border border-white/[0.06] text-[#d4a843] mb-6">
+          <div className="inline-block text-[12px] font-semibold tracking-[0.1em] uppercase px-5 py-2 rounded-3xl border border-[#2a3a5a] text-[#d4a843] mb-6">
             Autonomous Systems Built on VOW
           </div>
           <h2 className="text-[36px] font-extrabold leading-[1.2] tracking-[-0.02em] mb-4">
@@ -146,7 +146,7 @@ export default function ServicesPage() {
               Built on VOW
             </span>
           </h2>
-          <p className="text-[17px] text-[#9a94b0] max-w-[600px] mx-auto leading-[1.7]">
+          <p className="text-[17px] text-[#7a8aaa] max-w-[600px] mx-auto leading-[1.7]">
             We don't just build software. We architect formally-verified AI
             systems that learn from failure, leave audit trails, and comply with
             regulatory frameworks before they become law.
@@ -158,10 +158,10 @@ export default function ServicesPage() {
       <section className="pb-4">
         <div className="max-w-[720px] mx-auto px-6">
           <div className="pt-12 pb-6">
-            <h3 className="text-[28px] font-bold mb-3 text-[#e8e4f0]">
+            <h3 className="text-[28px] font-bold mb-3 text-[#e8ecf4]">
               Core Services
             </h3>
-            <p className="text-[15px] text-[#6b6580] leading-[1.6]">
+            <p className="text-[15px] text-[#7a8aaa] leading-[1.6]">
               Everything we build compiles to auditable Python. Every decision
               leaves a trail.
             </p>
@@ -173,7 +173,7 @@ export default function ServicesPage() {
               return (
                 <div
                   key={service.name}
-                  className="bg-[#161326] border border-white/[0.06] rounded-[20px] p-7 relative overflow-hidden group hover:border-[rgba(212,168,67,0.2)] hover:-translate-y-0.5 transition-all duration-300"
+                  className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-[20px] p-7 relative overflow-hidden group hover:border-[#8ba4d8]/30 hover:-translate-y-0.5 transition-all duration-300"
                 >
                   {/* Top gradient line on hover */}
                   <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#d4a843] to-[#e8c56d] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -186,12 +186,12 @@ export default function ServicesPage() {
                       <span className="text-[10px] font-bold tracking-[0.12em] text-[#d4a843] uppercase block mb-1">
                         {service.tag}
                       </span>
-                      <h4 className="text-[18px] font-bold text-[#e8e4f0]">
+                      <h4 className="text-[18px] font-bold text-[#e8ecf4]">
                         {service.name}
                       </h4>
                     </div>
                   </div>
-                  <p className="text-[15px] text-[#9a94b0] leading-[1.7] pl-16 max-sm:pl-0 max-sm:mt-3">
+                  <p className="text-[15px] text-[#7a8aaa] leading-[1.7] pl-16 max-sm:pl-0 max-sm:mt-3">
                     {service.description}
                   </p>
                 </div>
@@ -205,10 +205,10 @@ export default function ServicesPage() {
       <section className="pb-4">
         <div className="max-w-[720px] mx-auto px-6">
           <div className="pt-12 pb-6">
-            <h3 className="text-[28px] font-bold mb-3 text-[#e8e4f0]">
+            <h3 className="text-[28px] font-bold mb-3 text-[#e8ecf4]">
               How It Works
             </h3>
-            <p className="text-[15px] text-[#6b6580] leading-[1.6]">
+            <p className="text-[15px] text-[#7a8aaa] leading-[1.6]">
               The VOW engagement process — formal from day one.
             </p>
           </div>
@@ -217,16 +217,16 @@ export default function ServicesPage() {
             {PROCESS_STEPS.map((step) => (
               <div
                 key={step.number}
-                className="bg-[#161326] border border-white/[0.06] rounded-[20px] p-7 flex gap-5 items-start hover:border-[rgba(212,168,67,0.2)] transition-all duration-300 max-sm:flex-col"
+                className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-[20px] p-7 flex gap-5 items-start hover:border-[#8ba4d8]/30 transition-all duration-300 max-sm:flex-col"
               >
                 <div className="w-12 h-12 rounded-[14px] bg-[rgba(212,168,67,0.1)] border border-[rgba(212,168,67,0.2)] flex items-center justify-center flex-shrink-0 text-[16px] font-bold font-mono text-[#d4a843]">
                   {step.number}
                 </div>
                 <div>
-                  <h4 className="text-[18px] font-bold text-[#e8e4f0] mb-2">
+                  <h4 className="text-[18px] font-bold text-[#e8ecf4] mb-2">
                     {step.title}
                   </h4>
-                  <p className="text-[15px] text-[#9a94b0] leading-[1.7]">
+                  <p className="text-[15px] text-[#7a8aaa] leading-[1.7]">
                     {step.description}
                   </p>
                 </div>
@@ -240,10 +240,10 @@ export default function ServicesPage() {
       <section className="pb-4">
         <div className="max-w-[720px] mx-auto px-6">
           <div className="pt-12 pb-6">
-            <h3 className="text-[28px] font-bold mb-3 text-[#e8e4f0]">
+            <h3 className="text-[28px] font-bold mb-3 text-[#e8ecf4]">
               The VOW Difference
             </h3>
-            <p className="text-[15px] text-[#6b6580] leading-[1.6]">
+            <p className="text-[15px] text-[#7a8aaa] leading-[1.6]">
               What exists nowhere else.
             </p>
           </div>
@@ -254,15 +254,15 @@ export default function ServicesPage() {
               return (
                 <div
                   key={item.title}
-                  className="bg-[#161326] border border-white/[0.06] rounded-[20px] p-7 hover:border-[rgba(212,168,67,0.2)] transition-all duration-300"
+                  className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-[20px] p-7 hover:border-[#8ba4d8]/30 transition-all duration-300"
                 >
                   <div className="w-12 h-12 rounded-[14px] bg-[rgba(212,168,67,0.1)] border border-[rgba(212,168,67,0.15)] flex items-center justify-center mb-4">
                     <Icon className="w-5 h-5 text-[#d4a843]" />
                   </div>
-                  <h4 className="text-[18px] font-bold text-[#e8e4f0] mb-2">
+                  <h4 className="text-[18px] font-bold text-[#e8ecf4] mb-2">
                     {item.title}
                   </h4>
-                  <p className="text-[15px] text-[#9a94b0] leading-[1.7]">
+                  <p className="text-[15px] text-[#7a8aaa] leading-[1.7]">
                     {item.description}
                   </p>
                 </div>
@@ -276,10 +276,10 @@ export default function ServicesPage() {
       <section className="pb-4">
         <div className="max-w-[720px] mx-auto px-6">
           <div className="pt-12 pb-6">
-            <h3 className="text-[28px] font-bold mb-3 text-[#e8e4f0]">
+            <h3 className="text-[28px] font-bold mb-3 text-[#e8ecf4]">
               Why VOW
             </h3>
-            <p className="text-[15px] text-[#6b6580] leading-[1.6]">
+            <p className="text-[15px] text-[#7a8aaa] leading-[1.6]">
               What traditional agencies can't offer.
             </p>
           </div>
@@ -290,15 +290,15 @@ export default function ServicesPage() {
               return (
                 <div
                   key={item.title}
-                  className="bg-[#161326] border border-white/[0.06] rounded-[20px] p-7 hover:border-[rgba(212,168,67,0.2)] transition-all duration-300"
+                  className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-[20px] p-7 hover:border-[#8ba4d8]/30 transition-all duration-300"
                 >
                   <div className="w-12 h-12 rounded-[14px] bg-[rgba(212,168,67,0.1)] border border-[rgba(212,168,67,0.15)] flex items-center justify-center mb-4">
                     <Icon className="w-5 h-5 text-[#d4a843]" />
                   </div>
-                  <h4 className="text-[18px] font-bold text-[#e8e4f0] mb-2">
+                  <h4 className="text-[18px] font-bold text-[#e8ecf4] mb-2">
                     {item.title}
                   </h4>
-                  <p className="text-[15px] text-[#9a94b0] leading-[1.7]">
+                  <p className="text-[15px] text-[#7a8aaa] leading-[1.7]">
                     {item.description}
                   </p>
                 </div>
@@ -315,10 +315,10 @@ export default function ServicesPage() {
             <span className="text-[10px] font-bold tracking-[0.12em] text-[#fbbf24] uppercase block mb-3">
               Also Available
             </span>
-            <h4 className="text-[20px] font-bold text-[#e8e4f0] mb-2">
+            <h4 className="text-[20px] font-bold text-[#e8ecf4] mb-2">
               Custom Web Development
             </h4>
-            <p className="text-[15px] text-[#9a94b0] leading-[1.7]">
+            <p className="text-[15px] text-[#7a8aaa] leading-[1.7]">
               Full-stack web applications, APIs, and traditional automation —
               built with the same quality standards. React, Next.js, Node.js,
               tRPC. Responsive, accessible, production-ready. This is our
@@ -339,7 +339,7 @@ export default function ServicesPage() {
           </a>
           <a
             href="mailto:jonathan@jceelabs.com?subject=Enterprise%20Access%20Inquiry"
-            className="inline-block text-[14px] text-[#6b6580] border border-white/[0.06] px-6 py-3 rounded-full hover:border-[rgba(212,168,67,0.2)] hover:text-[#9a94b0] transition-all duration-300"
+            className="inline-block text-[14px] text-[#7a8aaa] border border-[#2a3a5a] px-6 py-3 rounded-full hover:border-[#8ba4d8]/30 hover:text-[#c0c8d8] transition-all duration-300"
           >
             Explore Enterprise Access
           </a>
