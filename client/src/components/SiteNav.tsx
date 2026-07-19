@@ -101,7 +101,7 @@ export default function SiteNav() {
 
         <div className="flex items-center gap-3">
           <Link href="/services">
-            <Button size="sm" className="hidden sm:flex rounded-xl bg-[#e0e6f0] text-[#080c18] hover:bg-[#c0c8d8] border-0 font-medium shadow-lg shadow-[#8ba4d8]/10 active:scale-95 transition-all">
+            <Button size="sm" className="hidden sm:flex rounded-xl bg-[#e0e6f0] text-[#080c18] hover:bg-[#c0c8d8] hover:shadow-xl hover:shadow-[#8ba4d8]/20 hover:-translate-y-0.5 border-0 font-medium shadow-lg shadow-[#8ba4d8]/10 active:scale-95 transition-all duration-200">
               <span className="flex items-center gap-1">
                 Get in Touch <ArrowUpRight className="w-3.5 h-3.5" />
               </span>

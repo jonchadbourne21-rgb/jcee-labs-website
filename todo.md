@@ -271,3 +271,9 @@
 - [x] TeamPage.tsx: Replace purple/teal with navy/silver
 - [x] Verify no purple/teal on parent brand pages (only on Mirrored.tsx product page)
 - [x] All tests passing (12/12)
+
+## Phase 31 — Subtle Hover Effects on Navy/Silver Buttons
+- [x] Home.tsx: Enhance primary/secondary button hover (glow, slight lift, smooth transitions)
+- [x] SiteNav.tsx: Enhance "Get in Touch" button hover
+- [x] ServicesPage.tsx: Enhance CTA buttons hover
+- [x] All tests passing

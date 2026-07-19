@@ -333,13 +333,13 @@ export default function ServicesPage() {
         <div className="max-w-[720px] mx-auto px-6 flex flex-col items-center gap-4">
           <a
             href="mailto:jonathan@jceelabs.com?subject=VOW%20Audit%20Request"
-            className="inline-block bg-gradient-to-r from-[#d4a843] to-[#c9952c] text-white text-[16px] font-semibold px-8 py-4 rounded-full hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(212,168,67,0.3)] transition-all duration-300"
+            className="inline-block bg-gradient-to-r from-[#d4a843] to-[#c9952c] text-white text-[16px] font-semibold px-8 py-4 rounded-full hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(212,168,67,0.35)] active:scale-97 transition-all duration-200"
           >
             Request a VOW Audit &rarr;
           </a>
           <a
             href="mailto:jonathan@jceelabs.com?subject=Enterprise%20Access%20Inquiry"
-            className="inline-block text-[14px] text-[#7a8aaa] border border-[#2a3a5a] px-6 py-3 rounded-full hover:border-[#8ba4d8]/30 hover:text-[#c0c8d8] transition-all duration-300"
+            className="inline-block text-[14px] text-[#7a8aaa] border border-[#2a3a5a] px-6 py-3 rounded-full hover:border-[#8ba4d8]/50 hover:text-[#c0c8d8] hover:bg-[#8ba4d8]/5 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#8ba4d8]/10 active:scale-97 transition-all duration-200"
           >
             Explore Enterprise Access
           </a>
