@@ -54,8 +54,12 @@ export default function SiteNav() {
           ? "border-b border-[#2a3a5a]/50 bg-[#080c18]/90 backdrop-blur-xl py-3"
           : "bg-transparent py-4 md:py-5"
       }`}>
-        <div className="container flex items-center justify-between px-4 md:px-6">
-          <Link href="/" className="flex items-center gap-2.5 md:gap-3 group">
+        <div className="container flex items-center justify-between px-4 md:px-6 relative">
+          {/* Spacer for mobile to balance hamburger on right */}
+          <div className="w-9 md:hidden" aria-hidden="true" />
+
+          {/* Logo — centered on mobile, left-aligned on desktop */}
+          <Link href="/" className="flex items-center gap-2.5 md:gap-3 group absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0">
             <img
               src="/manus-storage/jcee-labs-new-logo_cd2cbbaa.jpg"
               alt="Jcee Labs Logo"
