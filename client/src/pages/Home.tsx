@@ -138,9 +138,9 @@ export default function Home() {
       <section className="relative flex-1 flex items-center justify-center min-h-screen z-10 overflow-hidden px-4 md:px-0">
         {/* Hero background image — different for mobile vs desktop */}
         <div className="absolute inset-0 pointer-events-none">
-          {/* Mobile background (centered logo version) */}
+          {/* Mobile background (quantum neural network) */}
           <img
-            src="/manus-storage/jcee-labs-hero-mobile_72385c22.png"
+            src="https://d2xsxph8kpxj0f.cloudfront.net/310519663398434536/PGyQHKFdSR7kZkQyzRA9uW/quantum-neural-bg-mobile-UNbHbew8qCTxmWrUfrMJAX.webp"
             alt=""
             className="md:hidden w-full h-full object-cover object-center opacity-30 select-none"
           />
