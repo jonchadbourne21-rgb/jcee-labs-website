@@ -288,3 +288,13 @@
 - [x] TeamPage.tsx: Mobile-optimized layout (already responsive)
 - [x] SiteFooter.tsx: Mobile-friendly footer columns (2-col grid on mobile)
 - [x] All tests passing (12/12)
+
+## Phase 33 — Enhanced Mobile Navigation
+- [x] Make SiteNav sticky (fixed top) on all screen sizes
+- [x] Add smooth slide-out animation for mobile hamburger menu (right-side panel, 400ms ease-out)
+- [x] Animated hamburger icon (transforms to X with rotation)
+- [x] Body scroll lock when menu is open
+- [x] Backdrop overlay with blur + click-to-close
+- [x] Ensure backdrop blur and proper z-index for sticky header
+- [x] CTA button at bottom of slide-out panel
+- [x] All tests passing (12/12)
