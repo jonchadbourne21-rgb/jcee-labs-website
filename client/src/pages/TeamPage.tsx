@@ -91,10 +91,25 @@ export default function TeamPage() {
                   <span>Age 34</span>
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
-                  Jonathan founded Jcee Labs with a clear vision: to build software that levels the playing field for small businesses and independent operators. With a deep background in systems architecture and a relentless drive to solve real-world problems through technology, he leads the company's product strategy, engineering direction, and AI integration efforts.
+                  Jonathan doesn't think like most people in tech. He doesn't have a CS degree, a decade in Big Tech, or a pedigree from Stanford or MIT. What he has is a mind that refuses to accept "this is just how it's done" — and the stubbornness to build something better when the existing answers don't fit the question.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  His vision for Jcee Labs is to create an ecosystem of intelligent, accessible tools that give everyday entrepreneurs the same technological advantages as large enterprises — from AI-powered personal development to automated business operations. Every product at Jcee Labs is designed to be practical, revenue-generating, and built for people who work hard and think big.
+                  VOW wasn't born in a research lab. It was born from watching AI systems fail, lie, and leave no trace — then hearing the industry say "that's just how AI works." Jonathan asked a question most engineers never ask: <em className="text-purple-300/80">What if the language itself could enforce accountability? What if goals, proofs, and memory weren't features you add later — but foundations you start with?</em>
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
+                  He started building with no formal training, just a belief that anything is possible if you refuse to quit. Manus was the tool. VOW was the vision. The scar memory, the formal ontology, the compile-time enforcement — these aren't academic concepts he borrowed. They're solutions he arrived at by thinking from first principles, refusing to accept that small teams can't build what enterprises claim only they can.
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
+                  At 33, Jonathan experienced a fundamental shift. A self-actualization that changed everything: <em className="text-slate-200">life doesn't happen to you, it happens for you. There is no failure — only lessons.</em> This wasn't motivational poster talk. It was a complete restructuring of how he saw himself and the world. He developed new philosophical frameworks, internal systems for facing the hard questions most people spend their lives avoiding.
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
+                  Mirrored — his first app — came from that place. Not from a product roadmap, but from a genuine need to help others do what he had done: face themselves. He built an AI that doesn't just respond, but reflects. Profound, intellectual, unflinching — the kind of mirror that shows you what you need to see, not what you want to see. Creative prompting became philosophical architecture. The app became a tool for self-confrontation.
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
+                  The result is nine products that prove formally-verified AI doesn't require a Fortune 500 budget. TrueRPM serves owner-operators because Jonathan believes the people who keep the economy moving deserve the same technological advantages as the people who profit from it. Every product is built for the underdog.
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
+                  Jonathan leads Jcee Labs with one rule: question everything, especially your own assumptions. The confidence comes from knowing he's built something real. The humility comes from knowing he's still building.
                 </p>
               </div>
             </div>
