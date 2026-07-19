@@ -88,7 +88,7 @@ const PRODUCTS = [
     meta: "Autonomous marketing",
   },
   {
-    name: "Revel Industries",
+    name: "Bourne Aire Industries",
     tagline: "Industrial workflow automation",
     description:
       "Industrial equipment bid management built specifically for HVAC wholesalers and resellers. Automates the entire workflow — from receiving a bid request (PDF spec sheet or email) to sending RFQs to vendors and comparing quotes.",

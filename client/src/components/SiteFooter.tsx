@@ -107,7 +107,7 @@ export default function SiteFooter() {
               </li>
               <li>
                 <Link href="/revel">
-                  <a className="hover:text-teal-300 transition-colors">Revel Industries</a>
+                  <a className="hover:text-teal-300 transition-colors">Bourne Aire Industries</a>
                 </Link>
               </li>
               <li>

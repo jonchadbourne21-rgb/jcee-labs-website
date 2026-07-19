@@ -240,3 +240,10 @@
 - [x] Update SiteFooter products column
 - [x] Update Home.tsx if any reference exists (none found — no change needed)
 - [x] All tests passing
+
+## Phase 27 — Rename Revel Industries to Bourne Aire Industries
+- [x] Update SiteNav.tsx
+- [x] Update SiteFooter.tsx
+- [x] Update ProductsPage.tsx
+- [x] Update RevelPage.tsx hero title
+- [x] All tests passing
