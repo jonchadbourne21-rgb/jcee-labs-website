@@ -214,3 +214,11 @@
 - [x] Update product card layout to 2-column grid matching wireframe
 - [x] Add meta/category line to each card (Domain-specific language, App Store launch, etc.)
 - [x] All tests passing
+
+## Phase 24 — Separate Products Page & Static Landing
+- [x] Create ProductsPage.tsx with full 9-product list (moved from Home.tsx)
+- [x] Strip Home.tsx to hero-only static landing page (no products section)
+- [x] Update "Explore Products" CTA to route to /products
+- [x] Add /products route to App.tsx
+- [x] Update SiteNav with "View All Products" link to /products
+- [x] All tests passing

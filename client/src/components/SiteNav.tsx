@@ -81,6 +81,16 @@ export default function SiteNav() {
                     </a>
                   </Link>
                 ))}
+                <div className="border-t border-white/10 mt-1 pt-1">
+                  <Link href="/products">
+                    <a
+                      onClick={() => setProductsOpen(false)}
+                      className="block px-4 py-2 text-sm text-purple-300 hover:text-purple-200 hover:bg-white/5 transition-colors font-medium"
+                    >
+                      View All Products
+                    </a>
+                  </Link>
+                </div>
               </div>
             )}
           </div>
