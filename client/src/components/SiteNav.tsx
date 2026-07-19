@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 
 const PRODUCTS = [
-  { name: "VOW", href: "/vow", color: "text-purple-300" },
+  { name: "VOW", href: "/vow", color: "text-[#d4a843]" },
   { name: "Mirrored", href: "/mirrored", color: "text-teal-300" },
   { name: "TrueRPM", href: "/truerpm", color: "text-orange-300" },
   { name: "NicheFlo", href: "/nicheflo", color: "text-cyan-300" },

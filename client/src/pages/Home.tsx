@@ -197,7 +197,7 @@ export default function Home() {
             <p className="text-lg md:text-xl leading-relaxed max-w-2xl text-slate-300/90">
               Jcee Labs builds AI products on{" "}
               <Link href="/vow">
-                <a className="text-purple-300 hover:text-purple-200 underline underline-offset-2 decoration-purple-500/40 font-semibold">VOW</a>
+                <a className="text-[#d4a843] hover:text-[#e8c56d] underline underline-offset-2 decoration-[#d4a843]/40 font-semibold">VOW</a>
               </Link>
               {" "}— our formally-grounded language where every agent action compiles to auditable Python and leaves a causal trail, not a black box. Built for regulatory transparency before the EU AI Act makes it mandatory.
             </p>

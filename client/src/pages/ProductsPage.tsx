@@ -133,7 +133,7 @@ export default function ProductsPage() {
       {/* Hero */}
       <section className="pt-32 pb-8 text-center">
         <div className="max-w-[720px] mx-auto px-6">
-          <div className="inline-block text-[12px] font-semibold tracking-[0.1em] uppercase px-5 py-2 rounded-3xl border border-white/[0.06] text-[#67e8f9] mb-6">
+          <div className="inline-block text-[12px] font-semibold tracking-[0.1em] uppercase px-5 py-2 rounded-3xl border border-[#d4a843]/20 text-[#d4a843] mb-6">
             9 Products — Built on VOW
           </div>
           <h2 className="text-[36px] font-extrabold leading-[1.2] tracking-[-0.02em] mb-4">
@@ -155,9 +155,9 @@ export default function ProductsPage() {
               return (
                 <Link key={product.name} href={product.href}>
                   <a
-                    className={`block bg-[#161326] border border-white/[0.06] rounded-2xl p-7 group hover:border-[rgba(167,139,250,0.2)] hover:-translate-y-px transition-all duration-300 relative overflow-hidden${
+                    className={`block bg-[#161326] border border-white/[0.06] rounded-2xl p-7 group hover:border-[rgba(212,168,67,0.2)] hover:-translate-y-px transition-all duration-300 relative overflow-hidden${
                       product.name === "VOW"
-                        ? " border-[rgba(167,139,250,0.15)] bg-gradient-to-b from-[rgba(167,139,250,0.04)] to-[#161326]"
+                        ? " border-[rgba(212,168,67,0.15)] bg-gradient-to-b from-[rgba(212,168,67,0.04)] to-[#161326] hover:border-[rgba(212,168,67,0.3)]"
                         : ""
                     }`}
                   >
@@ -165,7 +165,7 @@ export default function ProductsPage() {
                     <div className="flex items-start justify-between gap-3 mb-3.5">
                       <div className="flex-1 min-w-0">
                         {product.poweredByVow && product.name !== "VOW" && (
-                          <span className="text-[10px] font-bold tracking-[0.12em] text-[#a78bfa] uppercase mb-1 block">
+                          <span className="text-[10px] font-bold tracking-[0.12em] text-[#d4a843] uppercase mb-1 block">
                             POWERED BY VOW
                           </span>
                         )}
@@ -179,7 +179,7 @@ export default function ProductsPage() {
                             ? "bg-[rgba(251,191,36,0.12)] text-[#fbbf24] border-[rgba(251,191,36,0.2)]"
                             : product.status === "BETA \u2014 WAITLIST"
                             ? "bg-[rgba(244,114,182,0.12)] text-[#f472b6] border-[rgba(244,114,182,0.2)]"
-                            : "bg-[rgba(167,139,250,0.12)] text-[#a78bfa] border-[rgba(167,139,250,0.2)]"
+                            : "bg-[rgba(52,211,153,0.12)] text-[#34d399] border-[rgba(52,211,153,0.2)]"
                         }`}
                       >
                         {product.status}
@@ -193,7 +193,7 @@ export default function ProductsPage() {
 
                     {/* Meta line */}
                     <div className="flex items-center gap-2.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#a78bfa] flex-shrink-0" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#d4a843] flex-shrink-0" />
                       <span className="text-[13px] text-[#6b6580]">
                         {product.meta}
                       </span>

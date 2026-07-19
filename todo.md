@@ -222,3 +222,13 @@
 - [x] Add /products route to App.tsx
 - [x] Update SiteNav with "View All Products" link to /products
 - [x] All tests passing
+
+## Phase 25 — VOW Gold Color Update (site-wide)
+- [x] Home.tsx — VOW link changed to gold (#d4a843)
+- [x] SiteNav.tsx — VOW color changed to text-[#d4a843]
+- [x] SiteFooter.tsx — VOW hover color changed to text-[#d4a843]
+- [x] ProductsPage.tsx — VOW card border/bg, POWERED BY VOW label, badge, hero badge, hover borders, meta dot all changed to gold
+- [x] ProductsPage.tsx — Status badge for generic "BETA" changed from purple to green (#34d399) to avoid confusion with VOW gold
+- [x] ServicesPage.tsx — All purple references replaced with gold: hero badge, gradient text, card hover borders, icon containers, process step numbers, CTA button
+- [x] VowPage.tsx — Already fully gold-themed (done in earlier phase)
+- [x] All 12 tests passing

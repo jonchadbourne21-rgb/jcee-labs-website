@@ -137,12 +137,12 @@ export default function ServicesPage() {
       {/* Hero */}
       <section className="pt-32 pb-8 text-center">
         <div className="max-w-[720px] mx-auto px-6">
-          <div className="inline-block text-[12px] font-semibold tracking-[0.1em] uppercase px-5 py-2 rounded-3xl border border-white/[0.06] text-[#67e8f9] mb-6">
+          <div className="inline-block text-[12px] font-semibold tracking-[0.1em] uppercase px-5 py-2 rounded-3xl border border-white/[0.06] text-[#d4a843] mb-6">
             Autonomous Systems Built on VOW
           </div>
           <h2 className="text-[36px] font-extrabold leading-[1.2] tracking-[-0.02em] mb-4">
             Autonomous Systems{" "}
-            <span className="bg-gradient-to-r from-[#a78bfa] to-[#f472b6] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#d4a843] to-[#e8c56d] bg-clip-text text-transparent">
               Built on VOW
             </span>
           </h2>
@@ -173,17 +173,17 @@ export default function ServicesPage() {
               return (
                 <div
                   key={service.name}
-                  className="bg-[#161326] border border-white/[0.06] rounded-[20px] p-7 relative overflow-hidden group hover:border-[rgba(167,139,250,0.2)] hover:-translate-y-0.5 transition-all duration-300"
+                  className="bg-[#161326] border border-white/[0.06] rounded-[20px] p-7 relative overflow-hidden group hover:border-[rgba(212,168,67,0.2)] hover:-translate-y-0.5 transition-all duration-300"
                 >
                   {/* Top gradient line on hover */}
-                  <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#a78bfa] to-[#f472b6] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#d4a843] to-[#e8c56d] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                   <div className="flex items-start gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-[14px] bg-[rgba(167,139,250,0.1)] border border-[rgba(167,139,250,0.15)] flex items-center justify-center flex-shrink-0">
-                      <Icon className="w-5 h-5 text-[#a78bfa]" />
+                    <div className="w-12 h-12 rounded-[14px] bg-[rgba(212,168,67,0.1)] border border-[rgba(212,168,67,0.15)] flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-5 h-5 text-[#d4a843]" />
                     </div>
                     <div className="flex-1">
-                      <span className="text-[10px] font-bold tracking-[0.12em] text-[#a78bfa] uppercase block mb-1">
+                      <span className="text-[10px] font-bold tracking-[0.12em] text-[#d4a843] uppercase block mb-1">
                         {service.tag}
                       </span>
                       <h4 className="text-[18px] font-bold text-[#e8e4f0]">
@@ -217,9 +217,9 @@ export default function ServicesPage() {
             {PROCESS_STEPS.map((step) => (
               <div
                 key={step.number}
-                className="bg-[#161326] border border-white/[0.06] rounded-[20px] p-7 flex gap-5 items-start hover:border-[rgba(167,139,250,0.2)] transition-all duration-300 max-sm:flex-col"
+                className="bg-[#161326] border border-white/[0.06] rounded-[20px] p-7 flex gap-5 items-start hover:border-[rgba(212,168,67,0.2)] transition-all duration-300 max-sm:flex-col"
               >
-                <div className="w-12 h-12 rounded-[14px] bg-[rgba(103,232,249,0.1)] border border-[rgba(103,232,249,0.2)] flex items-center justify-center flex-shrink-0 text-[16px] font-bold font-mono text-[#67e8f9]">
+                <div className="w-12 h-12 rounded-[14px] bg-[rgba(212,168,67,0.1)] border border-[rgba(212,168,67,0.2)] flex items-center justify-center flex-shrink-0 text-[16px] font-bold font-mono text-[#d4a843]">
                   {step.number}
                 </div>
                 <div>
@@ -254,10 +254,10 @@ export default function ServicesPage() {
               return (
                 <div
                   key={item.title}
-                  className="bg-[#161326] border border-white/[0.06] rounded-[20px] p-7 hover:border-[rgba(167,139,250,0.2)] transition-all duration-300"
+                  className="bg-[#161326] border border-white/[0.06] rounded-[20px] p-7 hover:border-[rgba(212,168,67,0.2)] transition-all duration-300"
                 >
-                  <div className="w-12 h-12 rounded-[14px] bg-[rgba(167,139,250,0.1)] border border-[rgba(167,139,250,0.15)] flex items-center justify-center mb-4">
-                    <Icon className="w-5 h-5 text-[#a78bfa]" />
+                  <div className="w-12 h-12 rounded-[14px] bg-[rgba(212,168,67,0.1)] border border-[rgba(212,168,67,0.15)] flex items-center justify-center mb-4">
+                    <Icon className="w-5 h-5 text-[#d4a843]" />
                   </div>
                   <h4 className="text-[18px] font-bold text-[#e8e4f0] mb-2">
                     {item.title}
@@ -290,10 +290,10 @@ export default function ServicesPage() {
               return (
                 <div
                   key={item.title}
-                  className="bg-[#161326] border border-white/[0.06] rounded-[20px] p-7 hover:border-[rgba(167,139,250,0.2)] transition-all duration-300"
+                  className="bg-[#161326] border border-white/[0.06] rounded-[20px] p-7 hover:border-[rgba(212,168,67,0.2)] transition-all duration-300"
                 >
-                  <div className="w-12 h-12 rounded-[14px] bg-[rgba(167,139,250,0.1)] border border-[rgba(167,139,250,0.15)] flex items-center justify-center mb-4">
-                    <Icon className="w-5 h-5 text-[#a78bfa]" />
+                  <div className="w-12 h-12 rounded-[14px] bg-[rgba(212,168,67,0.1)] border border-[rgba(212,168,67,0.15)] flex items-center justify-center mb-4">
+                    <Icon className="w-5 h-5 text-[#d4a843]" />
                   </div>
                   <h4 className="text-[18px] font-bold text-[#e8e4f0] mb-2">
                     {item.title}
@@ -333,13 +333,13 @@ export default function ServicesPage() {
         <div className="max-w-[720px] mx-auto px-6 flex flex-col items-center gap-4">
           <a
             href="mailto:jonathan@jceelabs.com?subject=VOW%20Audit%20Request"
-            className="inline-block bg-gradient-to-r from-[#a78bfa] to-[#f472b6] text-white text-[16px] font-semibold px-8 py-4 rounded-full hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(167,139,250,0.3)] transition-all duration-300"
+            className="inline-block bg-gradient-to-r from-[#d4a843] to-[#c9952c] text-white text-[16px] font-semibold px-8 py-4 rounded-full hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(212,168,67,0.3)] transition-all duration-300"
           >
             Request a VOW Audit &rarr;
           </a>
           <a
             href="mailto:jonathan@jceelabs.com?subject=Enterprise%20Access%20Inquiry"
-            className="inline-block text-[14px] text-[#6b6580] border border-white/[0.06] px-6 py-3 rounded-full hover:border-[rgba(167,139,250,0.2)] hover:text-[#9a94b0] transition-all duration-300"
+            className="inline-block text-[14px] text-[#6b6580] border border-white/[0.06] px-6 py-3 rounded-full hover:border-[rgba(212,168,67,0.2)] hover:text-[#9a94b0] transition-all duration-300"
           >
             Explore Enterprise Access
           </a>

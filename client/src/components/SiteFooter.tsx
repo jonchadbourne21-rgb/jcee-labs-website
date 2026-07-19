@@ -77,7 +77,7 @@ export default function SiteFooter() {
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
                 <Link href="/vow">
-                  <a className="hover:text-purple-300 transition-colors">VOW</a>
+                  <a className="hover:text-[#d4a843] transition-colors">VOW</a>
                 </Link>
               </li>
               <li>
