@@ -242,7 +242,7 @@ export default function Home() {
             Jcee Labs is the d.b.a. of HOWM HOLDINGS LLC.
           </p>
           <p className="text-lg text-slate-300/80 font-medium">
-            We architect formally-verified AI systems. Everything else is just software.
+            We architect formally-verified AI systems. Everyone else is just shipping software.
           </p>
         </div>
       </section>
