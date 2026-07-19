@@ -149,17 +149,16 @@ export default function Home() {
           HERO — Full viewport, static, intriguing
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="relative flex-1 flex items-center justify-center min-h-screen z-10 overflow-hidden">
-        {/* Logo as background element */}
-        <div className="absolute inset-0 flex items-center justify-end pointer-events-none">
+        {/* Hero background image */}
+        <div className="absolute inset-0 pointer-events-none">
           <img
-            src="/manus-storage/jcee-labs-new-logo_cd2cbbaa.jpg"
+            src="/manus-storage/jcee-labs-hero-bg_104c4860.png"
             alt=""
-            className="w-[500px] md:w-[650px] lg:w-[750px] opacity-20 mr-[-5%] md:mr-[2%] select-none"
-            style={{ filter: "brightness(1.2) contrast(1.1)" }}
+            className="w-full h-full object-cover opacity-40 select-none"
           />
-          {/* Gradient overlay to blend logo edges */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#080c18] via-[#080c18]/70 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#080c18] via-transparent to-[#080c18]/50" />
+          {/* Gradient overlays to blend with content */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#080c18] via-[#080c18]/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#080c18] via-transparent to-[#080c18]/40" />
         </div>
 
         <div className="container relative z-10">
