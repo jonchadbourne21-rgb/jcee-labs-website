@@ -44,7 +44,7 @@ export default function Home() {
           <Link href="/">
             <a className="flex items-center gap-3 group">
               <img
-                src="/manus-storage/jcee-labs-logo_d242d7a5.png"
+                src="/manus-storage/jcee-labs-new-logo_cd2cbbaa.jpg"
                 alt="Jcee Labs Logo"
                 className="w-9 h-9 rounded-xl shadow-lg shadow-[#8ba4d8]/15 group-hover:scale-105 transition-transform duration-300 object-contain"
               />
@@ -170,7 +170,7 @@ export default function Home() {
         {/* Logo as background element */}
         <div className="absolute inset-0 flex items-center justify-end pointer-events-none">
           <img
-            src="/manus-storage/jcee-labs-logo_d242d7a5.png"
+            src="/manus-storage/jcee-labs-new-logo_cd2cbbaa.jpg"
             alt=""
             className="w-[500px] md:w-[650px] lg:w-[750px] opacity-20 mr-[-5%] md:mr-[2%] select-none"
             style={{ filter: "brightness(1.2) contrast(1.1)" }}
