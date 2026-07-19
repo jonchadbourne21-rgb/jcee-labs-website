@@ -20,7 +20,7 @@ export default function VowPage() {
 
         <div className="container max-w-5xl mx-auto relative">
           <div className="mb-6 inline-flex items-center gap-3">
-            <span className="px-4 py-2 rounded-full border border-purple-500/30 bg-purple-500/5 text-sm text-purple-400 font-mono">
+            <span className="px-4 py-2 rounded-full border border-[#d4a843]/30 bg-[#d4a843]/5 text-sm text-[#d4a843] font-mono">
               Ontology-Driven PaaS & Language
             </span>
             <span className="px-3 py-1.5 rounded-full border border-green-500/30 bg-green-500/5 text-xs text-green-400 font-mono">
@@ -29,7 +29,7 @@ export default function VowPage() {
           </div>
 
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">VOW</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4a843] to-[#e8c56d]">VOW</span>
           </h1>
 
           <p className="text-xl text-[#A0AEC0] mb-4 max-w-3xl leading-relaxed">
@@ -41,7 +41,7 @@ export default function VowPage() {
 
           <div className="flex flex-col sm:flex-row gap-4 mb-12">
             <Link href="/services#contact">
-              <Button className="rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white font-semibold shadow-lg shadow-purple-500/20 active:scale-97 transition-all">
+              <Button className="rounded-xl bg-gradient-to-r from-[#c9952c] to-[#d4a843] hover:from-[#d4a843] hover:to-[#e8c56d] text-[#0d0b14] font-semibold shadow-lg shadow-[#d4a843]/20 active:scale-97 transition-all">
                 Request Enterprise Access <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
@@ -55,8 +55,8 @@ export default function VowPage() {
       {/* Note: Aurora removed since we now use the hero image */}
       <section className="relative">
         <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[120px] opacity-20" style={{ transform: 'translateZ(0)' }} />
-          <div className="absolute bottom-20 left-1/4 w-96 h-96 bg-pink-500/10 rounded-full blur-[120px] opacity-20" style={{ transform: 'translateZ(0)' }} />
+          <div className="absolute top-20 right-1/4 w-96 h-96 bg-[#d4a843]/20 rounded-full blur-[120px] opacity-20" style={{ transform: 'translateZ(0)' }} />
+          <div className="absolute bottom-20 left-1/4 w-96 h-96 bg-[#c9952c]/10 rounded-full blur-[120px] opacity-20" style={{ transform: 'translateZ(0)' }} />
         </div>
       </section>
 
@@ -64,10 +64,10 @@ export default function VowPage() {
       <section className="py-20 px-4 border-t border-white/5">
         <div className="container max-w-5xl mx-auto">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
-              <Brain className="w-4 h-4 text-purple-400" />
+            <div className="w-8 h-8 rounded-lg bg-[#d4a843]/10 border border-[#d4a843]/20 flex items-center justify-center">
+              <Brain className="w-4 h-4 text-[#d4a843]" />
             </div>
-            <span className="text-xs font-mono text-purple-400/80 uppercase tracking-wider">Formal Architecture</span>
+            <span className="text-xs font-mono text-[#d4a843]/80 uppercase tracking-wider">Formal Architecture</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-4">Built on Ontological Foundations</h2>
           <p className="text-[#718096] mb-12 max-w-2xl">
@@ -75,9 +75,9 @@ export default function VowPage() {
           </p>
 
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-purple-500/20 transition-colors">
+            <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-[#d4a843]/20 transition-colors">
               <div className="flex items-center gap-3 mb-4">
-                <Layers className="w-6 h-6 text-purple-400" />
+                <Layers className="w-6 h-6 text-[#d4a843]" />
                 <h3 className="text-lg font-bold text-white">Continuant / Occurrent</h3>
               </div>
               <p className="text-sm text-[#718096] leading-relaxed">
@@ -85,9 +85,9 @@ export default function VowPage() {
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-purple-500/20 transition-colors">
+            <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-[#d4a843]/20 transition-colors">
               <div className="flex items-center gap-3 mb-4">
-                <Workflow className="w-6 h-6 text-purple-400" />
+                <Workflow className="w-6 h-6 text-[#d4a843]" />
                 <h3 className="text-lg font-bold text-white">Mereology (Part-Whole)</h3>
               </div>
               <p className="text-sm text-[#718096] leading-relaxed">
@@ -95,9 +95,9 @@ export default function VowPage() {
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-purple-500/20 transition-colors">
+            <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-[#d4a843]/20 transition-colors">
               <div className="flex items-center gap-3 mb-4">
-                <Code className="w-6 h-6 text-purple-400" />
+                <Code className="w-6 h-6 text-[#d4a843]" />
                 <h3 className="text-lg font-bold text-white">Subsumption Logic</h3>
               </div>
               <p className="text-sm text-[#718096] leading-relaxed">
@@ -105,9 +105,9 @@ export default function VowPage() {
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-purple-500/20 transition-colors">
+            <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-[#d4a843]/20 transition-colors">
               <div className="flex items-center gap-3 mb-4">
-                <Scale className="w-6 h-6 text-purple-400" />
+                <Scale className="w-6 h-6 text-[#d4a843]" />
                 <h3 className="text-lg font-bold text-white">Deontic Logic</h3>
               </div>
               <p className="text-sm text-[#718096] leading-relaxed">
@@ -183,10 +183,10 @@ export default function VowPage() {
       <section className="py-20 px-4 border-t border-white/5">
         <div className="container max-w-5xl mx-auto">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 rounded-lg bg-pink-500/10 border border-pink-500/20 flex items-center justify-center">
-              <Zap className="w-4 h-4 text-pink-400" />
+            <div className="w-8 h-8 rounded-lg bg-[#d4a843]/10 border border-[#d4a843]/20 flex items-center justify-center">
+              <Zap className="w-4 h-4 text-[#d4a843]" />
             </div>
-            <span className="text-xs font-mono text-pink-400/80 uppercase tracking-wider">In Production</span>
+            <span className="text-xs font-mono text-[#d4a843]/80 uppercase tracking-wider">In Production</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-4">The Brain Behind Our Multi-Agent Systems</h2>
           <p className="text-[#718096] mb-12 max-w-2xl">
@@ -240,17 +240,17 @@ export default function VowPage() {
                 This isn't traditional machine learning. It's formal record-keeping with ontological classification — each scar is categorized, its causal chain preserved, and its lessons made available to every downstream decision without retraining.
               </p>
             </div>
-            <div className="p-6 rounded-2xl border border-purple-500/10 bg-purple-500/[0.02] font-mono text-sm">
-              <div className="text-purple-400/60 mb-2">// VOW Scar Memory — simplified</div>
+            <div className="p-6 rounded-2xl border border-[#d4a843]/10 bg-[#d4a843]/[0.02] font-mono text-sm">
+              <div className="text-[#d4a843]/60 mb-2">// VOW Scar Memory — simplified</div>
               <div className="text-[#A0AEC0] space-y-1">
-                <div><span className="text-purple-400">continuant</span> ScarMemory {"{"}</div>
-                <div className="pl-4"><span className="text-pink-400">accumulates</span>: Trace[]</div>
-                <div className="pl-4"><span className="text-pink-400">classifies</span>: OntologyCategory</div>
-                <div className="pl-4"><span className="text-pink-400">preserves</span>: CausalChain</div>
+                <div><span className="text-[#d4a843]">continuant</span> ScarMemory {"{"}</div>
+                <div className="pl-4"><span className="text-[#e8c56d]">accumulates</span>: Trace[]</div>
+                <div className="pl-4"><span className="text-[#e8c56d]">classifies</span>: OntologyCategory</div>
+                <div className="pl-4"><span className="text-[#e8c56d]">preserves</span>: CausalChain</div>
                 <div>{"}"}</div>
-                <div className="mt-3"><span className="text-purple-400">occurrent</span> FailureEvent {"{"}</div>
-                <div className="pl-4"><span className="text-pink-400">triggers</span>: ScarWrite</div>
-                <div className="pl-4"><span className="text-pink-400">requires</span>: TemporalOrdering</div>
+                <div className="mt-3"><span className="text-[#d4a843]">occurrent</span> FailureEvent {"{"}</div>
+                <div className="pl-4"><span className="text-[#e8c56d]">triggers</span>: ScarWrite</div>
+                <div className="pl-4"><span className="text-[#e8c56d]">requires</span>: TemporalOrdering</div>
                 <div>{"}"}</div>
                 <div className="mt-3 text-green-400/60">// Category error caught at compile time:</div>
                 <div className="text-red-400/80">// Cannot mutate continuant without sync</div>
@@ -269,7 +269,7 @@ export default function VowPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/services#contact">
-              <Button className="rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white font-semibold shadow-lg shadow-purple-500/20 active:scale-97 transition-all">
+              <Button className="rounded-xl bg-gradient-to-r from-[#c9952c] to-[#d4a843] hover:from-[#d4a843] hover:to-[#e8c56d] text-[#0d0b14] font-semibold shadow-lg shadow-[#d4a843]/20 active:scale-97 transition-all">
                 Talk to Our Team <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
