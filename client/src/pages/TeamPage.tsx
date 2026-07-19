@@ -154,32 +154,53 @@ export default function TeamPage() {
           </div>
           <div className="space-y-4">
             <div className="flex items-start gap-3 bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-purple-500/20 transition-colors">
-              <span className="text-purple-400 mt-0.5">•</span>
-              <p className="text-muted-foreground leading-relaxed">Failure is unacceptable when you can choose a lesson and the next step</p>
+              <span className="text-purple-400 mt-1">•</span>
+              <div>
+                <p className="text-muted-foreground leading-relaxed">Failure is unacceptable when you can choose a lesson and the next step</p>
+                <p className="text-sm text-white/40 mt-1">Every setback feeds VOW's scar memory — we encode what went wrong so the system never repeats it.</p>
+              </div>
             </div>
             <div className="flex items-start gap-3 bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-purple-500/20 transition-colors">
-              <span className="text-purple-400 mt-0.5">•</span>
-              <p className="text-muted-foreground leading-relaxed">Our hope is problems, our faith is solutions</p>
+              <span className="text-purple-400 mt-1">•</span>
+              <div>
+                <p className="text-muted-foreground leading-relaxed">Our hope is problems, our faith is solutions</p>
+                <p className="text-sm text-white/40 mt-1">We actively seek broken workflows and inefficient industries because that's where the highest-impact products live.</p>
+              </div>
             </div>
             <div className="flex items-start gap-3 bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-purple-500/20 transition-colors">
-              <span className="text-purple-400 mt-0.5">•</span>
-              <p className="text-muted-foreground leading-relaxed">Turn ideas into solutions for the agentic AI boom</p>
+              <span className="text-purple-400 mt-1">•</span>
+              <div>
+                <p className="text-muted-foreground leading-relaxed">Turn ideas into solutions for the agentic AI boom</p>
+                <p className="text-sm text-white/40 mt-1">We ship production-ready autonomous systems while others are still debating frameworks.</p>
+              </div>
             </div>
             <div className="flex items-start gap-3 bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-purple-500/20 transition-colors">
-              <span className="text-purple-400 mt-0.5">•</span>
-              <p className="text-muted-foreground leading-relaxed">We don't have a niche. <em className="text-white">We ARE the niche</em></p>
+              <span className="text-purple-400 mt-1">•</span>
+              <div>
+                <p className="text-muted-foreground leading-relaxed">We don't have a niche. <em className="text-white">We ARE the niche</em></p>
+                <p className="text-sm text-white/40 mt-1">Nine products across trucking, wellness, supply chain, marketing, and DeFi — unified by one language and one standard of quality.</p>
+              </div>
             </div>
             <div className="flex items-start gap-3 bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-purple-500/20 transition-colors">
-              <span className="text-purple-400 mt-0.5">•</span>
-              <p className="text-muted-foreground leading-relaxed">Innovation is our quest. Fixing industry problems is our goal</p>
+              <span className="text-purple-400 mt-1">•</span>
+              <div>
+                <p className="text-muted-foreground leading-relaxed">Innovation is our quest. Fixing industry problems is our goal</p>
+                <p className="text-sm text-white/40 mt-1">We don't build technology for technology's sake — every product solves a specific pain point for real operators.</p>
+              </div>
             </div>
             <div className="flex items-start gap-3 bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-purple-500/20 transition-colors">
-              <span className="text-purple-400 mt-0.5">•</span>
-              <p className="text-muted-foreground leading-relaxed">Attitude and belief — anything is possible until it isn't — we engrave into the culture</p>
+              <span className="text-purple-400 mt-1">•</span>
+              <div>
+                <p className="text-muted-foreground leading-relaxed">Attitude and belief — anything is possible until it isn't — we engrave into the culture</p>
+                <p className="text-sm text-white/40 mt-1">We attempt what others dismiss as impossible, and let the results speak for themselves.</p>
+              </div>
             </div>
             <div className="flex items-start gap-3 bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-purple-500/20 transition-colors">
-              <span className="text-purple-400 mt-0.5">•</span>
-              <p className="text-muted-foreground leading-relaxed">We always stay young in our thinking to stay years ahead</p>
+              <span className="text-purple-400 mt-1">•</span>
+              <div>
+                <p className="text-muted-foreground leading-relaxed">We always stay young in our thinking to stay years ahead</p>
+                <p className="text-sm text-white/40 mt-1">No legacy assumptions, no "we've always done it this way" — every decision is made fresh from first principles.</p>
+              </div>
             </div>
 
           </div>
