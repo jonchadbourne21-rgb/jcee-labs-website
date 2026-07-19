@@ -187,7 +187,7 @@ export default function Home() {
             </div>
             <h1 className="text-5xl md:text-7xl font-display font-extrabold leading-[1.05] tracking-tight">
               One studio.{" "}
-              <span className="text-[#c0c8d8]">
+              <span className="text-[#d4a843]">
                 One language.
               </span>{" "}
               <span className="text-[#8ba4d8]">
