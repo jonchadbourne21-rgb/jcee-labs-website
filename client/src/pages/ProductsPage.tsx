@@ -140,8 +140,7 @@ export default function ProductsPage() {
             Products
           </h2>
           <p className="text-[17px] text-[#7a8aaa] max-w-[600px] mx-auto leading-[1.7]">
-            Built on VOW. Auditable by design. Every product in our portfolio
-            compiles to readable Python and leaves a decision trail.
+            Every product learns from failure, explains every decision, and compiles to code you can actually read.
           </p>
         </div>
       </section>
