@@ -15,79 +15,104 @@ import {
   Eye,
   Workflow,
   Ship,
+  Cpu,
+  Bot,
+  Factory,
+  FileText,
+  Orbit,
 } from "lucide-react";
 
 // ─── Product Cards Data ─────────────────────────────────────────────────────
 const PRODUCTS = [
   {
-    name: "Mirrored",
-    tagline: "Your Higher Self, Reflecting Back",
-    description:
-      "Not a chatbot. Not a therapist. Mirrored listens without judgment and reflects your own patterns back to you with the clarity only an outside perspective can offer. Cognitive journaling and real-time Voice-to-Voice conversation — tracking emotional tone, surfacing blind spots, asking the sharp honest questions that meet you where you are.",
-    color: "teal",
-    icon: Brain,
-    href: "/mirrored",
-    status: "Beta",
-  },
-  {
-    name: "TrueRPM",
-    tagline: "Revenue Per Mile",
-    description:
-      "Know your true revenue per mile. Load intelligence and multi-stacking optimization for owner-operators.",
-    color: "orange",
-    icon: Truck,
-    href: "/truerpm",
-    status: "Coming Soon",
-  },
-  {
     name: "VOW",
-    tagline: "Ontology-Driven PaaS & Language",
+    tagline: "Quest-Oriented Programming Language",
     description:
-      "Most agentic AI frameworks treat safety and auditability as an afterthought bolted onto a general-purpose language. VOW is different: it's purpose-built from the ground up so that autonomous agents can take real-world actions — and every one of those actions is transparent, traceable, and gated by explicit permissions. VOW compiles to readable Python rather than hiding logic in a bytecode VM, so what the agent does is never a mystery. Every capability-gated action routes through an auditable guard layer, and the system maintains a persistent 'scar trail' — a record of consequential decisions an agent has made and why. That's not just good engineering practice; it's increasingly a regulatory requirement. VOW's audit architecture maps directly onto the EU AI Act's high-risk system obligations (Articles 9–15), positioning it ahead of the transparency deadlines already taking effect in 2026.",
+      "The first quest-oriented programming language: goals, proofs, and scar memory built into the syntax itself. Code that remembers what hurt, knows why, and never tries the same failing path twice.",
     color: "purple",
     icon: Code2,
     href: "/vow",
     status: "In Development",
   },
   {
-    name: "BidIndustrial",
-    tagline: "Intelligent Bidding",
+    name: "Mirrored",
+    tagline: "AI Higher Self",
     description:
-      "Smart bid estimation for contractors. Hyper-accurate calculations at lightning speed.",
+      "An AI self-reflection companion with emotional intelligence and a unique voice-to-voice experience. Not a chatbot — a sophisticated AI built with no script. Not a coach, not a therapist: your Higher Self, made possible by a custom persona prompt, EVI, and a proprietary RAG system. Our first app.",
     color: "teal",
-    icon: TrendingUp,
-    href: "/bidindustrial",
-    status: "Coming Soon",
+    icon: Brain,
+    href: "/mirrored",
+    status: "Ready for Launch — App Store Within a Month",
   },
   {
-    name: "APEX Media",
-    tagline: "Autonomous Content Engine",
+    name: "TrueRPM",
+    tagline: "True Revenue Per Mile",
     description:
-      "Multi-agent system that watches your market, creates content, and adapts to what drives results.",
-    color: "amber",
-    icon: Eye,
-    href: "/apex",
-    status: "In Development",
+      "AI-powered multi-load stacking board for owner-operators. Optimizes routes to simplify workflow and eliminate deadhead miles, with in-app navigation via Google Maps, live diesel prices, and a built-in ledger — three apps replaced by one, driven by multi-agent intelligence.",
+    color: "orange",
+    icon: Truck,
+    href: "/truerpm",
+    status: "Beta — Releases August 1",
   },
   {
-    name: "NicheFlow",
-    tagline: "SOP Generator",
+    name: "KlawNiche",
+    tagline: "GPU Arbitrage Intelligence",
     description:
-      "Auto-generates industry-specific standard operating procedures for small businesses.",
-    color: "indigo",
-    icon: Workflow,
-    href: "/nicheflo",
-    status: "Coming Soon",
-  },
-  {
-    name: "Zhipz",
-    tagline: "Logistics Intelligence",
-    description:
-      "Multi-agent port monitoring and route optimization. Anticipate disruptions before they cost you.",
+      "Autonomous GPU arbitrage intelligence and RWAiFi yield optimization. Real-time signals. AI-powered execution.",
     color: "cyan",
+    icon: Cpu,
+    href: "/klawniche",
+    status: "Beta",
+  },
+  {
+    name: "FloCraft",
+    tagline: "Supply Chain Intelligence",
+    description:
+      "Supply chain intelligence, powered by VOW. FloCraft uses VOW's intelligent brain to solve supply chain problems in real time — alternate routes and corrective solutions that directly improve ROI.",
+    color: "teal",
     icon: Ship,
-    href: "/zhipz",
-    status: "In Development",
+    href: "/flocraft",
+    status: "Beta",
+  },
+  {
+    name: "Rooh",
+    tagline: "Autonomous Marketing Team — Powered by VOW",
+    description:
+      "An autonomous multi-agent marketing team working asynchronously every day, each agent focused on its own niche. It studies strategies and learns from what works, tracks daily news in your industry, drafts content on a posting schedule, and pings your phone when a blog or social post is ready to send — with a human in the loop whenever you want one.",
+    color: "amber",
+    icon: Bot,
+    href: "/rooh",
+    status: "Beta",
+  },
+  {
+    name: "Revel",
+    tagline: "Industrial Bid Management",
+    description:
+      "Industrial equipment bid management built specifically for HVAC wholesalers and resellers. Automates the entire workflow — from receiving a bid request (PDF spec sheet or email) to sending RFQs to vendors and comparing quotes.",
+    color: "teal",
+    icon: Factory,
+    href: "/revel",
+    status: "Building",
+  },
+  {
+    name: "SOPForge",
+    tagline: "Autonomous SOP Platform — Powered by VOW",
+    description:
+      "Autonomous AI platform for standard operating procedures. Powered by VOW.",
+    color: "indigo",
+    icon: FileText,
+    href: "/sopforge",
+    status: "Beta",
+  },
+  {
+    name: "Babodie",
+    tagline: "Autonomous Neuro-OS",
+    description:
+      "The world's first autonomous Neuro-OS. Powered by VOW v1.0. Run Quests. Build Beliefs. Persist Memory.",
+    color: "purple",
+    icon: Orbit,
+    href: "/babodie",
+    status: "Beta — Waitlist",
   },
 ];
 
@@ -465,13 +490,15 @@ export default function Home() {
                 Products
               </h5>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="/mirrored"><a className="hover:text-purple-300 transition-colors">Mirrored</a></Link></li>
-                <li><Link href="/truerpm"><a className="hover:text-orange-300 transition-colors">TrueRPM</a></Link></li>
                 <li><Link href="/vow"><a className="hover:text-purple-300 transition-colors">VOW</a></Link></li>
-                <li><Link href="/apex"><a className="hover:text-amber-300 transition-colors">APEX Media</a></Link></li>
-                <li><Link href="/bidindustrial"><a className="hover:text-teal-300 transition-colors">BidIndustrial</a></Link></li>
-                <li><Link href="/nicheflo"><a className="hover:text-indigo-300 transition-colors">NicheFlow</a></Link></li>
-                <li><Link href="/zhipz"><a className="hover:text-cyan-300 transition-colors">Zhipz</a></Link></li>
+                <li><Link href="/mirrored"><a className="hover:text-teal-300 transition-colors">Mirrored</a></Link></li>
+                <li><Link href="/truerpm"><a className="hover:text-orange-300 transition-colors">TrueRPM</a></Link></li>
+                <li><Link href="/klawniche"><a className="hover:text-cyan-300 transition-colors">KlawNiche</a></Link></li>
+                <li><Link href="/flocraft"><a className="hover:text-teal-300 transition-colors">FloCraft</a></Link></li>
+                <li><Link href="/rooh"><a className="hover:text-amber-300 transition-colors">Rooh</a></Link></li>
+                <li><Link href="/revel"><a className="hover:text-teal-300 transition-colors">Revel</a></Link></li>
+                <li><Link href="/sopforge"><a className="hover:text-indigo-300 transition-colors">SOPForge</a></Link></li>
+                <li><Link href="/babodie"><a className="hover:text-purple-300 transition-colors">Babodie</a></Link></li>
               </ul>
             </div>
 

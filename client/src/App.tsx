@@ -9,13 +9,14 @@ import { lazy, Suspense, useEffect } from "react";
 const FAQ = lazy(() => import("./pages/FAQ"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Mirrored = lazy(() => import("./pages/Mirrored"));
-const BidIndustrialPage = lazy(() => import("./pages/BidIndustrialPage"));
-const NicheFloPage = lazy(() => import("./pages/NicheFloPage"));
 const VowPage = lazy(() => import("./pages/VowPage"));
 const TrueRPMPage = lazy(() => import("./pages/TrueRPMPage"));
-const ApexPage = lazy(() => import("./pages/ApexPage"));
-const CellularAutomataPage = lazy(() => import("./pages/CellularAutomataPage"));
-const ZhipzPage = lazy(() => import("./pages/ZhipzPage"));
+const KlawNichePage = lazy(() => import("./pages/KlawNichePage"));
+const FloCraftPage = lazy(() => import("./pages/FloCraftPage"));
+const RoohPage = lazy(() => import("./pages/RoohPage"));
+const RevelPage = lazy(() => import("./pages/RevelPage"));
+const SOPForgePage = lazy(() => import("./pages/SOPForgePage"));
+const BabodiePage = lazy(() => import("./pages/BabodiePage"));
 const TeamPage = lazy(() => import("./pages/TeamPage"));
 const AdminPage = lazy(() => import("./pages/AdminPage"));
 const PricingAdmin = lazy(() => import("./pages/PricingAdmin"));
@@ -37,14 +38,15 @@ function Router() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/faq" component={FAQ} />
-        <Route path="/mirrored" component={Mirrored} />
-        <Route path="/bidindustrial" component={BidIndustrialPage} />
-        <Route path="/nicheflo" component={NicheFloPage} />
         <Route path="/vow" component={VowPage} />
+        <Route path="/mirrored" component={Mirrored} />
         <Route path="/truerpm" component={TrueRPMPage} />
-        <Route path="/apex" component={ApexPage} />
-        <Route path="/cellular-automata" component={CellularAutomataPage} />
-        <Route path="/zhipz" component={ZhipzPage} />
+        <Route path="/klawniche" component={KlawNichePage} />
+        <Route path="/flocraft" component={FloCraftPage} />
+        <Route path="/rooh" component={RoohPage} />
+        <Route path="/revel" component={RevelPage} />
+        <Route path="/sopforge" component={SOPForgePage} />
+        <Route path="/babodie" component={BabodiePage} />
         <Route path="/team" component={TeamPage} />
         <Route path="/admin" component={AdminPage} />
         <Route path="/admin/pricing" component={PricingAdmin} />

@@ -4,13 +4,15 @@ import { Button } from "@/components/ui/button";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 
 const PRODUCTS = [
-  { name: "Mirrored", href: "/mirrored", color: "text-purple-300" },
+  { name: "VOW", href: "/vow", color: "text-purple-300" },
+  { name: "Mirrored", href: "/mirrored", color: "text-teal-300" },
   { name: "TrueRPM", href: "/truerpm", color: "text-orange-300" },
-  { name: "VOW", href: "/vow", color: "text-pink-300" },
-  { name: "BidIndustrial", href: "/bidindustrial", color: "text-teal-300" },
-  { name: "NicheFlow", href: "/nicheflo", color: "text-indigo-300" },
-  { name: "APEX Media", href: "/apex", color: "text-amber-300" },
-  { name: "Zhipz", href: "/zhipz", color: "text-cyan-300" },
+  { name: "KlawNiche", href: "/klawniche", color: "text-cyan-300" },
+  { name: "FloCraft", href: "/flocraft", color: "text-teal-300" },
+  { name: "Rooh", href: "/rooh", color: "text-amber-300" },
+  { name: "Revel", href: "/revel", color: "text-teal-300" },
+  { name: "SOPForge", href: "/sopforge", color: "text-indigo-300" },
+  { name: "Babodie", href: "/babodie", color: "text-purple-300" },
 ];
 
 export default function SiteNav() {

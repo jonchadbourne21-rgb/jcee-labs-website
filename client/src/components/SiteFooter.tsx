@@ -76,8 +76,13 @@ export default function SiteFooter() {
             </h5>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
+                <Link href="/vow">
+                  <a className="hover:text-purple-300 transition-colors">VOW</a>
+                </Link>
+              </li>
+              <li>
                 <Link href="/mirrored">
-                  <a className="hover:text-purple-300 transition-colors">Mirrored</a>
+                  <a className="hover:text-teal-300 transition-colors">Mirrored</a>
                 </Link>
               </li>
               <li>
@@ -86,28 +91,33 @@ export default function SiteFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/vow">
-                  <a className="hover:text-purple-300 transition-colors">VOW</a>
+                <Link href="/klawniche">
+                  <a className="hover:text-cyan-300 transition-colors">KlawNiche</a>
                 </Link>
               </li>
               <li>
-                <Link href="/apex">
-                  <a className="hover:text-amber-300 transition-colors">APEX Media</a>
+                <Link href="/flocraft">
+                  <a className="hover:text-teal-300 transition-colors">FloCraft</a>
                 </Link>
               </li>
               <li>
-                <Link href="/bidindustrial">
-                  <a className="hover:text-teal-300 transition-colors">BidIndustrial</a>
+                <Link href="/rooh">
+                  <a className="hover:text-amber-300 transition-colors">Rooh</a>
                 </Link>
               </li>
               <li>
-                <Link href="/nicheflo">
-                  <a className="hover:text-indigo-300 transition-colors">NicheFlow</a>
+                <Link href="/revel">
+                  <a className="hover:text-teal-300 transition-colors">Revel</a>
                 </Link>
               </li>
               <li>
-                <Link href="/zhipz">
-                  <a className="hover:text-cyan-300 transition-colors">Zhipz</a>
+                <Link href="/sopforge">
+                  <a className="hover:text-indigo-300 transition-colors">SOPForge</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/babodie">
+                  <a className="hover:text-purple-300 transition-colors">Babodie</a>
                 </Link>
               </li>
             </ul>
