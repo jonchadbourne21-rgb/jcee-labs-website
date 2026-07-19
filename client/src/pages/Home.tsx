@@ -248,6 +248,28 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
+          STATS
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section className="py-16 border-t border-white/5">
+        <div className="container max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 text-center">
+              <div className="text-3xl font-display font-bold text-purple-400 mb-2">9+</div>
+              <p className="text-sm text-muted-foreground">Products Live & Building</p>
+            </div>
+            <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 text-center">
+              <div className="text-3xl font-display font-bold text-teal-400 mb-2">March 2026</div>
+              <p className="text-sm text-muted-foreground">Founded</p>
+            </div>
+            <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 text-center">
+              <div className="text-lg md:text-xl font-display font-bold text-indigo-400 mb-2 leading-tight">Human-Creative Architecture,<br/>Agentic AI-Driven</div>
+              <p className="text-sm text-muted-foreground">Development Approach</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════════
           FOOTER
       ═══════════════════════════════════════════════════════════════════════ */}
       <SiteFooter />

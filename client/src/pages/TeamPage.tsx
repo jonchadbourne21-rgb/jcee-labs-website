@@ -216,7 +216,7 @@ export default function TeamPage() {
               <p className="text-sm text-muted-foreground">Founded</p>
             </div>
             <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 text-center">
-              <div className="text-lg md:text-xl font-display font-bold text-indigo-400 mb-2 leading-tight">Creative Human Thinking<br/>+ Agentic AI Perfection</div>
+              <div className="text-lg md:text-xl font-display font-bold text-indigo-400 mb-2 leading-tight">Human-Creative Architecture,<br/>Agentic AI-Driven</div>
               <p className="text-sm text-muted-foreground">Development Approach</p>
             </div>
           </div>
