@@ -52,7 +52,7 @@ const FAQ_ITEMS = [
     question: "Who is behind Jcee Labs?",
     answer: (
       <>
-        Jcee Labs was founded by <strong>Jonathan Chadbourne</strong>, a fundamental-principles thinker who built VOW and all nine products without a CS degree. The studio proves that formally-verified AI doesn't need Fortune 500 budgets. George Taylor serves as advisor.
+        Jcee Labs was founded by <strong>Jonathan Chadbourne</strong>, a first-principles thinker who built VOW and all nine products without a CS degree. The studio proves that formally-verified AI doesn't need Fortune 500 budgets. George Taylor serves as advisor.
       </>
     ),
   },

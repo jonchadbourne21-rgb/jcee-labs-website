@@ -126,7 +126,7 @@ export default function Mirrored() {
       <section className="pb-24">
         <div className="max-w-[720px] mx-auto px-6 text-center">
           <h2 className="text-[28px] font-extrabold tracking-[-0.02em] mb-3">
-            Get early access.
+            Be first in line.
           </h2>
           <p className="text-[16px] text-[#9a94b0] mb-8">
             Launching on the App Store within a month.
