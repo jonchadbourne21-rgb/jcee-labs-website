@@ -156,17 +156,23 @@ export default function SiteNav() {
 
       {/* Mobile slide-out panel */}
       <div
-        className={`fixed top-0 right-0 z-50 h-full w-[280px] max-w-[80vw] md:hidden bg-[#0a0f1e] border-l border-[#2a3a5a]/50 shadow-2xl shadow-black/50 transition-transform duration-400 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+        className={`fixed top-0 right-0 z-50 h-full w-[280px] max-w-[80vw] md:hidden border-l border-[#8ba4d8]/20 shadow-2xl shadow-[#8ba4d8]/10 transition-transform duration-400 ease-[cubic-bezier(0.23,1,0.32,1)] ${
           mobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
-        style={{ transitionDuration: "400ms" }}
+        style={{ transitionDuration: "400ms", background: "linear-gradient(180deg, #040810 0%, #080c18 40%, #0a1020 100%)" }}
       >
+        {/* Subtle quantum glow effect at top */}
+        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#8ba4d8]/5 to-transparent pointer-events-none" />
+        <div className="absolute top-20 left-4 w-1 h-1 rounded-full bg-[#8ba4d8] opacity-40 animate-pulse" />
+        <div className="absolute top-40 right-8 w-0.5 h-0.5 rounded-full bg-[#d4a843] opacity-50 animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-64 left-10 w-0.5 h-0.5 rounded-full bg-[#8ba4d8] opacity-30 animate-pulse" style={{ animationDelay: '2s' }} />
+
         {/* Panel header */}
-        <div className="flex items-center justify-between px-5 pt-5 pb-4 border-b border-[#2a3a5a]/30">
-          <span className="text-xs font-mono tracking-widest text-[#7a8aaa] uppercase">Menu</span>
+        <div className="relative flex items-center justify-between px-5 pt-5 pb-4 border-b border-[#8ba4d8]/10">
+          <span className="text-xs font-mono tracking-widest text-[#8ba4d8]/70 uppercase">Menu</span>
           <button
             onClick={() => setMobileMenuOpen(false)}
-            className="w-8 h-8 flex items-center justify-center rounded-lg text-[#7a8aaa] hover:text-[#e8ecf4] hover:bg-[#2a3a5a]/30 transition-all duration-150"
+            className="w-8 h-8 flex items-center justify-center rounded-lg text-[#8ba4d8]/60 hover:text-[#e8ecf4] hover:bg-[#8ba4d8]/10 transition-all duration-150"
             aria-label="Close menu"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -176,19 +182,19 @@ export default function SiteNav() {
         </div>
 
         {/* Panel content */}
-        <nav className="px-5 py-4 overflow-y-auto h-[calc(100%-60px)]">
+        <nav className="relative px-5 py-4 overflow-y-auto h-[calc(100%-60px)]">
           <div className="space-y-1">
             <Link
               href="/"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-3 text-[15px] text-[#e8ecf4] hover:text-[#c0c8d8] transition-colors py-3 px-3 rounded-lg hover:bg-[#2a3a5a]/20"
+              className="flex items-center gap-3 text-[15px] text-[#e8ecf4] hover:text-white transition-colors py-3 px-3 rounded-lg hover:bg-[#8ba4d8]/10"
             >
               Home
             </Link>
 
             {/* Products section */}
             <div className="py-2">
-              <span className="text-[10px] font-bold tracking-[0.12em] text-[#7a8aaa]/60 uppercase px-3 mb-1 block">
+              <span className="text-[10px] font-bold tracking-[0.12em] text-[#8ba4d8]/50 uppercase px-3 mb-1 block">
                 Products
               </span>
               <div className="mt-1 space-y-0.5">
@@ -197,8 +203,8 @@ export default function SiteNav() {
                     key={product.href}
                     href={product.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`block text-[14px] py-2.5 px-3 rounded-lg transition-all duration-200 hover:bg-[#2a3a5a]/20 ${
-                      product.name === "VOW" ? "text-[#d4a843] font-medium" : "text-[#7a8aaa] hover:text-[#e8ecf4]"
+                    className={`block text-[14px] py-2.5 px-3 rounded-lg transition-all duration-200 hover:bg-[#8ba4d8]/10 ${
+                      product.name === "VOW" ? "text-[#d4a843] font-medium" : "text-[#c0c8d8]/80 hover:text-[#e8ecf4]"
                     }`}
                     style={{
                       transitionDelay: mobileMenuOpen ? `${(i + 1) * 40}ms` : "0ms",
@@ -210,7 +216,7 @@ export default function SiteNav() {
                 <Link
                   href="/products"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block text-[14px] text-[#8ba4d8] font-medium py-2.5 px-3 rounded-lg hover:bg-[#2a3a5a]/20 transition-colors mt-1 border-t border-[#2a3a5a]/30 pt-3"
+                  className="block text-[14px] text-[#8ba4d8] font-medium py-2.5 px-3 rounded-lg hover:bg-[#8ba4d8]/10 transition-colors mt-1 border-t border-[#8ba4d8]/10 pt-3"
                 >
                   View All Products →
                 </Link>
@@ -221,32 +227,32 @@ export default function SiteNav() {
             <Link
               href="/services"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-3 text-[15px] text-[#e8ecf4] hover:text-[#c0c8d8] transition-colors py-3 px-3 rounded-lg hover:bg-[#2a3a5a]/20"
+              className="flex items-center gap-3 text-[15px] text-[#e8ecf4] hover:text-white transition-colors py-3 px-3 rounded-lg hover:bg-[#8ba4d8]/10"
             >
               Services
             </Link>
             <Link
               href="/team"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-3 text-[15px] text-[#e8ecf4] hover:text-[#c0c8d8] transition-colors py-3 px-3 rounded-lg hover:bg-[#2a3a5a]/20"
+              className="flex items-center gap-3 text-[15px] text-[#e8ecf4] hover:text-white transition-colors py-3 px-3 rounded-lg hover:bg-[#8ba4d8]/10"
             >
               Team
             </Link>
             <Link
               href="/faq"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-3 text-[15px] text-[#e8ecf4] hover:text-[#c0c8d8] transition-colors py-3 px-3 rounded-lg hover:bg-[#2a3a5a]/20"
+              className="flex items-center gap-3 text-[15px] text-[#e8ecf4] hover:text-white transition-colors py-3 px-3 rounded-lg hover:bg-[#8ba4d8]/10"
             >
               FAQ
             </Link>
           </div>
 
           {/* CTA at bottom of panel */}
-          <div className="mt-6 pt-4 border-t border-[#2a3a5a]/30">
+          <div className="mt-6 pt-4 border-t border-[#8ba4d8]/10">
             <Link
               href="/services"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[#e0e6f0] text-[#080c18] text-sm font-semibold hover:bg-[#c0c8d8] active:scale-97 transition-all duration-200"
+              className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[#8ba4d8]/15 text-[#e8ecf4] text-sm font-semibold border border-[#8ba4d8]/30 hover:bg-[#8ba4d8]/25 hover:border-[#8ba4d8]/50 hover:shadow-lg hover:shadow-[#8ba4d8]/10 active:scale-97 transition-all duration-200"
             >
               Get in Touch <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
