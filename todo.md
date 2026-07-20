@@ -315,3 +315,11 @@
 - [x] Remove "first" claims about VOW (e.g. "world's first") — ProductsPage, BabodiePage
 - [x] Remove Python compilation as marketing pitch — Home, FAQ, ServicesPage
 - [x] Replace "ontology/ontological" with "provable" language — VowPage, FloCraftPage, SOPForgePage, TeamPage, ServicesPage
+
+## Phase 37 — Restructure Baus Time Media (Product → Internal Marketing Engine)
+- [x] Remove Baus Time Media from ProductsPage product list
+- [x] Update product count references (9→8) across Home, FAQ, TeamPage, SiteFooter
+- [x] Create Blog page showing AI-generated blog posts + social media content (powered by Baus Time Media, human reviewed)
+- [x] Add Blog to navigation (SiteNav desktop + mobile, SiteFooter)
+- [x] Update FAQ to reflect Baus Time Media is internal marketing, not a product
+- [x] Update VowPage to remove Baus Time Media product card

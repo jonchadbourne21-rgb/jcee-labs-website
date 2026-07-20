@@ -24,6 +24,7 @@ const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
 const TermsPage = lazy(() => import("./pages/TermsPage"));
 const ServicesPage = lazy(() => import("./pages/ServicesPage"));
 const ProductsPage = lazy(() => import("./pages/ProductsPage"));
+const BlogPage = lazy(() => import("./pages/BlogPage"));
 
 function Router() {
   const [location] = useLocation();
@@ -55,6 +56,7 @@ function Router() {
         <Route path="/terms" component={TermsPage} />
         <Route path="/services" component={ServicesPage} />
         <Route path="/products" component={ProductsPage} />
+        <Route path="/blog" component={BlogPage} />
         <Route path="/404" component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />

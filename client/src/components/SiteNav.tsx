@@ -9,7 +9,7 @@ const PRODUCTS = [
   { name: "TrueRPM", href: "/truerpm", color: "text-[#c0c8d8]" },
   { name: "NicheFlo", href: "/nicheflo", color: "text-[#c0c8d8]" },
   { name: "FloCraft", href: "/flocraft", color: "text-[#c0c8d8]" },
-  { name: "Baus Time Media", href: "/rooh", color: "text-[#c0c8d8]" },
+
   { name: "Bourne Aire Industries", href: "/revel", color: "text-[#c0c8d8]" },
   { name: "SOPForge", href: "/sopforge", color: "text-[#c0c8d8]" },
   { name: "Babodie", href: "/babodie", color: "text-[#c0c8d8]" },
@@ -110,6 +110,7 @@ export default function SiteNav() {
             </div>
             <Link href="/services" className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">Services</Link>
             <Link href="/team" className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">Team</Link>
+            <Link href="/blog" className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">Blog</Link>
             <Link href="/faq" className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">FAQ</Link>
           </nav>
 
@@ -237,6 +238,13 @@ export default function SiteNav() {
               className="flex items-center gap-3 text-[15px] text-[#e8ecf4] hover:text-white transition-colors py-3 px-3 rounded-lg hover:bg-[#8ba4d8]/10"
             >
               Team
+            </Link>
+            <Link
+              href="/blog"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-3 text-[15px] text-[#e8ecf4] hover:text-white transition-colors py-3 px-3 rounded-lg hover:bg-[#8ba4d8]/10"
+            >
+              Blog
             </Link>
             <Link
               href="/faq"

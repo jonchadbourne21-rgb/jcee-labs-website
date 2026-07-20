@@ -214,15 +214,7 @@ export default function VowPage() {
               </div>
             </Link>
 
-            <Link href="/rooh">
-              <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-pink-500/20 transition-colors cursor-pointer group">
-                <h3 className="text-white font-semibold mb-2 group-hover:text-pink-400 transition-colors">Baus Time Media</h3>
-                <p className="text-xs text-pink-400/60 font-mono mb-3">Autonomous Marketing</p>
-                <p className="text-sm text-[#718096] leading-relaxed">
-                  Multi-agent marketing team powered by VOW. Each agent focused on its niche, learning from what works, with human-in-the-loop when you want it.
-                </p>
-              </div>
-            </Link>
+
           </div>
         </div>
       </section>

@@ -7,7 +7,6 @@ import {
   Code2,
   Cpu,
   Ship,
-  Bot,
   Factory,
   FileText,
   Orbit,
@@ -75,18 +74,7 @@ const PRODUCTS = [
     poweredByVow: true,
     meta: "Supply chain optimization",
   },
-  {
-    name: "Baus Time Media",
-    tagline: "Autonomous marketing",
-    description:
-      "An autonomous multi-agent marketing team working asynchronously every day, each agent focused on its own niche. It studies strategies and learns from what works, tracks daily news in your industry, drafts content on a posting schedule, and pings your phone when a blog or social post is ready to send, with a human in the loop whenever you want one.",
-    color: "amber",
-    icon: Bot,
-    href: "/rooh",
-    status: "BETA",
-    poweredByVow: true,
-    meta: "Autonomous marketing",
-  },
+
   {
     name: "Bourne Aire Industries",
     tagline: "Industrial workflow automation",
@@ -134,7 +122,7 @@ export default function ProductsPage() {
       <section className="pt-24 md:pt-32 pb-6 md:pb-10 text-center">
         <div className="max-w-[1100px] mx-auto px-5 md:px-8 lg:px-12">
           <div className="inline-block text-[11px] md:text-[12px] font-semibold tracking-[0.1em] uppercase px-4 md:px-5 py-1.5 md:py-2 rounded-3xl border border-[#d4a843]/20 text-[#d4a843] mb-4 md:mb-6">
-            9 Products Built on VOW
+            8 Products Built on VOW
           </div>
           <h2 className="text-2xl md:text-[36px] lg:text-[48px] font-extrabold leading-[1.2] tracking-[-0.02em] mb-3 md:mb-4">
             Products
