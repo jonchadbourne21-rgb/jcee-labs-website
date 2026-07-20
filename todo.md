@@ -323,3 +323,12 @@
 - [x] Add Blog to navigation (SiteNav desktop + mobile, SiteFooter)
 - [x] Update FAQ to reflect Baus Time Media is internal marketing, not a product
 - [x] Update VowPage to remove Baus Time Media product card
+
+## Phase 38 — Remove NicheFlo & Babodie from Products (keep pages, stop advertising)
+- [x] Remove NicheFlo from ProductsPage product list
+- [x] Remove Babodie from ProductsPage product list
+- [x] Remove NicheFlo and Babodie from SiteNav dropdown
+- [x] Remove NicheFlo and Babodie from SiteFooter product links
+- [x] Update product count to "6+" across Home, FAQ, TeamPage, SiteFooter, ProductsPage
+- [x] Remove NicheFlo and Babodie from VowPage product grid (already removed previously)
+- [x] Update FAQ product list answer

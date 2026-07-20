@@ -5,11 +5,9 @@ import {
   Brain,
   Truck,
   Code2,
-  Cpu,
   Ship,
   Factory,
   FileText,
-  Orbit,
 } from "lucide-react";
 
 // ─── Product Cards Data ─────────────────────────────────────────────────────
@@ -50,18 +48,7 @@ const PRODUCTS = [
     poweredByVow: true,
     meta: "Releases August 1",
   },
-  {
-    name: "NicheFlo",
-    tagline: "Financial intelligence",
-    description:
-      "Autonomous GPU arbitrage intelligence and DeFi yield optimization. Real-time signals. AI-powered execution.",
-    color: "cyan",
-    icon: Cpu,
-    href: "/nicheflo",
-    status: "BETA",
-    poweredByVow: true,
-    meta: "Financial intelligence",
-  },
+
   {
     name: "FloCraft",
     tagline: "Supply chain optimization",
@@ -99,18 +86,7 @@ const PRODUCTS = [
     poweredByVow: true,
     meta: "SOP automation",
   },
-  {
-    name: "Babodie",
-    tagline: "Neuro-OS",
-    description:
-      "An autonomous Neuro-OS. Powered by VOW v1.0. Run Quests. Build Beliefs. Persist Memory.",
-    color: "purple",
-    icon: Orbit,
-    href: "/babodie",
-    status: "BETA WAITLIST",
-    poweredByVow: true,
-    meta: "Neuro-OS",
-  },
+
 ];
 
 export default function ProductsPage() {
@@ -122,7 +98,7 @@ export default function ProductsPage() {
       <section className="pt-24 md:pt-32 pb-6 md:pb-10 text-center">
         <div className="max-w-[1100px] mx-auto px-5 md:px-8 lg:px-12">
           <div className="inline-block text-[11px] md:text-[12px] font-semibold tracking-[0.1em] uppercase px-4 md:px-5 py-1.5 md:py-2 rounded-3xl border border-[#d4a843]/20 text-[#d4a843] mb-4 md:mb-6">
-            8 Products Built on VOW
+            6+ Products Built on VOW
           </div>
           <h2 className="text-2xl md:text-[36px] lg:text-[48px] font-extrabold leading-[1.2] tracking-[-0.02em] mb-3 md:mb-4">
             Products

@@ -30,7 +30,7 @@ export default function SiteFooter() {
             <p className="text-[#7a8aaa] text-sm leading-relaxed max-w-sm">
               Jcee Labs is the d.b.a. of{" "}
               <strong className="text-[#e8ecf4]">HOWM HOLDINGS LLC</strong>. We
-              build formally-verified AI systems on VOW. One studio, one language, eight products.
+              build formally-verified AI systems on VOW. One studio, one language, 6+ products.
             </p>
 
             {/* Social icons */}
@@ -77,12 +77,12 @@ export default function SiteFooter() {
               <li><Link href="/vow" className="hover:text-[#d4a843] transition-colors">VOW</Link></li>
               <li><Link href="/mirrored" className="hover:text-[#c0c8d8] transition-colors">Mirrored</Link></li>
               <li><Link href="/truerpm" className="hover:text-[#c0c8d8] transition-colors">TrueRPM</Link></li>
-              <li><Link href="/nicheflo" className="hover:text-[#c0c8d8] transition-colors">NicheFlo</Link></li>
+
               <li><Link href="/flocraft" className="hover:text-[#c0c8d8] transition-colors">FloCraft</Link></li>
               <li><Link href="/blog" className="hover:text-[#c0c8d8] transition-colors">Blog</Link></li>
               <li><Link href="/revel" className="hover:text-[#c0c8d8] transition-colors">Bourne Aire Industries</Link></li>
               <li><Link href="/sopforge" className="hover:text-[#c0c8d8] transition-colors">SOPForge</Link></li>
-              <li><Link href="/babodie" className="hover:text-[#c0c8d8] transition-colors">Babodie</Link></li>
+
             </ul>
           </div>
 
