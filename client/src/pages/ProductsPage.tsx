@@ -132,7 +132,7 @@ export default function ProductsPage() {
 
       {/* Hero */}
       <section className="pt-24 md:pt-32 pb-6 md:pb-10 text-center">
-        <div className="max-w-[720px] lg:max-w-[1100px] mx-auto px-5 md:px-8 lg:px-12">
+        <div className="max-w-[1100px] mx-auto px-5 md:px-8 lg:px-12">
           <div className="inline-block text-[11px] md:text-[12px] font-semibold tracking-[0.1em] uppercase px-4 md:px-5 py-1.5 md:py-2 rounded-3xl border border-[#d4a843]/20 text-[#d4a843] mb-4 md:mb-6">
             9 Products Built on VOW
           </div>
@@ -147,7 +147,7 @@ export default function ProductsPage() {
 
       {/* Product Cards */}
       <section className="pb-12 md:pb-20">
-        <div className="max-w-[720px] lg:max-w-[1100px] mx-auto px-4 md:px-6 lg:px-12">
+        <div className="max-w-[1100px] mx-auto px-4 md:px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-4 lg:gap-5">
             {PRODUCTS.map((product) => {
               const Icon = product.icon;

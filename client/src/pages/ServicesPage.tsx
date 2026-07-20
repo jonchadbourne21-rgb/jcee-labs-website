@@ -136,7 +136,7 @@ export default function ServicesPage() {
 
       {/* Hero */}
       <section className="pt-24 md:pt-32 pb-6 md:pb-10 text-center">
-        <div className="max-w-[720px] lg:max-w-[1100px] mx-auto px-5 md:px-8 lg:px-12">
+        <div className="max-w-[1100px] mx-auto px-5 md:px-8 lg:px-12">
           <div className="inline-block text-[11px] md:text-[12px] font-semibold tracking-[0.1em] uppercase px-4 md:px-5 py-1.5 md:py-2 rounded-3xl border border-[#2a3a5a] text-[#d4a843] mb-4 md:mb-6">
             Autonomous Systems Built on VOW
           </div>
@@ -154,7 +154,7 @@ export default function ServicesPage() {
 
       {/* Core Services */}
       <section className="pb-4">
-        <div className="max-w-[720px] lg:max-w-[1100px] mx-auto px-5 md:px-8 lg:px-12">
+        <div className="max-w-[1100px] mx-auto px-5 md:px-8 lg:px-12">
           <div className="pt-12 pb-6 lg:flex lg:items-end lg:justify-between">
             <div>
               <h3 className="text-[28px] lg:text-[34px] font-bold mb-3 text-[#e8ecf4]">
@@ -167,7 +167,7 @@ export default function ServicesPage() {
           </div>
 
           {/* Mobile: stacked | Desktop: 2-col grid, last card full-width if odd */}
-          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-5">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-5">
             {CORE_SERVICES.map((service, i) => {
               const Icon = service.icon;
               const isLastOdd = CORE_SERVICES.length % 2 !== 0 && i === CORE_SERVICES.length - 1;
@@ -204,7 +204,7 @@ export default function ServicesPage() {
 
       {/* How It Works */}
       <section className="pb-4">
-        <div className="max-w-[720px] lg:max-w-[1100px] mx-auto px-5 md:px-8 lg:px-12">
+        <div className="max-w-[1100px] mx-auto px-5 md:px-8 lg:px-12">
           <div className="pt-12 pb-6">
             <h3 className="text-[28px] lg:text-[34px] font-bold mb-3 text-[#e8ecf4]">
               How It Works
@@ -240,7 +240,7 @@ export default function ServicesPage() {
 
       {/* The VOW Difference */}
       <section className="pb-4">
-        <div className="max-w-[720px] lg:max-w-[1100px] mx-auto px-5 md:px-8 lg:px-12">
+        <div className="max-w-[1100px] mx-auto px-5 md:px-8 lg:px-12">
           <div className="pt-12 pb-6">
             <h3 className="text-[28px] lg:text-[34px] font-bold mb-3 text-[#e8ecf4]">
               The VOW Difference
@@ -277,7 +277,7 @@ export default function ServicesPage() {
 
       {/* Why VOW */}
       <section className="pb-4">
-        <div className="max-w-[720px] lg:max-w-[1100px] mx-auto px-5 md:px-8 lg:px-12">
+        <div className="max-w-[1100px] mx-auto px-5 md:px-8 lg:px-12">
           <div className="pt-12 pb-6">
             <h3 className="text-[28px] lg:text-[34px] font-bold mb-3 text-[#e8ecf4]">
               Why VOW
@@ -316,7 +316,7 @@ export default function ServicesPage() {
 
       {/* Also Available */}
       <section className="pb-4">
-        <div className="max-w-[720px] lg:max-w-[1100px] mx-auto px-5 md:px-8 lg:px-12">
+        <div className="max-w-[1100px] mx-auto px-5 md:px-8 lg:px-12">
           <div className="bg-[rgba(251,191,36,0.05)] border border-[rgba(251,191,36,0.1)] rounded-[20px] p-7 lg:p-10 my-12 text-center lg:text-left lg:flex lg:items-center lg:gap-10">
             <div className="lg:flex-1">
               <span className="text-[10px] lg:text-[11px] font-bold tracking-[0.12em] text-[#fbbf24] uppercase block mb-3">
@@ -343,7 +343,7 @@ export default function ServicesPage() {
 
       {/* CTA */}
       <section id="contact" className="pb-16 text-center">
-        <div className="max-w-[720px] lg:max-w-[1100px] mx-auto px-5 md:px-8 lg:px-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="max-w-[1100px] mx-auto px-5 md:px-8 lg:px-12 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
             href="mailto:jonathan@jceelabs.com?subject=VOW%20Audit%20Request"
             className="inline-block bg-gradient-to-r from-[#d4a843] to-[#c9952c] text-white text-[16px] font-semibold px-8 py-4 rounded-full hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(212,168,67,0.35)] active:scale-97 transition-all duration-200"

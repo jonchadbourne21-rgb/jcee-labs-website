@@ -80,7 +80,7 @@ export default function FAQ() {
       <SiteNav />
 
       {/* Main Content */}
-      <main className="container max-w-4xl lg:max-w-[1100px] pt-24 md:pt-32 pb-12 md:pb-24 flex-grow px-4 md:px-6 lg:px-12">
+      <main className="container max-w-[1100px] pt-24 md:pt-32 pb-12 md:pb-24 flex-grow px-4 md:px-6 lg:px-12">
         <div className="text-center mb-8 md:mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[rgba(212,168,67,0.1)] border border-[rgba(212,168,67,0.2)] text-[#d4a843] text-[10px] md:text-xs font-mono mb-3 md:mb-4">
             <HelpCircle className="w-3 h-3 md:w-3.5 md:h-3.5" /> FAQ &amp; Information Hub
