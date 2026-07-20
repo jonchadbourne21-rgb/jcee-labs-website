@@ -14,7 +14,7 @@ export default function VowPage() {
         {/* Background image */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
-          style={{ backgroundImage: `url('/manus-storage/vow-hero_7db8ee7c.png')` }}
+          style={{ backgroundImage: `url('/manus-storage/vow-hero-logo_b1a4358a.png')` }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#090514]/70 via-[#090514]/50 to-[#090514]" />
 
