@@ -157,12 +157,12 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#080c18] via-transparent to-[#080c18]/40" />
         </div>
 
-        <div className="container relative z-10 pt-20 md:pt-0">
-          <div className="max-w-3xl space-y-5 md:space-y-8">
+        <div className="container relative z-10 pt-20 md:pt-0 lg:max-w-[1100px] lg:mx-auto lg:px-12">
+          <div className="max-w-3xl lg:max-w-[680px] space-y-5 md:space-y-8">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#8ba4d8]/10 border border-[#8ba4d8]/20 text-[#8ba4d8] text-[10px] md:text-xs font-mono">
               <Sparkles className="w-3 h-3 md:w-3.5 md:h-3.5" /> SaaS, PaaS, Venture Architecture
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-display font-extrabold leading-[1.1] md:leading-[1.05] tracking-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-extrabold leading-[1.1] md:leading-[1.05] tracking-tight">
               <span className="text-[#8ba4d8]">One studio.</span>{" "}
               <span className="text-[#d4a843]">
                 One language.
@@ -210,7 +210,7 @@ export default function Home() {
           TAGLINE
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="py-10 md:py-16 border-t border-[#2a3a5a]/50">
-        <div className="container text-center max-w-2xl mx-auto space-y-3 px-6">
+        <div className="container text-center max-w-2xl lg:max-w-[1100px] mx-auto space-y-3 px-6 lg:px-12">
           <p className="text-xs md:text-sm text-[#7a8aaa] tracking-wide">
             Jcee Labs is the d.b.a. of HOWM HOLDINGS LLC.
           </p>
@@ -224,7 +224,7 @@ export default function Home() {
           STATS
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="py-10 md:py-16 border-t border-[#2a3a5a]/50">
-        <div className="container max-w-4xl mx-auto px-4">
+        <div className="container max-w-4xl lg:max-w-[1100px] mx-auto px-4 lg:px-12">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
             <div className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-2xl p-5 md:p-6 text-center">
               <div className="text-2xl md:text-3xl font-display font-bold text-[#c0c8d8] mb-1 md:mb-2">9+</div>

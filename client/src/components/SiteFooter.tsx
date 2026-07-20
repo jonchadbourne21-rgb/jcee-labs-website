@@ -12,7 +12,7 @@ function InstagramIcon({ className }: { className?: string }) {
 export default function SiteFooter() {
   return (
     <footer className="border-t border-[#2a3a5a]/50 bg-[#060a14] py-8 md:py-12 relative z-10 mt-auto">
-      <div className="container px-4 md:px-6">
+      <div className="container max-w-[1100px] mx-auto px-4 md:px-6 lg:px-12">
         <div className="grid grid-cols-2 md:grid-cols-12 gap-6 md:gap-8 mb-8 md:mb-10">
 
           {/* Column 1 — Brand */}

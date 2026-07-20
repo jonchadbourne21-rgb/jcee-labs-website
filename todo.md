@@ -298,3 +298,11 @@
 - [x] Ensure backdrop blur and proper z-index for sticky header
 - [x] CTA button at bottom of slide-out panel
 - [x] All tests passing (12/12)
+
+## Phase 34 — Desktop Hotdog Layout (Wide Horizontal)
+- [x] ServicesPage: widen max-width on desktop, 2-col card grid for service/process cards, 3-col for VOW Difference and Why VOW
+- [x] Home: widen hero max-width on desktop
+- [x] ProductsPage: widen max-width, 3-col product card grid on desktop
+- [x] FAQ: widen max-width on desktop, 2-col accordion layout
+- [x] TeamPage: widen max-width on desktop
+- [x] All tests passing (12/12)

@@ -10,11 +10,11 @@ export default function TeamPage() {
 
       {/* Hero */}
       <section className="relative pt-32 pb-16 px-4">
-        <div className="container max-w-4xl mx-auto text-center space-y-6">
+        <div className="container max-w-4xl lg:max-w-[1100px] mx-auto text-center space-y-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#8ba4d8]/10 border border-[#8ba4d8]/20 text-[#8ba4d8] text-xs font-mono mx-auto">
             <Users className="w-3.5 h-3.5" /> Leadership
           </div>
-          <h1 className="text-4xl md:text-6xl font-display font-extrabold">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-extrabold">
             The <span className="text-[#c0c8d8]">Team</span> Behind Jcee Labs
           </h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
@@ -30,7 +30,7 @@ export default function TeamPage() {
 
       {/* Team Members */}
       <section className="py-16 px-4">
-        <div className="container max-w-4xl mx-auto space-y-12">
+        <div className="container max-w-4xl lg:max-w-[1100px] mx-auto space-y-12">
 
           {/* Jonathan Chadbourne */}
           <div className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-3xl p-8 md:p-10 hover:border-[#8ba4d8]/30 transition-colors">
@@ -143,7 +143,7 @@ export default function TeamPage() {
 
       {/* What Makes Us Different */}
       <section className="py-16 px-4 border-t border-[#2a3a5a]/50">
-        <div className="container max-w-3xl mx-auto space-y-8">
+        <div className="container max-w-3xl lg:max-w-[1100px] mx-auto space-y-8">
           <div className="text-center space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#8ba4d8]/10 border border-[#8ba4d8]/20 text-[#8ba4d8] text-xs font-mono mx-auto">
               <Lightbulb className="w-3.5 h-3.5" /> What Makes Us Different

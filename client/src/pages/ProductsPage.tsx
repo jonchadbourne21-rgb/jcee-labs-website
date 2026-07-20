@@ -131,15 +131,15 @@ export default function ProductsPage() {
       <SiteNav />
 
       {/* Hero */}
-      <section className="pt-24 md:pt-32 pb-6 md:pb-8 text-center">
-        <div className="max-w-[720px] mx-auto px-5 md:px-6">
+      <section className="pt-24 md:pt-32 pb-6 md:pb-10 text-center">
+        <div className="max-w-[720px] lg:max-w-[1100px] mx-auto px-5 md:px-8 lg:px-12">
           <div className="inline-block text-[11px] md:text-[12px] font-semibold tracking-[0.1em] uppercase px-4 md:px-5 py-1.5 md:py-2 rounded-3xl border border-[#d4a843]/20 text-[#d4a843] mb-4 md:mb-6">
             9 Products Built on VOW
           </div>
-          <h2 className="text-2xl md:text-[36px] font-extrabold leading-[1.2] tracking-[-0.02em] mb-3 md:mb-4">
+          <h2 className="text-2xl md:text-[36px] lg:text-[48px] font-extrabold leading-[1.2] tracking-[-0.02em] mb-3 md:mb-4">
             Products
           </h2>
-          <p className="text-sm md:text-[17px] text-[#7a8aaa] max-w-[600px] mx-auto leading-[1.7]">
+          <p className="text-sm md:text-[17px] lg:text-[19px] text-[#7a8aaa] max-w-[600px] lg:max-w-[760px] mx-auto leading-[1.7]">
             Every product learns from failure, explains every decision, and compiles to code you can actually read.
           </p>
         </div>
@@ -147,12 +147,12 @@ export default function ProductsPage() {
 
       {/* Product Cards */}
       <section className="pb-12 md:pb-20">
-        <div className="max-w-[720px] mx-auto px-4 md:px-6">
-          <div className="flex flex-col gap-3 md:gap-4">
+        <div className="max-w-[720px] lg:max-w-[1100px] mx-auto px-4 md:px-6 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-4 lg:gap-5">
             {PRODUCTS.map((product) => {
               const Icon = product.icon;
               return (
-                <Link key={product.name} href={product.href} className={`block bg-[#0d1424] border border-[#2a3a5a]/50 rounded-xl md:rounded-2xl p-5 md:p-7 group hover:border-[#8ba4d8]/30 hover:-translate-y-px transition-all duration-300 relative overflow-hidden${
+                <Link key={product.name} href={product.href} className={`block bg-[#0d1424] border border-[#2a3a5a]/50 rounded-xl md:rounded-2xl p-5 md:p-7 lg:p-8 group hover:border-[#8ba4d8]/30 hover:-translate-y-px transition-all duration-300 relative overflow-hidden flex flex-col${
                       product.name === "VOW"
                         ? " border-[rgba(212,168,67,0.15)] bg-gradient-to-b from-[rgba(212,168,67,0.04)] to-[#0d1424] hover:border-[rgba(212,168,67,0.3)]"
                         : ""
