@@ -40,8 +40,8 @@ const CORE_SERVICES = [
   },
   {
     icon: Sparkles,
-    tag: "Grounded",
-    name: "Formally-Grounded LLM Systems",
+    tag: "Bounded",
+    name: "Formally-Bounded LLM Systems",
     description:
       "Large language models integrated through formal structure, not prompt engineering. Chatbots, document analysis, and smart search that reason within defined boundaries and explain their decisions.",
   },
@@ -147,9 +147,7 @@ export default function ServicesPage() {
             </span>
           </h2>
           <p className="text-sm md:text-[17px] text-[#7a8aaa] max-w-[600px] mx-auto leading-[1.7]">
-            We don't just build software. We architect formally-verified AI
-            systems that learn from failure, leave audit trails, and comply with
-            regulatory frameworks before they become law.
+            We architect systems that learn from failure, leave a full decision trail, and comply before the law requires it.
           </p>
         </div>
       </section>
@@ -162,7 +160,7 @@ export default function ServicesPage() {
               Core Services
             </h3>
             <p className="text-[15px] text-[#7a8aaa] leading-[1.6]">
-              Autonomous systems built from first principles. Not templates. Not black boxes. Systems that think, remember, and improve.
+              Every system starts from first principles. Every decision is traceable. Every failure makes the system smarter.
             </p>
           </div>
 
@@ -315,13 +313,10 @@ export default function ServicesPage() {
               Also Available
             </span>
             <h4 className="text-[20px] font-bold text-[#e8ecf4] mb-2">
-              Custom Web Development
+              Traditional Development, VOW Standards
             </h4>
             <p className="text-[15px] text-[#7a8aaa] leading-[1.7]">
-              Full-stack web applications, APIs, and traditional automation,
-              built with the same quality standards. React, Next.js, Node.js,
-              tRPC. Responsive, accessible, production-ready. This is our
-              foundation while the VOW ecosystem scales.
+              Full-stack web applications, APIs, and automation built with the same formal rigor. React, Next.js, Node.js, tRPC. Responsive, accessible, production-ready. This is our foundation while the VOW ecosystem scales.
             </p>
           </div>
         </div>
