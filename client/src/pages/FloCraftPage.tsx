@@ -49,7 +49,7 @@ export default function FloCraftPage() {
               <Brain className="w-6 h-6 text-teal-400 mb-4" />
               <h3 className="text-white font-semibold mb-2">VOW-Powered Intelligence</h3>
               <p className="text-sm text-[#718096] leading-relaxed">
-                Built on VOW's ontological reasoning engine for supply chain decisions that are auditable and explainable.
+                Built on VOW's provable reasoning engine for supply chain decisions that are auditable and explainable.
               </p>
             </div>
             <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02]">

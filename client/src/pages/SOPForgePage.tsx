@@ -60,7 +60,7 @@ export default function SOPForgePage() {
               <Brain className="w-6 h-6 text-indigo-400 mb-4" />
               <h3 className="text-white font-semibold mb-2">VOW Intelligence</h3>
               <p className="text-sm text-[#718096] leading-relaxed">
-                Leverages VOW's ontological reasoning for SOPs that are auditable and compliant by design.
+                Leverages VOW's provable reasoning for SOPs that are auditable and compliant by design.
               </p>
             </div>
           </div>

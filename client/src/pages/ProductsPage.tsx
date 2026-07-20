@@ -115,7 +115,7 @@ const PRODUCTS = [
     name: "Babodie",
     tagline: "Neuro-OS",
     description:
-      "The world's first autonomous Neuro-OS. Powered by VOW v1.0. Run Quests. Build Beliefs. Persist Memory.",
+      "An autonomous Neuro-OS. Powered by VOW v1.0. Run Quests. Build Beliefs. Persist Memory.",
     color: "purple",
     icon: Orbit,
     href: "/babodie",

@@ -8,14 +8,14 @@ const FAQ_ITEMS = [
   {
     value: "item-1",
     question: "What is Jcee Labs?",
-    answer: "Jcee Labs is an AI product studio and the registered d.b.a. of HOWM HOLDINGS LLC, founded in March 2026. We build formally-verified AI systems on VOW, our proprietary programming language where every agent action compiles to auditable Python and leaves a causal trail. One studio, one language, nine products.",
+    answer: "Jcee Labs is an AI product studio and the registered d.b.a. of HOWM HOLDINGS LLC, founded in March 2026. We build formally-verified AI systems on VOW, our proprietary programming language where every agent action is provably safe and leaves a causal trail. One studio, one language, nine products.",
   },
   {
     value: "item-2",
     question: "What is VOW?",
     answer: (
       <>
-        <strong>VOW</strong> is our formally-grounded programming language built around quests, proofs, and scar memory. Code that learns from failure. It remembers what hurt, knows why, and never repeats the same failing path. It compiles to auditable Python and is designed for regulatory transparency before the EU AI Act makes it mandatory. VOW powers seven of our nine products.
+        <strong>VOW</strong> is our formally-grounded programming language built around quests, proofs, and scar memory. Code that learns from failure. It remembers what hurt, knows why, and never repeats the same failing path. Every decision is provably safe and designed for regulatory transparency before the EU AI Act makes it mandatory. VOW powers seven of our nine products.
       </>
     ),
   },
@@ -147,7 +147,7 @@ export default function FAQ() {
             <Cpu className="w-8 h-8 text-[#d4a843] mb-3" />
             <h3 className="font-display font-bold text-lg mb-2">VOW-Powered</h3>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Every system we build compiles to auditable Python with formal proofs, scar memory, and causal trails built into the architecture.
+              Every system we build is provably safe with formal proofs, scar memory, and causal trails built into the architecture.
             </p>
           </div>
           <div className="glass-panel p-6 rounded-xl border border-[#2a3a5a]/50">

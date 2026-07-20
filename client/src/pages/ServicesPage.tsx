@@ -65,7 +65,7 @@ const PROCESS_STEPS = [
     number: "02",
     title: "Agent Definition",
     description:
-      "Goals, proofs, and guardrails compiled to readable Python. Every action is traceable. Every decision is explainable. The system knows what it's allowed to do and what it must never attempt.",
+      "Goals, proofs, and guardrails enforced at build time. Every action is traceable. Every decision is explainable. The system knows what it's allowed to do and what it must never attempt.",
   },
   {
     number: "03",
@@ -125,7 +125,7 @@ const WHY_VOW = [
     icon: CheckCircle,
     title: "Formal Verification",
     description:
-      "Structural errors caught at build time, not runtime. The formal foundation enforces constraints that would be invisible bugs in traditional code: ontological mismatches, temporal violations, causal loops.",
+      "Structural errors caught at build time, not runtime. The formal foundation enforces constraints that would be invisible bugs in traditional code: provable mismatches, temporal violations, causal loops.",
   },
 ];
 

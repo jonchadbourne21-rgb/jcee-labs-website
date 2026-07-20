@@ -24,7 +24,7 @@ export default function BabodiePage() {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">Babodie</span>
           </h1>
           <p className="text-lg md:text-xl text-[#A0AEC0] max-w-2xl mx-auto mb-8 leading-relaxed">
-            The world's first autonomous Neuro-OS. Powered by VOW v1.0. Run Quests. Build Beliefs. Persist Memory.
+            An autonomous Neuro-OS. Powered by VOW v1.0. Run Quests. Build Beliefs. Persist Memory.
           </p>
           <Link href="/services#contact">
             <Button className="rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white font-semibold shadow-lg shadow-purple-500/20 active:scale-97 transition-all">

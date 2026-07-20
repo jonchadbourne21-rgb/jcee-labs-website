@@ -21,7 +21,7 @@ export default function VowPage() {
         <div className="container max-w-5xl mx-auto relative">
           <div className="mb-5 md:mb-6 flex flex-wrap items-center gap-2 md:gap-3">
             <span className="px-4 py-2 rounded-full border border-[#d4a843]/30 bg-[#d4a843]/5 text-sm text-[#d4a843] font-mono">
-              Ontology-Driven PaaS & Language
+              Provable AI PaaS & Language
             </span>
             <span className="px-3 py-1.5 rounded-full border border-green-500/30 bg-green-500/5 text-xs text-green-400 font-mono">
               EU AI Act Ready
@@ -33,7 +33,7 @@ export default function VowPage() {
           </h1>
 
           <p className="text-base md:text-xl text-[#A0AEC0] mb-3 md:mb-4 max-w-3xl leading-relaxed">
-            A formally-grounded coding language and platform that brings ontological reasoning to autonomous AI systems — making them auditable, provably safe, and compliant by design.
+            A formally-grounded coding language and platform that brings provable reasoning to autonomous AI systems — making them auditable, provably safe, and compliant by design.
           </p>
           <p className="text-sm md:text-base text-[#718096] mb-8 md:mb-10 max-w-2xl leading-relaxed">
             VOW is the architectural backbone powering every Jcee Labs product. Its formal foundations ensure that AI agents operate within defined boundaries, learn from failures, and produce decision trails that satisfy regulatory scrutiny.
@@ -69,7 +69,7 @@ export default function VowPage() {
             </div>
             <span className="text-xs font-mono text-[#d4a843]/80 uppercase tracking-wider">Formal Architecture</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-4">Built on Ontological Foundations</h2>
+          <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-4">Built on Provable Foundations</h2>
           <p className="text-[#718096] mb-12 max-w-2xl">
             VOW doesn't guess — it reasons. Every construct is formally classified, every composition rule is provably consistent, and every permission gate is mathematically separate from execution.
           </p>
@@ -164,7 +164,7 @@ export default function VowPage() {
             <div className="space-y-4">
               {[
                 { requirement: "Article 9 — Risk Management", solution: "Dry-run mode evaluates risk before execution; deontic gates prevent unauthorized actions" },
-                { requirement: "Article 11 — Technical Documentation", solution: "Formal ontological classification auto-generates decision documentation" },
+                { requirement: "Article 11 — Technical Documentation", solution: "Formal provable classification auto-generates decision documentation" },
                 { requirement: "Article 13 — Transparency", solution: "Continuant/Occurrent audit trails show exactly what happened and why" },
                 { requirement: "Article 14 — Human Oversight", solution: "Capability gating ensures human-defined permission boundaries are never violated" },
                 { requirement: "Article 15 — Accuracy & Robustness", solution: "Subsumption logic proves type safety; mereology prevents hidden side effects" },
@@ -237,7 +237,7 @@ export default function VowPage() {
                 VOW systems don't just fail — they learn. Scar Memory is a continuant that accumulates traces of every failure, near-miss, and unexpected outcome. Future decisions reference these scars to avoid repeating mistakes.
               </p>
               <p className="text-[#718096] leading-relaxed">
-                This isn't traditional machine learning. It's formal record-keeping with ontological classification — each scar is categorized, its causal chain preserved, and its lessons made available to every downstream decision without retraining.
+                This isn't traditional machine learning. It's formal record-keeping with provable classification — each scar is categorized, its causal chain preserved, and its lessons made available to every downstream decision without retraining.
               </p>
             </div>
             <div className="p-6 rounded-2xl border border-[#d4a843]/10 bg-[#d4a843]/[0.02] font-mono text-sm">
@@ -245,7 +245,7 @@ export default function VowPage() {
               <div className="text-[#A0AEC0] space-y-1">
                 <div><span className="text-[#d4a843]">continuant</span> ScarMemory {"{"}</div>
                 <div className="pl-4"><span className="text-[#e8c56d]">accumulates</span>: Trace[]</div>
-                <div className="pl-4"><span className="text-[#e8c56d]">classifies</span>: OntologyCategory</div>
+                <div className="pl-4"><span className="text-[#e8c56d]">classifies</span>: ProofCategory</div>
                 <div className="pl-4"><span className="text-[#e8c56d]">preserves</span>: CausalChain</div>
                 <div>{"}"}</div>
                 <div className="mt-3"><span className="text-[#d4a843]">occurrent</span> FailureEvent {"{"}</div>

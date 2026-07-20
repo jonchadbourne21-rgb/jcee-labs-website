@@ -310,3 +310,8 @@
 ## Phase 35 — Home Page Layout Cleanup
 - [x] Remove separate TAGLINE and STATS sections from Home.tsx
 - [x] Move two tagline sentences directly below the 3 buttons (Explore Products, Services, Meet the Team), centered on page
+
+## Phase 36 — Copy Cleanup (No "first", no Python pitch, no ontology)
+- [x] Remove "first" claims about VOW (e.g. "world's first") — ProductsPage, BabodiePage
+- [x] Remove Python compilation as marketing pitch — Home, FAQ, ServicesPage
+- [x] Replace "ontology/ontological" with "provable" language — VowPage, FloCraftPage, SOPForgePage, TeamPage, ServicesPage
