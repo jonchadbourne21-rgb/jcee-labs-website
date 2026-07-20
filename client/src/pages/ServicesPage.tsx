@@ -162,8 +162,7 @@ export default function ServicesPage() {
               Core Services
             </h3>
             <p className="text-[15px] text-[#7a8aaa] leading-[1.6]">
-              Everything we build compiles to auditable Python. Every decision
-              leaves a trail.
+              Autonomous systems built from first principles. Not templates. Not black boxes. Systems that think, remember, and improve.
             </p>
           </div>
 
