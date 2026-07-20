@@ -202,7 +202,7 @@ export default function Home() {
                 </Button>
               </Link>
             </div>
-            <div className="pt-6 md:pt-8 text-center sm:text-left space-y-1">
+            <div className="pt-6 md:pt-8 text-center sm:text-left space-y-1 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.6s_forwards]">
               <p className="text-xs md:text-sm text-[#7a8aaa] tracking-wide">
                 Jcee Labs is the d.b.a. of HOWM HOLDINGS LLC.
               </p>
