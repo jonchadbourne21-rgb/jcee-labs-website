@@ -111,7 +111,7 @@ export default function VowPage() {
                 <h3 className="text-lg font-bold text-white">Deontic Logic</h3>
               </div>
               <p className="text-sm text-[#718096] leading-relaxed">
-                Permission, obligation, and prohibition are first-class concepts. Actions are gated by capability — what an agent is <em>allowed</em> to do is mathematically separate from what it <em>actually</em> does. This is the foundation for safe AI.
+                Permission, obligation, and prohibition are core concepts. Actions are gated by capability — what an agent is <em>allowed</em> to do is mathematically separate from what it <em>actually</em> does. This is the foundation for safe AI.
               </p>
             </div>
           </div>

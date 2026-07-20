@@ -97,13 +97,13 @@ export default function TeamPage() {
                   VOW wasn't born in a research lab. It was born from watching AI systems fail, lie, and leave no trace, then hearing the industry say "that's just how AI works." Jonathan asked a question most engineers never ask: <em className="text-[#c0c8d8]">What if the language itself could enforce accountability? What if goals, proofs, and memory weren't features you add later, but foundations you start with?</em>
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  He started building with no formal training, just a belief that anything is possible if you refuse to quit. Manus was the tool. VOW was the vision. The scar memory, the formal proofs, the compile-time enforcement: these aren't academic concepts he borrowed. They're solutions he arrived at by thinking from first principles, refusing to accept that small teams can't build what enterprises claim only they can.
+                  He started building with no formal training, just a belief that anything is possible if you refuse to quit. Manus was the tool. VOW was the vision. The scar memory, the formal proofs, the compile-time enforcement: these aren't academic concepts he borrowed. They're solutions he arrived at by thinking from fundamental principles, refusing to accept that small teams can't build what enterprises claim only they can.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
                   At 33, Jonathan experienced a fundamental shift. A self-actualization that changed everything: <em className="text-slate-200">life doesn't happen to you, it happens for you. There is no failure, only lessons.</em> This wasn't motivational poster talk. It was a complete restructuring of how he saw himself and the world. He developed new philosophical frameworks, internal systems for facing the hard questions most people spend their lives avoiding. <em className="text-slate-200">"As within, so without"</em>. The belief that how you see yourself internally is the way reality will reflect back to you was something he put into practice, and once the results started showing the sky was the limit. A new mind frame and unstoppable belief in himself took him to a new level of living and thinking.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  Mirrored, his first app, came from that place. Not from a product roadmap, but from a genuine need to help others do what he had done: face themselves. He built an AI that doesn't just respond, but reflects. Profound, intellectual, unflinching. The kind of mirror that shows you what you need to see, not what you want to see. Creative prompting became philosophical architecture. The app became a tool for self-confrontation.
+                  Mirrored, his earliest app, came from that place. Not from a product roadmap, but from a genuine need to help others do what he had done: face themselves. He built an AI that doesn't just respond, but reflects. Profound, intellectual, unflinching. The kind of mirror that shows you what you need to see, not what you want to see. Creative prompting became philosophical architecture. The app became a tool for self-confrontation.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
                   The result is nine products that prove formally-verified AI doesn't require a Fortune 500 budget. TrueRPM serves owner-operators because Jonathan believes the people who keep the economy moving deserve the same technological advantages as the people who profit from it. Every product is built for the underdog.
@@ -164,13 +164,13 @@ export default function TeamPage() {
               <span className="text-[#8ba4d8] mt-1">•</span>
               <div>
                 <p className="text-muted-foreground leading-relaxed">We try what others dismiss. The results speak.</p>
-                <p className="text-sm text-white/40 mt-1">Nine products, one language, no VC runway — built from first principles by a team that refuses to accept "impossible."</p>
+                <p className="text-sm text-white/40 mt-1">Nine products, one language, no VC runway — built from fundamental principles by a team that refuses to accept "impossible."</p>
               </div>
             </div>
             <div className="flex items-start gap-3 bg-white/[0.02] border border-[#2a3a5a]/50 rounded-xl p-4 hover:border-[#8ba4d8]/30 transition-colors">
               <span className="text-[#8ba4d8] mt-1">•</span>
               <div>
-                <p className="text-muted-foreground leading-relaxed">No sacred cows. Every decision starts from first principles.</p>
+                <p className="text-muted-foreground leading-relaxed">No sacred cows. Every decision starts from fundamental principles.</p>
                 <p className="text-sm text-white/40 mt-1">No legacy assumptions, no "we've always done it this way" — if the reasoning doesn't hold, the approach changes.</p>
               </div>
             </div>

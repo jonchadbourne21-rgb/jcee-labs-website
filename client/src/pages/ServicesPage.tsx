@@ -161,7 +161,7 @@ export default function ServicesPage() {
                 Core Services
               </h3>
               <p className="text-[15px] lg:text-[17px] text-[#7a8aaa] leading-[1.6] max-w-[560px]">
-                Every system starts from first principles. Every decision is traceable. Every failure makes the system smarter.
+                Every system starts from fundamental principles. Every decision is traceable. Every failure makes the system smarter.
               </p>
             </div>
           </div>
