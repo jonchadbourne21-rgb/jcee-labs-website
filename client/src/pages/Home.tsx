@@ -202,41 +202,13 @@ export default function Home() {
                 </Button>
               </Link>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════════════
-          TAGLINE
-      ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="py-10 md:py-16 border-t border-[#2a3a5a]/50">
-        <div className="container text-center max-w-[1100px] mx-auto space-y-3 px-6 lg:px-12">
-          <p className="text-xs md:text-sm text-[#7a8aaa] tracking-wide">
-            Jcee Labs is the d.b.a. of HOWM HOLDINGS LLC.
-          </p>
-          <p className="text-base md:text-lg text-[#c0c8d8] font-medium">
-            We architect formally-verified AI systems. Everyone else is just shipping software.
-          </p>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════════════
-          STATS
-      ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="py-10 md:py-16 border-t border-[#2a3a5a]/50">
-        <div className="container max-w-[1100px] mx-auto px-4 lg:px-12">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
-            <div className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-2xl p-5 md:p-6 text-center">
-              <div className="text-2xl md:text-3xl font-display font-bold text-[#c0c8d8] mb-1 md:mb-2">9+</div>
-              <p className="text-xs md:text-sm text-[#7a8aaa]">Products Live & Building</p>
-            </div>
-            <div className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-2xl p-5 md:p-6 text-center">
-              <div className="text-2xl md:text-3xl font-display font-bold text-[#8ba4d8] mb-1 md:mb-2">March 2026</div>
-              <p className="text-xs md:text-sm text-[#7a8aaa]">Founded</p>
-            </div>
-            <div className="bg-[#0d1424] border border-[#2a3a5a]/50 rounded-2xl p-5 md:p-6 text-center">
-              <div className="text-sm md:text-lg lg:text-xl font-display font-bold text-[#c0c8d8] mb-1 md:mb-2 leading-tight">Human-Creative Architecture,<br/>Agentic AI-Driven</div>
-              <p className="text-xs md:text-sm text-[#7a8aaa]">Development Approach</p>
+            <div className="pt-6 md:pt-8 text-center sm:text-left space-y-1">
+              <p className="text-xs md:text-sm text-[#7a8aaa] tracking-wide">
+                Jcee Labs is the d.b.a. of HOWM HOLDINGS LLC.
+              </p>
+              <p className="text-sm md:text-base text-[#c0c8d8] font-medium">
+                We architect formally-verified AI systems. Everyone else is just shipping software.
+              </p>
             </div>
           </div>
         </div>

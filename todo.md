@@ -306,3 +306,7 @@
 - [x] FAQ: widen max-width on desktop, 2-col accordion layout
 - [x] TeamPage: widen max-width on desktop
 - [x] All tests passing (12/12)
+
+## Phase 35 — Home Page Layout Cleanup
+- [x] Remove separate TAGLINE and STATS sections from Home.tsx
+- [x] Move two tagline sentences directly below the 3 buttons (Explore Products, Services, Meet the Team), centered on page
