@@ -10,7 +10,7 @@ export default function VowPage() {
       <SiteNav />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-4">
+      <section className="relative pt-28 pb-16 md:pt-32 md:pb-20 px-4">
         {/* Background image */}
         <div
           className="absolute inset-0 bg-contain md:bg-cover bg-center bg-no-repeat opacity-30"
@@ -19,7 +19,7 @@ export default function VowPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#090514]/70 via-[#090514]/50 to-[#090514]" />
 
         <div className="container max-w-5xl mx-auto relative">
-          <div className="mb-6 inline-flex items-center gap-3">
+          <div className="mb-5 md:mb-6 flex flex-wrap items-center gap-2 md:gap-3">
             <span className="px-4 py-2 rounded-full border border-[#d4a843]/30 bg-[#d4a843]/5 text-sm text-[#d4a843] font-mono">
               Ontology-Driven PaaS & Language
             </span>
@@ -28,18 +28,18 @@ export default function VowPage() {
             </span>
           </div>
 
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-4 md:mb-6">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4a843] to-[#e8c56d]">VOW</span>
           </h1>
 
-          <p className="text-xl text-[#A0AEC0] mb-4 max-w-3xl leading-relaxed">
+          <p className="text-base md:text-xl text-[#A0AEC0] mb-3 md:mb-4 max-w-3xl leading-relaxed">
             A formally-grounded coding language and platform that brings ontological reasoning to autonomous AI systems — making them auditable, provably safe, and compliant by design.
           </p>
-          <p className="text-[#718096] mb-10 max-w-2xl leading-relaxed">
+          <p className="text-sm md:text-base text-[#718096] mb-8 md:mb-10 max-w-2xl leading-relaxed">
             VOW is the architectural backbone powering every Jcee Labs product. Its formal foundations ensure that AI agents operate within defined boundaries, learn from failures, and produce decision trails that satisfy regulatory scrutiny.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 mb-12">
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-10 md:mb-12">
             <Link href="/services#contact">
               <Button className="rounded-xl bg-gradient-to-r from-[#c9952c] to-[#d4a843] hover:from-[#d4a843] hover:to-[#e8c56d] text-[#0d0b14] font-semibold shadow-lg shadow-[#d4a843]/20 active:scale-97 transition-all">
                 Request Enterprise Access <ArrowRight className="w-4 h-4 ml-2" />
