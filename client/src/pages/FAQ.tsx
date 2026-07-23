@@ -8,14 +8,14 @@ const FAQ_ITEMS = [
   {
     value: "item-1",
     question: "What is Jcee Labs?",
-    answer: "Jcee Labs is an AI product studio and the registered d.b.a. of HOWM HOLDINGS LLC, founded in March 2026. We build formally-verified AI systems on VOW, our proprietary programming language where every agent action is provably safe and leaves a causal trail. One studio, one language, 6+ products.",
+    answer: "Jcee Labs is an AI product studio and the registered d.b.a. of HOWM HOLDINGS LLC, founded in March 2026. We build formally-verified AI systems on VOW, our proprietary programming language where every agent action is provably safe and leaves a causal trail. One studio, one language, 5 products.",
   },
   {
     value: "item-2",
     question: "What is VOW?",
     answer: (
       <>
-        <strong>VOW</strong> is our formally-grounded programming language built around quests, proofs, and scar memory. Code that learns from failure. It remembers what hurt, knows why, and never repeats the same failing path. Every decision is provably safe and designed for regulatory transparency before the EU AI Act makes it mandatory. VOW powers all of our products.
+        <strong>VOW</strong> is our formally-grounded programming language built around quests, proofs, and scar memory. Code that learns from failure. It remembers what hurt, knows why, and never repeats the same failing path. Every decision is provably safe and designed for regulatory transparency before the EU AI Act makes it mandatory. VOW powers most of our products.
       </>
     ),
   },
@@ -29,7 +29,7 @@ const FAQ_ITEMS = [
     question: "What products does Jcee Labs build?",
     answer: (
       <>
-        We currently have 6+ products: <strong>VOW</strong> (our programming language), <strong>Mirrored</strong> (AI higher self / personal development), <strong>TrueRPM</strong> (Revenue Per Mile for owner-operators), <strong>FloCraft</strong> (supply chain intelligence), <strong>Bourne Aire Industries</strong> (industrial equipment bid management for HVAC), and <strong>SOPForge</strong> (autonomous SOP platform).
+        We currently have 5 products: <strong>VOW</strong> (our programming language), <strong>Mirrored</strong> (AI higher self / personal development), <strong>TrueRPM</strong> (Revenue Per Mile for owner-operators), <strong>NicheFlo</strong> (GPU arbitrage &amp; DeFi yield optimization), <strong>FloCraft</strong> (supply chain intelligence), and <strong>SOPForge</strong> (autonomous SOP platform in pilot testing).
       </>
     ),
   },
@@ -45,14 +45,14 @@ const FAQ_ITEMS = [
   {
     value: "item-6",
     question: "Are these products available to the public?",
-    answer: "Products are at various stages. Some are in beta (VOW, FloCraft, SOPForge), some are actively building (Mirrored, TrueRPM, Bourne Aire Industries). You can reach out to jonathan@jceelabs.com for early access or partnership inquiries.",
+    answer: "Products are at various stages. VOW, NicheFlo, and FloCraft are in beta. Mirrored drops August 1st. SOPForge is in pilot testing with 3 companies. Reach out to jonathan@jceelabs.com for early access or to see how SOPForge is already saving our pilot customers time and money.",
   },
   {
     value: "item-7",
     question: "Who is behind Jcee Labs?",
     answer: (
       <>
-        Jcee Labs was founded by <strong>Jonathan Chadbourne</strong>, a first-principles thinker who built VOW and all products without a CS degree. The studio proves that formally-verified AI doesn't need Fortune 500 budgets. George Taylor serves as advisor.
+        Jcee Labs was founded by <strong>Jonathan Chadbourne</strong>, a first-principles thinker who built VOW and all 5 products without a CS degree. The studio proves that formally-verified AI doesn't need Fortune 500 budgets. George Taylor serves as advisor.
       </>
     ),
   },

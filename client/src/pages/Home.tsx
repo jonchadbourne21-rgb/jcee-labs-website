@@ -168,7 +168,7 @@ export default function Home() {
                 One language.
               </span>{" "}
               <span className="text-[#8ba4d8]">
-                6+ products.
+                5 products.
               </span>
             </h1>
             <p className="text-base md:text-lg lg:text-xl leading-relaxed max-w-2xl text-[#f0f4fa]">

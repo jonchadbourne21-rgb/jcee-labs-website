@@ -106,7 +106,7 @@ export default function TeamPage() {
                   Mirrored, his first app, came from that place. Not from a product roadmap, but from a genuine need to help others do what he had done: face themselves. He built an AI that doesn't just respond, but reflects. Profound, intellectual, unflinching. The kind of mirror that shows you what you need to see, not what you want to see. Creative prompting became philosophical architecture. The app became a tool for self-confrontation.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  The result is 6+ products that prove formally-verified AI doesn't require a Fortune 500 budget. TrueRPM serves owner-operators because Jonathan believes the people who keep the economy moving deserve the same technological advantages as the people who profit from it. Every product is built for the underdog.
+                  The result is 5 products that prove formally-verified AI doesn't require a Fortune 500 budget. TrueRPM serves owner-operators because Jonathan believes the people who keep the economy moving deserve the same technological advantages as the people who profit from it. Every product is built for the underdog.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
                   Jonathan leads Jcee Labs with one rule: question everything, especially your own assumptions. The confidence comes from knowing he's built something real. The humility comes from knowing he's still building.
@@ -164,7 +164,7 @@ export default function TeamPage() {
               <span className="text-[#8ba4d8] mt-1">•</span>
               <div>
                 <p className="text-muted-foreground leading-relaxed">We try what others dismiss. The results speak.</p>
-                <p className="text-sm text-white/40 mt-1">6+ products, one language, no VC runway — built from fundamental principles by a team that refuses to accept "impossible."</p>
+                <p className="text-sm text-white/40 mt-1">5 products, one language, no VC runway — built from fundamental principles by a team that refuses to accept "impossible."</p>
               </div>
             </div>
             <div className="flex items-start gap-3 bg-white/[0.02] border border-[#2a3a5a]/50 rounded-xl p-4 hover:border-[#8ba4d8]/30 transition-colors">

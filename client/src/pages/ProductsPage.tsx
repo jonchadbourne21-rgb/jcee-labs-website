@@ -6,7 +6,7 @@ import {
   Truck,
   Code2,
   Ship,
-  Factory,
+  Cpu,
   FileText,
 } from "lucide-react";
 
@@ -32,9 +32,9 @@ const PRODUCTS = [
     color: "teal",
     icon: Brain,
     href: "/mirrored",
-    status: "BUILDING",
+    status: "App Store August 1st",
     poweredByVow: false,
-    meta: "App Store launch within a month",
+    meta: "Dropping August 1st",
   },
   {
     name: "TrueRPM",
@@ -62,30 +62,31 @@ const PRODUCTS = [
     meta: "Supply chain optimization",
   },
 
+
   {
-    name: "Bourne Aire Industries",
-    tagline: "Industrial workflow automation",
+    name: "NicheFlo",
+    tagline: "Financial intelligence",
     description:
-      "Industrial equipment bid management built specifically for HVAC wholesalers and resellers. Automates the entire workflow from receiving a bid request (PDF spec sheet or email) to sending RFQs to vendors and comparing quotes.",
-    color: "teal",
-    icon: Factory,
-    href: "/revel",
-    status: "BUILDING",
+      "Autonomous GPU arbitrage intelligence and DeFi yield optimization. Real-time signals. AI-powered execution.",
+    color: "cyan",
+    icon: Cpu,
+    href: "/nicheflo",
+    status: "BETA",
     poweredByVow: true,
-    meta: "Industrial workflow automation",
+    meta: "Financial intelligence",
   },
   {
     name: "SOPForge",
     tagline: "SOP automation",
     description:
-      "Autonomous AI platform for standard operating procedures.",
+      "Autonomous AI platform for standard operating procedures. Currently in pilot testing with 3 companies seeing real-world results. If you're interested, let us show you how it's already saving them time and money.",
     color: "indigo",
     icon: FileText,
     href: "/sopforge",
-    status: "BETA",
+    status: "PILOTS & TESTING",
     poweredByVow: true,
-    meta: "SOP automation",
-  },
+    meta: "3 companies testing",
+  }
 
 ];
 
@@ -98,7 +99,7 @@ export default function ProductsPage() {
       <section className="pt-24 md:pt-32 pb-6 md:pb-10 text-center">
         <div className="max-w-[1100px] mx-auto px-5 md:px-8 lg:px-12">
           <div className="inline-block text-[11px] md:text-[12px] font-semibold tracking-[0.1em] uppercase px-4 md:px-5 py-1.5 md:py-2 rounded-3xl border border-[#d4a843]/20 text-[#d4a843] mb-4 md:mb-6">
-            6+ Products Built on VOW
+            5 Products Built on VOW
           </div>
           <h2 className="text-2xl md:text-[36px] lg:text-[48px] font-extrabold leading-[1.2] tracking-[-0.02em] mb-3 md:mb-4">
             Products
