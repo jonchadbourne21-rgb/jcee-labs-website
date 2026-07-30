@@ -10,6 +10,7 @@ const PRODUCTS = [
   { name: "NicheFlo", href: "/nicheflo", color: "text-[#c0c8d8]" },
   { name: "FloCraft", href: "/flocraft", color: "text-[#c0c8d8]" },
   { name: "SOPForge", href: "/sopforge", color: "text-[#c0c8d8]" },
+  { name: "Musaia", href: "https://musaia.org", color: "text-[#c0c8d8]" },
 
 ];
 

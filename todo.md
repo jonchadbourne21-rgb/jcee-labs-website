@@ -343,3 +343,22 @@
 - [x] Update SiteFooter product links
 - [x] Update FAQ product list and count
 - [x] Update TeamPage references
+
+## Phase 40 — Add Musaia to Products
+- [x] Add Musaia to ProductsPage with full description and Music icon
+- [x] Update product count to 6 across Home, FAQ, TeamPage, SiteFooter, ProductsPage
+- [x] Add Musaia to SiteNav dropdown
+- [x] Add Musaia to SiteFooter product links
+- [x] Update FAQ product list and count
+- [x] Update TeamPage references
+
+## Phase 41 — Reposition VOW as Runtime (Execution Engine for AI-Native Software)
+- [x] Update ProductsPage VOW card: "Domain-specific language" → "Intelligent execution engine"
+- [x] Update ProductsPage VOW description with new positioning
+- [x] Update Home.tsx: VOW language references → VOW Runtime references
+- [x] Update FAQ item-2 (What is VOW?): language → runtime positioning
+- [x] Update FAQ item-1 and item-4: language → runtime
+- [x] Update TeamPage: VOW language references → VOW Runtime
+- [x] Update SiteFooter: VOW language → VOW Runtime
+- [x] Update ServicesPage: VOW language → VOW Runtime (headers and tag)
+- [x] All 12 tests passing

@@ -8,14 +8,14 @@ const FAQ_ITEMS = [
   {
     value: "item-1",
     question: "What is Jcee Labs?",
-    answer: "Jcee Labs is an AI product studio and the registered d.b.a. of HOWM HOLDINGS LLC, founded in March 2026. We build formally-verified AI systems on VOW, our proprietary programming language where every agent action is provably safe and leaves a causal trail. One studio, one language, 5 products.",
+    answer: "Jcee Labs is an AI product studio and the registered d.b.a. of HOWM HOLDINGS LLC, founded in March 2026. We build formally-verified AI systems on VOW Runtime, an intelligent execution engine for AI-native software. One studio, one runtime, 6 products.",
   },
   {
     value: "item-2",
     question: "What is VOW?",
     answer: (
       <>
-        <strong>VOW</strong> is our formally-grounded programming language built around quests, proofs, and scar memory. Code that learns from failure. It remembers what hurt, knows why, and never repeats the same failing path. Every decision is provably safe and designed for regulatory transparency before the EU AI Act makes it mandatory. VOW powers most of our products.
+        <strong>The VOW Runtime</strong> is an intelligent execution engine built for AI-native software. Rather than introducing another programming language, it provides a new execution model that enables applications to adapt, optimize, and reason about their own behavior. It features adaptive execution that learns from previous decisions, semantic optimization based on program intent, persistent execution memory, language-agnostic design, and an AI-native architecture that allows intelligent agents to participate directly in software execution and orchestration. VOW powers most of our products.
       </>
     ),
   },
@@ -29,7 +29,7 @@ const FAQ_ITEMS = [
     question: "What products does Jcee Labs build?",
     answer: (
       <>
-        We currently have 5 products: <strong>VOW</strong> (our programming language), <strong>Mirrored</strong> (AI higher self / personal development), <strong>TrueRPM</strong> (Revenue Per Mile for owner-operators), <strong>NicheFlo</strong> (GPU arbitrage &amp; DeFi yield optimization), <strong>FloCraft</strong> (supply chain intelligence), and <strong>SOPForge</strong> (autonomous SOP platform in pilot testing).
+        We currently have 6 products: <strong>VOW Runtime</strong> (intelligent execution engine for AI-native software), <strong>Mirrored</strong> (AI higher self / personal development), <strong>TrueRPM</strong> (Revenue Per Mile for owner-operators), <strong>NicheFlo</strong> (GPU arbitrage &amp; DeFi yield optimization), <strong>FloCraft</strong> (supply chain intelligence), <strong>SOPForge</strong> (autonomous SOP platform in pilot testing), and <strong>Musaia</strong> (music streaming for artists).
       </>
     ),
   },

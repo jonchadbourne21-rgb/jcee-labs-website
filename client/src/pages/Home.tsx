@@ -168,13 +168,13 @@ export default function Home() {
                 One language.
               </span>{" "}
               <span className="text-[#8ba4d8]">
-                5 products.
+                6 products.
               </span>
             </h1>
             <p className="text-base md:text-lg lg:text-xl leading-relaxed max-w-2xl text-[#f0f4fa]">
               Jcee Labs builds AI products on{" "}
-              <Link href="/vow" className="text-[#d4a843] hover:text-[#e8c56d] underline underline-offset-2 decoration-[#d4a843]/40 font-semibold">VOW</Link>
-              , our formally-grounded language where every agent action is provably safe and leaves a causal trail, not a black box. Built for regulatory transparency before the EU AI Act makes it mandatory.
+              <Link href="/vow" className="text-[#d4a843] hover:text-[#e8c56d] underline underline-offset-2 decoration-[#d4a843]/40 font-semibold">VOW Runtime</Link>
+              , an intelligent execution engine for AI-native software that enables applications to adapt, optimize, and reason about their own behavior. Every decision is provably safe and leaves a causal trail. Built for regulatory transparency before the EU AI Act makes it mandatory.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-2">
               <Link href="/products">

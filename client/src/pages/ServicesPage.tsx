@@ -243,7 +243,7 @@ export default function ServicesPage() {
         <div className="max-w-[1100px] mx-auto px-5 md:px-8 lg:px-12">
           <div className="pt-12 pb-6">
             <h3 className="text-[28px] lg:text-[34px] font-bold mb-3 text-[#e8ecf4]">
-              The VOW Difference
+              The VOW Runtime Difference
             </h3>
             <p className="text-[15px] lg:text-[17px] text-[#7a8aaa] leading-[1.6]">
               What exists nowhere else.
@@ -280,7 +280,7 @@ export default function ServicesPage() {
         <div className="max-w-[1100px] mx-auto px-5 md:px-8 lg:px-12">
           <div className="pt-12 pb-6">
             <h3 className="text-[28px] lg:text-[34px] font-bold mb-3 text-[#e8ecf4]">
-              Why VOW
+              Why VOW Runtime
             </h3>
             <p className="text-[15px] lg:text-[17px] text-[#7a8aaa] leading-[1.6]">
               What traditional agencies can't offer.

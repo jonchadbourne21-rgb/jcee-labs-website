@@ -8,21 +8,22 @@ import {
   Ship,
   Cpu,
   FileText,
+  Music,
 } from "lucide-react";
 
 // ─── Product Cards Data ─────────────────────────────────────────────────────
 const PRODUCTS = [
   {
     name: "VOW",
-    tagline: "Domain-specific language",
+    tagline: "Intelligent execution engine",
     description:
-      "Programming language built around quests, proofs, and scar memory. Code that learns from failure, remembers what hurt, knows why, and never repeats the same failing path.",
+      "The VOW Runtime is an intelligent execution engine built for AI-native software. Rather than introducing another programming language, it provides a new execution model that enables applications to adapt, optimize, and reason about their own behavior. Designed to power software that evolves over time while remaining deterministic, scalable, and developer-controlled.",
     color: "purple",
     icon: Code2,
     href: "/vow",
     status: "BETA",
     poweredByVow: true,
-    meta: "Domain-specific language",
+    meta: "Execution engine for AI",
   },
   {
     name: "Mirrored",
@@ -86,6 +87,18 @@ const PRODUCTS = [
     status: "PILOTS & TESTING",
     poweredByVow: true,
     meta: "3 companies testing",
+  },
+  {
+    name: "Musaia",
+    tagline: "Music streaming & discovery",
+    description:
+      "Music streaming app integrated with Sonic DNA — designed to learn your style, flavor, and vibe. In two weeks you won't be skipping. You will be heard and listen like never before. Built for fans and artists. We have a contract where you keep 100% rights to your songs and music. We center our focus on underground and emerging artists. If you're an artist that wants an app that promotes, engages, and earns — Spotify on steroids. Ask about a demo.",
+    color: "pink",
+    icon: Music,
+    href: "https://musaia.org",
+    status: "BETA",
+    poweredByVow: false,
+    meta: "Music streaming",
   }
 
 ];
@@ -99,7 +112,7 @@ export default function ProductsPage() {
       <section className="pt-24 md:pt-32 pb-6 md:pb-10 text-center">
         <div className="max-w-[1100px] mx-auto px-5 md:px-8 lg:px-12">
           <div className="inline-block text-[11px] md:text-[12px] font-semibold tracking-[0.1em] uppercase px-4 md:px-5 py-1.5 md:py-2 rounded-3xl border border-[#d4a843]/20 text-[#d4a843] mb-4 md:mb-6">
-            5 Products Built on VOW
+            6 Products Built on VOW
           </div>
           <h2 className="text-2xl md:text-[36px] lg:text-[48px] font-extrabold leading-[1.2] tracking-[-0.02em] mb-3 md:mb-4">
             Products
