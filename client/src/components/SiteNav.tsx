@@ -9,7 +9,7 @@ const PRODUCTS = [
   { name: "TrueRPM", href: "/truerpm", color: "text-[#c0c8d8]" },
   { name: "NicheFlo", href: "/nicheflo", color: "text-[#c0c8d8]" },
   { name: "FloCraft", href: "/flocraft", color: "text-[#c0c8d8]" },
-  { name: "SOPForge", href: "/sopforge", color: "text-[#c0c8d8]" },
+  { name: "FORGEX", href: "/forgex", color: "text-[#c0c8d8]" },
   { name: "Musaia", href: "https://musaia.org", color: "text-[#c0c8d8]" },
 
 ];

@@ -75,12 +75,12 @@ export default function SiteFooter() {
             </h5>
             <ul className="space-y-1.5 md:space-y-2 text-xs md:text-sm text-[#7a8aaa]">
               <li><Link href="/vow" className="hover:text-[#d4a843] transition-colors">VOW</Link></li>
-              <li><Link href="/mirrored" className="hover:text-[#c0c8d8] transition-colors">Mirrored</Link></li>
+              <li><Link href="/mirrored" className="hover:text-[#c0c8d8] transition-colors">Mirrored (Aug 7)</Link></li>
               <li><Link href="/truerpm" className="hover:text-[#c0c8d8] transition-colors">TrueRPM</Link></li>
 
               <li><Link href="/flocraft" className="hover:text-[#c0c8d8] transition-colors">FloCraft</Link></li>
               <li><Link href="/nicheflo" className="hover:text-[#c0c8d8] transition-colors">NicheFlo</Link></li>
-              <li><Link href="/sopforge" className="hover:text-[#c0c8d8] transition-colors">SOPForge</Link></li>
+              <li><Link href="/forgex" className="hover:text-[#c0c8d8] transition-colors">FORGEX</Link></li>
               <li><a href="https://musaia.org" target="_blank" rel="noopener noreferrer" className="hover:text-[#c0c8d8] transition-colors">Musaia</a></li>
               <li><Link href="/blog" className="hover:text-[#c0c8d8] transition-colors">Blog</Link></li>
 

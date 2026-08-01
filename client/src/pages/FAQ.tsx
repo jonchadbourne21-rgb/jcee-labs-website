@@ -8,14 +8,14 @@ const FAQ_ITEMS = [
   {
     value: "item-1",
     question: "What is Jcee Labs?",
-    answer: "Jcee Labs is an AI product studio and the registered d.b.a. of HOWM HOLDINGS LLC, founded in March 2026. We build formally-verified AI systems on VOW Runtime, an intelligent execution engine for AI-native software. One studio, one runtime, 6 products.",
+    answer: "Jcee Labs is an AI product studio and the registered d.b.a. of HOWM HOLDINGS LLC, founded in March 2026. We build formally-verified AI systems on VOW, a language for agentic AI with an intelligent execution runtime. One studio, one language, 6 products.",
   },
   {
     value: "item-2",
     question: "What is VOW?",
     answer: (
       <>
-        <strong>The VOW Runtime</strong> is an intelligent execution engine built for AI-native software. Rather than introducing another programming language, it provides a new execution model that enables applications to adapt, optimize, and reason about their own behavior. It features adaptive execution that learns from previous decisions, semantic optimization based on program intent, persistent execution memory, language-agnostic design, and an AI-native architecture that allows intelligent agents to participate directly in software execution and orchestration. VOW powers most of our products.
+        <strong>VOW</strong> is a language for agentic AI where every capability—network, filesystem, shell, model calls—must be declared in source and is enforced at compile time. Runs are dry by default: effects are recorded, not executed. Every run emits a structured, exportable trace. VOW compiles to readable Python. The VOW Runtime is an intelligent execution engine that enables applications to adapt, optimize, and reason about their own behavior. It features adaptive execution, semantic optimization, persistent execution memory, and an AI-native architecture. VOW powers most of our products.
       </>
     ),
   },
@@ -29,7 +29,7 @@ const FAQ_ITEMS = [
     question: "What products does Jcee Labs build?",
     answer: (
       <>
-        We currently have 6 products: <strong>VOW Runtime</strong> (intelligent execution engine for AI-native software), <strong>Mirrored</strong> (AI higher self / personal development), <strong>TrueRPM</strong> (Revenue Per Mile for owner-operators), <strong>NicheFlo</strong> (GPU arbitrage &amp; DeFi yield optimization), <strong>FloCraft</strong> (supply chain intelligence), <strong>SOPForge</strong> (autonomous SOP platform in pilot testing), and <strong>Musaia</strong> (music streaming for artists).
+        We currently have 6 products: <strong>VOW</strong> (language + runtime for agentic AI), <strong>Mirrored</strong> (AI higher self / personal development, dropping Aug 7), <strong>TrueRPM</strong> (Revenue Per Mile for owner-operators), <strong>NicheFlo</strong> (GPU arbitrage &amp; DeFi yield optimization), <strong>FloCraft</strong> (supply chain intelligence), <strong>FORGEX</strong> (autonomous SOP platform in pilot testing), and <strong>Musaia</strong> (music streaming for artists).
       </>
     ),
   },

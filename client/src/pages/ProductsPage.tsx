@@ -15,15 +15,15 @@ import {
 const PRODUCTS = [
   {
     name: "VOW",
-    tagline: "Intelligent execution engine",
+    tagline: "Language + Runtime for agentic AI",
     description:
-      "The VOW Runtime is an intelligent execution engine built for AI-native software. Rather than introducing another programming language, it provides a new execution model that enables applications to adapt, optimize, and reason about their own behavior. Designed to power software that evolves over time while remaining deterministic, scalable, and developer-controlled.",
+      "VOW is a language for agentic AI where every capability—network, filesystem, shell, model calls—must be declared in source and is enforced at compile time. Runs are dry by default: effects are recorded, not executed. Every run emits a structured, exportable trace. VOW compiles to readable Python. The VOW Runtime is an intelligent execution engine that enables applications to adapt, optimize, and reason about their own behavior. Designed to power software that evolves over time while remaining deterministic, scalable, and developer-controlled.",
     color: "purple",
     icon: Code2,
     href: "/vow",
-    status: "BETA",
+    status: "IP CHECKING + OPEN SOURCE",
     poweredByVow: true,
-    meta: "Execution engine for AI",
+    meta: "Pilots dropping after",
   },
   {
     name: "Mirrored",
@@ -33,9 +33,9 @@ const PRODUCTS = [
     color: "teal",
     icon: Brain,
     href: "/mirrored",
-    status: "App Store August 1st",
+    status: "App Store August 7th",
     poweredByVow: false,
-    meta: "Dropping August 1st",
+    meta: "Dropping August 7th",
   },
   {
     name: "TrueRPM",
@@ -77,13 +77,13 @@ const PRODUCTS = [
     meta: "Financial intelligence",
   },
   {
-    name: "SOPForge",
+    name: "FORGEX",
     tagline: "SOP automation",
     description:
       "Autonomous AI platform for standard operating procedures. Currently in pilot testing with 3 companies seeing real-world results. If you're interested, let us show you how it's already saving them time and money.",
     color: "indigo",
     icon: FileText,
-    href: "/sopforge",
+    href: "/forgex",
     status: "PILOTS & TESTING",
     poweredByVow: true,
     meta: "3 companies testing",

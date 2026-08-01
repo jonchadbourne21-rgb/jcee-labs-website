@@ -362,3 +362,16 @@
 - [x] Update SiteFooter: VOW language → VOW Runtime
 - [x] Update ServicesPage: VOW language → VOW Runtime (headers and tag)
 - [x] All 12 tests passing
+
+## Phase 42 — Add VOW Language Technical Details
+- [x] Update ProductsPage VOW description to include language + runtime details
+- [x] Update FAQ item-1 and item-2 to include language technical specs
+- [x] Update Home.tsx VOW description to mention language + runtime
+- [x] Update TeamPage VOW references to include language aspect
+- [x] All 12 tests passing
+
+## Phase 43 — Update Product Status & Dates
+- [x] Change Mirrored launch date: August 1st → August 7th
+- [x] Update VOW status: BETA → IP Checking + Open Source (pilots dropping after)
+- [x] Rename SOPForge to FORGEX across all pages (ProductsPage, SiteNav, SiteFooter, FAQ)
+- [x] All 12 tests passing
