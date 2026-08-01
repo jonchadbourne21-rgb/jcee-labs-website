@@ -5,10 +5,7 @@ import {
   Brain,
   Truck,
   Code2,
-  Ship,
-  Cpu,
   FileText,
-  Music,
 } from "lucide-react";
 
 // ─── Product Cards Data ─────────────────────────────────────────────────────
@@ -49,33 +46,6 @@ const PRODUCTS = [
     poweredByVow: true,
     meta: "Releases August 1",
   },
-
-  {
-    name: "FloCraft",
-    tagline: "Supply chain optimization",
-    description:
-      "Supply chain intelligence, powered by VOW. FloCraft uses VOW's intelligent brain to solve supply chain problems in real time. Alternate routes and corrective solutions that directly improve ROI.",
-    color: "teal",
-    icon: Ship,
-    href: "/flocraft",
-    status: "BETA",
-    poweredByVow: true,
-    meta: "Supply chain optimization",
-  },
-
-
-  {
-    name: "NicheFlo",
-    tagline: "Financial intelligence",
-    description:
-      "Autonomous GPU arbitrage intelligence and DeFi yield optimization. Real-time signals. AI-powered execution.",
-    color: "cyan",
-    icon: Cpu,
-    href: "/nicheflo",
-    status: "BETA",
-    poweredByVow: true,
-    meta: "Financial intelligence",
-  },
   {
     name: "FORGEX",
     tagline: "SOP automation",
@@ -87,18 +57,6 @@ const PRODUCTS = [
     status: "PILOTS & TESTING",
     poweredByVow: true,
     meta: "3 companies testing",
-  },
-  {
-    name: "Musaia",
-    tagline: "Music streaming & discovery",
-    description:
-      "Music streaming app integrated with Sonic DNA — designed to learn your style, flavor, and vibe. In two weeks you won't be skipping. You will be heard and listen like never before. Built for fans and artists. We have a contract where you keep 100% rights to your songs and music. We center our focus on underground and emerging artists. If you're an artist that wants an app that promotes, engages, and earns — Spotify on steroids. Ask about a demo.",
-    color: "pink",
-    icon: Music,
-    href: "https://musaia.org",
-    status: "BETA",
-    poweredByVow: false,
-    meta: "Music streaming",
   }
 
 ];
@@ -112,7 +70,7 @@ export default function ProductsPage() {
       <section className="pt-24 md:pt-32 pb-6 md:pb-10 text-center">
         <div className="max-w-[1100px] mx-auto px-5 md:px-8 lg:px-12">
           <div className="inline-block text-[11px] md:text-[12px] font-semibold tracking-[0.1em] uppercase px-4 md:px-5 py-1.5 md:py-2 rounded-3xl border border-[#d4a843]/20 text-[#d4a843] mb-4 md:mb-6">
-            6 Products Built on VOW
+            3 Products Built on VOW
           </div>
           <h2 className="text-2xl md:text-[36px] lg:text-[48px] font-extrabold leading-[1.2] tracking-[-0.02em] mb-3 md:mb-4">
             Products

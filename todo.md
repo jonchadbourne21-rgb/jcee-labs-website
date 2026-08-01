@@ -375,3 +375,12 @@
 - [x] Update VOW status: BETA → IP Checking + Open Source (pilots dropping after)
 - [x] Rename SOPForge to FORGEX across all pages (ProductsPage, SiteNav, SiteFooter, FAQ)
 - [x] All 12 tests passing
+
+## Phase 44 — Remove Products & Update Status
+- [x] Remove NicheFlo (arbitration app) from ProductsPage, SiteNav, SiteFooter, FAQ
+- [x] Remove FloCraft (logistics app) from ProductsPage, SiteNav, SiteFooter, FAQ
+- [x] Remove Musaia from ProductsPage, SiteNav, SiteFooter, FAQ (moved to future 2027 builds)
+- [x] TrueRPM status confirmed as BUILDING
+- [x] Update product count from 6 to 3 (VOW, Mirrored, FORGEX, FORGEX) across all pages
+- [x] Update FAQ product list with 2027 future builds note
+- [x] All 12 tests passing

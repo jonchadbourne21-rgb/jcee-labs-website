@@ -7,10 +7,7 @@ const PRODUCTS = [
   { name: "VOW", href: "/vow", color: "text-[#d4a843]" },
   { name: "Mirrored", href: "/mirrored", color: "text-[#c0c8d8]" },
   { name: "TrueRPM", href: "/truerpm", color: "text-[#c0c8d8]" },
-  { name: "NicheFlo", href: "/nicheflo", color: "text-[#c0c8d8]" },
-  { name: "FloCraft", href: "/flocraft", color: "text-[#c0c8d8]" },
   { name: "FORGEX", href: "/forgex", color: "text-[#c0c8d8]" },
-  { name: "Musaia", href: "https://musaia.org", color: "text-[#c0c8d8]" },
 
 ];
 

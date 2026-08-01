@@ -30,7 +30,7 @@ export default function SiteFooter() {
             <p className="text-[#7a8aaa] text-sm leading-relaxed max-w-sm">
               Jcee Labs is the d.b.a. of{" "}
               <strong className="text-[#e8ecf4]">HOWM HOLDINGS LLC</strong>. We
-              build formally-verified AI systems on VOW Runtime. One studio, one runtime, 6 products.
+              build formally-verified AI systems on VOW. One studio, one language, 3 products.
             </p>
 
             {/* Social icons */}
@@ -77,11 +77,7 @@ export default function SiteFooter() {
               <li><Link href="/vow" className="hover:text-[#d4a843] transition-colors">VOW</Link></li>
               <li><Link href="/mirrored" className="hover:text-[#c0c8d8] transition-colors">Mirrored (Aug 7)</Link></li>
               <li><Link href="/truerpm" className="hover:text-[#c0c8d8] transition-colors">TrueRPM</Link></li>
-
-              <li><Link href="/flocraft" className="hover:text-[#c0c8d8] transition-colors">FloCraft</Link></li>
-              <li><Link href="/nicheflo" className="hover:text-[#c0c8d8] transition-colors">NicheFlo</Link></li>
               <li><Link href="/forgex" className="hover:text-[#c0c8d8] transition-colors">FORGEX</Link></li>
-              <li><a href="https://musaia.org" target="_blank" rel="noopener noreferrer" className="hover:text-[#c0c8d8] transition-colors">Musaia</a></li>
               <li><Link href="/blog" className="hover:text-[#c0c8d8] transition-colors">Blog</Link></li>
 
             </ul>
