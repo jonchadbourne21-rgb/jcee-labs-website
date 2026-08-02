@@ -8,14 +8,14 @@ const FAQ_ITEMS = [
   {
     value: "item-1",
     question: "What is Jcee Labs?",
-    answer: "Jcee Labs is an AI product studio and the registered d.b.a. of HOWM HOLDINGS LLC, founded in March 2026. We build formally-verified AI systems on VOW, a language for agentic AI with an intelligent execution runtime. One studio, one language, 3 products.",
+    answer: "Jcee Labs is an AI product studio and the registered d.b.a. of HOWM HOLDINGS LLC, founded in March 2026. We build on VOW, an evidence-oriented execution engine for AI and distributed software. One studio, one runtime, 3 products.",
   },
   {
     value: "item-2",
     question: "What is VOW?",
     answer: (
       <>
-        <strong>VOW</strong> is a language for agentic AI where every capability—network, filesystem, shell, model calls—must be declared in source and is enforced at compile time. Runs are dry by default: effects are recorded, not executed. Every run emits a structured, exportable trace. VOW compiles to readable Python. The VOW Runtime is an intelligent execution engine that enables applications to adapt, optimize, and reason about their own behavior. It features adaptive execution, semantic optimization, persistent execution memory, and an AI-native architecture. VOW powers most of our products.
+        <strong>VOW</strong> is an evidence-oriented execution engine for AI and distributed software. It records every meaningful decision as evidence, enabling deterministic replay, crash recovery, exactly-once effects, and adaptive execution. Makes long-running, AI-assisted, and distributed workflows deterministic, recoverable, and auditable through journaled execution, exactly-once effects, and evidence-based recovery.
       </>
     ),
   },
@@ -29,7 +29,7 @@ const FAQ_ITEMS = [
     question: "What products does Jcee Labs build?",
     answer: (
       <>
-        We currently have 3 products: <strong>VOW</strong> (language + runtime for agentic AI), <strong>Mirrored</strong> (AI higher self / personal development, dropping Aug 7), <strong>TrueRPM</strong> (Revenue Per Mile for owner-operators), and <strong>FORGEX</strong> (autonomous SOP platform in pilot testing). NicheFlo, FloCraft, and Musaia are on ice for future 2027 builds.
+        We currently have 3 products: <strong>VOW</strong> (evidence-oriented execution engine for AI and distributed software), <strong>Mirrored</strong> (AI higher self / personal development, dropping Aug 7), <strong>TrueRPM</strong> (Revenue Per Mile for owner-operators), and <strong>FORGEX</strong> (autonomous SOP platform in pilot testing). NicheFlo, FloCraft, and Musaia are on ice for future 2027 builds.
       </>
     ),
   },

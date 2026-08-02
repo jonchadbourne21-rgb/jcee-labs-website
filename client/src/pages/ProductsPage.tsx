@@ -12,13 +12,13 @@ import {
 const PRODUCTS = [
   {
     name: "VOW",
-    tagline: "Language + Runtime for agentic AI",
+    tagline: "Evidence-oriented execution engine",
     description:
-      "VOW is a language for agentic AI where every capability—network, filesystem, shell, model calls—must be declared in source and is enforced at compile time. Runs are dry by default: effects are recorded, not executed. Every run emits a structured, exportable trace. VOW compiles to readable Python. The VOW Runtime is an intelligent execution engine that enables applications to adapt, optimize, and reason about their own behavior. Designed to power software that evolves over time while remaining deterministic, scalable, and developer-controlled.",
+      "VOW is a runtime and language that records every meaningful decision as evidence, enabling deterministic replay, crash recovery, exactly-once effects, and adaptive execution. Makes long-running, AI-assisted, and distributed workflows deterministic, recoverable, and auditable through journaled execution, exactly-once effects, and evidence-based recovery.",
     color: "purple",
     icon: Code2,
     href: "/vow",
-    status: "IP CHECKING + OPEN SOURCE",
+    status: "BETA",
     poweredByVow: true,
     meta: "Pilots dropping after",
   },

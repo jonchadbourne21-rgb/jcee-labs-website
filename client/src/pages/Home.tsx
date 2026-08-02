@@ -174,7 +174,7 @@ export default function Home() {
             <p className="text-base md:text-lg lg:text-xl leading-relaxed max-w-2xl text-[#f0f4fa]">
               Jcee Labs builds AI products on{" "}
               <Link href="/vow" className="text-[#d4a843] hover:text-[#e8c56d] underline underline-offset-2 decoration-[#d4a843]/40 font-semibold">VOW</Link>
-              , a language for agentic AI where every capability is declared in source and enforced at compile time. Runs are dry by default: effects are recorded, not executed. VOW compiles to readable Python. The VOW Runtime is an intelligent execution engine for AI-native software that enables applications to adapt, optimize, and reason about their own behavior. Every decision is provably safe and leaves a causal trail. Built for regulatory transparency before the EU AI Act makes it mandatory.
+              , a runtime and language that records every meaningful decision as evidence, enabling deterministic replay, crash recovery, exactly-once effects, and adaptive execution. Software fails. Evidence shouldn't.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-2">
               <Link href="/products">
