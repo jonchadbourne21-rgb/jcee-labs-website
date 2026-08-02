@@ -57,9 +57,9 @@ export default function SiteNav() {
           {/* Logo — centered on mobile, left-aligned on desktop */}
           <Link href="/" className="flex items-center gap-2.5 md:gap-3 group absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0">
             <img
-              src="/manus-storage/jcee-labs-new-logo_cd2cbbaa.jpg"
+              src="/manus-storage/jcee-labs-logo_75bbef18.png"
               alt="Jcee Labs Logo"
-              className="w-8 h-8 md:w-9 md:h-9 rounded-xl shadow-lg shadow-[#8ba4d8]/15 group-hover:scale-105 transition-transform duration-300 object-contain"
+              className="w-8 h-8 md:w-9 md:h-9 shadow-lg shadow-[#8ba4d8]/15 group-hover:scale-105 transition-transform duration-300 object-contain"
             />
             <div className="flex flex-col">
               <span className="font-display font-bold text-sm md:text-base tracking-wider text-[#e8ecf4] group-hover:text-[#c0c8d8] transition-colors">
