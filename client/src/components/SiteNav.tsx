@@ -45,26 +45,20 @@ export default function SiteNav() {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled || mobileMenuOpen
-          ? "border-b border-[#2a3a5a]/50 bg-[#080c18]/90 backdrop-blur-xl py-3"
-          : "bg-transparent py-4 md:py-5"
-      }`}>
+      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white py-3 md:py-4 shadow-sm shadow-black/5">
         <div className="container flex items-center justify-between px-4 md:px-6 relative">
-          {/* Logo with white background box — Litslink style */}
-          <Link href="/" className="flex items-center gap-4 md:gap-5 group">
-            <div className="bg-white rounded-lg p-2.5 md:p-3 shadow-lg shadow-[#8ba4d8]/15 group-hover:shadow-[#8ba4d8]/25 transition-shadow duration-300">
-              <img
-                src="/manus-storage/jcee-labs-logo_75bbef18.png"
-                alt="Jcee Labs Logo"
-                className="w-10 h-10 md:w-12 md:h-12 object-contain"
-              />
-            </div>
+          {/* Logo on white header */}
+          <Link href="/" className="flex items-center gap-3 md:gap-4 group">
+            <img
+              src="/manus-storage/jcee-labs-logo_75bbef18.png"
+              alt="Jcee Labs Logo"
+              className="w-10 h-10 md:w-11 md:h-11 object-contain group-hover:opacity-80 transition-opacity"
+            />
             <div className="flex flex-col">
-              <span className="font-display font-bold text-base md:text-xl tracking-wider text-[#e8ecf4] group-hover:text-[#c0c8d8] transition-colors">
+              <span className="font-display font-bold text-sm md:text-base tracking-wider text-black group-hover:text-gray-700 transition-colors">
                 JCEE LABS
               </span>
-              <span className="text-[10px] md:text-xs font-mono tracking-widest text-[#7a8aaa] uppercase">
+              <span className="text-[9px] md:text-[10px] font-mono tracking-widest text-gray-600 uppercase">
                 by HOWM HOLDINGS LLC
               </span>
             </div>
@@ -72,11 +66,11 @@ export default function SiteNav() {
 
           {/* Desktop navigation — hidden, only hamburger on mobile/desktop */}
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-            <Link href="/" className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">Home</Link>
+            <Link href="/" className="text-gray-700 hover:text-black transition-colors">Home</Link>
             <div ref={dropdownRef} className="relative">
               <button
                 onClick={() => setProductsOpen(!productsOpen)}
-                className="flex items-center gap-1 text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors"
+                className="flex items-center gap-1 text-gray-700 hover:text-black transition-colors"
               >
                 Products <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${productsOpen ? 'rotate-180' : ''}`} />
               </button>
@@ -104,10 +98,10 @@ export default function SiteNav() {
                 </div>
               )}
             </div>
-            <Link href="/services" className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">Services</Link>
-            <Link href="/team" className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">Team</Link>
-            <Link href="/blog" className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">Blog</Link>
-            <Link href="/faq" className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">FAQ</Link>
+            <Link href="/services" className="text-gray-700 hover:text-black transition-colors">Services</Link>
+            <Link href="/team" className="text-gray-700 hover:text-black transition-colors">Team</Link>
+            <Link href="/blog" className="text-gray-700 hover:text-black transition-colors">Blog</Link>
+            <Link href="/faq" className="text-gray-700 hover:text-black transition-colors">FAQ</Link>
           </nav>
 
           <div className="flex items-center gap-3">
@@ -122,7 +116,7 @@ export default function SiteNav() {
             {/* Hamburger button — Litslink style with rounded square border */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="w-12 h-12 flex items-center justify-center rounded-2xl border-2 border-[#c0c8d8]/40 bg-transparent text-white hover:border-[#c0c8d8]/70 hover:bg-[#2a3a5a]/20 active:scale-95 transition-all duration-200"
+              className="w-12 h-12 flex items-center justify-center rounded-2xl border-2 border-gray-400 bg-transparent text-black hover:border-black hover:bg-gray-100 active:scale-95 transition-all duration-200"
               aria-label="Toggle menu"
             >
               <div className="w-6 h-6 flex flex-col items-center justify-center gap-[6px]">
