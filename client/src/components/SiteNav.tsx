@@ -51,26 +51,26 @@ export default function SiteNav() {
           : "bg-transparent py-4 md:py-5"
       }`}>
         <div className="container flex items-center justify-between px-4 md:px-6 relative">
-          {/* Spacer for mobile to balance hamburger on right */}
-          <div className="w-11 md:hidden" aria-hidden="true" />
-
-          {/* Logo — centered on mobile, left-aligned on desktop */}
-          <Link href="/" className="flex items-center gap-2.5 md:gap-3 group absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0">
-            <img
-              src="/manus-storage/jcee-labs-logo_75bbef18.png"
-              alt="Jcee Labs Logo"
-              className="w-8 h-8 md:w-9 md:h-9 shadow-lg shadow-[#8ba4d8]/15 group-hover:scale-105 transition-transform duration-300 object-contain"
-            />
+          {/* Logo with white background box — Litslink style */}
+          <Link href="/" className="flex items-center gap-4 md:gap-5 group">
+            <div className="bg-white rounded-lg p-2.5 md:p-3 shadow-lg shadow-[#8ba4d8]/15 group-hover:shadow-[#8ba4d8]/25 transition-shadow duration-300">
+              <img
+                src="/manus-storage/jcee-labs-logo_75bbef18.png"
+                alt="Jcee Labs Logo"
+                className="w-10 h-10 md:w-12 md:h-12 object-contain"
+              />
+            </div>
             <div className="flex flex-col">
-              <span className="font-display font-bold text-sm md:text-base tracking-wider text-[#e8ecf4] group-hover:text-[#c0c8d8] transition-colors">
+              <span className="font-display font-bold text-base md:text-xl tracking-wider text-[#e8ecf4] group-hover:text-[#c0c8d8] transition-colors">
                 JCEE LABS
               </span>
-              <span className="text-[8px] md:text-[9px] font-mono tracking-widest text-[#7a8aaa] uppercase">
+              <span className="text-[10px] md:text-xs font-mono tracking-widest text-[#7a8aaa] uppercase">
                 by HOWM HOLDINGS LLC
               </span>
             </div>
           </Link>
 
+          {/* Desktop navigation — hidden, only hamburger on mobile/desktop */}
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
             <Link href="/" className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">Home</Link>
             <div ref={dropdownRef} className="relative">
@@ -119,10 +119,10 @@ export default function SiteNav() {
               </Button>
             </Link>
 
-            {/* Hamburger button */}
+            {/* Hamburger button — Litslink style with rounded square border */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden w-11 h-11 flex items-center justify-center rounded-xl border border-[#c0c8d8]/30 bg-[#080c18]/60 backdrop-blur-sm text-white hover:bg-[#2a3a5a]/50 hover:border-[#c0c8d8]/50 active:scale-95 transition-all duration-150 relative shadow-sm shadow-black/20"
+              className="w-12 h-12 flex items-center justify-center rounded-2xl border-2 border-[#c0c8d8]/40 bg-transparent text-white hover:border-[#c0c8d8]/70 hover:bg-[#2a3a5a]/20 active:scale-95 transition-all duration-200"
               aria-label="Toggle menu"
             >
               <div className="w-6 h-6 flex flex-col items-center justify-center gap-[6px]">
