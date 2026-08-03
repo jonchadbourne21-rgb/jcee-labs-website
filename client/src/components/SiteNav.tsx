@@ -45,8 +45,8 @@ export default function SiteNav() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white py-3 md:py-4 shadow-sm shadow-black/5">
-        <div className="container flex items-center justify-between px-4 md:px-6 relative">
+      <header className="sticky top-0 left-0 right-0 z-50 bg-white py-3 md:py-4 shadow-md shadow-black/10">
+        <div className="max-w-[1100px] mx-auto flex items-center justify-between px-4 md:px-6 relative">
           {/* Logo on white header */}
           <Link href="/" className="flex items-center gap-3 md:gap-4 group">
             <img
