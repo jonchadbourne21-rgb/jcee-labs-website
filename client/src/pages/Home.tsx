@@ -1,223 +1,214 @@
-import { useState, useEffect } from "react";
-import { Link } from "wouter";
-import { Button } from "@/components/ui/button";
-import {
-  ArrowUpRight,
-  Sparkles,
-} from "lucide-react";
-import SiteFooter from "@/components/SiteFooter";
+const receiptRows = [
+  ["00", "intent", "verified"],
+  ["01", "effect", "committed once"],
+  ["02", "operator", "crash observed"],
+  ["03", "replay", "resumed"],
+  ["04", "duplicate effects", "0"],
+];
+
+const guarantees = [
+  {
+    index: "01",
+    title: "Durable evidence",
+    copy: "Every meaningful execution leaves a receipt that survives the process that created it.",
+  },
+  {
+    index: "02",
+    title: "Exactly-once effects",
+    copy: "Retries and recovery do not have to mean duplicate real-world actions.",
+  },
+  {
+    index: "03",
+    title: "Crash recovery",
+    copy: "Failure becomes a recorded state to resume from—not a mystery to reconstruct.",
+  },
+  {
+    index: "04",
+    title: "Scar memory",
+    copy: "Failed paths become durable knowledge, so the system can stop repeating avoidable mistakes.",
+  },
+];
 
 export default function Home() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <div className="min-h-screen bg-[#080c18] text-[#e8ecf4] relative overflow-x-hidden flex flex-col">
+    <main>
+      <header className="site-header">
+        <a className="wordmark" href="#top" aria-label="JCEE Labs home">
+          <span className="mark" aria-hidden="true">J</span>
+          <span>JCEE LABS</span>
+        </a>
 
-      {/* BACKGROUND AURORAS — navy/silver tones */}
-      <div
-        className="absolute top-[-10%] left-[-5%] w-[350px] h-[350px] rounded-full bg-[#8ba4d8]/8 blur-[80px] pointer-events-none"
-        style={{ willChange: "transform", transform: "translateZ(0)" }}
-      />
-      <div
-        className="absolute top-[40%] right-[-10%] w-[400px] h-[400px] rounded-full bg-[#2a3a5a]/20 blur-[90px] pointer-events-none"
-        style={{ willChange: "transform", transform: "translateZ(0)" }}
-      />
+        <nav aria-label="Main navigation">
+          <a href="#vow">VOW</a>
+          <a href="#mirrored">MIRRORED</a>
+          <a href="#company">COMPANY</a>
+        </nav>
 
-      {/* ═══════════════════════════════════════════════════════════════════════
-          NAVIGATION
-      ═══════════════════════════════════════════════════════════════════════ */}
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "border-b border-[#2a3a5a]/50 bg-[#080c18]/80 backdrop-blur-xl py-2 md:py-3"
-            : "bg-transparent py-3 md:py-5"
-        }`}
-      >
-        <div className="container flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 md:gap-3 group">
-              <img
-                src="/manus-storage/jcee-labs-logo_75bbef18.png"
-                alt="Jcee Labs Logo"
-                className="w-8 h-8 md:w-9 md:h-9 shadow-lg shadow-[#8ba4d8]/15 group-hover:scale-105 transition-transform duration-300 object-contain"
-              />
-              <div className="flex flex-col">
-                <span className="font-display font-bold text-sm md:text-base tracking-wider text-[#e8ecf4] group-hover:text-[#c0c8d8] transition-colors">
-                  JCEE LABS
-                </span>
-                <span className="text-[8px] md:text-[9px] font-mono tracking-widest text-[#7a8aaa] uppercase">
-                  by HOWM HOLDINGS LLC
-                </span>
-              </div>
-          </Link>
-
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-            <Link href="/products" className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">Products</Link>
-            <Link href="/services" className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">Services</Link>
-            <Link href="/team" className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">Team</Link>
-            <Link href="/faq" className="text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors">FAQ</Link>
-          </nav>
-
-          <div className="flex items-center gap-3">
-            <Link href="/services">
-              <Button
-                size="sm"
-                className="hidden sm:flex rounded-xl bg-[#e0e6f0] text-[#080c18] hover:bg-[#c0c8d8] hover:shadow-xl hover:shadow-[#8ba4d8]/20 hover:-translate-y-0.5 border-0 font-medium shadow-lg shadow-[#8ba4d8]/10 active:scale-95 transition-all duration-200"
-              >
-                <span className="flex items-center gap-1">
-                  Get in Touch <ArrowUpRight className="w-3.5 h-3.5" />
-                </span>
-              </Button>
-            </Link>
-            {/* Mobile menu toggle */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden w-9 h-9 flex items-center justify-center rounded-lg border border-[#2a3a5a] text-[#e8ecf4]"
-            >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                {mobileMenuOpen ? (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                ) : (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                )}
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden border-t border-[#2a3a5a]/50 bg-[#080c18]/95 backdrop-blur-xl px-6 py-4 space-y-1">
-            <Link href="/products" onClick={() => setMobileMenuOpen(false)} className="block text-base text-[#e8ecf4] hover:text-[#8ba4d8] transition-colors py-3 border-b border-[#2a3a5a]/30">
-              Products
-            </Link>
-            <Link href="/services" onClick={() => setMobileMenuOpen(false)} className="block text-base text-[#e8ecf4] hover:text-[#8ba4d8] transition-colors py-3 border-b border-[#2a3a5a]/30">
-              Services
-            </Link>
-            <Link href="/team" onClick={() => setMobileMenuOpen(false)} className="block text-base text-[#e8ecf4] hover:text-[#8ba4d8] transition-colors py-3 border-b border-[#2a3a5a]/30">
-              Team
-            </Link>
-            <Link href="/faq" onClick={() => setMobileMenuOpen(false)} className="block text-base text-[#e8ecf4] hover:text-[#8ba4d8] transition-colors py-3">
-              FAQ
-            </Link>
-            <Link href="/services" onClick={() => setMobileMenuOpen(false)} className="block mt-3">
-              <Button size="sm" className="w-full rounded-xl bg-[#e0e6f0] text-[#080c18] font-medium">
-                <span className="flex items-center justify-center gap-1">
-                  Get in Touch <ArrowUpRight className="w-3.5 h-3.5" />
-                </span>
-              </Button>
-            </Link>
-          </div>
-        )}
+        <a className="header-contact" href="mailto:jonathan@jceelabs.com">
+          CONTACT <span aria-hidden="true">↗</span>
+        </a>
       </header>
 
-      {/* ═══════════════════════════════════════════════════════════════════════
-          HERO — Full viewport, static, intriguing
-      ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative flex-1 flex items-center justify-center min-h-screen z-10 overflow-hidden px-4 md:px-0">
-        {/* Hero background image — different for mobile vs desktop */}
-        <div className="absolute inset-0 pointer-events-none">
-          {/* Mobile background (quantum neural network) */}
-          <img
-            src="https://d2xsxph8kpxj0f.cloudfront.net/310519663398434536/PGyQHKFdSR7kZkQyzRA9uW/quantum-neural-bg-mobile-UNbHbew8qCTxmWrUfrMJAX.webp"
-            alt=""
-            className="md:hidden w-full h-full object-cover object-center opacity-30 select-none"
-          />
-          {/* Desktop background (widescreen light-ray version) */}
-          <img
-            src="/manus-storage/jcee-labs-hero-bg_104c4860.png"
-            alt=""
-            className="hidden md:block w-full h-full object-cover object-center opacity-40 select-none"
-          />
-          {/* Mobile-only dark overlay for text readability */}
-          <div className="absolute inset-0 bg-[#080c18]/40 md:hidden" />
-          {/* Gradient overlays to blend with content */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#080c18] via-[#080c18]/70 md:via-[#080c18]/60 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#080c18] via-transparent to-[#080c18]/40" />
+      <section className="hero" id="top">
+        <div className="hero-copy">
+          <p className="eyebrow"><span /> INDEPENDENT SOFTWARE LAB · DALLAS, TX</p>
+          <h1>
+            AI can act.
+            <br />
+            <em>Can it prove it?</em>
+          </h1>
+          <p className="hero-deck">
+            JCEE Labs builds software for the moment intelligence leaves the
+            chat window and touches the real world.
+          </p>
+          <div className="hero-actions">
+            <a className="primary-link" href="#vow">SEE THE RUNTIME <span>↓</span></a>
+            <span className="availability"><i /> BUILDING IN PUBLIC · 2026</span>
+          </div>
         </div>
 
-        <div className="container relative z-10 pt-20 md:pt-0 max-w-[1100px] mx-auto px-6 md:px-8 lg:px-12">
-          <div className="max-w-3xl lg:max-w-[680px] space-y-5 md:space-y-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#8ba4d8]/10 border border-[#8ba4d8]/20 text-[#8ba4d8] text-[10px] md:text-xs font-mono">
-              <Sparkles className="w-3 h-3 md:w-3.5 md:h-3.5" /> SaaS, PaaS, Venture Architecture
-            </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-extrabold leading-[1.1] md:leading-[1.05] tracking-tight">
-              <span className="text-[#8ba4d8]">One studio.</span>{" "}
-              <span className="text-[#d4a843]">
-                One language.
-              </span>{" "}
-              <span className="text-[#8ba4d8]">
-                3 products.
-              </span>
-            </h1>
-            <p className="text-base md:text-lg lg:text-xl leading-relaxed max-w-2xl text-[#f0f4fa]">
-              Jcee Labs builds AI products on{" "}
-              <Link href="/vow" className="text-[#d4a843] hover:text-[#e8c56d] underline underline-offset-2 decoration-[#d4a843]/40 font-semibold">VOW</Link>
-              , a runtime and language that records every meaningful decision as evidence, enabling deterministic replay, crash recovery, exactly-once effects, and adaptive execution. Software fails. Evidence shouldn't.
+        <aside className="receipt" aria-label="Example VOW execution receipt">
+          <div className="receipt-header">
+            <span>VOW / EXECUTION RECEIPT</span>
+            <span className="receipt-status"><i /> PROVABLE</span>
+          </div>
+          <div className="receipt-id">
+            <span>RUN</span>
+            <strong>vow_01HX7A</strong>
+            <span>2026-08-03 17:42:11</span>
+          </div>
+          <div className="receipt-rows">
+            {receiptRows.map(([index, label, value]) => (
+              <div className="receipt-row" key={index}>
+                <span>{index}</span>
+                <span>{label}</span>
+                <strong>{value}</strong>
+              </div>
+            ))}
+          </div>
+          <div className="hash-line">
+            <span>PROOF</span>
+            <code>4a91:0d72:bc8e:f103</code>
+          </div>
+          <div className="receipt-footer">
+            <span>CLAIM</span>
+            <strong>EXECUTION VERIFIED</strong>
+          </div>
+        </aside>
+      </section>
+
+      <div className="statement-band" aria-label="JCEE Labs principle">
+        <span>EVIDENCE OVER CLAIMS</span>
+        <span>•</span>
+        <span>STATE OVER GUESSWORK</span>
+        <span>•</span>
+        <span>RECOVERY OVER RESTARTS</span>
+      </div>
+
+      <section className="vow-section" id="vow">
+        <div className="section-index">
+          <span>01 / VOW</span>
+          <span>EXECUTION RUNTIME</span>
+        </div>
+
+        <div className="vow-intro">
+          <h2>The runtime between<br />intention and effect.</h2>
+          <div>
+            <p>
+              VOW is an evidence-first execution runtime for AI systems. It is
+              designed to make agent work inspectable, resumable, and
+              accountable—even when the process fails halfway through.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-2">
-              <Link href="/products">
-                <Button
-                  size="lg"
-                  className="w-full sm:w-auto rounded-xl bg-[#e0e6f0] text-[#080c18] hover:bg-[#c0c8d8] hover:shadow-2xl hover:shadow-[#8ba4d8]/20 hover:-translate-y-0.5 font-semibold shadow-xl shadow-[#8ba4d8]/5 active:scale-97 transition-all duration-200"
-                >
-                  Explore Products
-                </Button>
-              </Link>
-              <Link href="/services">
-                <Button
-                  size="lg"
-                  className="w-full sm:w-auto rounded-xl bg-[#e0e6f0] text-[#080c18] hover:bg-[#c0c8d8] hover:shadow-2xl hover:shadow-[#8ba4d8]/20 hover:-translate-y-0.5 font-semibold shadow-xl shadow-[#8ba4d8]/5 active:scale-97 transition-all duration-200"
-                >
-                  Services
-                </Button>
-              </Link>
-              <Link href="/team">
-                <Button
-                  size="lg"
-                  className="w-full sm:w-auto rounded-xl bg-[#e0e6f0] text-[#080c18] hover:bg-[#c0c8d8] hover:shadow-2xl hover:shadow-[#8ba4d8]/20 hover:-translate-y-0.5 font-semibold shadow-xl shadow-[#8ba4d8]/5 active:scale-97 transition-all duration-200"
-                >
-                  Meet the Team
-                </Button>
-              </Link>
+            <p className="quiet">
+              Not another model. Not another wrapper. The layer that remembers
+              what actually happened.
+            </p>
+          </div>
+        </div>
+
+        <div className="guarantee-grid">
+          {guarantees.map((item) => (
+            <article key={item.index}>
+              <span>{item.index}</span>
+              <h3>{item.title}</h3>
+              <p>{item.copy}</p>
+            </article>
+          ))}
+        </div>
+
+        <div className="vow-close">
+          <div className="terminal-line">
+            <span>$</span>
+            <code>vow inspect run_01HX7A --receipts</code>
+            <span className="cursor" aria-hidden="true" />
+          </div>
+          <p>SOFTWARE FAILS. EVIDENCE SHOULDN&apos;T.</p>
+        </div>
+      </section>
+
+      <section className="mirrored-section" id="mirrored">
+        <div className="section-index light">
+          <span>02 / MIRRORED</span>
+          <span>CONSUMER PRODUCT · COMING SOON</span>
+        </div>
+
+        <div className="mirrored-layout">
+          <div className="mirror-orbit" aria-hidden="true">
+            <div className="orbit orbit-one" />
+            <div className="orbit orbit-two" />
+            <div className="mirror-core">M</div>
+          </div>
+
+          <div className="mirrored-copy">
+            <p className="mirrored-kicker">A DIFFERENT SURFACE. THE SAME STANDARD.</p>
+            <h2>A conversation<br />that reflects you.</h2>
+            <p>
+              Mirrored is an upcoming voice-first reflection product designed
+              to help people hear their own patterns, examine their thinking,
+              and move with greater intention.
+            </p>
+            <div className="mirrored-meta">
+              <span>VOICE-TO-VOICE</span>
+              <span>DAILY REFLECTION</span>
+              <span>PHILOSOPHICAL PROGRAMS</span>
             </div>
-            <div className="pt-6 md:pt-8 text-center sm:text-left space-y-1 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.6s_forwards]">
-              <p className="text-xs md:text-sm text-[#7a8aaa] tracking-wide">
-                Jcee Labs is the d.b.a. of HOWM HOLDINGS LLC.
-              </p>
-              <p className="text-sm md:text-base text-[#c0c8d8] font-medium">
-                We architect formally-verified AI systems. Everyone else is just shipping software.
-              </p>
-            </div>
+            <a href="mailto:jonathan@jceelabs.com?subject=Mirrored%20early%20access">
+              REQUEST EARLY ACCESS <span aria-hidden="true">↗</span>
+            </a>
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════════════
-          FOOTER
-      ═══════════════════════════════════════════════════════════════════════ */}
-      <SiteFooter />
-    </div>
+      <section className="company-section" id="company">
+        <div className="section-index">
+          <span>03 / JCEE LABS</span>
+          <span>HOWM HOLDINGS LLC</span>
+        </div>
+        <div className="company-statement">
+          <p>OUR STANDARD</p>
+          <h2>
+            A claim is not a feature.<br />
+            <em>A demo is not proof.</em><br />
+            Intelligence should leave receipts.
+          </h2>
+        </div>
+        <div className="company-bottom">
+          <p>
+            JCEE Labs is an independent software company building systems at
+            the intersection of intelligence, execution, and human agency.
+          </p>
+          <a href="mailto:jonathan@jceelabs.com">jonathan@jceelabs.com <span>↗</span></a>
+        </div>
+      </section>
+
+      <footer>
+        <div className="footer-wordmark">JCEE LABS</div>
+        <div className="footer-meta">
+          <span>© 2026 HOWM HOLDINGS LLC</span>
+          <span>DALLAS, TEXAS</span>
+          <a href="#top">BACK TO TOP ↑</a>
+        </div>
+      </footer>
+    </main>
   );
 }
