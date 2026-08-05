@@ -41,7 +41,12 @@ export default function Home() {
         <nav aria-label="Main navigation">
           <a href="#vow">VOW</a>
           <a href="#mirrored">MIRRORED</a>
-          <a href="#company">COMPANY</a>
+          <span className="nav-menu">
+            <a href="#company">ABOUT</a>
+            <span className="nav-submenu">
+              <a href="/charter">CHARTER</a>
+            </span>
+          </span>
         </nav>
 
         <a className="header-contact" href="mailto:jonathan@jceelabs.com">
@@ -201,6 +206,21 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="charter-intro" aria-labelledby="charter-intro-title">
+        <div className="section-index">
+          <span>04 / CHARTER</span>
+          <span>PUBLIC STANDARD · VERSION 1.0</span>
+        </div>
+        <div className="charter-intro-copy">
+          <h2 id="charter-intro-title">The JCEE Labs Charter</h2>
+          <p>
+            Why we exist, what problems we pursue, how we conduct research, and
+            the boundaries we will not cross.
+          </p>
+          <a href="/charter">Read the Charter <span aria-hidden="true">→</span></a>
+        </div>
+      </section>
+
       <footer>
         <div className="footer-wordmark">JCEE LABS</div>
         <div className="footer-meta">
@@ -212,3 +232,4 @@ export default function Home() {
     </main>
   );
 }
+
