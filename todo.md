@@ -384,3 +384,9 @@
 - [x] Update product count from 6 to 3 (VOW, Mirrored, FORGEX, FORGEX) across all pages
 - [x] Update FAQ product list with 2027 future builds note
 - [x] All 12 tests passing
+
+
+## Contact Email Update
+- [x] Replace every visible old contact address with `support@jceelabs.com`
+- [x] Verify the old address is absent and tests pass
+- [x] Publish the verified update

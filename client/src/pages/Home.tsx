@@ -49,7 +49,7 @@ export default function Home() {
           </span>
         </nav>
 
-        <a className="header-contact" href="mailto:jonathan@jceelabs.com">
+        <a className="header-contact" href="mailto:support@jceelabs.com">
           CONTACT <span aria-hidden="true">↗</span>
         </a>
       </header>
@@ -177,7 +177,7 @@ export default function Home() {
               <span>DAILY REFLECTION</span>
               <span>PHILOSOPHICAL PROGRAMS</span>
             </div>
-            <a href="mailto:jonathan@jceelabs.com?subject=Mirrored%20early%20access">
+            <a href="mailto:support@jceelabs.com?subject=Mirrored%20early%20access">
               REQUEST EARLY ACCESS <span aria-hidden="true">↗</span>
             </a>
           </div>
@@ -202,7 +202,7 @@ export default function Home() {
             JCEE Labs is an independent software company building systems at
             the intersection of intelligence, execution, and human agency.
           </p>
-          <a href="mailto:jonathan@jceelabs.com">jonathan@jceelabs.com <span>↗</span></a>
+          <a href="mailto:support@jceelabs.com">support@jceelabs.com <span>↗</span></a>
         </div>
       </section>
 

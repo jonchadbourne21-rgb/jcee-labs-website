@@ -60,11 +60,11 @@ export default function SiteFooter() {
 
             {/* Contact email */}
             <a
-              href="mailto:jonathan@jceelabs.com"
+              href="mailto:support@jceelabs.com"
               className="inline-flex items-center gap-2 text-[#7a8aaa] hover:text-[#e8ecf4] transition-colors text-xs font-mono"
             >
               <Mail className="w-3.5 h-3.5" />
-              jonathan@jceelabs.com
+              support@jceelabs.com
             </a>
           </div>
 

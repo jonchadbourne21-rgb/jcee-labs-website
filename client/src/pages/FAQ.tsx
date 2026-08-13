@@ -45,7 +45,7 @@ const FAQ_ITEMS = [
   {
     value: "item-6",
     question: "Are these products available to the public?",
-    answer: "Products are at various stages. VOW, NicheFlo, and FloCraft are in beta. Mirrored drops August 1st. SOPForge is in pilot testing with 3 companies. Reach out to jonathan@jceelabs.com for early access or to see how SOPForge is already saving our pilot customers time and money.",
+    answer: "Products are at various stages. VOW, NicheFlo, and FloCraft are in beta. Mirrored drops August 1st. SOPForge is in pilot testing with 3 companies. Reach out to support@jceelabs.com for early access or to see how SOPForge is already saving our pilot customers time and money.",
   },
   {
     value: "item-7",
@@ -61,7 +61,7 @@ const FAQ_ITEMS = [
     question: "How can I get in touch?",
     answer: (
       <>
-        Email us at <a href="mailto:jonathan@jceelabs.com" className="text-[#d4a843] hover:underline">jonathan@jceelabs.com</a>. You can also find us on Instagram at <a href="https://instagram.com/jceelabs" className="text-[#d4a843] hover:underline" target="_blank" rel="noopener noreferrer">@jceelabs</a> and <a href="https://instagram.com/vow._.wow" className="text-[#d4a843] hover:underline" target="_blank" rel="noopener noreferrer">@vow._.wow</a>.
+        Email us at <a href="mailto:support@jceelabs.com" className="text-[#d4a843] hover:underline">support@jceelabs.com</a>. You can also find us on Instagram at <a href="https://instagram.com/jceelabs" className="text-[#d4a843] hover:underline" target="_blank" rel="noopener noreferrer">@jceelabs</a> and <a href="https://instagram.com/vow._.wow" className="text-[#d4a843] hover:underline" target="_blank" rel="noopener noreferrer">@vow._.wow</a>.
       </>
     ),
   },

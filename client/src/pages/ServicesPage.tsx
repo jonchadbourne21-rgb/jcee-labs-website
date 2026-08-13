@@ -331,7 +331,7 @@ export default function ServicesPage() {
             </div>
             <div className="mt-6 lg:mt-0 lg:flex-shrink-0">
               <a
-                href="mailto:jonathan@jceelabs.com?subject=Web%20Development%20Inquiry"
+                href="mailto:support@jceelabs.com?subject=Web%20Development%20Inquiry"
                 className="inline-block text-[14px] lg:text-[15px] text-[#7a8aaa] border border-[#2a3a5a] px-6 py-3 rounded-full hover:border-[#8ba4d8]/50 hover:text-[#c0c8d8] hover:bg-[#8ba4d8]/5 hover:-translate-y-0.5 transition-all duration-200"
               >
                 Get in Touch
@@ -345,13 +345,13 @@ export default function ServicesPage() {
       <section id="contact" className="pb-16 text-center">
         <div className="max-w-[1100px] mx-auto px-5 md:px-8 lg:px-12 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href="mailto:jonathan@jceelabs.com?subject=VOW%20Audit%20Request"
+            href="mailto:support@jceelabs.com?subject=VOW%20Audit%20Request"
             className="inline-block bg-gradient-to-r from-[#d4a843] to-[#c9952c] text-white text-[16px] font-semibold px-8 py-4 rounded-full hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(212,168,67,0.35)] active:scale-97 transition-all duration-200"
           >
             Request a VOW Audit &rarr;
           </a>
           <a
-            href="mailto:jonathan@jceelabs.com?subject=Enterprise%20Access%20Inquiry"
+            href="mailto:support@jceelabs.com?subject=Enterprise%20Access%20Inquiry"
             className="inline-block text-[14px] text-[#7a8aaa] border border-[#2a3a5a] px-6 py-3 rounded-full hover:border-[#8ba4d8]/50 hover:text-[#c0c8d8] hover:bg-[#8ba4d8]/5 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#8ba4d8]/10 active:scale-97 transition-all duration-200"
           >
             Explore Enterprise Access

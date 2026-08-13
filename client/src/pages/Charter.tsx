@@ -47,7 +47,7 @@ export default function Charter() {
           </span>
         </nav>
 
-        <a className="header-contact" href="mailto:jonathan@jceelabs.com">
+        <a className="header-contact" href="mailto:support@jceelabs.com">
           CONTACT <span aria-hidden="true">↗</span>
         </a>
       </header>
