@@ -20,6 +20,31 @@
     <noscript>
       <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&family=Space+Mono:wght@400&display=swap" rel="stylesheet" />
     </noscript>
+    <!-- JCEE Labs master brand accent: Electric Cobalt -->
+    <style>
+      :root {
+        --signal: #315CFF !important;
+        --signal-readable: #5B7CFF;
+      }
+
+      /* Preserve readable contrast for small cobalt text on dark surfaces. */
+      .qcs-kicker,
+      .qcs-status-grid dd,
+      .qcs-copy > a,
+      .mirrored-copy > a {
+        color: var(--signal-readable) !important;
+      }
+
+      /* Keep the footer statement fully inside the viewport on laptop/desktop widths. */
+      @media (min-width: 561px) {
+        .brand-footer-wordmark {
+          font-size: clamp(52px, 8.8vw, 160px) !important;
+          gap: 1vw !important;
+          justify-content: space-between;
+          width: 100%;
+        }
+      }
+    </style>
   </head>
 
   <body class="bg-[#090514] text-[#E2E8F0] antialiased overflow-x-hidden selection:bg-purple-500/30 selection:text-purple-200">
