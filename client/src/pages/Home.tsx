@@ -168,7 +168,10 @@ export default function Home() {
             A public record of what we are testing, what the evidence supports,
             where the limits are, and what remains unproven.
           </p>
-          <a href="/research-evidence">View the Index <span aria-hidden="true">→</span></a>
+          <div className="home-research-links">
+            <a href="/research-evidence">View the Index <span aria-hidden="true">→</span></a>
+            <a href="/research/jrp-000">Read JRP-000 <span aria-hidden="true">→</span></a>
+          </div>
         </div>
       </section>
 

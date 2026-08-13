@@ -6,22 +6,24 @@ const contents = [
   ["standard", "Evidence Before Claims"],
   ["classifications", "I. Evidence Classifications"],
   ["current-work", "II. Current Work"],
-  ["evidence", "III. What Counts as Evidence"],
-  ["negative-results", "IV. Failed and Negative Results"],
-  ["public-protected", "V. Public Evidence and Responsible Disclosure"],
-  ["separation", "VI. Product and Research Separation"],
-  ["our-standard", "VII. Our Standard"],
+  ["publications", "III. Research Publications"],
+  ["evidence", "IV. What Counts as Evidence"],
+  ["negative-results", "V. Failed and Negative Results"],
+  ["public-protected", "VI. Public Evidence and Responsible Disclosure"],
+  ["separation", "VII. Product and Research Separation"],
+  ["our-standard", "VIII. Our Standard"],
   ["revisions", "Revision History"],
 ];
 
 const githubUrl =
-  "https://github.com/jonchadbourne21-rgb/jcee-labs-website/blob/main/public/JCEE_Labs_Research_Evidence_Index_v1.0.md";
+  "https://github.com/jonchadbourne21-rgb/jcee-labs-website/blob/main/client/public/JCEE_Labs_Research_Evidence_Index_v1.1.md";
 
 const classifications = [
   ["Planned", "The problem and intended investigation have been identified, but the experiment or implementation has not been frozen. No result is claimed."],
   ["Preregistered", "The hypothesis, test conditions, scoring rules, stopping rules, and rejection thresholds have been defined before results are observed. A preregistered experiment is ready to run. It is not a verified result."],
   ["Experimental", "The work has produced results, but reproduction, transfer testing, adversarial review, or independent verification remains incomplete. Experimental findings may guide further work. They are not presented as established facts."],
   ["Verified Milestone", "A specific and bounded claim has survived its defined verification process, and the supporting evidence has been preserved. Verified applies only to the claim and conditions identified. It does not mean universally proven, independently certified, or production-ready in every environment."],
+  ["Inconclusive", "The test did not provide enough valid information to admit or reject the claim. The reason must be recorded, and the result must not be presented as a pass."],
   ["Rejected", "The claim failed its stated threshold, depended on an unsupported assumption, or could not be reproduced under the required conditions. Rejected results are preserved. They are not rewritten as successes."],
   ["Closed", "The investigation has ended because the claim was rejected, the research question was answered, or further work no longer provides enough value to justify continuing."],
 ];
@@ -40,7 +42,7 @@ export default function ResearchEvidence() {
       <CoreHeader current="research" />
 
       <section className="charter-masthead evidence-masthead">
-        <p className="eyebrow"><span /> PUBLIC RECORD · VERSION 1.0</p>
+        <p className="eyebrow"><span /> PUBLIC RECORD · VERSION 1.1</p>
         <img
           className="evidence-brand-lockup"
           src="/brand/jcee-labs-logo-horizontal.png"
@@ -52,7 +54,7 @@ export default function ResearchEvidence() {
           its known limitations, and what remains unproven.
         </p>
         <div className="charter-version-row">
-          <span>VERSION 1.0 — AUGUST 13, 2026</span>
+          <span>VERSION 1.1 — AUGUST 13, 2026</span>
           <span>STATUS · CURRENT</span>
         </div>
       </section>
@@ -67,7 +69,7 @@ export default function ResearchEvidence() {
           </ol>
           <div className="charter-file-links">
             <a href={githubUrl} target="_blank" rel="noreferrer">VIEW ON GITHUB ↗</a>
-            <a href="/JCEE_Labs_Research_Evidence_Index_v1.0.md" download>DOWNLOAD .MD ↓</a>
+            <a href="/JCEE_Labs_Research_Evidence_Index_v1.1.md" download>DOWNLOAD .MD ↓</a>
           </div>
         </aside>
 
@@ -195,8 +197,27 @@ export default function ResearchEvidence() {
             </article>
           </section>
 
+          <section id="publications">
+            <h2><span>III.</span> Research Publications</h2>
+            <p>Adopted papers and experiment records establish the standards and evidence behind entries in this index. Publication does not strengthen a claim by itself; the status shown on each record controls.</p>
+            <article className="evidence-publication-card">
+              <div className="evidence-publication-topline">
+                <span>JRP-000 · VERSION 1.0</span>
+                <span>ADOPTED · AUGUST 13, 2026</span>
+              </div>
+              <h3>The Evidence Boundary</h3>
+              <p className="evidence-publication-subtitle">How JCEE Labs Admits, Limits, and Rejects Technical Claims</p>
+              <p>JRP-000 defines the claim cards, evidence packages, mandatory admission gates, verdict vocabulary, limitation rules, and correction process that govern later JCEE Labs research and experiment records.</p>
+              <p><strong>Document class:</strong> JCEE Labs research-governance standard. Its adoption governs JCEE Labs; it is not an empirical result, external consensus standard, or independent certification.</p>
+              <div className="evidence-publication-links">
+                <a href="/research/jrp-000">READ JRP-000 <span>→</span></a>
+                <a href="/JRP-000_The_Evidence_Boundary_v1.0.md" download>DOWNLOAD VERSION 1.0 <span>↓</span></a>
+              </div>
+            </article>
+          </section>
+
           <section id="evidence">
-            <h2><span>III.</span> What Counts as Evidence</h2>
+            <h2><span>IV.</span> What Counts as Evidence</h2>
             <p>JCEE Labs does not treat screenshots, demonstrations, generated explanations, or passing examples as sufficient evidence by themselves.</p>
             <p>Depending on the claim, an acceptable evidence package may include:</p>
             <ul>
@@ -217,7 +238,7 @@ export default function ResearchEvidence() {
           </section>
 
           <section id="negative-results">
-            <h2><span>IV.</span> Failed and Negative Results</h2>
+            <h2><span>V.</span> Failed and Negative Results</h2>
             <p>Negative results are part of the research record.</p>
             <p>When a claim fails, we preserve what failed, why it failed, and what changed afterward. We do not silently alter the original threshold or present a redesigned experiment as proof that the earlier version succeeded.</p>
             <p>JCEE Labs intends to publish meaningful negative and contradictory results alongside successful ones whenever responsible disclosure permits.</p>
@@ -225,7 +246,7 @@ export default function ResearchEvidence() {
           </section>
 
           <section id="public-protected">
-            <h2><span>V.</span> Public Evidence and Responsible Disclosure</h2>
+            <h2><span>VI.</span> Public Evidence and Responsible Disclosure</h2>
             <p>Evidence-first research does not require making every working artifact public.</p>
             <p>JCEE Labs will publish enough information to make public claims understandable, bounded, and open to scrutiny while practicing responsible disclosure.</p>
             <p>When a result cannot be reproduced from the public record alone, that limitation will be stated directly.</p>
@@ -233,7 +254,7 @@ export default function ResearchEvidence() {
           </section>
 
           <section id="separation">
-            <h2><span>VI.</span> Product and Research Separation</h2>
+            <h2><span>VII.</span> Product and Research Separation</h2>
             <p>JCEE Labs works across both products and research programs.</p>
             <p>A product may use findings from a research program, but the existence of the product does not prove the research claim. Likewise, a promising experiment does not make a system production-ready.</p>
             <p>We will identify which work is:</p>
@@ -248,7 +269,7 @@ export default function ResearchEvidence() {
           </section>
 
           <section id="our-standard">
-            <h2><span>VII.</span> Our Standard</h2>
+            <h2><span>VIII.</span> Our Standard</h2>
             <p>Before a claim becomes part of JCEE Labs, it must survive verification.</p>
             <p>Enthusiasm is never sufficient evidence.</p>
             <div className="charter-signoff">
@@ -264,10 +285,16 @@ export default function ResearchEvidence() {
               <span>PUBLIC RECORD</span>
             </div>
             <div className="revision-row">
+              <strong>1.1</strong>
+              <span>AUGUST 13, 2026</span>
+              <p>Added Inconclusive to the public status vocabulary and added JRP-000 as the first adopted research publication.</p>
+              <span className="revision-status">CURRENT</span>
+            </div>
+            <div className="revision-row">
               <strong>1.0</strong>
               <span>AUGUST 13, 2026</span>
               <p>Initial publication.</p>
-              <span className="revision-status">CURRENT</span>
+              <span className="revision-status superseded">SUPERSEDED</span>
             </div>
           </section>
         </article>

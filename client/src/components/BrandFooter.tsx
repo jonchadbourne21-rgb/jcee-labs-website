@@ -26,6 +26,7 @@ export default function BrandFooter({ backToTopHref = "/#top" }: BrandFooterProp
           <span>CORE WORK</span>
           <a href="/#vow">VOW</a>
           <a href="/research-evidence">Research &amp; Evidence</a>
+          <a href="/research/jrp-000">JRP-000 · Evidence Boundary</a>
           <a href="/qcs">QCS</a>
         </div>
         <div>
