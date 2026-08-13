@@ -37,7 +37,7 @@ export default function ResearchEvidence() {
     <main className="charter-page evidence-page" id="top">
       <header className="site-header charter-header">
         <a className="wordmark" href="/" aria-label="JCEE Labs home">
-          <span className="mark" aria-hidden="true">J</span>
+          <img className="wordmark-mark" src="/brand/jcee-labs-mark.png" alt="" aria-hidden="true" />
           <span>JCEE LABS</span>
         </a>
 
@@ -60,6 +60,11 @@ export default function ResearchEvidence() {
 
       <section className="charter-masthead evidence-masthead">
         <p className="eyebrow"><span /> PUBLIC RECORD · VERSION 1.0</p>
+        <img
+          className="evidence-brand-lockup"
+          src="/brand/jcee-labs-logo-horizontal.png"
+          alt="JCEE Labs"
+        />
         <h1 className="charter-title evidence-title">Research &amp;<br /><em>Evidence</em></h1>
         <p className="charter-position">
           This index records the status of our work, the evidence behind it,

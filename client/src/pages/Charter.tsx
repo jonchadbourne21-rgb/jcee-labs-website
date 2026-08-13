@@ -32,7 +32,7 @@ export default function Charter() {
     <main className="charter-page" id="top">
       <header className="site-header charter-header">
         <a className="wordmark" href="/" aria-label="JCEE Labs home">
-          <span className="mark" aria-hidden="true">J</span>
+          <img className="wordmark-mark" src="/brand/jcee-labs-mark.png" alt="" aria-hidden="true" />
           <span>JCEE LABS</span>
         </a>
 

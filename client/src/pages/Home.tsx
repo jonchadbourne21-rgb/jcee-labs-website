@@ -34,7 +34,7 @@ export default function Home() {
     <main>
       <header className="site-header">
         <a className="wordmark" href="#top" aria-label="JCEE Labs home">
-          <span className="mark" aria-hidden="true">J</span>
+          <img className="wordmark-mark" src="/brand/jcee-labs-mark.png" alt="" aria-hidden="true" />
           <span>JCEE LABS</span>
         </a>
 

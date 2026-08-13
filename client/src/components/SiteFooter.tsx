@@ -19,9 +19,10 @@ export default function SiteFooter() {
           <div className="col-span-2 md:col-span-5 space-y-3 md:space-y-4">
             <div className="flex items-center gap-3">
               <img
-                src="/manus-storage/jcee-labs-logo_75bbef18.png"
-                alt="Jcee Labs Logo"
-                className="w-8 h-8 shadow-lg shadow-[#8ba4d8]/15 object-contain"
+                src="/brand/jcee-labs-mark.png"
+                alt=""
+                aria-hidden="true"
+                className="w-10 h-10 bg-white p-1 object-contain"
               />
               <span className="font-display font-bold text-base tracking-wider text-[#e8ecf4]">
                 JCEE LABS

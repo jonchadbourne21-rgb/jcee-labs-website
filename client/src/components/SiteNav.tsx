@@ -50,8 +50,8 @@ export default function SiteNav() {
           {/* Logo on white header */}
           <Link href="/" className="flex items-center gap-3 md:gap-4 group">
             <img
-              src="/manus-storage/jcee-labs-logo_75bbef18.png"
-              alt="Jcee Labs Logo"
+              src="/brand/jcee-labs-mark.png"
+              alt="JCEE Labs"
               className="w-10 h-10 md:w-11 md:h-11 object-contain group-hover:opacity-80 transition-opacity"
             />
             <div className="flex flex-col">
