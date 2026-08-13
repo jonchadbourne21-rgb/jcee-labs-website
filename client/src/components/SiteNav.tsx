@@ -101,6 +101,7 @@ export default function SiteNav() {
             <Link href="/services" className="text-gray-700 hover:text-black transition-colors">Services</Link>
             <Link href="/team" className="text-gray-700 hover:text-black transition-colors">Team</Link>
             <Link href="/blog" className="text-gray-700 hover:text-black transition-colors">Blog</Link>
+            <Link href="/research-evidence" className="text-gray-700 hover:text-black transition-colors">Research</Link>
             <Link href="/faq" className="text-gray-700 hover:text-black transition-colors">FAQ</Link>
           </nav>
 
@@ -235,6 +236,13 @@ export default function SiteNav() {
               className="flex items-center gap-3 text-[15px] text-[#e8ecf4] hover:text-white transition-colors py-3 px-3 rounded-lg hover:bg-[#8ba4d8]/10"
             >
               Blog
+            </Link>
+            <Link
+              href="/research-evidence"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-3 text-[15px] text-[#e8ecf4] hover:text-white transition-colors py-3 px-3 rounded-lg hover:bg-[#8ba4d8]/10"
+            >
+              Research &amp; Evidence
             </Link>
             <Link
               href="/faq"

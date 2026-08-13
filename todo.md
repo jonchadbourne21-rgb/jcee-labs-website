@@ -390,3 +390,10 @@
 - [x] Replace every visible old contact address with `support@jceelabs.com`
 - [x] Verify the old address is absent and tests pass
 - [x] Publish the verified update
+
+## Phase 45 — Publish Research and Evidence Index v1.0 (Commit affd35cd)
+- [x] Pull and verify commit affd35cdf10cac7c38f5bed600b891b9e3ee4ed5 from GitHub repo
+- [x] Apply changes to published jcee-labs project while preserving domain configuration
+- [x] Run test suite to verify 12/12 passing tests
+- [x] Save checkpoint and publish site
+- [ ] Verify /research-evidence route, About menu, homepage link, Markdown download, and Charter route

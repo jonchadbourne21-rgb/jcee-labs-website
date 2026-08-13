@@ -92,6 +92,8 @@ export default function SiteFooter() {
               <li><Link href="/team" className="hover:text-[#e8ecf4] transition-colors">Team</Link></li>
               <li><Link href="/faq" className="hover:text-[#e8ecf4] transition-colors">FAQ</Link></li>
               <li><Link href="/services" className="hover:text-[#e8ecf4] transition-colors">Services</Link></li>
+              <li><Link href="/charter" className="hover:text-[#e8ecf4] transition-colors">Charter</Link></li>
+              <li><Link href="/research-evidence" className="hover:text-[#e8ecf4] transition-colors">Research &amp; Evidence</Link></li>
             </ul>
           </div>
 

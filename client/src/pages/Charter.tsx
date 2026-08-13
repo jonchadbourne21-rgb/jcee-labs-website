@@ -43,6 +43,7 @@ export default function Charter() {
             <a href="/#company">ABOUT</a>
             <span className="nav-submenu">
               <a href="/charter" aria-current="page">CHARTER</a>
+              <a href="/research-evidence">RESEARCH &amp; EVIDENCE</a>
             </span>
           </span>
         </nav>
