@@ -406,3 +406,11 @@
 - [x] Save a checkpoint and publish without changing existing domains or deployment configuration
 
 - [x] Add the official JCEE Labs favicon declaration to the Vite production entry file (`client/index.html`) so the browser receives the logo favicon
+
+# Current Request — Publish GitHub Commit 068000f9
+
+- [x] Inspect and verify GitHub commit 068000f9c704ab1f0ade4c6108eb928753e97e43
+- [x] Apply the exact commit without changing current domains or deployment configuration
+- [x] Run the full test suite and production build
+- [x] Verify the live JCEE Labs deployment and preserved domains
+- [x] Save a final checkpoint and report the publication result
