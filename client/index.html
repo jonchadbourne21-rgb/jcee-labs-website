@@ -116,9 +116,17 @@
       }
       .vow-section .guarantee-grid p { color: #4f4f4a !important; }
       .vow-section .terminal-line {
-        background: var(--chapter-dark) !important;
-        color: var(--chapter-white) !important;
+        background: transparent !important;
+        color: var(--chapter-dark) !important;
+        border-bottom: 1px solid var(--chapter-dark) !important;
+        padding: 18px 0 !important;
       }
+      .vow-section .terminal-line > span:first-child {
+        color: #2449d8 !important;
+        font-weight: 700;
+      }
+      .vow-section .terminal-line code { color: var(--chapter-dark) !important; }
+      .vow-section .terminal-line .cursor { background: var(--signal) !important; }
       .vow-section .section-detail-link { color: #2449d8 !important; }
 
       /* 03 / RESEARCH & EVIDENCE — black */
