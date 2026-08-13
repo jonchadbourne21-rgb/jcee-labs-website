@@ -45,6 +45,7 @@ export default function Home() {
             <a href="#company">ABOUT</a>
             <span className="nav-submenu">
               <a href="/charter">CHARTER</a>
+              <a href="/research-evidence">RESEARCH &amp; EVIDENCE</a>
             </span>
           </span>
         </nav>
@@ -221,6 +222,21 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="charter-intro evidence-intro" aria-labelledby="evidence-intro-title">
+        <div className="section-index">
+          <span>05 / RESEARCH &amp; EVIDENCE</span>
+          <span>PUBLIC RECORD · VERSION 1.0</span>
+        </div>
+        <div className="charter-intro-copy">
+          <h2 id="evidence-intro-title">Research &amp; Evidence</h2>
+          <p>
+            The status of our work, the evidence behind it, its known
+            limitations, and what remains unproven.
+          </p>
+          <a href="/research-evidence">View the Index <span aria-hidden="true">→</span></a>
+        </div>
+      </section>
+
       <footer>
         <div className="footer-wordmark">JCEE LABS</div>
         <div className="footer-meta">
@@ -232,4 +248,3 @@ export default function Home() {
     </main>
   );
 }
-

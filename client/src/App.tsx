@@ -8,6 +8,7 @@ import { lazy, Suspense, useEffect } from "react";
 
 const FAQ = lazy(() => import("./pages/FAQ"));
 const Charter = lazy(() => import("./pages/Charter"));
+const ResearchEvidence = lazy(() => import("./pages/ResearchEvidence"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Mirrored = lazy(() => import("./pages/Mirrored"));
 const VowPage = lazy(() => import("./pages/VowPage"));
@@ -42,6 +43,7 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/faq" component={FAQ} />
         <Route path="/charter" component={Charter} />
+        <Route path="/research-evidence" component={ResearchEvidence} />
         <Route path="/vow" component={VowPage} />
         <Route path="/mirrored" component={Mirrored} />
         <Route path="/truerpm" component={TrueRPMPage} />
@@ -81,4 +83,3 @@ function App() {
 }
 
 export default App;
-
