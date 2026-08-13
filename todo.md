@@ -397,3 +397,10 @@
 - [x] Run test suite to verify 12/12 passing tests
 - [x] Save checkpoint and publish site
 - [x] Verify /research-evidence route, About menu, homepage link, Markdown download, and Charter route
+
+# Current Request — GitHub Logo Update
+
+- [x] Pull and apply GitHub commit 7381261364f2c342cca6df114781162df4e1b1ca from jonchadbourne21-rgb/jcee-labs-website
+- [x] Run the full Vitest suite and confirm all tests pass
+- [ ] Verify the logo on the homepage, Charter page, Research & Evidence page, shared navigation, footer, and browser favicon
+- [ ] Save a checkpoint and publish without changing existing domains or deployment configuration
