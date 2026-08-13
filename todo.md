@@ -402,7 +402,7 @@
 
 - [x] Pull and apply GitHub commit 7381261364f2c342cca6df114781162df4e1b1ca from jonchadbourne21-rgb/jcee-labs-website
 - [x] Run the full Vitest suite and confirm all tests pass
-- [ ] Verify the logo on the homepage, Charter page, Research & Evidence page, shared navigation, footer, and browser favicon
-- [ ] Save a checkpoint and publish without changing existing domains or deployment configuration
+- [x] Verify the logo on the homepage, Charter page, Research & Evidence page, shared navigation, footer, and browser favicon
+- [x] Save a checkpoint and publish without changing existing domains or deployment configuration
 
-- [ ] Add the official JCEE Labs favicon declaration to the Vite production entry file (`client/index.html`) so the browser receives the logo favicon
+- [x] Add the official JCEE Labs favicon declaration to the Vite production entry file (`client/index.html`) so the browser receives the logo favicon
