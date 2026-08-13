@@ -31,8 +31,17 @@
       .qcs-kicker,
       .qcs-status-grid dd,
       .qcs-copy > a,
-      .mirrored-copy > a {
+      .mirrored-copy > a,
+      .receipt-status,
+      .receipt-footer strong,
+      .mirrored-kicker,
+      .program-statement-dark .charter-section-label {
         color: var(--signal-readable) !important;
+      }
+
+      /* Keep the document viewport stable on narrow devices. */
+      html {
+        overflow-x: clip;
       }
 
       /* Keep the footer statement fully inside the viewport on laptop/desktop widths. */
