@@ -428,3 +428,14 @@
 - [x] Correct the discovered 390px mobile horizontal overflow without changing copy or the supplied cobalt/footer design
 
 - [x] Raise remaining small cobalt text on dark surfaces to the supplied readable cobalt value without changing the design or copy
+
+# Current Request — Site-Wide Visual Hierarchy Update
+
+- [x] Inspect and verify GitHub commit 906df6a04d07ac9633a8d75ee539b1133f2c6862
+- [x] Apply the exact commit without rewriting content or changing domains/deployment configuration
+- [x] Run the complete existing test suite and production build
+- [x] Verify alternating black/white numbered chapters, Electric Cobalt signal, typography minimums, and cobalt footer
+- [x] Verify readable text, contrast, navigation, routes, no horizontal overflow, and no clipping at desktop, laptop, tablet, and mobile widths
+- [ ] Publish a final checkpoint only after all validations pass
+
+- [x] Correct the measured small footer text contrast on Electric Cobalt while preserving the cobalt surface, copy, and lockup design
