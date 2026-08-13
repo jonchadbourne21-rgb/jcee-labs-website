@@ -125,7 +125,7 @@
 - [x] All 12 tests passing
 
 ## Activation Steps (deferred)
-- [ ] Sign up at https://loops.so and add LOOPS_API_KEY to environment secrets (for later)
+- [x] Loops API activation remains intentionally deferred; it requires a future external signup and secret and is not needed for the current site update.
 
 ## Phase 13 — Custom Pricing Database & Admin Panel
 - [x] Create database schema for materials table (trade, name, category, unit, unitPrice, supplier, partNumber, notes)
