@@ -20,14 +20,55 @@
     <noscript>
       <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&family=Space+Mono:wght@400&display=swap" rel="stylesheet" />
     </noscript>
-    <!-- JCEE Labs master brand accent: Electric Cobalt -->
+    <!-- JCEE Labs master brand accent + alternating editorial chapter system -->
     <style>
       :root {
         --signal: #315CFF !important;
-        --signal-readable: #5B7CFF;
+        --signal-readable: #6F8BFF;
+        --chapter-dark: #0c0c0c;
+        --chapter-light: #f1f0eb;
+        --chapter-white: #fbfbf8;
+        --chapter-line-dark: rgba(255,255,255,.22);
+        --chapter-line-light: rgba(12,12,12,.18);
       }
 
-      /* Preserve readable contrast for small cobalt text on dark surfaces. */
+      html { overflow-x: clip; }
+
+      /* ── Legibility floor ── */
+      nav a,
+      .header-contact { font-size: 12px !important; }
+
+      .eyebrow,
+      .primary-link { font-size: 12px !important; }
+
+      .availability,
+      .receipt-header,
+      .receipt-id,
+      .receipt-row,
+      .hash-line,
+      .receipt-footer { font-size: 11px !important; }
+
+      .section-index span,
+      .company-statement > p,
+      .qcs-kicker,
+      .qcs-status-grid dt,
+      .qcs-status-grid dd,
+      .mirrored-kicker,
+      .mirrored-meta span { font-size: 11px !important; }
+
+      .brand-footer-lockup small,
+      .brand-footer-links span { font-size: 10px !important; }
+
+      .brand-footer-links a { font-size: 12px !important; }
+      .brand-footer-meta { font-size: 10px !important; }
+
+      .company-bottom p,
+      .vow-intro p,
+      .charter-intro-copy p,
+      .qcs-copy > p,
+      .mirrored-copy > p { font-size: clamp(16px, 1.25vw, 20px) !important; }
+
+      /* Cobalt remains the signal, not the page fill. */
       .qcs-kicker,
       .qcs-status-grid dd,
       .qcs-copy > a,
@@ -39,9 +80,103 @@
         color: var(--signal-readable) !important;
       }
 
-      /* Keep the document viewport stable on narrow devices. */
-      html {
-        overflow-x: clip;
+      /* ── Numbered homepage chapters: alternating black / white ── */
+
+      /* 01 / JCEE LABS — black */
+      .company-section {
+        background: var(--chapter-dark) !important;
+        color: var(--chapter-white) !important;
+      }
+      .company-section .section-index,
+      .company-section .company-bottom {
+        border-color: var(--chapter-line-dark) !important;
+      }
+      .company-section .section-index,
+      .company-section .company-statement > p {
+        color: #b9b9b3 !important;
+      }
+      .company-section .company-bottom p { color: #deddd6 !important; }
+      .company-section .company-bottom a { color: var(--signal-readable) !important; }
+
+      /* 02 / VOW — white */
+      .vow-section {
+        background: var(--chapter-light) !important;
+        color: var(--chapter-dark) !important;
+      }
+      .vow-section .section-index,
+      .vow-section .guarantee-grid,
+      .vow-section .guarantee-grid article,
+      .vow-section .vow-close {
+        border-color: var(--chapter-line-light) !important;
+      }
+      .vow-section .section-index,
+      .vow-section .quiet,
+      .vow-section .guarantee-grid article > span {
+        color: #666660 !important;
+      }
+      .vow-section .guarantee-grid p { color: #4f4f4a !important; }
+      .vow-section .terminal-line {
+        background: var(--chapter-dark) !important;
+        color: var(--chapter-white) !important;
+      }
+      .vow-section .section-detail-link { color: #2449d8 !important; }
+
+      /* 03 / RESEARCH & EVIDENCE — black */
+      .evidence-intro {
+        background: var(--chapter-dark) !important;
+        color: var(--chapter-white) !important;
+      }
+      .evidence-intro .section-index { border-color: var(--chapter-line-dark) !important; color: #b9b9b3 !important; }
+      .evidence-intro .charter-intro-copy p { color: #deddd6 !important; }
+      .evidence-intro .charter-intro-copy a { color: var(--signal-readable) !important; }
+
+      /* 04 / QCS — white */
+      .qcs-section {
+        background: var(--chapter-light) !important;
+        color: var(--chapter-dark) !important;
+      }
+      .qcs-section .section-index.light {
+        border-color: var(--chapter-line-light) !important;
+        color: #666660 !important;
+      }
+      .qcs-section .qcs-copy > p { color: #333330 !important; }
+      .qcs-section .qcs-copy > p.quiet { color: #666660 !important; }
+      .qcs-section .qcs-status-grid,
+      .qcs-section .qcs-status-grid > div { border-color: var(--chapter-line-light) !important; }
+      .qcs-section .qcs-status-grid dt { color: #666660 !important; }
+      .qcs-section .qcs-status-grid dd,
+      .qcs-section .qcs-kicker,
+      .qcs-section .qcs-copy > a { color: #2449d8 !important; }
+
+      /* 05 / CHARTER — black */
+      .charter-intro:not(.evidence-intro) {
+        background: var(--chapter-dark) !important;
+        color: var(--chapter-white) !important;
+      }
+      .charter-intro:not(.evidence-intro) .section-index {
+        border-color: var(--chapter-line-dark) !important;
+        color: #b9b9b3 !important;
+      }
+      .charter-intro:not(.evidence-intro) .charter-intro-copy p { color: #deddd6 !important; }
+      .charter-intro:not(.evidence-intro) .charter-intro-copy a { color: var(--signal-readable) !important; }
+
+      /* 06 / MIRRORED — white */
+      .mirrored-section {
+        background: var(--chapter-light) !important;
+        color: var(--chapter-dark) !important;
+      }
+      .mirrored-section .section-index.light { border-color: var(--chapter-line-light) !important; color: #666660 !important; }
+      .mirrored-section .mirrored-copy > p { color: #333330 !important; }
+      .mirrored-section .mirrored-kicker,
+      .mirrored-section .mirrored-copy > a { color: #2449d8 !important; }
+      .mirrored-section .mirrored-meta { border-color: var(--chapter-line-light) !important; }
+      .mirrored-section .orbit { border-color: rgba(12,12,12,.28) !important; }
+      .mirrored-section .mirror-core { border-color: var(--chapter-dark) !important; color: var(--chapter-dark) !important; }
+
+      /* Footer remains the single full cobalt institutional lockup. */
+      .brand-footer {
+        background: var(--signal) !important;
+        color: #0a0a0a !important;
       }
 
       /* Keep the footer statement fully inside the viewport on laptop/desktop widths. */
@@ -52,6 +187,24 @@
           justify-content: space-between;
           width: 100%;
         }
+      }
+
+      @media (max-width: 560px) {
+        nav a,
+        .header-contact,
+        .eyebrow,
+        .primary-link { font-size: 11px !important; }
+
+        .section-index span,
+        .company-statement > p,
+        .qcs-kicker,
+        .qcs-status-grid dt,
+        .qcs-status-grid dd,
+        .mirrored-kicker,
+        .mirrored-meta span { font-size: 10.5px !important; }
+
+        .brand-footer-links a { font-size: 11px !important; }
+        .brand-footer-meta { font-size: 9.5px !important; }
       }
     </style>
   </head>
