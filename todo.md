@@ -396,4 +396,4 @@
 - [x] Apply changes to published jcee-labs project while preserving domain configuration
 - [x] Run test suite to verify 12/12 passing tests
 - [x] Save checkpoint and publish site
-- [ ] Verify /research-evidence route, About menu, homepage link, Markdown download, and Charter route
+- [x] Verify /research-evidence route, About menu, homepage link, Markdown download, and Charter route
