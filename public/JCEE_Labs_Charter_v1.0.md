@@ -21,7 +21,7 @@ Our position is straightforward:
 
 > Capability without accountability is unfinished engineering.
 
-This Charter defines why JCEE Labs exists, which problems deserve our attention, how we conduct research, how we engineer consequential systems, what we publish, what we protect, what we refuse, and how we will know whether our work mattered.
+This Charter defines why JCEE Labs exists, which problems deserve our attention, how we conduct research, how we engineer consequential systems, what we publish, what we refuse, and how we will know whether our work mattered.
 
 It is both a public commitment and an internal constraint. It is intended to govern us most when convenience, excitement, competition, or profit would tempt us to behave differently.
 
@@ -225,19 +225,17 @@ JCEE Labs publishes to contribute durable knowledge, expose claims to scrutiny, 
 
 Meaningful failures belong in the research record. We will not publish only the experiments that make our theories look inevitable. When negative or contradictory results materially change the interpretation of a claim, we disclose them with the context required to understand their significance.
 
-### We protect mechanisms without making untestable claims
+### We practice responsible disclosure without making untestable claims
 
-Independent testability does not require indiscriminate disclosure of every proprietary mechanism, source file, security control, or implementation detail.
+Independent testability does not require publishing every working artifact. The public evidence must still be sufficient to test the public claim.
 
-JCEE Labs may protect intellectual property while exposing a claim to meaningful independent testing. The standard is not whether every internal detail is public. The standard is whether the public evidence is sufficient to test the public claim.
-
-We will not use intellectual-property protection as an excuse to make grand claims that no outsider can challenge.
+We will not use responsible disclosure as an excuse to make grand claims that no outsider can challenge.
 
 ### We withhold information when disclosure would create material harm
 
-We do not publish private data, credentials, exploit instructions, security-sensitive implementation details, or information whose release would create a material and foreseeable danger.
+Information is withheld when its release would create a material and foreseeable danger.
 
-Responsible withholding must protect people, systems, or legitimate intellectual property—not protect a claim from scrutiny.
+Responsible withholding must protect people or systems—not protect a claim from scrutiny.
 
 ### We disclose the boundary of what we know
 
@@ -304,7 +302,7 @@ Success will be visible when:
 - JCEE Labs principles influence systems beyond JCEE Labs; and
 - our work remains useful even to someone who does not know or trust our name.
 
-Revenue, growth, recognition, patents, and market adoption may sustain and extend the mission. They are not substitutes for it. A commercially successful product that weakens our principles is not a JCEE Labs success. A respected theory that does not improve real systems is incomplete.
+Revenue, growth, recognition, and market adoption may sustain and extend the mission. They are not substitutes for it. A commercially successful product that weakens our principles is not a JCEE Labs success. A respected theory that does not improve real systems is incomplete.
 
 Our deepest success would be cultural as well as technical: that the question asked of autonomous systems changes from *Does it look intelligent?* to *What can it prove?*
 

@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import BrandFooter from "@/components/BrandFooter";
+import CoreHeader from "@/components/CoreHeader";
 
 const contents = [
   ["preamble", "Preamble"],
@@ -30,28 +32,7 @@ export default function Charter() {
 
   return (
     <main className="charter-page" id="top">
-      <header className="site-header charter-header">
-        <a className="wordmark" href="/" aria-label="JCEE Labs home">
-          <img className="wordmark-mark" src="/brand/jcee-labs-mark.png" alt="" aria-hidden="true" />
-          <span>JCEE LABS</span>
-        </a>
-
-        <nav aria-label="Main navigation">
-          <a href="/#vow">VOW</a>
-          <a href="/#mirrored">MIRRORED</a>
-          <span className="nav-menu">
-            <a href="/#company">ABOUT</a>
-            <span className="nav-submenu">
-              <a href="/charter" aria-current="page">CHARTER</a>
-              <a href="/research-evidence">RESEARCH &amp; EVIDENCE</a>
-            </span>
-          </span>
-        </nav>
-
-        <a className="header-contact" href="mailto:support@jceelabs.com">
-          CONTACT <span aria-hidden="true">↗</span>
-        </a>
-      </header>
+      <CoreHeader />
 
       <section className="charter-masthead">
         <p className="eyebrow"><span /> PUBLIC STANDARD · VERSION 1.0</p>
@@ -90,7 +71,7 @@ export default function Charter() {
             <p>We are not opposed to artificial intelligence. We are opposed to unaccountable power, unverifiable claims, disposable history, and the human habit of blaming tools for choices made by people.</p>
             <p>Our position is straightforward:</p>
             <blockquote>Capability without accountability is unfinished engineering.</blockquote>
-            <p>This Charter defines why JCEE Labs exists, which problems deserve our attention, how we conduct research, how we engineer consequential systems, what we publish, what we protect, what we refuse, and how we will know whether our work mattered.</p>
+            <p>This Charter defines why JCEE Labs exists, which problems deserve our attention, how we conduct research, how we engineer consequential systems, what we publish, what we refuse, and how we will know whether our work mattered.</p>
             <p>It is both a public commitment and an internal constraint. It is intended to govern us most when convenience, excitement, competition, or profit would tempt us to behave differently.</p>
           </section>
 
@@ -219,13 +200,12 @@ export default function Charter() {
             <p>JCEE Labs publishes to contribute durable knowledge, expose claims to scrutiny, and allow others to distinguish demonstrated results from ambition.</p>
             <h3>We publish negative and contradictory results</h3>
             <p>Meaningful failures belong in the research record. We will not publish only the experiments that make our theories look inevitable. When negative or contradictory results materially change the interpretation of a claim, we disclose them with the context required to understand their significance.</p>
-            <h3>We protect mechanisms without making untestable claims</h3>
-            <p>Independent testability does not require indiscriminate disclosure of every proprietary mechanism, source file, security control, or implementation detail.</p>
-            <p>JCEE Labs may protect intellectual property while exposing a claim to meaningful independent testing. The standard is not whether every internal detail is public. The standard is whether the public evidence is sufficient to test the public claim.</p>
-            <p>We will not use intellectual-property protection as an excuse to make grand claims that no outsider can challenge.</p>
+            <h3>We practice responsible disclosure without making untestable claims</h3>
+            <p>Independent testability does not require publishing every working artifact. The public evidence must still be sufficient to test the public claim.</p>
+            <p>We will not use responsible disclosure as an excuse to make grand claims that no outsider can challenge.</p>
             <h3>We withhold information when disclosure would create material harm</h3>
-            <p>We do not publish private data, credentials, exploit instructions, security-sensitive implementation details, or information whose release would create a material and foreseeable danger.</p>
-            <p>Responsible withholding must protect people, systems, or legitimate intellectual property—not protect a claim from scrutiny.</p>
+            <p>Information is withheld when its release would create a material and foreseeable danger.</p>
+            <p>Responsible withholding must protect people or systems—not protect a claim from scrutiny.</p>
             <h3>We disclose the boundary of what we know</h3>
             <p>Public work should identify material limitations, conflicts of interest, revisions, contradictory evidence, and unresolved uncertainty. When later evidence changes a published conclusion, we correct or revise the record rather than allowing an obsolete claim to remain silently authoritative.</p>
             <p>Publication is not performance. It is part of the evidence system.</p>
@@ -275,7 +255,7 @@ export default function Charter() {
               <li>JCEE Labs principles influence systems beyond JCEE Labs; and</li>
               <li>our work remains useful even to someone who does not know or trust our name.</li>
             </ul>
-            <p>Revenue, growth, recognition, patents, and market adoption may sustain and extend the mission. They are not substitutes for it. A commercially successful product that weakens our principles is not a JCEE Labs success. A respected theory that does not improve real systems is incomplete.</p>
+            <p>Revenue, growth, recognition, and market adoption may sustain and extend the mission. They are not substitutes for it. A commercially successful product that weakens our principles is not a JCEE Labs success. A respected theory that does not improve real systems is incomplete.</p>
             <p>Our deepest success would be cultural as well as technical: that the question asked of autonomous systems changes from <em>Does it look intelligent?</em> to <em>What can it prove?</em></p>
           </section>
 
@@ -320,14 +300,7 @@ export default function Charter() {
         </article>
       </div>
 
-      <footer className="charter-footer">
-        <div className="footer-wordmark">JCEE LABS</div>
-        <div className="footer-meta">
-          <span>© 2026 HOWM HOLDINGS LLC</span>
-          <span>VERSION 1.0 · AUGUST 4, 2026</span>
-          <a href="#top">BACK TO TOP ↑</a>
-        </div>
-      </footer>
+      <BrandFooter backToTopHref="#top" />
     </main>
   );
 }

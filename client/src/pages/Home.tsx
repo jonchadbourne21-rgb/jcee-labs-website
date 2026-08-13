@@ -1,9 +1,12 @@
+import BrandFooter from "@/components/BrandFooter";
+import CoreHeader from "@/components/CoreHeader";
+
 const receiptRows = [
-  ["00", "intent", "verified"],
-  ["01", "effect", "committed once"],
-  ["02", "operator", "crash observed"],
-  ["03", "replay", "resumed"],
-  ["04", "duplicate effects", "0"],
+  ["00", "claim", "bounded"],
+  ["01", "execution", "recorded"],
+  ["02", "interruption", "observed"],
+  ["03", "recovery", "evaluated"],
+  ["04", "verdict", "admitted"],
 ];
 
 const guarantees = [
@@ -14,8 +17,8 @@ const guarantees = [
   },
   {
     index: "02",
-    title: "Exactly-once effects",
-    copy: "Retries and recovery do not have to mean duplicate real-world actions.",
+    title: "Evidence-aware recovery",
+    copy: "Recovery decisions account for what the recorded execution can actually establish.",
   },
   {
     index: "03",
@@ -24,38 +27,17 @@ const guarantees = [
   },
   {
     index: "04",
-    title: "Scar memory",
-    copy: "Failed paths become durable knowledge, so the system can stop repeating avoidable mistakes.",
+    title: "Explicit verdicts",
+    copy: "The system records what is supported, what is refused, and what still requires observation.",
   },
 ];
 
 export default function Home() {
   return (
-    <main>
-      <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="JCEE Labs home">
-          <img className="wordmark-mark" src="/brand/jcee-labs-mark.png" alt="" aria-hidden="true" />
-          <span>JCEE LABS</span>
-        </a>
+    <main id="top">
+      <CoreHeader current="jcee" />
 
-        <nav aria-label="Main navigation">
-          <a href="#vow">VOW</a>
-          <a href="#mirrored">MIRRORED</a>
-          <span className="nav-menu">
-            <a href="#company">ABOUT</a>
-            <span className="nav-submenu">
-              <a href="/charter">CHARTER</a>
-              <a href="/research-evidence">RESEARCH &amp; EVIDENCE</a>
-            </span>
-          </span>
-        </nav>
-
-        <a className="header-contact" href="mailto:support@jceelabs.com">
-          CONTACT <span aria-hidden="true">↗</span>
-        </a>
-      </header>
-
-      <section className="hero" id="top">
+      <section className="hero">
         <div className="hero-copy">
           <p className="eyebrow"><span /> INDEPENDENT SOFTWARE LAB · DALLAS, TX</p>
           <h1>
@@ -76,7 +58,7 @@ export default function Home() {
         <aside className="receipt" aria-label="Example VOW execution receipt">
           <div className="receipt-header">
             <span>VOW / EXECUTION RECEIPT</span>
-            <span className="receipt-status"><i /> PROVABLE</span>
+            <span className="receipt-status"><i /> BOUNDED</span>
           </div>
           <div className="receipt-id">
             <span>RUN</span>
@@ -93,12 +75,12 @@ export default function Home() {
             ))}
           </div>
           <div className="hash-line">
-            <span>PROOF</span>
-            <code>4a91:0d72:bc8e:f103</code>
+            <span>RECORD</span>
+            <code>vow:01HX7A:verified</code>
           </div>
           <div className="receipt-footer">
             <span>CLAIM</span>
-            <strong>EXECUTION VERIFIED</strong>
+            <strong>CLAIM ADMITTED</strong>
           </div>
         </aside>
       </section>
@@ -111,14 +93,37 @@ export default function Home() {
         <span>RECOVERY OVER RESTARTS</span>
       </div>
 
+      <section className="company-section" id="company">
+        <div className="section-index">
+          <span>01 / JCEE LABS</span>
+          <span>INDEPENDENT SOFTWARE LAB · DALLAS, TEXAS</span>
+        </div>
+        <div className="company-statement">
+          <p>OUR STANDARD</p>
+          <h2>
+            A claim is not a feature.<br />
+            <em>A demo is not proof.</em><br />
+            Intelligence should leave receipts.
+          </h2>
+        </div>
+        <div className="company-bottom">
+          <p>
+            JCEE Labs discovers and engineers the principles of intelligent
+            execution. We build software and conduct research where intelligence,
+            evidence, execution, and human responsibility meet.
+          </p>
+          <a href="/charter">READ OUR CHARTER <span>→</span></a>
+        </div>
+      </section>
+
       <section className="vow-section" id="vow">
         <div className="section-index">
-          <span>01 / VOW</span>
-          <span>EXECUTION RUNTIME</span>
+          <span>02 / VOW</span>
+          <span>EVIDENCE-FIRST EXECUTION RUNTIME</span>
         </div>
 
         <div className="vow-intro">
-          <h2>The runtime between<br />intention and effect.</h2>
+          <h2>The runtime between<br />intention and action.</h2>
           <div>
             <p>
               VOW is an evidence-first execution runtime for AI systems. It is
@@ -126,8 +131,7 @@ export default function Home() {
               accountable—even when the process fails halfway through.
             </p>
             <p className="quiet">
-              Not another model. Not another wrapper. The layer that remembers
-              what actually happened.
+              Not another model. The execution layer beneath the claim.
             </p>
           </div>
         </div>
@@ -150,12 +154,73 @@ export default function Home() {
           </div>
           <p>SOFTWARE FAILS. EVIDENCE SHOULDN&apos;T.</p>
         </div>
+        <a className="section-detail-link" href="/vow">READ THE PUBLIC VOW OVERVIEW <span>→</span></a>
+      </section>
+
+      <section className="charter-intro evidence-intro" id="research" aria-labelledby="evidence-intro-title">
+        <div className="section-index">
+          <span>03 / RESEARCH &amp; EVIDENCE</span>
+          <span>PUBLIC RECORD · ACTIVE</span>
+        </div>
+        <div className="charter-intro-copy">
+          <h2 id="evidence-intro-title">Research &amp; Evidence</h2>
+          <p>
+            A public record of what we are testing, what the evidence supports,
+            where the limits are, and what remains unproven.
+          </p>
+          <a href="/research-evidence">View the Index <span aria-hidden="true">→</span></a>
+        </div>
+      </section>
+
+      <section className="qcs-section" id="qcs" aria-labelledby="qcs-title">
+        <div className="section-index light">
+          <span>04 / QCS</span>
+          <span>WORKFLOW-FREE TRANSITION CALCULUS · RESEARCH</span>
+        </div>
+        <div className="qcs-layout">
+          <div>
+            <p className="qcs-kicker">A SEPARATE JCEE LABS RESEARCH PROGRAM</p>
+            <h2 id="qcs-title">When does the evidence justify the next action?</h2>
+          </div>
+          <div className="qcs-copy">
+            <p>
+              QCS studies the rules that connect available evidence to a justified
+              transition. Its 1.x line is frozen as a candidate specification;
+              QCS-2.0 is focused on independent reproduction.
+            </p>
+            <p className="quiet">
+              QCS is research. It is separate from the VOW product release, and
+              its present status does not imply a universal result.
+            </p>
+            <dl className="qcs-status-grid">
+              <div><dt>SPECIFICATION</dt><dd>FROZEN CANDIDATE</dd></div>
+              <div><dt>CURRENT GATE</dt><dd>INDEPENDENT REPRODUCTION</dd></div>
+              <div><dt>PUBLIC POSTURE</dt><dd>BOUNDED RESEARCH CLAIMS</dd></div>
+            </dl>
+            <a href="/qcs">VIEW QCS <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </section>
+
+      <section className="charter-intro" aria-labelledby="charter-intro-title">
+        <div className="section-index">
+          <span>05 / CHARTER</span>
+          <span>PUBLIC STANDARD · VERSION 1.0</span>
+        </div>
+        <div className="charter-intro-copy">
+          <h2 id="charter-intro-title">The JCEE Labs Charter</h2>
+          <p>
+            Why we exist, how we conduct research, what we refuse to build, and
+            the standards that govern the institution.
+          </p>
+          <a href="/charter">Read the Charter <span aria-hidden="true">→</span></a>
+        </div>
       </section>
 
       <section className="mirrored-section" id="mirrored">
         <div className="section-index light">
-          <span>02 / MIRRORED</span>
-          <span>CONSUMER PRODUCT · COMING SOON</span>
+          <span>06 / MIRRORED</span>
+          <span>CONSUMER PRODUCT · IN DEVELOPMENT</span>
         </div>
 
         <div className="mirrored-layout">
@@ -169,82 +234,23 @@ export default function Home() {
             <p className="mirrored-kicker">A DIFFERENT SURFACE. THE SAME STANDARD.</p>
             <h2>A conversation<br />that reflects you.</h2>
             <p>
-              Mirrored is an upcoming voice-first reflection product designed
-              to help people hear their own patterns, examine their thinking,
-              and move with greater intention.
+              Mirrored is a voice-first reflection product designed to help
+              people hear their own patterns, examine their thinking, and move
+              with greater intention.
             </p>
             <div className="mirrored-meta">
               <span>VOICE-TO-VOICE</span>
               <span>DAILY REFLECTION</span>
-              <span>PHILOSOPHICAL PROGRAMS</span>
+              <span>GUIDED PRACTICE</span>
             </div>
-            <a href="mailto:support@jceelabs.com?subject=Mirrored%20early%20access">
-              REQUEST EARLY ACCESS <span aria-hidden="true">↗</span>
+            <a href="/mirrored">
+              VIEW MIRRORED <span aria-hidden="true">→</span>
             </a>
           </div>
         </div>
       </section>
 
-      <section className="company-section" id="company">
-        <div className="section-index">
-          <span>03 / JCEE LABS</span>
-          <span>HOWM HOLDINGS LLC</span>
-        </div>
-        <div className="company-statement">
-          <p>OUR STANDARD</p>
-          <h2>
-            A claim is not a feature.<br />
-            <em>A demo is not proof.</em><br />
-            Intelligence should leave receipts.
-          </h2>
-        </div>
-        <div className="company-bottom">
-          <p>
-            JCEE Labs is an independent software company building systems at
-            the intersection of intelligence, execution, and human agency.
-          </p>
-          <a href="mailto:support@jceelabs.com">support@jceelabs.com <span>↗</span></a>
-        </div>
-      </section>
-
-      <section className="charter-intro" aria-labelledby="charter-intro-title">
-        <div className="section-index">
-          <span>04 / CHARTER</span>
-          <span>PUBLIC STANDARD · VERSION 1.0</span>
-        </div>
-        <div className="charter-intro-copy">
-          <h2 id="charter-intro-title">The JCEE Labs Charter</h2>
-          <p>
-            Why we exist, what problems we pursue, how we conduct research, and
-            the boundaries we will not cross.
-          </p>
-          <a href="/charter">Read the Charter <span aria-hidden="true">→</span></a>
-        </div>
-      </section>
-
-      <section className="charter-intro evidence-intro" aria-labelledby="evidence-intro-title">
-        <div className="section-index">
-          <span>05 / RESEARCH &amp; EVIDENCE</span>
-          <span>PUBLIC RECORD · VERSION 1.0</span>
-        </div>
-        <div className="charter-intro-copy">
-          <h2 id="evidence-intro-title">Research &amp; Evidence</h2>
-          <p>
-            The status of our work, the evidence behind it, its known
-            limitations, and what remains unproven.
-          </p>
-          <a href="/research-evidence">View the Index <span aria-hidden="true">→</span></a>
-        </div>
-      </section>
-
-      <footer>
-        <div className="footer-wordmark">JCEE LABS</div>
-        <div className="footer-meta">
-          <span>© 2026 HOWM HOLDINGS LLC</span>
-          <span>DALLAS, TEXAS</span>
-          <a href="#top">BACK TO TOP ↑</a>
-        </div>
-      </footer>
+      <BrandFooter backToTopHref="#top" />
     </main>
   );
 }

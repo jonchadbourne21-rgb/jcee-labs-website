@@ -12,6 +12,7 @@ const ResearchEvidence = lazy(() => import("./pages/ResearchEvidence"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Mirrored = lazy(() => import("./pages/Mirrored"));
 const VowPage = lazy(() => import("./pages/VowPage"));
+const QcsPage = lazy(() => import("./pages/QcsPage"));
 const TrueRPMPage = lazy(() => import("./pages/TrueRPMPage"));
 const NicheFloPage = lazy(() => import("./pages/NicheFloPage"));
 const FloCraftPage = lazy(() => import("./pages/FloCraftPage"));
@@ -45,6 +46,7 @@ function Router() {
         <Route path="/charter" component={Charter} />
         <Route path="/research-evidence" component={ResearchEvidence} />
         <Route path="/vow" component={VowPage} />
+        <Route path="/qcs" component={QcsPage} />
         <Route path="/mirrored" component={Mirrored} />
         <Route path="/truerpm" component={TrueRPMPage} />
         <Route path="/nicheflo" component={NicheFloPage} />

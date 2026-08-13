@@ -57,9 +57,9 @@ VOW is a runtime designed for consequential software and AI-directed actions whe
 
 Its purpose is to make execution inspectable, resumable, and accountable through durable evidence.
 
-A pinned private release of VOW 1.1 has completed a bounded verification milestone. The release, source manifest, evidence records, checksums, commit identity, and test materials have been preserved.
+A pinned VOW 1.1 release has completed a bounded internal verification milestone. The release identity and supporting test record have been preserved.
 
-Current work is focused on reproduction against independently authoritative systems and the hardening required for real external integrations.
+Current work is focused on independent reproduction and the hardening required for real external integrations.
 
 **What this status supports:**
 
@@ -76,25 +76,29 @@ Current work is focused on reproduction against independently authoritative syst
 - Enterprise production readiness in every environment
 - Validation against every external authority or provider
 
-Implementation details that may affect intellectual-property protection remain private while legal review is underway.
+### QCS
 
-### Cross-Authority Execution Assurance
+**Classification:** Workflow-free transition calculus research
+**Status:** Frozen candidate; independent reproduction
 
-**Classification:** Execution-assurance research  
-**Status:** Active experimental reproduction
+QCS is a separate JCEE Labs research program studying when available evidence is sufficient to justify a system transition.
 
-This research asks whether the same proof requirements can govern actions across materially different authoritative systems without changing the underlying reasoning for each provider.
+The QCS 1.x line has been frozen as a candidate specification. QCS-2.0 is focused on independent reproduction against materially different execution environments without changing the frozen reasoning.
 
-The present reproduction phase uses two different authority classes:
+This status supports the existence of a defined candidate specification and an active reproduction program. It does not establish universal transfer, production readiness, or independent certification.
 
-1. A transactional authority with independently controlled state and concurrency.
-2. A remote effect authority with externally recognized identity and delivery evidence.
+QCS is research. It is not the VOW product release, and the two names are not interchangeable.
 
-The central test is strict: adapters may translate provider-specific information, but the assurance rules should not receive provider-specific exceptions.
+### Independent Runtime Reproduction
 
-A successful reproduction would support a bounded claim that the assurance model transfers across those tested authority classes. It would not establish universal transfer across all systems.
+**Classification:** Execution-assurance validation
+**Status:** Active validation
 
-No final public claim has been admitted at this stage.
+This work tests whether bounded execution-assurance claims survive outside the environment in which they were first developed.
+
+The current gate requires reproduction against independently authoritative systems while preserving the frozen decision standard.
+
+A successful result would apply only to the tested environments and conditions. No universal claim has been admitted.
 
 ### Procedural Execution Science
 
@@ -162,23 +166,21 @@ Negative results are part of the research record.
 
 When a claim fails, we preserve what failed, why it failed, and what changed afterward. We do not silently alter the original threshold or present a redesigned experiment as proof that the earlier version succeeded.
 
-Where publication does not expose protected mechanisms, security-sensitive information, personal data, or third-party confidential material, JCEE Labs intends to publish meaningful negative and contradictory results alongside successful ones.
+JCEE Labs intends to publish meaningful negative and contradictory results alongside successful ones whenever responsible disclosure permits.
 
 A failed test can still produce useful knowledge. It cannot be counted as a pass.
 
 ---
 
-## V. Public Evidence and Protected Work
+## V. Public Evidence and Responsible Disclosure
 
-Evidence-first research does not require publishing every implementation detail.
+Evidence-first research does not require making every working artifact public.
 
-JCEE Labs will publish enough information to make public claims understandable, bounded, and open to scrutiny. We will also protect proprietary mechanisms, unpublished inventions, security-sensitive details, credentials, private source code, and confidential third-party information.
+JCEE Labs will publish enough information to make public claims understandable, bounded, and open to scrutiny while practicing responsible disclosure.
 
-Until intellectual-property review is complete, some programs may show a verified internal milestone without publishing the complete enabling implementation.
+When a result cannot be reproduced from the public record alone, that limitation will be stated directly.
 
-In those cases, the limitation will be stated directly.
-
-No private evidence package should be mistaken for independent verification.
+An internal evidence package should not be mistaken for independent verification.
 
 ---
 

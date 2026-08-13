@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { ArrowLeft, Mic, Calendar, Route, TrendingUp, BookOpen, ExternalLink } from "lucide-react";
+import { ArrowLeft, Mic, Calendar, Route, TrendingUp, ExternalLink } from "lucide-react";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 
@@ -94,28 +94,9 @@ export default function Mirrored() {
                 <div>
                   <h3 className="text-[17px] font-bold text-[#e8e4f0] mb-1.5">Watch yourself change.</h3>
                   <p className="text-[15px] text-[#9a94b0] leading-[1.7]">
-                    Journaling, habit streaks, and Echo memory reflections make growth visible.
+                    Journaling and habit streaks make patterns and progress easier to see.
                   </p>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Under the Hood */}
-      <section className="pb-20">
-        <div className="max-w-[720px] mx-auto px-6">
-          <div className="bg-[#161326] border border-[rgba(167,139,250,0.15)] rounded-2xl p-8 bg-gradient-to-b from-[rgba(167,139,250,0.04)] to-[#161326]">
-            <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-xl bg-[rgba(167,139,250,0.1)] flex items-center justify-center flex-shrink-0 mt-0.5">
-                <BookOpen className="w-5 h-5 text-[#a78bfa]" />
-              </div>
-              <div>
-                <h3 className="text-[17px] font-bold text-[#e8e4f0] mb-3">Under the Hood</h3>
-                <p className="text-[15px] text-[#9a94b0] leading-[1.8]">
-                  Most AI apps answer questions. Mirrored asks better ones. It's built on a custom persona architecture with emotional voice intelligence and a proprietary memory system — so instead of a generic assistant, you get something closer to the wisest version of yourself. And it's safe by design: crisis support protocols are built into its foundation, and your reflections stay private.
-                </p>
               </div>
             </div>
           </div>
@@ -129,7 +110,7 @@ export default function Mirrored() {
             Be first in line.
           </h2>
           <p className="text-[16px] text-[#9a94b0] mb-8">
-            Launching on the App Store within a month.
+            In development at JCEE Labs.
           </p>
           <a
             href="https://mirroredapp.com"

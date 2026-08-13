@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import BrandFooter from "@/components/BrandFooter";
+import CoreHeader from "@/components/CoreHeader";
 
 const contents = [
   ["standard", "Evidence Before Claims"],
@@ -6,7 +8,7 @@ const contents = [
   ["current-work", "II. Current Work"],
   ["evidence", "III. What Counts as Evidence"],
   ["negative-results", "IV. Failed and Negative Results"],
-  ["public-protected", "V. Public Evidence and Protected Work"],
+  ["public-protected", "V. Public Evidence and Responsible Disclosure"],
   ["separation", "VI. Product and Research Separation"],
   ["our-standard", "VII. Our Standard"],
   ["revisions", "Revision History"],
@@ -35,28 +37,7 @@ export default function ResearchEvidence() {
 
   return (
     <main className="charter-page evidence-page" id="top">
-      <header className="site-header charter-header">
-        <a className="wordmark" href="/" aria-label="JCEE Labs home">
-          <img className="wordmark-mark" src="/brand/jcee-labs-mark.png" alt="" aria-hidden="true" />
-          <span>JCEE LABS</span>
-        </a>
-
-        <nav aria-label="Main navigation">
-          <a href="/#vow">VOW</a>
-          <a href="/#mirrored">MIRRORED</a>
-          <span className="nav-menu">
-            <a href="/#company">ABOUT</a>
-            <span className="nav-submenu">
-              <a href="/charter">CHARTER</a>
-              <a href="/research-evidence" aria-current="page">RESEARCH &amp; EVIDENCE</a>
-            </span>
-          </span>
-        </nav>
-
-        <a className="header-contact" href="mailto:support@jceelabs.com">
-          CONTACT <span aria-hidden="true">↗</span>
-        </a>
-      </header>
+      <CoreHeader current="research" />
 
       <section className="charter-masthead evidence-masthead">
         <p className="eyebrow"><span /> PUBLIC RECORD · VERSION 1.0</p>
@@ -126,8 +107,8 @@ export default function ResearchEvidence() {
               </div>
               <p>VOW is a runtime designed for consequential software and AI-directed actions where interruption, retry, incomplete information, and external effects can create uncertainty.</p>
               <p>Its purpose is to make execution inspectable, resumable, and accountable through durable evidence.</p>
-              <p>A pinned private release of VOW 1.1 has completed a bounded verification milestone. The release, source manifest, evidence records, checksums, commit identity, and test materials have been preserved.</p>
-              <p>Current work is focused on reproduction against independently authoritative systems and the hardening required for real external integrations.</p>
+              <p>A pinned VOW 1.1 release has completed a bounded internal verification milestone. The release identity and supporting test record have been preserved.</p>
+              <p>Current work is focused on independent reproduction and the hardening required for real external integrations.</p>
               <div className="evidence-boundary-grid">
                 <div>
                   <h4>WHAT THIS STATUS SUPPORTS</h4>
@@ -149,26 +130,33 @@ export default function ResearchEvidence() {
                   </ul>
                 </div>
               </div>
-              <p className="charter-note">Implementation details that may affect intellectual-property protection remain private while legal review is underway.</p>
             </article>
 
             <article className="evidence-program">
               <div className="evidence-program-heading">
                 <div>
-                  <p className="charter-section-label">EXECUTION-ASSURANCE RESEARCH</p>
-                  <h3>Cross-Authority Execution Assurance</h3>
+                  <p className="charter-section-label">WORKFLOW-FREE TRANSITION CALCULUS</p>
+                  <h3>QCS</h3>
                 </div>
-                <span className="evidence-status experimental">ACTIVE EXPERIMENTAL REPRODUCTION</span>
+                <span className="evidence-status experimental">FROZEN CANDIDATE · REPRODUCTION</span>
               </div>
-              <p>This research asks whether the same proof requirements can govern actions across materially different authoritative systems without changing the underlying reasoning for each provider.</p>
-              <p>The present reproduction phase uses two different authority classes:</p>
-              <ol>
-                <li>A transactional authority with independently controlled state and concurrency.</li>
-                <li>A remote effect authority with externally recognized identity and delivery evidence.</li>
-              </ol>
-              <p>The central test is strict: adapters may translate provider-specific information, but the assurance rules should not receive provider-specific exceptions.</p>
-              <p>A successful reproduction would support a bounded claim that the assurance model transfers across those tested authority classes. It would not establish universal transfer across all systems.</p>
-              <p><strong>No final public claim has been admitted at this stage.</strong></p>
+              <p>QCS is a separate JCEE Labs research program studying when available evidence is sufficient to justify a system transition.</p>
+              <p>The QCS 1.x line has been frozen as a candidate specification. QCS-2.0 is focused on independent reproduction against materially different execution environments without changing the frozen reasoning.</p>
+              <p>This status supports the existence of a defined candidate specification and an active reproduction program. It does not establish universal transfer, production readiness, or independent certification.</p>
+              <p><strong>QCS is research. It is not the VOW product release, and the two names are not interchangeable.</strong></p>
+            </article>
+
+            <article className="evidence-program">
+              <div className="evidence-program-heading">
+                <div>
+                  <p className="charter-section-label">EXECUTION-ASSURANCE VALIDATION</p>
+                  <h3>Independent Runtime Reproduction</h3>
+                </div>
+                <span className="evidence-status experimental">ACTIVE VALIDATION</span>
+              </div>
+              <p>This work tests whether bounded execution-assurance claims survive outside the environment in which they were first developed.</p>
+              <p>The current gate requires reproduction against independently authoritative systems while preserving the frozen decision standard.</p>
+              <p>A successful result would apply only to the tested environments and conditions. No universal claim has been admitted.</p>
             </article>
 
             <article className="evidence-program">
@@ -201,8 +189,8 @@ export default function ResearchEvidence() {
               </div>
               <p>AEEL is a separate research program focused on evidence-producing AI execution for local, offline, and resource-constrained devices.</p>
               <p>Its intended environment includes edge computers, embedded systems, and air-gapped deployments where cloud-dependent assumptions may not hold.</p>
-              <p>Current work includes local inference routing, tamper-evident execution records, replay verification, and signed evidence envelopes.</p>
-              <p>Hardware-backed signing and physical-device recovery testing remain incomplete. AEEL should therefore be understood as an experimental system, not a production-ready edge platform.</p>
+              <p>Current work is focused on evidence-producing local execution and recovery under constrained operating conditions.</p>
+              <p>Physical-device validation remains incomplete. AEEL should therefore be understood as an experimental system, not a production-ready edge platform.</p>
               <p>AEEL is separate from VOW. The two programs may share engineering principles, but they do not share the same identity or present evidence status.</p>
             </article>
           </section>
@@ -232,17 +220,16 @@ export default function ResearchEvidence() {
             <h2><span>IV.</span> Failed and Negative Results</h2>
             <p>Negative results are part of the research record.</p>
             <p>When a claim fails, we preserve what failed, why it failed, and what changed afterward. We do not silently alter the original threshold or present a redesigned experiment as proof that the earlier version succeeded.</p>
-            <p>Where publication does not expose protected mechanisms, security-sensitive information, personal data, or third-party confidential material, JCEE Labs intends to publish meaningful negative and contradictory results alongside successful ones.</p>
+            <p>JCEE Labs intends to publish meaningful negative and contradictory results alongside successful ones whenever responsible disclosure permits.</p>
             <blockquote>A failed test can still produce useful knowledge. It cannot be counted as a pass.</blockquote>
           </section>
 
           <section id="public-protected">
-            <h2><span>V.</span> Public Evidence and Protected Work</h2>
-            <p>Evidence-first research does not require publishing every implementation detail.</p>
-            <p>JCEE Labs will publish enough information to make public claims understandable, bounded, and open to scrutiny. We will also protect proprietary mechanisms, unpublished inventions, security-sensitive details, credentials, private source code, and confidential third-party information.</p>
-            <p>Until intellectual-property review is complete, some programs may show a verified internal milestone without publishing the complete enabling implementation.</p>
-            <p>In those cases, the limitation will be stated directly.</p>
-            <p><strong>No private evidence package should be mistaken for independent verification.</strong></p>
+            <h2><span>V.</span> Public Evidence and Responsible Disclosure</h2>
+            <p>Evidence-first research does not require making every working artifact public.</p>
+            <p>JCEE Labs will publish enough information to make public claims understandable, bounded, and open to scrutiny while practicing responsible disclosure.</p>
+            <p>When a result cannot be reproduced from the public record alone, that limitation will be stated directly.</p>
+            <p><strong>An internal evidence package should not be mistaken for independent verification.</strong></p>
           </section>
 
           <section id="separation">
@@ -286,14 +273,7 @@ export default function ResearchEvidence() {
         </article>
       </div>
 
-      <footer className="charter-footer">
-        <div className="footer-wordmark">JCEE LABS</div>
-        <div className="footer-meta">
-          <span>© 2026 HOWM HOLDINGS LLC</span>
-          <span>VERSION 1.0 · AUGUST 13, 2026</span>
-          <a href="#top">BACK TO TOP ↑</a>
-        </div>
-      </footer>
+      <BrandFooter backToTopHref="#top" />
     </main>
   );
 }
