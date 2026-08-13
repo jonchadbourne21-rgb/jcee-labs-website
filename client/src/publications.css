@@ -17,6 +17,14 @@
   padding: clamp(28px, 5vw, 64px);
 }
 
+.evidence-publication-card + .evidence-publication-card {
+  margin-top: 24px;
+}
+
+.evidence-publication-card-assurance {
+  border-top: 7px solid var(--signal);
+}
+
 .evidence-publication-topline {
   border-bottom: 1px solid rgba(255, 255, 255, .24);
   color: var(--signal);
@@ -107,6 +115,10 @@
   color: var(--signal);
   font-family: Georgia, "Times New Roman", serif;
   font-weight: 400;
+}
+
+.paper-masthead-assurance h1 {
+  font-size: clamp(66px, 10.6vw, 172px);
 }
 
 .paper-deck {

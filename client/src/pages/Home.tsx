@@ -170,6 +170,7 @@ export default function Home() {
           </p>
           <div className="home-research-links">
             <a href="/research-evidence">View the Index <span aria-hidden="true">→</span></a>
+            <a href="/research/jrp-001">Read JRP-001 <span aria-hidden="true">→</span></a>
             <a href="/research/jrp-000">Read JRP-000 <span aria-hidden="true">→</span></a>
           </div>
         </div>

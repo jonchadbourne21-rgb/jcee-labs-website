@@ -16,7 +16,7 @@ const contents = [
 ];
 
 const githubUrl =
-  "https://github.com/jonchadbourne21-rgb/jcee-labs-website/blob/main/client/public/JCEE_Labs_Research_Evidence_Index_v1.1.md";
+  "https://github.com/jonchadbourne21-rgb/jcee-labs-website/blob/main/client/public/JCEE_Labs_Research_Evidence_Index_v1.2.md";
 
 const classifications = [
   ["Planned", "The problem and intended investigation have been identified, but the experiment or implementation has not been frozen. No result is claimed."],
@@ -42,7 +42,7 @@ export default function ResearchEvidence() {
       <CoreHeader current="research" />
 
       <section className="charter-masthead evidence-masthead">
-        <p className="eyebrow"><span /> PUBLIC RECORD · VERSION 1.1</p>
+        <p className="eyebrow"><span /> PUBLIC RECORD · VERSION 1.2</p>
         <img
           className="evidence-brand-lockup"
           src="/brand/jcee-labs-logo-horizontal.png"
@@ -54,7 +54,7 @@ export default function ResearchEvidence() {
           its known limitations, and what remains unproven.
         </p>
         <div className="charter-version-row">
-          <span>VERSION 1.1 — AUGUST 13, 2026</span>
+          <span>VERSION 1.2 — AUGUST 13, 2026</span>
           <span>STATUS · CURRENT</span>
         </div>
       </section>
@@ -69,7 +69,7 @@ export default function ResearchEvidence() {
           </ol>
           <div className="charter-file-links">
             <a href={githubUrl} target="_blank" rel="noreferrer">VIEW ON GITHUB ↗</a>
-            <a href="/JCEE_Labs_Research_Evidence_Index_v1.1.md" download>DOWNLOAD .MD ↓</a>
+            <a href="/JCEE_Labs_Research_Evidence_Index_v1.2.md" download>DOWNLOAD .MD ↓</a>
           </div>
         </aside>
 
@@ -132,6 +132,20 @@ export default function ResearchEvidence() {
                   </ul>
                 </div>
               </div>
+            </article>
+
+            <article className="evidence-program">
+              <div className="evidence-program-heading">
+                <div>
+                  <p className="charter-section-label">EXECUTION ASSURANCE</p>
+                  <h3>JCEE Assurance / Evidence Engine</h3>
+                </div>
+                <span className="evidence-status verified">VERIFIED MILESTONE · BOUNDED INTERNAL</span>
+              </div>
+              <p>JCEE Assurance evaluates preserved evidence against frozen interfaces, profiles, and decision rules without granting that evidence authority it does not contain.</p>
+              <p>The product boundary, interface schemas and 30-fixture conformance corpus, deterministic verification kernel, and application-level append-only evidence ledger and snapshot resolver have passed their frozen internal gates through JA-P0.4.</p>
+              <p>This status supports deterministic behavior within the frozen artifacts and tested conditions. It does not establish external-world truth, production readiness, independent certification, legal conformity, physical write-once storage, multi-host consensus, or activation of QCS-backed profiles.</p>
+              <p><strong>The exclusions are part of the admitted result.</strong></p>
             </article>
 
             <article className="evidence-program">
@@ -200,6 +214,20 @@ export default function ResearchEvidence() {
           <section id="publications">
             <h2><span>III.</span> Research Publications</h2>
             <p>Adopted papers and experiment records establish the standards and evidence behind entries in this index. Publication does not strengthen a claim by itself; the status shown on each record controls.</p>
+            <article className="evidence-publication-card evidence-publication-card-assurance">
+              <div className="evidence-publication-topline">
+                <span>JRP-001 · VERSION 1.0</span>
+                <span>VERIFIED MILESTONE · AUGUST 13, 2026</span>
+              </div>
+              <h3>The Assurance Boundary</h3>
+              <p className="evidence-publication-subtitle">What JCEE Assurance Can Verify—and What It Must Refuse to Claim</p>
+              <p>JRP-001 records the first bounded JCEE Assurance / Evidence Engine milestone: frozen product and interface boundaries, deterministic verification, preserved evidence identities, historical snapshot reconstruction, and tested refusals.</p>
+              <p><strong>Evidence boundary:</strong> documented internal reproduction under frozen conditions. No external certification, production readiness, legal conformity, or universal validity is claimed.</p>
+              <div className="evidence-publication-links">
+                <a href="/research/jrp-001">READ JRP-001 <span>→</span></a>
+                <a href="/JRP-001_The_Assurance_Boundary_v1.0.md" download>DOWNLOAD VERSION 1.0 <span>↓</span></a>
+              </div>
+            </article>
             <article className="evidence-publication-card">
               <div className="evidence-publication-topline">
                 <span>JRP-000 · VERSION 1.0</span>
@@ -285,10 +313,16 @@ export default function ResearchEvidence() {
               <span>PUBLIC RECORD</span>
             </div>
             <div className="revision-row">
+              <strong>1.2</strong>
+              <span>AUGUST 13, 2026</span>
+              <p>Added JCEE Assurance / Evidence Engine as a bounded verified milestone and published JRP-001 — The Assurance Boundary.</p>
+              <span className="revision-status">CURRENT</span>
+            </div>
+            <div className="revision-row">
               <strong>1.1</strong>
               <span>AUGUST 13, 2026</span>
               <p>Added Inconclusive to the public status vocabulary and added JRP-000 as the first adopted research publication.</p>
-              <span className="revision-status">CURRENT</span>
+              <span className="revision-status superseded">SUPERSEDED</span>
             </div>
             <div className="revision-row">
               <strong>1.0</strong>
