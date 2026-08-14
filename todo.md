@@ -523,3 +523,10 @@
 - [x] Run tests and production build
 - [x] Verify contrast, readability, scrollbar styling, and responsive behavior
 - [x] Save the verified obsidian/neon-violet color scheme checkpoint
+
+# Current Request — Dark-Mode Social Preview Image
+
+- [x] Generate a 1200x630 dark-mode social preview image using obsidian black and neon violet
+- [x] Upload the image and wire it into the site Open Graph and Twitter Card meta tags
+- [x] Run tests and production build
+- [x] Save the verified social preview checkpoint
