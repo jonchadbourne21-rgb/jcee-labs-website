@@ -221,10 +221,11 @@
 
 /* JCEE Labs homepage styles */
 :root {
-  --ink: #0c0c0c;
+  --ink: #080808;
   --paper: #f1f0eb;
   --white: #fbfbf8;
-  --signal: #b9ff37;
+  --signal: #b347ff;
+  --signal-readable: #c97aff;
   --muted: #777771;
   --line: rgba(12, 12, 12, 0.18);
 }
@@ -492,7 +493,7 @@ h1 em,
 
 .statement-band {
   align-items: center;
-  background: var(--signal);
+  background: #7b2dbb;
   border-bottom: 1px solid var(--ink);
   border-top: 1px solid var(--ink);
   display: flex;
@@ -525,7 +526,7 @@ h1 em,
 }
 
 .statement-band::-webkit-scrollbar-thumb:hover {
-  background: #222220;
+  background: #1a1a1a;
 }
 .statement-band > span { flex: 0 0 auto; }
 

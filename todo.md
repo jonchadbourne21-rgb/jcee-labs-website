@@ -515,3 +515,11 @@
 - [x] Save the verified update checkpoint
 
 - [x] Verify all five publication table wrappers remain intact and the SWIPE TO EXPLORE label is hidden on desktop
+
+# Current Request — Obsidian Black + Neon Violet Color Scheme
+
+- [x] Audit current signal color variable and all surfaces using Electric Cobalt
+- [x] Replace signal with neon violet and ensure obsidian black backgrounds site-wide
+- [x] Run tests and production build
+- [x] Verify contrast, readability, scrollbar styling, and responsive behavior
+- [ ] Save the verified obsidian/neon-violet color scheme checkpoint
