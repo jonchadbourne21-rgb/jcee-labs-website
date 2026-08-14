@@ -490,6 +490,6 @@
 - [x] Apply Electric Cobalt scrollbar styling to the statement bar and publication-table surfaces
 - [x] Run tests and production build
 - [x] Verify scrollbar styling, overflow, and readability at mobile and desktop widths
-- [ ] Save the branded scrollbar update checkpoint
+- [x] Save the branded scrollbar update checkpoint
 
 - [x] Verify rendered publication table scrollbar uses Electric Cobalt, thin sizing, horizontal overflow, and pan-x touch behavior
