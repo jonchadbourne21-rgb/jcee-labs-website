@@ -221,13 +221,13 @@
 
 /* JCEE Labs homepage styles */
 :root {
-  --ink: #080808;
-  --paper: #f1f0eb;
-  --white: #fbfbf8;
-  --signal: #00ffd5;
-  --signal-readable: #5cffe6;
+  --ink: #000000;
+  --paper: #060610;
+  --white: #ffffff;
+  --signal: #1a5cff;
+  --signal-readable: #4d8aff;
   --muted: #777771;
-  --line: rgba(12, 12, 12, 0.18);
+  --line: rgba(255, 255, 255, 0.12);
 }
 
 * { box-sizing: border-box; }
@@ -239,7 +239,7 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
+  background: #050510;
   color: var(--ink);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   text-rendering: optimizeLegibility;
@@ -254,7 +254,7 @@ a { color: inherit; text-decoration: none; }
 .site-header {
   align-items: center;
   background: var(--signal);
-  border-bottom: 3px solid var(--ink);
+  border-bottom: 1px solid rgba(26, 92, 255, 0.3);
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   height: 76px;
@@ -299,7 +299,7 @@ nav a,
 nav a { position: relative; }
 
 nav a::after {
-  background: var(--ink);
+  background: var(--signal);
   bottom: -7px;
   content: "";
   height: 1px;
@@ -317,11 +317,13 @@ nav a:hover::after { transform: scaleX(1); }
 .header-contact span { margin-left: 6px; }
 
 .hero {
+  background: var(--ink) url('/manus-storage/jcee-hero-cubes_002df7db.png') no-repeat right center / contain;
   display: grid;
   gap: 7vw;
   grid-template-columns: minmax(0, 1.15fr) minmax(360px, 0.85fr);
   min-height: calc(100svh - 76px);
   padding: 8.5vh 4vw 6vh;
+  color: var(--white);
 }
 
 .hero-copy {
@@ -341,7 +343,7 @@ nav a:hover::after { transform: scaleX(1); }
 
 .eyebrow span {
   background: var(--signal);
-  border: 1px solid var(--ink);
+  border: 1px solid var(--signal);
   border-radius: 50%;
   height: 8px;
   margin-right: 10px;
@@ -372,7 +374,7 @@ h1 em,
 
 .hero-actions {
   align-items: center;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(26, 92, 255, 0.2);
   display: flex;
   justify-content: space-between;
   margin-top: 7vh;
@@ -498,7 +500,7 @@ h1 em,
 
 .statement-band {
   align-items: center;
-  background: #008f77;
+  background: #1a5cff;
   border-bottom: 1px solid var(--ink);
   border-top: 1px solid var(--ink);
   display: flex;
@@ -588,7 +590,7 @@ h1 em,
 
 .guarantee-grid {
   border-left: 1px solid var(--line);
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(26, 92, 255, 0.2);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
@@ -867,7 +869,7 @@ h1 em,
 
 .mirrored-copy > a span { margin-left: 12px; }
 
-.company-section { background: var(--paper); }
+.company-section { background: #050510; }
 
 .company-statement { padding: 11vh 0 12vh; }
 
@@ -888,7 +890,7 @@ h1 em,
 
 .company-bottom {
   align-items: end;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(26, 92, 255, 0.2);
   display: grid;
   gap: 7vw;
   grid-template-columns: 1fr 1fr;
@@ -1063,8 +1065,8 @@ h1 em,
 }
 
 @keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 255, 213, .6); }
-  50% { box-shadow: 0 0 8px 8px rgba(0, 255, 213, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(26, 92, 255, .6); }
+  50% { box-shadow: 0 0 8px 8px rgba(26, 92, 255, 0); }
 }
 
 @keyframes blink { 50% { opacity: 0; } }
@@ -1228,7 +1230,7 @@ h1 em,
 
 .nav-submenu {
   background: var(--ink);
-  border: 1px solid var(--ink);
+  border: 1px solid var(--signal);
   color: var(--paper);
   display: grid;
   gap: 11px;
@@ -1260,8 +1262,8 @@ h1 em,
 }
 
 .charter-intro {
-  background: var(--paper);
-  border-top: 1px solid var(--line);
+  background: #050510;
+  border-top: 1px solid rgba(26, 92, 255, 0.2);
   padding: 8vh 4vw 10vh;
 }
 
@@ -1308,7 +1310,7 @@ h1 em,
 }
 
 /* Public program pages */
-.program-page { background: var(--paper); min-height: 100vh; }
+.program-page { background: #050510; min-height: 100vh; }
 
 .program-masthead {
   min-height: calc(100svh - 76px);
@@ -1343,7 +1345,7 @@ h1 em,
 }
 
 .program-status-row {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(26, 92, 255, 0.2);
   display: flex;
   font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
   font-size: 9px;
@@ -1355,7 +1357,7 @@ h1 em,
 .program-statement,
 .program-boundaries,
 .program-next {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(26, 92, 255, 0.2);
   padding: 10vh 4vw 11vh;
 }
 
@@ -1448,7 +1450,7 @@ h1 em,
 .program-statement-dark .program-statement-copy p { color: #b9b8b1; }
 
 .charter-page {
-  background: var(--paper);
+  background: #050510;
   min-height: 100vh;
 }
 
@@ -1480,7 +1482,7 @@ h1 em,
 }
 
 .charter-version-row {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(26, 92, 255, 0.2);
   display: flex;
   font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
   font-size: 9px;
@@ -1491,7 +1493,7 @@ h1 em,
 
 .charter-version-row span:last-child::before {
   background: var(--signal);
-  border: 1px solid var(--ink);
+  border: 1px solid var(--signal);
   border-radius: 50%;
   content: "";
   display: inline-block;
@@ -1523,7 +1525,7 @@ h1 em,
 }
 
 .charter-toc ol {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(26, 92, 255, 0.2);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -1566,7 +1568,7 @@ h1 em,
 }
 
 .charter-document section {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(26, 92, 255, 0.2);
   padding: 10vh 0 2vh;
   scroll-margin-top: 95px;
 }
@@ -1648,7 +1650,7 @@ h1 em,
 }
 
 .charter-gate li {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(26, 92, 255, 0.2);
   display: grid;
   gap: 2vw;
   grid-template-columns: minmax(220px, .7fr) 1fr;
@@ -1693,7 +1695,7 @@ h1 em,
 }
 
 .charter-references li {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(26, 92, 255, 0.2);
   margin: 0;
   padding: 18px 0;
 }
@@ -1740,7 +1742,7 @@ h1 em,
 .revision-row {
   align-items: baseline;
   border-bottom: 1px solid var(--line);
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(26, 92, 255, 0.2);
   display: grid;
   gap: 20px;
   grid-template-columns: 60px 140px 1fr auto;
@@ -1789,7 +1791,7 @@ h1 em,
 }
 
 .evidence-classifications article {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(26, 92, 255, 0.2);
   display: grid;
   gap: 3vw;
   grid-template-columns: minmax(170px, .45fr) 1fr;
@@ -1812,7 +1814,7 @@ h1 em,
 }
 
 .evidence-program {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(26, 92, 255, 0.2);
   margin-top: 8vh;
   padding-top: 4vh;
 }

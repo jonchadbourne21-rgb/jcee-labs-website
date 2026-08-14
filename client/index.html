@@ -35,13 +35,13 @@
     <!-- JCEE Labs master brand accent + alternating editorial chapter system -->
     <style>
       :root {
-        --signal: #00ffd5 !important;
-        --signal-readable: #5cffe6;
-        --chapter-dark: #0c0c0c;
-        --chapter-light: #f1f0eb;
-        --chapter-white: #fbfbf8;
-        --chapter-line-dark: rgba(255,255,255,.22);
-        --chapter-line-light: rgba(12,12,12,.18);
+        --signal: #1a5cff !important;
+        --signal-readable: #4d8aff;
+        --chapter-dark: #000000;
+        --chapter-light: #0a0a14;
+        --chapter-white: #ffffff;
+        --chapter-line-dark: rgba(26,92,255,.3);
+        --chapter-line-light: rgba(26,92,255,.2);
       }
 
       html { overflow-x: clip; }
@@ -113,7 +113,7 @@
       /* 02 / VOW — white */
       .vow-section {
         background: var(--chapter-light) !important;
-        color: var(--chapter-dark) !important;
+        color: #ffffff !important;
       }
       .vow-section .section-index,
       .vow-section .guarantee-grid,
@@ -124,22 +124,22 @@
       .vow-section .section-index,
       .vow-section .quiet,
       .vow-section .guarantee-grid article > span {
-        color: #666660 !important;
+        color: #8888aa !important;
       }
       .vow-section .guarantee-grid p { color: #4f4f4a !important; }
       .vow-section .terminal-line {
         background: transparent !important;
-        color: var(--chapter-dark) !important;
+        color: #ffffff !important;
         border-bottom: 1px solid var(--chapter-dark) !important;
         padding: 18px 0 !important;
       }
       .vow-section .terminal-line > span:first-child {
-        color: #2449d8 !important;
+        color: var(--signal-readable) !important;
         font-weight: 700;
       }
-      .vow-section .terminal-line code { color: var(--chapter-dark) !important; }
-      .vow-section .terminal-line .cursor { background: var(--signal) !important; }
-      .vow-section .section-detail-link { color: #2449d8 !important; }
+      .vow-section .terminal-line code { color: #ffffff !important; }
+      .vow-section .terminal-line .cursor { background: #0a0a14 !important; border-top: 1px solid rgba(26,92,255,.3) !important; }
+      .vow-section .section-detail-link { color: var(--signal-readable) !important; }
 
       /* 03 / RESEARCH & EVIDENCE — black */
       .evidence-intro {
@@ -153,20 +153,20 @@
       /* 04 / QCS — white */
       .qcs-section {
         background: var(--chapter-light) !important;
-        color: var(--chapter-dark) !important;
+        color: #ffffff !important;
       }
       .qcs-section .section-index.light {
         border-color: var(--chapter-line-light) !important;
-        color: #666660 !important;
+        color: #8888aa !important;
       }
-      .qcs-section .qcs-copy > p { color: #333330 !important; }
-      .qcs-section .qcs-copy > p.quiet { color: #666660 !important; }
+      .qcs-section .qcs-copy > p { color: #c8c8d0 !important; }
+      .qcs-section .qcs-copy > p.quiet { color: #8888aa !important; }
       .qcs-section .qcs-status-grid,
       .qcs-section .qcs-status-grid > div { border-color: var(--chapter-line-light) !important; }
-      .qcs-section .qcs-status-grid dt { color: #666660 !important; }
+      .qcs-section .qcs-status-grid dt { color: #8888aa !important; }
       .qcs-section .qcs-status-grid dd,
       .qcs-section .qcs-kicker,
-      .qcs-section .qcs-copy > a { color: #2449d8 !important; }
+      .qcs-section .qcs-copy > a { color: var(--signal-readable) !important; }
 
       /* 05 / CHARTER — black */
       .charter-intro:not(.evidence-intro) {
@@ -183,20 +183,20 @@
       /* 06 / MIRRORED — white */
       .mirrored-section {
         background: var(--chapter-light) !important;
-        color: var(--chapter-dark) !important;
+        color: #ffffff !important;
       }
-      .mirrored-section .section-index.light { border-color: var(--chapter-line-light) !important; color: #666660 !important; }
-      .mirrored-section .mirrored-copy > p { color: #333330 !important; }
+      .mirrored-section .section-index.light { border-color: var(--chapter-line-light) !important; color: #8888aa !important; }
+      .mirrored-section .mirrored-copy > p { color: #c8c8d0 !important; }
       .mirrored-section .mirrored-kicker,
-      .mirrored-section .mirrored-copy > a { color: #2449d8 !important; }
+      .mirrored-section .mirrored-copy > a { color: var(--signal-readable) !important; }
       .mirrored-section .mirrored-meta { border-color: var(--chapter-line-light) !important; }
-      .mirrored-section .orbit { border-color: rgba(12,12,12,.28) !important; }
-      .mirrored-section .mirror-core { border-color: var(--chapter-dark) !important; color: var(--chapter-dark) !important; }
+      .mirrored-section .orbit { border-color: rgba(26,92,255,.3) !important; }
+      .mirrored-section .mirror-core { border-color: #ffffff !important; color: #ffffff !important; }
 
       /* Footer remains the single full electric-teal institutional lockup — darker shade for weight. */
       .brand-footer {
-        background: var(--signal) !important;
-        color: var(--ink) !important;
+        background: #0a0a14 !important; border-top: 1px solid rgba(26,92,255,.3) !important;
+        color: #ffffff !important;
         border-top: 3px solid var(--ink) !important;
       }
       .brand-footer-top > p,
