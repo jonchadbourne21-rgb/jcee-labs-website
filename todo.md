@@ -530,3 +530,10 @@
 - [x] Upload the image and wire it into the site Open Graph and Twitter Card meta tags
 - [x] Run tests and production build
 - [x] Save the verified social preview checkpoint
+
+# Current Request — Electric Green Color Swap
+
+- [x] Replace all neon violet values with electric green across index.css, index.html, and publications.css
+- [x] Regenerate the social preview image with the electric green palette
+- [x] Run tests and production build
+- [x] Save the verified electric green checkpoint
