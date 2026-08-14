@@ -483,3 +483,13 @@
 
 - [x] Apply touch-scrolling to the shared publication markdown table wrapper, which contains 720px-wide tables on mobile
 - [x] Verify JRP-000 publication layout at mobile and desktop widths without visible page clipping
+
+# Current Request — Electric Cobalt Scrollbar Styling
+
+- [x] Inspect existing horizontal-scroll selectors and scrollbar behavior
+- [x] Apply Electric Cobalt scrollbar styling to the statement bar and publication-table surfaces
+- [x] Run tests and production build
+- [x] Verify scrollbar styling, overflow, and readability at mobile and desktop widths
+- [ ] Save the branded scrollbar update checkpoint
+
+- [x] Verify rendered publication table scrollbar uses Electric Cobalt, thin sizing, horizontal overflow, and pan-x touch behavior

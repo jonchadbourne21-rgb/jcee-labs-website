@@ -504,12 +504,29 @@ h1 em,
   overflow-x: auto;
   overflow-y: hidden;
   padding: 0 3vw;
-  scrollbar-width: none;
+  scrollbar-color: var(--ink) var(--signal);
+  scrollbar-width: thin;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-x;
 }
 
-.statement-band::-webkit-scrollbar { display: none; }
+.statement-band::-webkit-scrollbar {
+  height: 6px;
+}
+
+.statement-band::-webkit-scrollbar-track {
+  background: var(--signal);
+}
+
+.statement-band::-webkit-scrollbar-thumb {
+  background: var(--ink);
+  border: 1px solid var(--signal);
+  border-radius: 999px;
+}
+
+.statement-band::-webkit-scrollbar-thumb:hover {
+  background: #222220;
+}
 .statement-band > span { flex: 0 0 auto; }
 
 .vow-section,

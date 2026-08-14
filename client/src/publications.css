@@ -368,12 +368,27 @@
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+  scrollbar-color: var(--signal) rgba(49, 92, 255, .14);
+  scrollbar-width: thin;
   touch-action: pan-x;
 }
 
 .paper-markdown [data-streamdown="table-wrapper"]::-webkit-scrollbar {
-  display: none;
+  height: 6px;
+}
+
+.paper-markdown [data-streamdown="table-wrapper"]::-webkit-scrollbar-track {
+  background: rgba(49, 92, 255, .14);
+}
+
+.paper-markdown [data-streamdown="table-wrapper"]::-webkit-scrollbar-thumb {
+  background: var(--signal);
+  border: 1px solid rgba(255, 255, 255, .55);
+  border-radius: 999px;
+}
+
+.paper-markdown [data-streamdown="table-wrapper"]::-webkit-scrollbar-thumb:hover {
+  background: #214ee8;
 }
 
 .paper-markdown table {
