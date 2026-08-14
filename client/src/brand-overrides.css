@@ -239,6 +239,45 @@
   color: #facc15;
 }
 
+/* ── Shared header/footer brand lock ── */
+.site-header,
+.brand-footer {
+  background: #000000;
+  color: #ffffff;
+}
+
+.site-header {
+  border-bottom-color: rgba(37, 99, 235, 0.18);
+}
+
+.brand-footer {
+  border-top-color: rgba(37, 99, 235, 0.18);
+}
+
+.brand-footer,
+.brand-footer a,
+.brand-footer span,
+.brand-footer p,
+.brand-footer strong,
+.brand-footer small,
+.brand-footer div {
+  color: #ffffff !important;
+}
+
+.brand-footer-wordmark,
+.brand-footer-wordmark span {
+  color: #ffffff !important;
+}
+
+.brand-footer-wordmark em {
+  color: #60a5fa !important;
+}
+
+.brand-footer-links,
+.brand-footer-meta {
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
 /* Keep interactive text readable against the dark system. */
 .program-page a:focus-visible,
 .paper-page a:focus-visible,
