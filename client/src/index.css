@@ -503,6 +503,7 @@ h1 em,
 .receipt-footer strong { color: var(--signal); font-size: 11px; }
 
 .statement-band {
+  color: rgba(255, 255, 255, 0.85);
   align-items: center;
   background: rgba(37, 99, 235, 0.08); border-top: 1px solid rgba(37, 99, 235, 0.15); border-bottom: 1px solid rgba(37, 99, 235, 0.15);
   border-bottom: 1px solid var(--ink);
@@ -516,7 +517,7 @@ h1 em,
   overflow-x: auto;
   overflow-y: hidden;
   padding: 0 3vw;
-  scrollbar-color: var(--ink) var(--signal);
+  scrollbar-color: rgba(37, 99, 235, 0.5) rgba(0, 0, 0, 0.3);
   scrollbar-width: thin;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-x;
@@ -527,7 +528,7 @@ h1 em,
 }
 
 .statement-band::-webkit-scrollbar-track {
-  background: var(--signal);
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .statement-band::-webkit-scrollbar-thumb {
@@ -992,6 +993,7 @@ h1 em,
 .brand-footer-links a:hover { text-decoration: underline; text-underline-offset: 4px; }
 
 .brand-footer-wordmark {
+  color: rgba(255, 255, 255, 0.35);
   align-items: baseline;
   display: grid;
   font-size: clamp(55px, 12vw, 205px);
@@ -1006,6 +1008,7 @@ h1 em,
 
 .brand-footer-wordmark em {
   font-family: Georgia, "Times New Roman", serif;
+  color: rgba(37, 99, 235, 0.6);
   font-size: .42em;
   font-weight: 400;
   letter-spacing: -.04em;
