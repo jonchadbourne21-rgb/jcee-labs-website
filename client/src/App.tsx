@@ -4,7 +4,7 @@ import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect, useState, useTransition } from "react";
 
 const FAQ = lazy(() => import("./pages/FAQ"));
 const Charter = lazy(() => import("./pages/Charter"));
@@ -30,6 +30,14 @@ const ServicesPage = lazy(() => import("./pages/ServicesPage"));
 const ProductsPage = lazy(() => import("./pages/ProductsPage"));
 const BlogPage = lazy(() => import("./pages/BlogPage"));
 
+function RouteShimmer() {
+  return (
+    <div className="route-shimmer-container">
+      <div className="route-shimmer-bar" />
+    </div>
+  );
+}
+
 function Router() {
   const [location] = useLocation();
 
@@ -40,7 +48,7 @@ function Router() {
 
   // make sure to consider if you need authentication for certain routes
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#090514]" />}>
+    <Suspense fallback={<RouteShimmer />}>
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/faq" component={FAQ} />
