@@ -522,4 +522,4 @@
 - [x] Replace signal with neon violet and ensure obsidian black backgrounds site-wide
 - [x] Run tests and production build
 - [x] Verify contrast, readability, scrollbar styling, and responsive behavior
-- [ ] Save the verified obsidian/neon-violet color scheme checkpoint
+- [x] Save the verified obsidian/neon-violet color scheme checkpoint
