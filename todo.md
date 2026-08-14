@@ -463,3 +463,10 @@
 - [x] Restore the missing JRP-000 lazy import so the remaining publication route continues to render
 
 - [x] Restore the missing JRP-000 lazy import so the remaining publication route continues to render
+
+# Current Request — Scrollable Electric Cobalt Statement Bar
+
+- [x] Make the mobile statement bar horizontally scrollable by touch without changing its copy or visual treatment
+- [x] Run tests and production build
+- [x] Verify mobile scroll behavior and desktop presentation
+- [ ] Save the update checkpoint

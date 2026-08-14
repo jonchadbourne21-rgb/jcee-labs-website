@@ -501,8 +501,16 @@ h1 em,
   justify-content: space-around;
   letter-spacing: 0.06em;
   min-height: 54px;
+  overflow-x: auto;
+  overflow-y: hidden;
   padding: 0 3vw;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
 }
+
+.statement-band::-webkit-scrollbar { display: none; }
+.statement-band > span { flex: 0 0 auto; }
 
 .vow-section,
 .company-section {
@@ -1058,7 +1066,6 @@ h1 em,
   .statement-band {
     gap: 14px;
     justify-content: flex-start;
-    overflow: hidden;
     padding: 0 20px;
     white-space: nowrap;
   }
