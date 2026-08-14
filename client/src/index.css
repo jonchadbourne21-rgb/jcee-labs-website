@@ -921,6 +921,9 @@ h1 em,
   color: #ffffff;
   padding: 5vh 4vw 3vh;
 }
+.brand-footer *, .brand-footer a, .brand-footer span, .brand-footer p, .brand-footer div { color: #ffffff !important; opacity: 1 !important; }
+.brand-footer-wordmark, .brand-footer-wordmark span { color: #ff0033 !important; }
+.brand-footer-wordmark em { color: #ff0033 !important; }
 
 .brand-footer-top {
   align-items: end;
