@@ -1,5 +1,6 @@
 import BrandFooter from "@/components/BrandFooter";
 import CoreHeader from "@/components/CoreHeader";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const receiptRows = [
   ["00", "claim", "bounded"],
@@ -33,8 +34,9 @@ const guarantees = [
 ];
 
 export default function Home() {
+  const revealRef = useScrollReveal();
   return (
-    <main id="top">
+    <main id="top" ref={revealRef as any}>
       <CoreHeader current="jcee" />
 
       <section className="hero">

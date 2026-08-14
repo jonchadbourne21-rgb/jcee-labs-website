@@ -1029,6 +1029,29 @@ h1 em,
   animation: shimmer-slide 1.2s ease-in-out infinite;
   border-radius: 2px;
 }
+/* Scroll-reveal entrance animations */
+.page-shell section {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1), transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.page-shell section.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* First section (hero) should be visible immediately */
+.page-shell section:first-child {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-shell section {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 @keyframes shimmer-slide {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(350%); }
