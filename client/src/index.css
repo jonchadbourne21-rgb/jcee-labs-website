@@ -2041,3 +2041,33 @@ h1 em,
     grid-column: 2;
   }
 }
+
+/* Breathing dividers — white/light strips between dark chapters */
+.breath {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  height: 1px;
+  margin: 0;
+  position: relative;
+}
+.breath::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(37, 99, 235, 0.2) 30%,
+    rgba(37, 99, 235, 0.3) 50%,
+    rgba(37, 99, 235, 0.2) 70%,
+    transparent
+  );
+  transform: translateY(-50%);
+}

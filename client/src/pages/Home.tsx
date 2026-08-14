@@ -116,6 +116,7 @@ export default function Home() {
           </p>
           <a href="/charter">READ OUR CHARTER <span>→</span></a>
         </div>
+      <div className="breath" aria-hidden="true" />
       </section>
 
       <section className="vow-section" id="vow">
@@ -158,6 +159,7 @@ export default function Home() {
         </div>
         <a className="section-detail-link" href="/vow">READ THE PUBLIC VOW OVERVIEW <span>→</span></a>
       </section>
+      <div className="breath" aria-hidden="true" />
 
       <section className="charter-intro evidence-intro" id="research" aria-labelledby="evidence-intro-title">
         <div className="section-index">
@@ -176,6 +178,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <div className="breath" aria-hidden="true" />
 
       <section className="qcs-section" id="qcs" aria-labelledby="qcs-title">
         <div className="section-index light">
@@ -206,6 +209,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <div className="breath" aria-hidden="true" />
 
       <section className="charter-intro" aria-labelledby="charter-intro-title">
         <div className="section-index">
@@ -220,6 +224,7 @@ export default function Home() {
           </p>
           <a href="/charter">Read the Charter <span aria-hidden="true">→</span></a>
         </div>
+      <div className="breath" aria-hidden="true" />
       </section>
 
       <section className="mirrored-section" id="mirrored">
