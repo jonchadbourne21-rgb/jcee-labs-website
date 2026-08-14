@@ -35,169 +35,86 @@
     <!-- JCEE Labs master brand accent + alternating editorial chapter system -->
     <style>
       :root {
-        --signal: #1a5cff !important;
-        --signal-readable: #4d8aff;
+        --signal: #2563eb !important;
+        --signal-readable: #60a5fa;
         --chapter-dark: #000000;
-        --chapter-light: #0a0a14;
+        --chapter-light: #050508;
         --chapter-white: #ffffff;
-        --chapter-line-dark: rgba(26,92,255,.3);
-        --chapter-line-light: rgba(26,92,255,.2);
+        --chapter-line-dark: rgba(37, 99, 235, 0.15);
+        --chapter-line-light: rgba(37, 99, 235, 0.1);
       }
-
-      html { overflow-x: clip; }
-
-      /* ── Legibility floor ── */
-      nav a,
-      .header-contact { font-size: 12px !important; }
-
-      .eyebrow,
-      .primary-link { font-size: 12px !important; }
-
-      .availability,
-      .receipt-header,
-      .receipt-id,
-      .receipt-row,
-      .hash-line,
-      .receipt-footer { font-size: 11px !important; }
-
-      .section-index span,
-      .company-statement > p,
-      .qcs-kicker,
-      .qcs-status-grid dt,
-      .qcs-status-grid dd,
-      .mirrored-kicker,
-      .mirrored-meta span { font-size: 11px !important; }
-
-      .brand-footer-lockup small,
-      .brand-footer-links span { font-size: 10px !important; }
-
-      .brand-footer-links a { font-size: 12px !important; }
-      .brand-footer-meta { font-size: 10px !important; }
-
-      .company-bottom p,
-      .vow-intro p,
-      .charter-intro-copy p,
-      .qcs-copy > p,
-      .mirrored-copy > p { font-size: clamp(16px, 1.25vw, 20px) !important; }
-
-      /* Cobalt remains the signal, not the page fill. */
-      .qcs-kicker,
-      .qcs-status-grid dd,
-      .qcs-copy > a,
-      .mirrored-copy > a,
+      /* Premium dark system — every surface is near-black with blue glow accents */
+      .company-section,
+      .evidence-intro,
+      .charter-intro:not(.evidence-intro) {
+        background: #000000 !important;
+        color: #ffffff !important;
+      }
+      .vow-section,
+      .qcs-section,
+      .mirrored-section {
+        background: #050508 !important;
+        color: #ffffff !important;
+      }
+      .section-index,
+      .section-index.light {
+        border-color: rgba(37, 99, 235, 0.15) !important;
+        color: rgba(255,255,255,0.45) !important;
+      }
+      .company-statement em,
       .receipt-status,
       .receipt-footer strong,
       .mirrored-kicker,
-      .program-statement-dark .charter-section-label {
+      .qcs-kicker,
+      .qcs-status-grid dd,
+      .section-detail-link,
+      .charter-intro-copy a,
+      .evidence-intro .charter-intro-copy a,
+      .mirrored-copy > a,
+      .qcs-copy > a,
+      .home-research-links a {
         color: var(--signal-readable) !important;
       }
-
-      /* ── Numbered homepage chapters: alternating black / white ── */
-
-      /* 01 / JCEE LABS — black */
-      .company-section {
-        background: var(--chapter-dark) !important;
-        color: var(--chapter-white) !important;
+      .guarantee-grid article > span,
+      .quiet,
+      .company-bottom span {
+        color: rgba(255,255,255,0.4) !important;
       }
-      .company-section .section-index,
-      .company-section .company-bottom {
-        border-color: var(--chapter-line-dark) !important;
+      .guarantee-grid p,
+      .company-statement > p,
+      .charter-intro-copy p,
+      .evidence-intro .charter-intro-copy p,
+      .qcs-copy > p,
+      .mirrored-copy > p {
+        color: rgba(255,255,255,0.7) !important;
       }
-      .company-section .section-index,
-      .company-section .company-statement > p {
-        color: #b9b9b3 !important;
+      .guarantee-grid,
+      .guarantee-grid article {
+        border-color: rgba(37, 99, 235, 0.12) !important;
       }
-      .company-section .company-bottom p { color: #deddd6 !important; }
-      .company-section .company-bottom a { color: var(--signal-readable) !important; }
-
-      /* 02 / VOW — white */
-      .vow-section {
-        background: var(--chapter-light) !important;
-        color: #ffffff !important;
+      .vow-close {
+        border-color: rgba(37, 99, 235, 0.12) !important;
       }
-      .vow-section .section-index,
-      .vow-section .guarantee-grid,
-      .vow-section .guarantee-grid article,
-      .vow-section .vow-close {
-        border-color: var(--chapter-line-light) !important;
-      }
-      .vow-section .section-index,
-      .vow-section .quiet,
-      .vow-section .guarantee-grid article > span {
-        color: #8888aa !important;
-      }
-      .vow-section .guarantee-grid p { color: #4f4f4a !important; }
-      .vow-section .terminal-line {
+      .terminal-line {
         background: transparent !important;
         color: #ffffff !important;
-        border-bottom: 1px solid var(--chapter-dark) !important;
-        padding: 18px 0 !important;
+        border-bottom: 1px solid rgba(37, 99, 235, 0.2) !important;
       }
-      .vow-section .terminal-line > span:first-child {
-        color: var(--signal-readable) !important;
-        font-weight: 700;
-      }
-      .vow-section .terminal-line code { color: #ffffff !important; }
-      .vow-section .terminal-line .cursor { background: #0a0a14 !important; border-top: 1px solid rgba(26,92,255,.3) !important; }
-      .vow-section .section-detail-link { color: var(--signal-readable) !important; }
-
-      /* 03 / RESEARCH & EVIDENCE — black */
-      .evidence-intro {
-        background: var(--chapter-dark) !important;
-        color: var(--chapter-white) !important;
-      }
-      .evidence-intro .section-index { border-color: var(--chapter-line-dark) !important; color: #b9b9b3 !important; }
-      .evidence-intro .charter-intro-copy p { color: #deddd6 !important; }
-      .evidence-intro .charter-intro-copy a { color: var(--signal-readable) !important; }
-
-      /* 04 / QCS — white */
-      .qcs-section {
-        background: var(--chapter-light) !important;
-        color: #ffffff !important;
-      }
-      .qcs-section .section-index.light {
-        border-color: var(--chapter-line-light) !important;
-        color: #8888aa !important;
-      }
-      .qcs-section .qcs-copy > p { color: #c8c8d0 !important; }
-      .qcs-section .qcs-copy > p.quiet { color: #8888aa !important; }
-      .qcs-section .qcs-status-grid,
-      .qcs-section .qcs-status-grid > div { border-color: var(--chapter-line-light) !important; }
-      .qcs-section .qcs-status-grid dt { color: #8888aa !important; }
-      .qcs-section .qcs-status-grid dd,
-      .qcs-section .qcs-kicker,
-      .qcs-section .qcs-copy > a { color: var(--signal-readable) !important; }
-
-      /* 05 / CHARTER — black */
-      .charter-intro:not(.evidence-intro) {
-        background: var(--chapter-dark) !important;
-        color: var(--chapter-white) !important;
-      }
-      .charter-intro:not(.evidence-intro) .section-index {
-        border-color: var(--chapter-line-dark) !important;
-        color: #b9b9b3 !important;
-      }
-      .charter-intro:not(.evidence-intro) .charter-intro-copy p { color: #deddd6 !important; }
-      .charter-intro:not(.evidence-intro) .charter-intro-copy a { color: var(--signal-readable) !important; }
-
-      /* 06 / MIRRORED — white */
-      .mirrored-section {
-        background: var(--chapter-light) !important;
-        color: #ffffff !important;
-      }
-      .mirrored-section .section-index.light { border-color: var(--chapter-line-light) !important; color: #8888aa !important; }
-      .mirrored-section .mirrored-copy > p { color: #c8c8d0 !important; }
-      .mirrored-section .mirrored-kicker,
-      .mirrored-section .mirrored-copy > a { color: var(--signal-readable) !important; }
-      .mirrored-section .mirrored-meta { border-color: var(--chapter-line-light) !important; }
-      .mirrored-section .orbit { border-color: rgba(26,92,255,.3) !important; }
-      .mirrored-section .mirror-core { border-color: #ffffff !important; color: #ffffff !important; }
-
-      /* Footer remains the single full electric-teal institutional lockup — darker shade for weight. */
+      .terminal-line > span:first-child { color: var(--signal-readable) !important; }
+      .terminal-line code { color: #ffffff !important; }
+      .terminal-line .cursor { background: var(--signal) !important; }
+      .qcs-status-grid,
+      .qcs-status-grid > div { border-color: rgba(37, 99, 235, 0.12) !important; }
+      .qcs-status-grid dt { color: rgba(255,255,255,0.4) !important; }
+      .mirrored-meta { border-color: rgba(37, 99, 235, 0.12) !important; }
+      .orbit { border-color: rgba(37, 99, 235, 0.25) !important; }
+      .mirror-core { border-color: #ffffff !important; color: #ffffff !important; }
+      .company-bottom a { color: var(--signal-readable) !important; }
+      /* Footer — deep dark with blue accent line */
       .brand-footer {
-        background: #0a0a14 !important; border-top: 1px solid rgba(26,92,255,.3) !important;
+        background: #020205 !important;
+        border-top: 1px solid rgba(37, 99, 235, 0.2) !important;
         color: #ffffff !important;
-        border-top: 3px solid var(--ink) !important;
       }
       .brand-footer-top > p,
       .brand-footer-lockup small,
@@ -205,10 +122,11 @@
       .brand-footer-links a,
       .brand-footer-meta,
       .brand-footer-meta a {
-        color: #ffffff !important;
+        color: rgba(255,255,255,0.6) !important;
       }
-
-      /* Keep the footer statement fully inside the viewport on laptop/desktop widths. */
+      .brand-footer-links a:hover { color: var(--signal-readable) !important; }
+      .brand-footer-wordmark { color: rgba(255,255,255,0.06) !important; }
+      .brand-footer-wordmark em { color: rgba(37, 99, 235, 0.3) !important; }
       @media (min-width: 561px) {
         .brand-footer-wordmark {
           font-size: clamp(52px, 8.8vw, 160px) !important;
@@ -217,23 +135,11 @@
           width: 100%;
         }
       }
-
       @media (max-width: 560px) {
-        nav a,
-        .header-contact,
-        .eyebrow,
-        .primary-link { font-size: 11px !important; }
-
-        .section-index span,
-        .company-statement > p,
-        .qcs-kicker,
-        .qcs-status-grid dt,
-        .qcs-status-grid dd,
-        .mirrored-kicker,
-        .mirrored-meta span { font-size: 10.5px !important; }
-
-        .brand-footer-links a { font-size: 11px !important; }
-        .brand-footer-meta { font-size: 9.5px !important; }
+        nav a, .header-contact, .eyebrow, .primary-link { font-size: 11px !important; }
+        .section-index span, .company-statement > p, .qcs-kicker,
+        .qcs-status-grid dt, .mirrored-meta span, .guarantee-grid article > span,
+        .brand-footer-links span { font-size: 9px !important; }
       }
     </style>
   </head>

@@ -222,12 +222,12 @@
 /* JCEE Labs homepage styles */
 :root {
   --ink: #000000;
-  --paper: #060610;
+  --paper: #030306;
   --white: #ffffff;
-  --signal: #1a5cff;
-  --signal-readable: #4d8aff;
+  --signal: #2563eb;
+  --signal-readable: #60a5fa;
   --muted: #777771;
-  --line: rgba(255, 255, 255, 0.12);
+  --line: rgba(37, 99, 235, 0.12);
 }
 
 * { box-sizing: border-box; }
@@ -239,7 +239,7 @@ html {
 
 body {
   margin: 0;
-  background: #050510;
+  background: #020205;
   color: var(--ink);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   text-rendering: optimizeLegibility;
@@ -254,7 +254,7 @@ a { color: inherit; text-decoration: none; }
 .site-header {
   align-items: center;
   background: var(--signal);
-  border-bottom: 1px solid rgba(26, 92, 255, 0.3);
+  border-bottom: 1px solid rgba(37, 99, 235, 0.15);
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   height: 76px;
@@ -317,7 +317,7 @@ nav a:hover::after { transform: scaleX(1); }
 .header-contact span { margin-left: 6px; }
 
 .hero {
-  background: var(--ink) url('/manus-storage/jcee-hero-cubes_002df7db.png') no-repeat right center / contain;
+  background: #000000 url('/manus-storage/jcee-hero-cubes_002df7db.png') no-repeat right bottom / 55%;
   display: grid;
   gap: 7vw;
   grid-template-columns: minmax(0, 1.15fr) minmax(360px, 0.85fr);
@@ -374,7 +374,7 @@ h1 em,
 
 .hero-actions {
   align-items: center;
-  border-top: 1px solid rgba(26, 92, 255, 0.2);
+  border-top: 1px solid rgba(37, 99, 235, 0.2);
   display: flex;
   justify-content: space-between;
   margin-top: 7vh;
@@ -414,7 +414,10 @@ h1 em,
 
 .receipt {
   align-self: stretch;
-  background: var(--ink);
+  background: rgba(5, 5, 12, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  box-shadow: 0 0 60px rgba(37, 99, 235, 0.06), inset 0 1px 0 rgba(255,255,255,0.03);
   color: var(--white);
   display: flex;
   flex-direction: column;
@@ -422,7 +425,7 @@ h1 em,
   min-height: 600px;
   padding: 32px;
   position: relative;
-  border-radius: 4px;
+  border-radius: 8px;
   box-shadow: 0 24px 50px -12px rgba(12, 12, 12, 0.22);
 }
 
@@ -500,7 +503,7 @@ h1 em,
 
 .statement-band {
   align-items: center;
-  background: #1a5cff;
+  background: rgba(37, 99, 235, 0.08); border-top: 1px solid rgba(37, 99, 235, 0.15); border-bottom: 1px solid rgba(37, 99, 235, 0.15);
   border-bottom: 1px solid var(--ink);
   border-top: 1px solid var(--ink);
   display: flex;
@@ -590,7 +593,7 @@ h1 em,
 
 .guarantee-grid {
   border-left: 1px solid var(--line);
-  border-top: 1px solid rgba(26, 92, 255, 0.2);
+  border-top: 1px solid rgba(37, 99, 235, 0.2);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
@@ -869,7 +872,7 @@ h1 em,
 
 .mirrored-copy > a span { margin-left: 12px; }
 
-.company-section { background: #050510; }
+.company-section { background: #020205; }
 
 .company-statement { padding: 11vh 0 12vh; }
 
@@ -890,7 +893,7 @@ h1 em,
 
 .company-bottom {
   align-items: end;
-  border-top: 1px solid rgba(26, 92, 255, 0.2);
+  border-top: 1px solid rgba(37, 99, 235, 0.2);
   display: grid;
   gap: 7vw;
   grid-template-columns: 1fr 1fr;
@@ -1065,8 +1068,8 @@ h1 em,
 }
 
 @keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(26, 92, 255, .6); }
-  50% { box-shadow: 0 0 8px 8px rgba(26, 92, 255, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, .6); }
+  50% { box-shadow: 0 0 8px 8px rgba(37, 99, 235, 0); }
 }
 
 @keyframes blink { 50% { opacity: 0; } }
@@ -1262,8 +1265,8 @@ h1 em,
 }
 
 .charter-intro {
-  background: #050510;
-  border-top: 1px solid rgba(26, 92, 255, 0.2);
+  background: #020205;
+  border-top: 1px solid rgba(37, 99, 235, 0.2);
   padding: 8vh 4vw 10vh;
 }
 
@@ -1310,7 +1313,7 @@ h1 em,
 }
 
 /* Public program pages */
-.program-page { background: #050510; min-height: 100vh; }
+.program-page { background: #020205; min-height: 100vh; }
 
 .program-masthead {
   min-height: calc(100svh - 76px);
@@ -1345,7 +1348,7 @@ h1 em,
 }
 
 .program-status-row {
-  border-top: 1px solid rgba(26, 92, 255, 0.2);
+  border-top: 1px solid rgba(37, 99, 235, 0.2);
   display: flex;
   font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
   font-size: 9px;
@@ -1357,7 +1360,7 @@ h1 em,
 .program-statement,
 .program-boundaries,
 .program-next {
-  border-top: 1px solid rgba(26, 92, 255, 0.2);
+  border-top: 1px solid rgba(37, 99, 235, 0.2);
   padding: 10vh 4vw 11vh;
 }
 
@@ -1450,7 +1453,7 @@ h1 em,
 .program-statement-dark .program-statement-copy p { color: #b9b8b1; }
 
 .charter-page {
-  background: #050510;
+  background: #020205;
   min-height: 100vh;
 }
 
@@ -1482,7 +1485,7 @@ h1 em,
 }
 
 .charter-version-row {
-  border-top: 1px solid rgba(26, 92, 255, 0.2);
+  border-top: 1px solid rgba(37, 99, 235, 0.2);
   display: flex;
   font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
   font-size: 9px;
@@ -1525,7 +1528,7 @@ h1 em,
 }
 
 .charter-toc ol {
-  border-top: 1px solid rgba(26, 92, 255, 0.2);
+  border-top: 1px solid rgba(37, 99, 235, 0.2);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -1568,7 +1571,7 @@ h1 em,
 }
 
 .charter-document section {
-  border-top: 1px solid rgba(26, 92, 255, 0.2);
+  border-top: 1px solid rgba(37, 99, 235, 0.2);
   padding: 10vh 0 2vh;
   scroll-margin-top: 95px;
 }
@@ -1650,7 +1653,7 @@ h1 em,
 }
 
 .charter-gate li {
-  border-top: 1px solid rgba(26, 92, 255, 0.2);
+  border-top: 1px solid rgba(37, 99, 235, 0.2);
   display: grid;
   gap: 2vw;
   grid-template-columns: minmax(220px, .7fr) 1fr;
@@ -1695,7 +1698,7 @@ h1 em,
 }
 
 .charter-references li {
-  border-top: 1px solid rgba(26, 92, 255, 0.2);
+  border-top: 1px solid rgba(37, 99, 235, 0.2);
   margin: 0;
   padding: 18px 0;
 }
@@ -1742,7 +1745,7 @@ h1 em,
 .revision-row {
   align-items: baseline;
   border-bottom: 1px solid var(--line);
-  border-top: 1px solid rgba(26, 92, 255, 0.2);
+  border-top: 1px solid rgba(37, 99, 235, 0.2);
   display: grid;
   gap: 20px;
   grid-template-columns: 60px 140px 1fr auto;
@@ -1791,7 +1794,7 @@ h1 em,
 }
 
 .evidence-classifications article {
-  border-top: 1px solid rgba(26, 92, 255, 0.2);
+  border-top: 1px solid rgba(37, 99, 235, 0.2);
   display: grid;
   gap: 3vw;
   grid-template-columns: minmax(170px, .45fr) 1fr;
@@ -1814,7 +1817,7 @@ h1 em,
 }
 
 .evidence-program {
-  border-top: 1px solid rgba(26, 92, 255, 0.2);
+  border-top: 1px solid rgba(37, 99, 235, 0.2);
   margin-top: 8vh;
   padding-top: 4vh;
 }
