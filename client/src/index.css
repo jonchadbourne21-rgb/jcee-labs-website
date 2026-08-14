@@ -224,8 +224,8 @@
   --ink: #080808;
   --paper: #f1f0eb;
   --white: #fbfbf8;
-  --signal: #aaff00;
-  --signal-readable: #ccff33;
+  --signal: #00ffd5;
+  --signal-readable: #5cffe6;
   --muted: #777771;
   --line: rgba(12, 12, 12, 0.18);
 }
@@ -493,7 +493,7 @@ h1 em,
 
 .statement-band {
   align-items: center;
-  background: #5c8a00;
+  background: #008f77;
   border-bottom: 1px solid var(--ink);
   border-top: 1px solid var(--ink);
   display: flex;
