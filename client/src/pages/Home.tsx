@@ -1,3 +1,4 @@
+import { useRef, useEffect } from "react";
 import BrandFooter from "@/components/BrandFooter";
 import CoreHeader from "@/components/CoreHeader";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -35,11 +36,22 @@ const guarantees = [
 
 export default function Home() {
   const revealRef = useScrollReveal();
+  const heroRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (!hero || window.matchMedia("(max-width: 560px)").matches) return;
+    const onScroll = () => {
+      const y = window.scrollY;
+      hero.style.backgroundPositionY = `calc(50% + ${y * 0.3}px)`;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   return (
     <main id="top" ref={revealRef as any}>
       <CoreHeader current="jcee" />
 
-      <section className="hero">
+      <section className="hero" ref={heroRef}>
         <div className="hero-copy">
           <p className="eyebrow"><span /> INDEPENDENT SOFTWARE LAB · DALLAS, TX</p>
           <h1>
