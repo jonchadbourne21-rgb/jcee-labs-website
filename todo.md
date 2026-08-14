@@ -537,3 +537,5 @@
 - [x] Regenerate the social preview image with the electric green palette
 - [x] Run tests and production build
 - [x] Save the verified electric green checkpoint
+
+- [ ] Publish the newest existing implementation without changing site content, design, configuration, domains, or deployment settings.
