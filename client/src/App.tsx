@@ -9,8 +9,6 @@ import { lazy, Suspense, useEffect } from "react";
 const FAQ = lazy(() => import("./pages/FAQ"));
 const Charter = lazy(() => import("./pages/Charter"));
 const ResearchEvidence = lazy(() => import("./pages/ResearchEvidence"));
-const Jrp000 = lazy(() => import("./pages/Jrp000"));
-const Jrp001 = lazy(() => import("./pages/Jrp001"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Mirrored = lazy(() => import("./pages/Mirrored"));
 const VowPage = lazy(() => import("./pages/VowPage"));
@@ -48,7 +46,6 @@ function Router() {
         <Route path="/charter" component={Charter} />
         <Route path="/research-evidence" component={ResearchEvidence} />
         <Route path="/research/jrp-000" component={Jrp000} />
-        <Route path="/research/jrp-001" component={Jrp001} />
         <Route path="/vow" component={VowPage} />
         <Route path="/qcs" component={QcsPage} />
         <Route path="/mirrored" component={Mirrored} />

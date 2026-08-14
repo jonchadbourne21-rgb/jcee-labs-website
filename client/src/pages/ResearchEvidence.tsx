@@ -214,20 +214,6 @@ export default function ResearchEvidence() {
           <section id="publications">
             <h2><span>III.</span> Research Publications</h2>
             <p>Adopted papers and experiment records establish the standards and evidence behind entries in this index. Publication does not strengthen a claim by itself; the status shown on each record controls.</p>
-            <article className="evidence-publication-card evidence-publication-card-assurance">
-              <div className="evidence-publication-topline">
-                <span>JRP-001 · VERSION 1.0</span>
-                <span>VERIFIED MILESTONE · AUGUST 13, 2026</span>
-              </div>
-              <h3>The Assurance Boundary</h3>
-              <p className="evidence-publication-subtitle">What JCEE Assurance Can Verify—and What It Must Refuse to Claim</p>
-              <p>JRP-001 records the first bounded JCEE Assurance / Evidence Engine milestone: frozen product and interface boundaries, deterministic verification, preserved evidence identities, historical snapshot reconstruction, and tested refusals.</p>
-              <p><strong>Evidence boundary:</strong> documented internal reproduction under frozen conditions. No external certification, production readiness, legal conformity, or universal validity is claimed.</p>
-              <div className="evidence-publication-links">
-                <a href="/research/jrp-001">READ JRP-001 <span>→</span></a>
-                <a href="/JRP-001_The_Assurance_Boundary_v1.0.md" download>DOWNLOAD VERSION 1.0 <span>↓</span></a>
-              </div>
-            </article>
             <article className="evidence-publication-card">
               <div className="evidence-publication-topline">
                 <span>JRP-000 · VERSION 1.0</span>
@@ -313,16 +299,10 @@ export default function ResearchEvidence() {
               <span>PUBLIC RECORD</span>
             </div>
             <div className="revision-row">
-              <strong>1.2</strong>
-              <span>AUGUST 13, 2026</span>
-              <p>Added JCEE Assurance / Evidence Engine as a bounded verified milestone and published JRP-001 — The Assurance Boundary.</p>
-              <span className="revision-status">CURRENT</span>
-            </div>
-            <div className="revision-row">
               <strong>1.1</strong>
               <span>AUGUST 13, 2026</span>
               <p>Added Inconclusive to the public status vocabulary and added JRP-000 as the first adopted research publication.</p>
-              <span className="revision-status superseded">SUPERSEDED</span>
+              <span className="revision-status">CURRENT</span>
             </div>
             <div className="revision-row">
               <strong>1.0</strong>

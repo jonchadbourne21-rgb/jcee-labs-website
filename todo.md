@@ -447,3 +447,15 @@
 - [x] Run the complete existing test suite and production build
 - [x] Verify the VOW terminal has a transparent/light background, dark mono command text, thin dark bottom rule, cobalt prompt/cursor, and no overflow or clipping
 - [x] Publish a final checkpoint only after all validations pass
+
+# Current Request — Remove JRP-001
+
+- [ ] Locate all JRP-001 routes, files, navigation references, and tests
+- [ ] Remove JRP-001 from the public site without changing JRP-000 or unrelated content
+- [ ] Run tests and production build and verify JRP-001 is absent while JRP-000 remains available
+- [ ] Save a checkpoint for the removal
+
+- [x] Remove JRP-001 from the public site without changing JRP-000 or unrelated content
+- [x] Run tests and production build and verify JRP-001 is absent while JRP-000 remains available
+
+- [x] Remove the stale Jrp001 import left after synchronizing the remote research publication update

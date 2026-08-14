@@ -157,22 +157,6 @@ AEEL is separate from VOW. The two programs may share engineering principles, bu
 
 Adopted papers and experiment records establish the standards and evidence behind entries in this index. Publication does not strengthen a claim by itself; the status shown on each record controls.
 
-### JRP-001 — The Assurance Boundary
-
-**Version:** 1.0  
-**Status:** Verified Milestone — Bounded Internal Verification  
-**Date:** August 13, 2026  
-**Document class:** JCEE Labs Research Publication
-
-*What JCEE Assurance Can Verify—and What It Must Refuse to Claim*
-
-JRP-001 records the first bounded JCEE Assurance / Evidence Engine milestone: frozen product and interface boundaries, deterministic verification, preserved evidence identities, historical snapshot reconstruction, and tested refusals.
-
-Its evidence package establishes documented internal reproduction under frozen conditions. It does not establish external certification, production readiness, legal conformity, or universal validity.
-
-- [Read JRP-001](https://jceelabs.com/research/jrp-001)
-- [Download Version 1.0](https://jceelabs.com/JRP-001_The_Assurance_Boundary_v1.0.md)
-
 ### JRP-000 — The Evidence Boundary
 
 **Version:** 1.0  
@@ -274,7 +258,6 @@ When the evidence changes, the claim changes with it.
 ### Version 1.2 — August 13, 2026
 
 - Added JCEE Assurance / Evidence Engine as a bounded verified milestone.
-- Added JRP-001 — The Assurance Boundary.
 
 ### Version 1.1 — August 13, 2026
 
