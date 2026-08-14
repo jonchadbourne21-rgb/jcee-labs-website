@@ -364,6 +364,16 @@
 
 .paper-markdown [data-streamdown="table-wrapper"] {
   margin: 5vh 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  touch-action: pan-x;
+}
+
+.paper-markdown [data-streamdown="table-wrapper"]::-webkit-scrollbar {
+  display: none;
 }
 
 .paper-markdown table {

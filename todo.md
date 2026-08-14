@@ -470,3 +470,16 @@
 - [x] Run tests and production build
 - [x] Verify mobile scroll behavior and desktop presentation
 - [x] Save the update checkpoint
+
+# Current Request — Mobile Wide-Surface Audit
+
+- [x] Inventory remaining wide tables, data strips, grids, and overflow-prone surfaces across live routes
+- [x] Apply the existing touch-scroll pattern only to affected mobile surfaces
+- [x] Run tests and production build
+- [x] Verify affected routes at mobile and desktop widths
+- [x] Save the verified update checkpoint
+
+- [x] Add touch-scrolling to the shared publication markdown table wrapper, which contains 720px-wide tables on mobile
+
+- [x] Apply touch-scrolling to the shared publication markdown table wrapper, which contains 720px-wide tables on mobile
+- [x] Verify JRP-000 publication layout at mobile and desktop widths without visible page clipping
