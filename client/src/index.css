@@ -506,8 +506,8 @@ h1 em,
   color: rgba(255, 255, 255, 0.85);
   align-items: center;
   background: rgba(37, 99, 235, 0.08); border-top: 1px solid rgba(37, 99, 235, 0.15); border-bottom: 1px solid rgba(37, 99, 235, 0.15);
-  border-bottom: 1px solid var(--ink);
-  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
   display: flex;
   font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
   font-size: 10px;
@@ -644,7 +644,7 @@ h1 em,
 }
 
 .terminal-line {
-  border-bottom: 1px solid var(--ink);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   display: flex;
   font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
   font-size: 12px;
@@ -668,7 +668,7 @@ h1 em,
 }
 
 .section-detail-link {
-  border-bottom: 1px solid var(--ink);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   display: block;
   font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
   font-size: 10px;
@@ -971,8 +971,8 @@ h1 em,
 }
 
 .brand-footer-links {
-  border-bottom: 1px solid var(--ink);
-  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
   display: grid;
   gap: 3vw;
   grid-template-columns: repeat(4, 1fr);
@@ -986,14 +986,14 @@ h1 em,
   font-size: 8px;
   letter-spacing: .08em;
   margin-bottom: 8px;
-  opacity: .65;
+  opacity: 1;
 }
 
 .brand-footer-links a { font-size: 10px; width: max-content; }
 .brand-footer-links a:hover { text-decoration: underline; text-underline-offset: 4px; }
 
 .brand-footer-wordmark {
-  color: rgba(255, 255, 255, 0.35);
+  color: #ffffff;
   align-items: baseline;
   display: grid;
   font-size: clamp(55px, 12vw, 205px);
@@ -1008,14 +1008,14 @@ h1 em,
 
 .brand-footer-wordmark em {
   font-family: Georgia, "Times New Roman", serif;
-  color: rgba(37, 99, 235, 0.6);
+  color: #2563eb;
   font-size: .42em;
   font-weight: 400;
   letter-spacing: -.04em;
 }
 
 .brand-footer-meta {
-  border-top: 1px solid var(--ink);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
   display: grid;
   font-size: 8px;
   grid-template-columns: 1fr 1fr 1fr;
@@ -1299,7 +1299,7 @@ h1 em,
 }
 
 .charter-intro-copy a {
-  border-bottom: 1px solid var(--ink);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
   font-size: 11px;
   font-weight: 650;
@@ -1430,7 +1430,7 @@ h1 em,
 .program-next > p { margin-left: auto; max-width: 720px; }
 
 .program-links {
-  border-top: 1px solid var(--ink);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
   display: flex;
   gap: 34px;
   justify-content: flex-end;
