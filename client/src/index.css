@@ -1275,6 +1275,7 @@ h1 em,
 .charter-intro {
   background: #020205;
   border-top: 1px solid rgba(37, 99, 235, 0.2);
+  color: #ffffff;
   padding: 8vh 4vw 10vh;
 }
 
@@ -1321,7 +1322,7 @@ h1 em,
 }
 
 /* Public program pages */
-.program-page { background: #020205; min-height: 100vh; }
+.program-page { background: #020205; min-height: 100vh; color: #ffffff; }
 
 .program-masthead {
   min-height: calc(100svh - 76px);
@@ -1463,6 +1464,7 @@ h1 em,
 .charter-page {
   background: #020205;
   min-height: 100vh;
+  color: #ffffff;
 }
 
 .charter-masthead {

@@ -12,7 +12,7 @@
 
 .evidence-publication-card {
   background: var(--ink);
-  color: var(--paper);
+  color: #ffffff;
   margin-top: 5vh;
   padding: clamp(28px, 5vw, 64px);
 }
@@ -37,7 +37,7 @@
 }
 
 .evidence-publication-card h3 {
-  color: var(--paper);
+  color: #ffffff;
   font-size: clamp(38px, 5vw, 72px);
   letter-spacing: -.055em;
   line-height: .95;
@@ -49,7 +49,7 @@
 }
 
 .evidence-publication-card .evidence-publication-subtitle {
-  color: var(--paper);
+  color: #ffffff;
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: clamp(18px, 1.7vw, 25px);
   line-height: 1.35;
@@ -67,7 +67,7 @@
 }
 
 .evidence-publication-links a {
-  color: var(--paper);
+  color: #ffffff;
   font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
   font-size: 10px;
   font-weight: 650;
@@ -86,7 +86,7 @@
 
 .paper-masthead {
   background: var(--ink);
-  color: var(--paper);
+  color: #ffffff;
   min-height: calc(100svh - 76px);
   padding: 7vh 4vw 5vh;
 }
@@ -416,7 +416,7 @@
 
 .paper-markdown th {
   background: var(--ink);
-  color: var(--paper);
+  color: #ffffff;
   font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
   font-size: 9px;
   letter-spacing: .04em;
