@@ -1013,8 +1013,8 @@ h1 em,
 .brand-footer-meta a { text-align: right; }
 
 @keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(185,255,55,.5); }
-  50% { box-shadow: 0 0 0 6px rgba(185,255,55,0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 255, 213, .6); }
+  50% { box-shadow: 0 0 8px 8px rgba(0, 255, 213, 0); }
 }
 
 @keyframes blink { 50% { opacity: 0; } }
