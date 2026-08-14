@@ -511,6 +511,17 @@
     transition: box-shadow 180ms ease;
   }
 
+  .paper-markdown [data-streamdown="table-wrapper"]::before {
+    color: var(--signal);
+    content: "SWIPE TO EXPLORE";
+    display: block;
+    font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+    font-size: 8px;
+    font-weight: 650;
+    letter-spacing: .1em;
+    margin-bottom: 8px;
+  }
+
   .paper-markdown [data-streamdown="table-wrapper"].has-more-left {
     box-shadow:
       inset 22px 0 18px -20px rgba(49, 92, 255, .9),

@@ -505,3 +505,13 @@
 - [x] Verify the desktop publication table has no unnecessary cue when it is not horizontally overflowing and retains pan-x touch behavior
 
 - [x] Confirmed all five rendered publication table wrappers use the shared overflow surface and each table retains a 720px minimum width at desktop
+
+# Current Request — Mobile Table Swipe Label
+
+- [x] Inspect the publication table wrapper and choose a non-intrusive label placement
+- [x] Add a mobile-only “SWIPE TO EXPLORE” label above wide publication tables
+- [x] Run tests and production build
+- [x] Verify label visibility, spacing, scrolling, and desktop preservation
+- [ ] Save the verified update checkpoint
+
+- [x] Verify all five publication table wrappers remain intact and the SWIPE TO EXPLORE label is hidden on desktop
