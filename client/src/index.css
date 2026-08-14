@@ -993,7 +993,7 @@ h1 em,
 .brand-footer-links a:hover { text-decoration: underline; text-underline-offset: 4px; }
 
 .brand-footer-wordmark {
-  color: #ffffff;
+  color: #ff0033;
   align-items: baseline;
   display: grid;
   font-size: clamp(55px, 12vw, 205px);
