@@ -267,7 +267,7 @@ a { color: inherit; text-decoration: none; }
 .site-header a,
 .site-header .wordmark,
 .site-header .header-contact {
-  color: var(--ink);
+  color: #ffffff;
 }
 
 .wordmark {
