@@ -1411,7 +1411,12 @@ h1 em,
   margin: 0;
 }
 
-.program-next { background: var(--signal); }
+.program-next { background: var(--ink); color: var(--white); }
+.program-next .charter-section-label { color: var(--signal); }
+.program-next h2 { color: var(--white); }
+.program-next > p { color: #deddd6; }
+.program-next .program-links { border-top-color: rgba(255,255,255,.2); }
+.program-next .program-links a { color: var(--signal); }
 .program-next > p { margin-left: auto; max-width: 720px; }
 
 .program-links {
