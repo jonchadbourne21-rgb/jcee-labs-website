@@ -1,0 +1,259 @@
+/* JCEE Labs public-site brand consistency overrides.
+ * Keep public research, program, and publication surfaces aligned with the
+ * black / white / cobalt visual system used on the homepage.
+ */
+
+/* ── Shared public page surfaces ── */
+.program-page,
+.charter-page,
+.paper-page {
+  background: #020205;
+  color: #ffffff;
+}
+
+.program-masthead,
+.qcs-program-page .program-masthead,
+.charter-masthead,
+.paper-masthead {
+  background: #000000;
+  color: #ffffff;
+}
+
+.program-masthead,
+.qcs-program-page .program-masthead {
+  background-image: radial-gradient(
+    circle at 78% 32%,
+    rgba(37, 99, 235, 0.12),
+    rgba(37, 99, 235, 0) 34%
+  );
+}
+
+.program-masthead .eyebrow,
+.program-status-row,
+.charter-masthead .eyebrow,
+.paper-masthead .eyebrow,
+.paper-version-row {
+  color: #d8d7d0;
+}
+
+.program-number,
+.paper-record dt,
+.paper-toc > p,
+.paper-record > p,
+.charter-toc > p,
+.charter-document h2 span,
+.charter-note {
+  color: #8f8e88;
+}
+
+.program-deck,
+.program-statement-copy p,
+.program-next > p,
+.paper-markdown p,
+.paper-markdown li,
+.charter-document p,
+.charter-document li {
+  color: #d8d7d0;
+}
+
+/* ── Program pages: VOW + QCS ── */
+.program-statement,
+.program-statement-dark,
+.program-boundaries,
+.program-next {
+  background: #020205;
+  border-color: rgba(37, 99, 235, 0.22);
+  color: #ffffff;
+}
+
+.program-statement h2,
+.program-boundaries > h2,
+.program-next h2,
+.program-boundary-list article > p,
+.program-boundary-list article > span {
+  color: #ffffff;
+}
+
+.program-statement .charter-section-label,
+.program-statement-dark .charter-section-label,
+.program-next .charter-section-label {
+  color: #60a5fa;
+}
+
+.program-statement-copy p,
+.program-statement-dark .program-statement-copy p,
+.program-next > p {
+  color: #b9b8b1;
+}
+
+.program-boundary-list {
+  border-top-color: rgba(37, 99, 235, 0.42);
+}
+
+.program-boundary-list article,
+.program-status-row,
+.program-links {
+  border-color: rgba(37, 99, 235, 0.22);
+}
+
+.program-links a {
+  color: #60a5fa;
+}
+
+/* ── JRP publications ── */
+.paper-shell,
+.paper-sidebar,
+.paper-document {
+  background: #020205;
+  color: #ffffff;
+}
+
+.paper-record dd,
+.paper-toc a,
+.paper-markdown,
+.paper-markdown h2,
+.paper-markdown h3,
+.paper-markdown h4,
+.paper-markdown strong,
+.paper-load-state {
+  color: #ffffff;
+}
+
+.paper-record dl,
+.paper-record dl > div,
+.paper-toc ol,
+.paper-toc li,
+.paper-markdown > h2,
+.paper-markdown hr,
+.paper-markdown th,
+.paper-markdown td,
+.paper-load-state {
+  border-color: rgba(37, 99, 235, 0.22);
+}
+
+.paper-file-links a {
+  border-color: rgba(255, 255, 255, 0.24);
+  color: #ffffff;
+}
+
+.paper-file-links a:first-child {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+}
+
+.paper-file-links a:hover,
+.paper-file-links a:focus-visible,
+.paper-toc a:hover,
+.paper-toc a:focus-visible,
+.paper-markdown a {
+  color: #60a5fa;
+}
+
+.paper-markdown blockquote {
+  color: #ffffff;
+}
+
+.paper-markdown code {
+  background: rgba(37, 99, 235, 0.14);
+  color: #ffffff;
+}
+
+.paper-markdown th {
+  background: #05050a;
+  color: #ffffff;
+}
+
+.paper-next-record {
+  background: #020205;
+  border-top: 1px solid rgba(37, 99, 235, 0.42);
+  color: #ffffff;
+}
+
+.paper-next-record > p {
+  color: #60a5fa;
+}
+
+.paper-next-record h2,
+.paper-next-record > div p,
+.paper-next-record a {
+  color: #ffffff;
+}
+
+.paper-next-record > div,
+.paper-next-record a {
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+/* ── Charter + evidence index ── */
+.charter-shell,
+.charter-document,
+.evidence-page {
+  background: #020205;
+  color: #ffffff;
+}
+
+.charter-toc a,
+.charter-file-links a,
+.charter-document h2,
+.charter-document h3,
+.charter-document h4,
+.charter-document blockquote,
+.revision-row,
+.evidence-classifications h3,
+.evidence-program-heading h3 {
+  color: #ffffff;
+}
+
+.charter-toc ol,
+.charter-toc li,
+.charter-document section,
+.charter-gate li,
+.charter-references li,
+.revision-row,
+.evidence-classifications,
+.evidence-classifications article,
+.evidence-program {
+  border-color: rgba(37, 99, 235, 0.22);
+}
+
+.charter-signoff {
+  background: #000000;
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  color: #ffffff;
+}
+
+.charter-signoff strong:first-child {
+  color: #60a5fa;
+}
+
+.evidence-boundary-grid > div {
+  border-top-color: rgba(37, 99, 235, 0.42);
+}
+
+.evidence-status.verified {
+  color: #60a5fa;
+}
+
+.evidence-status.experimental {
+  color: #facc15;
+}
+
+/* Keep interactive text readable against the dark system. */
+.program-page a:focus-visible,
+.paper-page a:focus-visible,
+.charter-page a:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 4px;
+}
+
+@media (max-width: 560px) {
+  .program-masthead,
+  .qcs-program-page .program-masthead {
+    background-image: radial-gradient(
+      circle at 82% 24%,
+      rgba(37, 99, 235, 0.11),
+      rgba(37, 99, 235, 0) 28%
+    );
+  }
+}
