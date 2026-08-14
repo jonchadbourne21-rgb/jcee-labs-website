@@ -500,7 +500,7 @@
 - [x] Add a subtle edge shadow or gradient that indicates remaining horizontal content
 - [x] Run tests and production build
 - [x] Verify the cue at mobile and desktop widths without interfering with touch scrolling
-- [ ] Save the verified update checkpoint
+- [x] Save the verified update checkpoint
 
 - [x] Verify the desktop publication table has no unnecessary cue when it is not horizontally overflowing and retains pan-x touch behavior
 
