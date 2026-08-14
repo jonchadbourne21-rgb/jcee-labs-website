@@ -9,6 +9,7 @@ import { lazy, Suspense, useEffect } from "react";
 const FAQ = lazy(() => import("./pages/FAQ"));
 const Charter = lazy(() => import("./pages/Charter"));
 const ResearchEvidence = lazy(() => import("./pages/ResearchEvidence"));
+const Jrp000 = lazy(() => import("./pages/Jrp000"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Mirrored = lazy(() => import("./pages/Mirrored"));
 const VowPage = lazy(() => import("./pages/VowPage"));

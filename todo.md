@@ -450,12 +450,16 @@
 
 # Current Request — Remove JRP-001
 
-- [ ] Locate all JRP-001 routes, files, navigation references, and tests
-- [ ] Remove JRP-001 from the public site without changing JRP-000 or unrelated content
-- [ ] Run tests and production build and verify JRP-001 is absent while JRP-000 remains available
-- [ ] Save a checkpoint for the removal
+- [x] Locate all JRP-001 routes, files, navigation references, and tests
+- [x] Remove JRP-001 from the public site without changing JRP-000 or unrelated content
+- [x] Run tests and production build and verify JRP-001 is absent while JRP-000 remains available
+- [x] Save a checkpoint for the removal
 
 - [x] Remove JRP-001 from the public site without changing JRP-000 or unrelated content
 - [x] Run tests and production build and verify JRP-001 is absent while JRP-000 remains available
 
 - [x] Remove the stale Jrp001 import left after synchronizing the remote research publication update
+
+- [x] Restore the missing JRP-000 lazy import so the remaining publication route continues to render
+
+- [x] Restore the missing JRP-000 lazy import so the remaining publication route continues to render
