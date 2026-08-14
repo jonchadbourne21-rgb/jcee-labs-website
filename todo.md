@@ -512,6 +512,6 @@
 - [x] Add a mobile-only “SWIPE TO EXPLORE” label above wide publication tables
 - [x] Run tests and production build
 - [x] Verify label visibility, spacing, scrolling, and desktop preservation
-- [ ] Save the verified update checkpoint
+- [x] Save the verified update checkpoint
 
 - [x] Verify all five publication table wrappers remain intact and the SWIPE TO EXPLORE label is hidden on desktop
