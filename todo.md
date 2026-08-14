@@ -493,3 +493,15 @@
 - [x] Save the branded scrollbar update checkpoint
 
 - [x] Verify rendered publication table scrollbar uses Electric Cobalt, thin sizing, horizontal overflow, and pan-x touch behavior
+
+# Current Request — Mobile Wide-Table Scroll Cue
+
+- [x] Inspect the publication table wrapper and choose a non-blocking mobile cue
+- [x] Add a subtle edge shadow or gradient that indicates remaining horizontal content
+- [x] Run tests and production build
+- [x] Verify the cue at mobile and desktop widths without interfering with touch scrolling
+- [ ] Save the verified update checkpoint
+
+- [x] Verify the desktop publication table has no unnecessary cue when it is not horizontally overflowing and retains pan-x touch behavior
+
+- [x] Confirmed all five rendered publication table wrappers use the shared overflow surface and each table retains a 720px minimum width at desktop

@@ -94,6 +94,39 @@ export default function Jrp000() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!source) return;
+
+    const wrappers = Array.from(
+      document.querySelectorAll<HTMLElement>('[data-streamdown="table-wrapper"]')
+    );
+    const updateCue = (wrapper: HTMLElement) => {
+      const atStart = wrapper.scrollLeft <= 1;
+      const atEnd =
+        wrapper.scrollLeft + wrapper.clientWidth >= wrapper.scrollWidth - 1;
+      wrapper.classList.toggle("has-more-left", !atStart);
+      wrapper.classList.toggle("has-more-right", !atEnd);
+    };
+    const listeners = wrappers.map(wrapper => {
+      const onScroll = () => updateCue(wrapper);
+      updateCue(wrapper);
+      wrapper.addEventListener("scroll", onScroll, { passive: true });
+      return { wrapper, onScroll };
+    });
+    const resizeObserver =
+      typeof ResizeObserver !== "undefined"
+        ? new ResizeObserver(() => listeners.forEach(({ wrapper }) => updateCue(wrapper)))
+        : null;
+    listeners.forEach(({ wrapper }) => resizeObserver?.observe(wrapper));
+
+    return () => {
+      listeners.forEach(({ wrapper, onScroll }) =>
+        wrapper.removeEventListener("scroll", onScroll)
+      );
+      resizeObserver?.disconnect();
+    };
+  }, [source]);
+
   const paperBody = useMemo(() => bodyOnly(source), [source]);
 
   return (
