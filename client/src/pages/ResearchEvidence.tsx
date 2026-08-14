@@ -45,7 +45,7 @@ export default function ResearchEvidence() {
         <p className="eyebrow"><span /> PUBLIC RECORD · VERSION 1.2</p>
         <img
           className="evidence-brand-lockup"
-          src="/manus-storage/jcee-labs-logo-horizontal-teal_500ebeed.png"
+          src="/brand/jcee-labs-mark.png"
           alt="JCEE Labs"
         />
         <h1 className="charter-title evidence-title">Research &amp;<br /><em>Evidence</em></h1>

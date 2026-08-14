@@ -1794,9 +1794,10 @@ h1 em,
   display: block;
   height: auto;
   margin-top: 6vh;
-  max-width: min(340px, 55vw);
+  max-width: min(80px, 20vw);
   width: 24vw;
 }
+  filter: drop-shadow(0 0 12px rgba(37, 99, 235, 0.4));
 
 .evidence-classifications {
   border-bottom: 1px solid var(--line);
