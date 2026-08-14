@@ -8,6 +8,7 @@ import App from "./App";
 import { getLoginUrl } from "./const";
 import "./index.css";
 import "./publications.css";
+import "./brand-overrides.css";
 
 const queryClient = new QueryClient();
 
