@@ -296,3 +296,301 @@
     );
   }
 }
+
+
+/* ── Light mode precedence layer ── */
+html.light .program-page,
+html.light .charter-page,
+html.light .paper-page,
+html.light .paper-shell,
+html.light .paper-sidebar,
+html.light .paper-document,
+html.light .charter-shell,
+html.light .charter-document,
+html.light .evidence-page {
+  background: #f5f7fb;
+  color: #171a20;
+}
+
+html.light .program-masthead,
+html.light .qcs-program-page .program-masthead,
+html.light .charter-masthead,
+html.light .paper-masthead {
+  background: #f5f7fb;
+  background-image: radial-gradient(
+    circle at 78% 32%,
+    rgba(49, 92, 255, 0.08),
+    rgba(49, 92, 255, 0) 34%
+  );
+  color: #171a20;
+}
+
+html.light .program-masthead .eyebrow,
+html.light .program-status-row,
+html.light .charter-masthead .eyebrow,
+html.light .paper-masthead .eyebrow,
+html.light .paper-version-row {
+  color: #465363;
+}
+
+html.light .program-number,
+html.light .paper-record dt,
+html.light .paper-toc > p,
+html.light .paper-record > p,
+html.light .charter-toc > p,
+html.light .charter-document h2 span,
+html.light .charter-note {
+  color: #657080;
+}
+
+html.light .program-deck,
+html.light .program-statement-copy p,
+html.light .program-next > p,
+html.light .paper-markdown p,
+html.light .paper-markdown li,
+html.light .charter-document p,
+html.light .charter-document li {
+  color: #334050;
+}
+
+html.light .program-statement {
+  background: #ffffff;
+  border-color: rgba(23, 26, 32, .16);
+  color: #171a20;
+}
+
+html.light .program-statement-dark,
+html.light .program-boundaries {
+  background: #e7edfb;
+  border-color: rgba(49, 92, 255, .22);
+  color: #171a20;
+}
+
+html.light .program-next,
+html.light .paper-next-record {
+  background: #e7edfb;
+  border-color: rgba(49, 92, 255, .22);
+  color: #171a20;
+}
+
+html.light .program-statement h2,
+html.light .program-boundaries > h2,
+html.light .program-next h2,
+html.light .program-boundary-list article > p,
+html.light .program-boundary-list article > span,
+html.light .paper-record dd,
+html.light .paper-toc a,
+html.light .paper-markdown,
+html.light .paper-markdown h2,
+html.light .paper-markdown h3,
+html.light .paper-markdown h4,
+html.light .paper-markdown strong,
+html.light .paper-load-state,
+html.light .charter-toc a,
+html.light .charter-file-links a,
+html.light .charter-document h2,
+html.light .charter-document h3,
+html.light .charter-document h4,
+html.light .charter-document blockquote,
+html.light .revision-row,
+html.light .evidence-classifications h3,
+html.light .evidence-program-heading h3 {
+  color: #171a20;
+}
+
+html.light .program-statement .charter-section-label,
+html.light .program-statement-dark .charter-section-label,
+html.light .program-next .charter-section-label,
+html.light .paper-next-record > p {
+  color: #315cff;
+}
+
+html.light .program-links,
+html.light .program-status-row,
+html.light .program-boundary-list article,
+html.light .paper-record dl,
+html.light .paper-record dl > div,
+html.light .paper-toc ol,
+html.light .paper-toc li,
+html.light .paper-markdown > h2,
+html.light .paper-markdown hr,
+html.light .paper-markdown th,
+html.light .paper-markdown td,
+html.light .paper-load-state,
+html.light .charter-toc ol,
+html.light .charter-toc li,
+html.light .charter-document section,
+html.light .charter-gate li,
+html.light .charter-references li,
+html.light .revision-row,
+html.light .evidence-classifications,
+html.light .evidence-classifications article,
+html.light .evidence-program {
+  border-color: rgba(23, 26, 32, .16);
+}
+
+html.light .program-links a,
+html.light .paper-file-links a,
+html.light .paper-markdown a {
+  color: #315cff;
+}
+
+html.light .paper-file-links a {
+  border-color: rgba(23, 26, 32, .28);
+}
+
+html.light .paper-file-links a:first-child {
+  background: #315cff;
+  border-color: #315cff;
+  color: #ffffff;
+}
+
+html.light .paper-markdown code {
+  background: rgba(49, 92, 255, .1);
+  color: #171a20;
+}
+
+html.light .paper-markdown th {
+  background: #e7edfb;
+  color: #171a20;
+}
+
+html.light .paper-next-record h2,
+html.light .paper-next-record > div p,
+html.light .paper-next-record a {
+  color: #171a20;
+}
+
+html.light .paper-next-record > div,
+html.light .paper-next-record a {
+  border-color: rgba(23, 26, 32, .16);
+}
+
+html.light .charter-signoff {
+  background: #171a20;
+  border-color: rgba(49, 92, 255, .3);
+  color: #f5f7fb;
+}
+
+html.light .charter-signoff strong:first-child {
+  color: #6f8cff;
+}
+
+html.light .evidence-status.verified {
+  color: #315c00;
+}
+
+html.light .evidence-status.experimental {
+  color: #765a00;
+}
+
+html.light .site-header,
+html.light .brand-footer {
+  background: rgba(248, 250, 253, .94);
+  color: #171a20;
+}
+
+html.light .brand-footer {
+  background: #e7edfb;
+}
+
+html.light .site-header,
+html.light .site-header a,
+html.light .site-header .wordmark,
+html.light .site-header .header-contact {
+  color: #171a20;
+}
+
+html.light .brand-footer,
+html.light .brand-footer a,
+html.light .brand-footer span,
+html.light .brand-footer p,
+html.light .brand-footer strong,
+html.light .brand-footer small,
+html.light .brand-footer div {
+  color: #171a20 !important;
+}
+
+html.light .brand-footer-wordmark,
+html.light .brand-footer-wordmark span,
+html.light .brand-footer-wordmark em {
+  color: #ff0033 !important;
+}
+
+html.light .brand-footer-links,
+html.light .brand-footer-meta {
+  border-color: rgba(23, 26, 32, .2);
+}
+
+
+/* ── Legacy product page light mode ── */
+html.light .mirrored-page {
+  background: #f5f7fb;
+  color: #171a20;
+}
+
+html.light .mirrored-hero {
+  background: #f5f7fb;
+}
+
+html.light .mirrored-hero-overlay {
+  background: linear-gradient(to bottom, rgba(245, 247, 251, .72), rgba(245, 247, 251, .98));
+}
+
+html.light .mirrored-page h1,
+html.light .mirrored-page h2 {
+  color: #171a20;
+}
+
+html.light .mirrored-hero-copy,
+html.light .mirrored-cta-copy {
+  color: #465363 !important;
+}
+
+html.light .mirrored-back-link {
+  color: #465363 !important;
+}
+
+html.light .mirrored-card {
+  background: #ffffff;
+  border-color: rgba(23, 26, 32, .1);
+  box-shadow: 0 14px 34px rgba(22, 39, 82, .08);
+}
+
+html.light .mirrored-card h3 {
+  color: #171a20;
+}
+
+html.light .mirrored-card p {
+  color: #657080;
+}
+
+
+html.light .products-page {
+  background: #f5f7fb;
+  color: #171a20;
+}
+
+html.light .products-page h2 {
+  color: #171a20;
+}
+
+html.light .products-intro {
+  color: #465363 !important;
+}
+
+html.light .products-card {
+  background: #ffffff !important;
+  background-image: none !important;
+  border-color: rgba(23, 26, 32, .12) !important;
+  box-shadow: 0 14px 34px rgba(22, 39, 82, .08);
+}
+
+html.light .products-card-title {
+  color: #171a20 !important;
+}
+
+html.light .products-card-description,
+html.light .products-card-meta {
+  color: #657080 !important;
+}

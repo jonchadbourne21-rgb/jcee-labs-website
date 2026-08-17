@@ -1,6 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useLayoutEffect, useState } from "react";
 
-type Theme = "light" | "dark";
+export type Theme = "light" | "dark";
+
+export function resolveStoredTheme(stored: string | null, fallback: Theme): Theme {
+  return stored === "light" || stored === "dark" ? stored : fallback;
+}
 
 interface ThemeContextType {
   theme: Theme;
@@ -22,23 +26,21 @@ export function ThemeProvider({
   switchable = false,
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(() => {
-    if (switchable) {
-      const stored = localStorage.getItem("theme");
-      return (stored as Theme) || defaultTheme;
+    if (switchable && typeof window !== "undefined") {
+      const stored = window.localStorage.getItem("jcee-theme");
+      return resolveStoredTheme(stored, defaultTheme);
     }
     return defaultTheme;
   });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const root = document.documentElement;
-    if (theme === "dark") {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
-    }
+    root.classList.toggle("dark", theme === "dark");
+    root.classList.toggle("light", theme === "light");
+    root.style.colorScheme = theme;
 
     if (switchable) {
-      localStorage.setItem("theme", theme);
+      window.localStorage.setItem("jcee-theme", theme);
     }
   }, [theme, switchable]);
 

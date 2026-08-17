@@ -1,3 +1,6 @@
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "@/contexts/ThemeContext";
+
 type CoreHeaderProps = {
   current?: "jcee" | "vow" | "research" | "qcs" | "mirrored";
 };
@@ -11,6 +14,9 @@ const links = [
 ] as const;
 
 export default function CoreHeader({ current }: CoreHeaderProps) {
+  const { theme, toggleTheme } = useTheme();
+  const isDark = theme === "dark";
+
   return (
     <header className="site-header">
       <a className="wordmark" href="/" aria-label="JCEE Labs home">
@@ -30,9 +36,22 @@ export default function CoreHeader({ current }: CoreHeaderProps) {
         ))}
       </nav>
 
-      <a className="header-contact" href="mailto:support@jceelabs.com">
-        CONTACT <span aria-hidden="true">↗</span>
-      </a>
+      <div className="header-actions">
+        <a className="header-contact" href="mailto:support@jceelabs.com">
+          CONTACT <span aria-hidden="true">↗</span>
+        </a>
+        <button
+          className="theme-toggle"
+          type="button"
+          onClick={() => toggleTheme?.()}
+          aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+          aria-pressed={!isDark}
+          title={isDark ? "Switch to light mode" : "Switch to dark mode"}
+        >
+          {isDark ? <Sun aria-hidden="true" size={13} /> : <Moon aria-hidden="true" size={13} />}
+          <span>{isDark ? "LIGHT" : "DARK"}</span>
+        </button>
+      </div>
     </header>
   );
 }

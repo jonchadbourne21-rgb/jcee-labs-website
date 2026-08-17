@@ -63,7 +63,7 @@ const PRODUCTS = [
 
 export default function ProductsPage() {
   return (
-    <div className="min-h-screen bg-[#080c18] text-[#e8ecf4] flex flex-col">
+    <div className="products-page min-h-screen bg-[#080c18] text-[#e8ecf4] flex flex-col">
       <SiteNav />
 
       {/* Hero */}
@@ -75,7 +75,7 @@ export default function ProductsPage() {
           <h2 className="text-2xl md:text-[36px] lg:text-[48px] font-extrabold leading-[1.2] tracking-[-0.02em] mb-3 md:mb-4">
             Products
           </h2>
-          <p className="text-sm md:text-[17px] lg:text-[19px] text-[#7a8aaa] max-w-[600px] lg:max-w-[760px] mx-auto leading-[1.7]">
+          <p className="products-intro text-sm md:text-[17px] lg:text-[19px] text-[#7a8aaa] max-w-[600px] lg:max-w-[760px] mx-auto leading-[1.7]">
             Every product learns from failure, explains every decision, and compiles to code you can actually read.
           </p>
         </div>
@@ -88,7 +88,7 @@ export default function ProductsPage() {
             {PRODUCTS.map((product) => {
               const Icon = product.icon;
               return (
-                <Link key={product.name} href={product.href} className={`block bg-[#0d1424] border border-[#2a3a5a]/50 rounded-xl md:rounded-2xl p-5 md:p-7 lg:p-8 group hover:border-[#8ba4d8]/30 hover:-translate-y-px transition-all duration-300 relative overflow-hidden flex flex-col${
+                <Link key={product.name} href={product.href} className={`products-card block bg-[#0d1424] border border-[#2a3a5a]/50 rounded-xl md:rounded-2xl p-5 md:p-7 lg:p-8 group hover:border-[#8ba4d8]/30 hover:-translate-y-px transition-all duration-300 relative overflow-hidden flex flex-col${
                       product.name === "VOW"
                         ? " border-[rgba(212,168,67,0.15)] bg-gradient-to-b from-[rgba(212,168,67,0.04)] to-[#0d1424] hover:border-[rgba(212,168,67,0.3)]"
                         : ""
@@ -101,7 +101,7 @@ export default function ProductsPage() {
                             POWERED BY VOW
                           </span>
                         )}
-                        <h3 className="text-base md:text-lg font-bold text-[#e8ecf4] tracking-[-0.01em]">
+                        <h3 className="products-card-title text-base md:text-lg font-bold text-[#e8ecf4] tracking-[-0.01em]">
                           {product.name}
                         </h3>
                       </div>
@@ -119,14 +119,14 @@ export default function ProductsPage() {
                     </div>
 
                     {/* Description */}
-                    <p className="text-[13px] md:text-[15px] text-[#7a8aaa] leading-[1.6] md:leading-[1.7] mb-3 md:mb-4 whitespace-pre-line">
+                    <p className="products-card-description text-[13px] md:text-[15px] text-[#7a8aaa] leading-[1.6] md:leading-[1.7] mb-3 md:mb-4 whitespace-pre-line">
                       {product.description}
                     </p>
 
                     {/* Meta line */}
                     <div className="flex items-center gap-2">
                       <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${product.name === "VOW" ? "bg-[#d4a843]" : "bg-[#8ba4d8]"}`} />
-                      <span className="text-[11px] md:text-[13px] text-[#7a8aaa]/70">
+                      <span className="products-card-meta text-[11px] md:text-[13px] text-[#7a8aaa]/70">
                         {product.meta}
                       </span>
                     </div>

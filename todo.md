@@ -538,4 +538,9 @@
 - [x] Run tests and production build
 - [x] Save the verified electric green checkpoint
 
-- [ ] Publish the newest existing implementation without changing site content, design, configuration, domains, or deployment settings.
+- [x] Publish the newest existing implementation without changing site content, design, configuration, domains, or deployment settings.
+
+- [x] Add a persistent light/dark mode toggle with dark mode remaining the default.
+- [x] Apply readable light-mode tokens and verify shared navigation, footer, pages, and mobile layout.
+- [x] Add or update Vitest coverage for theme preference behavior, then run tests and production build.
+- [x] Publish the verified theme-toggle implementation.

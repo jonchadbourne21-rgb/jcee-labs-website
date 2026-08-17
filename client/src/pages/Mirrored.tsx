@@ -5,20 +5,20 @@ import SiteFooter from "@/components/SiteFooter";
 
 export default function Mirrored() {
   return (
-    <div className="min-h-screen bg-[#0d0b14] text-[#e8e4f0] flex flex-col">
+    <div className="mirrored-page min-h-screen bg-[#0d0b14] text-[#e8e4f0] flex flex-col">
       <SiteNav />
 
       {/* Hero with background image */}
-      <section className="relative pt-32 pb-24 overflow-hidden">
+      <section className="mirrored-hero relative pt-32 pb-24 overflow-hidden">
         {/* Background image */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
           style={{ backgroundImage: `url('/manus-storage/mirrored-hero_29be35fb.png')` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0d0b14]/60 via-transparent to-[#0d0b14]" />
+        <div className="mirrored-hero-overlay absolute inset-0 bg-gradient-to-b from-[#0d0b14]/60 via-transparent to-[#0d0b14]" />
 
         <div className="relative max-w-[720px] mx-auto px-6">
-          <Link href="/products" className="inline-flex items-center gap-2 text-sm text-[#9a94b0] hover:text-[#67e8f9] transition-colors mb-8">
+          <Link href="/products" className="mirrored-back-link inline-flex items-center gap-2 text-sm text-[#9a94b0] hover:text-[#67e8f9] transition-colors mb-8">
               <ArrowLeft className="w-4 h-4" />
               Back to Products
           </Link>
@@ -34,7 +34,7 @@ export default function Mirrored() {
             </span>
           </h1>
 
-          <p className="text-[18px] text-[#c4bfd6] leading-[1.8] mb-8">
+          <p className="mirrored-hero-copy text-[18px] text-[#c4bfd6] leading-[1.8] mb-8">
             Mirrored is an AI self-reflection companion that helps you hear your own thinking — clearly, honestly, and out loud. Talk to it by voice like you'd talk to yourself on a long drive. It remembers, it reflects, and it never judges.
           </p>
         </div>
@@ -44,7 +44,7 @@ export default function Mirrored() {
       <section className="pb-20">
         <div className="max-w-[720px] mx-auto px-6">
           <div className="flex flex-col gap-5">
-            <div className="bg-[#161326] border border-white/[0.06] rounded-2xl p-7">
+            <div className="mirrored-card bg-[#161326] border border-white/[0.06] rounded-2xl p-7">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-xl bg-[rgba(103,232,249,0.1)] flex items-center justify-center flex-shrink-0 mt-0.5">
                   <Calendar className="w-5 h-5 text-[#67e8f9]" />
@@ -58,7 +58,7 @@ export default function Mirrored() {
               </div>
             </div>
 
-            <div className="bg-[#161326] border border-white/[0.06] rounded-2xl p-7">
+            <div className="mirrored-card bg-[#161326] border border-white/[0.06] rounded-2xl p-7">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-xl bg-[rgba(167,139,250,0.1)] flex items-center justify-center flex-shrink-0 mt-0.5">
                   <Mic className="w-5 h-5 text-[#a78bfa]" />
@@ -72,7 +72,7 @@ export default function Mirrored() {
               </div>
             </div>
 
-            <div className="bg-[#161326] border border-white/[0.06] rounded-2xl p-7">
+            <div className="mirrored-card bg-[#161326] border border-white/[0.06] rounded-2xl p-7">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-xl bg-[rgba(103,232,249,0.1)] flex items-center justify-center flex-shrink-0 mt-0.5">
                   <Route className="w-5 h-5 text-[#67e8f9]" />
@@ -86,7 +86,7 @@ export default function Mirrored() {
               </div>
             </div>
 
-            <div className="bg-[#161326] border border-white/[0.06] rounded-2xl p-7">
+            <div className="mirrored-card bg-[#161326] border border-white/[0.06] rounded-2xl p-7">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-xl bg-[rgba(167,139,250,0.1)] flex items-center justify-center flex-shrink-0 mt-0.5">
                   <TrendingUp className="w-5 h-5 text-[#a78bfa]" />
@@ -109,7 +109,7 @@ export default function Mirrored() {
           <h2 className="text-[28px] font-extrabold tracking-[-0.02em] mb-3">
             Be first in line.
           </h2>
-          <p className="text-[16px] text-[#9a94b0] mb-8">
+          <p className="mirrored-cta-copy text-[16px] text-[#9a94b0] mb-8">
             In development at JCEE Labs.
           </p>
           <a
