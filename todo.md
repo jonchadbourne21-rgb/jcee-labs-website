@@ -552,3 +552,7 @@
 - [x] Add an accessible hamburger menu for mobile navigation while preserving desktop navigation and theme-toggle behavior.
 - [x] Verify mobile menu touch, keyboard, closing behavior, responsive layout, tests, and production build.
 - [x] Publish the verified mobile hamburger-menu implementation.
+
+- [x] Add smooth open and close transitions to the mobile menu with a reduced-motion fallback.
+- [x] Verify animated and reduced-motion states, tests, and production build.
+- [x] Publish the verified animated mobile-menu implementation.

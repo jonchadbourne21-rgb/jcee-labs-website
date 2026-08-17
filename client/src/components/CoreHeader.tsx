@@ -17,6 +17,9 @@ const links = [
 export const getMobileMenuLabel = (menuOpen: boolean) =>
   menuOpen ? "Close navigation menu" : "Open navigation menu";
 
+export const getMobileMenuState = (menuOpen: boolean) =>
+  menuOpen ? "is-open" : "is-closed";
+
 export default function CoreHeader({ current }: CoreHeaderProps) {
   const { theme, toggleTheme } = useTheme();
   const isDark = theme === "dark";
@@ -63,6 +66,7 @@ export default function CoreHeader({ current }: CoreHeaderProps) {
         key={link.id}
         href={link.href}
         aria-current={current === link.id ? "page" : undefined}
+        tabIndex={mobile && !menuOpen ? -1 : undefined}
         ref={mobile && index === 0 ? firstMobileLinkRef : undefined}
         onClick={mobile ? closeMobileMenu : undefined}
       >
@@ -95,11 +99,14 @@ export default function CoreHeader({ current }: CoreHeaderProps) {
           >
             {menuOpen ? <X aria-hidden="true" size={17} /> : <Menu aria-hidden="true" size={17} />}
           </button>
-          {menuOpen && (
-            <nav id="mobile-navigation" className="mobile-nav" aria-label="Mobile navigation">
-              {renderLinks(true)}
-            </nav>
-          )}
+          <nav
+            id="mobile-navigation"
+            className={`mobile-nav ${getMobileMenuState(menuOpen)}`}
+            aria-hidden={!menuOpen}
+            aria-label="Mobile navigation"
+          >
+            {renderLinks(true)}
+          </nav>
         </div>
 
         <a className="header-contact" href="mailto:support@jceelabs.com">
