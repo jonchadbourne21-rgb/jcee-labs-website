@@ -2403,3 +2403,82 @@ html.light .breath {
     display: none;
   }
 }
+
+
+/* ── Narrow-phone header refinement ── */
+@media (max-width: 560px) {
+  .site-header {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 14px;
+    height: 64px;
+    padding: 0 16px;
+  }
+
+  .wordmark {
+    min-width: 0;
+    gap: 9px;
+    font-size: 11px;
+    letter-spacing: .1em;
+    white-space: nowrap;
+  }
+
+  .wordmark-mark {
+    flex: 0 0 auto;
+    height: 32px;
+    width: 30px;
+  }
+
+  .header-actions {
+    flex: 0 0 auto;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .header-contact {
+    font-size: 8px;
+    letter-spacing: .06em;
+    white-space: nowrap;
+  }
+
+  .theme-toggle {
+    flex: 0 0 40px;
+    height: 40px;
+    min-height: 40px;
+    min-width: 40px;
+    justify-content: center;
+    padding: 0;
+  }
+}
+
+@media (max-width: 380px) {
+  .site-header {
+    gap: 10px;
+    padding: 0 12px;
+  }
+
+  .wordmark {
+    gap: 7px;
+    font-size: 10px;
+  }
+
+  .wordmark-mark {
+    height: 30px;
+    width: 28px;
+  }
+
+  .header-actions {
+    gap: 6px;
+  }
+
+  .header-contact {
+    font-size: 7px;
+    letter-spacing: .04em;
+  }
+
+  .theme-toggle {
+    flex-basis: 38px;
+    height: 38px;
+    min-height: 38px;
+    min-width: 38px;
+  }
+}

@@ -544,3 +544,7 @@
 - [x] Apply readable light-mode tokens and verify shared navigation, footer, pages, and mobile layout.
 - [x] Add or update Vitest coverage for theme preference behavior, then run tests and production build.
 - [x] Publish the verified theme-toggle implementation.
+
+- [x] Optimize shared header and theme-toggle spacing for narrow mobile screens without changing desktop layout or page content.
+- [x] Verify narrow-mobile header interaction, responsive layout, tests, and production build.
+- [x] Publish the verified narrow-mobile header correction.
