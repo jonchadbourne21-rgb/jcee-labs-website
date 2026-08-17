@@ -548,3 +548,7 @@
 - [x] Optimize shared header and theme-toggle spacing for narrow mobile screens without changing desktop layout or page content.
 - [x] Verify narrow-mobile header interaction, responsive layout, tests, and production build.
 - [x] Publish the verified narrow-mobile header correction.
+
+- [x] Add an accessible hamburger menu for mobile navigation while preserving desktop navigation and theme-toggle behavior.
+- [x] Verify mobile menu touch, keyboard, closing behavior, responsive layout, tests, and production build.
+- [x] Publish the verified mobile hamburger-menu implementation.
