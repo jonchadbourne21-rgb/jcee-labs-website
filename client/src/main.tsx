@@ -12,6 +12,7 @@ import "./brand-overrides.css";
 import "./company-cubes.css";
 import "./vow-durability.css";
 import "./curlicue.css";
+import "./qcs-gate.css";
 
 const queryClient = new QueryClient();
 
