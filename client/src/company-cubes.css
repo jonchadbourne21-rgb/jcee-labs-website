@@ -1,0 +1,53 @@
+/* Reuse the original JCEE Labs blue-cube hero artwork as a restrained
+ * institutional accent in Section 01. The asset remains in Manus storage;
+ * this treatment intentionally keeps it out of the new primary hex hero. */
+.company-section {
+  isolation: isolate;
+  overflow: hidden;
+  position: relative;
+}
+
+.company-section::before {
+  background-image: url("/manus-storage/jcee-hero-cubes_002df7db.png");
+  background-position: right top;
+  background-repeat: no-repeat;
+  background-size: contain;
+  content: "";
+  height: clamp(250px, 30vw, 470px);
+  opacity: 0.82;
+  pointer-events: none;
+  position: absolute;
+  right: -1.5vw;
+  top: 5.5vh;
+  width: clamp(320px, 39vw, 650px);
+  z-index: 0;
+  -webkit-mask-image: radial-gradient(ellipse at 74% 30%, #000 0%, #000 48%, rgba(0, 0, 0, 0.78) 62%, transparent 82%);
+  mask-image: radial-gradient(ellipse at 74% 30%, #000 0%, #000 48%, rgba(0, 0, 0, 0.78) 62%, transparent 82%);
+}
+
+.company-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 900px) {
+  .company-section::before {
+    height: clamp(220px, 48vw, 390px);
+    opacity: 0.62;
+    right: -12vw;
+    top: 7vh;
+    width: clamp(280px, 62vw, 520px);
+  }
+}
+
+@media (max-width: 680px) {
+  .company-section::before {
+    height: 260px;
+    opacity: 0.38;
+    right: -26vw;
+    top: 8vh;
+    width: 390px;
+    -webkit-mask-image: radial-gradient(ellipse at 72% 30%, #000 0%, rgba(0, 0, 0, 0.9) 42%, transparent 76%);
+    mask-image: radial-gradient(ellipse at 72% 30%, #000 0%, rgba(0, 0, 0, 0.9) 42%, transparent 76%);
+  }
+}
