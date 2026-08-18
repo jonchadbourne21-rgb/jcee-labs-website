@@ -3,6 +3,7 @@ import CoreHeader from "@/components/CoreHeader";
 import CurlicueField from "@/components/CurlicueField";
 import HexInspector from "@/components/HexInspector";
 import HexWaveField from "@/components/HexWaveField";
+import QcsTransitionGate from "@/components/QcsTransitionGate";
 import VowDurabilityDemo from "@/components/VowDurabilityDemo";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import "@/home-hex.css";
@@ -202,27 +203,36 @@ export default function Home() {
         </div>
         <div className="qcs-layout">
           <div>
-            <p className="qcs-kicker">A SEPARATE JCEE LABS RESEARCH PROGRAM</p>
+            <p className="qcs-kicker">VERIFIED MILESTONE · QCS-2.0 CORE FROZEN</p>
             <h2 id="qcs-title">When does the evidence justify the next action?</h2>
           </div>
           <div className="qcs-copy">
             <p>
-              QCS studies the rules that connect available evidence to a justified
-              transition. Its 1.x line is frozen as a candidate specification;
-              QCS-2.0 is focused on independent reproduction.
+              QCS is a workflow-free transition legality calculus for determining
+              whether the currently proven authoritative state justifies a proposed
+              causal transition.
+            </p>
+            <p>
+              The frozen QCS-2.0 specification passed its planned reproduction gate
+              across PostgreSQL transactional authority and a remote network-effect
+              authority without changing the frozen calculus.
             </p>
             <p className="quiet">
-              QCS is research. It is separate from the VOW product release, and
-              its present status does not imply a universal result.
+              Verified milestone, bounded scope. The result applies to the tested
+              specification, authority classes, and adversarial conditions. It is
+              not a universal correctness, production-readiness, or third-party
+              certification claim.
             </p>
             <dl className="qcs-status-grid">
-              <div><dt>SPECIFICATION</dt><dd>FROZEN CANDIDATE</dd></div>
-              <div><dt>CURRENT GATE</dt><dd>INDEPENDENT REPRODUCTION</dd></div>
-              <div><dt>PUBLIC POSTURE</dt><dd>BOUNDED RESEARCH CLAIMS</dd></div>
+              <div><dt>SPECIFICATION</dt><dd>QCS-2.0 CORE FROZEN</dd></div>
+              <div><dt>REPRODUCTION GATE</dt><dd>PASS · TWO AUTHORITY CLASSES</dd></div>
+              <div><dt>JUDGMENT</dt><dd>PROVED · DISPROVED · UNKNOWN</dd></div>
             </dl>
             <a href="/qcs">VIEW QCS <span aria-hidden="true">→</span></a>
           </div>
         </div>
+
+        <QcsTransitionGate />
       </section>
       <div className="breath" aria-hidden="true" />
 
