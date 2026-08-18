@@ -1,15 +1,9 @@
-import { useRef, useEffect } from "react";
 import BrandFooter from "@/components/BrandFooter";
 import CoreHeader from "@/components/CoreHeader";
+import HexInspector from "@/components/HexInspector";
+import HexWaveField from "@/components/HexWaveField";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-
-const receiptRows = [
-  ["00", "claim", "bounded"],
-  ["01", "execution", "recorded"],
-  ["02", "interruption", "observed"],
-  ["03", "recovery", "evaluated"],
-  ["04", "verdict", "admitted"],
-];
+import "@/home-hex.css";
 
 const guarantees = [
   {
@@ -36,22 +30,19 @@ const guarantees = [
 
 export default function Home() {
   const revealRef = useScrollReveal();
-  const heroRef = useRef<HTMLElement>(null);
-  useEffect(() => {
-    const hero = heroRef.current;
-    if (!hero || window.matchMedia("(max-width: 560px)").matches) return;
-    const onScroll = () => {
-      const y = window.scrollY;
-      hero.style.backgroundPositionY = `calc(50% + ${y * 0.3}px)`;
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+
   return (
     <main id="top" ref={revealRef as any}>
       <CoreHeader current="jcee" />
 
-      <section className="hero" ref={heroRef}>
+      <section className="hero hex-hero">
+        <HexWaveField />
+        <div className="hex-ambient-data" aria-hidden="true">
+          <span>0x0000 · 4A 43 45 45 · JCEE</span>
+          <span>01000101 01010110 01001001 01000100 01000101 01001110 01000011 01000101</span>
+          <span>0x7F2E · STATE=OBSERVED · PROOF=BOUNDED</span>
+        </div>
+
         <div className="hero-copy">
           <p className="eyebrow"><span /> INDEPENDENT SOFTWARE LAB · DALLAS, TX</p>
           <h1>
@@ -69,34 +60,7 @@ export default function Home() {
           </div>
         </div>
 
-        <aside className="receipt" aria-label="Example VOW execution receipt">
-          <div className="receipt-header">
-            <span>VOW / EXECUTION RECEIPT</span>
-            <span className="receipt-status"><i /> BOUNDED</span>
-          </div>
-          <div className="receipt-id">
-            <span>RUN</span>
-            <strong>vow_01HX7A</strong>
-            <span>2026-08-03 17:42:11</span>
-          </div>
-          <div className="receipt-rows">
-            {receiptRows.map(([index, label, value]) => (
-              <div className="receipt-row" key={index}>
-                <span>{index}</span>
-                <span>{label}</span>
-                <strong>{value}</strong>
-              </div>
-            ))}
-          </div>
-          <div className="hash-line">
-            <span>RECORD</span>
-            <code>vow:01HX7A:verified</code>
-          </div>
-          <div className="receipt-footer">
-            <span>CLAIM</span>
-            <strong>CLAIM ADMITTED</strong>
-          </div>
-        </aside>
+        <HexInspector />
       </section>
 
       <div className="statement-band" aria-label="JCEE Labs principle">
@@ -128,7 +92,7 @@ export default function Home() {
           </p>
           <a href="/charter">READ OUR CHARTER <span>→</span></a>
         </div>
-      <div className="breath" aria-hidden="true" />
+        <div className="breath" aria-hidden="true" />
       </section>
 
       <section className="vow-section" id="vow">
@@ -236,7 +200,7 @@ export default function Home() {
           </p>
           <a href="/charter">Read the Charter <span aria-hidden="true">→</span></a>
         </div>
-      <div className="breath" aria-hidden="true" />
+        <div className="breath" aria-hidden="true" />
       </section>
 
       <section className="mirrored-section" id="mirrored">
