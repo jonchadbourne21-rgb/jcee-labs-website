@@ -10,6 +10,7 @@ import "./index.css";
 import "./publications.css";
 import "./brand-overrides.css";
 import "./company-cubes.css";
+import "./vow-durability.css";
 
 const queryClient = new QueryClient();
 
