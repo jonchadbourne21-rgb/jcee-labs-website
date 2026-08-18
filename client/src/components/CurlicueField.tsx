@@ -100,8 +100,6 @@ export default function CurlicueField() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const stage = canvas.parentElement;
-    if (!stage) return;
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
@@ -156,7 +154,7 @@ export default function CurlicueField() {
     };
 
     const observer = new ResizeObserver(start);
-    observer.observe(stage);
+    observer.observe(canvas);
     media.addEventListener("change", start);
     start();
 
