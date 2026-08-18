@@ -22,7 +22,7 @@ export default function QcsPage() {
 
       <section className="program-masthead qcs-program">
         <p className="eyebrow"><span /> RESEARCH PROGRAM · FROZEN CANDIDATE</p>
-        <div className="program-number">02 / QCS</div>
+        <div className="program-number">QCS / RESEARCH PROGRAM</div>
         <h1>What evidence justifies<br /><em>the next action?</em></h1>
         <p className="program-deck">
           QCS is a JCEE Labs research program studying the relationship between
