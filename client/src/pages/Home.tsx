@@ -1,5 +1,6 @@
 import BrandFooter from "@/components/BrandFooter";
 import CoreHeader from "@/components/CoreHeader";
+import CurlicueField from "@/components/CurlicueField";
 import HexInspector from "@/components/HexInspector";
 import HexWaveField from "@/components/HexWaveField";
 import VowDurabilityDemo from "@/components/VowDurabilityDemo";
@@ -154,6 +155,41 @@ export default function Home() {
           <div className="home-research-links">
             <a href="/research-evidence">View the Index <span aria-hidden="true">→</span></a>
             <a href="/research/jrp-000">Read JRP-000 <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </section>
+      <div className="breath" aria-hidden="true" />
+
+      <section className="curlicue-section" aria-labelledby="curlicue-title">
+        <div className="curlicue-index">
+          <span>RESEARCH FIELD / IRRATIONAL ORDER</span>
+          <span>ONE RULE · CONTINUOUS UNFOLDING</span>
+        </div>
+        <div className="curlicue-layout">
+          <div className="curlicue-stage">
+            <CurlicueField />
+            <div className="curlicue-coordinates" aria-hidden="true">
+              <span>α = √2 − 1 · IRRATIONAL</span>
+              <span>EQUAL STEP · QUADRATIC PHASE · LIVE TRACE</span>
+            </div>
+          </div>
+          <div className="curlicue-copy">
+            <p className="curlicue-kicker">IRRATIONAL ORDER / LIVE GENERATIVE FIELD</p>
+            <h2 id="curlicue-title">Perfect rule.<br />No true repeat.</h2>
+            <p>
+              A curlicue path shows how intricate structure can emerge from an
+              extremely small rule. Each segment is equal. Only its direction
+              changes, driven by an irrational quadratic phase. The instruction
+              stays exact while the geometry keeps unfolding into spiral-like,
+              braided forms that do not settle into a finite repeating cycle.
+            </p>
+            <div className="curlicue-formula">
+              <span>GENERATING RULE</span>
+              <code>θₙ = 2π α n² · pₙ₊₁ = pₙ + (cos θₙ, sin θₙ)</code>
+            </div>
+            <p className="curlicue-note">
+              LIVE CLIENT-SIDE MATHEMATICAL VISUALIZATION · α = √2 − 1
+            </p>
           </div>
         </div>
       </section>

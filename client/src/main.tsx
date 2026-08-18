@@ -11,6 +11,7 @@ import "./publications.css";
 import "./brand-overrides.css";
 import "./company-cubes.css";
 import "./vow-durability.css";
+import "./curlicue.css";
 
 const queryClient = new QueryClient();
 
