@@ -509,12 +509,19 @@
   .hex-table-head,
   .hex-table-row {
     gap: 10px;
-    grid-template-columns: 58px minmax(420px, 1fr);
+    grid-template-columns: 58px minmax(0, 1fr);
+    min-width: 0;
   }
 
   .hex-table-head span:last-child,
   .hex-table-row code:last-child {
     display: none;
+  }
+
+  .hex-table-head span:nth-child(2) {
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
   }
 
   .hex-table-row {

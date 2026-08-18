@@ -649,12 +649,19 @@ h1 em,
   font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
   font-size: 12px;
   gap: 13px;
+  min-width: 0;
   padding: 18px 0;
+}
+
+.terminal-line code {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .cursor {
   animation: blink 1.1s step-end infinite;
   background: var(--ink);
+  flex: 0 0 7px;
   height: 15px;
   width: 7px;
 }
@@ -768,6 +775,7 @@ h1 em,
 .mirrored-section {
   background: var(--ink);
   color: var(--white);
+  overflow-x: clip;
   padding: 8vh 4vw 12vh;
 }
 
