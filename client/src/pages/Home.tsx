@@ -2,6 +2,7 @@ import BrandFooter from "@/components/BrandFooter";
 import CoreHeader from "@/components/CoreHeader";
 import HexInspector from "@/components/HexInspector";
 import HexWaveField from "@/components/HexWaveField";
+import VowDurabilityDemo from "@/components/VowDurabilityDemo";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import "@/home-hex.css";
 
@@ -114,6 +115,8 @@ export default function Home() {
             </p>
           </div>
         </div>
+
+        <VowDurabilityDemo />
 
         <div className="guarantee-grid">
           {guarantees.map((item) => (
