@@ -36,6 +36,8 @@ export default function BrandFooter({ backToTopHref = "/#top" }: BrandFooterProp
         <div>
           <span>CONTACT</span>
           <a href="mailto:support@jceelabs.com">support@jceelabs.com ↗</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
         </div>
       </div>
 

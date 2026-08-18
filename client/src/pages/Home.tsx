@@ -11,22 +11,22 @@ const guarantees = [
   {
     index: "01",
     title: "Durable evidence",
-    copy: "Every meaningful execution leaves a receipt that survives the process that created it.",
+    copy: "Covered executions produce durable receipts designed to survive the process that created them.",
   },
   {
     index: "02",
     title: "Evidence-aware recovery",
-    copy: "Recovery decisions account for what the recorded execution can actually establish.",
+    copy: "Recovery decisions are tied to what preserved execution evidence can actually establish.",
   },
   {
     index: "03",
     title: "Crash recovery",
-    copy: "Failure becomes a recorded state to resume from—not a mystery to reconstruct.",
+    copy: "Covered interruptions become recorded states that can be reconciled instead of reconstructed from memory.",
   },
   {
     index: "04",
     title: "Explicit verdicts",
-    copy: "The system records what is supported, what is refused, and what still requires observation.",
+    copy: "The runtime records what is supported, what is refused, and what still requires observation.",
   },
 ];
 
@@ -184,11 +184,11 @@ export default function Home() {
               braided forms that do not settle into a finite repeating cycle.
             </p>
             <div className="curlicue-formula">
-              <span>GENERATING RULE</span>
+              <span>PUBLIC GENERATIVE RULE</span>
               <code>θₙ = 2π α n² · pₙ₊₁ = pₙ + (cos θₙ, sin θₙ)</code>
             </div>
             <p className="curlicue-note">
-              LIVE CLIENT-SIDE MATHEMATICAL VISUALIZATION · α = √2 − 1
+              LIVE CLIENT-SIDE VISUALIZATION · α = √2 − 1 · NOT QCS EXECUTION
             </p>
           </div>
         </div>

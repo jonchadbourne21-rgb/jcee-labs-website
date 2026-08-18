@@ -10,102 +10,97 @@ export default function PrivacyPage() {
         <div className="container max-w-3xl mx-auto">
           <div className="space-y-4 mb-12">
             <h1 className="text-4xl md:text-5xl font-display font-extrabold text-white">Privacy Policy</h1>
-            <p className="text-muted-foreground text-sm font-mono">Last Updated: July 14, 2026</p>
+            <p className="text-muted-foreground text-sm font-mono">Last Updated: August 18, 2026</p>
           </div>
 
           <div className="prose prose-invert max-w-none space-y-8 text-[#E2E8F0]/80 leading-relaxed">
             <section className="space-y-4">
               <h2 className="text-xl font-display font-bold text-white">1. Introduction</h2>
               <p>
-                HOWM HOLDINGS LLC, doing business as Jcee Labs ("we," "our," or "us"), respects your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website jceelabs.com and use our services.
+                HOWM HOLDINGS LLC, doing business as JCEE Labs ("we," "our," or "us"), respects your privacy. This Privacy Policy describes the information practices associated with the public JCEE Labs website at jceelabs.com.
               </p>
             </section>
 
             <section className="space-y-4">
               <h2 className="text-xl font-display font-bold text-white">2. Information We Collect</h2>
-              <p>We may collect the following types of information:</p>
+              <p>Depending on how you use the site, we may receive or collect:</p>
               <ul className="list-disc pl-6 space-y-2">
-                <li><strong className="text-white">Contact Information:</strong> Email address, name, phone number, and company name when you submit forms or sign up for our newsletter.</li>
-                <li><strong className="text-white">Business Inquiry Data:</strong> Project descriptions, budget ranges, and timeline preferences submitted through our contact forms.</li>
-                <li><strong className="text-white">Usage Data:</strong> Information about how you interact with our website, including pages visited, time spent, and referring sources.</li>
-                <li><strong className="text-white">Device Information:</strong> Browser type, operating system, and device identifiers collected through standard web technologies.</li>
+                <li><strong className="text-white">Information you provide:</strong> Information you voluntarily send to us, such as your name, email address, company information, and the contents of a message or inquiry.</li>
+                <li><strong className="text-white">Site analytics:</strong> Basic information about use of the public website, such as pages viewed, referring sources, approximate session timing, browser type, and operating system, when analytics are enabled.</li>
+                <li><strong className="text-white">Technical and security data:</strong> Hosting and infrastructure providers may process standard request and diagnostic information needed to deliver, secure, and troubleshoot the website.</li>
               </ul>
             </section>
 
             <section className="space-y-4">
-              <h2 className="text-xl font-display font-bold text-white">3. How We Use Your Information</h2>
-              <p>We use the information we collect to:</p>
+              <h2 className="text-xl font-display font-bold text-white">3. How We Use Information</h2>
+              <p>We may use information to:</p>
               <ul className="list-disc pl-6 space-y-2">
-                <li>Respond to your inquiries and provide requested services</li>
-                <li>Send you updates about our products and services (with your consent)</li>
-                <li>Improve our website and user experience</li>
-                <li>Analyze usage patterns to enhance our offerings</li>
-                <li>Comply with legal obligations</li>
+                <li>Respond to messages and requests</li>
+                <li>Operate, maintain, and secure the website</li>
+                <li>Understand site performance and improve the public experience</li>
+                <li>Investigate errors, abuse, or security incidents</li>
+                <li>Comply with applicable legal obligations</li>
               </ul>
             </section>
 
             <section className="space-y-4">
               <h2 className="text-xl font-display font-bold text-white">4. Data Sharing</h2>
               <p>
-                We do not sell, trade, or rent your personal information to third parties. We may share information with trusted service providers who assist us in operating our website and conducting our business, provided they agree to keep this information confidential.
+                We do not sell or rent personal information. We may share information with service providers that help us host, secure, analyze, or operate the website, and when disclosure is required by law or reasonably necessary to protect rights, safety, or the integrity of our systems.
               </p>
             </section>
 
             <section className="space-y-4">
               <h2 className="text-xl font-display font-bold text-white">5. Data Security</h2>
               <p>
-                We implement appropriate technical and organizational security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the Internet is 100% secure.
+                We use reasonable technical and organizational measures intended to protect information associated with the site. No method of transmission or storage is completely secure, so we cannot guarantee absolute security.
               </p>
             </section>
 
             <section className="space-y-4">
-              <h2 className="text-xl font-display font-bold text-white">6. Cookies</h2>
+              <h2 className="text-xl font-display font-bold text-white">6. Cookies and Similar Technologies</h2>
               <p>
-                Our website uses cookies and similar tracking technologies to enhance your browsing experience. You can control cookie preferences through your browser settings. Essential cookies required for site functionality cannot be disabled.
+                The site may use cookies, local storage, or similar browser technologies for functions such as preferences, sessions, and analytics where those features are enabled. Browser controls may allow you to restrict or clear these technologies, although doing so can affect site functionality.
               </p>
             </section>
 
             <section className="space-y-4">
-              <h2 className="text-xl font-display font-bold text-white">7. Your Rights</h2>
-              <p>Depending on your jurisdiction, you may have the right to:</p>
-              <ul className="list-disc pl-6 space-y-2">
-                <li>Access the personal data we hold about you</li>
-                <li>Request correction of inaccurate data</li>
-                <li>Request deletion of your data</li>
-                <li>Opt out of marketing communications</li>
-                <li>Data portability</li>
-              </ul>
+              <h2 className="text-xl font-display font-bold text-white">7. Your Choices and Rights</h2>
+              <p>
+                Depending on your location and the information involved, applicable law may provide rights concerning access, correction, deletion, portability, or certain uses of personal information. You may contact us to make a privacy-related request.
+              </p>
             </section>
 
             <section className="space-y-4">
-              <h2 className="text-xl font-display font-bold text-white">8. Third-Party Services</h2>
+              <h2 className="text-xl font-display font-bold text-white">8. Third-Party Services and Links</h2>
               <p>
-                Our website may contain links to third-party websites or services. We are not responsible for the privacy practices of these external sites. We encourage you to read the privacy policies of any third-party services you interact with.
+                The website may rely on third-party hosting, analytics, infrastructure, or linked services. Their handling of information is governed by their own terms and privacy practices where applicable. Links to third-party websites do not make JCEE Labs responsible for those websites' privacy practices.
               </p>
             </section>
 
             <section className="space-y-4">
               <h2 className="text-xl font-display font-bold text-white">9. Children's Privacy</h2>
               <p>
-                Our services are not directed to individuals under the age of 13. We do not knowingly collect personal information from children. If we become aware that we have collected data from a child under 13, we will take steps to delete that information.
+                The public JCEE Labs website is not directed to children under 13, and we do not knowingly seek personal information from children under 13 through this site. If we learn that such information was collected through the site, we will take appropriate steps to address it.
               </p>
             </section>
 
             <section className="space-y-4">
               <h2 className="text-xl font-display font-bold text-white">10. Changes to This Policy</h2>
               <p>
-                We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the "Last Updated" date. Your continued use of our services after changes are posted constitutes acceptance of the revised policy.
+                We may update this Privacy Policy as our website and information practices change. When we do, we will post the updated policy here and revise the "Last Updated" date.
               </p>
             </section>
 
             <section className="space-y-4">
               <h2 className="text-xl font-display font-bold text-white">11. Contact Us</h2>
               <p>
-                If you have questions about this Privacy Policy or wish to exercise your data rights, please contact us at:
+                For questions about this Privacy Policy or privacy-related requests, contact us at:
               </p>
               <div className="bg-white/[0.03] border border-white/10 rounded-xl p-6 space-y-2">
-                <p className="font-bold text-white">HOWM HOLDINGS LLC (d.b.a. Jcee Labs)</p>
+                <p className="font-bold text-white">HOWM HOLDINGS LLC (d.b.a. JCEE Labs)</p>
                 <p>Dallas, Texas</p>
+                <p>Email: <a href="mailto:support@jceelabs.com" className="text-purple-400 hover:text-purple-300 transition-colors">support@jceelabs.com</a></p>
                 <p>Website: <a href="https://jceelabs.com" className="text-purple-400 hover:text-purple-300 transition-colors">jceelabs.com</a></p>
               </div>
             </section>

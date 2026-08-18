@@ -22,7 +22,7 @@ export default function VowPage() {
 
       <section className="program-masthead vow-program">
         <p className="eyebrow"><span /> PUBLIC OVERVIEW · ACTIVE</p>
-        <div className="program-number">01 / VOW</div>
+        <div className="program-number">VOW / PUBLIC OVERVIEW</div>
         <h1>Execution should<br /><em>leave evidence.</em></h1>
         <p className="program-deck">
           VOW is JCEE Labs&apos; evidence-first runtime for software that must act,
