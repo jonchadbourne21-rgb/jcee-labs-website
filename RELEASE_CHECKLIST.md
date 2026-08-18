@@ -10,7 +10,7 @@ Run the following command from the repository root before publishing:
 pnpm release:check
 ```
 
-The command performs the TypeScript check, complete Vitest suite, production build, and headless device-profile smoke checks. The browser checks start an isolated production server and enforce all of the following at both target widths:
+The command performs the TypeScript check, complete Vitest suite, production build, headless device-profile smoke checks, and the public-surface integrity gate. The browser checks start an isolated production server and enforce all of the following at both target widths:
 
 | Profile | Viewport | Required checks |
 |---|---:|---|
@@ -25,6 +25,12 @@ pnpm smoke:mobile:android
 ```
 
 > The smoke checks are deterministic browser device-profile emulations. They are a release gate, but they do not replace a final physical-device check on iPhone Safari and Android Chrome for major visual or interaction changes.
+
+## Public-surface integrity gate
+
+`pnpm test:public-surface` is included in `pnpm release:check` and runs in the **public-surface** GitHub Actions job on every pull request to `main`. The job must be required in the repository’s main-branch protection rule so a failing result blocks merge.
+
+The gate starts the production build and verifies that all retired public routes render the canonical **404 / UNKNOWN STATE** surface. It also verifies the shared footer’s Privacy and Terms links, the Charter page’s `.md` download link, and the production Markdown asset response at `/JCEE_Labs_Charter_v1.0.md`.
 
 ## Physical-device confirmation
 

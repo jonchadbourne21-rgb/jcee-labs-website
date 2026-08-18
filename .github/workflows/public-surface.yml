@@ -1,0 +1,41 @@
+name: Public Surface
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  public-surface:
+    name: public-surface
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Chromium
+        run: sudo apt-get update && sudo apt-get install --yes chromium-browser || sudo apt-get install --yes chromium
+
+      - name: Run merge-blocking public-surface gate
+        env:
+          CHROMIUM_BIN: chromium
+        run: pnpm release:check
