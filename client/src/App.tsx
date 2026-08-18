@@ -6,7 +6,6 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import { lazy, Suspense, useEffect } from "react";
 
-const FAQ = lazy(() => import("./pages/FAQ"));
 const Charter = lazy(() => import("./pages/Charter"));
 const ResearchEvidence = lazy(() => import("./pages/ResearchEvidence"));
 const Jrp000 = lazy(() => import("./pages/Jrp000"));
@@ -38,7 +37,6 @@ function Router() {
     <Suspense fallback={<RouteShimmer />}>
       <Switch>
         <Route path="/" component={Home} />
-        <Route path="/faq" component={FAQ} />
         <Route path="/charter" component={Charter} />
         <Route path="/research-evidence" component={ResearchEvidence} />
         <Route path="/research/jrp-000" component={Jrp000} />
