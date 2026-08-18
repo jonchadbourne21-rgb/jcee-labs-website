@@ -16,7 +16,7 @@ const contents = [
 ];
 
 const githubUrl =
-  "https://github.com/jonchadbourne21-rgb/jcee-labs-website/blob/main/client/public/JCEE_Labs_Research_Evidence_Index_v1.2.md";
+  "https://github.com/jonchadbourne21-rgb/jcee-labs-website/blob/main/client/public/JCEE_Labs_Research_Evidence_Index_v1.1.md";
 
 const classifications = [
   ["Planned", "The problem and intended investigation have been identified, but the experiment or implementation has not been frozen. No result is claimed."],
@@ -42,7 +42,7 @@ export default function ResearchEvidence() {
       <CoreHeader current="research" />
 
       <section className="charter-masthead evidence-masthead">
-        <p className="eyebrow"><span /> PUBLIC RECORD · VERSION 1.2</p>
+        <p className="eyebrow"><span /> PUBLIC RECORD · VERSION 1.1</p>
         <img
           className="evidence-brand-lockup"
           src="/brand/jcee-labs-mark.png"
@@ -54,7 +54,7 @@ export default function ResearchEvidence() {
           its known limitations, and what remains unproven.
         </p>
         <div className="charter-version-row">
-          <span>VERSION 1.2 — AUGUST 13, 2026</span>
+          <span>VERSION 1.1 — AUGUST 13, 2026</span>
           <span>STATUS · CURRENT</span>
         </div>
       </section>
@@ -69,7 +69,7 @@ export default function ResearchEvidence() {
           </ol>
           <div className="charter-file-links">
             <a href={githubUrl} target="_blank" rel="noreferrer">VIEW ON GITHUB ↗</a>
-            <a href="/JCEE_Labs_Research_Evidence_Index_v1.2.md" download>DOWNLOAD .MD ↓</a>
+            <a href="/JCEE_Labs_Research_Evidence_Index_v1.1.md" download>DOWNLOAD .MD ↓</a>
           </div>
         </aside>
 
@@ -132,20 +132,6 @@ export default function ResearchEvidence() {
                   </ul>
                 </div>
               </div>
-            </article>
-
-            <article className="evidence-program">
-              <div className="evidence-program-heading">
-                <div>
-                  <p className="charter-section-label">EXECUTION ASSURANCE</p>
-                  <h3>JCEE Assurance / Evidence Engine</h3>
-                </div>
-                <span className="evidence-status verified">VERIFIED MILESTONE · BOUNDED INTERNAL</span>
-              </div>
-              <p>JCEE Assurance evaluates preserved evidence against frozen interfaces, profiles, and decision rules without granting that evidence authority it does not contain.</p>
-              <p>The product boundary, interface schemas and 30-fixture conformance corpus, deterministic verification kernel, and application-level append-only evidence ledger and snapshot resolver have passed their frozen internal gates through JA-P0.4.</p>
-              <p>This status supports deterministic behavior within the frozen artifacts and tested conditions. It does not establish external-world truth, production readiness, independent certification, legal conformity, physical write-once storage, multi-host consensus, or activation of QCS-backed profiles.</p>
-              <p><strong>The exclusions are part of the admitted result.</strong></p>
             </article>
 
             <article className="evidence-program">
