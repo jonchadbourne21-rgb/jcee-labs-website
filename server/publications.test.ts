@@ -10,7 +10,7 @@ describe("JRP-000 publication", () => {
   const paper = read("client/public/JRP-000_The_Evidence_Boundary_v1.0.md");
   const paperPage = read("client/src/pages/Jrp000.tsx");
   const app = read("client/src/App.tsx");
-  const index = read("client/public/JCEE_Labs_Research_Evidence_Index_v1.1.md");
+  const index = read("client/public/JCEE_Labs_Research_Evidence_Index_v1.2.md");
 
   it("publishes the adopted Version 1.0 source with its governing boundary", () => {
     expect(paper).toContain("**Version:** 1.0");
@@ -43,11 +43,19 @@ describe("JRP-000 publication", () => {
     expect(paperPage).toContain("STATUS · ADOPTED");
   });
 
-  it("registers JRP-000 in Research & Evidence Index Version 1.1", () => {
-    expect(index).toContain("**Version 1.1 — August 13, 2026**");
+  it("registers JRP-000 in current Research & Evidence Index Version 1.2", () => {
+    expect(index).toContain("**Version 1.2 — August 18, 2026**");
     expect(index).toContain("## III. Research Publications");
     expect(index).toContain("### JRP-000 — The Evidence Boundary");
     expect(index).toContain("### Inconclusive");
+  });
+
+  it("records the bounded QCS-2.0 reproduction milestone without universalizing it", () => {
+    expect(index).toContain("**Status:** Verified milestone; QCS-2.0 core frozen");
+    expect(index).toContain("PostgreSQL transactional authority");
+    expect(index).toContain("remote network-effect authority");
+    expect(index).toContain("Universal correctness over all authority systems or failure models");
+    expect(index).toContain("Independent third-party certification");
   });
 
   it("does not publish private VOW implementation identifiers", () => {
