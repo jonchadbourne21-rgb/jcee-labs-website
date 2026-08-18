@@ -1,28 +1,44 @@
-/* Reuse the original JCEE Labs blue-cube hero artwork as a restrained
- * institutional accent in Section 01. The asset remains in Manus storage;
- * this treatment intentionally keeps it out of the new primary hex hero. */
+/* Original JCEE Labs blue-cube artwork, now treated as a large kinetic
+ * institutional object in Section 01 rather than a background decoration. */
 .company-section {
   isolation: isolate;
   overflow: hidden;
   position: relative;
 }
 
+.company-section::before,
+.company-section::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+}
+
 .company-section::before {
+  animation: cubeDrift 11s cubic-bezier(.45,0,.25,1) infinite alternate;
   background-image: url("/manus-storage/jcee-hero-cubes_002df7db.png");
   background-position: right top;
   background-repeat: no-repeat;
   background-size: contain;
-  content: "";
-  height: clamp(250px, 30vw, 470px);
-  opacity: 0.82;
-  pointer-events: none;
-  position: absolute;
-  right: -1.5vw;
-  top: 5.5vh;
-  width: clamp(320px, 39vw, 650px);
-  z-index: 0;
-  -webkit-mask-image: radial-gradient(ellipse at 74% 30%, #000 0%, #000 48%, rgba(0, 0, 0, 0.78) 62%, transparent 82%);
-  mask-image: radial-gradient(ellipse at 74% 30%, #000 0%, #000 48%, rgba(0, 0, 0, 0.78) 62%, transparent 82%);
+  filter: saturate(1.18) contrast(1.06) drop-shadow(0 28px 55px rgba(37,99,235,.18));
+  height: clamp(390px, 45vw, 720px);
+  opacity: .94;
+  right: -2vw;
+  top: 1.5vh;
+  transform-origin: 70% 35%;
+  width: clamp(480px, 56vw, 920px);
+  -webkit-mask-image: radial-gradient(ellipse at 73% 30%, #000 0%, #000 54%, rgba(0,0,0,.86) 68%, transparent 88%);
+  mask-image: radial-gradient(ellipse at 73% 30%, #000 0%, #000 54%, rgba(0,0,0,.86) 68%, transparent 88%);
+}
+
+.company-section::after {
+  animation: cubeLightPass 8.5s ease-in-out infinite;
+  background: linear-gradient(112deg, transparent 37%, rgba(96,165,250,.02) 44%, rgba(147,197,253,.16) 50%, rgba(96,165,250,.03) 56%, transparent 63%);
+  height: 78%;
+  right: -14%;
+  top: -8%;
+  transform: translateX(-38%) skewX(-7deg);
+  width: 65%;
 }
 
 .company-section > * {
@@ -30,24 +46,54 @@
   z-index: 1;
 }
 
-@media (max-width: 900px) {
+.company-statement h2 {
+  position: relative;
+  text-shadow: 0 2px 24px rgba(2,2,5,.42);
+}
+
+@keyframes cubeDrift {
+  0% { transform: translate3d(0, 0, 0) scale(1) rotate(.001deg); }
+  45% { transform: translate3d(-8px, 9px, 0) scale(1.015) rotate(-.35deg); }
+  100% { transform: translate3d(9px, -6px, 0) scale(1.035) rotate(.45deg); }
+}
+
+@keyframes cubeLightPass {
+  0%, 18% { opacity: 0; transform: translateX(-58%) skewX(-7deg); }
+  42% { opacity: 1; }
+  68%, 100% { opacity: 0; transform: translateX(78%) skewX(-7deg); }
+}
+
+@media (max-width: 1000px) {
   .company-section::before {
-    height: clamp(220px, 48vw, 390px);
-    opacity: 0.62;
-    right: -12vw;
-    top: 7vh;
-    width: clamp(280px, 62vw, 520px);
+    height: clamp(330px, 58vw, 560px);
+    opacity: .76;
+    right: -15vw;
+    top: 4vh;
+    width: clamp(430px, 74vw, 700px);
   }
 }
 
 @media (max-width: 680px) {
   .company-section::before {
-    height: 260px;
-    opacity: 0.38;
-    right: -26vw;
-    top: 8vh;
-    width: 390px;
-    -webkit-mask-image: radial-gradient(ellipse at 72% 30%, #000 0%, rgba(0, 0, 0, 0.9) 42%, transparent 76%);
-    mask-image: radial-gradient(ellipse at 72% 30%, #000 0%, rgba(0, 0, 0, 0.9) 42%, transparent 76%);
+    height: 360px;
+    opacity: .48;
+    right: -42vw;
+    top: 7vh;
+    width: 560px;
+    -webkit-mask-image: radial-gradient(ellipse at 70% 30%, #000 0%, rgba(0,0,0,.92) 48%, transparent 79%);
+    mask-image: radial-gradient(ellipse at 70% 30%, #000 0%, rgba(0,0,0,.92) 48%, transparent 79%);
+  }
+
+  .company-section::after {
+    opacity: .35;
+    right: -32%;
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .company-section::before,
+  .company-section::after {
+    animation: none !important;
   }
 }
