@@ -28,5 +28,12 @@
 - [x] Run live-site iPhone and Android browser device-profile smoke tests and document the emulation limitation.
 - [x] Add a durable mobile-overflow assertion to the release test coverage.
 - [x] Run TypeScript, full tests, production build, and recheck the device-profile smoke tests.
-- [ ] Publish the verified mobile-overflow regression coverage.
-- [ ] Report device-profile QA outcomes, coverage added, validation results, and live status.
+- [x] Publish the verified mobile-overflow regression coverage.
+- [x] Report device-profile QA outcomes, coverage added, validation results, and live status.
+
+- [x] Add a permanent headless browser layout test asserting scrollWidth equals innerWidth at iPhone and Android widths.
+- [x] Add reusable iPhone and Android device-profile smoke commands to the project scripts.
+- [x] Document the automated mobile layout and device-profile checks in the release workflow.
+- [x] Run the complete release automation, tests, TypeScript check, and production build.
+- [ ] Publish the verified permanent mobile release-process automation.
+- [ ] Report the safeguards added and live publication status.

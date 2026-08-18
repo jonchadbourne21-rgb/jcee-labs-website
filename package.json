@@ -10,6 +10,10 @@
     "check": "tsc --noEmit",
     "format": "prettier --write .",
     "test": "vitest run",
+    "smoke:mobile:iphone": "pnpm build && node scripts/mobile-layout-check.mjs --profile=iphone",
+    "smoke:mobile:android": "pnpm build && node scripts/mobile-layout-check.mjs --profile=android",
+    "test:mobile-layout": "node scripts/mobile-layout-check.mjs",
+    "release:check": "pnpm check && pnpm test && pnpm build && pnpm test:mobile-layout",
     "db:push": "drizzle-kit generate && drizzle-kit migrate"
   },
   "dependencies": {
