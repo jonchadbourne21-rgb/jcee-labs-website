@@ -1,20 +1,150 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
 
   <head>
     <meta charset="UTF-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <title>{{project_title}}</title>    
-    <!-- THIS IS THE START OF A COMMENT BLOCK, BLOCK TO BE DELETED: Google Fonts here, example:
+    <title>Jcee Labs | Innovation & AI Lab</title>
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="JCEE Labs — Evidence-Oriented Execution for AI Software" />
+    <meta property="og:description" content="An independent software lab building tools for agentic AI and human transformation. Evidence over claims." />
+    <meta property="og:image" content="/manus-storage/jcee-labs-og-teal_587de72d.png" />
+    <meta property="og:url" content="https://jceelabs.com" />
+    <meta property="og:site_name" content="JCEE Labs" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="JCEE Labs — Evidence-Oriented Execution for AI Software" />
+    <meta name="twitter:description" content="An independent software lab building tools for agentic AI and human transformation. Evidence over claims." />
+    <meta name="twitter:image" content="/manus-storage/jcee-labs-og-teal_587de72d.png" />
+    <link rel="icon" href="/brand/jcee-labs-mark.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    THIS IS THE END OF A COMMENT BLOCK, BLOCK TO BE DELETED -->
+    <!-- Non-render-blocking font load: media=print trick swaps to all after load -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&family=Space+Mono:wght@400&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&family=Space+Mono:wght@400&display=swap" rel="stylesheet" />
+    </noscript>
+    <!-- JCEE Labs master brand accent + alternating editorial chapter system -->
+    <style>
+      :root {
+        --signal: #2563eb !important;
+        --signal-readable: #60a5fa;
+        --chapter-dark: #000000;
+        --chapter-light: #050508;
+        --chapter-white: #ffffff;
+        --chapter-line-dark: rgba(37, 99, 235, 0.15);
+        --chapter-line-light: rgba(37, 99, 235, 0.1);
+      }
+      /* Premium dark system — every surface is near-black with blue glow accents */
+      .company-section,
+      .evidence-intro,
+      .charter-intro:not(.evidence-intro) {
+        background: #000000 !important;
+        color: #ffffff !important;
+      }
+      .vow-section,
+      .qcs-section,
+      .mirrored-section {
+        background: #050508 !important;
+        color: #ffffff !important;
+      }
+      .section-index,
+      .section-index.light {
+        border-color: rgba(37, 99, 235, 0.15) !important;
+        color: rgba(255,255,255,0.45) !important;
+      }
+      .company-statement em,
+      .receipt-status,
+      .receipt-footer strong,
+      .mirrored-kicker,
+      .qcs-kicker,
+      .qcs-status-grid dd,
+      .section-detail-link,
+      .charter-intro-copy a,
+      .evidence-intro .charter-intro-copy a,
+      .mirrored-copy > a,
+      .qcs-copy > a,
+      .home-research-links a {
+        color: var(--signal-readable) !important;
+      }
+      .guarantee-grid article > span,
+      .quiet,
+      .company-bottom span {
+        color: rgba(255,255,255,0.4) !important;
+      }
+      .guarantee-grid p,
+      .company-statement > p,
+      .charter-intro-copy p,
+      .evidence-intro .charter-intro-copy p,
+      .qcs-copy > p,
+      .mirrored-copy > p {
+        color: rgba(255,255,255,0.7) !important;
+      }
+      .guarantee-grid,
+      .guarantee-grid article {
+        border-color: rgba(37, 99, 235, 0.12) !important;
+      }
+      .vow-close {
+        border-color: rgba(37, 99, 235, 0.12) !important;
+      }
+      .terminal-line {
+        background: transparent !important;
+        color: #ffffff !important;
+        border-bottom: 1px solid rgba(37, 99, 235, 0.2) !important;
+      }
+      .terminal-line > span:first-child { color: var(--signal-readable) !important; }
+      .terminal-line code { color: #ffffff !important; }
+      .terminal-line .cursor { background: var(--signal) !important; }
+      .qcs-status-grid,
+      .qcs-status-grid > div { border-color: rgba(37, 99, 235, 0.12) !important; }
+      .qcs-status-grid dt { color: rgba(255,255,255,0.4) !important; }
+      .mirrored-meta { border-color: rgba(37, 99, 235, 0.12) !important; }
+      .orbit { border-color: rgba(37, 99, 235, 0.25) !important; }
+      .mirror-core { border-color: #ffffff !important; color: #ffffff !important; }
+      .company-bottom a { color: var(--signal-readable) !important; }
+      /* Footer — deep dark with blue accent line */
+      .brand-footer {
+        background: #020205 !important;
+        border-top: 1px solid rgba(37, 99, 235, 0.2) !important;
+        color: #ffffff !important;
+      }
+      .brand-footer-top > p,
+      .brand-footer-lockup small,
+      .brand-footer-links span,
+      .brand-footer-links a,
+      .brand-footer-meta,
+      .brand-footer-meta a {
+        color: rgba(255,255,255,0.6) !important;
+      }
+      .brand-footer-links a:hover { color: var(--signal-readable) !important; }
+      .brand-footer-wordmark { color: rgba(255,255,255,0.06) !important; }
+      .brand-footer-wordmark em { color: rgba(37, 99, 235, 0.3) !important; }
+      @media (min-width: 561px) {
+        .brand-footer-wordmark {
+          font-size: clamp(52px, 8.8vw, 160px) !important;
+          gap: 1vw !important;
+          justify-content: space-between;
+          width: 100%;
+        }
+      }
+      @media (max-width: 560px) {
+        nav a, .header-contact, .eyebrow, .primary-link { font-size: 11px !important; }
+        .section-index span, .company-statement > p, .qcs-kicker,
+        .qcs-status-grid dt, .mirrored-meta span, .guarantee-grid article > span,
+        .brand-footer-links span { font-size: 9px !important; }
+      }
+    </style>
   </head>
 
-  <body>
+  <body class="bg-[#090514] text-[#E2E8F0] antialiased overflow-x-hidden selection:bg-purple-500/30 selection:text-purple-200">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <script
