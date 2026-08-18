@@ -9,6 +9,7 @@ import { getLoginUrl } from "./const";
 import "./index.css";
 import "./publications.css";
 import "./brand-overrides.css";
+import "./company-cubes.css";
 
 const queryClient = new QueryClient();
 
