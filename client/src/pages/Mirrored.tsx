@@ -18,9 +18,9 @@ export default function Mirrored() {
         <div className="mirrored-hero-overlay absolute inset-0 bg-gradient-to-b from-[#0d0b14]/60 via-transparent to-[#0d0b14]" />
 
         <div className="relative max-w-[720px] mx-auto px-6">
-          <Link href="/products" className="mirrored-back-link inline-flex items-center gap-2 text-sm text-[#9a94b0] hover:text-[#67e8f9] transition-colors mb-8">
+          <Link href="/#mirrored" className="mirrored-back-link inline-flex items-center gap-2 text-sm text-[#9a94b0] hover:text-[#67e8f9] transition-colors mb-8">
               <ArrowLeft className="w-4 h-4" />
-              Back to Products
+              Back to JCEE Labs
           </Link>
 
           <div className="inline-block text-[10px] font-bold tracking-[0.12em] uppercase px-4 py-1.5 rounded-full bg-[rgba(251,191,36,0.12)] text-[#fbbf24] border border-[rgba(251,191,36,0.2)] mb-4">
