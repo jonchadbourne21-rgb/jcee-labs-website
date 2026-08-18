@@ -22,5 +22,11 @@
 - [x] Merge PR #6 feature/curlicue-irrational-order into main and confirm the merged commit.
 - [x] Fix the existing narrow-mobile horizontal overflow without changing the curlicue feature or unrelated content.
 - [x] Re-run TypeScript, tests, production build, and mobile QA on merged main.
-- [ ] Publish the verified merged site to the existing JCEE Labs production domains.
-- [ ] Report merge SHA, overflow fix, validation results, and live production status.
+- [x] Publish the verified merged site to the existing JCEE Labs production domains.
+- [x] Report merge SHA, overflow fix, validation results, and live production status.
+
+- [x] Run live-site iPhone and Android browser device-profile smoke tests and document the emulation limitation.
+- [x] Add a durable mobile-overflow assertion to the release test coverage.
+- [x] Run TypeScript, full tests, production build, and recheck the device-profile smoke tests.
+- [ ] Publish the verified mobile-overflow regression coverage.
+- [ ] Report device-profile QA outcomes, coverage added, validation results, and live status.
