@@ -287,6 +287,28 @@
   to { left: calc(100% - 5px); }
 }
 
+@media (min-width: 1101px) {
+  .qcs-gate__graph {
+    grid-template-columns:
+      minmax(110px, .85fr)
+      minmax(44px, .45fr)
+      minmax(205px, 1.65fr)
+      minmax(44px, .45fr)
+      minmax(110px, .85fr);
+  }
+
+  .qcs-gate__decision {
+    min-width: 0;
+  }
+
+  .qcs-gate__decision strong {
+    font-size: clamp(22px, 2vw, 34px);
+    letter-spacing: -.035em;
+    max-width: 100%;
+    white-space: nowrap;
+  }
+}
+
 @media (max-width: 1100px) {
   .qcs-gate__layout { grid-template-columns: 1fr; }
   .qcs-gate__graph {
