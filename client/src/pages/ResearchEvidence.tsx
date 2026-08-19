@@ -16,7 +16,7 @@ const contents = [
 ];
 
 const githubUrl =
-  "https://github.com/jonchadbourne21-rgb/jcee-labs-website/blob/main/client/public/JCEE_Labs_Research_Evidence_Index_v1.1.md";
+  "https://github.com/jonchadbourne21-rgb/jcee-labs-website/blob/main/client/public/JCEE_Labs_Research_Evidence_Index_v1.2.md";
 
 const classifications = [
   ["Planned", "The problem and intended investigation have been identified, but the experiment or implementation has not been frozen. No result is claimed."],
@@ -42,7 +42,7 @@ export default function ResearchEvidence() {
       <CoreHeader current="research" />
 
       <section className="charter-masthead evidence-masthead">
-        <p className="eyebrow"><span /> PUBLIC RECORD · VERSION 1.1</p>
+        <p className="eyebrow"><span /> PUBLIC RECORD · VERSION 1.2</p>
         <img
           className="evidence-brand-lockup"
           src="/brand/jcee-labs-mark.png"
@@ -54,7 +54,7 @@ export default function ResearchEvidence() {
           its known limitations, and what remains unproven.
         </p>
         <div className="charter-version-row">
-          <span>VERSION 1.1 — AUGUST 13, 2026</span>
+          <span>VERSION 1.2 — AUGUST 18, 2026</span>
           <span>STATUS · CURRENT</span>
         </div>
       </section>
@@ -69,7 +69,7 @@ export default function ResearchEvidence() {
           </ol>
           <div className="charter-file-links">
             <a href={githubUrl} target="_blank" rel="noreferrer">VIEW ON GITHUB ↗</a>
-            <a href="/JCEE_Labs_Research_Evidence_Index_v1.1.md" download>DOWNLOAD .MD ↓</a>
+            <a href="/JCEE_Labs_Research_Evidence_Index_v1.2.md" download>DOWNLOAD .MD ↓</a>
           </div>
         </aside>
 
@@ -137,28 +137,48 @@ export default function ResearchEvidence() {
             <article className="evidence-program">
               <div className="evidence-program-heading">
                 <div>
-                  <p className="charter-section-label">WORKFLOW-FREE TRANSITION CALCULUS</p>
+                  <p className="charter-section-label">WORKFLOW-FREE TRANSITION LEGALITY CALCULUS</p>
                   <h3>QCS</h3>
                 </div>
-                <span className="evidence-status experimental">FROZEN CANDIDATE · REPRODUCTION</span>
+                <span className="evidence-status verified">VERIFIED MILESTONE · QCS-2.0 CORE FROZEN</span>
               </div>
-              <p>QCS is a separate JCEE Labs research program studying when available evidence is sufficient to justify a system transition.</p>
-              <p>The QCS 1.x line has been frozen as a candidate specification. QCS-2.0 is focused on independent reproduction against materially different execution environments without changing the frozen reasoning.</p>
-              <p>This status supports the existence of a defined candidate specification and an active reproduction program. It does not establish universal transfer, production readiness, or independent certification.</p>
+              <p>QCS is a separate JCEE Labs research program for determining whether the currently proven authoritative state justifies a proposed causal transition.</p>
+              <p>The frozen QCS-2.0 normative specification passed its planned reproduction gate across PostgreSQL transactional authority and a genuinely remote network-effect authority without changing the frozen calculus.</p>
+              <p>The reproduced boundary included grammar, judgments, proof-object semantics, evidence semantics, authority model, recovery semantics, and conservative UNKNOWN / WAIT behavior.</p>
+              <div className="evidence-boundary-grid">
+                <div>
+                  <h4>WHAT THIS STATUS SUPPORTS</h4>
+                  <ul>
+                    <li>A frozen QCS-2.0 normative core exists.</li>
+                    <li>A new implementation was constructed from the frozen specification.</li>
+                    <li>PostgreSQL authority reproduction completed 800 concurrent attempts with 0 unsafe commits and rejected 100 stale-proof attacks.</li>
+                    <li>The final remote combined soak passed 18/18 trials with 0 execution while authority was unreachable and 0 unsafe duplicate remote effects.</li>
+                    <li>The first Stage 5D harness failure was preserved and corrected without changing the normative QCS specification.</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>WHAT THIS STATUS DOES NOT CLAIM</h4>
+                  <ul>
+                    <li>Universal correctness over all authority systems or failure models</li>
+                    <li>Production readiness</li>
+                    <li>Independent third-party certification</li>
+                    <li>Guaranteed transfer to every future substrate</li>
+                  </ul>
+                </div>
+              </div>
               <p><strong>QCS is research. It is not the VOW product release, and the two names are not interchangeable.</strong></p>
             </article>
 
             <article className="evidence-program">
               <div className="evidence-program-heading">
                 <div>
-                  <p className="charter-section-label">EXECUTION-ASSURANCE VALIDATION</p>
+                  <p className="charter-section-label">QCS-2.0 FROZEN-SPECIFICATION REPRODUCTION</p>
                   <h3>Independent Runtime Reproduction</h3>
                 </div>
-                <span className="evidence-status experimental">ACTIVE VALIDATION</span>
+                <span className="evidence-status verified">VERIFIED MILESTONE · GATE PASSED</span>
               </div>
-              <p>This work tests whether bounded execution-assurance claims survive outside the environment in which they were first developed.</p>
-              <p>The current gate requires reproduction against independently authoritative systems while preserving the frozen decision standard.</p>
-              <p>A successful result would apply only to the tested environments and conditions. No universal claim has been admitted.</p>
+              <p>This work tested whether the frozen QCS-2.0 authority, legality, evidence, recovery, and commit semantics could survive a new implementation and materially different real execution substrates without rewriting the calculus.</p>
+              <p>The planned reproduction gate passed for the tested scope. The QCS-2.0 core is now frozen pending evidence that a new substrate or formally identified counterexample requires revision.</p>
             </article>
 
             <article className="evidence-program">
@@ -242,6 +262,7 @@ export default function ResearchEvidence() {
             <p>Negative results are part of the research record.</p>
             <p>When a claim fails, we preserve what failed, why it failed, and what changed afterward. We do not silently alter the original threshold or present a redesigned experiment as proof that the earlier version succeeded.</p>
             <p>JCEE Labs intends to publish meaningful negative and contradictory results alongside successful ones whenever responsible disclosure permits.</p>
+            <p>The QCS-2.0 Stage 5D reproduction is a current example: the first campaign produced two harness failures, the failed run was preserved, re-observation established exactly one remote commit, and the harness was corrected without changing the frozen QCS specification.</p>
             <blockquote>A failed test can still produce useful knowledge. It cannot be counted as a pass.</blockquote>
           </section>
 
@@ -250,7 +271,7 @@ export default function ResearchEvidence() {
             <p>Evidence-first research does not require making every working artifact public.</p>
             <p>JCEE Labs will publish enough information to make public claims understandable, bounded, and open to scrutiny while practicing responsible disclosure.</p>
             <p>When a result cannot be reproduced from the public record alone, that limitation will be stated directly.</p>
-            <p><strong>An internal evidence package should not be mistaken for independent verification.</strong></p>
+            <p><strong>An internal evidence package should not be mistaken for independent third-party verification.</strong></p>
           </section>
 
           <section id="separation">
@@ -285,10 +306,16 @@ export default function ResearchEvidence() {
               <span>PUBLIC RECORD</span>
             </div>
             <div className="revision-row">
+              <strong>1.2</strong>
+              <span>AUGUST 18, 2026</span>
+              <p>Updated QCS to the frozen QCS-2.0 verified milestone after completion of the planned reproduction gate; added bounded PostgreSQL and remote-authority results and preserved the Stage 5D negative result.</p>
+              <span className="revision-status">CURRENT</span>
+            </div>
+            <div className="revision-row">
               <strong>1.1</strong>
               <span>AUGUST 13, 2026</span>
               <p>Added Inconclusive to the public status vocabulary and added JRP-000 as the first adopted research publication.</p>
-              <span className="revision-status">CURRENT</span>
+              <span className="revision-status superseded">SUPERSEDED</span>
             </div>
             <div className="revision-row">
               <strong>1.0</strong>
