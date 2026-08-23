@@ -3,7 +3,7 @@ import BrandFooter from "@/components/BrandFooter";
 import CoreHeader from "@/components/CoreHeader";
 
 const boundaries = [
-  ["WHAT IT IS", "An evidence-first execution runtime for consequential software and AI-directed actions."],
+  ["WHAT IT IS", "JCEE VOW is an evidence-first execution runtime for consequential software and AI-directed actions."],
   ["WHAT IT RECORDS", "A durable account of covered execution, interruption, recovery, and the resulting verdict."],
   ["WHAT IT IS NOT", "A model, a claim of universal safety, or an automatic statement of legal compliance."],
   ["CURRENT STATUS", "VOW 1.1 has reached a bounded internal verification milestone and remains under active hardening and reproduction."],
@@ -12,7 +12,7 @@ const boundaries = [
 export default function VowPage() {
   useEffect(() => {
     const previousTitle = document.title;
-    document.title = "VOW — JCEE Labs";
+    document.title = "JCEE VOW — JCEE Labs";
     return () => { document.title = previousTitle; };
   }, []);
 
@@ -22,10 +22,10 @@ export default function VowPage() {
 
       <section className="program-masthead vow-program">
         <p className="eyebrow"><span /> PUBLIC OVERVIEW · ACTIVE</p>
-        <div className="program-number">VOW / PUBLIC OVERVIEW</div>
+        <div className="program-number">JCEE VOW / PUBLIC OVERVIEW</div>
         <h1>Execution should<br /><em>leave evidence.</em></h1>
         <p className="program-deck">
-          VOW is JCEE Labs&apos; evidence-first runtime for software that must act,
+          JCEE VOW is JCEE Labs&apos; evidence-first runtime for software that must act,
           recover, and remain accountable when execution does not go as planned.
         </p>
         <div className="program-status-row">
@@ -45,7 +45,7 @@ export default function VowPage() {
             enough to explain what happened.
           </p>
           <p>
-            VOW is being built for that boundary. Its public claim is deliberately
+            JCEE VOW is being built for that boundary. Its public claim is deliberately
             narrow: within the covered conditions, it produces durable evidence that
             supports inspection, recovery, and a bounded execution verdict.
           </p>
