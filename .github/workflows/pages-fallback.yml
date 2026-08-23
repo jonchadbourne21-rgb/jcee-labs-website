@@ -38,8 +38,11 @@ jobs:
       - name: Type-check
         run: pnpm check
 
-      - name: Build static public site
-        run: pnpm build
+      - name: Run unit tests
+        run: pnpm test
+
+      - name: Build static fallback with portable asset paths
+        run: pnpm exec vite build --base=./
 
       - name: Prepare SPA fallback
         run: |
