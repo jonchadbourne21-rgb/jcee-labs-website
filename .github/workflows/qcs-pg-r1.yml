@@ -1,0 +1,59 @@
+name: QCS PostgreSQL R1
+on:
+  push:
+    branches:
+      - qcs-pg-r1-20260826
+  workflow_dispatch:
+
+jobs:
+  qcs-pg-r1:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+    env:
+      PG_DSN: postgresql://postgres:postgres@127.0.0.1:5432/postgres
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install harness dependencies
+        run: python -m pip install --disable-pip-version-check 'psycopg[binary]>=3.2,<4' 'requests>=2.32,<3'
+      - name: Verify PostgreSQL engine
+        run: |
+          python - <<'PY'
+          import os, psycopg
+          with psycopg.connect(os.environ['PG_DSN']) as c:
+              print(c.execute('select version()').fetchone()[0])
+              assert 'PostgreSQL' in c.execute('select version()').fetchone()[0]
+          PY
+      - name: Run QCS+DCC PostgreSQL R1 tournament
+        run: python research/qcs-pg-r1/qcs_pg_r1.py
+      - name: Create checksums
+        if: always()
+        run: |
+          sha256sum QCS_PG_R1_RESULTS.json QCS_PG_R1_ROWS.jsonl QCS_PG_R1_ISOLATION.json QCS_PG_R1_REPORT.md > QCS_PG_R1_SHA256SUMS.txt || true
+      - name: Upload R1 evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qcs-pg-r1-evidence
+          path: |
+            QCS_PG_R1_RESULTS.json
+            QCS_PG_R1_ROWS.jsonl
+            QCS_PG_R1_ISOLATION.json
+            QCS_PG_R1_REPORT.md
+            QCS_PG_R1_SHA256SUMS.txt
+          if-no-files-found: warn
