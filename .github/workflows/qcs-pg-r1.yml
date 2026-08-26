@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - qcs-pg-r1-20260826
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -36,8 +39,9 @@ jobs:
           python - <<'PY'
           import os, psycopg
           with psycopg.connect(os.environ['PG_DSN']) as c:
-              print(c.execute('select version()').fetchone()[0])
-              assert 'PostgreSQL' in c.execute('select version()').fetchone()[0]
+              v=c.execute('select version()').fetchone()[0]
+              print(v)
+              assert 'PostgreSQL' in v
           PY
       - name: Run QCS+DCC PostgreSQL R1 tournament
         run: python research/qcs-pg-r1/qcs_pg_r1.py
