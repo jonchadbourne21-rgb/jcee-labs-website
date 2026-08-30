@@ -24,8 +24,6 @@ jobs:
 
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
-        
-        
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -42,8 +40,59 @@ jobs:
       - name: Run unit tests
         run: pnpm test
 
-      - name: Build static fallback with portable asset paths
-        run: pnpm exec vite build --base=./
+      - name: Build static fallback for the GitHub project URL
+        run: pnpm exec vite build --base=/jcee-labs-website/
+
+      - name: Harden fallback for GitHub Pages
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require("fs");
+          const path = require("path");
+
+          const root = "dist/public";
+          const prefix = "/jcee-labs-website";
+          const assets = path.join(root, "assets");
+
+          for (const name of fs.readdirSync(assets)) {
+            if (!name.endsWith(".js")) continue;
+            const file = path.join(assets, name);
+            let source = fs.readFileSync(file, "utf8");
+
+            source = source
+              .replaceAll('href:"/', `href:"${prefix}/`)
+              .replaceAll('src:"/', `src:"${prefix}/`)
+              .replaceAll('path:"/', `path:"${prefix}/`);
+
+            fs.writeFileSync(file, source);
+          }
+
+          const indexPath = path.join(root, "index.html");
+          let html = fs.readFileSync(indexPath, "utf8");
+
+          html = html
+            .replace(/\s*<script id="manus-runtime">[\s\S]*?<\/script>/, "")
+            .replace(/\s*<script\s+defer\s+src="%VITE_ANALYTICS_ENDPOINT%\/umami"[\s\S]*?<\/script>/, "")
+            .replace(
+              'content="https://jceelabs.com"',
+              'content="https://jonchadbourne21-rgb.github.io/jcee-labs-website/"'
+            )
+            .replaceAll(
+              'content="/manus-storage/jcee-labs-og-teal_587de72d.png"',
+              'content="https://jonchadbourne21-rgb.github.io/jcee-labs-website/brand/jcee-labs-mark.png"'
+            );
+
+          fs.writeFileSync(indexPath, html);
+          NODE
+
+      - name: Verify emergency artifact boundary
+        shell: bash
+        run: |
+          test ! -e dist/public/CNAME
+          ! grep -q 'id="manus-runtime"' dist/public/index.html
+          ! grep -q 'VITE_ANALYTICS_ENDPOINT' dist/public/index.html
+          grep -q '/jcee-labs-website/assets/' dist/public/index.html
+          grep -R -q 'path:"/jcee-labs-website/' dist/public/assets
 
       - name: Prepare SPA fallback
         run: |
