@@ -5,7 +5,10 @@ import { rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 
-const requestedProfile = process.argv.find(argument => argument.startsWith("--profile="))?.split("=")[1];
+const requestedProfile = process.argv
+  .find(argument => argument.startsWith("--profile="))
+  ?.split("=")[1];
+
 const profiles = {
   iphone: {
     label: "iPhone Safari profile",
@@ -109,7 +112,9 @@ async function connectToPage(debugPort) {
   await waitForUrl(`http://127.0.0.1:${debugPort}/json/list`, "headless browser");
   const targets = await (await fetch(`http://127.0.0.1:${debugPort}/json/list`)).json();
   const target = targets.find(item => item.type === "page") ?? targets[0];
-  if (!target?.webSocketDebuggerUrl) throw new Error("Headless browser did not expose a page target");
+  if (!target?.webSocketDebuggerUrl) {
+    throw new Error("Headless browser did not expose a page target");
+  }
 
   const socket = new WebSocket(target.webSocketDebuggerUrl);
   await new Promise((resolve, reject) => {
@@ -120,6 +125,7 @@ async function connectToPage(debugPort) {
   let requestId = 0;
   const pending = new Map();
   const runtimeErrors = [];
+
   socket.addEventListener("message", event => {
     const response = JSON.parse(event.data);
     if (response.method === "Runtime.exceptionThrown") {
@@ -137,7 +143,7 @@ async function connectToPage(debugPort) {
     socket.send(JSON.stringify({ id, method, params }));
     return new Promise((resolve, reject) => {
       pending.set(id, response =>
-        response.error ? reject(new Error(response.error.message)) : resolve(response.result),
+        response.error ? reject(new Error(response.error.message)) : resolve(response.result)
       );
     });
   }
@@ -148,15 +154,46 @@ async function connectToPage(debugPort) {
 }
 
 async function waitForApp(send) {
-  for (let attempt = 0; attempt < 30; attempt += 1) {
+  for (let attempt = 0; attempt < 40; attempt += 1) {
     const state = await send("Runtime.evaluate", {
       returnByValue: true,
-      expression: "({ readyState: document.readyState, textLength: document.querySelector('#root')?.textContent?.trim().length ?? 0 })",
+      expression:
+        "({ readyState: document.readyState, textLength: document.querySelector('#root')?.textContent?.trim().length ?? 0 })",
     });
     if (state.result.value.readyState === "complete" && state.result.value.textLength > 200) return;
     await wait(100);
   }
   throw new Error("Application root did not finish rendering");
+}
+
+async function navigate(send, url) {
+  await send("Page.navigate", { url });
+  await waitForApp(send);
+}
+
+async function readLayout(send, selector) {
+  const result = await send("Runtime.evaluate", {
+    returnByValue: true,
+    expression: `(() => {
+      const element = document.querySelector(${JSON.stringify(selector)});
+      const rect = element?.getBoundingClientRect();
+      return {
+        viewportWidth: innerWidth,
+        scrollWidth: document.documentElement.scrollWidth,
+        bodyScrollWidth: document.body.scrollWidth,
+        element: rect
+          ? {
+              width: Math.round(rect.width),
+              height: Math.round(rect.height),
+              left: Math.round(rect.left),
+              right: Math.round(rect.right),
+            }
+          : null,
+        touchPoints: navigator.maxTouchPoints,
+      };
+    })()`,
+  });
+  return result.result.value;
 }
 
 async function evaluateProfile(send, profileName, profile, baseUrl) {
@@ -175,38 +212,38 @@ async function evaluateProfile(send, profileName, profile, baseUrl) {
       { name: "prefers-reduced-motion", value: "no-preference" },
     ],
   });
-  await send("Page.navigate", { url: `${baseUrl}/?mobile-layout-check=${profileName}` });
-  await waitForApp(send);
-  const result = await send("Runtime.evaluate", {
-    returnByValue: true,
-    expression: `(() => {
-      const menu = document.querySelector('.mobile-menu-toggle');
-      const curlicue = document.querySelector('.curlicue-stage');
-      const menuRect = menu?.getBoundingClientRect();
-      const curlicueRect = curlicue?.getBoundingClientRect();
-      return {
-        viewportWidth: innerWidth,
-        scrollWidth: document.documentElement.scrollWidth,
-        bodyScrollWidth: document.body.scrollWidth,
-        menu: menuRect ? { width: Math.round(menuRect.width), height: Math.round(menuRect.height) } : null,
-        curlicue: curlicueRect ? { width: Math.round(curlicueRect.width), right: Math.round(curlicueRect.right) } : null,
-        touchPoints: navigator.maxTouchPoints,
-      };
-    })()`,
-  });
-  const checks = result.result.value;
+
+  await navigate(send, `${baseUrl}/?mobile-layout-check=${profileName}`);
+  const homepage = await readLayout(send, ".mobile-menu-toggle");
+
+  await navigate(send, `${baseUrl}/registry?mobile-layout-check=${profileName}`);
+  const registry = await readLayout(send, ".curlicue-stage");
+
   const failures = [];
-  if (checks.scrollWidth !== checks.viewportWidth || checks.bodyScrollWidth > checks.viewportWidth) {
-    failures.push(`horizontal overflow (${checks.scrollWidth}/${checks.bodyScrollWidth} at ${checks.viewportWidth}px)`);
+  for (const [surface, checks] of [["homepage", homepage], ["registry", registry]]) {
+    if (
+      checks.scrollWidth !== checks.viewportWidth ||
+      checks.bodyScrollWidth > checks.viewportWidth
+    ) {
+      failures.push(
+        `${surface} horizontal overflow (${checks.scrollWidth}/${checks.bodyScrollWidth} at ${checks.viewportWidth}px)`
+      );
+    }
   }
-  if (!checks.menu || checks.menu.width < 40 || checks.menu.height < 40) {
+
+  if (!homepage.element || homepage.element.width < 40 || homepage.element.height < 40) {
     failures.push("mobile menu control is missing or smaller than 40px");
   }
-  if (!checks.curlicue || checks.curlicue.right > checks.viewportWidth) {
-    failures.push("curlicue stage is missing or exceeds the mobile viewport");
+
+  if (!registry.element || registry.element.right > registry.viewportWidth || registry.element.left < 0) {
+    failures.push("registry curlicue stage is missing or exceeds the mobile viewport");
   }
-  if (checks.touchPoints < 1) failures.push("touch emulation did not activate");
-  return { profileName, profile, checks, failures };
+
+  if (homepage.touchPoints < 1 || registry.touchPoints < 1) {
+    failures.push("touch emulation did not activate");
+  }
+
+  return { profileName, profile, homepage, registry, failures };
 }
 
 const projectRoot = process.cwd();
@@ -238,23 +275,35 @@ try {
   await waitForUrl(baseUrl, "production server");
   const page = await connectToPage(debugPort);
   const reports = [];
+
   for (const [profileName, profile] of profileEntries) {
     reports.push(await evaluateProfile(page.send, profileName, profile, baseUrl));
   }
-  const failures = reports.flatMap(report => report.failures.map(failure => `${report.profileName}: ${failure}`));
-  if (page.runtimeErrors.length) failures.push(`runtime errors: ${page.runtimeErrors.join("; ")}`);
+
+  const failures = reports.flatMap(report =>
+    report.failures.map(failure => `${report.profileName}: ${failure}`)
+  );
+  if (page.runtimeErrors.length) {
+    failures.push(`runtime errors: ${page.runtimeErrors.join("; ")}`);
+  }
+
   reports.forEach(report => {
-    const { checks } = report;
     console.log(
-      `${report.profile.label}: ${checks.viewportWidth}px viewport, ${checks.scrollWidth}px document width, ${checks.menu?.width ?? 0}×${checks.menu?.height ?? 0}px menu`,
+      `${report.profile.label}: ${report.homepage.viewportWidth}px viewport, ` +
+        `${report.homepage.scrollWidth}px homepage width, ` +
+        `${report.registry.scrollWidth}px registry width, ` +
+        `${report.homepage.element?.width ?? 0}×${report.homepage.element?.height ?? 0}px menu`
     );
   });
+
   if (failures.length) throw new Error(failures.join("\n"));
   console.log("Mobile layout smoke check passed.");
   page.close();
 } catch (error) {
   exitCode = 1;
-  console.error(`Mobile layout smoke check failed: ${error instanceof Error ? error.message : String(error)}`);
+  console.error(
+    `Mobile layout smoke check failed: ${error instanceof Error ? error.message : String(error)}`
+  );
   console.error(`App output:\n${app.output.join("")}`);
 } finally {
   await Promise.all([stopProcess(app.child), stopProcess(browser.child)]);

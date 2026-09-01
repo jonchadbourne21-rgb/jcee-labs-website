@@ -17,6 +17,7 @@ const retiredRoutes = [
   "/revel",
   "/sopforge",
   "/babodie",
+  "/mirrored",
 ];
 
 const sleep = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds));
@@ -28,7 +29,9 @@ function findOpenPort() {
     server.on("error", reject);
     server.listen(0, "127.0.0.1", () => {
       const address = server.address();
-      if (!address || typeof address === "string") return reject(new Error("Could not allocate a local port"));
+      if (!address || typeof address === "string") {
+        return reject(new Error("Could not allocate a local port"));
+      }
       server.close(error => (error ? reject(error) : resolve(address.port)));
     });
   });
@@ -83,7 +86,9 @@ async function connect(debugPort) {
   await waitForUrl(endpoint, "headless browser");
   const targets = await (await fetch(endpoint)).json();
   const target = targets.find(item => item.type === "page") ?? targets[0];
-  if (!target?.webSocketDebuggerUrl) throw new Error("Headless browser did not expose a page target");
+  if (!target?.webSocketDebuggerUrl) {
+    throw new Error("Headless browser did not expose a page target");
+  }
 
   const socket = new WebSocket(target.webSocketDebuggerUrl);
   await new Promise((resolve, reject) => {
@@ -96,7 +101,9 @@ async function connect(debugPort) {
   const runtimeErrors = [];
   socket.addEventListener("message", event => {
     const message = JSON.parse(event.data);
-    if (message.method === "Runtime.exceptionThrown") runtimeErrors.push(message.params.exceptionDetails.text);
+    if (message.method === "Runtime.exceptionThrown") {
+      runtimeErrors.push(message.params.exceptionDetails.text);
+    }
     const callback = pending.get(message.id);
     if (callback) {
       pending.delete(message.id);
@@ -108,7 +115,9 @@ async function connect(debugPort) {
     const id = ++sequence;
     socket.send(JSON.stringify({ id, method, params }));
     return new Promise((resolve, reject) => {
-      pending.set(id, message => (message.error ? reject(new Error(message.error.message)) : resolve(message.result)));
+      pending.set(id, message =>
+        message.error ? reject(new Error(message.error.message)) : resolve(message.result)
+      );
     });
   };
 
@@ -121,7 +130,8 @@ async function waitForApp(send) {
   for (let attempt = 0; attempt < 80; attempt += 1) {
     const response = await send("Runtime.evaluate", {
       returnByValue: true,
-      expression: "({ ready: document.readyState, textLength: document.querySelector('#root')?.textContent?.trim().length ?? 0 })",
+      expression:
+        "({ ready: document.readyState, textLength: document.querySelector('#root')?.textContent?.trim().length ?? 0 })",
     });
     if (response.result.value.ready === "complete" && response.result.value.textLength > 100) return;
     await sleep(75);
@@ -143,13 +153,18 @@ async function readBody(send) {
 }
 
 async function evaluate(send, expression) {
-  const response = await send("Runtime.evaluate", { returnByValue: true, expression });
+  const response = await send("Runtime.evaluate", {
+    returnByValue: true,
+    expression,
+  });
   return response.result.value;
 }
 
 const projectRoot = process.cwd();
 const distEntry = path.join(projectRoot, "dist", "index.js");
-if (!existsSync(distEntry)) throw new Error("Missing dist/index.js. Run pnpm build before pnpm test:public-surface.");
+if (!existsSync(distEntry)) {
+  throw new Error("Missing dist/index.js. Run pnpm build before pnpm test:public-surface.");
+}
 
 const appPort = await findOpenPort();
 const debugPort = await findOpenPort();
@@ -175,14 +190,31 @@ try {
   const failures = [];
 
   await navigate(page.send, baseUrl, "/");
+  const homepageText = await readBody(page.send);
+  if (!homepageText.includes("JCEE ASSURANCE")) {
+    failures.push("homepage is missing the JCEE Assurance section");
+  }
+  if (!homepageText.includes("PUBLIC REGISTRY")) {
+    failures.push("homepage is missing the Public Registry section");
+  }
+  if (homepageText.includes("MIRRORED")) {
+    failures.push("homepage still exposes Mirrored");
+  }
+
   const footer = await evaluate(page.send, `(() => {
     const footer = document.querySelector('.brand-footer');
-    const links = [...(footer?.querySelectorAll('a') ?? [])].map(link => ({ href: link.getAttribute('href'), text: link.textContent?.trim() }));
+    const links = [...(footer?.querySelectorAll('a') ?? [])].map(link => ({
+      href: link.getAttribute('href'),
+      text: link.textContent?.trim(),
+    }));
     return { present: Boolean(footer), links };
   })()`);
+
   const requiredFooterLinks = [
     ["/privacy", "Privacy"],
     ["/terms", "Terms"],
+    ["/registry", "Public Registry"],
+    ["/assurance", "JCEE Assurance"],
   ];
   if (!footer.present) failures.push("shared footer is missing from homepage");
   for (const [href, text] of requiredFooterLinks) {
@@ -199,30 +231,108 @@ try {
     }
   }
 
-  for (const [route, expectedHeading] of [["/privacy", "Privacy Policy"], ["/terms", "Terms of Service"]]) {
+  for (const [route, expectedHeading] of [
+    ["/privacy", "Privacy Policy"],
+    ["/terms", "Terms of Service"],
+    ["/registry", "A living record."],
+    ["/assurance", "The actor is not"],
+    ["/charter", "Hypotheses may"],
+  ]) {
     await navigate(page.send, baseUrl, route);
     if (!(await readBody(page.send)).includes(expectedHeading)) {
-      failures.push(`${route} does not render ${expectedHeading}`);
+      failures.push(`${route} does not render expected text: ${expectedHeading}`);
     }
   }
 
-  await navigate(page.send, baseUrl, "/charter");
-  const charterLink = await evaluate(page.send, "Boolean(document.querySelector('a[download][href=\"/JCEE_Labs_Charter_v1.0.md\"]'))");
-  if (!charterLink) failures.push("Charter page is missing the Markdown download link");
-
-  const charterResponse = await fetch(`${baseUrl}/JCEE_Labs_Charter_v1.0.md`);
-  const charterText = await charterResponse.text();
-  if (!charterResponse.ok || !charterResponse.headers.get("content-type")?.includes("text/markdown") || !charterText.startsWith("# The JCEE Labs Charter")) {
-    failures.push("Charter Markdown download endpoint is not valid");
+  await navigate(page.send, baseUrl, "/terms");
+  const termsText = await readBody(page.send);
+  if (termsText.toUpperCase().includes("MIRRORED")) {
+    failures.push("Terms still expose the retired Mirrored product");
+  }
+  for (const requiredTermsSurface of [
+    "JCEE VOW",
+    "QCS research program",
+    "JCEE Assurance",
+    "JCEE Public Registry",
+    "JCEE Labs Charter",
+  ]) {
+    if (!termsText.includes(requiredTermsSurface)) {
+      failures.push(`Terms are missing current public surface: ${requiredTermsSurface}`);
+    }
   }
 
-  if (page.runtimeErrors.length) failures.push(`runtime errors: ${page.runtimeErrors.join("; ")}`);
+  await navigate(page.send, baseUrl, "/registry");
+  const registryDownloadLink = await evaluate(
+    page.send,
+    "Boolean(document.querySelector('a[download][href=\"/JCEE_Labs_Public_Registry_v1.0.md\"]'))"
+  );
+  if (!registryDownloadLink) {
+    failures.push("Public Registry page is missing its Markdown download link");
+  }
+
+  const registryResponse = await fetch(`${baseUrl}/JCEE_Labs_Public_Registry_v1.0.md`);
+  const registryText = await registryResponse.text();
+  if (
+    !registryResponse.ok ||
+    !registryResponse.headers.get("content-type")?.includes("text/markdown") ||
+    !registryText.startsWith("# JCEE Labs Public Registry — Version 1.0")
+  ) {
+    failures.push("Public Registry Markdown endpoint is not valid");
+  }
+
+  await navigate(page.send, baseUrl, "/charter");
+  const charterV11Link = await evaluate(
+    page.send,
+    "Boolean(document.querySelector('a[download][href=\"/JCEE_Labs_Charter_v1.1.md\"]'))"
+  );
+  if (!charterV11Link) {
+    failures.push("Charter v1.1 page is missing the addendum download link");
+  }
+
+  const charterV11Response = await fetch(`${baseUrl}/JCEE_Labs_Charter_v1.1.md`);
+  const charterV11Text = await charterV11Response.text();
+  if (
+    !charterV11Response.ok ||
+    !charterV11Response.headers.get("content-type")?.includes("text/markdown") ||
+    !charterV11Text.startsWith("# The JCEE Labs Charter — Version 1.1")
+  ) {
+    failures.push("Charter v1.1 Markdown download endpoint is not valid");
+  }
+
+  await navigate(page.send, baseUrl, "/charter/archive/v1.0");
+  const charterV10Link = await evaluate(
+    page.send,
+    "Boolean(document.querySelector('a[download][href=\"/JCEE_Labs_Charter_v1.0.md\"]'))"
+  );
+  if (!charterV10Link) {
+    failures.push("Preserved Charter v1.0 page is missing its Markdown download link");
+  }
+
+  const charterV10Response = await fetch(`${baseUrl}/JCEE_Labs_Charter_v1.0.md`);
+  const charterV10Text = await charterV10Response.text();
+  if (
+    !charterV10Response.ok ||
+    !charterV10Response.headers.get("content-type")?.includes("text/markdown") ||
+    !charterV10Text.startsWith("# The JCEE Labs Charter")
+  ) {
+    failures.push("Preserved Charter v1.0 Markdown endpoint is not valid");
+  }
+
+  if (page.runtimeErrors.length) {
+    failures.push(`runtime errors: ${page.runtimeErrors.join("; ")}`);
+  }
   if (failures.length) throw new Error(failures.join("\n"));
-  console.log(`Public surface gate passed: ${retiredRoutes.length} retired routes resolve to JCEE 404; Privacy, Terms, and Charter download links are intact.`);
+
+  console.log(
+    `Public surface gate passed: ${retiredRoutes.length} retired routes resolve to JCEE 404; ` +
+      "JCEE Assurance, Public Registry, Charter v1.1, preserved Charter v1.0, Privacy, and current Terms are intact."
+  );
   page.close();
 } catch (error) {
   exitCode = 1;
-  console.error(`Public surface gate failed: ${error instanceof Error ? error.message : String(error)}`);
+  console.error(
+    `Public surface gate failed: ${error instanceof Error ? error.message : String(error)}`
+  );
   console.error(`Application output:\n${app.output.join("")}`);
 } finally {
   await Promise.all([stop(app.child), stop(browser.child)]);

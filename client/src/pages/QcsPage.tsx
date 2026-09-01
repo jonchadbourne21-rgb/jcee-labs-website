@@ -8,7 +8,7 @@ const statusRows = [
   ["SPECIFICATION", "QCS-2.0 normative core frozen"],
   ["REPRODUCTION GATE", "PASS across PostgreSQL transactional authority and a remote network-effect authority"],
   ["FROZEN BOUNDARY", "Grammar, judgments, proof semantics, evidence semantics, authority model, recovery semantics, and conservative UNKNOWN / WAIT behavior remained unchanged"],
-  ["RELATION TO VOW", "Separate research identity; not the VOW product release"],
+  ["RELATION TO JCEE VOW", "Separate research identity; not the JCEE VOW product release"],
 ];
 
 const evidenceRows = [
@@ -117,8 +117,9 @@ export default function QcsPage() {
           independent third-party certification.
         </p>
         <div className="program-links">
-          <a href="/research-evidence">VIEW THE EVIDENCE INDEX <span>→</span></a>
-          <a href="/vow">VIEW VOW <span>→</span></a>
+          <a href="/registry">VIEW THE PUBLIC REGISTRY <span>→</span></a>
+          <a href="/assurance">VIEW JCEE ASSURANCE <span>→</span></a>
+          <a href="/vow">VIEW JCEE VOW <span>→</span></a>
         </div>
       </section>
 

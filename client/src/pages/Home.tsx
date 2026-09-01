@@ -1,6 +1,5 @@
 import BrandFooter from "@/components/BrandFooter";
 import CoreHeader from "@/components/CoreHeader";
-import CurlicueField from "@/components/CurlicueField";
 import HexInspector from "@/components/HexInspector";
 import HexWaveField from "@/components/HexWaveField";
 import QcsTransitionGate from "@/components/QcsTransitionGate";
@@ -17,17 +16,63 @@ const guarantees = [
   {
     index: "02",
     title: "Evidence-aware recovery",
-    copy: "Recovery decisions are tied to what preserved execution evidence can actually establish.",
+    copy: "Recovery decisions remain tied to what preserved execution evidence can actually establish.",
   },
   {
     index: "03",
     title: "Crash recovery",
-    copy: "Covered interruptions become recorded states that can be reconciled instead of reconstructed from memory.",
+    copy: "Covered interruptions become explicit states that can be reconciled instead of reconstructed from memory.",
   },
   {
     index: "04",
-    title: "Explicit verdicts",
+    title: "Bounded verdicts",
     copy: "The runtime records what is supported, what is refused, and what still requires observation.",
+  },
+];
+
+const assuranceLayers = [
+  {
+    label: "JEC",
+    title: "Portable evidence contract",
+    copy: "Separates evidence records from the claims later derived from them, so a receiving system can inspect scope, lineage, and limits.",
+  },
+  {
+    label: "JCEE ASSURANCE",
+    title: "Claim-scoped verification",
+    copy: "Evaluates bounded conclusions against named evidence, authority, currentness, and declared certificate rules.",
+  },
+  {
+    label: "IEJ",
+    title: "Independent evidence judgment",
+    copy: "Studies deterministic review that keeps contradiction, insufficiency, and support meaningfully distinct.",
+  },
+  {
+    label: "EVIDENCE ENGINE",
+    title: "Inspection and replay",
+    copy: "Presents claim-to-effect records without making the evidence stronger than the underlying artifacts allow.",
+  },
+];
+
+const registryPreview = [
+  {
+    status: "VERIFIED MILESTONE",
+    name: "JCEE VOW 1.1",
+    boundary: "Pinned release and preserved verification record; active hardening continues.",
+  },
+  {
+    status: "VERIFIED MILESTONE",
+    name: "QCS-2.0",
+    boundary: "Frozen normative core reproduced across the two tested authority classes.",
+  },
+  {
+    status: "EXPERIMENTAL",
+    name: "JCEE Assurance",
+    boundary: "Bounded verifier stages and portable evidence work; no universal certification claim.",
+  },
+  {
+    status: "ADOPTED STANDARD",
+    name: "JCEE First Principle",
+    boundary: "Hypotheses may begin anywhere. Consequential authority must still be earned.",
   },
 ];
 
@@ -54,8 +99,9 @@ export default function Home() {
             <em>Can it prove it?</em>
           </h1>
           <p className="hero-deck">
-            JCEE Labs builds software for the moment intelligence leaves the
-            chat window and touches the real world.
+            JCEE Labs builds execution-assurance infrastructure for intelligent
+            systems that act beyond the chat window—where authority, evidence,
+            execution, recovery, and verification matter.
           </p>
           <div className="hero-actions">
             <a className="primary-link" href="#vow">SEE THE RUNTIME <span>↓</span></a>
@@ -66,12 +112,12 @@ export default function Home() {
         <HexInspector />
       </section>
 
-      <div className="statement-band" aria-label="JCEE Labs principle">
+      <div className="statement-band" aria-label="JCEE Labs principles">
         <span>EVIDENCE OVER CLAIMS</span>
         <span>•</span>
-        <span>STATE OVER GUESSWORK</span>
+        <span>AUTHORITY OVER ASSUMPTION</span>
         <span>•</span>
-        <span>RECOVERY OVER RESTARTS</span>
+        <span>UNKNOWN IS NOT PERMISSION</span>
       </div>
 
       <section className="company-section" id="company">
@@ -89,9 +135,10 @@ export default function Home() {
         </div>
         <div className="company-bottom">
           <p>
-            JCEE Labs discovers and engineers the principles of intelligent
-            execution. We build software and conduct research where intelligence,
-            evidence, execution, and human responsibility meet.
+            JCEE Labs discovers and engineers the infrastructure between an
+            intelligent system&apos;s intention and its real-world consequence.
+            Our work joins bounded authority, durable execution, portable
+            evidence, independent verification, and public claim discipline.
           </p>
           <a href="/charter">READ OUR CHARTER <span>→</span></a>
         </div>
@@ -100,7 +147,7 @@ export default function Home() {
 
       <section className="vow-section" id="vow">
         <div className="section-index">
-          <span>02 / VOW</span>
+          <span>02 / JCEE VOW</span>
           <span>EVIDENCE-FIRST EXECUTION RUNTIME</span>
         </div>
 
@@ -108,9 +155,10 @@ export default function Home() {
           <h2>The runtime between<br />intention and action.</h2>
           <div>
             <p>
-              VOW is an evidence-first execution runtime for AI systems. It is
-              designed to make agent work inspectable, resumable, and
-              accountable—even when the process fails halfway through.
+              JCEE VOW is an evidence-first execution runtime for consequential
+              software and AI-directed actions. It is designed to make covered
+              work inspectable, resumable, and accountable—even when a process
+              fails halfway through.
             </p>
             <p className="quiet">
               Not another model. The execution layer beneath the claim.
@@ -138,67 +186,15 @@ export default function Home() {
           </div>
           <p>SOFTWARE FAILS. EVIDENCE SHOULDN&apos;T.</p>
         </div>
-        <a className="section-detail-link" href="/vow">READ THE PUBLIC VOW OVERVIEW <span>→</span></a>
-      </section>
-      <div className="breath" aria-hidden="true" />
-
-      <section className="charter-intro evidence-intro" id="research" aria-labelledby="evidence-intro-title">
-        <div className="section-index">
-          <span>03 / RESEARCH &amp; EVIDENCE</span>
-          <span>PUBLIC RECORD · ACTIVE</span>
-        </div>
-        <div className="charter-intro-copy">
-          <h2 id="evidence-intro-title">Research &amp; Evidence</h2>
-          <p>
-            A public record of what we are testing, what the evidence supports,
-            where the limits are, and what remains unproven.
-          </p>
-          <div className="home-research-links">
-            <a href="/research-evidence">View the Index <span aria-hidden="true">→</span></a>
-            <a href="/research/jrp-000">Read JRP-000 <span aria-hidden="true">→</span></a>
-          </div>
-        </div>
-      </section>
-      <div className="breath" aria-hidden="true" />
-
-      <section className="curlicue-section" aria-labelledby="curlicue-title">
-        <div className="curlicue-index">
-          <span>RESEARCH FIELD / IRRATIONAL ORDER</span>
-          <span>ONE RULE · CONTINUOUS UNFOLDING</span>
-        </div>
-        <div className="curlicue-layout">
-          <div className="curlicue-stage">
-            <CurlicueField />
-            <div className="curlicue-coordinates" aria-hidden="true">
-              <span>α = √2 − 1 · IRRATIONAL</span>
-              <span>EQUAL STEP · QUADRATIC PHASE · LIVE TRACE</span>
-            </div>
-          </div>
-          <div className="curlicue-copy">
-            <p className="curlicue-kicker">IRRATIONAL ORDER / LIVE GENERATIVE FIELD</p>
-            <h2 id="curlicue-title">Perfect rule.<br />No true repeat.</h2>
-            <p>
-              A curlicue path shows how intricate structure can emerge from an
-              extremely small rule. Each segment is equal. Only its direction
-              changes, driven by an irrational quadratic phase. The instruction
-              stays exact while the geometry keeps unfolding into spiral-like,
-              braided forms that do not settle into a finite repeating cycle.
-            </p>
-            <div className="curlicue-formula">
-              <span>PUBLIC GENERATIVE RULE</span>
-              <code>θₙ = 2π α n² · pₙ₊₁ = pₙ + (cos θₙ, sin θₙ)</code>
-            </div>
-            <p className="curlicue-note">
-              LIVE CLIENT-SIDE VISUALIZATION · α = √2 − 1 · NOT QCS EXECUTION
-            </p>
-          </div>
-        </div>
+        <a className="section-detail-link" href="/vow">
+          READ THE PUBLIC JCEE VOW OVERVIEW <span>→</span>
+        </a>
       </section>
       <div className="breath" aria-hidden="true" />
 
       <section className="qcs-section" id="qcs" aria-labelledby="qcs-title">
         <div className="section-index light">
-          <span>04 / QCS</span>
+          <span>03 / QCS</span>
           <span>WORKFLOW-FREE TRANSITION CALCULUS · RESEARCH</span>
         </div>
         <div className="qcs-layout">
@@ -208,20 +204,20 @@ export default function Home() {
           </div>
           <div className="qcs-copy">
             <p>
-              QCS is a workflow-free transition legality calculus for determining
-              whether the currently proven authoritative state justifies a proposed
-              causal transition.
+              QCS is a separate research program for determining whether the
+              currently proven authoritative state justifies a proposed causal
+              transition.
             </p>
             <p>
-              The frozen QCS-2.0 specification passed its planned reproduction gate
-              across PostgreSQL transactional authority and a remote network-effect
-              authority without changing the frozen calculus.
+              The frozen QCS-2.0 specification passed its planned reproduction
+              gate across PostgreSQL transactional authority and a remote
+              network-effect authority without changing the frozen calculus.
             </p>
             <p className="quiet">
-              Verified milestone, bounded scope. The result applies to the tested
-              specification, authority classes, and adversarial conditions. It is
-              not a universal correctness, production-readiness, or third-party
-              certification claim.
+              Verified milestone, bounded scope. The result applies to the
+              tested specification, authority classes, and adversarial
+              conditions. It is not a universal correctness,
+              production-readiness, or third-party certification claim.
             </p>
             <dl className="qcs-status-grid">
               <div><dt>SPECIFICATION</dt><dd>QCS-2.0 CORE FROZEN</dd></div>
@@ -236,53 +232,136 @@ export default function Home() {
       </section>
       <div className="breath" aria-hidden="true" />
 
-      <section className="charter-intro" aria-labelledby="charter-intro-title">
-        <div className="section-index">
-          <span>05 / CHARTER</span>
-          <span>PUBLIC STANDARD · VERSION 1.0</span>
-        </div>
-        <div className="charter-intro-copy">
-          <h2 id="charter-intro-title">The JCEE Labs Charter</h2>
-          <p>
-            Why we exist, how we conduct research, what we refuse to build, and
-            the standards that govern the institution.
-          </p>
-          <a href="/charter">Read the Charter <span aria-hidden="true">→</span></a>
-        </div>
-        <div className="breath" aria-hidden="true" />
-      </section>
-
-      <section className="mirrored-section" id="mirrored">
+      <section className="assurance-section" id="assurance" aria-labelledby="assurance-title">
         <div className="section-index light">
-          <span>06 / MIRRORED</span>
-          <span>CONSUMER PRODUCT · IN DEVELOPMENT</span>
+          <span>04 / JCEE ASSURANCE</span>
+          <span>PORTABLE EVIDENCE · INDEPENDENT VERIFICATION</span>
         </div>
 
-        <div className="mirrored-layout">
-          <div className="mirror-orbit" aria-hidden="true">
-            <div className="orbit orbit-one" />
-            <div className="orbit orbit-two" />
-            <div className="mirror-core">M</div>
+        <div className="assurance-intro">
+          <div>
+            <p className="assurance-kicker">ONE LAB · DISTINCT LAYERS · SEPARATE EVIDENCE</p>
+            <h2 id="assurance-title">The system that acted should not be the only system asked to prove it.</h2>
           </div>
-
-          <div className="mirrored-copy">
-            <p className="mirrored-kicker">A DIFFERENT SURFACE. THE SAME STANDARD.</p>
-            <h2>A conversation<br />that reflects you.</h2>
+          <div className="assurance-intro-copy">
             <p>
-              Mirrored is a voice-first reflection product designed to help
-              people hear their own patterns, examine their thinking, and move
-              with greater intention.
+              JCEE Assurance is the public name for our work on portable
+              execution evidence, bounded verification, independent judgment,
+              and reviewable proof objects.
             </p>
-            <div className="mirrored-meta">
-              <span>VOICE-TO-VOICE</span>
-              <span>DAILY REFLECTION</span>
-              <span>GUIDED PRACTICE</span>
-            </div>
-            <a href="/mirrored">
-              VIEW MIRRORED <span aria-hidden="true">→</span>
-            </a>
+            <p className="quiet">
+              This public overview describes roles and boundaries—not private
+              verifier logic, attack corpora, trust profiles, or claim
+              construction.
+            </p>
           </div>
         </div>
+
+        <div className="assurance-flow" aria-label="JCEE assurance flow">
+          <article><span>01</span><strong>EXECUTION</strong><p>A system proposes, acts, waits, recovers, or refuses.</p></article>
+          <article><span>02</span><strong>EVIDENCE</strong><p>Relevant state, authority, lineage, and outcome are preserved.</p></article>
+          <article><span>03</span><strong>VERIFICATION</strong><p>A bounded conclusion is derived from declared evidence and rules.</p></article>
+          <article><span>04</span><strong>REVIEW</strong><p>The result can be inspected without trusting the original narrator.</p></article>
+        </div>
+
+        <div className="infrastructure-grid">
+          {assuranceLayers.map((layer) => (
+            <article key={layer.label}>
+              <span>{layer.label}</span>
+              <h3>{layer.title}</h3>
+              <p>{layer.copy}</p>
+            </article>
+          ))}
+        </div>
+
+        <a className="section-detail-link" href="/assurance">
+          VIEW THE PUBLIC ASSURANCE OVERVIEW <span>→</span>
+        </a>
+      </section>
+      <div className="breath" aria-hidden="true" />
+
+      <section className="registry-section" id="registry" aria-labelledby="registry-title">
+        <div className="section-index">
+          <span>05 / PUBLIC REGISTRY</span>
+          <span>A LIVING RECORD · NOT A HIGHLIGHT REEL</span>
+        </div>
+
+        <div className="registry-intro">
+          <div>
+            <p className="registry-kicker">PUBLIC CLAIM CONTROL</p>
+            <h2 id="registry-title">What we established. What failed. What remains unresolved.</h2>
+          </div>
+          <div>
+            <p>
+              The JCEE Public Registry is a sanitized projection of our internal
+              research and build record. It shows public status, evidence
+              boundary, and known limitation without exposing private source,
+              attack corpora, counsel material, or enabling implementation
+              detail.
+            </p>
+          </div>
+        </div>
+
+        <div className="registry-preview">
+          {registryPreview.map((entry, index) => (
+            <article key={entry.name}>
+              <span className="registry-sequence">{String(index + 1).padStart(2, "0")}</span>
+              <div>
+                <span className="registry-state">{entry.status}</span>
+                <h3>{entry.name}</h3>
+                <p>{entry.boundary}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <a className="section-detail-link" href="/registry">
+          OPEN THE JCEE PUBLIC REGISTRY <span>→</span>
+        </a>
+      </section>
+      <div className="breath" aria-hidden="true" />
+
+      <section className="first-principle-section" id="charter" aria-labelledby="first-principle-title">
+        <div className="section-index light">
+          <span>06 / CHARTER</span>
+          <span>PUBLIC STANDARD · VERSION 1.1</span>
+        </div>
+
+        <div className="first-principle-lead">
+          <p>JCEE FIRST PRINCIPLE</p>
+          <h2 id="first-principle-title">
+            Hypotheses may begin anywhere.<br />
+            <em>Authority cannot.</em>
+          </h2>
+          <p>
+            Experience, intuition, coherence, imagination, serendipity, faith,
+            love, and felt meaning may generate questions worth investigating.
+            They do not, by themselves, establish shared-world empirical facts
+            or grant authority for consequential action.
+          </p>
+        </div>
+
+        <div className="first-principle-grid">
+          <article>
+            <span>01</span>
+            <h3>State is not authority.</h3>
+            <p>A model output, simulation, prediction, memory, or internal state does not become permission merely because it exists.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Unknown is not permission.</h3>
+            <p>Missing evidence, timeout, ambiguity, or expected success cannot silently become authorization.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Human responsibility remains.</h3>
+            <p>Intelligent software does not absorb responsibility from the people and institutions that direct, authorize, and deploy it.</p>
+          </article>
+        </div>
+
+        <a className="section-detail-link" href="/charter">
+          READ THE JCEE LABS CHARTER <span>→</span>
+        </a>
       </section>
 
       <BrandFooter backToTopHref="#top" />

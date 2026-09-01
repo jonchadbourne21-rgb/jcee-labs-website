@@ -1,5 +1,5 @@
 import { trpc } from "@/lib/trpc";
-import { UNAUTHED_ERR_MSG } from '@shared/const';
+import { UNAUTHED_ERR_MSG } from "@shared/const";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { httpBatchLink, TRPCClientError } from "@trpc/client";
 import { createRoot } from "react-dom/client";
@@ -13,6 +13,7 @@ import "./company-cubes.css";
 import "./vow-durability.css";
 import "./curlicue.css";
 import "./qcs-gate.css";
+import "./site-vnext.css";
 
 const queryClient = new QueryClient();
 

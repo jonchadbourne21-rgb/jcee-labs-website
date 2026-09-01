@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { getMobileMenuLabel, getMobileMenuState } from "./CoreHeader";
+import {
+  getMobileMenuLabel,
+  getMobileMenuState,
+  publicNavigationLinks,
+} from "./CoreHeader";
 
 describe("CoreHeader mobile navigation", () => {
   it("labels the closed menu as an action to open navigation", () => {
@@ -13,5 +17,22 @@ describe("CoreHeader mobile navigation", () => {
   it("uses the open and closed classes needed for CSS transitions", () => {
     expect(getMobileMenuState(false)).toBe("is-closed");
     expect(getMobileMenuState(true)).toBe("is-open");
+  });
+});
+
+describe("CoreHeader public information architecture", () => {
+  it("exposes the approved infrastructure navigation", () => {
+    expect(publicNavigationLinks.map((link) => link.label)).toEqual([
+      "JCEE LABS",
+      "JCEE VOW",
+      "QCS",
+      "ASSURANCE",
+      "REGISTRY",
+      "CHARTER",
+    ]);
+  });
+
+  it("does not present Mirrored as part of the JCEE public site", () => {
+    expect(publicNavigationLinks.some((link) => link.label === "MIRRORED")).toBe(false);
   });
 });

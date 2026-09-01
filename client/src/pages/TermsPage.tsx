@@ -10,7 +10,7 @@ export default function TermsPage() {
         <div className="container max-w-3xl mx-auto">
           <div className="space-y-4 mb-12">
             <h1 className="text-4xl md:text-5xl font-display font-extrabold text-white">Terms of Service</h1>
-            <p className="text-muted-foreground text-sm font-mono">Last Updated: August 18, 2026</p>
+            <p className="text-muted-foreground text-sm font-mono">Last Updated: September 1, 2026</p>
           </div>
 
           <div className="prose prose-invert max-w-none space-y-8 text-[#E2E8F0]/80 leading-relaxed">
@@ -24,7 +24,7 @@ export default function TermsPage() {
             <section className="space-y-4">
               <h2 className="text-xl font-display font-bold text-white">2. Description of Services</h2>
               <p>
-                JCEE Labs develops software and publishes technical research. The public website currently includes information about VOW, the QCS research program, Mirrored, the JCEE Labs Charter, and public research and evidence records. Product, research, and experiment status may change over time, and publication on this website does not by itself constitute a guarantee of production readiness, certification, or availability.
+                JCEE Labs develops software and publishes technical research. The public website currently includes information about JCEE VOW, the QCS research program, JCEE Assurance, the JCEE Public Registry, the JCEE Labs Charter, and public research and evidence records. Product, research, and experiment status may change over time, and publication on this website does not by itself constitute a guarantee of production readiness, certification, or availability.
               </p>
             </section>
 

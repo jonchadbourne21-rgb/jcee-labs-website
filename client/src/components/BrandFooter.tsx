@@ -21,17 +21,18 @@ export default function BrandFooter({ backToTopHref = "/#top" }: BrandFooterProp
           <span>INSTITUTION</span>
           <a href="/#company">JCEE Labs</a>
           <a href="/charter">Charter</a>
+          <a href="/charter/archive/v1.0">Charter v1.0 Archive</a>
         </div>
         <div>
-          <span>CORE WORK</span>
-          <a href="/#vow">VOW</a>
-          <a href="/research-evidence">Research &amp; Evidence</a>
-          <a href="/research/jrp-000">JRP-000 · Evidence Boundary</a>
+          <span>INFRASTRUCTURE</span>
+          <a href="/vow">JCEE VOW</a>
           <a href="/qcs">QCS</a>
+          <a href="/assurance">JCEE Assurance</a>
         </div>
         <div>
-          <span>CONSUMER</span>
-          <a href="/#mirrored">Mirrored</a>
+          <span>EVIDENCE</span>
+          <a href="/registry">Public Registry</a>
+          <a href="/research/jrp-000">JRP-000 · Evidence Boundary</a>
         </div>
         <div>
           <span>CONTACT</span>
