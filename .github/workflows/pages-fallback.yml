@@ -1,5 +1,5 @@
-# Primary GitHub Pages deployment for jceelabs.com
-name: JCEE Labs GitHub Pages
+# Independent GitHub Pages fallback. jceelabs.com is hosted and DNS-managed by Manus.
+name: JCEE Labs GitHub Pages Backup
 
 on:
   push:
@@ -40,39 +40,59 @@ jobs:
       - name: Run unit tests
         run: pnpm test
 
-      - name: Build production site for custom domain
-        run: pnpm exec vite build --base=/
+      - name: Build static backup for GitHub project URL
+        run: pnpm exec vite build --base=/jcee-labs-website/
 
-      - name: Harden production artifact
+      - name: Harden backup for GitHub Pages
         shell: bash
         run: |
           node <<'NODE'
           const fs = require("fs");
           const path = require("path");
-          const indexPath = path.join("dist/public", "index.html");
+
+          const root = "dist/public";
+          const prefix = "/jcee-labs-website";
+          const assets = path.join(root, "assets");
+
+          for (const name of fs.readdirSync(assets)) {
+            if (!name.endsWith(".js")) continue;
+            const file = path.join(assets, name);
+            let source = fs.readFileSync(file, "utf8");
+
+            source = source
+              .replaceAll('href:"/', `href:"${prefix}/`)
+              .replaceAll('src:"/', `src:"${prefix}/`)
+              .replaceAll('path:"/', `path:"${prefix}/`);
+
+            fs.writeFileSync(file, source);
+          }
+
+          const indexPath = path.join(root, "index.html");
           let html = fs.readFileSync(indexPath, "utf8");
 
           html = html
             .replace(/\s*<script id="manus-runtime">[\s\S]*?<\/script>/, "")
             .replace(/\s*<script\s+defer\s+src="%VITE_ANALYTICS_ENDPOINT%\/umami"[\s\S]*?<\/script>/, "")
+            .replace(
+              'content="https://jceelabs.com"',
+              'content="https://jonchadbourne21-rgb.github.io/jcee-labs-website/"'
+            )
             .replaceAll(
               'content="/manus-storage/jcee-labs-og-teal_587de72d.png"',
-              'content="https://jceelabs.com/brand/jcee-labs-mark.png"'
+              'content="https://jonchadbourne21-rgb.github.io/jcee-labs-website/brand/jcee-labs-mark.png"'
             );
 
           fs.writeFileSync(indexPath, html);
           NODE
 
-      - name: Verify production artifact boundary
+      - name: Verify backup artifact boundary
         shell: bash
         run: |
-          test -f dist/public/CNAME
-          grep -qx 'jceelabs.com' dist/public/CNAME
+          test ! -e dist/public/CNAME
           ! grep -q 'id="manus-runtime"' dist/public/index.html
           ! grep -q 'VITE_ANALYTICS_ENDPOINT' dist/public/index.html
-          grep -q '/assets/' dist/public/index.html
-          ! grep -q '/jcee-labs-website/assets/' dist/public/index.html
-          grep -q 'content="https://jceelabs.com"' dist/public/index.html
+          grep -q '/jcee-labs-website/assets/' dist/public/index.html
+          grep -R -q 'path:"/jcee-labs-website/' dist/public/assets
 
       - name: Prepare SPA fallback
         run: |
@@ -94,6 +114,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy backup to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
