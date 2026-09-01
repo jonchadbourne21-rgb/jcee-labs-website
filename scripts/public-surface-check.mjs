@@ -244,6 +244,23 @@ try {
     }
   }
 
+  await navigate(page.send, baseUrl, "/terms");
+  const termsText = await readBody(page.send);
+  if (termsText.toUpperCase().includes("MIRRORED")) {
+    failures.push("Terms still expose the retired Mirrored product");
+  }
+  for (const requiredTermsSurface of [
+    "JCEE VOW",
+    "QCS research program",
+    "JCEE Assurance",
+    "JCEE Public Registry",
+    "JCEE Labs Charter",
+  ]) {
+    if (!termsText.includes(requiredTermsSurface)) {
+      failures.push(`Terms are missing current public surface: ${requiredTermsSurface}`);
+    }
+  }
+
   await navigate(page.send, baseUrl, "/registry");
   const registryDownloadLink = await evaluate(
     page.send,
@@ -308,7 +325,7 @@ try {
 
   console.log(
     `Public surface gate passed: ${retiredRoutes.length} retired routes resolve to JCEE 404; ` +
-      "JCEE Assurance, Public Registry, Charter v1.1, preserved Charter v1.0, Privacy, and Terms are intact."
+      "JCEE Assurance, Public Registry, Charter v1.1, preserved Charter v1.0, Privacy, and current Terms are intact."
   );
   page.close();
 } catch (error) {
