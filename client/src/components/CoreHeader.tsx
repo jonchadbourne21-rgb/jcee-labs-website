@@ -2,16 +2,27 @@ import { Menu, Moon, Sun, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 
+export type CoreHeaderCurrent =
+  | "jcee"
+  | "vow"
+  | "qcs"
+  | "assurance"
+  | "registry"
+  | "charter"
+  | "research"
+  | "mirrored";
+
 type CoreHeaderProps = {
-  current?: "jcee" | "vow" | "research" | "qcs" | "mirrored";
+  current?: CoreHeaderCurrent;
 };
 
-const links = [
+export const publicNavigationLinks = [
   { id: "jcee", label: "JCEE LABS", href: "/#company" },
-  { id: "vow", label: "VOW", href: "/#vow" },
-  { id: "research", label: "RESEARCH", href: "/research-evidence" },
+  { id: "vow", label: "JCEE VOW", href: "/vow" },
   { id: "qcs", label: "QCS", href: "/qcs" },
-  { id: "mirrored", label: "MIRRORED", href: "/#mirrored" },
+  { id: "assurance", label: "ASSURANCE", href: "/assurance" },
+  { id: "registry", label: "REGISTRY", href: "/registry" },
+  { id: "charter", label: "CHARTER", href: "/charter" },
 ] as const;
 
 export const getMobileMenuLabel = (menuOpen: boolean) =>
@@ -61,7 +72,7 @@ export default function CoreHeader({ current }: CoreHeaderProps) {
   }, [menuOpen]);
 
   const renderLinks = (mobile = false) =>
-    links.map((link, index) => (
+    publicNavigationLinks.map((link, index) => (
       <a
         key={link.id}
         href={link.href}
@@ -77,7 +88,12 @@ export default function CoreHeader({ current }: CoreHeaderProps) {
   return (
     <header className="site-header">
       <a className="wordmark" href="/" aria-label="JCEE Labs home">
-        <img className="wordmark-mark" src="/brand/jcee-labs-mark.png" alt="" aria-hidden="true" />
+        <img
+          className="wordmark-mark"
+          src="/brand/jcee-labs-mark.png"
+          alt=""
+          aria-hidden="true"
+        />
         <span>JCEE LABS</span>
       </a>
 
@@ -97,7 +113,11 @@ export default function CoreHeader({ current }: CoreHeaderProps) {
             title={mobileMenuLabel}
             onClick={() => setMenuOpen((open) => !open)}
           >
-            {menuOpen ? <X aria-hidden="true" size={17} /> : <Menu aria-hidden="true" size={17} />}
+            {menuOpen ? (
+              <X aria-hidden="true" size={17} />
+            ) : (
+              <Menu aria-hidden="true" size={17} />
+            )}
           </button>
           <nav
             id="mobile-navigation"
@@ -120,7 +140,11 @@ export default function CoreHeader({ current }: CoreHeaderProps) {
           aria-pressed={!isDark}
           title={isDark ? "Switch to light mode" : "Switch to dark mode"}
         >
-          {isDark ? <Sun aria-hidden="true" size={13} /> : <Moon aria-hidden="true" size={13} />}
+          {isDark ? (
+            <Sun aria-hidden="true" size={13} />
+          ) : (
+            <Moon aria-hidden="true" size={13} />
+          )}
           <span>{isDark ? "LIGHT" : "DARK"}</span>
         </button>
       </div>

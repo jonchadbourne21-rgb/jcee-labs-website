@@ -29,7 +29,7 @@ export default function VowPage() {
           recover, and remain accountable when execution does not go as planned.
         </p>
         <div className="program-status-row">
-          <span>VERSION · 1.1</span>
+          <span>HISTORICAL RELEASE · VOW 1.1</span>
           <span>STATUS · VERIFIED MILESTONE / ACTIVE HARDENING</span>
         </div>
       </section>
@@ -77,7 +77,8 @@ export default function VowPage() {
           survives. If it does not, the claim will narrow.
         </p>
         <div className="program-links">
-          <a href="/research-evidence">VIEW THE EVIDENCE INDEX <span>→</span></a>
+          <a href="/registry">VIEW THE PUBLIC REGISTRY <span>→</span></a>
+          <a href="/assurance">VIEW JCEE ASSURANCE <span>→</span></a>
           <a href="/charter">READ THE CHARTER <span>→</span></a>
         </div>
       </section>

@@ -6,11 +6,12 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import { lazy, Suspense, useEffect } from "react";
 
-const Charter = lazy(() => import("./pages/Charter"));
-const ResearchEvidence = lazy(() => import("./pages/ResearchEvidence"));
+const AssurancePage = lazy(() => import("./pages/AssurancePage"));
+const CharterV11 = lazy(() => import("./pages/CharterV11"));
+const CharterV10 = lazy(() => import("./pages/Charter"));
+const PublicRegistry = lazy(() => import("./pages/PublicRegistry"));
 const Jrp000 = lazy(() => import("./pages/Jrp000"));
 const NotFound = lazy(() => import("./pages/NotFound"));
-const Mirrored = lazy(() => import("./pages/Mirrored"));
 const VowPage = lazy(() => import("./pages/VowPage"));
 const QcsPage = lazy(() => import("./pages/QcsPage"));
 const AdminPage = lazy(() => import("./pages/AdminPage"));
@@ -37,12 +38,14 @@ function Router() {
     <Suspense fallback={<RouteShimmer />}>
       <Switch>
         <Route path="/" component={Home} />
-        <Route path="/charter" component={Charter} />
-        <Route path="/research-evidence" component={ResearchEvidence} />
+        <Route path="/charter/archive/v1.0" component={CharterV10} />
+        <Route path="/charter" component={CharterV11} />
+        <Route path="/registry" component={PublicRegistry} />
+        <Route path="/research-evidence" component={PublicRegistry} />
+        <Route path="/assurance" component={AssurancePage} />
         <Route path="/research/jrp-000" component={Jrp000} />
         <Route path="/vow" component={VowPage} />
         <Route path="/qcs" component={QcsPage} />
-        <Route path="/mirrored" component={Mirrored} />
         <Route path="/admin" component={AdminPage} />
         <Route path="/admin/pricing" component={PricingAdmin} />
         <Route path="/privacy" component={PrivacyPage} />
