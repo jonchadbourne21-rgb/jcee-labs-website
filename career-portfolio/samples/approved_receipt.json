@@ -1,0 +1,22 @@
+{
+  "decision": {
+    "allowed": true,
+    "reason": "approved_by_demo_policy"
+  },
+  "effect": {
+    "amount": "125.00",
+    "effect_id": "simulated:sample-approved-001",
+    "status": "simulated",
+    "target": "sandbox-vendor-a"
+  },
+  "notice": "Invented public example. Records only this toy's deterministic decision and simulated effect; it is not a production, compliance, or external-truth claim.",
+  "proposal": {
+    "amount": "125.00",
+    "proposal_id": "sample-approved-001",
+    "purpose": "recruiting demonstration",
+    "target": "sandbox-vendor-a"
+  },
+  "receipt_id": "career-demo-a0d447720e4c583c",
+  "receipt_version": "career-demo-1",
+  "scope": "recruiting_only_simulation"
+}

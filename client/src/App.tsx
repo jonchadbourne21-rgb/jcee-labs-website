@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import { lazy, Suspense, useEffect } from "react";
 
 const AssurancePage = lazy(() => import("./pages/AssurancePage"));
+const CareerPortfolio = lazy(() => import("./pages/CareerPortfolio"));
 const CharterV11 = lazy(() => import("./pages/CharterV11"));
 const CharterV10 = lazy(() => import("./pages/Charter"));
 const PublicRegistry = lazy(() => import("./pages/PublicRegistry"));
@@ -38,6 +39,7 @@ function Router() {
     <Suspense fallback={<RouteShimmer />}>
       <Switch>
         <Route path="/" component={Home} />
+        <Route path="/portfolio" component={CareerPortfolio} />
         <Route path="/charter/archive/v1.0" component={CharterV10} />
         <Route path="/charter" component={CharterV11} />
         <Route path="/registry" component={PublicRegistry} />
