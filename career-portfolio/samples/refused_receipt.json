@@ -1,0 +1,17 @@
+{
+  "decision": {
+    "allowed": false,
+    "reason": "target_not_allowed"
+  },
+  "effect": null,
+  "notice": "Invented public example. Records only this toy's deterministic decision and simulated effect; it is not a production, compliance, or external-truth claim.",
+  "proposal": {
+    "amount": "125.00",
+    "proposal_id": "sample-refused-001",
+    "purpose": "recruiting demonstration",
+    "target": "not-on-demo-allowlist"
+  },
+  "receipt_id": "career-demo-bc04ed5c3b1d1fe2",
+  "receipt_version": "career-demo-1",
+  "scope": "recruiting_only_simulation"
+}
