@@ -1,0 +1,55 @@
+{
+  "schema": "JCEE_DIFF_P0_1D_STEP2_RECEIPT_V1",
+  "date": "2026-09-03",
+  "contract_id": "JCEE-DIFF-P0.1D-STEP2",
+  "status": "ADVANCE_RESIDUAL_NO_BUILD_YET",
+  "validity": {
+    "comparator_frozen_before_adjudication": true,
+    "benchmark_set_frozen_before_adjudication": true,
+    "comparator_blob": "346f0ece4e755457f725f936f0bb3a9800889708",
+    "benchmark_selection_blob": "c486d7c57d50e7f7e36d6cffbb5ab106b88922f6"
+  },
+  "benchmarks": {
+    "Temporal": {
+      "verdict": "RESIDUAL_PROPERTY",
+      "packet_blob": "a95b967d76c5b3236c37afaddfb6562cd8347633",
+      "independence": "OFFICIAL_DOCUMENTARY_NO_LIVE_HARNESS"
+    },
+    "Stripe": {
+      "verdict": "INDETERMINATE",
+      "packet_blob": "604e3f21a1fc855def5f4b2b132b4b5606404b05",
+      "independence": "OFFICIAL_DOCUMENTARY_LIVE_TEST_REQUIRED",
+      "missing_evidence": "same-operation concurrent-worker and authority-transition test-mode observation"
+    },
+    "Authzed_SpiceDB": {
+      "verdict": "RESIDUAL_PROPERTY",
+      "packet_blob": "aee97e5c7ef002e278c3497b1a98bdab2904f648",
+      "independence": "OFFICIAL_DOCUMENTARY_NO_LIVE_HARNESS"
+    },
+    "AWS_native_composition": {
+      "verdict": "RESIDUAL_PROPERTY",
+      "packet_blob": "b8216fbb93402b1d70302fe989115f43c00cf334",
+      "independence": "OFFICIAL_DOCUMENTARY_NO_LIVE_HARNESS"
+    }
+  },
+  "native_judgment": "strongest-faithful native control reconstruction under frozen H01-H14 comparator",
+  "cross_program_judgment": "three bounded documentary residuals plus one explicit indeterminate strongest direct consequential-target falsifier",
+  "surviving_candidate_property": "current/causally-fresh authority + exact consequential effect binding + unique execution ownership/non-conflicting authoritative attribution + independently verifiable receipt closure + authority-closed recovery after ambiguous failure across non-shared transaction/ownership domains",
+  "broad_claims_killed": [
+    "current authority alone as JCEE differentiator",
+    "durable workflow recovery alone as JCEE differentiator",
+    "exactly-once workflow execution alone as JCEE differentiator",
+    "OCC/CAS alone as JCEE differentiator",
+    "idempotency/deduplication alone as JCEE differentiator",
+    "audit/event history alone as JCEE differentiator",
+    "generic workflow+OCC+idempotency+authorization+audit composition as broad JCEE differentiator"
+  ],
+  "economic_importance": "NOT_EVALUATED",
+  "integration_burden": "NOT_YET_TARGET_SPECIFIC",
+  "build_authority": false,
+  "qcs_dcc_successor_authorized": false,
+  "payabli_gap_proven": false,
+  "payos_gap_proven": false,
+  "claim_ceiling": "documentary benchmark falsification and narrow residual nomination only; no uniqueness, novelty, patentability, FTO, production, market-superiority, or target-specific gap claim",
+  "next_action": "resolve Stripe in safe test mode if legitimate sandbox route becomes available; then apply frozen comparator independently to Payabli and payOS while preserving Stripe indeterminacy"
+}
