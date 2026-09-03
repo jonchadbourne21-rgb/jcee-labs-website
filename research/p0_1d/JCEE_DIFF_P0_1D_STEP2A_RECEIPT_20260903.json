@@ -1,0 +1,44 @@
+{
+  "schema": "JCEE_DIFF_P0_1D_STEP2A_RECEIPT_V1",
+  "date": "2026-09-03",
+  "contract_id": "JCEE-DIFF-P0.1D-STEP2A",
+  "status": "ADVANCE_RESIDUAL_NO_BUILD_YET",
+  "validity": {
+    "attack_frozen_before_adjudication": true,
+    "freeze_blob": "7acb0bb68391d12477843ec8346e1dec5ab28ef7",
+    "synthesis_blob": "a5f68e2a32d68beb85b5de49e5a2f5e3e52489fa"
+  },
+  "targets": {
+    "DBOS": {
+      "verdict": "RESIDUAL_PROPERTY",
+      "packet_blob": "1a42b76a922b3a44f61364838a20acf0b2b903dc",
+      "infrastructure_disposition": "DATABASE_CENTRIC_SUBSTRATE_CANDIDATE"
+    },
+    "Restate": {
+      "verdict": "RESIDUAL_PROPERTY",
+      "packet_blob": "eff083fc66843d0179730ad1eb2e139be01be8f6",
+      "infrastructure_disposition": "PRIMARY_SUBSTRATE_CANDIDATE_FOR_EVALUATION"
+    },
+    "Cloudflare_Durable_Objects": {
+      "verdict": "RESIDUAL_PROPERTY",
+      "packet_blob": "86d2f0ef0bfb0b96f7f793552f2fe4f2fad86528",
+      "infrastructure_disposition": "EDGE_SPECIALIST_NOT_CORE_CANDIDATE"
+    },
+    "Azure_Durable_Task": {
+      "verdict": "RESIDUAL_PROPERTY",
+      "packet_blob": "f2264ddc763221653878e483050581e3f64b603e",
+      "infrastructure_disposition": "CUSTOMER_NATIVE_INTEGRATION_TARGET"
+    }
+  },
+  "surviving_hypothesis": "Current/causally-fresh authority + exact external effect binding + authoritative effect ownership/non-conflicting attribution + target-side observation + authority-closed ambiguity recovery + independently verifiable receipt closure when the external consequential target is outside the durable substrate's strongest atomic ownership/transaction domain.",
+  "architecture_finding": "RIGHT_PROPERTY_POSSIBLY_TOO_MUCH_OWNED_COMMODITY_EXECUTION_INFRASTRUCTURE",
+  "next_recommended_gate": "JCEE-ARCH-P0.1_EXECUTION_SUBSTRATE_SUBSTITUTION_AND_COMMODITY_OFFLOAD",
+  "build_authority": false,
+  "migration_authority": false,
+  "restate_adoption_authority": false,
+  "dbos_adoption_authority": false,
+  "vow_rewrite_authority": false,
+  "qcs_dcc_engineering_authority": false,
+  "unresolved_falsifier": "Stripe remains INDETERMINATE from Step 2",
+  "claim_ceiling": "Documentary comparative residual and architecture-candidate finding only; no novelty, patentability, FTO, production-readiness, universal-superiority, or customer-gap claim."
+}
