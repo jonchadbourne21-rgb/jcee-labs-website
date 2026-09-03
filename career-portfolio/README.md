@@ -4,6 +4,11 @@ This repository area is a **recruiting-only, deliberately non-proprietary techni
 
 JCEE Labs: https://jceelabs.com
 
+## Recruiting quick paths
+
+- **AI / RAG evaluation engineering:** https://github.com/jonchadbourne21-rgb/higher-self — public TypeScript RAG evaluation work covering precision@K, recall@K, MRR, LLM-judged relevance, groundedness, latency, bounded judge cost, and explicit evaluation limitations.
+- **Consequential workflow demonstrator:** continue below for the recruiting-only deterministic gate/effect/receipt example in this repository.
+
 ## What this demonstrates
 
 A small deterministic flow:
