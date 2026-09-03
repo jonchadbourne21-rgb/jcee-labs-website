@@ -49,4 +49,4 @@ For JCEE Labs' current public record and public research surfaces, visit https:/
 ---
 
 **Jonathan Chadbourne** — Founder & Chief Architect, JCEE Labs  
-Dallas, TX · support@jceelabs.com · https://jceelabs.com
+Dallas, TX · jonchadbourne21@gmail.com · https://jceelabs.com
