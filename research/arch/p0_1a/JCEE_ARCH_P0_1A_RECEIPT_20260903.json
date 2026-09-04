@@ -1,0 +1,71 @@
+{
+  "schema": "JCEE_ARCH_P0_1A_RECEIPT_V1",
+  "date": "2026-09-03",
+  "contract_id": "JCEE-ARCH-P0.1A",
+  "status": "PASS_BOUNDED_SHADOW",
+  "branch": "jcee-arch-p0.1a-20260903",
+  "prereg_commit": "a7205c6241743a95fed2514d20cf00c5f2330ad9",
+  "execution_head": "cfdf3a3624e60d9384af733f2fe04cc8aa6641fd",
+  "workflow_run_id": 33825354238,
+  "job_id": 100876726889,
+  "artifact": {
+    "id": 9919742572,
+    "name": "jcee-arch-p0-1a-evidence",
+    "zip_sha256": "6ef5000e6a8c74673cfb9823807b09efd8d57dffd5c7a22f6542049025df8dfa",
+    "results_sha256": "eb532ccca5058b093b8ca513a9e8ab1661be6384e3d5ab3571fa7d995473d8b2",
+    "npm_tree_sha256": "bafb0e3e3a9a1bc5dea4c55a0a534b99fac59198b45bc2fcd39d6c4cac3eab97"
+  },
+  "environment": {
+    "runner": "GitHub-hosted Ubuntu 24.04.4",
+    "azure_region": "eastus",
+    "node": "22.23.2",
+    "npm": "10.9.8",
+    "docker": "28.0.4",
+    "restate_sdk": "1.16.9",
+    "restate_clients": "1.16.9",
+    "restate_testcontainers": "1.16.9"
+  },
+  "execution_mode": {
+    "restate": "REAL_LOCAL_RESTATE_TESTCONTAINER",
+    "vow": "FROZEN_VOW_REFERENCE_SEMANTIC_FIXTURE",
+    "real_external_target": false
+  },
+  "acceptance": {
+    "c01": true,
+    "c02": true,
+    "c03": true,
+    "c04": true,
+    "c05": true,
+    "c06": true,
+    "c07": true,
+    "c08_semantic_equivalence": true,
+    "c09_repeat_identity": true,
+    "zero_real_external_effects": true,
+    "substrate_retry_non_authority": true,
+    "target_truth_non_inflation": true,
+    "stale_authority_fails_closed": true,
+    "stale_dependency_fails_closed": true
+  },
+  "c09_observed": {
+    "first_submit_status": "Accepted",
+    "second_submit_status": "PreviouslyAccepted",
+    "same_canonical_result": true
+  },
+  "security_observations": {
+    "local_test_handler_signature_validation_disabled_warning": true,
+    "npm_moderate_vulnerabilities_reported": 4,
+    "production_security_qualified": false
+  },
+  "reproducibility_observations": {
+    "top_level_versions_pinned": true,
+    "full_installed_dependency_tree_captured": true,
+    "package_lock_preserved": false
+  },
+  "architectural_disposition": "RESTATE_SHADOW_PLUG_CONTRACT_FEASIBLE",
+  "vow_abandonment_authorized": false,
+  "vow_deprecation_authorized": false,
+  "restate_production_adoption_authorized": false,
+  "real_consequential_effect_authorized": false,
+  "automatic_next_gate_authorized": false,
+  "claim_ceiling": "Bounded Restate shadow plug-contract feasibility and semantic equivalence to frozen VOW reference fixture only; no executable VOW-Restate parity, production readiness, or external-effect closure claim."
+}
