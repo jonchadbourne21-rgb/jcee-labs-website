@@ -1,0 +1,51 @@
+{
+  "schema": "JCEE_DIFF_P0_1D_STEP4_RECEIPT_V1",
+  "date": "2026-09-04",
+  "contract_id": "JCEE-DIFF-P0.1D-STEP4",
+  "status": "ADVANCE_BOTH_BUYER_LANES",
+  "validity": {
+    "step4_frozen_before_adjudication": true,
+    "step4_freeze_blob": "7bdc348326e8e2e8cacc721f30ed1dddec65dc45",
+    "step3_synthesis_blob": "cc06326b940fd99cf6917861ebcbbfa10a541c07",
+    "payabli_technical_packet_blob": "d4299de57741722e432f1e39811c3ae3157c4994",
+    "step4_synthesis_blob": "1866b3d1f15d79edf08b47f5e3771ce944890397",
+    "step4a_discovery_packet_blob": "fc3e53ed8cdf6be83ddaceada66d13d11264edd5"
+  },
+  "buyer_lanes": {
+    "payabli_vendor": {
+      "disposition": "ADVANCE_DISCOVERY",
+      "wedge": "CURRENT_AUTHORITY_PLUS_EXACT_RECOVERY_PERMISSION_PLUS_DURABLE_OPERATION_RECOVERY_RECEIPT",
+      "integration_burden": "POTENTIALLY_LOW_TO_MEDIUM_VENDOR_NATIVE_COMMERCIAL_ACCESS_UNKNOWN",
+      "willingness_to_pay": "UNPROVEN"
+    },
+    "payabli_customer_platform": {
+      "disposition": "ADVANCE_DISCOVERY_PRIORITY_1",
+      "wedge": "DURABLE_LOGICAL_OPERATION_IDENTITY_PLUS_TARGET_OBSERVATION_PLUS_AUTHORITY_CLOSED_RECOVERY_PLUS_CANONICAL_RECEIPT",
+      "recovery_sidecar_burden": "LOW_TO_MEDIUM_DOCUMENTARY_HYPOTHESIS",
+      "immediate_stale_token_enforcement_burden": "MEDIUM_TO_HIGH_IF_CUSTOMER_SIDE_MEDIATION_REQUIRED",
+      "willingness_to_pay": "UNPROVEN"
+    }
+  },
+  "economic_judgment": {
+    "problem_reality": "SUPPORTED_BY_VENDOR_DOCUMENTATION_AND_PRODUCT_POSITIONING",
+    "buyer_ownership": "SUPPORTED_AS_ROLE_HYPOTHESIS",
+    "customer_incident_evidence": "NOT_YET_OBTAINED",
+    "willingness_to_evaluate": "UNPROVEN",
+    "willingness_to_pay": "UNPROVEN"
+  },
+  "other_targets": {
+    "payOS": "HOLD_NATIVE_RESIDUAL_INDETERMINATE",
+    "Stripe": "INDETERMINATE_EXTERNAL_FALSIFIER"
+  },
+  "build_authority": {
+    "payabli_adapter": false,
+    "payabli_sandbox": false,
+    "credential_use": false,
+    "vow_change": false,
+    "qcs_dcc_change": false,
+    "restate_production_integration": false
+  },
+  "outreach_status": "PREPARED_NOT_SENT",
+  "next_authorized_action": "DIRECT_FALSIFICATION_FIRST_DISCOVERY_USING_STEP4A_PACKET",
+  "claim_ceiling": "Public-documentary technical and commercial-discovery qualification only; no willingness-to-pay, production-readiness, vendor-defect, superiority, novelty, or patentability claim."
+}
