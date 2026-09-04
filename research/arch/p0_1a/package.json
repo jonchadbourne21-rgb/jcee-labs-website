@@ -1,0 +1,13 @@
+{
+  "name": "jcee-arch-p0-1a-shadow-plug",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node run_test.mjs"
+  },
+  "dependencies": {
+    "@restatedev/restate-sdk": "1.16.9",
+    "@restatedev/restate-sdk-clients": "1.16.9",
+    "@restatedev/restate-sdk-testcontainers": "1.16.9"
+  }
+}
