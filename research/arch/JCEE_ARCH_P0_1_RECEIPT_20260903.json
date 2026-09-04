@@ -1,0 +1,44 @@
+{
+  "schema": "JCEE_ARCH_P0_1_RECEIPT_V1",
+  "date": "2026-09-03",
+  "contract_id": "JCEE-ARCH-P0.1",
+  "status": "QUALIFY_BOTH_DIFFERENT_SCOPES",
+  "architectures": {
+    "VOW_REFERENCE_NATIVE": {
+      "disposition": "KEEP_AS_REFERENCE_AND_FALLBACK_BASELINE",
+      "vow_release_ref": "release/vow-1.1-verified-20260812",
+      "vow_readme_blob": "5a8db8d69fc939f55f86417ea0d1fd0a86336422",
+      "vow_architecture_blob": "600507bb82f08fb82bceeb2d8dcf23146b4bd699"
+    },
+    "RESTATE_SUBSTRATE": {
+      "disposition": "QUALIFIED_OPTIONAL_GENERAL_SUBSTRATE_CANDIDATE",
+      "implementation_authorized": false
+    },
+    "DBOS_SUBSTRATE": {
+      "disposition": "QUALIFIED_OPTIONAL_POSTGRES_SUBSTRATE_CANDIDATE",
+      "implementation_authorized": false
+    }
+  },
+  "governing_laws": {
+    "vow_abandonment_authorized": false,
+    "vow_deprecation_authorized": false,
+    "vow_rewrite_authorized": false,
+    "substrate_retry_creates_authority": false,
+    "external_target_truth_outranks_runtime_self_report": true,
+    "canonical_jcee_contract_must_remain_substrate_neutral": true,
+    "plug_must_be_removable": true
+  },
+  "automatic_retry_containment": {
+    "required": true,
+    "rule": "Substrate retry/replay/recovery may schedule observation, reconciliation, or a JCEE recovery decision but may not itself authorize a new consequential target attempt after an ambiguous boundary."
+  },
+  "build_authority": {
+    "restate_integration": false,
+    "dbos_integration": false,
+    "new_qcs_dcc_branch": false,
+    "production_migration": false,
+    "customer_adapter": false
+  },
+  "recommended_successor": "JCEE-ARCH-P0.1A — Substrate-Neutral Plug Contract & Reversibility Gate",
+  "claim_ceiling": "Documentary architecture qualification only; no production-readiness, performance, migration-safety, or implementation-conformance claim."
+}
