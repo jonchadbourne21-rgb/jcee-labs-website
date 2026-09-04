@@ -1,0 +1,60 @@
+name: JCEE ARCH P0.1A Shadow Plug
+
+on:
+  push:
+    branches:
+      - jcee-arch-p0.1a-20260903
+    paths:
+      - 'research/arch/p0_1a/**'
+      - '.github/workflows/jcee-arch-p0-1a.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  shadow-plug-conformance:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: research/arch/p0_1a
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Record environment
+        run: |
+          node --version
+          npm --version
+          docker --version
+
+      - name: Install exact Restate dependencies
+        run: npm install --ignore-scripts=false
+
+      - name: Record dependency tree
+        run: npm ls --all > JCEE_ARCH_P0_1A_NPM_TREE.txt
+
+      - name: Run bounded shadow conformance test
+        run: npm test
+
+      - name: Hash evidence
+        if: always()
+        run: |
+          sha256sum JCEE_ARCH_P0_1A_RESULTS.json JCEE_ARCH_P0_1A_NPM_TREE.txt > JCEE_ARCH_P0_1A_SHA256SUMS.txt || true
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jcee-arch-p0-1a-evidence
+          path: |
+            research/arch/p0_1a/JCEE_ARCH_P0_1A_RESULTS.json
+            research/arch/p0_1a/JCEE_ARCH_P0_1A_NPM_TREE.txt
+            research/arch/p0_1a/JCEE_ARCH_P0_1A_SHA256SUMS.txt
+          if-no-files-found: warn
