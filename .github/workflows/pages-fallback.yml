@@ -53,9 +53,31 @@ jobs:
           const root = "dist/public";
           const prefix = "/jcee-labs-website";
           const assets = path.join(root, "assets");
+          const mediaRewrites = new Map([
+            [
+              "/manus-storage/jcee-hero-ledger-emerald-1920_af0c5b4a.webp",
+              `${prefix}/visuals/jcee-hero-ledger-emerald-1920.webp`,
+            ],
+            [
+              "/manus-storage/jcee-hero-ledger-emerald-mobile-960_2801aea1.webp",
+              `${prefix}/visuals/jcee-hero-ledger-emerald-mobile-960.webp`,
+            ],
+            [
+              "/manus-storage/jcee-assurance-ledger-1600_4a66a78a.webp",
+              `${prefix}/visuals/jcee-assurance-ledger-1600.webp`,
+            ],
+            [
+              "/manus-storage/jcee-hero-ledger-motion-1600_ac3320fa.webm",
+              `${prefix}/visuals/jcee-hero-ledger-motion-1600.webm`,
+            ],
+            [
+              "/manus-storage/jcee-hero-ledger-motion-1600_8b7eac81.mp4",
+              `${prefix}/visuals/jcee-hero-ledger-motion-1600.mp4`,
+            ],
+          ]);
 
           for (const name of fs.readdirSync(assets)) {
-            if (!name.endsWith(".js")) continue;
+            if (!name.endsWith(".js") && !name.endsWith(".css")) continue;
             const file = path.join(assets, name);
             let source = fs.readFileSync(file, "utf8");
 
@@ -63,6 +85,10 @@ jobs:
               .replaceAll('href:"/', `href:"${prefix}/`)
               .replaceAll('src:"/', `src:"${prefix}/`)
               .replaceAll('path:"/', `path:"${prefix}/`);
+
+            for (const [from, to] of mediaRewrites) {
+              source = source.replaceAll(from, to);
+            }
 
             fs.writeFileSync(file, source);
           }
@@ -93,6 +119,12 @@ jobs:
           ! grep -q 'VITE_ANALYTICS_ENDPOINT' dist/public/index.html
           grep -q '/jcee-labs-website/assets/' dist/public/index.html
           grep -R -q 'path:"/jcee-labs-website/' dist/public/assets
+          test -f dist/public/visuals/jcee-hero-ledger-motion-1600.webm
+          test -f dist/public/visuals/jcee-hero-ledger-motion-1600.mp4
+          test -f dist/public/visuals/jcee-hero-ledger-emerald-mobile-960.webp
+          grep -R -q '/jcee-labs-website/visuals/jcee-hero-ledger-motion-1600.webm' dist/public/assets
+          grep -R -q '/jcee-labs-website/visuals/jcee-hero-ledger-motion-1600.mp4' dist/public/assets
+          ! grep -R -q '/manus-storage/jcee-hero-ledger' dist/public/assets
 
       - name: Prepare SPA fallback
         run: |

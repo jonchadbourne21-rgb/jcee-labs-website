@@ -317,7 +317,15 @@ nav a:hover::after { transform: scaleX(1); }
 .header-contact span { margin-left: 6px; }
 
 .hero {
-  background: #000000 url("/manus-storage/jcee-hero-cubes_002df7db.png") no-repeat center right / 60%;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0.28) 38%,
+      rgba(0, 0, 0, 0.08) 64%,
+      rgba(0, 0, 0, 0.03) 100%
+    ),
+    #000000 url("/manus-storage/jcee-hero-ledger-emerald-1920_af0c5b4a.webp") no-repeat center / cover;
   background-attachment: fixed;
   display: grid;
   gap: 7vw;
@@ -1122,8 +1130,9 @@ h1 em,
   .header-contact { font-size: 9px; }
 
   .hero {
+    background-attachment: scroll;
+    background-position: 62% center;
     min-height: auto;
-  .hero { background-attachment: scroll; background-size: 90%; background-position: center bottom; }
     padding: 6vh 20px 20px;
   }
 
@@ -2163,7 +2172,7 @@ html.light .site-header .header-contact {
 }
 
 html.light .hero {
-  background: #f5f7fb url("/manus-storage/jcee-hero-cubes_002df7db.png") no-repeat center right / 60%;
+  background: #f5f7fb url("/manus-storage/jcee-hero-ledger-emerald-1920_af0c5b4a.webp") no-repeat center / cover;
   background-blend-mode: screen;
   color: var(--ink);
 }
