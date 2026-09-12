@@ -5,49 +5,7 @@ import HexWaveField from "@/components/HexWaveField";
 import QcsTransitionGate from "@/components/QcsTransitionGate";
 import VowDurabilityDemo from "@/components/VowDurabilityDemo";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { useEffect, useState } from "react";
 import "@/home-hex.css";
-
-function DesktopHeroMotion() {
-  const [enabled, setEnabled] = useState(false);
-
-  useEffect(() => {
-    const query = window.matchMedia(
-      "(min-width: 901px) and (prefers-reduced-motion: no-preference)",
-    );
-    const update = () => setEnabled(query.matches);
-
-    update();
-    query.addEventListener("change", update);
-    return () => query.removeEventListener("change", update);
-  }, []);
-
-  if (!enabled) return null;
-
-  return (
-    <div className="hero-media" aria-hidden="true">
-      <video
-        className="hero-motion"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        poster="/manus-storage/jcee-hero-ledger-emerald-1920_af0c5b4a.webp"
-        tabIndex={-1}
-      >
-        <source
-          src="/manus-storage/jcee-hero-ledger-motion-1600_ac3320fa.webm"
-          type="video/webm"
-        />
-        <source
-          src="/manus-storage/jcee-hero-ledger-motion-1600_8b7eac81.mp4"
-          type="video/mp4"
-        />
-      </video>
-    </div>
-  );
-}
 
 const guarantees = [
   {
@@ -126,7 +84,6 @@ export default function Home() {
       <CoreHeader current="jcee" />
 
       <section className="hero hex-hero">
-        <DesktopHeroMotion />
         <HexWaveField />
         <div className="hex-ambient-data" aria-hidden="true">
           <span>0x0000 · 4A 43 45 45 · JCEE</span>

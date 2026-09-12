@@ -4,8 +4,9 @@
   --hex-cyan: #4cc9f0;
   --hex-cyan-soft: rgba(76, 201, 240, 0.15);
   background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.26) 40%, rgba(0, 0, 0, 0.06) 72%, transparent 100%),
-    #020605 url("/manus-storage/jcee-hero-ledger-emerald-1920_af0c5b4a.webp") no-repeat center / cover;
+    radial-gradient(circle at 76% 32%, rgba(76, 201, 240, 0.07), transparent 31%),
+    radial-gradient(circle at 20% 18%, rgba(98, 255, 139, 0.055), transparent 26%),
+    #020605;
   background-attachment: scroll;
   color: #f7fbf9;
   gap: clamp(34px, 4vw, 72px);
@@ -16,30 +17,6 @@
   padding-bottom: 7vh;
   padding-top: 8vh;
   position: relative;
-}
-
-.hero-media {
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  position: absolute;
-  z-index: 0;
-}
-
-.hero-motion {
-  height: 100%;
-  inset: 0;
-  object-fit: cover;
-  object-position: center;
-  position: absolute;
-  width: 100%;
-}
-
-.hero-media::after {
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.26) 40%, rgba(0, 0, 0, 0.06) 72%, transparent 100%);
-  content: "";
-  inset: 0;
-  position: absolute;
 }
 
 .hero.hex-hero::before {
@@ -76,7 +53,7 @@
   pointer-events: none;
   position: absolute;
   width: 100%;
-  z-index: 1;
+  z-index: 0;
   animation: hex-field-arrive 1.4s 0.15s ease-out forwards;
   mask-image: radial-gradient(ellipse at center, black 24%, rgba(0, 0, 0, 0.82) 64%, transparent 100%);
 }
@@ -465,16 +442,9 @@
 
 @media (max-width: 900px) {
   .hero.hex-hero {
-    background:
-      linear-gradient(90deg, rgba(0, 0, 0, 0.58) 0%, rgba(0, 0, 0, 0.34) 55%, rgba(0, 0, 0, 0.12) 100%),
-      #020605 url("/manus-storage/jcee-hero-ledger-emerald-mobile-960_2801aea1.webp") no-repeat 62% center / cover;
     grid-template-columns: minmax(0, 1fr);
     min-height: auto;
     padding-top: 7vh;
-  }
-
-  .hero-media {
-    display: none;
   }
 
   .hex-hero .hero-copy {
@@ -569,10 +539,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-media {
-    display: none;
-  }
-
   .hex-wave-field,
   .hero.hex-hero::after,
   .hex-inspector::before,

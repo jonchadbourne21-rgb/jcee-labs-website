@@ -37,25 +37,8 @@
 
 .assurance-section {
   background:
-    radial-gradient(circle at 18% 12%, rgba(81, 255, 139, 0.1), transparent 34%),
+    radial-gradient(circle at 18% 12%, rgba(37, 99, 235, 0.14), transparent 34%),
     linear-gradient(180deg, #03050a 0%, #050508 100%);
-}
-
-.assurance-section::before {
-  background:
-    linear-gradient(90deg, #03050a 0%, rgba(3, 5, 10, 0.92) 32%, rgba(3, 5, 10, 0.42) 68%, rgba(3, 5, 10, 0.18) 100%),
-    url("/manus-storage/jcee-assurance-ledger-1600_4a66a78a.webp") no-repeat right 15% / min(74vw, 1180px) auto;
-  content: "";
-  inset: 0;
-  opacity: 0.66;
-  pointer-events: none;
-  position: absolute;
-  z-index: 0;
-}
-
-.assurance-section > * {
-  position: relative;
-  z-index: 1;
 }
 
 .registry-section {
