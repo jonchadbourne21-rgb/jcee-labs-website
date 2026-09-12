@@ -128,6 +128,30 @@ export type NutritionTrendBucket = {
   packagedLogCount: number;
 };
 
+export type BarcodeDeviceDiagnostic = {
+  id: number;
+  userId: number;
+  deviceLabel: string;
+  platform: string;
+  browser: string;
+  engine: "native" | "zxing" | "unavailable";
+  cameraStartMs: number | null;
+  firstDetectionMs: number | null;
+  trialCount: number;
+  successfulTrials: number;
+  medianDetectionMs: number | null;
+  focusSupported: boolean;
+  continuousFocusSupported: boolean;
+  torchSupported: boolean;
+  rearCameraSelected: boolean;
+  videoWidth: number | null;
+  videoHeight: number | null;
+  notes: string | null;
+  createdAt: Date;
+};
+
+export type BarcodeScannerTelemetry = Omit<BarcodeDeviceDiagnostic, "id" | "userId" | "deviceLabel" | "platform" | "browser" | "notes" | "createdAt">;
+
 export type SemanticMemoryResult = {
   id: number;
   kind: "food_lens" | "recipe" | "meal_feedback" | "preference";

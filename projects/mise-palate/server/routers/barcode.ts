@@ -2,6 +2,7 @@ import { z } from "zod";
 import type { BarcodeLookupResult } from "../../shared/product";
 import { protectedProcedure, router } from "../_core/trpc";
 import * as db from "../db";
+import { boundedMilliseconds, medianMilliseconds, successRate } from "../product/device-diagnostics";
 import {
   fetchOpenFoodFactsProduct,
   hasValidBarcodeCheckDigit,
@@ -30,6 +31,25 @@ const customLabelInput = z.object({
   ingredientsText: z.string().trim().max(5000).optional().default(""),
   allergens: z.array(z.string().trim().min(1).max(80)).max(20).default([]),
   nutritionPerServing: nutritionValuesSchema,
+});
+
+const deviceDiagnosticInput = z.object({
+  deviceLabel: z.string().trim().min(2).max(180),
+  platform: z.string().trim().min(1).max(160),
+  browser: z.string().trim().min(1).max(160),
+  engine: z.enum(["native", "zxing", "unavailable"]),
+  cameraStartMs: z.number().nullable().optional(),
+  firstDetectionMs: z.number().nullable().optional(),
+  trialCount: z.number().int().min(0).max(100).default(0),
+  successfulTrials: z.number().int().min(0).max(100).default(0),
+  trialDetectionMs: z.array(z.number().min(0).max(120000)).max(100).optional().default([]),
+  focusSupported: z.boolean().default(false),
+  continuousFocusSupported: z.boolean().default(false),
+  torchSupported: z.boolean().default(false),
+  rearCameraSelected: z.boolean().default(false),
+  videoWidth: z.number().int().positive().nullable().optional(),
+  videoHeight: z.number().int().positive().nullable().optional(),
+  notes: z.string().trim().max(2000).nullable().optional(),
 });
 
 export const barcodeRouter = router({
@@ -155,4 +175,39 @@ export const barcodeRouter = router({
   removeCustomLog: protectedProcedure
     .input(z.object({ logId: z.number().int().positive() }))
     .mutation(async ({ ctx, input }) => db.removeCustomFoodMealLog(ctx.user.id, input.logId)),
+
+  recordDeviceDiagnostic: protectedProcedure
+    .input(deviceDiagnosticInput)
+    .mutation(async ({ ctx, input }) => {
+      const median = medianMilliseconds(input.trialDetectionMs);
+      const record = await db.recordBarcodeDeviceDiagnostic({
+        userId: ctx.user.id,
+        deviceLabel: input.deviceLabel,
+        platform: input.platform,
+        browser: input.browser,
+        engine: input.engine,
+        cameraStartMs: boundedMilliseconds(input.cameraStartMs),
+        firstDetectionMs: boundedMilliseconds(input.firstDetectionMs),
+        trialCount: input.trialCount,
+        successfulTrials: input.successfulTrials,
+        medianDetectionMs: median,
+        focusSupported: input.focusSupported,
+        continuousFocusSupported: input.continuousFocusSupported,
+        torchSupported: input.torchSupported,
+        rearCameraSelected: input.rearCameraSelected,
+        videoWidth: input.videoWidth ?? null,
+        videoHeight: input.videoHeight ?? null,
+        notes: input.notes ?? null,
+      });
+      await db.trackEvent(ctx.user.id, "barcode_device_diagnostic_recorded", {
+        deviceLabel: record.deviceLabel,
+        engine: record.engine,
+        focusSupported: record.focusSupported,
+        medianDetectionMs: record.medianDetectionMs,
+        successRate: successRate(record.successfulTrials, record.trialCount),
+      });
+      return record;
+    }),
+
+  deviceDiagnostics: protectedProcedure.query(({ ctx }) => db.listBarcodeDeviceDiagnostics(ctx.user.id)),
 });

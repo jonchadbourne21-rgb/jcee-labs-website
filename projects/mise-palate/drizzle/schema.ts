@@ -193,6 +193,32 @@ export const customFoodLogs = mysqlTable(
   ]
 );
 
+export const barcodeDeviceDiagnostics = mysqlTable(
+  "barcode_device_diagnostics",
+  {
+    id: int("id").autoincrement().primaryKey(),
+    userId: int("userId").notNull(),
+    deviceLabel: varchar("deviceLabel", { length: 180 }).notNull(),
+    platform: varchar("platform", { length: 160 }).notNull(),
+    browser: varchar("browser", { length: 160 }).notNull(),
+    engine: mysqlEnum("engine", ["native", "zxing", "unavailable"]).notNull(),
+    cameraStartMs: int("cameraStartMs"),
+    firstDetectionMs: int("firstDetectionMs"),
+    trialCount: int("trialCount").default(0).notNull(),
+    successfulTrials: int("successfulTrials").default(0).notNull(),
+    medianDetectionMs: int("medianDetectionMs"),
+    focusSupported: boolean("focusSupported").default(false).notNull(),
+    continuousFocusSupported: boolean("continuousFocusSupported").default(false).notNull(),
+    torchSupported: boolean("torchSupported").default(false).notNull(),
+    rearCameraSelected: boolean("rearCameraSelected").default(false).notNull(),
+    videoWidth: int("videoWidth"),
+    videoHeight: int("videoHeight"),
+    notes: text("notes"),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+  },
+  table => [index("barcode_device_diagnostics_user_created_idx").on(table.userId, table.createdAt)]
+);
+
 export const semanticMemories = mysqlTable(
   "semantic_memories",
   {

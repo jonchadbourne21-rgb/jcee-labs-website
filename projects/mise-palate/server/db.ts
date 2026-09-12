@@ -2,6 +2,7 @@ import { and, desc, eq, gte, lt } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import {
   analyticsEvents,
+  barcodeDeviceDiagnostics,
   chefKnowledge,
   cookingSessions,
   customFoodLabels,
@@ -21,7 +22,7 @@ import {
   type InsertUser,
   users,
 } from "../drizzle/schema";
-import type { CustomFoodLabel, FoodLensAnalysis, FoodLensItem, IngredientDetection, NutritionGoals, NutritionValues, PackagedFoodProduct, SemanticMemoryResult, SensoryProfile, StructuredRecipe } from "../shared/product";
+import type { BarcodeDeviceDiagnostic, CustomFoodLabel, FoodLensAnalysis, FoodLensItem, IngredientDetection, NutritionGoals, NutritionValues, PackagedFoodProduct, SemanticMemoryResult, SensoryProfile, StructuredRecipe } from "../shared/product";
 import { ENV } from "./_core/env";
 import { CHEF_KNOWLEDGE_SEED } from "./product/knowledge";
 import { cosineSimilarity } from "./product/memory";
@@ -147,6 +148,7 @@ export async function listPalateSignals(userId: number) {
 export async function deleteCulinaryData(userId: number) {
   const db = await requireDb();
   await db.delete(analyticsEvents).where(eq(analyticsEvents.userId, userId));
+  await db.delete(barcodeDeviceDiagnostics).where(eq(barcodeDeviceDiagnostics.userId, userId));
   await db.delete(nutritionLogs).where(eq(nutritionLogs.userId, userId));
   await db.delete(packagedFoodLogs).where(eq(packagedFoodLogs.userId, userId));
   await db.delete(customFoodLogs).where(eq(customFoodLogs.userId, userId));
@@ -531,6 +533,45 @@ export async function listCustomFoodLogs(userId: number, start: Date, end: Date)
     .innerJoin(customFoodLabels, eq(customFoodLogs.customFoodLabelId, customFoodLabels.id))
     .where(and(eq(customFoodLogs.userId, userId), gte(customFoodLogs.eatenAt, start), lt(customFoodLogs.eatenAt, end)))
     .orderBy(desc(customFoodLogs.eatenAt));
+}
+
+export async function recordBarcodeDeviceDiagnostic(input: {
+  userId: number;
+  deviceLabel: string;
+  platform: string;
+  browser: string;
+  engine: "native" | "zxing" | "unavailable";
+  cameraStartMs: number | null;
+  firstDetectionMs: number | null;
+  trialCount: number;
+  successfulTrials: number;
+  medianDetectionMs: number | null;
+  focusSupported: boolean;
+  continuousFocusSupported: boolean;
+  torchSupported: boolean;
+  rearCameraSelected: boolean;
+  videoWidth: number | null;
+  videoHeight: number | null;
+  notes: string | null;
+}): Promise<BarcodeDeviceDiagnostic> {
+  const db = await requireDb();
+  const [result] = await db.insert(barcodeDeviceDiagnostics).values(input).$returningId();
+  const [stored] = await db
+    .select()
+    .from(barcodeDeviceDiagnostics)
+    .where(and(eq(barcodeDeviceDiagnostics.userId, input.userId), eq(barcodeDeviceDiagnostics.id, result.id)))
+    .limit(1);
+  return stored as BarcodeDeviceDiagnostic;
+}
+
+export async function listBarcodeDeviceDiagnostics(userId: number): Promise<BarcodeDeviceDiagnostic[]> {
+  const db = await requireDb();
+  return db
+    .select()
+    .from(barcodeDeviceDiagnostics)
+    .where(eq(barcodeDeviceDiagnostics.userId, userId))
+    .orderBy(desc(barcodeDeviceDiagnostics.createdAt))
+    .limit(20) as Promise<BarcodeDeviceDiagnostic[]>;
 }
 
 export async function upsertSemanticMemory(input: {

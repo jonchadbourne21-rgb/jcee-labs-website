@@ -11,6 +11,7 @@ const CookMode = lazy(() => import("./pages/CookMode"));
 const Discover = lazy(() => import("./pages/Discover"));
 const Knowledge = lazy(() => import("@/pages/Knowledge"));
 const FoodLens = lazy(() => import("@/pages/FoodLens"));
+const DeviceDiagnostics = lazy(() => import("@/pages/DeviceDiagnostics"));
 const Me = lazy(() => import("./pages/Me"));
 const Onboarding = lazy(() => import("./pages/Onboarding"));
 const Recipe = lazy(() => import("./pages/Recipe"));
@@ -29,6 +30,7 @@ function Router() {
       <Route path="/me" component={Me} />
       <Route path={"/knowledge"} component={Knowledge} />
       <Route path={"/lens"} component={FoodLens} />
+      <Route path={"/diagnostics"} component={DeviceDiagnostics} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>

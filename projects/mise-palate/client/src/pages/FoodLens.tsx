@@ -585,6 +585,11 @@ export default function FoodLens() {
 
               <div className="mt-5">
                 <BarcodeCameraScanner disabled={barcodeLookupMutation.isPending} onDetected={handleDetectedBarcode} />
+                <div className="mt-2 text-right">
+                  <a href="/diagnostics" className="text-[0.68rem] text-muted-ink underline hover:text-ink">
+                    Run camera focus & detection speed test →
+                  </a>
+                </div>
               </div>
 
               <div className="mt-6 flex gap-2">
