@@ -15,3 +15,9 @@ The first status screenshot rendered the warm canvas and loading state (“Setti
 ## Final mobile release capture
 
 A second 390 × 844 capture after route splitting verified that lazy-loaded routes render successfully. The home retained the camera-first hierarchy and fixed navigation. The Palate Twin screen rendered the profile identity, explanatory copy, sensory bars, and correct active navigation state. The Chef Knowledge screen rendered its trust boundary, horizontal filters, owner-edit indicator, and knowledge cards without clipping. No final mobile capture showed a blank route, broken asset, overlapping primary action, or horizontal layout failure.
+
+## Food Lens, nutrition goals, and semantic memory release
+
+Final managed 390 × 844 captures verified the Food Lens capture screen and five-tab mobile navigation without horizontal clipping. The capture card, optional context field, sample-meal action, camera target, and selected Lens state remain visible above the fold. The Me route renders the Palate Twin heading, identity card, sensory map, and selected Me state without collision; nutrition targets and daily progress continue below the fold in the same responsive single-column layout.
+
+A stateful browser navigation reached the Manus OAuth screen because that browser session no longer had an authenticated preview session. No login credentials were entered. Functional authenticated verification therefore used the managed screenshot renderer plus the database-backed tRPC integration harness, which exercised the actual protected procedures and live AI path.

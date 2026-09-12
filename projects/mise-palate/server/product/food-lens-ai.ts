@@ -1,6 +1,6 @@
 import { invokeLLM, listLLMModels } from "../_core/llm";
-import type { FoodLensAnalysis } from "../../shared/product";
-import { FOOD_LENS_DISCLOSURE, hydrateFoodLensItem, lookupUSDAReference, scaleNutrition, totalFoodLensNutrition, USDA_SOURCE } from "./nutrition";
+import type { FoodLensAnalysis, FoodLensItem } from "../../shared/product";
+import { FOOD_LENS_DISCLOSURE, hydrateFoodLensItem, resolveFoodLensItem, totalFoodLensNutrition } from "./nutrition";
 
 async function pickFoodLensModel() {
   try {
@@ -88,21 +88,10 @@ export async function analyzeFoodLens(dataUrl: string, context = ""): Promise<Fo
       },
     } as any);
     const data = parseContent(response) as Omit<FoodLensAnalysis, "items" | "totalNutrition" | "estimateDisclosure" | "generationMode"> & { items: VisionCandidate[] };
-    const items = await Promise.all(
-      data.items.map(async candidate => {
-        const local = hydrateFoodLensItem(candidate);
-        const usda = await lookupUSDAReference(candidate.name);
-        if (!usda) return local;
-        return {
-          ...local,
-          referenceStatus: "matched_reference" as const,
-          sourceLabel: `${USDA_SOURCE.label}: ${usda.description}`,
-          sourceUrl: `${USDA_SOURCE.url}food-details.html?fdcId=${usda.fdcId}`,
-          nutritionPer100g: usda.values,
-          nutritionForPortion: scaleNutrition(usda.values, candidate.estimatedGrams),
-        };
-      })
-    );
+    const items: FoodLensItem[] = [];
+    for (const candidate of data.items) {
+      items.push(await resolveFoodLensItem(candidate));
+    }
     return {
       ...data,
       items,

@@ -34,6 +34,28 @@ export type NutritionValues = {
   sodiumMg: number;
 };
 
+export type NutritionGoalMode = "balanced" | "high_protein" | "lower_carb" | "custom";
+
+export type NutritionGoals = {
+  mode: NutritionGoalMode;
+  caloriesTarget: number;
+  proteinGTarget: number;
+  carbsGTarget: number;
+  fatGTarget: number;
+  fiberGTarget: number;
+  sodiumMgLimit: number;
+};
+
+export const DEFAULT_NUTRITION_GOALS: NutritionGoals = {
+  mode: "balanced",
+  caloriesTarget: 2000,
+  proteinGTarget: 100,
+  carbsGTarget: 250,
+  fatGTarget: 70,
+  fiberGTarget: 28,
+  sodiumMgLimit: 2300,
+};
+
 export type FoodLensItem = {
   id: string;
   name: string;

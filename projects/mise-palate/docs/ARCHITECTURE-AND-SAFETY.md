@@ -18,12 +18,13 @@ The stack is React 19, TypeScript, Tailwind CSS, Express, tRPC, Drizzle ORM, MyS
 | Client | Capture, correction, navigation, Cook Mode controls, visual state | Provider credentials, authoritative safety decisions, database writes outside tRPC |
 | Product API | Authentication, validation, orchestration, persistence | Unstructured client trust or direct model output as truth |
 | Vision adapter | Ingredient/dish candidates, confidence, uncertainty | Confirmation or final recipe facts |
+| Nutrition reference adapter | Live USDA FoodData Central matches, per-100 g values, portion scaling, labeled fallback | Medical advice, exact portion truth, package-label equivalence |
 | Generative reasoning adapter | Options, recipe structure, substitution, forecast, recovery | Authoritative temperatures, allergen guarantees, user identity |
 | Chef Knowledge | Reviewed technique, ingredient, cut, error, recovery, sensory records | Arbitrary per-user prose or authentication logic |
 | Palate Twin | Current values, confidence, historical signals | Recipe safety or irreversible preference overwrites |
 | Safety | Fixed sourced requirements and deterministic attachment | Taste preference or generated culinary creativity |
 | Storage | User photos and editorial images | Binary data in relational rows |
-| Relational data | Typed user, scan, recipe, session, feedback, knowledge, and event records | Image bytes or opaque generated documents as the primary model |
+| Relational data | Typed user, scan, nutrition goal/log, semantic memory/edge, recipe, session, feedback, knowledge, and event records | Image bytes or opaque generated documents as the primary model |
 
 ## 3. Data and request flow
 
@@ -32,6 +33,10 @@ A photo arrives as a validated JPEG, PNG, or WebP data URL. The server rejects u
 A confirmed scan, Palate Twin, equipment list, restrictions, and time limit are sent to the option model. The selected option then goes to the stronger recipe model with Chef Knowledge context. The resulting JSON must pass a strict schema. The server discards unknown safety IDs and deterministically attaches relevant authoritative safety records. Every later recovery receives the current recipe and those fixed records.
 
 Meal feedback updates the current preference estimate through a bounded deterministic function. It also writes an immutable signal record containing the before and after values. This preserves history and allows the model to be re-estimated later.
+
+Food Lens follows a separate evidence path. Vision proposes visible food identities and edible mass estimates. The server normalizes food names, queries USDA FoodData Central, validates candidate lexical overlap, scales per-100 g nutrients to estimated grams, and labels every source. A dedicated `USDA_FDC_API_KEY` is preferred; USDA's public demo key is attempted when absent, with a labeled local reference fallback on timeout or rate limit. A scan does not count toward daily nutrition until the user explicitly logs it as eaten. Targets are user-selected planning preferences and are never described as clinical prescriptions.[4]
+
+Each Food Lens scan, generated recipe, and completed-meal feedback record is encoded into a deterministic 64-dimensional user-scoped semantic vector. Cosine retrieval selects related memories and typed edges record the strongest links. Recipe generation receives only the authenticated user's retrieved memories, with visible provenance; memory content is preference evidence, never food-safety or medical evidence. One-tap plate-to-recipe generation is idempotent per Food Lens scan and stores a direct provenance link.
 
 ## 4. Structured contracts
 
@@ -61,7 +66,7 @@ This architecture cannot guarantee safety. Vision can misidentify food, users ca
 
 ## 8. Privacy and deletion
 
-Images are stored as opaque object keys. The database stores references, not bytes. Palate signals preserve their source and confidence. The user can delete their Palate Twin, scans, recipes, sessions, feedback, signals, and analytics from the profile screen while keeping the authentication account available. The MVP does not sell data, expose a public profile, or train an external model on user records. Any future model-training or aggregated research use requires a distinct opt-in consent and retention policy.
+Images are stored as opaque object keys. The database stores references, not bytes. Palate signals preserve their source and confidence. The user can delete their Palate Twin, Food Lens and ingredient scans, nutrition goals and logs, semantic memories and edges, recipes, sessions, feedback, signals, and analytics from the profile screen while keeping the authentication account available. The MVP does not sell data, expose a public profile, or train an external model on user records. Any future model-training or aggregated research use requires a distinct opt-in consent and retention policy.
 
 ## 9. Inference cost model
 
@@ -91,3 +96,4 @@ Production publication requires a verified build and a saved release checkpoint.
 [1]: https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures "Safe Minimum Internal Temperatures"
 [2]: https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/steps-keep-food-safe "USDA FSIS Keep Food Safe"
 [3]: https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies "U.S. Food and Drug Administration Food Allergies"
+[4]: https://fdc.nal.usda.gov/api-guide "USDA FoodData Central API Guide"

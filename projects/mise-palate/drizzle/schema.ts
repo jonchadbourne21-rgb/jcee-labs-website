@@ -7,6 +7,7 @@ import {
   mysqlTable,
   text,
   timestamp,
+  uniqueIndex,
   varchar,
 } from "drizzle-orm/mysql-core";
 
@@ -78,6 +79,41 @@ export const foodLensScans = mysqlTable(
   table => [index("food_lens_scans_user_idx").on(table.userId), index("food_lens_scans_user_created_idx").on(table.userId, table.createdAt)]
 );
 
+export const nutritionGoals = mysqlTable(
+  "nutrition_goals",
+  {
+    id: int("id").autoincrement().primaryKey(),
+    userId: int("userId").notNull(),
+    mode: mysqlEnum("mode", ["balanced", "high_protein", "lower_carb", "custom"]).default("balanced").notNull(),
+    caloriesTarget: int("caloriesTarget").default(2000).notNull(),
+    proteinGTarget: int("proteinGTarget").default(100).notNull(),
+    carbsGTarget: int("carbsGTarget").default(250).notNull(),
+    fatGTarget: int("fatGTarget").default(70).notNull(),
+    fiberGTarget: int("fiberGTarget").default(28).notNull(),
+    sodiumMgLimit: int("sodiumMgLimit").default(2300).notNull(),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+    updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  },
+  table => [uniqueIndex("nutrition_goals_user_unique").on(table.userId)]
+);
+
+export const nutritionLogs = mysqlTable(
+  "nutrition_logs",
+  {
+    id: int("id").autoincrement().primaryKey(),
+    userId: int("userId").notNull(),
+    foodLensScanId: int("foodLensScanId").notNull(),
+    mealType: mysqlEnum("mealType", ["breakfast", "lunch", "dinner", "snack"]).default("dinner").notNull(),
+    nutritionSnapshot: json("nutritionSnapshot").notNull(),
+    eatenAt: timestamp("eatenAt").defaultNow().notNull(),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+  },
+  table => [
+    uniqueIndex("nutrition_logs_user_scan_unique").on(table.userId, table.foodLensScanId),
+    index("nutrition_logs_user_eaten_idx").on(table.userId, table.eatenAt),
+  ]
+);
+
 export const semanticMemories = mysqlTable(
   "semantic_memories",
   {
@@ -115,6 +151,7 @@ export const recipes = mysqlTable(
     id: int("id").autoincrement().primaryKey(),
     userId: int("userId").notNull(),
     scanId: int("scanId"),
+    foodLensScanId: int("foodLensScanId"),
     parentRecipeId: int("parentRecipeId"),
     version: int("version").default(1).notNull(),
     title: varchar("title", { length: 220 }).notNull(),
@@ -139,7 +176,7 @@ export const recipes = mysqlTable(
     createdAt: timestamp("createdAt").defaultNow().notNull(),
     updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
   },
-  table => [index("recipes_user_idx").on(table.userId), index("recipes_scan_idx").on(table.scanId), index("recipes_user_favorite_idx").on(table.userId, table.favorite)]
+  table => [index("recipes_user_idx").on(table.userId), index("recipes_scan_idx").on(table.scanId), index("recipes_food_lens_scan_idx").on(table.foodLensScanId), index("recipes_user_favorite_idx").on(table.userId, table.favorite)]
 );
 
 export const cookingSessions = mysqlTable(

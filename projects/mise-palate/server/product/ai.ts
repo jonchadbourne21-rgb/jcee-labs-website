@@ -276,6 +276,9 @@ export async function generateStructuredRecipe(params: {
   dietaryRestrictions: string[];
   equipment: string[];
   chefKnowledge: Array<{ slug: string; title: string; summary: string; content: unknown }>;
+  semanticContext?: Array<{ kind: string; title: string; content: string; similarity: number }>;
+  nutritionContext?: Record<string, unknown>;
+  sourceContext?: string;
 }) {
   const safetyRules = relevantSafetyRules(params.ingredients, params.option.title);
   const model = await pickModel("gpt-5", "gpt-5-mini");
@@ -288,7 +291,7 @@ export async function generateStructuredRecipe(params: {
         {
           role: "system",
           content:
-            "You are the generative reasoning layer of a chef-guided cooking product. Use the supplied reviewed Chef Knowledge; do not invent authoritative safety temperatures. Every instruction must include the reason, sensory cues, a likely mistake, and a recovery. Time is guidance; cues decide doneness. Output strict JSON only. Return no safety prose beyond known safety rule IDs supplied by the user payload.",
+            "You are the generative reasoning layer of a chef-guided cooking product. Use the supplied reviewed Chef Knowledge; do not invent authoritative safety temperatures. Retrieved memories are user-specific preference evidence, not safety or medical evidence. Nutrition targets are user-selected planning preferences, not medical prescriptions. Every instruction must include the reason, sensory cues, a likely mistake, and a recovery. Time is guidance; cues decide doneness. Output strict JSON only. Return no safety prose beyond known safety rule IDs supplied by the user payload.",
         },
         { role: "user", content: JSON.stringify({ ...params, safetyRules }) },
       ],

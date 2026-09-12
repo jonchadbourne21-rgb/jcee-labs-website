@@ -5,7 +5,7 @@
 
 ## 1. Prerequisites
 
-The application requires Node.js 22, pnpm 10, a MySQL-compatible database, private object storage, an OAuth application, and an OpenAI-compatible multimodal model gateway. In the managed project, `DATABASE_URL`, `JWT_SECRET`, `VITE_APP_ID`, `OAUTH_SERVER_URL`, `VITE_OAUTH_PORTAL_URL`, `BUILT_IN_FORGE_API_URL`, `BUILT_IN_FORGE_API_KEY`, `VITE_FRONTEND_FORGE_API_URL`, and `VITE_FRONTEND_FORGE_API_KEY` are injected automatically.
+The application requires Node.js 22, pnpm 10, a MySQL-compatible database, private object storage, an OAuth application, and an OpenAI-compatible multimodal model gateway. In the managed project, `DATABASE_URL`, `JWT_SECRET`, `VITE_APP_ID`, `OAUTH_SERVER_URL`, `VITE_OAUTH_PORTAL_URL`, `BUILT_IN_FORGE_API_URL`, `BUILT_IN_FORGE_API_KEY`, `VITE_FRONTEND_FORGE_API_URL`, and `VITE_FRONTEND_FORGE_API_KEY` are injected automatically. Configure `USDA_FDC_API_KEY` for production FoodData Central traffic. When absent, the app attempts USDA's public `DEMO_KEY`, then safely falls back to labeled generic references if the demo quota is exhausted or the service is unavailable.
 
 Credentials must remain server-side. Do not commit `.env` files or call the model gateway from the browser.
 
@@ -28,13 +28,13 @@ The development server listens on port 3000. Authentication uses secure cookie s
 
 ## 3. Database migration
 
-The authoritative Drizzle schema is `drizzle/schema.ts`. The initial application migration is `drizzle/0001_sticky_the_twelve.sql`.
+The authoritative Drizzle schema is `drizzle/schema.ts`. Migration `0003_fresh_wendell_vaughn.sql` adds Food Lens scans and semantic memory. Migration `0004_omniscient_firestar.sql` adds nutrition goals, explicit meal logs, and Food Lens recipe provenance.
 
 ```bash
 pnpm drizzle-kit generate
 ```
 
-Review generated SQL before applying it. Production migrations should be additive by default. The current migration creates nine tables and indexes; it does not drop or rewrite existing data.
+Review generated SQL before applying it. Production migrations should be additive by default. The current migration chain creates fourteen tables and associated indexes; it does not drop or rewrite existing data.
 
 ## 4. Validation gate
 
@@ -52,15 +52,16 @@ The live integration harness requires configured database and built-in model cre
 pnpm tsx scripts/e2e-flow.ts
 pnpm tsx scripts/vision-smoke.ts
 pnpm tsx scripts/photo-route-smoke.ts
+pnpm tsx scripts/food-lens-e2e.ts
 ```
 
-The scripts write machine-readable receipts under `docs/test-evidence/` and delete temporary relational test data. The photo-route test uploads one object; removing its database key makes it unreachable through the product.
+The scripts write machine-readable receipts under `docs/test-evidence/` and delete temporary relational test data. The Food Lens test exercises multimodal recognition, live USDA matching when quota is available, safe reference fallback, portion correction, nutrition targets, explicit meal logging, daily aggregation, semantic retrieval, one-tap recipe generation, and idempotent retry behavior. The photo-route tests upload objects; removing their database keys makes them unreachable through the product.
 
 ## 5. Managed publication
 
 The verified project lives at `/home/ubuntu/mise-palate`. Publication uses the managed WebDev release flow. A checkpoint is required before publishing. The release checkpoint should reference the passing type check, nine-unit-test run, production build, live-AI integration result, vision result, photo-route result, and visual captures.
 
-The application uses the default autoscaling mode. It does not need an always-on process, cron schedule, WebSocket server, or reserved host. Database and object storage hold all durable state.
+The application uses the default autoscaling mode. It does not need an always-on process, cron schedule, WebSocket server, or reserved host. Database and object storage hold all durable state. USDA results are cached in-process for twelve hours as a latency and quota optimization; correctness does not depend on cache persistence.
 
 ## 6. Rollback and recovery
 

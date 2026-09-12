@@ -18,16 +18,18 @@ import {
   Network,
   Scale,
   Sparkles,
+  UtensilsCrossed,
   Upload,
 } from "lucide-react";
 import { useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 
 const SAMPLE_PHOTO = "/manus-storage/mise-ingredients_ff9547f3.jpg";
 
 export default function FoodLens() {
   useAuth({ redirectOnUnauthenticated: true });
+  const [, navigate] = useLocation();
   const utils = trpc.useUtils();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [dataUrl, setDataUrl] = useState<string | null>(null);
@@ -35,8 +37,13 @@ export default function FoodLens() {
   const [currentScanId, setCurrentScanId] = useState<number | null>(null);
   const [currentAnalysis, setCurrentAnalysis] = useState<FoodLensAnalysis | null>(null);
   const [relatedMemories, setRelatedMemories] = useState<any[]>([]);
+  const [mealType, setMealType] = useState<"breakfast" | "lunch" | "dinner" | "snack">("dinner");
 
   const historyQuery = trpc.foodLens.history.useQuery();
+  const scanStatusQuery = trpc.nutrition.scanStatus.useQuery(
+    { scanId: currentScanId ?? 1 },
+    { enabled: currentScanId !== null }
+  );
 
   const analyzeMutation = trpc.foodLens.analyze.useMutation({
     onSuccess: (result: any) => {
@@ -72,6 +79,30 @@ export default function FoodLens() {
       setRelatedMemories(result.relatedMemories ?? []);
       utils.foodLens.history.invalidate();
       toast.success("Portions and nutrition recalculated");
+    },
+    onError: error => toast.error(error.message),
+  });
+
+  const createRecipeMutation = trpc.foodLens.createRecipe.useMutation({
+    onSuccess: result => {
+      toast.success(result.reused ? "Opening your existing Food Lens recipe" : "Personalized recipe created");
+      navigate(`/recipe/${result.recipeId}`);
+    },
+    onError: error => toast.error(error.message),
+  });
+
+  const logMealMutation = trpc.nutrition.logScan.useMutation({
+    onSuccess: async () => {
+      await Promise.all([scanStatusQuery.refetch(), utils.nutrition.daily.invalidate()]);
+      toast.success("Meal logged toward your daily targets");
+    },
+    onError: error => toast.error(error.message),
+  });
+
+  const removeMealMutation = trpc.nutrition.removeLog.useMutation({
+    onSuccess: async () => {
+      await Promise.all([scanStatusQuery.refetch(), utils.nutrition.daily.invalidate()]);
+      toast.success("Meal removed from today’s nutrition totals");
     },
     onError: error => toast.error(error.message),
   });
@@ -319,6 +350,23 @@ export default function FoodLens() {
                 <Info className="size-4 shrink-0 text-muted-ink mt-0.5" />
                 <span>{currentAnalysis.estimateDisclosure}</span>
               </div>
+
+              <div className="mt-5 grid gap-3 rounded-2xl bg-ink p-4 text-white sm:grid-cols-[1fr_auto] sm:items-center">
+                <div>
+                  <p className="text-sm font-bold">Turn this plate into your recipe</p>
+                  <p className="mt-1 text-[0.68rem] leading-5 text-white/55">
+                    Clicking confirms you reviewed the visible foods and portions. Mise will combine them with your Palate Twin, nutrition targets, chef knowledge, and related memories.
+                  </p>
+                </div>
+                <Button
+                  disabled={!currentScanId || createRecipeMutation.isPending || updateMutation.isPending}
+                  onClick={() => currentScanId && createRecipeMutation.mutate({ scanId: currentScanId, confirmed: true, instructions: "Recreate this recognized dish with the best fit for my palate and selected nutrition targets." })}
+                  className="h-12 rounded-full bg-copper px-5 text-ink hover:bg-[#ffb779]"
+                >
+                  {createRecipeMutation.isPending ? <Loader2 className="mr-2 size-4 animate-spin" /> : <UtensilsCrossed className="mr-2 size-4" />}
+                  Cook this dish
+                </Button>
+              </div>
             </section>
           )}
         </div>
@@ -378,6 +426,35 @@ export default function FoodLens() {
             <div className="mt-4 border-t border-ink pt-3 text-[0.65rem] text-muted-ink leading-4">
               Daily Values are based on a 2,000 calorie reference diet. Individual requirements vary by body mass and activity.
             </div>
+
+            {currentScanId && (
+              <div className="mt-5 border-t-4 border-ink pt-4">
+                <p className="text-xs font-bold uppercase tracking-wider">Count this meal only if eaten</p>
+                <div className="mt-3 grid grid-cols-4 gap-1 rounded-xl bg-ink/5 p-1">
+                  {(["breakfast", "lunch", "dinner", "snack"] as const).map(type => (
+                    <button
+                      key={type}
+                      onClick={() => setMealType(type)}
+                      className={`rounded-lg px-1 py-2 text-[0.62rem] font-bold capitalize transition-colors ${mealType === type ? "bg-ink text-white" : "text-muted-ink hover:bg-white"}`}
+                    >
+                      {type}
+                    </button>
+                  ))}
+                </div>
+                <Button
+                  variant={scanStatusQuery.data?.logged ? "outline" : "default"}
+                  disabled={logMealMutation.isPending || removeMealMutation.isPending}
+                  onClick={() => {
+                    if (scanStatusQuery.data?.logged) removeMealMutation.mutate({ scanId: currentScanId });
+                    else logMealMutation.mutate({ scanId: currentScanId, mealType });
+                  }}
+                  className="mt-3 h-11 w-full rounded-full"
+                >
+                  {(logMealMutation.isPending || removeMealMutation.isPending) && <Loader2 className="mr-2 size-4 animate-spin" />}
+                  {scanStatusQuery.data?.logged ? "Remove from today" : `Log as ${mealType}`}
+                </Button>
+              </div>
+            )}
           </section>
 
           {/* Semantic Memory & RAG Section */}

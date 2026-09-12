@@ -36,10 +36,14 @@ The implementation uses managed authentication, database, object storage, and se
 | Knife boundary | Geometry-only julienne/brunoise targets with safety text | Knowledge UI and reviewed records |
 | Privacy | User-triggered deletion of culinary profile, scans, recipes, sessions, feedback, signals and analytics | Protected deletion path, type check and build |
 | Analytics | Events for calibration, capture, confirmation, generation, cook start, recovery, completion, rating and forecast | Database calls in routed flows |
+| Food Lens | Meal recognition, editable grams, live USDA FoodData Central lookup, labeled fallback references, and source links | Live vision/USDA integration and deterministic candidate tests |
+| Nutrition planning | Explicit eaten-meal logs, six user-controlled targets, daily progress, and bounded planning guidance | Database-backed integration and profile UI |
+| Semantic memory | User-scoped 64-dimensional vectors, cosine retrieval, and newer-to-older DAG edges | Integration retrieval and graph persistence |
+| Plate-to-recipe | Idempotent one-tap personalized structured recipe using Palate Twin, targets, memories, and Chef Knowledge | Live AI integration generated and reused one recipe ID |
 
 ## 4. Automated verification
 
-The final static and unit run completed successfully. TypeScript reported no errors. Vitest reported **4 files passed, 9 tests passed**. The production build completed successfully. The output was written to `docs/test-evidence/typecheck.log`, `unit-tests.log`, and `build.log`.
+The final static and unit run completed successfully. TypeScript reported no errors. Vitest reported **6 files passed, 18 tests passed**. The production build completed successfully. The output was written to `docs/test-evidence/typecheck.log`, `unit-tests.log`, and `build.log`.
 
 The unit suite verifies calibration direction, confidence changes, crispier feedback, 0–100 bounding, authoritative poultry/cross-contact/allergen attachment, correction of unsafe poultry prose, seafood versus whole-cut rules, multi-palate spice separation, and close-palate no-conflict behavior.
 
@@ -61,6 +65,12 @@ The database-backed integration used a temporary authenticated user and cleaned 
 | Recipe memory | Persisted recipe was read back successfully |
 
 The full machine-readable receipt is `docs/test-evidence/e2e-result.json`.
+
+### Food Lens and nutrition integration
+
+The Food Lens harness ran the complete authenticated path: multimodal photo analysis, FoodData Central resolution, user gram correction, nutrition target persistence, explicit dinner logging, local-day aggregation, semantic retrieval, live personalized recipe generation, and idempotent retry. The first live run attached five USDA references and exposed an inaccurate candidate where “lemon (half)” matched “cream, half and half.” The matcher was corrected by removing portion descriptors, normalizing plurals, requiring lexical overlap, and penalizing mismatched processed forms. Unit tests now prove that chicken thigh meat outranks skin-only records and raw lemon outranks bottled concentrate.
+
+Subsequent calls temporarily exhausted USDA's public demo quota (`HTTP 429`, limit 10). The journey passed under that condition with labeled generic references. The final release run later attached four live USDA matches plus one labeled fallback, logged 639 estimated calories, reached 50% of the selected protein target, retrieved two related semantic memories, generated a live structured recipe, and proved idempotent recipe reuse. Production should configure `USDA_FDC_API_KEY`; rate-limit and timeout fallback is intentionally non-fatal. The receipt is `docs/test-evidence/food-lens-e2e-result.json`.
 
 ## 6. Live vision verification
 

@@ -1,10 +1,13 @@
 import { nanoid } from "nanoid";
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
+import { DEFAULT_NUTRITION_GOALS, DEFAULT_PALATE, DISH_IMAGES, type FoodLensItem, type NutritionGoals, type NutritionValues, type RecipeOption } from "../../shared/product";
 import { protectedProcedure, router } from "../_core/trpc";
 import * as db from "../db";
+import { generateStructuredRecipe } from "../product/ai";
 import { analyzeFoodLens } from "../product/food-lens-ai";
 import { semanticVector } from "../product/memory";
-import { hydrateFoodLensItem, totalFoodLensNutrition } from "../product/nutrition";
+import { resolveFoodLensItem, totalFoodLensNutrition } from "../product/nutrition";
 import { storagePut } from "../storage";
 
 const lensItemInput = z.object({
@@ -72,9 +75,19 @@ export const foodLensRouter = router({
     .mutation(async ({ ctx, input }) => {
       const scan = await db.getFoodLensScan(input.scanId, ctx.user.id);
       if (!scan) throw new Error("Food Lens scan not found.");
-      const items = input.items.map(item => hydrateFoodLensItem(item));
+      const items = await Promise.all(input.items.map(resolveFoodLensItem));
       const totalNutrition = totalFoodLensNutrition(items);
       const updated = await db.updateFoodLensScan({ scanId: input.scanId, userId: ctx.user.id, items, totalNutrition, measurementNote: input.measurementNote });
+      const existingLog = await db.getFoodLensMealLog(ctx.user.id, input.scanId);
+      if (existingLog) {
+        await db.logFoodLensMeal({
+          userId: ctx.user.id,
+          foodLensScanId: input.scanId,
+          mealType: existingLog.mealType,
+          nutritionSnapshot: totalNutrition,
+          eatenAt: existingLog.eatenAt,
+        });
+      }
       const content = memoryContent(scan.dishGuess, items, totalNutrition.calories);
       const vector = semanticVector(content, totalNutrition);
       const memory = await db.upsertSemanticMemory({
@@ -89,6 +102,93 @@ export const foodLensRouter = router({
       const related = memory ? await db.refreshSemanticEdges(ctx.user.id, memory.id, vector) : [];
       await db.trackEvent(ctx.user.id, "food_lens_portion_confirmed", { scanId: input.scanId, calories: totalNutrition.calories, itemCount: items.length });
       return { scan: updated, relatedMemories: related };
+    }),
+
+  createRecipe: protectedProcedure
+    .input(
+      z.object({
+        scanId: z.number().int().positive(),
+        confirmed: z.literal(true),
+        instructions: z.string().max(500).default("Recreate this dish with the best fit for my palate."),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const existing = await db.getRecipeByFoodLensScan(input.scanId, ctx.user.id);
+      if (existing) return { recipeId: existing.id, recipe: existing, reused: true as const };
+
+      const [scan, profile, knowledge, goalsRow] = await Promise.all([
+        db.getFoodLensScan(input.scanId, ctx.user.id),
+        db.getPalateProfile(ctx.user.id),
+        db.listChefKnowledge(),
+        db.getNutritionGoals(ctx.user.id),
+      ]);
+      if (!scan) throw new TRPCError({ code: "NOT_FOUND", message: "Food Lens scan not found." });
+      const items = scan.items as FoodLensItem[];
+      if (!items.length) throw new TRPCError({ code: "BAD_REQUEST", message: "Confirm at least one recognized food before creating a recipe." });
+
+      const palate = (profile?.dimensions as typeof DEFAULT_PALATE) ?? DEFAULT_PALATE;
+      const goals: NutritionGoals = goalsRow
+        ? {
+            mode: goalsRow.mode,
+            caloriesTarget: goalsRow.caloriesTarget,
+            proteinGTarget: goalsRow.proteinGTarget,
+            carbsGTarget: goalsRow.carbsGTarget,
+            fatGTarget: goalsRow.fatGTarget,
+            fiberGTarget: goalsRow.fiberGTarget,
+            sodiumMgLimit: goalsRow.sodiumMgLimit,
+          }
+        : DEFAULT_NUTRITION_GOALS;
+      const sourceIngredients = items.map(item => `${item.name} (${item.estimatedGrams} g visible estimate)`);
+      const query = `${scan.dishGuess} ${sourceIngredients.join(" ")} ${input.instructions}`;
+      const semanticContext = await db.searchSemanticMemories(ctx.user.id, semanticVector(query, scan.totalNutrition as NutritionValues), 5);
+      const option: RecipeOption = {
+        id: `food-lens-${scan.id}`,
+        title: `Your ${scan.dishGuess}`,
+        description: `A personalized, cookable interpretation of the recognized plate using ${items.map(item => item.name).join(", ")}.`,
+        whyForYou: `Rebuilt from your Food Lens scan using your Palate Twin and ${semanticContext.length} related culinary memories.`,
+        cuisine: "Food Lens recreation",
+        activeMinutes: 25,
+        totalMinutes: 45,
+        difficulty: "moderate",
+        sensoryProfile: palate,
+        imageUrl: scan.imageUrl ?? DISH_IMAGES.lemon,
+      };
+      const recipe = await generateStructuredRecipe({
+        option,
+        ingredients: sourceIngredients,
+        palate,
+        dietaryRestrictions: (profile?.dietaryRestrictions as string[]) ?? [],
+        equipment: (profile?.equipment as string[]) ?? ["oven", "stovetop", "skillet"],
+        chefKnowledge: knowledge.map(item => ({ slug: item.slug, title: item.title, summary: item.summary, content: item.content })),
+        semanticContext,
+        nutritionContext: {
+          goals,
+          recognizedMealEstimate: scan.totalNutrition,
+          rule: "Use these targets only for meal planning tradeoffs. Do not state medical claims or guarantee exact recipe nutrition.",
+        },
+        sourceContext: `${input.instructions} Food identity and portion values came from a user-confirmed Food Lens estimate.`,
+      });
+      const recipeId = await db.saveRecipe({
+        userId: ctx.user.id,
+        foodLensScanId: scan.id,
+        optionImageUrl: option.imageUrl,
+        sourceIngredients,
+        recipe,
+      });
+      const content = `${recipe.title}. ${recipe.summary} Ingredients: ${recipe.ingredients.map(ingredient => ingredient.name).join(", ")}. Generated from Food Lens scan ${scan.id}.`;
+      const vector = semanticVector(content);
+      const memory = await db.upsertSemanticMemory({
+        userId: ctx.user.id,
+        kind: "recipe",
+        sourceId: recipeId,
+        title: recipe.title,
+        content,
+        vector,
+        metadata: { recipeId, foodLensScanId: scan.id, version: 1 },
+      });
+      if (memory) await db.refreshSemanticEdges(ctx.user.id, memory.id, vector);
+      await db.trackEvent(ctx.user.id, "food_lens_recipe_created", { scanId: scan.id, recipeId, memoryCount: semanticContext.length });
+      return { recipeId, recipe, reused: false as const };
     }),
 
   history: protectedProcedure.query(({ ctx }) => db.listFoodLensScans(ctx.user.id)),

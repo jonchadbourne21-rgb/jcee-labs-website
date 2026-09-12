@@ -1,4 +1,4 @@
-import { and, desc, eq } from "drizzle-orm";
+import { and, desc, eq, gte, lt } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import {
   analyticsEvents,
@@ -7,6 +7,8 @@ import {
   foodLensScans,
   ingredientScans,
   mealFeedback,
+  nutritionGoals,
+  nutritionLogs,
   palateProfiles,
   palateSignals,
   recipes,
@@ -15,7 +17,7 @@ import {
   type InsertUser,
   users,
 } from "../drizzle/schema";
-import type { FoodLensAnalysis, FoodLensItem, IngredientDetection, NutritionValues, SemanticMemoryResult, SensoryProfile, StructuredRecipe } from "../shared/product";
+import type { FoodLensAnalysis, FoodLensItem, IngredientDetection, NutritionGoals, NutritionValues, SemanticMemoryResult, SensoryProfile, StructuredRecipe } from "../shared/product";
 import { ENV } from "./_core/env";
 import { CHEF_KNOWLEDGE_SEED } from "./product/knowledge";
 import { cosineSimilarity } from "./product/memory";
@@ -141,6 +143,8 @@ export async function listPalateSignals(userId: number) {
 export async function deleteCulinaryData(userId: number) {
   const db = await requireDb();
   await db.delete(analyticsEvents).where(eq(analyticsEvents.userId, userId));
+  await db.delete(nutritionLogs).where(eq(nutritionLogs.userId, userId));
+  await db.delete(nutritionGoals).where(eq(nutritionGoals.userId, userId));
   await db.delete(semanticMemoryEdges).where(eq(semanticMemoryEdges.userId, userId));
   await db.delete(semanticMemories).where(eq(semanticMemories.userId, userId));
   await db.delete(mealFeedback).where(eq(mealFeedback.userId, userId));
@@ -242,6 +246,82 @@ export async function updateFoodLensScan(input: {
   return getFoodLensScan(input.scanId, input.userId);
 }
 
+export async function getNutritionGoals(userId: number) {
+  const db = await requireDb();
+  const [goals] = await db.select().from(nutritionGoals).where(eq(nutritionGoals.userId, userId)).limit(1);
+  return goals;
+}
+
+export async function saveNutritionGoals(userId: number, goals: NutritionGoals) {
+  const db = await requireDb();
+  await db
+    .insert(nutritionGoals)
+    .values({ userId, ...goals })
+    .onDuplicateKeyUpdate({
+      set: {
+        mode: goals.mode,
+        caloriesTarget: goals.caloriesTarget,
+        proteinGTarget: goals.proteinGTarget,
+        carbsGTarget: goals.carbsGTarget,
+        fatGTarget: goals.fatGTarget,
+        fiberGTarget: goals.fiberGTarget,
+        sodiumMgLimit: goals.sodiumMgLimit,
+      },
+    });
+  return getNutritionGoals(userId);
+}
+
+export async function logFoodLensMeal(input: {
+  userId: number;
+  foodLensScanId: number;
+  mealType: "breakfast" | "lunch" | "dinner" | "snack";
+  nutritionSnapshot: NutritionValues;
+  eatenAt?: Date;
+}) {
+  const db = await requireDb();
+  await db
+    .insert(nutritionLogs)
+    .values({ ...input, eatenAt: input.eatenAt ?? new Date() })
+    .onDuplicateKeyUpdate({
+      set: {
+        mealType: input.mealType,
+        nutritionSnapshot: input.nutritionSnapshot,
+        eatenAt: input.eatenAt ?? new Date(),
+      },
+    });
+  const [log] = await db
+    .select()
+    .from(nutritionLogs)
+    .where(and(eq(nutritionLogs.userId, input.userId), eq(nutritionLogs.foodLensScanId, input.foodLensScanId)))
+    .limit(1);
+  return log;
+}
+
+export async function removeFoodLensMealLog(userId: number, foodLensScanId: number) {
+  const db = await requireDb();
+  await db.delete(nutritionLogs).where(and(eq(nutritionLogs.userId, userId), eq(nutritionLogs.foodLensScanId, foodLensScanId)));
+  return { removed: true as const, foodLensScanId };
+}
+
+export async function getFoodLensMealLog(userId: number, foodLensScanId: number) {
+  const db = await requireDb();
+  const [log] = await db
+    .select()
+    .from(nutritionLogs)
+    .where(and(eq(nutritionLogs.userId, userId), eq(nutritionLogs.foodLensScanId, foodLensScanId)))
+    .limit(1);
+  return log;
+}
+
+export async function listNutritionLogs(userId: number, start: Date, end: Date) {
+  const db = await requireDb();
+  return db
+    .select()
+    .from(nutritionLogs)
+    .where(and(eq(nutritionLogs.userId, userId), gte(nutritionLogs.eatenAt, start), lt(nutritionLogs.eatenAt, end)))
+    .orderBy(desc(nutritionLogs.eatenAt));
+}
+
 export async function upsertSemanticMemory(input: {
   userId: number;
   kind: "food_lens" | "recipe" | "meal_feedback" | "preference";
@@ -275,7 +355,7 @@ export async function refreshSemanticEdges(userId: number, fromMemoryId: number,
   const db = await requireDb();
   const memories = await db.select().from(semanticMemories).where(eq(semanticMemories.userId, userId));
   const candidates = memories
-    .filter(memory => memory.id !== fromMemoryId)
+    .filter(memory => memory.id < fromMemoryId)
     .map(memory => ({ memory, score: cosineSimilarity(vector, memory.vector as number[]) }))
     .filter(candidate => candidate.score >= 0.28)
     .sort((a, b) => b.score - a.score)
@@ -317,6 +397,7 @@ export async function searchSemanticMemories(userId: number, vector: number[], l
 export async function saveRecipe(input: {
   userId: number;
   scanId?: number;
+  foodLensScanId?: number;
   optionImageUrl?: string;
   sourceIngredients: string[];
   recipe: StructuredRecipe;
@@ -327,6 +408,7 @@ export async function saveRecipe(input: {
     .values({
       userId: input.userId,
       scanId: input.scanId,
+      foodLensScanId: input.foodLensScanId,
       title: input.recipe.title,
       summary: input.recipe.summary,
       rationale: input.recipe.rationale,
@@ -353,6 +435,17 @@ export async function saveRecipe(input: {
 export async function getRecipe(recipeId: number, userId: number) {
   const db = await requireDb();
   const [recipe] = await db.select().from(recipes).where(and(eq(recipes.id, recipeId), eq(recipes.userId, userId))).limit(1);
+  return recipe;
+}
+
+export async function getRecipeByFoodLensScan(foodLensScanId: number, userId: number) {
+  const db = await requireDb();
+  const [recipe] = await db
+    .select()
+    .from(recipes)
+    .where(and(eq(recipes.foodLensScanId, foodLensScanId), eq(recipes.userId, userId)))
+    .orderBy(desc(recipes.createdAt))
+    .limit(1);
   return recipe;
 }
 
