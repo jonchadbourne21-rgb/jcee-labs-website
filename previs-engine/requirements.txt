@@ -1,0 +1,10 @@
+fastapi==0.116.1
+httpx==0.28.1
+openai==1.109.1
+pydantic==2.11.9
+python-dotenv==1.1.1
+uvicorn[standard]==0.35.0
+
+# Test dependencies
+pytest==8.4.2
+pytest-asyncio==1.2.0
