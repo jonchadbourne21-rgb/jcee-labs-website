@@ -53,9 +53,39 @@ jobs:
           const root = "dist/public";
           const prefix = "/jcee-labs-website";
           const assets = path.join(root, "assets");
+          const hybridMediaRewrites = new Map([
+            [
+              "https://jceelabs.com/manus-storage/01-hero-boundary_f53560ae.webp",
+              `${prefix}/visuals/01-hero-boundary.webp`,
+            ],
+            [
+              "https://jceelabs.com/manus-storage/01-hero-boundary-mobile_8dd4b897.webp",
+              `${prefix}/visuals/01-hero-boundary-mobile.webp`,
+            ],
+            [
+              "https://jceelabs.com/manus-storage/02-vow-receipt_742d4ab7.webp",
+              `${prefix}/visuals/02-vow-receipt.webp`,
+            ],
+            [
+              "https://jceelabs.com/manus-storage/03-qcs-gate_f2ce0552.webp",
+              `${prefix}/visuals/03-qcs-gate.webp`,
+            ],
+            [
+              "https://jceelabs.com/manus-storage/04-assurance-layers_bdea77ce.webp",
+              `${prefix}/visuals/04-assurance-layers.webp`,
+            ],
+            [
+              "https://jceelabs.com/manus-storage/05-registry-drawers_0844a485.webp",
+              `${prefix}/visuals/05-registry-drawers.webp`,
+            ],
+            [
+              "https://jceelabs.com/manus-storage/06-charter-threshold_9c5fe973.webp",
+              `${prefix}/visuals/06-charter-threshold.webp`,
+            ],
+          ]);
 
           for (const name of fs.readdirSync(assets)) {
-            if (!name.endsWith(".js")) continue;
+            if (!name.endsWith(".js") && !name.endsWith(".css")) continue;
             const file = path.join(assets, name);
             let source = fs.readFileSync(file, "utf8");
 
@@ -63,6 +93,10 @@ jobs:
               .replaceAll('href:"/', `href:"${prefix}/`)
               .replaceAll('src:"/', `src:"${prefix}/`)
               .replaceAll('path:"/', `path:"${prefix}/`);
+
+            for (const [from, to] of hybridMediaRewrites) {
+              source = source.replaceAll(from, to);
+            }
 
             fs.writeFileSync(file, source);
           }
@@ -93,6 +127,12 @@ jobs:
           ! grep -q 'VITE_ANALYTICS_ENDPOINT' dist/public/index.html
           grep -q '/jcee-labs-website/assets/' dist/public/index.html
           grep -R -q 'path:"/jcee-labs-website/' dist/public/assets
+          test -f dist/public/visuals/01-hero-boundary.webp
+          test -f dist/public/visuals/01-hero-boundary-mobile.webp
+          test -f dist/public/visuals/06-charter-threshold.webp
+          grep -R -q '/jcee-labs-website/visuals/01-hero-boundary.webp' dist/public/assets
+          grep -R -q '/jcee-labs-website/visuals/05-registry-drawers.webp' dist/public/assets
+          ! grep -R -q 'https://jceelabs.com/manus-storage/0[1-6]-' dist/public/assets
 
       - name: Prepare SPA fallback
         run: |

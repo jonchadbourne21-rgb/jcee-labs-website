@@ -1,7 +1,6 @@
 import BrandFooter from "@/components/BrandFooter";
 import CoreHeader from "@/components/CoreHeader";
 import HexInspector from "@/components/HexInspector";
-import HexWaveField from "@/components/HexWaveField";
 import QcsTransitionGate from "@/components/QcsTransitionGate";
 import VowDurabilityDemo from "@/components/VowDurabilityDemo";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -80,17 +79,10 @@ export default function Home() {
   const revealRef = useScrollReveal();
 
   return (
-    <main id="top" ref={revealRef as any}>
+    <main id="top" className="hybrid-home" ref={revealRef as any}>
       <CoreHeader current="jcee" />
 
-      <section className="hero hex-hero">
-        <HexWaveField />
-        <div className="hex-ambient-data" aria-hidden="true">
-          <span>0x0000 · 4A 43 45 45 · JCEE</span>
-          <span>01000101 01010110 01001001 01000100 01000101 01001110 01000011 01000101</span>
-          <span>0x7F2E · STATE=OBSERVED · PROOF=BOUNDED</span>
-        </div>
-
+      <section className="hero hybrid-hero">
         <div className="hero-copy">
           <p className="eyebrow"><span /> INDEPENDENT SOFTWARE LAB · DALLAS, TX</p>
           <h1>
@@ -109,7 +101,14 @@ export default function Home() {
           </div>
         </div>
 
-        <HexInspector />
+        <aside className="hero-proof-index" aria-label="JCEE Labs operating principles">
+          <span>THE EVIDENCE BOUNDARY</span>
+          <ol>
+            <li><b>01</b><strong>Observe</strong><small>Establish the authoritative state.</small></li>
+            <li><b>02</b><strong>Authorize</strong><small>Earn permission for the next effect.</small></li>
+            <li><b>03</b><strong>Preserve</strong><small>Leave a reviewable record.</small></li>
+          </ol>
+        </aside>
       </section>
 
       <div className="statement-band" aria-label="JCEE Labs principles">
@@ -151,6 +150,15 @@ export default function Home() {
           <span>EVIDENCE-FIRST EXECUTION RUNTIME</span>
         </div>
 
+        <figure className="chapter-visual chapter-visual-vow">
+          <img
+            src="https://jceelabs.com/manus-storage/02-vow-receipt_742d4ab7.webp"
+            alt="Layered archival evidence sheets joined by a continuous green registration line"
+            loading="lazy"
+          />
+          <figcaption><span>CONTINUITY</span> Intent, authority, effect, and outcome remain joined.</figcaption>
+        </figure>
+
         <div className="vow-intro">
           <h2>The runtime between<br />intention and action.</h2>
           <div>
@@ -167,6 +175,18 @@ export default function Home() {
         </div>
 
         <VowDurabilityDemo />
+
+        <div className="vow-proof-stack">
+          <div className="vow-proof-copy">
+            <span>PRODUCT ARTIFACT / LIVE EVIDENCE VIEW</span>
+            <h3>The binary belongs where the claim can be inspected.</h3>
+            <p>
+              The evidence view remains part of VOW—not the visual identity of
+              every JCEE program. It exposes a bounded record for review.
+            </p>
+          </div>
+          <HexInspector />
+        </div>
 
         <div className="guarantee-grid">
           {guarantees.map((item) => (
@@ -228,6 +248,15 @@ export default function Home() {
           </div>
         </div>
 
+        <figure className="chapter-visual chapter-visual-qcs">
+          <img
+            src="https://jceelabs.com/manus-storage/03-qcs-gate_f2ce0552.webp"
+            alt="A mineral landscape divided by a precise physical gate at an evidence boundary"
+            loading="lazy"
+          />
+          <figcaption><span>TRANSITION</span> A proposed effect stops where authority is unresolved.</figcaption>
+        </figure>
+
         <QcsTransitionGate />
       </section>
       <div className="breath" aria-hidden="true" />
@@ -256,6 +285,15 @@ export default function Home() {
             </p>
           </div>
         </div>
+
+        <figure className="chapter-visual chapter-visual-assurance">
+          <img
+            src="https://jceelabs.com/manus-storage/04-assurance-layers_bdea77ce.webp"
+            alt="Independent archival evidence objects held in separate smoked-glass review planes"
+            loading="lazy"
+          />
+          <figcaption><span>SEPARATION</span> Evidence crosses independent layers without inheriting trust.</figcaption>
+        </figure>
 
         <div className="assurance-flow" aria-label="JCEE assurance flow">
           <article><span>01</span><strong>EXECUTION</strong><p>A system proposes, acts, waits, recovers, or refuses.</p></article>
@@ -302,6 +340,15 @@ export default function Home() {
           </div>
         </div>
 
+        <figure className="chapter-visual chapter-visual-registry">
+          <img
+            src="https://jceelabs.com/manus-storage/05-registry-drawers_0844a485.webp"
+            alt="Graphite archival drawers with one public evidence record opened for inspection"
+            loading="lazy"
+          />
+          <figcaption><span>DISCLOSURE</span> A living record of status, evidence boundary, and limitation.</figcaption>
+        </figure>
+
         <div className="registry-preview">
           {registryPreview.map((entry, index) => (
             <article key={entry.name}>
@@ -326,6 +373,15 @@ export default function Home() {
           <span>06 / CHARTER</span>
           <span>PUBLIC STANDARD · VERSION 1.1</span>
         </div>
+
+        <figure className="chapter-visual chapter-visual-charter">
+          <img
+            src="https://jceelabs.com/manus-storage/06-charter-threshold_9c5fe973.webp"
+            alt="A luminous sheet suspended at a monumental architectural threshold"
+            loading="lazy"
+          />
+          <figcaption><span>AUTHORITY</span> A hypothesis may cross the threshold only after authority is earned.</figcaption>
+        </figure>
 
         <div className="first-principle-lead">
           <p>JCEE FIRST PRINCIPLE</p>
