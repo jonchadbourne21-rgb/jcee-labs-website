@@ -250,6 +250,22 @@ try {
     }
   }
 
+  await navigate(page.send, baseUrl, "/assurance");
+  const assuranceArchitectureColors = await evaluate(page.send, `(() => {
+    const copy = document.querySelector('.assurance-architecture-grid article > div > p:last-child');
+    const label = document.querySelector('.assurance-architecture-grid article > div > p:first-child');
+    return {
+      copy: copy ? getComputedStyle(copy).color : null,
+      label: label ? getComputedStyle(label).color : null,
+    };
+  })()`);
+  if (assuranceArchitectureColors.copy !== "rgba(9, 11, 16, 0.68)") {
+    failures.push(`Assurance architecture copy has unexpected low-contrast color: ${assuranceArchitectureColors.copy}`);
+  }
+  if (assuranceArchitectureColors.label !== "rgb(49, 92, 255)") {
+    failures.push(`Assurance architecture label has unexpected color: ${assuranceArchitectureColors.label}`);
+  }
+
   await navigate(page.send, baseUrl, "/terms");
   const termsText = await readBody(page.send);
   if (termsText.toUpperCase().includes("MIRRORED")) {

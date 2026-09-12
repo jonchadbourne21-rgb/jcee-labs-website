@@ -1069,6 +1069,15 @@ nav a::after {
   color: rgba(9, 11, 16, 0.48) !important;
 }
 
+.assurance-layer-number,
+.assurance-architecture-grid article > div > p:first-child {
+  color: var(--precision-blue) !important;
+}
+
+.assurance-architecture-grid article > div > p:last-child {
+  color: rgba(9, 11, 16, 0.68) !important;
+}
+
 .program-boundary-list,
 .assurance-architecture-grid article,
 .registry-entry,
