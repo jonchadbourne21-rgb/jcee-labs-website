@@ -1,0 +1,5 @@
+claims_data.json
+*.tmp
+__pycache__/
+tests/__pycache__/
+.pytest_cache/
