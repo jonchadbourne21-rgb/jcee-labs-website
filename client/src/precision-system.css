@@ -77,9 +77,25 @@ select {
 }
 
 .desktop-nav a:hover,
+.desktop-nav a:focus-visible,
 .desktop-nav a[aria-current="page"],
-.header-contact:hover {
+.header-contact:hover,
+.header-contact:focus-visible {
   color: var(--precision-white) !important;
+}
+
+.desktop-nav a:focus-visible,
+.header-contact:focus-visible,
+.mobile-menu-toggle:focus-visible,
+.precision-home .company-bottom a:focus-visible,
+.precision-home .section-detail-link:focus-visible,
+.program-links a:focus-visible,
+.registry-entry a:focus-visible,
+.brand-footer a:focus-visible,
+.partner-pathway-link:focus-visible,
+.partner-form-submit button:focus-visible {
+  outline: 1px solid var(--precision-blue-soft) !important;
+  outline-offset: 4px !important;
 }
 
 nav a::after {
@@ -92,6 +108,15 @@ nav a::after {
   border: 1px solid rgba(245, 246, 248, 0.28) !important;
   border-radius: 0 !important;
   color: var(--precision-white) !important;
+  transition:
+    background-color 160ms var(--precision-ease),
+    border-color 160ms var(--precision-ease);
+}
+
+.mobile-menu-toggle:hover,
+.mobile-menu-toggle:focus-visible {
+  background: var(--precision-black-2) !important;
+  border-color: var(--precision-blue-soft) !important;
 }
 
 .mobile-nav {
@@ -429,6 +454,17 @@ nav a::after {
   font-family: "IBM Plex Mono", ui-monospace, monospace !important;
   font-size: 9px !important;
   letter-spacing: 0.08em !important;
+}
+
+.precision-home .company-bottom a span,
+.precision-home .section-detail-link span {
+  display: inline-block;
+  transition: transform 160ms var(--precision-ease) !important;
+}
+
+.precision-home .company-bottom a:focus-visible span,
+.precision-home .section-detail-link:focus-visible span {
+  transform: translateX(2px) !important;
 }
 
 .precision-home .breath {
@@ -1013,9 +1049,14 @@ nav a::after {
   border-radius: 0 !important;
   color: var(--precision-white) !important;
   font-family: "IBM Plex Mono", ui-monospace, monospace !important;
+  transition:
+    background-color 160ms var(--precision-ease),
+    border-color 160ms var(--precision-ease),
+    color 160ms var(--precision-ease);
 }
 
-.program-links a:hover {
+.program-links a:hover,
+.program-links a:focus-visible {
   background: var(--precision-blue) !important;
   border-color: var(--precision-blue) !important;
   color: #ffffff !important;
@@ -1087,6 +1128,24 @@ nav a::after {
     color: #173fd6 !important;
     transform: translateX(2px);
   }
+
+  .registry-entry:hover .registry-entry-index,
+  .registry-entry:hover dt,
+  .precision-home .registry-preview article:hover .registry-sequence,
+  .precision-home .registry-preview article:hover .registry-state {
+    color: #173fd6 !important;
+    transform: translateX(2px);
+  }
+
+  .registry-classification-grid article:hover span {
+    color: var(--precision-blue-soft) !important;
+    transform: translateX(2px);
+  }
+
+  .precision-home .company-bottom a:hover span,
+  .precision-home .section-detail-link:hover span {
+    transform: translateX(2px) !important;
+  }
 }
 
 .program-boundary-list,
@@ -1129,6 +1188,23 @@ nav a::after {
   color: rgba(245, 246, 248, 0.58) !important;
 }
 
+.registry-entry-index,
+.registry-entry dt,
+.registry-classification-grid span,
+.precision-home .registry-sequence,
+.precision-home .registry-state {
+  display: inline-block;
+  transition:
+    color 160ms var(--precision-ease),
+    transform 160ms var(--precision-ease);
+}
+
+.registry-entry:focus-within .registry-entry-index,
+.registry-entry:focus-within dt {
+  color: #173fd6 !important;
+  transform: translateX(2px);
+}
+
 .registry-entry h3 {
   color: var(--precision-ink) !important;
   font-family: "IBM Plex Sans", sans-serif !important;
@@ -1143,6 +1219,28 @@ nav a::after {
 .registry-entry-summary,
 .registry-entry a {
   color: var(--precision-ink) !important;
+}
+
+.registry-entry a {
+  transition: color 160ms var(--precision-ease);
+}
+
+.registry-entry a span {
+  display: inline-block;
+  transition:
+    color 160ms var(--precision-ease),
+    transform 160ms var(--precision-ease);
+}
+
+.registry-entry a:hover,
+.registry-entry a:focus-visible {
+  color: var(--precision-blue) !important;
+}
+
+.registry-entry a:hover span,
+.registry-entry a:focus-visible span {
+  color: #173fd6 !important;
+  transform: translateX(2px);
 }
 
 .registry-entry dd {
@@ -1424,7 +1522,15 @@ nav a::after {
   }
 
   .assurance-layer-number,
-  .assurance-architecture-grid article > div > p:first-child {
+  .assurance-architecture-grid article > div > p:first-child,
+  .registry-entry-index,
+  .registry-entry dt,
+  .registry-classification-grid span,
+  .precision-home .registry-sequence,
+  .precision-home .registry-state,
+  .precision-home .company-bottom a span,
+  .precision-home .section-detail-link span,
+  .registry-entry a span {
     transition: none !important;
   }
 }
@@ -1763,7 +1869,8 @@ nav a::after {
   transition: background-color 160ms var(--precision-ease), color 160ms var(--precision-ease), transform 140ms var(--precision-ease);
 }
 
-.partner-form-submit button:hover {
+.partner-form-submit button:hover,
+.partner-form-submit button:focus-visible {
   background: var(--precision-white);
   border-color: var(--precision-white);
   color: var(--precision-ink);
@@ -1981,7 +2088,8 @@ nav a::after {
   transition: background-color 160ms var(--precision-ease), color 160ms var(--precision-ease), transform 140ms var(--precision-ease);
 }
 
-.partner-pathway-link:hover {
+.partner-pathway-link:hover,
+.partner-pathway-link:focus-visible {
   background: var(--precision-blue);
   border-color: var(--precision-blue);
   color: #fff;

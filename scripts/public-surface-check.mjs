@@ -296,6 +296,34 @@ try {
     failures.push("Public Registry page is missing its Markdown download link");
   }
 
+  const registryInteractions = await evaluate(page.send, `(() => {
+    const index = document.querySelector('.registry-entry-index');
+    const label = document.querySelector('.registry-entry dt');
+    const link = document.querySelector('.registry-entry a');
+    link?.focus();
+    const containsFocusRule = rules => [...rules].some(rule => {
+      if (rule.cssText?.includes('.registry-entry a:focus-visible') && rule.cssText?.includes('outline')) return true;
+      return rule.cssRules ? containsFocusRule(rule.cssRules) : false;
+    });
+    return {
+      indexTransition: index ? getComputedStyle(index).transitionProperty : null,
+      labelTransition: label ? getComputedStyle(label).transitionProperty : null,
+      linkFocused: document.activeElement === link,
+      focusRulePresent: [...document.styleSheets].some(sheet => {
+        try { return containsFocusRule(sheet.cssRules); } catch { return false; }
+      }),
+    };
+  })()`);
+  if (!registryInteractions.indexTransition?.includes("color") || !registryInteractions.indexTransition?.includes("transform")) {
+    failures.push(`Registry entry index is missing its subtle label transition: ${registryInteractions.indexTransition}`);
+  }
+  if (!registryInteractions.labelTransition?.includes("color") || !registryInteractions.labelTransition?.includes("transform")) {
+    failures.push(`Registry evidence label is missing its subtle label transition: ${registryInteractions.labelTransition}`);
+  }
+  if (!registryInteractions.linkFocused || !registryInteractions.focusRulePresent) {
+    failures.push(`Registry technical link is missing visible keyboard focus: ${JSON.stringify(registryInteractions)}`);
+  }
+
   const registryResponse = await fetch(`${baseUrl}/JCEE_Labs_Public_Registry_v1.0.md`);
   const registryText = await registryResponse.text();
   if (
