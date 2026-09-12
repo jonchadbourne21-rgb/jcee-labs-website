@@ -1072,10 +1072,21 @@ nav a::after {
 .assurance-layer-number,
 .assurance-architecture-grid article > div > p:first-child {
   color: var(--precision-blue) !important;
+  transition:
+    color 160ms var(--precision-ease),
+    transform 160ms var(--precision-ease);
 }
 
 .assurance-architecture-grid article > div > p:last-child {
   color: rgba(9, 11, 16, 0.68) !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .assurance-architecture-grid article:hover .assurance-layer-number,
+  .assurance-architecture-grid article:hover > div > p:first-child {
+    color: #173fd6 !important;
+    transform: translateX(2px);
+  }
 }
 
 .program-boundary-list,
@@ -1410,6 +1421,11 @@ nav a::after {
   *::before,
   *::after {
     scroll-behavior: auto !important;
+  }
+
+  .assurance-layer-number,
+  .assurance-architecture-grid article > div > p:first-child {
+    transition: none !important;
   }
 }
 

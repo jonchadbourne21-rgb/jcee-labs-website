@@ -257,6 +257,7 @@ try {
     return {
       copy: copy ? getComputedStyle(copy).color : null,
       label: label ? getComputedStyle(label).color : null,
+      labelTransition: label ? getComputedStyle(label).transitionProperty : null,
     };
   })()`);
   if (assuranceArchitectureColors.copy !== "rgba(9, 11, 16, 0.68)") {
@@ -264,6 +265,9 @@ try {
   }
   if (assuranceArchitectureColors.label !== "rgb(49, 92, 255)") {
     failures.push(`Assurance architecture label has unexpected color: ${assuranceArchitectureColors.label}`);
+  }
+  if (!assuranceArchitectureColors.labelTransition?.includes("color") || !assuranceArchitectureColors.labelTransition?.includes("transform")) {
+    failures.push(`Assurance architecture label is missing its subtle hover transition: ${assuranceArchitectureColors.labelTransition}`);
   }
 
   await navigate(page.send, baseUrl, "/terms");
