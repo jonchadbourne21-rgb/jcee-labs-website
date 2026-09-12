@@ -1,0 +1,482 @@
+import { useAuth } from "@/_core/hooks/useAuth";
+import AppShell from "@/components/product/AppShell";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { trpc } from "@/lib/trpc";
+import type { FoodLensAnalysis, FoodLensItem, NutritionValues } from "@shared/product";
+import {
+  AlertTriangle,
+  ArrowRight,
+  Camera,
+  CheckCircle2,
+  Clock3,
+  ExternalLink,
+  Flame,
+  Info,
+  Layers,
+  Loader2,
+  Network,
+  Scale,
+  Sparkles,
+  Upload,
+} from "lucide-react";
+import { useMemo, useRef, useState } from "react";
+import { toast } from "sonner";
+import { Link } from "wouter";
+
+const SAMPLE_PHOTO = "/manus-storage/mise-ingredients_ff9547f3.jpg";
+
+export default function FoodLens() {
+  useAuth({ redirectOnUnauthenticated: true });
+  const utils = trpc.useUtils();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [dataUrl, setDataUrl] = useState<string | null>(null);
+  const [context, setContext] = useState("");
+  const [currentScanId, setCurrentScanId] = useState<number | null>(null);
+  const [currentAnalysis, setCurrentAnalysis] = useState<FoodLensAnalysis | null>(null);
+  const [relatedMemories, setRelatedMemories] = useState<any[]>([]);
+
+  const historyQuery = trpc.foodLens.history.useQuery();
+
+  const analyzeMutation = trpc.foodLens.analyze.useMutation({
+    onSuccess: (result: any) => {
+      setCurrentScanId(result.scanId);
+      setCurrentAnalysis({
+        dishGuess: result.dishGuess,
+        overallConfidence: result.overallConfidence,
+        portionConfidence: result.portionConfidence,
+        uncertaintySummary: result.uncertaintySummary,
+        measurementNote: result.measurementNote,
+        estimateDisclosure: result.estimateDisclosure,
+        items: result.items,
+        totalNutrition: result.totalNutrition,
+        generationMode: result.generationMode,
+      });
+      setRelatedMemories(result.relatedMemories ?? []);
+      utils.foodLens.history.invalidate();
+      toast.success("Food recognized with portion estimates");
+    },
+    onError: error => toast.error(error.message),
+  });
+
+  const updateMutation = trpc.foodLens.update.useMutation({
+    onSuccess: (result: any) => {
+      if (result.scan) {
+        setCurrentAnalysis(prev => prev ? {
+          ...prev,
+          items: result.scan.items,
+          totalNutrition: result.scan.totalNutrition,
+          measurementNote: result.scan.measurementNote,
+        } : null);
+      }
+      setRelatedMemories(result.relatedMemories ?? []);
+      utils.foodLens.history.invalidate();
+      toast.success("Portions and nutrition recalculated");
+    },
+    onError: error => toast.error(error.message),
+  });
+
+  function handleFileSelect(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = String(reader.result);
+      setDataUrl(result);
+      analyzeMutation.mutate({
+        dataUrl: result,
+        filename: file.name,
+        context,
+      });
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function handleUseSample() {
+    fetch(SAMPLE_PHOTO)
+      .then(res => res.blob())
+      .then(blob => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const base64 = String(reader.result);
+          setDataUrl(base64);
+          analyzeMutation.mutate({
+            dataUrl: base64,
+            filename: "mise-ingredients.jpg",
+            context: "dinner prep: chicken thighs, broccoli, lemon, garlic, parmesan",
+          });
+        };
+        reader.readAsDataURL(blob);
+      })
+      .catch(() => toast.error("Could not load sample image"));
+  }
+
+  function updateItemGrams(itemId: string, newGrams: number) {
+    if (!currentAnalysis || !currentScanId) return;
+    const updatedItems = currentAnalysis.items.map(item =>
+      item.id === itemId
+        ? { ...item, estimatedGrams: Math.max(0, newGrams), needsConfirmation: false }
+        : item
+    );
+    updateMutation.mutate({
+      scanId: currentScanId,
+      items: updatedItems.map(item => ({
+        id: item.id,
+        name: item.name,
+        estimatedGrams: item.estimatedGrams,
+        confidence: item.confidence,
+        portionConfidence: 90,
+        needsConfirmation: item.needsConfirmation,
+      })),
+      measurementNote: "Portion adjusted and confirmed by user",
+    });
+  }
+
+  const items = currentAnalysis?.items ?? [];
+  const nutrition: NutritionValues = currentAnalysis?.totalNutrition ?? {
+    calories: 0,
+    proteinG: 0,
+    carbsG: 0,
+    fatG: 0,
+    saturatedFatG: 0,
+    fiberG: 0,
+    sugarG: 0,
+    sodiumMg: 0,
+  };
+
+  return (
+    <AppShell>
+      <section className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <div className="inline-flex items-center gap-2 rounded-full bg-copper/15 px-3 py-1 text-[0.68rem] font-bold uppercase tracking-wider text-copper-deep">
+            <Camera className="size-3.5" /> Food Lens · Semantic Memory
+          </div>
+          <h1 className="page-title mt-3">Smart Food & Nutrition Recognition</h1>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-ink">
+            Point your camera at a meal or ingredients. Mise recognizes visible food, estimates portion grams, attaches reference nutrition facts, and connects the meal to your personal semantic memory graph.
+          </p>
+        </div>
+      </section>
+
+      {/* Main capture / review grid */}
+      <div className="mt-8 grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="space-y-6">
+          <div className="surface overflow-hidden p-6 sm:p-8">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="eyebrow">Visual Capture</p>
+                <h2 className="mt-1 font-display text-3xl">Take or upload a photo</h2>
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleUseSample}
+                disabled={analyzeMutation.isPending}
+                className="rounded-full text-xs"
+              >
+                Use sample meal
+              </Button>
+            </div>
+
+            <p className="mt-2 text-xs leading-5 text-muted-ink">
+              Clear overhead or 45-degree angle photos give the highest portion and food accuracy.
+            </p>
+
+            <div className="mt-5">
+              <Input
+                value={context}
+                onChange={e => setContext(e.target.value)}
+                placeholder="Optional context: e.g. dinner with olive oil and side of rice…"
+                className="h-11 rounded-full bg-white/70 px-4 text-xs"
+              />
+            </div>
+
+            <div className="mt-5">
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                onChange={handleFileSelect}
+                className="hidden"
+              />
+              {dataUrl ? (
+                <div className="relative overflow-hidden rounded-2xl bg-black/5">
+                  <img src={dataUrl} alt="Analyzed meal" className="h-72 w-full object-cover" />
+                  <Button
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={analyzeMutation.isPending}
+                    size="sm"
+                    className="absolute bottom-3 right-3 rounded-full bg-black/70 text-xs text-white backdrop-blur-md hover:bg-black"
+                  >
+                    <Upload className="mr-1.5 size-3.5" /> Retake
+                  </Button>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={analyzeMutation.isPending}
+                  className="grid h-64 w-full place-items-center rounded-2xl border-2 border-dashed border-ink/15 bg-white/40 p-6 text-center transition-colors hover:border-copper hover:bg-copper/5"
+                >
+                  <div>
+                    <Camera className="mx-auto size-10 text-copper-deep" />
+                    <p className="mt-3 font-display text-2xl">Capture or choose photo</p>
+                    <p className="mt-1 text-xs text-muted-ink">JPEG, PNG, WebP up to 8 MB</p>
+                  </div>
+                </button>
+              )}
+            </div>
+
+            {analyzeMutation.isPending && (
+              <div className="mt-6 flex items-center justify-center gap-3 rounded-2xl bg-copper/10 p-5 text-sm font-semibold text-copper-deep">
+                <Loader2 className="size-5 animate-spin" />
+                Analyzing food items, visual scale, and reference nutrition…
+              </div>
+            )}
+          </div>
+
+          {currentAnalysis && (
+            <section className="surface p-6 sm:p-8">
+              <div className="flex items-start justify-between">
+                <div>
+                  <p className="eyebrow">Recognized Foods</p>
+                  <h2 className="mt-1 font-display text-3xl">{currentAnalysis.dishGuess}</h2>
+                </div>
+                <div className="text-right">
+                  <span className="rounded-full bg-sage/20 px-3 py-1 text-xs font-bold text-sage-deep">
+                    {currentAnalysis.overallConfidence}% visual confidence
+                  </span>
+                  <p className="mt-1 text-[0.68rem] text-muted-ink">
+                    Portion confidence: {currentAnalysis.portionConfidence}%
+                  </p>
+                </div>
+              </div>
+
+              <p className="mt-3 text-xs leading-5 text-muted-ink">
+                {currentAnalysis.uncertaintySummary}
+              </p>
+
+              <div className="mt-6 space-y-3">
+                {items.map(item => (
+                  <div
+                    key={item.id}
+                    className="flex flex-col gap-3 rounded-2xl border border-ink/8 bg-white/60 p-4 sm:flex-row sm:items-center sm:justify-between"
+                  >
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-semibold text-sm capitalize">{item.name}</span>
+                        {item.needsConfirmation ? (
+                          <span className="inline-flex items-center gap-1 text-[0.65rem] font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full">
+                            <AlertTriangle className="size-2.5" /> verify
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-1 text-[0.65rem] font-bold text-sage-deep bg-sage/18 px-2 py-0.5 rounded-full">
+                            <CheckCircle2 className="size-2.5" /> confirmed
+                          </span>
+                        )}
+                      </div>
+                      <p className="mt-1 text-[0.68rem] text-muted-ink flex items-center gap-1.5">
+                        <span>{item.sourceLabel}</span>
+                        {item.sourceUrl && (
+                          <a
+                            href={item.sourceUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-0.5 text-copper-deep hover:underline"
+                          >
+                            <ExternalLink className="size-2.5" />
+                          </a>
+                        )}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-2 self-end sm:self-auto">
+                      <div className="flex items-center gap-1">
+                        <Input
+                          type="number"
+                          defaultValue={item.estimatedGrams}
+                          onBlur={e => {
+                            const val = Number(e.target.value);
+                            if (val !== item.estimatedGrams) {
+                              updateItemGrams(item.id, val);
+                            }
+                          }}
+                          className="h-9 w-20 rounded-xl bg-white text-center text-xs font-mono font-bold"
+                        />
+                        <span className="text-xs text-muted-ink font-semibold">g</span>
+                      </div>
+                      {item.nutritionForPortion && (
+                        <span className="min-w-16 text-right font-mono text-xs font-bold text-copper-deep">
+                          {item.nutritionForPortion.calories} kcal
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-5 rounded-2xl bg-black/4 p-4 text-[0.68rem] leading-5 text-muted-ink flex items-start gap-2">
+                <Info className="size-4 shrink-0 text-muted-ink mt-0.5" />
+                <span>{currentAnalysis.estimateDisclosure}</span>
+              </div>
+            </section>
+          )}
+        </div>
+
+        {/* Right column: Nutrition Facts + Semantic Memory DAG */}
+        <div className="space-y-6">
+          {/* Nutrition Facts Panel */}
+          <section className="rounded-[2rem] border-2 border-ink bg-white p-6 shadow-xl text-ink">
+            <div className="border-b-8 border-ink pb-2">
+              <h2 className="font-display text-4xl leading-none">Nutrition Facts</h2>
+              <p className="text-xs text-muted-ink mt-1">
+                Estimated from identified portions (not a laboratory label)
+              </p>
+            </div>
+
+            <div className="border-b-4 border-ink py-2 flex items-baseline justify-between">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-wider text-muted-ink">
+                  Total Energy
+                </p>
+                <p className="font-display text-4xl font-black">{nutrition.calories}</p>
+              </div>
+              <Flame className="size-7 text-copper" />
+            </div>
+
+            <div className="divide-y divide-ink/15 text-xs font-medium">
+              <div className="py-2 flex justify-between font-bold">
+                <span>Total Fat</span>
+                <span>{nutrition.fatG}g</span>
+              </div>
+              <div className="py-1 pl-4 flex justify-between text-muted-ink">
+                <span>Saturated Fat</span>
+                <span>{nutrition.saturatedFatG}g</span>
+              </div>
+              <div className="py-2 flex justify-between font-bold">
+                <span>Sodium</span>
+                <span>{nutrition.sodiumMg}mg</span>
+              </div>
+              <div className="py-2 flex justify-between font-bold">
+                <span>Total Carbohydrate</span>
+                <span>{nutrition.carbsG}g</span>
+              </div>
+              <div className="py-1 pl-4 flex justify-between text-muted-ink">
+                <span>Dietary Fiber</span>
+                <span>{nutrition.fiberG}g</span>
+              </div>
+              <div className="py-1 pl-4 flex justify-between text-muted-ink">
+                <span>Total Sugars</span>
+                <span>{nutrition.sugarG}g</span>
+              </div>
+              <div className="py-2 flex justify-between font-bold text-sm">
+                <span>Protein</span>
+                <span>{nutrition.proteinG}g</span>
+              </div>
+            </div>
+
+            <div className="mt-4 border-t border-ink pt-3 text-[0.65rem] text-muted-ink leading-4">
+              Daily Values are based on a 2,000 calorie reference diet. Individual requirements vary by body mass and activity.
+            </div>
+          </section>
+
+          {/* Semantic Memory & RAG Section */}
+          <section className="surface p-6 sm:p-8">
+            <div className="flex items-center gap-2">
+              <Network className="size-5 text-copper-deep" />
+              <div>
+                <p className="eyebrow">Semantic Vector Memory</p>
+                <h3 className="font-display text-2xl">Connected Culinary DAG</h3>
+              </div>
+            </div>
+
+            <p className="mt-2 text-xs leading-5 text-muted-ink">
+              Mise converts each meal recognition into a private 64-dimensional vector embedding. Related meals, past recipes, and your palate preferences link into an explicit directed acyclic graph.
+            </p>
+
+            {relatedMemories.length > 0 ? (
+              <div className="mt-5 space-y-2.5">
+                <p className="text-xs font-bold uppercase tracking-wider text-muted-ink">
+                  Top semantic connections
+                </p>
+                {relatedMemories.map(mem => (
+                  <div
+                    key={mem.id}
+                    className="rounded-xl border border-ink/8 bg-white/70 p-3 flex items-center justify-between"
+                  >
+                    <div>
+                      <p className="text-xs font-semibold text-ink">{mem.title}</p>
+                      <span className="text-[0.65rem] uppercase tracking-wider text-muted-ink">
+                        {mem.kind || "memory"}
+                      </span>
+                    </div>
+                    <span className="rounded-full bg-copper/15 px-2.5 py-0.5 text-xs font-mono font-bold text-copper-deep">
+                      {Math.round((mem.similarity ?? 0.8) * 100)}% match
+                    </span>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="mt-5 rounded-2xl bg-black/4 p-4 text-center text-xs text-muted-ink">
+                Capture a meal above to see how it automatically links to your existing recipe and feedback memories.
+              </div>
+            )}
+
+            <div className="mt-6 border-t soft-rule pt-4 flex items-center justify-between">
+              <span className="text-xs text-muted-ink">Want to cook something similar?</span>
+              <Link
+                href="/discover"
+                className="inline-flex items-center gap-1 text-xs font-bold text-copper-deep hover:underline"
+              >
+                Cook from ingredients →
+              </Link>
+            </div>
+          </section>
+
+          {/* Past Food Lens Scans */}
+          {(historyQuery.data ?? []).length > 0 && (
+            <section className="surface p-6">
+              <div className="flex items-center justify-between">
+                <p className="eyebrow">Recent Food Lens Scans</p>
+                <span className="text-xs font-semibold text-muted-ink">
+                  {historyQuery.data?.length} recorded
+                </span>
+              </div>
+              <div className="mt-4 space-y-2">
+                {historyQuery.data?.slice(0, 4).map((scan: any) => (
+                  <button
+                    key={scan.id}
+                    onClick={() => {
+                      setCurrentScanId(scan.id);
+                      setCurrentAnalysis({
+                        dishGuess: scan.dishGuess,
+                        overallConfidence: scan.overallConfidence,
+                        portionConfidence: scan.portionConfidence,
+                        uncertaintySummary: scan.uncertaintySummary,
+                        measurementNote: scan.measurementNote,
+                        estimateDisclosure: scan.estimateDisclosure,
+                        items: scan.items,
+                        totalNutrition: scan.totalNutrition,
+                        generationMode: scan.generationMode,
+                      });
+                      if (scan.imageUrl) setDataUrl(scan.imageUrl);
+                    }}
+                    className="w-full text-left rounded-xl border border-ink/8 bg-white/60 p-3 hover:bg-white transition-colors flex items-center justify-between"
+                  >
+                    <div>
+                      <p className="text-xs font-semibold">{scan.dishGuess}</p>
+                      <p className="text-[0.65rem] text-muted-ink">
+                        {scan.items?.length ?? 0} items · {scan.totalNutrition?.calories ?? 0} kcal
+                      </p>
+                    </div>
+                    <ArrowRight className="size-3.5 text-muted-ink" />
+                  </button>
+                ))}
+              </div>
+            </section>
+          )}
+        </div>
+      </div>
+    </AppShell>
+  );
+}

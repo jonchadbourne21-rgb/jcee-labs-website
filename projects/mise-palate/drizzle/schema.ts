@@ -56,6 +56,59 @@ export const ingredientScans = mysqlTable(
   table => [index("ingredient_scans_user_idx").on(table.userId)]
 );
 
+export const foodLensScans = mysqlTable(
+  "food_lens_scans",
+  {
+    id: int("id").autoincrement().primaryKey(),
+    userId: int("userId").notNull(),
+    imageKey: varchar("imageKey", { length: 512 }),
+    imageUrl: text("imageUrl"),
+    dishGuess: varchar("dishGuess", { length: 220 }).notNull(),
+    overallConfidence: int("overallConfidence").notNull(),
+    portionConfidence: int("portionConfidence").notNull(),
+    uncertaintySummary: text("uncertaintySummary").notNull(),
+    measurementNote: text("measurementNote").notNull(),
+    estimateDisclosure: text("estimateDisclosure").notNull(),
+    items: json("items").notNull(),
+    totalNutrition: json("totalNutrition").notNull(),
+    generationMode: mysqlEnum("generationMode", ["live_ai", "safe_fallback"]).default("live_ai").notNull(),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+    updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  },
+  table => [index("food_lens_scans_user_idx").on(table.userId), index("food_lens_scans_user_created_idx").on(table.userId, table.createdAt)]
+);
+
+export const semanticMemories = mysqlTable(
+  "semantic_memories",
+  {
+    id: int("id").autoincrement().primaryKey(),
+    userId: int("userId").notNull(),
+    kind: mysqlEnum("kind", ["food_lens", "recipe", "meal_feedback", "preference"]).notNull(),
+    sourceId: int("sourceId"),
+    title: varchar("title", { length: 220 }).notNull(),
+    content: text("content").notNull(),
+    vector: json("vector").notNull(),
+    metadata: json("metadata").notNull(),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+    updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  },
+  table => [index("semantic_memories_user_idx").on(table.userId), index("semantic_memories_user_kind_idx").on(table.userId, table.kind), index("semantic_memories_source_idx").on(table.userId, table.kind, table.sourceId)]
+);
+
+export const semanticMemoryEdges = mysqlTable(
+  "semantic_memory_edges",
+  {
+    id: int("id").autoincrement().primaryKey(),
+    userId: int("userId").notNull(),
+    fromMemoryId: int("fromMemoryId").notNull(),
+    toMemoryId: int("toMemoryId").notNull(),
+    relation: mysqlEnum("relation", ["similar_to", "derived_from", "reinforces"]).notNull(),
+    weight: int("weight").notNull(),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+  },
+  table => [index("semantic_memory_edges_user_idx").on(table.userId), index("semantic_memory_edges_from_idx").on(table.fromMemoryId)]
+);
+
 export const recipes = mysqlTable(
   "recipes",
   {

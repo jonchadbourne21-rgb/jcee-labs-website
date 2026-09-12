@@ -9,7 +9,8 @@ import NotFound from "./pages/NotFound";
 
 const CookMode = lazy(() => import("./pages/CookMode"));
 const Discover = lazy(() => import("./pages/Discover"));
-const Knowledge = lazy(() => import("./pages/Knowledge"));
+const Knowledge = lazy(() => import("@/pages/Knowledge"));
+const FoodLens = lazy(() => import("@/pages/FoodLens"));
 const Me = lazy(() => import("./pages/Me"));
 const Onboarding = lazy(() => import("./pages/Onboarding"));
 const Recipe = lazy(() => import("./pages/Recipe"));
@@ -26,8 +27,9 @@ function Router() {
       <Route path="/cook" component={CookMode} />
       <Route path="/saved" component={Saved} />
       <Route path="/me" component={Me} />
-      <Route path="/knowledge" component={Knowledge} />
-      <Route path="/404" component={NotFound} />
+      <Route path={"/knowledge"} component={Knowledge} />
+      <Route path={"/lens"} component={FoodLens} />
+      <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>
   );

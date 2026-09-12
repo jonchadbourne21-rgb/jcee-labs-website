@@ -3,6 +3,7 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { cookRouter } from "./routers/cook";
+import { foodLensRouter } from "./routers/food-lens";
 import { knowledgeRouter } from "./routers/knowledge";
 import { palateRouter } from "./routers/palate";
 import { recipesRouter } from "./routers/recipes";
@@ -21,6 +22,7 @@ export const appRouter = router({
   scans: scansRouter,
   recipes: recipesRouter,
   cook: cookRouter,
+  foodLens: foodLensRouter,
   knowledge: knowledgeRouter,
 });
 

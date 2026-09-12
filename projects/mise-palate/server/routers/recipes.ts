@@ -6,6 +6,7 @@ import { DEFAULT_PALATE, SENSORY_DIMENSIONS } from "../../shared/product";
 import { forecastTaste, generateRecipeOptions, generateStructuredRecipe, getSubstitution, mergePalates } from "../product/ai";
 import { recipeRecord, structuredRecipeFromRow } from "../product/records";
 import { normalizeRecipeTags } from "../product/tags";
+import { semanticVector } from "../product/memory";
 
 const sensorySchema = z.object(Object.fromEntries(SENSORY_DIMENSIONS.map(key => [key, z.number().min(0).max(100)])) as Record<(typeof SENSORY_DIMENSIONS)[number], z.ZodNumber>);
 const optionSchema = z.object({
@@ -34,6 +35,10 @@ export const recipesRouter = router({
     )
     .mutation(async ({ ctx, input }) => {
       const profile = await db.getPalateProfile(ctx.user.id);
+      const semanticContext = await db.searchSemanticMemories(
+        ctx.user.id,
+        semanticVector(`${input.ingredients.join(" ")} ${input.craving ?? ""}`)
+      );
       const result = await generateRecipeOptions({
         ingredients: input.ingredients,
         palate: (profile?.dimensions as typeof DEFAULT_PALATE) ?? DEFAULT_PALATE,
@@ -42,9 +47,10 @@ export const recipesRouter = router({
         difficulty: input.difficulty,
         dietaryRestrictions: (profile?.dietaryRestrictions as string[]) ?? [],
         craving: input.craving,
+        semanticContext,
       });
       await db.trackEvent(ctx.user.id, "recipe_options_generated", { scanId: input.scanId, mode: result.generationMode });
-      return result;
+      return { ...result, semanticContext };
     }),
 
   generate: protectedProcedure
@@ -60,6 +66,18 @@ export const recipesRouter = router({
         chefKnowledge: knowledge.map(item => ({ slug: item.slug, title: item.title, summary: item.summary, content: item.content })),
       });
       const recipeId = await db.saveRecipe({ userId: ctx.user.id, scanId: input.scanId, optionImageUrl: input.option.imageUrl, sourceIngredients: input.ingredients, recipe });
+      const content = `${recipe.title}. ${recipe.summary} Ingredients: ${recipe.ingredients.map(ingredient => ingredient.name).join(", ")}. Sensory profile: crunchy ${recipe.sensoryProfile.crunch}, bright ${recipe.sensoryProfile.acidity}, rich ${recipe.sensoryProfile.richness}.`;
+      const vector = semanticVector(content);
+      const memory = await db.upsertSemanticMemory({
+        userId: ctx.user.id,
+        kind: "recipe",
+        sourceId: recipeId,
+        title: recipe.title,
+        content,
+        vector,
+        metadata: { recipeId, scanId: input.scanId, version: 1 },
+      });
+      if (memory) await db.refreshSemanticEdges(ctx.user.id, memory.id, vector);
       await db.trackEvent(ctx.user.id, "recipe_generated", { recipeId, scanId: input.scanId, mode: recipe.generationMode });
       return { recipeId, recipe, imageUrl: input.option.imageUrl };
     }),

@@ -4,17 +4,21 @@ import {
   analyticsEvents,
   chefKnowledge,
   cookingSessions,
+  foodLensScans,
   ingredientScans,
   mealFeedback,
   palateProfiles,
   palateSignals,
   recipes,
+  semanticMemoryEdges,
+  semanticMemories,
   type InsertUser,
   users,
 } from "../drizzle/schema";
-import type { IngredientDetection, SensoryProfile, StructuredRecipe } from "../shared/product";
+import type { FoodLensAnalysis, FoodLensItem, IngredientDetection, NutritionValues, SemanticMemoryResult, SensoryProfile, StructuredRecipe } from "../shared/product";
 import { ENV } from "./_core/env";
 import { CHEF_KNOWLEDGE_SEED } from "./product/knowledge";
+import { cosineSimilarity } from "./product/memory";
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
@@ -137,10 +141,13 @@ export async function listPalateSignals(userId: number) {
 export async function deleteCulinaryData(userId: number) {
   const db = await requireDb();
   await db.delete(analyticsEvents).where(eq(analyticsEvents.userId, userId));
+  await db.delete(semanticMemoryEdges).where(eq(semanticMemoryEdges.userId, userId));
+  await db.delete(semanticMemories).where(eq(semanticMemories.userId, userId));
   await db.delete(mealFeedback).where(eq(mealFeedback.userId, userId));
   await db.delete(palateSignals).where(eq(palateSignals.userId, userId));
   await db.delete(cookingSessions).where(eq(cookingSessions.userId, userId));
   await db.delete(recipes).where(eq(recipes.userId, userId));
+  await db.delete(foodLensScans).where(eq(foodLensScans.userId, userId));
   await db.delete(ingredientScans).where(eq(ingredientScans.userId, userId));
   await db.delete(palateProfiles).where(eq(palateProfiles.userId, userId));
   return { deleted: true as const };
@@ -176,6 +183,135 @@ export async function getIngredientScan(scanId: number, userId: number) {
     .where(and(eq(ingredientScans.id, scanId), eq(ingredientScans.userId, userId)))
     .limit(1);
   return scan;
+}
+
+export async function createFoodLensScan(input: {
+  userId: number;
+  imageKey?: string;
+  imageUrl?: string;
+  analysis: FoodLensAnalysis;
+}) {
+  const db = await requireDb();
+  const [result] = await db
+    .insert(foodLensScans)
+    .values({
+      userId: input.userId,
+      imageKey: input.imageKey,
+      imageUrl: input.imageUrl,
+      dishGuess: input.analysis.dishGuess,
+      overallConfidence: input.analysis.overallConfidence,
+      portionConfidence: input.analysis.portionConfidence,
+      uncertaintySummary: input.analysis.uncertaintySummary,
+      measurementNote: input.analysis.measurementNote,
+      estimateDisclosure: input.analysis.estimateDisclosure,
+      items: input.analysis.items,
+      totalNutrition: input.analysis.totalNutrition,
+      generationMode: input.analysis.generationMode,
+    })
+    .$returningId();
+  return result.id;
+}
+
+export async function getFoodLensScan(scanId: number, userId: number) {
+  const db = await requireDb();
+  const [scan] = await db
+    .select()
+    .from(foodLensScans)
+    .where(and(eq(foodLensScans.id, scanId), eq(foodLensScans.userId, userId)))
+    .limit(1);
+  return scan;
+}
+
+export async function listFoodLensScans(userId: number) {
+  const db = await requireDb();
+  return db.select().from(foodLensScans).where(eq(foodLensScans.userId, userId)).orderBy(desc(foodLensScans.updatedAt)).limit(20);
+}
+
+export async function updateFoodLensScan(input: {
+  scanId: number;
+  userId: number;
+  items: FoodLensItem[];
+  totalNutrition: NutritionValues;
+  measurementNote: string;
+}) {
+  const db = await requireDb();
+  await db
+    .update(foodLensScans)
+    .set({ items: input.items, totalNutrition: input.totalNutrition, measurementNote: input.measurementNote })
+    .where(and(eq(foodLensScans.id, input.scanId), eq(foodLensScans.userId, input.userId)));
+  return getFoodLensScan(input.scanId, input.userId);
+}
+
+export async function upsertSemanticMemory(input: {
+  userId: number;
+  kind: "food_lens" | "recipe" | "meal_feedback" | "preference";
+  sourceId?: number;
+  title: string;
+  content: string;
+  vector: number[];
+  metadata: Record<string, unknown>;
+}) {
+  const db = await requireDb();
+  const existing = input.sourceId === undefined
+    ? undefined
+    : (await db
+        .select()
+        .from(semanticMemories)
+        .where(and(eq(semanticMemories.userId, input.userId), eq(semanticMemories.kind, input.kind), eq(semanticMemories.sourceId, input.sourceId)))
+        .limit(1))[0];
+  if (existing) {
+    await db
+      .update(semanticMemories)
+      .set({ title: input.title, content: input.content, vector: input.vector, metadata: input.metadata })
+      .where(eq(semanticMemories.id, existing.id));
+    return { ...existing, ...input, id: existing.id };
+  }
+  const [result] = await db.insert(semanticMemories).values(input).$returningId();
+  const [created] = await db.select().from(semanticMemories).where(eq(semanticMemories.id, result.id)).limit(1);
+  return created;
+}
+
+export async function refreshSemanticEdges(userId: number, fromMemoryId: number, vector: number[]) {
+  const db = await requireDb();
+  const memories = await db.select().from(semanticMemories).where(eq(semanticMemories.userId, userId));
+  const candidates = memories
+    .filter(memory => memory.id !== fromMemoryId)
+    .map(memory => ({ memory, score: cosineSimilarity(vector, memory.vector as number[]) }))
+    .filter(candidate => candidate.score >= 0.28)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3);
+  await db
+    .delete(semanticMemoryEdges)
+    .where(and(eq(semanticMemoryEdges.userId, userId), eq(semanticMemoryEdges.fromMemoryId, fromMemoryId)));
+  if (candidates.length) {
+    await db.insert(semanticMemoryEdges).values(
+      candidates.map(candidate => ({
+        userId,
+        fromMemoryId,
+        toMemoryId: candidate.memory.id,
+        relation: "similar_to" as const,
+        weight: Math.round(candidate.score * 100),
+      }))
+    );
+  }
+  return candidates.map(candidate => ({ id: candidate.memory.id, title: candidate.memory.title, similarity: Number(candidate.score.toFixed(3)) }));
+}
+
+export async function searchSemanticMemories(userId: number, vector: number[], limit = 4): Promise<SemanticMemoryResult[]> {
+  const db = await requireDb();
+  const memories = await db.select().from(semanticMemories).where(eq(semanticMemories.userId, userId));
+  return memories
+    .map(memory => ({
+      id: memory.id,
+      kind: memory.kind,
+      title: memory.title,
+      content: memory.content,
+      metadata: memory.metadata as Record<string, unknown>,
+      similarity: Number(cosineSimilarity(vector, memory.vector as number[]).toFixed(3)),
+    }))
+    .filter(memory => memory.similarity >= 0.18)
+    .sort((a, b) => b.similarity - a.similarity)
+    .slice(0, limit);
 }
 
 export async function saveRecipe(input: {

@@ -23,6 +23,52 @@ export type IngredientDetection = {
   needsConfirmation: boolean;
 };
 
+export type NutritionValues = {
+  calories: number;
+  proteinG: number;
+  carbsG: number;
+  fatG: number;
+  saturatedFatG: number;
+  fiberG: number;
+  sugarG: number;
+  sodiumMg: number;
+};
+
+export type FoodLensItem = {
+  id: string;
+  name: string;
+  confidence: number;
+  estimatedGrams: number;
+  portionConfidence: number;
+  needsConfirmation: boolean;
+  referenceStatus: "matched_reference" | "estimated" | "needs_reference";
+  sourceLabel: string;
+  sourceUrl: string;
+  nutritionPer100g: NutritionValues | null;
+  nutritionForPortion: NutritionValues | null;
+};
+
+export type FoodLensAnalysis = {
+  dishGuess: string;
+  overallConfidence: number;
+  portionConfidence: number;
+  uncertaintySummary: string;
+  measurementNote: string;
+  estimateDisclosure: string;
+  items: FoodLensItem[];
+  totalNutrition: NutritionValues;
+  generationMode: "live_ai" | "safe_fallback";
+};
+
+export type SemanticMemoryResult = {
+  id: number;
+  kind: "food_lens" | "recipe" | "meal_feedback" | "preference";
+  title: string;
+  content: string;
+  metadata: Record<string, unknown>;
+  similarity: number;
+};
+
 export type RecipeOption = {
   id: string;
   title: string;

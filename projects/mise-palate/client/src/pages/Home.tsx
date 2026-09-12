@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { startLogin } from "@/const";
 import { trpc } from "@/lib/trpc";
 import { DISH_IMAGES } from "@shared/product";
-import { ArrowRight, Camera, ChefHat, Clock3, ScanLine, Sparkles, Utensils } from "lucide-react";
+import { ArrowRight, Camera, ChefHat, Clock3, Network, ScanEye, ScanLine, Sparkles, Utensils } from "lucide-react";
 import { Link, useLocation } from "wouter";
 
 export default function Home() {
@@ -103,9 +103,9 @@ export default function Home() {
 
       <section className="mt-8 grid gap-4 md:grid-cols-3">
         {[
+          [ScanEye, "Food Lens & Nutrition", "Visual facts & memory graph", "/lens"],
           [Utensils, "Describe ingredients", "No photo needed", "/discover?mode=text"],
           [Sparkles, "Tell me a craving", "Start from the outcome", "/discover?mode=craving"],
-          [ChefHat, "Let the chef choose", "Use your strongest signals", "/discover?mode=chef"],
         ].map(([Icon, title, sub, href]) => {
           const I = Icon as typeof Utensils;
           return <Link key={title as string} href={href as string} className="surface group flex items-center gap-4 p-5 hover:-translate-y-0.5"><span className="grid size-11 shrink-0 place-items-center rounded-2xl bg-ink text-copper"><I className="size-5" /></span><span><strong className="block text-sm">{title as string}</strong><span className="mt-0.5 block text-xs text-muted-ink">{sub as string}</span></span><ArrowRight className="ml-auto size-4 text-muted-ink transition-transform group-hover:translate-x-1" /></Link>;

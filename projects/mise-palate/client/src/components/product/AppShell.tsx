@@ -1,9 +1,10 @@
-import { BookHeart, ChefHat, Home, Sparkles, UserRound } from "lucide-react";
+import { BookHeart, Camera, ChefHat, Home, Sparkles, UserRound } from "lucide-react";
 import type { ReactNode } from "react";
 import { Link, useLocation } from "wouter";
 
 const navItems = [
   { href: "/", label: "Home", icon: Home },
+  { href: "/lens", label: "Lens", icon: Camera },
   { href: "/cook", label: "Cook", icon: ChefHat },
   { href: "/saved", label: "Saved", icon: BookHeart },
   { href: "/me", label: "Me", icon: UserRound },
@@ -51,7 +52,7 @@ export default function AppShell({ children, immersive = false }: { children: Re
         </div>
       </header>
       <main className="mx-auto min-h-[calc(100vh-4rem)] max-w-6xl px-4 pb-28 pt-6 sm:px-6 lg:px-8 lg:pb-12">{children}</main>
-      <nav className="fixed inset-x-3 bottom-3 z-50 grid grid-cols-4 rounded-[1.4rem] border border-white/70 bg-ink/95 p-1.5 text-white shadow-2xl shadow-ink/25 backdrop-blur-xl md:hidden" aria-label="Primary navigation">
+      <nav className="fixed inset-x-3 bottom-3 z-50 grid grid-cols-5 rounded-[1.4rem] border border-white/70 bg-ink/95 p-1.5 text-white shadow-2xl shadow-ink/25 backdrop-blur-xl md:hidden" aria-label="Primary navigation">
         {navItems.map(item => {
           const active = item.href === "/" ? location === "/" : location.startsWith(item.href);
           const Icon = item.icon;

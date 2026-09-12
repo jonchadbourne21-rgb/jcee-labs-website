@@ -139,6 +139,7 @@ export async function generateRecipeOptions(params: {
   difficulty: "easy" | "moderate" | "ambitious";
   dietaryRestrictions: string[];
   craving?: string;
+  semanticContext?: Array<{ kind: string; title: string; content: string; similarity: number }>;
 }) {
   const model = await pickModel("gpt-5-mini", "gemini-3-flash-preview");
   if (!model) return fallbackOptions(params.ingredients, params.palate);
@@ -149,7 +150,7 @@ export async function generateRecipeOptions(params: {
         {
           role: "system",
           content:
-            "You are a chef creating four meaningfully different cooking directions, not four cosmetic recipe variants. Respect restrictions and available equipment. Explain why each direction fits the user's sensory profile. Output strict JSON only.",
+            "You are a chef creating four meaningfully different cooking directions, not four cosmetic recipe variants. Respect restrictions and available equipment. Explain why each direction fits the user's sensory profile. Retrieved user memory is supportive evidence only: do not treat it as medical or safety fact and do not invent memories. Output strict JSON only.",
         },
         {
           role: "user",

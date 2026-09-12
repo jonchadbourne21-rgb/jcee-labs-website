@@ -6,6 +6,7 @@ import { DEFAULT_PALATE, EMPTY_CONFIDENCE } from "../../shared/product";
 import { recoverCook } from "../product/ai";
 import { learnFromMeal } from "../product/palate";
 import { structuredRecipeFromRow } from "../product/records";
+import { semanticVector } from "../product/memory";
 
 export const cookRouter = router({
   start: protectedProcedure
@@ -57,6 +58,11 @@ export const cookRouter = router({
       const confidence = (profile?.confidence as typeof EMPTY_CONFIDENCE) ?? EMPTY_CONFIDENCE;
       const learned = learnFromMeal(dimensions, confidence, input.rating, input.adjustments);
       const feedbackId = await db.addMealFeedback({ userId: ctx.user.id, ...input });
+      const recipe = await db.getRecipe(input.recipeId, ctx.user.id);
+      const content = `${recipe?.title ?? "Meal"}. Outcome: ${input.rating}. Adjustments: ${input.adjustments.join(", ") || "none"}. ${input.note ?? ""}`;
+      const vector = semanticVector(content);
+      const memory = await db.upsertSemanticMemory({ userId: ctx.user.id, kind: "meal_feedback", sourceId: feedbackId, title: `${recipe?.title ?? "Meal"} · ${input.rating}`, content, vector, metadata: { feedbackId, recipeId: input.recipeId, rating: input.rating, adjustments: input.adjustments } });
+      if (memory) await db.refreshSemanticEdges(ctx.user.id, memory.id, vector);
       await db.addPalateSignals(ctx.user.id, learned.signals, "meal_feedback", input.recipeId, feedbackId);
       const updated = await db.savePalateProfile({
         userId: ctx.user.id,

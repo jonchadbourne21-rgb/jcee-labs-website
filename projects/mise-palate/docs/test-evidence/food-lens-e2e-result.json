@@ -1,0 +1,10 @@
+{
+  "startedAt": "2026-09-12T16:56:25.853Z",
+  "testUserId": 330001,
+  "scanId": 1,
+  "dishGuess": "Chicken thighs with broccoli (raw ingredients)",
+  "itemCount": 6,
+  "totalCalories": 726,
+  "relatedCount": 1,
+  "passed": true
+}
