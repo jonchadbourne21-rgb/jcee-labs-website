@@ -1,0 +1,55 @@
+flowchart TB
+  U[Mobile-first React client] -->|Manus OAuth cookie| API[tRPC application API]
+  U -->|Photo as base64| API
+
+  subgraph Product[Product services]
+    API --> P[Palate service]
+    API --> R[Recipe service]
+    API --> C[Cook-session service]
+    API --> K[Chef Knowledge editor]
+  end
+
+  subgraph Intelligence[Intelligence boundaries]
+    V[Vision adapter\nGPT-5 mini now\nprovider interface later]
+    G[Generative reasoning adapter\nGPT-5 for recipe build\nGPT-5 mini for rescue/forecast]
+    CK[Chef Knowledge Layer\nstructured reviewed records]
+    S[Safety Layer\nauthoritative fixed rules]
+    PT[Palate Twin\nvalues + confidence + event history]
+  end
+
+  R --> V
+  R --> G
+  C --> G
+  G --> CK
+  G --> PT
+  S -->|post-generation enforcement| R
+  S -->|cannot be overridden| C
+  P --> PT
+  K --> CK
+
+  subgraph Data[Managed durable data]
+    DB[(MySQL/TiDB\nusers, profiles, scans, recipes, sessions, feedback, signals, knowledge, analytics)]
+    OBJ[(Object storage\nuser photos + editorial assets)]
+  end
+
+  API --> DB
+  API --> OBJ
+  PT --> DB
+  CK --> DB
+  V -->|confidence + uncertainty| DB
+
+  subgraph External[Authoritative external references]
+    USDA[USDA / FoodSafety.gov]
+    FDA[FDA allergen guidance]
+  end
+
+  USDA --> S
+  FDA --> S
+
+  style U fill:#f4f0e7,stroke:#172017,color:#172017
+  style API fill:#f1a15f,stroke:#172017,color:#172017
+  style V fill:#fffaf0,stroke:#9f4728,color:#172017
+  style G fill:#fffaf0,stroke:#9f4728,color:#172017
+  style CK fill:#dfe7da,stroke:#34513a,color:#172017
+  style S fill:#dfe7da,stroke:#34513a,color:#172017
+  style PT fill:#f7dfcb,stroke:#9f4728,color:#172017

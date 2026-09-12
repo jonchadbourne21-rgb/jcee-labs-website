@@ -1,0 +1,40 @@
+{
+  "as_of": "2026-09-12",
+  "catalog_source": "/home/ubuntu/live-models.json",
+  "pricing_usd_per_1m_tokens": {
+    "gpt-5-mini": {
+      "input": 0.25,
+      "output": 2
+    },
+    "gpt-5": {
+      "input": 1.25,
+      "output": 10
+    }
+  },
+  "assumptions": {
+    "completed_cooks_per_active_user_month": 4,
+    "gpt_5_mini_input_tokens_per_cook": 11000,
+    "gpt_5_mini_output_tokens_per_cook": 3400,
+    "gpt_5_input_tokens_per_cook": 6000,
+    "gpt_5_output_tokens_per_cook": 3000,
+    "retry_and_variance_buffer": 0.15
+  },
+  "model_cost_per_completed_cook_usd": 0.04705,
+  "model_cost_per_active_user_month_usd": 0.21643,
+  "monthly_model_cost_by_active_users_usd": {
+    "100": 21.64,
+    "1000": 216.43,
+    "10000": 2164.3,
+    "100000": 21643.0
+  },
+  "exclusions": [
+    "managed hosting",
+    "database",
+    "object storage",
+    "bandwidth",
+    "support",
+    "payments",
+    "tax",
+    "image generation for editorial assets"
+  ]
+}

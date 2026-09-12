@@ -1,0 +1,52 @@
+{
+  "testedAt": "2026-09-12T16:19:53.263Z",
+  "clear": {
+    "generationMode": "live_ai",
+    "overallConfidence": 88,
+    "ingredients": [
+      {
+        "confidence": 92,
+        "name": "chicken thighs (raw)",
+        "needsConfirmation": false,
+        "quantityHint": "about 4 large thighs on a plate"
+      },
+      {
+        "confidence": 95,
+        "name": "broccoli florets",
+        "needsConfirmation": false,
+        "quantityHint": "several florets and part of a crown (roughly 6–8 pieces visible)"
+      },
+      {
+        "confidence": 96,
+        "name": "garlic (bulb and loose cloves)",
+        "needsConfirmation": false,
+        "quantityHint": "one whole bulb plus about 3–4 loose cloves visible"
+      },
+      {
+        "confidence": 96,
+        "name": "lemon (half)",
+        "needsConfirmation": false,
+        "quantityHint": "one half lemon"
+      },
+      {
+        "confidence": 86,
+        "name": "coarse salt (bowl of flaky/coarse salt)",
+        "needsConfirmation": false,
+        "quantityHint": "small bowl — roughly 1–3 tablespoons visible"
+      },
+      {
+        "confidence": 72,
+        "name": "hard aged cheese (wedge, e.g., Parmesan)",
+        "needsConfirmation": true,
+        "quantityHint": "one wedge, some crumb pieces visible"
+      }
+    ]
+  },
+  "unclear": {
+    "generationMode": "live_ai",
+    "overallConfidence": 5,
+    "uncertaintySummary": "The photo is heavily blurred and contains no clearly visible or identifiable food items or ingredients. I cannot confidently name any ingredients from this image. Please provide a clearer, higher-resolution photo or a close-up of the food for identification.",
+    "ingredients": []
+  },
+  "passed": true
+}

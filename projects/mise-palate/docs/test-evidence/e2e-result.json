@@ -1,0 +1,128 @@
+{
+  "startedAt": "2026-09-12T16:14:49.306Z",
+  "testUserId": 60001,
+  "calibration": {
+    "complete": true,
+    "acidity": 73,
+    "crunch": 79,
+    "spice": 57
+  },
+  "ingredientConfirmation": {
+    "scanId": 1,
+    "status": "corrected",
+    "count": 5
+  },
+  "recipeOptions": {
+    "count": 4,
+    "generationMode": "live_ai",
+    "titles": [
+      "Sheet‑Pan Roasted Lemon‑Garlic Thighs with Crispy Parmesan Broccoli",
+      "Skillet‑Seared Thighs with Lemon‑Garlic Pan Sauce and Sautéed Broccoli",
+      "Parmesan‑Crusted Thighs (Broiled Finish) with Charred Broccoli",
+      "Gentle Lemon‑Garlic Braise with Parmesan‑Laced Pan Juices and Tender Broccoli"
+    ]
+  },
+  "structuredRecipe": {
+    "recipeId": 1,
+    "generationMode": "live_ai",
+    "stepCount": 8,
+    "hasReasons": true,
+    "hasCues": true,
+    "hasRecovery": true,
+    "poultrySafety": "Cook all poultry, including thighs and ground poultry, to 165°F / 74°C measured with a food thermometer at the thickest part without touching bone."
+  },
+  "cookRecovery": {
+    "answer": "You don’t need heavy cream for this sheet‑pan recipe — it’s built around high heat, crisp skin, and a Parmesan finish. Keep preheating and continue with the plan. If you want a creamy element to serve alongside or spoon over at the end, use one of the quick, safe alternatives below and only add them after roasting so you don’t soften the crisp skin.",
+    "actionCount": 5,
+    "preservedSafety": true
+  },
+  "tasteForecast": {
+    "interpretation": "Assuming you increase lemon by about one whole lemon (extra juice and/or some extra zest) compared with the original recipe: the dish will taste noticeably brighter and more citrusy, with increased pan juices and slightly more perceived saltiness, a modest tenderizing effect on the chicken, reduced perceived richness, and a measurable risk of losing some crispness on the skin and Parmesan‑crusted broccoli. Exact magnitude depends on whether you add mostly zest (more aroma, less acid) or mostly juice (more acid, more liquid).",
+    "confidence": "medium",
+    "changes": [
+      {
+        "delta": 18,
+        "dimension": "acidity",
+        "explanation": "More lemon (juice) increases free acid on the surface and in any pan juices, noticeably brightening the whole dish and raising perceived tartness."
+      },
+      {
+        "delta": 10,
+        "dimension": "herbaceous",
+        "explanation": "Additional lemon zest or fresh juice increases citrus aromatics (volatile oils) so the dish smells and tastes more citrus-forward."
+      },
+      {
+        "delta": 6,
+        "dimension": "sauce",
+        "explanation": "Extra juice adds liquid to the pan and to any finishing spooning, producing more flavorful pan sauce and looser coating on broccoli."
+      },
+      {
+        "delta": 6,
+        "dimension": "tenderness",
+        "explanation": "Acid can slightly denature surface proteins and tenderize the chicken if it contacts the meat for a short time; the effect is modest unless the meat is marinated for many hours."
+      },
+      {
+        "delta": -8,
+        "dimension": "richness",
+        "explanation": "The added acidity cuts through fat and cheese, making the dish taste less rich and less heavy."
+      },
+      {
+        "delta": -7,
+        "dimension": "crunch",
+        "explanation": "Extra lemon juice on the skin or broccoli before roasting can interfere with browning and crisping, producing a softer skin and less crunchy Parmesan crust."
+      },
+      {
+        "delta": 4,
+        "dimension": "salt",
+        "explanation": "Acidity often enhances perceived saltiness, so the same amount of salt will taste slightly saltier with more lemon."
+      },
+      {
+        "delta": 3,
+        "dimension": "bitterness",
+        "explanation": "If you include white pith or over-zest, you may introduce a mild citrus bitterness; otherwise this is small."
+      },
+      {
+        "delta": -3,
+        "dimension": "sweetness",
+        "explanation": "Bright acidity suppresses perceived sweetness from the vegetables and any caramelization, so sweetness will register a bit lower."
+      },
+      {
+        "delta": 0,
+        "dimension": "doneness",
+        "explanation": "Adding lemon will not meaningfully change the required cooking time or internal doneness of the chicken when added at or near roasting time."
+      }
+    ]
+  },
+  "preferenceLearning": {
+    "beforeCrunch": 79,
+    "afterCrunch": 86,
+    "changed": true,
+    "signalCount": 1
+  },
+  "multiPalate": {
+    "tensions": [
+      {
+        "dimension": "acidity",
+        "gap": 33,
+        "strategy": "Finish individual portions with lemon rather than acidifying the shared pan."
+      },
+      {
+        "dimension": "spice",
+        "gap": 42,
+        "strategy": "Cook the shared base mild; add chile crisp or hot sauce at the table."
+      },
+      {
+        "dimension": "crunch",
+        "gap": 44,
+        "strategy": "Keep the crisp garnish separate so each diner controls texture."
+      }
+    ],
+    "hasSpiceResolution": true
+  },
+  "recipeMemory": {
+    "count": 1,
+    "persistedRecipeId": 1
+  },
+  "passed": true,
+  "completedAt": "2026-09-12T16:17:03.199Z",
+  "durationMs": 133893
+}

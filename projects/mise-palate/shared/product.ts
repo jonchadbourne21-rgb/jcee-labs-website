@@ -1,0 +1,143 @@
+export const SENSORY_DIMENSIONS = [
+  "sweetness",
+  "acidity",
+  "salt",
+  "spice",
+  "richness",
+  "bitterness",
+  "herbaceous",
+  "crunch",
+  "tenderness",
+  "doneness",
+  "sauce",
+  "smokiness",
+] as const;
+
+export type SensoryDimension = (typeof SENSORY_DIMENSIONS)[number];
+export type SensoryProfile = Record<SensoryDimension, number>;
+
+export type IngredientDetection = {
+  name: string;
+  confidence: number;
+  quantityHint: string;
+  needsConfirmation: boolean;
+};
+
+export type RecipeOption = {
+  id: string;
+  title: string;
+  description: string;
+  whyForYou: string;
+  cuisine: string;
+  activeMinutes: number;
+  totalMinutes: number;
+  difficulty: "easy" | "moderate" | "ambitious";
+  sensoryProfile: SensoryProfile;
+  imageUrl: string;
+};
+
+export type RecipeIngredient = {
+  name: string;
+  amount: number;
+  unit: string;
+  preparation: string;
+  optional: boolean;
+  allergens: string[];
+};
+
+export type MiseItem = {
+  order: number;
+  task: string;
+  reason: string;
+  canParallelize: boolean;
+};
+
+export type RecipeStep = {
+  id: string;
+  title: string;
+  instruction: string;
+  why: string;
+  minutes: number;
+  temperatureF: number;
+  visualCue: string;
+  smellCue: string;
+  textureCue: string;
+  commonMistake: string;
+  recovery: string;
+  techniqueSlug: string;
+  parallelGroup: string;
+  safetyRuleIds: string[];
+};
+
+export type Substitution = {
+  ingredient: string;
+  substitute: string;
+  ratio: string;
+  sensoryTradeoff: string;
+  methodChange: string;
+};
+
+export type SafetyRule = {
+  id: string;
+  title: string;
+  requirement: string;
+  sourceLabel: string;
+  sourceUrl: string;
+  authority: "authoritative";
+};
+
+export type StructuredRecipe = {
+  title: string;
+  summary: string;
+  rationale: string;
+  ingredients: RecipeIngredient[];
+  equipment: string[];
+  miseEnPlace: MiseItem[];
+  steps: RecipeStep[];
+  sensoryProfile: SensoryProfile;
+  substitutions: Substitution[];
+  safetyRules: SafetyRule[];
+  platingNotes: string;
+  activeMinutes: number;
+  totalMinutes: number;
+  difficulty: "easy" | "moderate" | "ambitious";
+  generationMode: "live_ai" | "safe_fallback";
+};
+
+export type TasteForecast = {
+  interpretation: string;
+  confidence: "high" | "medium" | "low";
+  changes: Array<{
+    dimension: SensoryDimension;
+    delta: number;
+    explanation: string;
+  }>;
+  culinaryActions: string[];
+  watchOuts: string[];
+};
+
+export const DEFAULT_PALATE: SensoryProfile = {
+  sweetness: 50,
+  acidity: 55,
+  salt: 50,
+  spice: 45,
+  richness: 50,
+  bitterness: 35,
+  herbaceous: 55,
+  crunch: 60,
+  tenderness: 60,
+  doneness: 55,
+  sauce: 55,
+  smokiness: 45,
+};
+
+export const EMPTY_CONFIDENCE: SensoryProfile = Object.fromEntries(
+  SENSORY_DIMENSIONS.map(dimension => [dimension, 15])
+) as SensoryProfile;
+
+export const DISH_IMAGES = {
+  ingredients: "/manus-storage/mise-ingredients_ff9547f3.jpg",
+  lemon: "/manus-storage/mise-lemon-chicken_1f590d72.jpg",
+  korean: "/manus-storage/mise-korean-bowl_470247c9.jpg",
+  tuscan: "/manus-storage/mise-tuscan-chicken_727cc6eb.jpg",
+} as const;

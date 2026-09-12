@@ -1,0 +1,111 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: oklch(0.955 0.018 88);
+  --foreground: oklch(0.19 0.018 118);
+  --card: oklch(0.985 0.012 88);
+  --card-foreground: oklch(0.19 0.018 118);
+  --popover: oklch(0.985 0.012 88);
+  --popover-foreground: oklch(0.19 0.018 118);
+  --primary: oklch(0.19 0.018 118);
+  --primary-foreground: oklch(0.96 0.018 88);
+  --secondary: oklch(0.9 0.03 97);
+  --secondary-foreground: oklch(0.24 0.02 118);
+  --muted: oklch(0.91 0.015 88);
+  --muted-foreground: oklch(0.48 0.025 86);
+  --accent: oklch(0.72 0.15 60);
+  --accent-foreground: oklch(0.2 0.025 70);
+  --destructive: oklch(0.58 0.2 29);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.84 0.018 88);
+  --input: oklch(0.84 0.018 88);
+  --ring: oklch(0.62 0.12 60);
+  --radius: 1rem;
+  --canvas: #f4f0e7;
+  --ink: #172017;
+  --muted-ink: #6f7167;
+  --copper: #f1a15f;
+  --copper-deep: #9f4728;
+  --sage: #8ea38b;
+  --sage-deep: #34513a;
+  --cream: #fffaf0;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-canvas: var(--canvas);
+  --color-ink: var(--ink);
+  --color-muted-ink: var(--muted-ink);
+  --color-copper: var(--copper);
+  --color-copper-deep: var(--copper-deep);
+  --color-sage: var(--sage);
+  --color-sage-deep: var(--sage-deep);
+  --color-cream: var(--cream);
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-mono: "DM Mono", ui-monospace, monospace;
+}
+
+* { border-color: var(--border); }
+html { background: var(--canvas); }
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 6% 2%, rgba(241, 161, 95, 0.15), transparent 28rem),
+    linear-gradient(rgba(23, 32, 23, 0.025) 1px, transparent 1px),
+    var(--canvas);
+  background-size: auto, 100% 4px, auto;
+  color: var(--ink);
+  font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+button, a, input, textarea { -webkit-tap-highlight-color: transparent; }
+button, a { transition: transform 150ms var(--ease-out), opacity 180ms var(--ease-out), background-color 180ms var(--ease-out), color 180ms var(--ease-out), border-color 180ms var(--ease-out); }
+button:active, a:active { transform: scale(0.97); }
+::selection { background: rgba(241, 161, 95, 0.42); }
+
+.font-display { font-family: "Instrument Serif", ui-serif, Georgia, serif; }
+.font-mono { font-family: "DM Mono", ui-monospace, monospace; }
+
+.surface {
+  border: 1px solid rgba(23, 32, 23, 0.08);
+  border-radius: 1.5rem;
+  background: rgba(255, 250, 240, 0.78);
+  box-shadow: 0 18px 55px rgba(48, 39, 25, 0.08);
+  backdrop-filter: blur(12px);
+}
+.eyebrow { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--copper-deep); }
+.display-title { font-family: "Instrument Serif", ui-serif, Georgia, serif; font-size: clamp(2.6rem, 8vw, 5.8rem); line-height: 0.92; letter-spacing: -0.035em; }
+.page-title { font-family: "Instrument Serif", ui-serif, Georgia, serif; font-size: clamp(2.2rem, 7vw, 4rem); line-height: 0.98; letter-spacing: -0.03em; }
+.soft-rule { border-color: rgba(23, 32, 23, 0.09); }
+.photo-vignette::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 35%, rgba(15, 18, 13, 0.84)); pointer-events: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal { animation: reveal 520ms var(--ease-out) both; }
+  .reveal-delay { animation: reveal 520ms 90ms var(--ease-out) both; }
+  @keyframes reveal { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+}

@@ -1,0 +1,11 @@
+{
+  "testedAt": "2026-09-12T16:21:11.745Z",
+  "scanId": 30001,
+  "imageUrl": "/manus-storage/mise/scans/90001/D6KW4ix50scJ_42021a29.jpg",
+  "generationMode": "live_ai",
+  "overallConfidence": 89,
+  "detectedCount": 6,
+  "uncertainCount": 1,
+  "invalidInputRejected": true,
+  "passed": true
+}
