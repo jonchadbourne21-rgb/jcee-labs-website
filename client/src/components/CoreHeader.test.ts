@@ -5,22 +5,34 @@ import {
   publicNavigationLinks,
 } from "./CoreHeader";
 
-describe("CoreHeader configuration", () => {
-  it("defines the expected primary navigation links", () => {
-    expect(publicNavigationLinks.map((link) => link.id)).toEqual([
-      "jcee",
-      "vow",
-      "qcs",
-      "assurance",
-      "registry",
-      "charter",
+describe("CoreHeader mobile navigation", () => {
+  it("labels the closed menu as an action to open navigation", () => {
+    expect(getMobileMenuLabel(false)).toBe("Open navigation menu");
+  });
+
+  it("labels the open menu as an action to close navigation", () => {
+    expect(getMobileMenuLabel(true)).toBe("Close navigation menu");
+  });
+
+  it("uses the open and closed classes needed for CSS transitions", () => {
+    expect(getMobileMenuState(false)).toBe("is-closed");
+    expect(getMobileMenuState(true)).toBe("is-open");
+  });
+});
+
+describe("CoreHeader public information architecture", () => {
+  it("exposes the approved infrastructure navigation", () => {
+    expect(publicNavigationLinks.map((link) => link.label)).toEqual([
+      "JCEE LABS",
+      "JCEE VOW",
+      "QCS",
+      "ASSURANCE",
+      "REGISTRY",
+      "CHARTER",
     ]);
   });
 
-  it("produces correct accessible labels and states for the mobile menu", () => {
-    expect(getMobileMenuLabel(false)).toBe("Open navigation menu");
-    expect(getMobileMenuLabel(true)).toBe("Close navigation menu");
-    expect(getMobileMenuState(false)).toBe("is-closed");
-    expect(getMobileMenuState(true)).toBe("is-open");
+  it("does not present Mirrored as part of the JCEE public site", () => {
+    expect(publicNavigationLinks.some((link) => link.label === "MIRRORED")).toBe(false);
   });
 });
