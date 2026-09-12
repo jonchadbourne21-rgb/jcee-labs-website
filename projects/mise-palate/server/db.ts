@@ -207,6 +207,7 @@ export async function saveRecipe(input: {
       activeMinutes: input.recipe.activeMinutes,
       totalMinutes: input.recipe.totalMinutes,
       difficulty: input.recipe.difficulty,
+      tags: [],
       generationMode: input.recipe.generationMode,
     })
     .$returningId();
@@ -228,6 +229,12 @@ export async function setFavorite(recipeId: number, userId: number, favorite: bo
   const db = await requireDb();
   await db.update(recipes).set({ favorite }).where(and(eq(recipes.id, recipeId), eq(recipes.userId, userId)));
   return { recipeId, favorite };
+}
+
+export async function setRecipeTags(recipeId: number, userId: number, tags: string[]) {
+  const db = await requireDb();
+  await db.update(recipes).set({ tags }).where(and(eq(recipes.id, recipeId), eq(recipes.userId, userId)));
+  return { recipeId, tags };
 }
 
 export async function startCookingSession(recipeId: number, userId: number) {

@@ -81,11 +81,12 @@ export const recipes = mysqlTable(
     totalMinutes: int("totalMinutes").notNull(),
     difficulty: mysqlEnum("difficulty", ["easy", "moderate", "ambitious"]).default("moderate").notNull(),
     favorite: boolean("favorite").default(false).notNull(),
+    tags: json("tags").notNull(),
     generationMode: mysqlEnum("generationMode", ["live_ai", "safe_fallback"]).default("live_ai").notNull(),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
     updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
   },
-  table => [index("recipes_user_idx").on(table.userId), index("recipes_scan_idx").on(table.scanId)]
+  table => [index("recipes_user_idx").on(table.userId), index("recipes_scan_idx").on(table.scanId), index("recipes_user_favorite_idx").on(table.userId, table.favorite)]
 );
 
 export const cookingSessions = mysqlTable(

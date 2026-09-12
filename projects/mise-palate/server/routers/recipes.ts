@@ -5,6 +5,7 @@ import * as db from "../db";
 import { DEFAULT_PALATE, SENSORY_DIMENSIONS } from "../../shared/product";
 import { forecastTaste, generateRecipeOptions, generateStructuredRecipe, getSubstitution, mergePalates } from "../product/ai";
 import { recipeRecord, structuredRecipeFromRow } from "../product/records";
+import { normalizeRecipeTags } from "../product/tags";
 
 const sensorySchema = z.object(Object.fromEntries(SENSORY_DIMENSIONS.map(key => [key, z.number().min(0).max(100)])) as Record<(typeof SENSORY_DIMENSIONS)[number], z.ZodNumber>);
 const optionSchema = z.object({
@@ -73,7 +74,22 @@ export const recipesRouter = router({
 
   favorite: protectedProcedure
     .input(z.object({ recipeId: z.number().int().positive(), favorite: z.boolean() }))
-    .mutation(({ ctx, input }) => db.setFavorite(input.recipeId, ctx.user.id, input.favorite)),
+    .mutation(async ({ ctx, input }) => {
+      const result = await db.setFavorite(input.recipeId, ctx.user.id, input.favorite);
+      await db.trackEvent(ctx.user.id, input.favorite ? "recipe_favorited" : "recipe_unfavorited", { recipeId: input.recipeId });
+      return result;
+    }),
+
+  setTags: protectedProcedure
+    .input(z.object({ recipeId: z.number().int().positive(), tags: z.array(z.string().trim().min(1).max(32)).max(8) }))
+    .mutation(async ({ ctx, input }) => {
+      const recipe = await db.getRecipe(input.recipeId, ctx.user.id);
+      if (!recipe) throw new TRPCError({ code: "NOT_FOUND", message: "Recipe not found" });
+      const tags = normalizeRecipeTags(input.tags);
+      const result = await db.setRecipeTags(input.recipeId, ctx.user.id, tags);
+      await db.trackEvent(ctx.user.id, "recipe_tags_updated", { recipeId: input.recipeId, tagCount: tags.length });
+      return result;
+    }),
 
   substitute: protectedProcedure
     .input(z.object({ recipeId: z.number().int().positive(), missingIngredient: z.string().min(1).max(120), context: z.string().max(500).default("") }))

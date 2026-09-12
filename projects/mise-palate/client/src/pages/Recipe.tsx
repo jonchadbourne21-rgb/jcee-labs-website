@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { trpc } from "@/lib/trpc";
 import { DISH_IMAGES } from "@shared/product";
-import { ArrowLeft, ChefHat, Clock3, Heart, Info, Layers3, Loader2, ShieldCheck, Sparkles, Utensils, WandSparkles } from "lucide-react";
+import { ArrowLeft, ChefHat, Clock3, Heart, Info, Layers3, Loader2, Plus, ShieldCheck, Sparkles, Tag, Utensils, WandSparkles, X } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Link, useLocation } from "wouter";
@@ -20,7 +20,16 @@ export default function Recipe({ params }: { params: { id: string } }) {
   const [missing, setMissing] = useState("heavy cream");
   const [forecast, setForecast] = useState<any>(null);
   const [substitution, setSubstitution] = useState<any>(null);
+  const [showTagDialog, setShowTagDialog] = useState(false);
+  const [newTagText, setNewTagText] = useState("");
   const favorite = trpc.recipes.favorite.useMutation({ onSuccess: () => { utils.recipes.get.invalidate({ recipeId }); utils.recipes.list.invalidate(); } });
+  const setTags = trpc.recipes.setTags.useMutation({
+    onSuccess: async () => {
+      await Promise.all([utils.recipes.get.invalidate({ recipeId }), utils.recipes.list.invalidate()]);
+      toast.success("Tags updated");
+    },
+    onError: error => toast.error(error.message),
+  });
   const start = trpc.cook.start.useMutation({ onSuccess: session => navigate(`/cook/${recipeId}?session=${session?.id}`), onError: error => toast.error(error.message) });
   const forecastMutation = trpc.recipes.forecast.useMutation({ onSuccess: setForecast, onError: error => toast.error(error.message) });
   const substitute = trpc.recipes.substitute.useMutation({ onSuccess: setSubstitution, onError: error => toast.error(error.message) });
@@ -29,14 +38,40 @@ export default function Recipe({ params }: { params: { id: string } }) {
   if (!recipeQuery.data) return <AppShell><div className="surface mx-auto max-w-xl p-10 text-center"><h1 className="font-display text-4xl">Recipe not found.</h1><Link href="/saved" className="mt-5 inline-flex text-sm font-bold text-copper-deep">Return to saved recipes</Link></div></AppShell>;
   const record = recipeQuery.data;
   const recipe = record.structured;
+  const currentTags = ((record as any).tags as string[] | undefined) ?? [];
+
+  function addTag(tag: string) {
+    const clean = tag.trim().toLowerCase();
+    if (!clean) return;
+    if (currentTags.includes(clean)) return;
+    setTags.mutate({ recipeId, tags: [...currentTags, clean] });
+    setNewTagText("");
+  }
+
+  function removeTag(tag: string) {
+    setTags.mutate({ recipeId, tags: currentTags.filter(t => t !== tag) });
+  }
 
   return (
     <AppShell>
-      <div className="mb-5 flex items-center justify-between"><button onClick={() => navigate("/saved")} className="inline-flex items-center gap-2 text-sm font-bold text-muted-ink"><ArrowLeft className="size-4" /> Recipe memory</button><button aria-label={record.favorite ? "Remove favorite" : "Add favorite"} onClick={() => favorite.mutate({ recipeId, favorite: !record.favorite })} className={`grid size-11 place-items-center rounded-full border ${record.favorite ? "border-copper bg-copper/18 text-copper-deep" : "border-ink/10 bg-white/50 text-muted-ink"}`}><Heart className={`size-5 ${record.favorite ? "fill-current" : ""}`} /></button></div>
+      <div className="mb-5 flex items-center justify-between"><button onClick={() => navigate("/saved")} className="inline-flex items-center gap-2 text-sm font-bold text-muted-ink"><ArrowLeft className="size-4" /> Recipe memory</button><div className="flex items-center gap-2"><button onClick={() => setShowTagDialog(true)} className="inline-flex h-11 items-center gap-1.5 rounded-full border border-ink/10 bg-white/60 px-4 text-xs font-bold text-muted-ink hover:text-ink"><Tag className="size-3.5 text-copper-deep" /> {currentTags.length ? `${currentTags.length} tags` : "Add tags"}</button><button aria-label={record.favorite ? "Remove favorite" : "Add favorite"} onClick={() => favorite.mutate({ recipeId, favorite: !record.favorite })} className={`grid size-11 place-items-center rounded-full border ${record.favorite ? "border-copper bg-copper/18 text-copper-deep" : "border-ink/10 bg-white/50 text-muted-ink"}`}><Heart className={`size-5 ${record.favorite ? "fill-current" : ""}`} /></button></div></div>
       <section className="grid overflow-hidden rounded-[2rem] bg-ink text-white shadow-2xl shadow-ink/15 lg:grid-cols-[1.05fr_0.95fr]">
         <div className="relative min-h-[23rem] lg:min-h-[34rem]"><img src={record.imageUrl || DISH_IMAGES.lemon} alt={recipe.title} className="absolute inset-0 h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" /><div className="absolute inset-x-0 bottom-0 p-6 lg:hidden"><span className="rounded-full bg-copper px-3 py-1.5 text-xs font-bold text-ink">Made for your palate</span></div></div>
         <div className="flex flex-col justify-center p-7 sm:p-10 lg:p-12"><p className="eyebrow !text-copper">Version {record.version} · {record.generationMode === "live_ai" ? "Live culinary reasoning" : "Reviewed fallback"}</p><h1 className="mt-5 font-display text-5xl leading-[0.95] tracking-[-0.03em] sm:text-6xl">{recipe.title}</h1><p className="mt-6 text-base leading-7 text-white/68">{recipe.summary}</p><div className="mt-7 flex flex-wrap gap-4 text-xs font-semibold text-white/55"><span className="inline-flex items-center gap-1.5"><Clock3 className="size-4 text-copper" /> {recipe.activeMinutes} active · {recipe.totalMinutes} total</span><span className="inline-flex items-center gap-1.5"><ChefHat className="size-4 text-copper" /> {recipe.difficulty}</span></div><Button onClick={() => start.mutate({ recipeId })} disabled={start.isPending} className="mt-9 h-14 rounded-full bg-copper text-base font-bold text-ink hover:bg-[#ffb779]">{start.isPending ? <Loader2 className="size-5 animate-spin" /> : <><Utensils className="mr-2 size-5" /> Start Cook Mode</>}</Button></div>
       </section>
+
+      {currentTags.length > 0 && (
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          <span className="text-xs font-bold uppercase tracking-wider text-muted-ink">Tagged:</span>
+          {currentTags.map(tag => (
+            <span key={tag} className="inline-flex items-center gap-1 rounded-full bg-copper/18 px-3 py-1 text-xs font-semibold text-copper-deep">
+              #{tag}
+              <button onClick={() => removeTag(tag)} aria-label={`Remove tag ${tag}`} className="text-copper-deep/60 hover:text-copper-deep"><X className="size-3" /></button>
+            </span>
+          ))}
+          <button onClick={() => setShowTagDialog(true)} className="text-xs font-bold text-copper-deep hover:underline">+ Add more</button>
+        </div>
+      )}
 
       <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_20rem]">
         <div className="space-y-6">
@@ -57,6 +92,30 @@ export default function Recipe({ params }: { params: { id: string } }) {
           <section className="rounded-[1.5rem] border border-sage/30 bg-sage/14 p-6"><div className="flex items-center gap-2"><ShieldCheck className="size-5 text-sage-deep" /><p className="text-xs font-bold uppercase tracking-[0.12em] text-sage-deep">Fixed safety layer</p></div><div className="mt-4 grid gap-4">{recipe.safetyRules.map(rule => <div key={rule.id}><p className="text-sm font-bold">{rule.title}</p><p className="mt-1 text-xs leading-5 text-muted-ink">{rule.requirement}</p><a href={rule.sourceUrl} target="_blank" rel="noreferrer" className="mt-1 inline-flex items-center gap-1 text-[0.68rem] font-bold text-sage-deep">Source <Info className="size-3" /></a></div>)}</div></section>
         </aside>
       </div>
+
+      {showTagDialog && (
+        <div role="dialog" aria-modal="true" className="fixed inset-0 z-50 grid items-end bg-black/60 p-3 sm:place-items-center">
+          <div className="w-full max-w-md rounded-[2rem] bg-cream p-6 text-ink shadow-2xl sm:p-8">
+            <div className="flex items-start justify-between">
+              <div>
+                <p className="eyebrow">Favorites & Organization</p>
+                <h2 className="mt-1 font-display text-3xl">Tag this recipe</h2>
+              </div>
+              <button onClick={() => setShowTagDialog(false)} className="grid size-10 place-items-center rounded-full bg-ink/6"><X className="size-5" /></button>
+            </div>
+            <div className="mt-5 flex gap-2">
+              <Input value={newTagText} onChange={e => setNewTagText(e.target.value)} onKeyDown={e => { if (e.key === "Enter") { e.preventDefault(); addTag(newTagText); } }} placeholder="e.g. weeknight, crispy, company…" className="h-11 rounded-full bg-white px-4 text-sm" />
+              <Button onClick={() => addTag(newTagText)} disabled={!newTagText.trim()} className="h-11 rounded-full bg-ink px-4 text-xs font-bold text-white">Add</Button>
+            </div>
+            <div className="mt-4 flex flex-wrap gap-1.5">
+              {["weeknight", "crispy", "date night", "guests", "high protein"].map(s => (
+                <button key={s} onClick={() => addTag(s)} className="rounded-full border border-ink/10 bg-white px-2.5 py-1 text-xs font-semibold text-muted-ink hover:text-ink">+{s}</button>
+              ))}
+            </div>
+            <Button onClick={() => setShowTagDialog(false)} className="mt-6 h-12 w-full rounded-full bg-ink text-sm font-bold text-white">Done</Button>
+          </div>
+        </div>
+      )}
     </AppShell>
   );
 }
