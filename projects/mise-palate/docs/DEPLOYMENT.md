@@ -28,13 +28,13 @@ The development server listens on port 3000. Authentication uses secure cookie s
 
 ## 3. Database migration
 
-The authoritative Drizzle schema is `drizzle/schema.ts`. Migration `0003_fresh_wendell_vaughn.sql` adds Food Lens scans and semantic memory. Migration `0004_omniscient_firestar.sql` adds nutrition goals, explicit meal logs, and Food Lens recipe provenance.
+The authoritative Drizzle schema is `drizzle/schema.ts`. Migration `0003_fresh_wendell_vaughn.sql` adds Food Lens scans and semantic memory. Migration `0004_omniscient_firestar.sql` adds nutrition goals, explicit meal logs, and Food Lens recipe provenance. Migration `0005_tan_whizzer.sql` adds packaged food product snapshots and user packaged-food meal logs.
 
 ```bash
 pnpm drizzle-kit generate
 ```
 
-Review generated SQL before applying it. Production migrations should be additive by default. The current migration chain creates fourteen tables and associated indexes; it does not drop or rewrite existing data.
+Review generated SQL before applying it. Production migrations should be additive by default. The current migration chain creates sixteen tables and associated indexes; it does not drop or rewrite existing data.
 
 ## 4. Validation gate
 
@@ -53,6 +53,7 @@ pnpm tsx scripts/e2e-flow.ts
 pnpm tsx scripts/vision-smoke.ts
 pnpm tsx scripts/photo-route-smoke.ts
 pnpm tsx scripts/food-lens-e2e.ts
+pnpm tsx scripts/barcode-e2e.ts
 ```
 
 The scripts write machine-readable receipts under `docs/test-evidence/` and delete temporary relational test data. The Food Lens test exercises multimodal recognition, live USDA matching when quota is available, safe reference fallback, portion correction, nutrition targets, explicit meal logging, daily aggregation, semantic retrieval, one-tap recipe generation, and idempotent retry behavior. The photo-route tests upload objects; removing their database keys makes them unreachable through the product.

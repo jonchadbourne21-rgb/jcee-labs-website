@@ -7,6 +7,8 @@ import {
   foodLensScans,
   ingredientScans,
   mealFeedback,
+  packagedFoodLogs,
+  packagedFoodProducts,
   nutritionGoals,
   nutritionLogs,
   palateProfiles,
@@ -17,7 +19,7 @@ import {
   type InsertUser,
   users,
 } from "../drizzle/schema";
-import type { FoodLensAnalysis, FoodLensItem, IngredientDetection, NutritionGoals, NutritionValues, SemanticMemoryResult, SensoryProfile, StructuredRecipe } from "../shared/product";
+import type { FoodLensAnalysis, FoodLensItem, IngredientDetection, NutritionGoals, NutritionValues, PackagedFoodProduct, SemanticMemoryResult, SensoryProfile, StructuredRecipe } from "../shared/product";
 import { ENV } from "./_core/env";
 import { CHEF_KNOWLEDGE_SEED } from "./product/knowledge";
 import { cosineSimilarity } from "./product/memory";
@@ -144,6 +146,7 @@ export async function deleteCulinaryData(userId: number) {
   const db = await requireDb();
   await db.delete(analyticsEvents).where(eq(analyticsEvents.userId, userId));
   await db.delete(nutritionLogs).where(eq(nutritionLogs.userId, userId));
+  await db.delete(packagedFoodLogs).where(eq(packagedFoodLogs.userId, userId));
   await db.delete(nutritionGoals).where(eq(nutritionGoals.userId, userId));
   await db.delete(semanticMemoryEdges).where(eq(semanticMemoryEdges.userId, userId));
   await db.delete(semanticMemories).where(eq(semanticMemories.userId, userId));
@@ -320,6 +323,107 @@ export async function listNutritionLogs(userId: number, start: Date, end: Date) 
     .from(nutritionLogs)
     .where(and(eq(nutritionLogs.userId, userId), gte(nutritionLogs.eatenAt, start), lt(nutritionLogs.eatenAt, end)))
     .orderBy(desc(nutritionLogs.eatenAt));
+}
+
+export async function getPackagedFoodProductByBarcode(barcode: string): Promise<PackagedFoodProduct | undefined> {
+  const db = await requireDb();
+  const [product] = await db.select().from(packagedFoodProducts).where(eq(packagedFoodProducts.barcode, barcode)).limit(1);
+  return product as PackagedFoodProduct | undefined;
+}
+
+export async function getPackagedFoodProductById(productId: number): Promise<PackagedFoodProduct | undefined> {
+  const db = await requireDb();
+  const [product] = await db.select().from(packagedFoodProducts).where(eq(packagedFoodProducts.id, productId)).limit(1);
+  return product as PackagedFoodProduct | undefined;
+}
+
+export async function upsertPackagedFoodProduct(input: {
+  barcode: string;
+  productName: string;
+  brands: string | null;
+  servingSize: string | null;
+  ingredientsText: string | null;
+  allergens: string[];
+  nutritionPerServing: NutritionValues;
+  nutritionPer100g: NutritionValues | null;
+  nutrimentsRaw: Record<string, unknown>;
+  sourceUrl: string;
+  sourceCompleteness: number | null;
+  imageUrl: string | null;
+  sourceUpdatedAt: Date | null;
+}): Promise<PackagedFoodProduct> {
+  const db = await requireDb();
+  await db
+    .insert(packagedFoodProducts)
+    .values(input)
+    .onDuplicateKeyUpdate({
+      set: {
+        productName: input.productName,
+        brands: input.brands,
+        servingSize: input.servingSize,
+        ingredientsText: input.ingredientsText,
+        allergens: input.allergens,
+        nutritionPerServing: input.nutritionPerServing,
+        nutritionPer100g: input.nutritionPer100g,
+        nutrimentsRaw: input.nutrimentsRaw,
+        sourceUrl: input.sourceUrl,
+        sourceCompleteness: input.sourceCompleteness,
+        imageUrl: input.imageUrl,
+        sourceUpdatedAt: input.sourceUpdatedAt,
+        fetchedAt: new Date(),
+      },
+    });
+  const stored = await getPackagedFoodProductByBarcode(input.barcode);
+  if (!stored) throw new Error("Could not persist packaged food product.");
+  return stored;
+}
+
+export async function logPackagedFoodMeal(input: {
+  userId: number;
+  packagedFoodProductId: number;
+  mealType: "breakfast" | "lunch" | "dinner" | "snack";
+  servings: number;
+  nutritionSnapshot: NutritionValues;
+  eatenAt?: Date;
+}) {
+  const db = await requireDb();
+  const [result] = await db
+    .insert(packagedFoodLogs)
+    .values({ ...input, eatenAt: input.eatenAt ?? new Date() })
+    .$returningId();
+  const [log] = await db.select().from(packagedFoodLogs).where(eq(packagedFoodLogs.id, result.id)).limit(1);
+  return log;
+}
+
+export async function removePackagedFoodMealLog(userId: number, logId: number) {
+  const db = await requireDb();
+  await db.delete(packagedFoodLogs).where(and(eq(packagedFoodLogs.id, logId), eq(packagedFoodLogs.userId, userId)));
+  return { removed: true as const, logId };
+}
+
+export async function listPackagedFoodLogs(userId: number, start: Date, end: Date) {
+  const db = await requireDb();
+  return db
+    .select({
+      id: packagedFoodLogs.id,
+      userId: packagedFoodLogs.userId,
+      packagedFoodProductId: packagedFoodLogs.packagedFoodProductId,
+      mealType: packagedFoodLogs.mealType,
+      servings: packagedFoodLogs.servings,
+      nutritionSnapshot: packagedFoodLogs.nutritionSnapshot,
+      eatenAt: packagedFoodLogs.eatenAt,
+      createdAt: packagedFoodLogs.createdAt,
+      productName: packagedFoodProducts.productName,
+      brands: packagedFoodProducts.brands,
+      barcode: packagedFoodProducts.barcode,
+      servingSize: packagedFoodProducts.servingSize,
+      sourceUrl: packagedFoodProducts.sourceUrl,
+      imageUrl: packagedFoodProducts.imageUrl,
+    })
+    .from(packagedFoodLogs)
+    .innerJoin(packagedFoodProducts, eq(packagedFoodLogs.packagedFoodProductId, packagedFoodProducts.id))
+    .where(and(eq(packagedFoodLogs.userId, userId), gte(packagedFoodLogs.eatenAt, start), lt(packagedFoodLogs.eatenAt, end)))
+    .orderBy(desc(packagedFoodLogs.eatenAt));
 }
 
 export async function upsertSemanticMemory(input: {

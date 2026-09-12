@@ -82,6 +82,28 @@ export type FoodLensAnalysis = {
   generationMode: "live_ai" | "safe_fallback";
 };
 
+export type PackagedFoodProduct = {
+  id: number;
+  barcode: string;
+  productName: string;
+  brands: string | null;
+  servingSize: string | null;
+  ingredientsText: string | null;
+  allergens: string[];
+  nutritionPerServing: NutritionValues;
+  nutritionPer100g: NutritionValues | null;
+  sourceUrl: string;
+  sourceCompleteness: number | null;
+  imageUrl: string | null;
+  sourceUpdatedAt: Date | null;
+  fetchedAt: Date;
+};
+
+export type BarcodeLookupResult =
+  | { status: "found"; product: PackagedFoodProduct; cacheStatus: "fresh" | "cached"; labelDisclosure: string }
+  | { status: "not_found"; barcode: string; message: string }
+  | { status: "unavailable"; barcode: string; message: string };
+
 export type SemanticMemoryResult = {
   id: number;
   kind: "food_lens" | "recipe" | "meal_feedback" | "preference";

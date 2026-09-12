@@ -114,6 +114,48 @@ export const nutritionLogs = mysqlTable(
   ]
 );
 
+export const packagedFoodProducts = mysqlTable(
+  "packaged_food_products",
+  {
+    id: int("id").autoincrement().primaryKey(),
+    barcode: varchar("barcode", { length: 32 }).notNull(),
+    productName: varchar("productName", { length: 320 }).notNull(),
+    brands: varchar("brands", { length: 320 }),
+    servingSize: varchar("servingSize", { length: 120 }),
+    ingredientsText: text("ingredientsText"),
+    allergens: json("allergens").notNull(),
+    nutritionPerServing: json("nutritionPerServing").notNull(),
+    nutritionPer100g: json("nutritionPer100g"),
+    nutrimentsRaw: json("nutrimentsRaw").notNull(),
+    sourceUrl: text("sourceUrl").notNull(),
+    sourceCompleteness: int("sourceCompleteness"),
+    imageUrl: text("imageUrl"),
+    sourceUpdatedAt: timestamp("sourceUpdatedAt"),
+    fetchedAt: timestamp("fetchedAt").defaultNow().notNull(),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+    updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  },
+  table => [uniqueIndex("packaged_food_products_barcode_unique").on(table.barcode)]
+);
+
+export const packagedFoodLogs = mysqlTable(
+  "packaged_food_logs",
+  {
+    id: int("id").autoincrement().primaryKey(),
+    userId: int("userId").notNull(),
+    packagedFoodProductId: int("packagedFoodProductId").notNull(),
+    mealType: mysqlEnum("mealType", ["breakfast", "lunch", "dinner", "snack"]).default("snack").notNull(),
+    servings: int("servings").default(1).notNull(),
+    nutritionSnapshot: json("nutritionSnapshot").notNull(),
+    eatenAt: timestamp("eatenAt").defaultNow().notNull(),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+  },
+  table => [
+    index("packaged_food_logs_user_eaten_idx").on(table.userId, table.eatenAt),
+    index("packaged_food_logs_user_product_idx").on(table.userId, table.packagedFoodProductId),
+  ]
+);
+
 export const semanticMemories = mysqlTable(
   "semantic_memories",
   {

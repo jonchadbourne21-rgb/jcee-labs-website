@@ -40,10 +40,11 @@ The implementation uses managed authentication, database, object storage, and se
 | Nutrition planning | Explicit eaten-meal logs, six user-controlled targets, daily progress, and bounded planning guidance | Database-backed integration and profile UI |
 | Semantic memory | User-scoped 64-dimensional vectors, cosine retrieval, and newer-to-older DAG edges | Integration retrieval and graph persistence |
 | Plate-to-recipe | Idempotent one-tap personalized structured recipe using Palate Twin, targets, memories, and Chef Knowledge | Live AI integration generated and reused one recipe ID |
+| Barcode packaged foods | UPC/EAN check-digit validation, Open Food Facts lookup, cached snapshots, serving multiplier, explicit meal logs, and allergen review | Unit tests (22 passing) and live database/API integration receipt |
 
 ## 4. Automated verification
 
-The final static and unit run completed successfully. TypeScript reported no errors. Vitest reported **6 files passed, 18 tests passed**. The production build completed successfully. The output was written to `docs/test-evidence/typecheck.log`, `unit-tests.log`, and `build.log`.
+The final static and unit run completed successfully. TypeScript reported no errors. Vitest reported **7 files passed, 22 tests passed**. The production build completed successfully. The output was written to `docs/test-evidence/typecheck.log`, `unit-tests.log`, and `build.log`.
 
 The unit suite verifies calibration direction, confidence changes, crispier feedback, 0–100 bounding, authoritative poultry/cross-contact/allergen attachment, correction of unsafe poultry prose, seafood versus whole-cut rules, multi-palate spice separation, and close-palate no-conflict behavior.
 
@@ -71,6 +72,10 @@ The full machine-readable receipt is `docs/test-evidence/e2e-result.json`.
 The Food Lens harness ran the complete authenticated path: multimodal photo analysis, FoodData Central resolution, user gram correction, nutrition target persistence, explicit dinner logging, local-day aggregation, semantic retrieval, live personalized recipe generation, and idempotent retry. The first live run attached five USDA references and exposed an inaccurate candidate where “lemon (half)” matched “cream, half and half.” The matcher was corrected by removing portion descriptors, normalizing plurals, requiring lexical overlap, and penalizing mismatched processed forms. Unit tests now prove that chicken thigh meat outranks skin-only records and raw lemon outranks bottled concentrate.
 
 Subsequent calls temporarily exhausted USDA's public demo quota (`HTTP 429`, limit 10). The journey passed under that condition with labeled generic references. The final release run later attached four live USDA matches plus one labeled fallback, logged 639 estimated calories, reached 50% of the selected protein target, retrieved two related semantic memories, generated a live structured recipe, and proved idempotent recipe reuse. Production should configure `USDA_FDC_API_KEY`; rate-limit and timeout fallback is intentionally non-fatal. The receipt is `docs/test-evidence/food-lens-e2e-result.json`.
+
+### Barcode and packaged-food integration
+
+The barcode harness ran against a fresh temporary test user, verified that invalid check digits return structured `not_found` rather than exceptions, performed a live lookup of Nutella (EAN `3017620422003`) via Open Food Facts, verified 7-day cache hit on repeat lookup, logged two servings toward daily nutrition, verified daily aggregation reflects the scaled calories, and cleanly removed the log before tearing down test data. The receipt is preserved in `docs/test-evidence/barcode-e2e-console.log`.
 
 ## 6. Live vision verification
 

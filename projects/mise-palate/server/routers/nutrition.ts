@@ -46,14 +46,19 @@ export const nutritionRouter = router({
         db.getNutritionGoals(ctx.user.id),
         db.listNutritionLogs(ctx.user.id, new Date(input.dayStartMs), new Date(input.dayEndMs)),
       ]);
+      const packagedLogs = await db.listPackagedFoodLogs(ctx.user.id, new Date(input.dayStartMs), new Date(input.dayEndMs));
       const goals = nutritionGoalsFromRow(goalsRow);
-      const total = aggregateNutritionLogs(logs.map(log => log.nutritionSnapshot as NutritionValues));
+      const total = aggregateNutritionLogs([
+        ...logs.map(log => log.nutritionSnapshot as NutritionValues),
+        ...packagedLogs.map(log => log.nutritionSnapshot as NutritionValues),
+      ]);
       return {
         goals,
         total,
         progress: nutritionProgress(total, goals),
         guidance: nutritionGuidance(total, goals),
         logs,
+        packagedLogs,
       };
     }),
 

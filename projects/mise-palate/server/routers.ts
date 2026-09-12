@@ -2,6 +2,7 @@ import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
+import { barcodeRouter } from "./routers/barcode";
 import { cookRouter } from "./routers/cook";
 import { foodLensRouter } from "./routers/food-lens";
 import { knowledgeRouter } from "./routers/knowledge";
@@ -23,6 +24,7 @@ export const appRouter = router({
   scans: scansRouter,
   recipes: recipesRouter,
   cook: cookRouter,
+  barcode: barcodeRouter,
   foodLens: foodLensRouter,
   knowledge: knowledgeRouter,
   nutrition: nutritionRouter,

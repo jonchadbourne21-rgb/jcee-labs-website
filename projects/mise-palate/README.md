@@ -4,7 +4,7 @@ Mise is a working full-stack MVP that turns confirmed ingredients or a craving i
 
 ## What works
 
-The current build includes managed authentication, eight-decision onboarding, photo upload, live multimodal ingredient recognition, confidence and correction, **Food Lens nutrition estimates with live USDA FoodData Central matching**, editable portion grams, explicit meal logging, user-controlled nutrition targets, daily macro progress, semantic vector memory with user-scoped DAG links, one-tap plate-to-personalized-recipe generation, four personalized directions, structured recipe generation, Cook Mode, timers, visual/smell/texture cues, substitutions, live recovery, Taste Forecast, saving, favorites, meal rating, preference learning, history, editable Chef Knowledge, fixed safety records, geometry-only knife-cut guides, multi-palate resolution, analytics, and user data deletion.
+The current build includes managed authentication, eight-decision onboarding, photo upload, live multimodal ingredient recognition, confidence and correction, **Food Lens nutrition estimates with live USDA FoodData Central matching**, **barcode scanning for packaged foods via Open Food Facts**, exact manufacturer Nutrition Facts review, serving-based meal logging, user-controlled nutrition targets, daily macro progress, semantic vector memory with user-scoped DAG links, one-tap plate-to-personalized-recipe generation, four personalized directions, structured recipe generation, Cook Mode, timers, visual/smell/texture cues, substitutions, live recovery, Taste Forecast, saving, favorites, meal rating, preference learning, history, editable Chef Knowledge, fixed safety records, geometry-only knife-cut guides, multi-palate resolution, analytics, and user data deletion.
 
 ## Architecture
 
@@ -27,6 +27,7 @@ pnpm tsx scripts/e2e-flow.ts
 pnpm tsx scripts/vision-smoke.ts
 pnpm tsx scripts/photo-route-smoke.ts
 pnpm tsx scripts/food-lens-e2e.ts
+pnpm tsx scripts/barcode-e2e.ts
 ```
 
 FoodData Central uses `USDA_FDC_API_KEY` when configured. Without it, the server attempts the official public `DEMO_KEY` and degrades to clearly labeled local reference profiles when the demo quota is exhausted. A dedicated USDA key is strongly recommended for production.

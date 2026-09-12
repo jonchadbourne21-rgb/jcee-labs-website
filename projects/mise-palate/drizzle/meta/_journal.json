@@ -36,6 +36,13 @@
       "when": 1789234194277,
       "tag": "0004_omniscient_firestar",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1789236550643,
+      "tag": "0005_tan_whizzer",
+      "breakpoints": true
     }
   ]
 }
