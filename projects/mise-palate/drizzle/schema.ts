@@ -1,5 +1,6 @@
 import {
   boolean,
+  decimal,
   index,
   int,
   json,
@@ -145,7 +146,7 @@ export const packagedFoodLogs = mysqlTable(
     userId: int("userId").notNull(),
     packagedFoodProductId: int("packagedFoodProductId").notNull(),
     mealType: mysqlEnum("mealType", ["breakfast", "lunch", "dinner", "snack"]).default("snack").notNull(),
-    servings: int("servings").default(1).notNull(),
+    servings: decimal("servings", { precision: 6, scale: 2 }).default("1.00").notNull(),
     nutritionSnapshot: json("nutritionSnapshot").notNull(),
     eatenAt: timestamp("eatenAt").defaultNow().notNull(),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
@@ -153,6 +154,42 @@ export const packagedFoodLogs = mysqlTable(
   table => [
     index("packaged_food_logs_user_eaten_idx").on(table.userId, table.eatenAt),
     index("packaged_food_logs_user_product_idx").on(table.userId, table.packagedFoodProductId),
+  ]
+);
+
+export const customFoodLabels = mysqlTable(
+  "custom_food_labels",
+  {
+    id: int("id").autoincrement().primaryKey(),
+    userId: int("userId").notNull(),
+    barcode: varchar("barcode", { length: 32 }),
+    productName: varchar("productName", { length: 320 }).notNull(),
+    brand: varchar("brand", { length: 320 }),
+    servingSize: varchar("servingSize", { length: 120 }).notNull(),
+    ingredientsText: text("ingredientsText"),
+    allergens: json("allergens").notNull(),
+    nutritionPerServing: json("nutritionPerServing").notNull(),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+    updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  },
+  table => [index("custom_food_labels_user_idx").on(table.userId), index("custom_food_labels_user_barcode_idx").on(table.userId, table.barcode)]
+);
+
+export const customFoodLogs = mysqlTable(
+  "custom_food_logs",
+  {
+    id: int("id").autoincrement().primaryKey(),
+    userId: int("userId").notNull(),
+    customFoodLabelId: int("customFoodLabelId").notNull(),
+    mealType: mysqlEnum("mealType", ["breakfast", "lunch", "dinner", "snack"]).default("snack").notNull(),
+    servings: decimal("servings", { precision: 6, scale: 2 }).default("1.00").notNull(),
+    nutritionSnapshot: json("nutritionSnapshot").notNull(),
+    eatenAt: timestamp("eatenAt").defaultNow().notNull(),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+  },
+  table => [
+    index("custom_food_logs_user_eaten_idx").on(table.userId, table.eatenAt),
+    index("custom_food_logs_user_label_idx").on(table.userId, table.customFoodLabelId),
   ]
 );
 

@@ -4,11 +4,11 @@ Mise is a working full-stack MVP that turns confirmed ingredients or a craving i
 
 ## What works
 
-The current build includes managed authentication, eight-decision onboarding, photo upload, live multimodal ingredient recognition, confidence and correction, **Food Lens nutrition estimates with live USDA FoodData Central matching**, **barcode scanning for packaged foods via Open Food Facts**, exact manufacturer Nutrition Facts review, serving-based meal logging, user-controlled nutrition targets, daily macro progress, semantic vector memory with user-scoped DAG links, one-tap plate-to-personalized-recipe generation, four personalized directions, structured recipe generation, Cook Mode, timers, visual/smell/texture cues, substitutions, live recovery, Taste Forecast, saving, favorites, meal rating, preference learning, history, editable Chef Knowledge, fixed safety records, geometry-only knife-cut guides, multi-palate resolution, analytics, and user data deletion.
+The current build includes managed authentication, eight-decision onboarding, photo upload, live multimodal ingredient recognition, confidence and correction, **Food Lens nutrition estimates with live USDA FoodData Central matching**, **continuous mobile barcode scanning through native BarcodeDetector with a lazy ZXing fallback**, Open Food Facts label lookup, editable private Nutrition Facts for unlisted products, quarter-serving meal logs, daily and four-week fresh-versus-packaged nutrition trends, user-controlled nutrition targets, semantic vector memory with user-scoped DAG links, one-tap plate-to-personalized-recipe generation, structured recipes, Cook Mode, recovery, Taste Forecast, favorites, preference learning, editable Chef Knowledge, fixed safety records, multi-palate resolution, analytics, and user data deletion.
 
 ## Architecture
 
-The application uses React 19, TypeScript, Tailwind CSS, Express, tRPC, Drizzle ORM, MySQL/TiDB, private object storage, and Manus OAuth. AI is isolated behind server domain functions. GPT-5 mini handles vision and lightweight reasoning; GPT-5 handles structured recipe construction. Safety facts are deterministic and sourced rather than generated.
+The application uses React 19, TypeScript, Tailwind CSS, Express, tRPC, Drizzle ORM, MySQL/TiDB, private object storage, Manus OAuth, Recharts, and a browser-only ZXing fallback. AI is isolated behind server domain functions. GPT-5 mini handles vision and lightweight reasoning; GPT-5 handles structured recipe construction. Safety facts and nutrition trend aggregation are deterministic.
 
 ## Run and verify
 

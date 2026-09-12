@@ -40,11 +40,13 @@ The implementation uses managed authentication, database, object storage, and se
 | Nutrition planning | Explicit eaten-meal logs, six user-controlled targets, daily progress, and bounded planning guidance | Database-backed integration and profile UI |
 | Semantic memory | User-scoped 64-dimensional vectors, cosine retrieval, and newer-to-older DAG edges | Integration retrieval and graph persistence |
 | Plate-to-recipe | Idempotent one-tap personalized structured recipe using Palate Twin, targets, memories, and Chef Knowledge | Live AI integration generated and reused one recipe ID |
-| Barcode packaged foods | UPC/EAN check-digit validation, Open Food Facts lookup, cached snapshots, serving multiplier, explicit meal logs, and allergen review | Unit tests (22 passing) and live database/API integration receipt |
+| Barcode packaged foods | Continuous native camera decoding with lazy ZXing fallback, check-digit validation, Open Food Facts lookup, cached snapshots, and allergen review | Production bundle, responsive capture, and live database/API integration |
+| Private labels | User-scoped editable Nutrition Facts, optional barcode, ingredients/allergens, quarter-serving logs, and deletion | Protected CRUD and integration receipt |
+| Nutrition trends | Seven-day daily and four-week weekly views with fresh-versus-packaged source splits for energy, protein, fiber, and sodium | Deterministic aggregation tests and database-backed tRPC integration |
 
 ## 4. Automated verification
 
-The final static and unit run completed successfully. TypeScript reported no errors. Vitest reported **7 files passed, 22 tests passed**. The production build completed successfully. The output was written to `docs/test-evidence/typecheck.log`, `unit-tests.log`, and `build.log`.
+The final static and unit run completed successfully. TypeScript reported no errors. Vitest reported **8 files passed, 24 tests passed**. The production build completed successfully. The output was written to `docs/test-evidence/typecheck.log`, `unit-tests.log`, and `build.log`.
 
 The unit suite verifies calibration direction, confidence changes, crispier feedback, 0–100 bounding, authoritative poultry/cross-contact/allergen attachment, correction of unsafe poultry prose, seafood versus whole-cut rules, multi-palate spice separation, and close-palate no-conflict behavior.
 
@@ -75,7 +77,7 @@ Subsequent calls temporarily exhausted USDA's public demo quota (`HTTP 429`, lim
 
 ### Barcode and packaged-food integration
 
-The barcode harness ran against a fresh temporary test user, verified that invalid check digits return structured `not_found` rather than exceptions, performed a live lookup of Nutella (EAN `3017620422003`) via Open Food Facts, verified 7-day cache hit on repeat lookup, logged two servings toward daily nutrition, verified daily aggregation reflects the scaled calories, and cleanly removed the log before tearing down test data. The receipt is preserved in `docs/test-evidence/barcode-e2e-console.log`.
+The barcode harness ran against a fresh temporary test user, rejected an invalid check digit, resolved Nutella (EAN `3017620422003`) through the live-or-cached Open Food Facts path, and verified cache reuse. It logged a half serving, created and edited a private granola label, logged three-quarters of a serving, and persisted a fresh Food Lens meal. Daily aggregation returned 1,049.5 kcal across all three sources. Seven-day trends classified one fresh log and two packaged logs, producing a 57% fresh and 43% packaged energy split. Every temporary log, label, scan, event, and user was removed. The receipt is `docs/test-evidence/barcode-e2e-console.log`.
 
 ## 6. Live vision verification
 

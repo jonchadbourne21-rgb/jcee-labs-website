@@ -104,6 +104,30 @@ export type BarcodeLookupResult =
   | { status: "not_found"; barcode: string; message: string }
   | { status: "unavailable"; barcode: string; message: string };
 
+export type CustomFoodLabel = {
+  id: number;
+  userId: number;
+  barcode: string | null;
+  productName: string;
+  brand: string | null;
+  servingSize: string;
+  ingredientsText: string | null;
+  allergens: string[];
+  nutritionPerServing: NutritionValues;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type NutritionTrendBucket = {
+  key: string;
+  label: string;
+  fresh: NutritionValues;
+  packaged: NutritionValues;
+  total: NutritionValues;
+  freshLogCount: number;
+  packagedLogCount: number;
+};
+
 export type SemanticMemoryResult = {
   id: number;
   kind: "food_lens" | "recipe" | "meal_feedback" | "preference";

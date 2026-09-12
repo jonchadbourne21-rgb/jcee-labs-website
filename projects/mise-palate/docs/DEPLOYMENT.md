@@ -28,13 +28,13 @@ The development server listens on port 3000. Authentication uses secure cookie s
 
 ## 3. Database migration
 
-The authoritative Drizzle schema is `drizzle/schema.ts`. Migration `0003_fresh_wendell_vaughn.sql` adds Food Lens scans and semantic memory. Migration `0004_omniscient_firestar.sql` adds nutrition goals, explicit meal logs, and Food Lens recipe provenance. Migration `0005_tan_whizzer.sql` adds packaged food product snapshots and user packaged-food meal logs.
+The authoritative Drizzle schema is `drizzle/schema.ts`. Migration `0003_fresh_wendell_vaughn.sql` adds Food Lens scans and semantic memory. Migration `0004_omniscient_firestar.sql` adds nutrition goals, explicit meal logs, and Food Lens recipe provenance. Migration `0005_tan_whizzer.sql` adds packaged food product snapshots and user packaged-food meal logs. Migration `0006_confused_killer_shrike.sql` adds private custom labels and custom food logs while converting packaged serving counts from integer to data-preserving `decimal(6,2)` values.
 
 ```bash
 pnpm drizzle-kit generate
 ```
 
-Review generated SQL before applying it. Production migrations should be additive by default. The current migration chain creates sixteen tables and associated indexes; it does not drop or rewrite existing data.
+Review generated SQL before applying it. Production migrations should be additive by default. The current migration chain creates eighteen tables and associated indexes; it does not drop existing data.
 
 ## 4. Validation gate
 
@@ -56,11 +56,11 @@ pnpm tsx scripts/food-lens-e2e.ts
 pnpm tsx scripts/barcode-e2e.ts
 ```
 
-The scripts write machine-readable receipts under `docs/test-evidence/` and delete temporary relational test data. The Food Lens test exercises multimodal recognition, live USDA matching when quota is available, safe reference fallback, portion correction, nutrition targets, explicit meal logging, daily aggregation, semantic retrieval, one-tap recipe generation, and idempotent retry behavior. The photo-route tests upload objects; removing their database keys makes them unreachable through the product.
+The scripts write receipts under `docs/test-evidence/` and delete temporary relational test data. The barcode test covers check digits, live/cached lookup, fractional packaged servings, private label creation and editing, explicit custom logging, three-source daily aggregation, fresh-versus-packaged trends, deletion, and cleanup. Camera streaming requires HTTPS or localhost and user permission. Native `BarcodeDetector` is preferred; ZXing is lazy-loaded only when native decoding is unavailable.
 
 ## 5. Managed publication
 
-The verified project lives at `/home/ubuntu/mise-palate`. Publication uses the managed WebDev release flow. A checkpoint is required before publishing. The release checkpoint should reference the passing type check, nine-unit-test run, production build, live-AI integration result, vision result, photo-route result, and visual captures.
+The verified project lives at `/home/ubuntu/mise-palate`. Publication uses the managed WebDev release flow. A checkpoint is required before publishing. The release checkpoint should reference the passing type check, 24-test run, production build, live integration receipts, and responsive captures.
 
 The application uses the default autoscaling mode. It does not need an always-on process, cron schedule, WebSocket server, or reserved host. Database and object storage hold all durable state. USDA results are cached in-process for twelve hours as a latency and quota optimization; correctness does not depend on cache persistence.
 

@@ -4,6 +4,8 @@ import {
   analyticsEvents,
   chefKnowledge,
   cookingSessions,
+  customFoodLabels,
+  customFoodLogs,
   foodLensScans,
   ingredientScans,
   mealFeedback,
@@ -19,7 +21,7 @@ import {
   type InsertUser,
   users,
 } from "../drizzle/schema";
-import type { FoodLensAnalysis, FoodLensItem, IngredientDetection, NutritionGoals, NutritionValues, PackagedFoodProduct, SemanticMemoryResult, SensoryProfile, StructuredRecipe } from "../shared/product";
+import type { CustomFoodLabel, FoodLensAnalysis, FoodLensItem, IngredientDetection, NutritionGoals, NutritionValues, PackagedFoodProduct, SemanticMemoryResult, SensoryProfile, StructuredRecipe } from "../shared/product";
 import { ENV } from "./_core/env";
 import { CHEF_KNOWLEDGE_SEED } from "./product/knowledge";
 import { cosineSimilarity } from "./product/memory";
@@ -147,6 +149,8 @@ export async function deleteCulinaryData(userId: number) {
   await db.delete(analyticsEvents).where(eq(analyticsEvents.userId, userId));
   await db.delete(nutritionLogs).where(eq(nutritionLogs.userId, userId));
   await db.delete(packagedFoodLogs).where(eq(packagedFoodLogs.userId, userId));
+  await db.delete(customFoodLogs).where(eq(customFoodLogs.userId, userId));
+  await db.delete(customFoodLabels).where(eq(customFoodLabels.userId, userId));
   await db.delete(nutritionGoals).where(eq(nutritionGoals.userId, userId));
   await db.delete(semanticMemoryEdges).where(eq(semanticMemoryEdges.userId, userId));
   await db.delete(semanticMemories).where(eq(semanticMemories.userId, userId));
@@ -389,7 +393,7 @@ export async function logPackagedFoodMeal(input: {
   const db = await requireDb();
   const [result] = await db
     .insert(packagedFoodLogs)
-    .values({ ...input, eatenAt: input.eatenAt ?? new Date() })
+    .values({ ...input, servings: input.servings.toFixed(2), eatenAt: input.eatenAt ?? new Date() })
     .$returningId();
   const [log] = await db.select().from(packagedFoodLogs).where(eq(packagedFoodLogs.id, result.id)).limit(1);
   return log;
@@ -424,6 +428,109 @@ export async function listPackagedFoodLogs(userId: number, start: Date, end: Dat
     .innerJoin(packagedFoodProducts, eq(packagedFoodLogs.packagedFoodProductId, packagedFoodProducts.id))
     .where(and(eq(packagedFoodLogs.userId, userId), gte(packagedFoodLogs.eatenAt, start), lt(packagedFoodLogs.eatenAt, end)))
     .orderBy(desc(packagedFoodLogs.eatenAt));
+}
+
+export async function listCustomFoodLabels(userId: number): Promise<CustomFoodLabel[]> {
+  const db = await requireDb();
+  return db.select().from(customFoodLabels).where(eq(customFoodLabels.userId, userId)).orderBy(desc(customFoodLabels.updatedAt)) as Promise<CustomFoodLabel[]>;
+}
+
+export async function getCustomFoodLabel(userId: number, labelId: number): Promise<CustomFoodLabel | undefined> {
+  const db = await requireDb();
+  const [label] = await db
+    .select()
+    .from(customFoodLabels)
+    .where(and(eq(customFoodLabels.userId, userId), eq(customFoodLabels.id, labelId)))
+    .limit(1);
+  return label as CustomFoodLabel | undefined;
+}
+
+export async function saveCustomFoodLabel(input: {
+  id?: number;
+  userId: number;
+  barcode: string | null;
+  productName: string;
+  brand: string | null;
+  servingSize: string;
+  ingredientsText: string | null;
+  allergens: string[];
+  nutritionPerServing: NutritionValues;
+}): Promise<CustomFoodLabel> {
+  const db = await requireDb();
+  if (input.id) {
+    await db
+      .update(customFoodLabels)
+      .set({
+        barcode: input.barcode,
+        productName: input.productName,
+        brand: input.brand,
+        servingSize: input.servingSize,
+        ingredientsText: input.ingredientsText,
+        allergens: input.allergens,
+        nutritionPerServing: input.nutritionPerServing,
+      })
+      .where(and(eq(customFoodLabels.id, input.id), eq(customFoodLabels.userId, input.userId)));
+    const updated = await getCustomFoodLabel(input.userId, input.id);
+    if (!updated) throw new Error("Custom food label not found.");
+    return updated;
+  }
+  const [result] = await db.insert(customFoodLabels).values(input).$returningId();
+  const created = await getCustomFoodLabel(input.userId, result.id);
+  if (!created) throw new Error("Could not create custom food label.");
+  return created;
+}
+
+export async function deleteCustomFoodLabel(userId: number, labelId: number) {
+  const db = await requireDb();
+  await db.delete(customFoodLogs).where(and(eq(customFoodLogs.userId, userId), eq(customFoodLogs.customFoodLabelId, labelId)));
+  await db.delete(customFoodLabels).where(and(eq(customFoodLabels.userId, userId), eq(customFoodLabels.id, labelId)));
+  return { deleted: true as const, labelId };
+}
+
+export async function logCustomFoodMeal(input: {
+  userId: number;
+  customFoodLabelId: number;
+  mealType: "breakfast" | "lunch" | "dinner" | "snack";
+  servings: number;
+  nutritionSnapshot: NutritionValues;
+  eatenAt?: Date;
+}) {
+  const db = await requireDb();
+  const [result] = await db
+    .insert(customFoodLogs)
+    .values({ ...input, servings: input.servings.toFixed(2), eatenAt: input.eatenAt ?? new Date() })
+    .$returningId();
+  const [log] = await db.select().from(customFoodLogs).where(eq(customFoodLogs.id, result.id)).limit(1);
+  return log;
+}
+
+export async function removeCustomFoodMealLog(userId: number, logId: number) {
+  const db = await requireDb();
+  await db.delete(customFoodLogs).where(and(eq(customFoodLogs.id, logId), eq(customFoodLogs.userId, userId)));
+  return { removed: true as const, logId };
+}
+
+export async function listCustomFoodLogs(userId: number, start: Date, end: Date) {
+  const db = await requireDb();
+  return db
+    .select({
+      id: customFoodLogs.id,
+      userId: customFoodLogs.userId,
+      customFoodLabelId: customFoodLogs.customFoodLabelId,
+      mealType: customFoodLogs.mealType,
+      servings: customFoodLogs.servings,
+      nutritionSnapshot: customFoodLogs.nutritionSnapshot,
+      eatenAt: customFoodLogs.eatenAt,
+      createdAt: customFoodLogs.createdAt,
+      productName: customFoodLabels.productName,
+      brand: customFoodLabels.brand,
+      barcode: customFoodLabels.barcode,
+      servingSize: customFoodLabels.servingSize,
+    })
+    .from(customFoodLogs)
+    .innerJoin(customFoodLabels, eq(customFoodLogs.customFoodLabelId, customFoodLabels.id))
+    .where(and(eq(customFoodLogs.userId, userId), gte(customFoodLogs.eatenAt, start), lt(customFoodLogs.eatenAt, end)))
+    .orderBy(desc(customFoodLogs.eatenAt));
 }
 
 export async function upsertSemanticMemory(input: {

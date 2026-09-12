@@ -36,6 +36,8 @@ Meal feedback updates the current preference estimate through a bounded determin
 
 Food Lens follows a separate evidence path. Vision proposes visible food identities and edible mass estimates. The server normalizes food names, queries USDA FoodData Central, validates candidate lexical overlap, scales per-100 g nutrients to estimated grams, and labels every source. A dedicated `USDA_FDC_API_KEY` is preferred; USDA's public demo key is attempted when absent, with a labeled local reference fallback on timeout or rate limit. A scan does not count toward daily nutrition until the user explicitly logs it as eaten. Targets are user-selected planning preferences and are never described as clinical prescriptions.[4]
 
+Packaged-food barcodes are decoded in the browser; camera frames are not uploaded. Supported browsers use the native `BarcodeDetector` API, while other browsers lazy-load ZXing and process the same live video locally. Only the decoded digits are sent to the protected server, which validates the GS1 check digit and resolves a cached Open Food Facts snapshot. Unlisted products can be transcribed into user-scoped custom labels. Custom labels are explicitly marked user-entered, remain editable, and are never promoted into the shared provider cache. Daily and four-week charts aggregate only explicit meal logs and separate Food Lens estimates from packaged database or private-label facts.
+
 Each Food Lens scan, generated recipe, and completed-meal feedback record is encoded into a deterministic 64-dimensional user-scoped semantic vector. Cosine retrieval selects related memories and typed edges record the strongest links. Recipe generation receives only the authenticated user's retrieved memories, with visible provenance; memory content is preference evidence, never food-safety or medical evidence. One-tap plate-to-recipe generation is idempotent per Food Lens scan and stores a direct provenance link.
 
 ## 4. Structured contracts
@@ -66,7 +68,7 @@ This architecture cannot guarantee safety. Vision can misidentify food, users ca
 
 ## 8. Privacy and deletion
 
-Images are stored as opaque object keys. The database stores references, not bytes. Palate signals preserve their source and confidence. The user can delete their Palate Twin, Food Lens and ingredient scans, nutrition goals and logs, semantic memories and edges, recipes, sessions, feedback, signals, and analytics from the profile screen while keeping the authentication account available. The MVP does not sell data, expose a public profile, or train an external model on user records. Any future model-training or aggregated research use requires a distinct opt-in consent and retention policy.
+Images are stored as opaque object keys. Live barcode video remains on-device. The database stores references and decoded values, not camera frames. Palate signals preserve their source and confidence. The user can delete their Palate Twin, scans, nutrition goals, fresh and packaged logs, private labels, semantic memories and edges, recipes, sessions, feedback, signals, and analytics from the profile screen while keeping the authentication account available. Shared Open Food Facts snapshots contain no user identifier and remain available as a provider cache. The MVP does not sell data, expose a public profile, or train an external model on user records.
 
 ## 9. Inference cost model
 

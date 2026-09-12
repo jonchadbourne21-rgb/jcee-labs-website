@@ -3,6 +3,7 @@ import { DEFAULT_NUTRITION_GOALS, type NutritionGoals, type NutritionValues } fr
 import { protectedProcedure, router } from "../_core/trpc";
 import * as db from "../db";
 import { aggregateNutritionLogs, nutritionGuidance, nutritionProgress } from "../product/nutrition-goals";
+import { aggregateNutritionTrends, trendSummary } from "../product/nutrition-trends";
 
 const goalsSchema = z.object({
   mode: z.enum(["balanced", "high_protein", "lower_carb", "custom"]),
@@ -42,15 +43,17 @@ export const nutritionRouter = router({
       if (input.dayEndMs <= input.dayStartMs || input.dayEndMs - input.dayStartMs > 172_800_000) {
         throw new Error("Daily nutrition range must cover one local day.");
       }
-      const [goalsRow, logs] = await Promise.all([
+      const [goalsRow, logs, packagedLogs, customFoodLogs] = await Promise.all([
         db.getNutritionGoals(ctx.user.id),
         db.listNutritionLogs(ctx.user.id, new Date(input.dayStartMs), new Date(input.dayEndMs)),
+        db.listPackagedFoodLogs(ctx.user.id, new Date(input.dayStartMs), new Date(input.dayEndMs)),
+        db.listCustomFoodLogs(ctx.user.id, new Date(input.dayStartMs), new Date(input.dayEndMs)),
       ]);
-      const packagedLogs = await db.listPackagedFoodLogs(ctx.user.id, new Date(input.dayStartMs), new Date(input.dayEndMs));
       const goals = nutritionGoalsFromRow(goalsRow);
       const total = aggregateNutritionLogs([
         ...logs.map(log => log.nutritionSnapshot as NutritionValues),
         ...packagedLogs.map(log => log.nutritionSnapshot as NutritionValues),
+        ...customFoodLogs.map(log => log.nutritionSnapshot as NutritionValues),
       ]);
       return {
         goals,
@@ -59,7 +62,38 @@ export const nutritionRouter = router({
         guidance: nutritionGuidance(total, goals),
         logs,
         packagedLogs,
+        customFoodLogs,
       };
+    }),
+
+  trends: protectedProcedure
+    .input(z.object({
+      days: z.array(z.object({
+        key: z.string().min(1).max(40),
+        label: z.string().min(1).max(20),
+        startMs: z.number().int().nonnegative(),
+        endMs: z.number().int().positive(),
+      })).min(1).max(31),
+    }))
+    .query(async ({ ctx, input }) => {
+      for (const day of input.days) {
+        if (day.endMs <= day.startMs || day.endMs - day.startMs > 172_800_000) {
+          throw new Error("Each trend bucket must represent one local day.");
+        }
+      }
+      const startMs = Math.min(...input.days.map(day => day.startMs));
+      const endMs = Math.max(...input.days.map(day => day.endMs));
+      if (endMs - startMs > 35 * 86_400_000) throw new Error("Nutrition trends support up to 31 daily buckets.");
+
+      const [freshRows, packagedRows, customRows] = await Promise.all([
+        db.listNutritionLogs(ctx.user.id, new Date(startMs), new Date(endMs)),
+        db.listPackagedFoodLogs(ctx.user.id, new Date(startMs), new Date(endMs)),
+        db.listCustomFoodLogs(ctx.user.id, new Date(startMs), new Date(endMs)),
+      ]);
+      const fresh = freshRows.map(row => ({ eatenAt: row.eatenAt, nutritionSnapshot: row.nutritionSnapshot as NutritionValues }));
+      const packaged = [...packagedRows, ...customRows].map(row => ({ eatenAt: row.eatenAt, nutritionSnapshot: row.nutritionSnapshot as NutritionValues }));
+      const buckets = aggregateNutritionTrends(input.days, fresh, packaged);
+      return { buckets, summary: trendSummary(buckets) };
     }),
 
   scanStatus: protectedProcedure

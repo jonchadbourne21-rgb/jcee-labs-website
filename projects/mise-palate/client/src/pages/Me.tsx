@@ -1,5 +1,6 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import AppShell from "@/components/product/AppShell";
+import { NutritionTrends } from "@/components/product/NutritionTrends";
 import { SensoryProfileView } from "@/components/product/SensoryProfile";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -102,6 +103,7 @@ export default function Me() {
         utils.recipes.list.invalidate(),
         utils.nutrition.goals.invalidate(),
         utils.nutrition.daily.invalidate(),
+        utils.nutrition.trends.invalidate(),
         utils.foodLens.history.invalidate(),
       ]);
       toast.success("Your culinary data was removed");
@@ -122,6 +124,11 @@ export default function Me() {
   useEffect(() => {
     if (goalsQuery.data) setNutritionGoals(goalsQuery.data);
   }, [goalsQuery.data]);
+
+  useEffect(() => {
+    if (!profileQuery.data?.profile || new URLSearchParams(window.location.search).get("section") !== "trends") return;
+    window.requestAnimationFrame(() => document.getElementById("nutrition-trends")?.scrollIntoView({ block: "start" }));
+  }, [profileQuery.data?.profile]);
 
   if (profileQuery.isLoading) {
     return <AppShell><div className="grid min-h-[60vh] place-items-center"><Loader2 className="size-6 animate-spin text-copper-deep" /></div></AppShell>;
@@ -225,6 +232,8 @@ export default function Me() {
           <Button onClick={() => updateGoals.mutate(nutritionGoals)} disabled={updateGoals.isPending} className="mt-6 h-12 rounded-full bg-ink px-5 text-white"><Save className="mr-2 size-4" /> Save nutrition targets</Button>
         </div>
       </section>
+
+      <div id="nutrition-trends" className="scroll-mt-24"><NutritionTrends /></div>
 
       <section className="mt-10 rounded-[2rem] bg-ink p-6 text-white sm:p-9">
         <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">

@@ -1,5 +1,7 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import AppShell from "@/components/product/AppShell";
+import { BarcodeCameraScanner } from "@/components/product/BarcodeCameraScanner";
+import { ManualNutritionLabels } from "@/components/product/ManualNutritionLabels";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { trpc } from "@/lib/trpc";
@@ -38,9 +40,10 @@ export default function FoodLens() {
   const [, navigate] = useLocation();
   const utils = trpc.useUtils();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const barcodeFileRef = useRef<HTMLInputElement>(null);
 
-  const [activeTab, setActiveTab] = useState<"plate" | "barcode">("plate");
+  const [activeTab, setActiveTab] = useState<"plate" | "barcode">(() =>
+    new URLSearchParams(window.location.search).get("mode") === "barcode" ? "barcode" : "plate"
+  );
   const [dataUrl, setDataUrl] = useState<string | null>(null);
   const [context, setContext] = useState("");
   const [currentScanId, setCurrentScanId] = useState<number | null>(null);
@@ -118,7 +121,7 @@ export default function FoodLens() {
 
   const logMealMutation = trpc.nutrition.logScan.useMutation({
     onSuccess: async () => {
-      await Promise.all([scanStatusQuery.refetch(), utils.nutrition.daily.invalidate()]);
+      await Promise.all([scanStatusQuery.refetch(), utils.nutrition.daily.invalidate(), utils.nutrition.trends.invalidate()]);
       toast.success("Meal logged toward your daily targets");
     },
     onError: error => toast.error(error.message),
@@ -126,7 +129,7 @@ export default function FoodLens() {
 
   const removeMealMutation = trpc.nutrition.removeLog.useMutation({
     onSuccess: async () => {
-      await Promise.all([scanStatusQuery.refetch(), utils.nutrition.daily.invalidate()]);
+      await Promise.all([scanStatusQuery.refetch(), utils.nutrition.daily.invalidate(), utils.nutrition.trends.invalidate()]);
       toast.success("Meal removed from today’s nutrition totals");
     },
     onError: error => toast.error(error.message),
@@ -149,7 +152,7 @@ export default function FoodLens() {
 
   const logBarcodeMealMutation = trpc.barcode.logMeal.useMutation({
     onSuccess: async () => {
-      await utils.nutrition.daily.invalidate();
+      await Promise.all([utils.nutrition.daily.invalidate(), utils.nutrition.trends.invalidate()]);
       toast.success("Packaged food logged to daily totals");
     },
     onError: error => toast.error(error.message),
@@ -157,8 +160,16 @@ export default function FoodLens() {
 
   const removeBarcodeLogMutation = trpc.barcode.removeLog.useMutation({
     onSuccess: async () => {
-      await utils.nutrition.daily.invalidate();
+      await Promise.all([utils.nutrition.daily.invalidate(), utils.nutrition.trends.invalidate()]);
       toast.success("Packaged food removed from daily totals");
+    },
+    onError: error => toast.error(error.message),
+  });
+
+  const removeCustomMealMutation = trpc.barcode.removeCustomLog.useMutation({
+    onSuccess: async () => {
+      await Promise.all([utils.nutrition.daily.invalidate(), utils.nutrition.trends.invalidate()]);
+      toast.success("Private-label food removed from daily totals");
     },
     onError: error => toast.error(error.message),
   });
@@ -175,16 +186,10 @@ export default function FoodLens() {
     reader.readAsDataURL(file);
   }
 
-  function handleBarcodePhotoSelect(event: React.ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
-    if (!file) return;
-    toast.info("Reading image for visible barcode digits. You can also type the code directly.");
-    // In browser, prompt user with standard manual fallback or scan input
-    const entered = window.prompt("Enter or verify the numbers printed below the barcode:", barcodeInput || "3017620422003");
-    if (entered) {
-      setBarcodeInput(entered);
-      barcodeLookupMutation.mutate({ barcode: entered });
-    }
+  function handleDetectedBarcode(barcode: string) {
+    setBarcodeInput(barcode);
+    barcodeLookupMutation.mutate({ barcode });
+    toast.success(`Barcode detected: ${barcode}`);
   }
 
   function handleUseSample() {
@@ -575,8 +580,12 @@ export default function FoodLens() {
                 <Barcode className="size-6 text-copper-deep" />
               </div>
               <p className="mt-2 text-xs leading-5 text-muted-ink">
-                Point your camera at a UPC or EAN barcode, upload a photo, or enter the numbers directly.
+                Point your rear camera at a UPC, EAN, or GTIN. Mise decodes continuously and starts lookup automatically.
               </p>
+
+              <div className="mt-5">
+                <BarcodeCameraScanner disabled={barcodeLookupMutation.isPending} onDetected={handleDetectedBarcode} />
+              </div>
 
               <div className="mt-6 flex gap-2">
                 <div className="relative flex-1">
@@ -609,25 +618,7 @@ export default function FoodLens() {
                 </Button>
               </div>
 
-              {/* Photo scan action */}
               <div className="mt-4 flex flex-wrap gap-2">
-                <input
-                  ref={barcodeFileRef}
-                  type="file"
-                  accept="image/*"
-                  capture="environment"
-                  onChange={handleBarcodePhotoSelect}
-                  className="hidden"
-                />
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => barcodeFileRef.current?.click()}
-                  className="rounded-full text-xs"
-                >
-                  <Camera className="mr-1.5 size-3.5" /> Scan with camera
-                </Button>
-
                 <div className="flex items-center gap-1.5 text-xs text-muted-ink">
                   <span>Popular:</span>
                   {POPULAR_BARCODES.map(sample => (
@@ -701,7 +692,7 @@ export default function FoodLens() {
                       <Button
                         size="sm"
                         variant="outline"
-                        onClick={() => setServings(s => Math.max(0.5, s - 0.5))}
+                        onClick={() => setServings(s => Math.max(0.25, s - 0.25))}
                         className="size-8 rounded-full p-0"
                       >
                         -
@@ -710,7 +701,7 @@ export default function FoodLens() {
                       <Button
                         size="sm"
                         variant="outline"
-                        onClick={() => setServings(s => s + 0.5)}
+                        onClick={() => setServings(s => Math.min(20, s + 0.25))}
                         className="size-8 rounded-full p-0"
                       >
                         +
@@ -763,6 +754,8 @@ export default function FoodLens() {
                 )}
               </section>
             )}
+
+            <ManualNutritionLabels defaultBarcode={barcodeInput.trim()} />
           </div>
 
           {/* Right column: Packaged Nutrition Facts & Today's Packaged Logs */}
@@ -824,18 +817,18 @@ export default function FoodLens() {
             </section>
 
             {/* Today's Logged Packaged Foods */}
-            {((dailyQuery.data as any)?.packagedLogs ?? []).length > 0 && (
+            {(((dailyQuery.data as any)?.packagedLogs ?? []).length > 0 || ((dailyQuery.data as any)?.customFoodLogs ?? []).length > 0) && (
               <section className="surface p-6">
                 <div className="flex items-center justify-between">
                   <p className="eyebrow">Logged Packaged Foods</p>
                   <span className="text-xs font-semibold text-muted-ink">
-                    {(dailyQuery.data as any).packagedLogs.length} today
+                    {((dailyQuery.data as any).packagedLogs.length + (dailyQuery.data as any).customFoodLogs.length)} today
                   </span>
                 </div>
                 <div className="mt-4 space-y-2">
                   {(dailyQuery.data as any).packagedLogs.map((log: any) => (
                     <div
-                      key={log.id}
+                      key={`database-${log.id}`}
                       className="rounded-xl border border-ink/8 bg-white/60 p-3 flex items-center justify-between"
                     >
                       <div>
@@ -853,6 +846,15 @@ export default function FoodLens() {
                       >
                         Remove
                       </Button>
+                    </div>
+                  ))}
+                  {(dailyQuery.data as any).customFoodLogs.map((log: any) => (
+                    <div key={`private-${log.id}`} className="rounded-xl border border-ink/8 bg-white/60 p-3 flex items-center justify-between">
+                      <div>
+                        <p className="text-xs font-semibold text-ink">{log.productName}</p>
+                        <p className="text-[0.65rem] text-muted-ink">{Number(log.servings)} serving · {log.nutritionSnapshot?.calories ?? 0} kcal · {log.mealType} · private label</p>
+                      </div>
+                      <Button variant="ghost" size="sm" onClick={() => removeCustomMealMutation.mutate({ logId: log.id })} disabled={removeCustomMealMutation.isPending} className="text-xs text-destructive hover:bg-destructive/10">Remove</Button>
                     </div>
                   ))}
                 </div>
