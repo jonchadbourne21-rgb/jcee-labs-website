@@ -1,70 +1,12 @@
-import { FormEvent, useEffect } from "react";
+import { useEffect } from "react";
 import BrandFooter from "@/components/BrandFooter";
 import CoreHeader from "@/components/CoreHeader";
 
-const engagementPaths = [
-  {
-    id: "01",
-    title: "Design partnership",
-    copy: "Apply evidence-first execution, bounded authority, and verification principles to a consequential system under active development.",
-  },
-  {
-    id: "02",
-    title: "Technical evaluation",
-    copy: "Evaluate a concrete workflow, failure boundary, or evidence requirement against JCEE VOW, QCS, or Assurance concepts.",
-  },
-  {
-    id: "03",
-    title: "Research collaboration",
-    copy: "Reproduce, challenge, or extend a bounded research claim with explicit assumptions, artifacts, and publication rules.",
-  },
-  {
-    id: "04",
-    title: "Strategic integration",
-    copy: "Explore an integration where execution receipts, causal constraints, or portable evidence improve an existing product or platform.",
-  },
+const sharedStandard = [
+  ["BOUNDARY", "Name the system, action, or claim that needs stronger control."],
+  ["EVIDENCE", "Show what can be inspected today and what remains inferred."],
+  ["DECISION", "Define what a successful engagement should allow you to decide."],
 ];
-
-const inquirySignals = [
-  ["SYSTEM", "What acts, changes state, or crosses a trust boundary?"],
-  ["CONSEQUENCE", "What can fail, duplicate, drift, or become difficult to explain?"],
-  ["EVIDENCE", "What record exists today, and who needs to trust it?"],
-  ["DECISION", "What would a successful first engagement allow you to decide?"],
-];
-
-export type PartnerInquiryFields = {
-  name: string;
-  email: string;
-  company: string;
-  role: string;
-  engagement: string;
-  timeline: string;
-  problem: string;
-  evidence: string;
-};
-
-export function buildPartnerInquiryMailto(fields: PartnerInquiryFields) {
-  const company = fields.company.trim() || "Company";
-  const subject = `Partnership inquiry — ${company}`;
-  const body = [
-    "JCEE Labs partnership inquiry",
-    "",
-    `Name: ${fields.name}`,
-    `Work email: ${fields.email}`,
-    `Company: ${company}`,
-    `Role: ${fields.role || "Not provided"}`,
-    `Engagement: ${fields.engagement || "Not selected"}`,
-    `Timeline: ${fields.timeline || "Not provided"}`,
-    "",
-    "System / problem:",
-    fields.problem,
-    "",
-    "Current evidence or control boundary:",
-    fields.evidence || "Not provided",
-  ].join("\n");
-
-  return `mailto:support@jceelabs.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-}
 
 export default function PartnersPage() {
   useEffect(() => {
@@ -75,171 +17,94 @@ export default function PartnersPage() {
     };
   }, []);
 
-  const openInquiryDraft = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    if (!form.reportValidity()) return;
-
-    const data = new FormData(form);
-    window.location.href = buildPartnerInquiryMailto({
-      name: String(data.get("name") || ""),
-      email: String(data.get("email") || ""),
-      company: String(data.get("company") || ""),
-      role: String(data.get("role") || ""),
-      engagement: String(data.get("engagement") || ""),
-      timeline: String(data.get("timeline") || ""),
-      problem: String(data.get("problem") || ""),
-      evidence: String(data.get("evidence") || ""),
-    });
-  };
-
   return (
-    <main className="program-page partner-page" id="top">
+    <main className="program-page partner-page partner-gateway" id="top">
       <CoreHeader current="partners" />
 
       <section className="program-masthead partner-masthead">
-        <p className="eyebrow"><span /> COMPANY PARTNERSHIPS · SELECTIVE ENGAGEMENTS</p>
+        <p className="eyebrow"><span /> JCEE LABS PARTNERSHIPS · TWO PATHWAYS</p>
         <div className="program-number">JCEE LABS / PARTNERS</div>
         <h1>
-          Bring us the system<br />
-          <em>that has to answer for itself.</em>
+          Choose the boundary<br />
+          <em>you need to strengthen.</em>
         </h1>
         <p className="program-deck">
-          We work with companies operating near consequential boundaries—where software acts,
-          authority changes, failures compound, and evidence must survive the process that created it.
+          Companies bring us consequential systems. Research teams bring us claims,
+          methods, and evidence. Each pathway starts with a different brief.
         </p>
         <div className="program-status-row">
-          <span>ENGAGEMENT · TECHNICAL / RESEARCH / STRATEGIC</span>
-          <span>STARTING POINT · A CONCRETE SYSTEM BOUNDARY</span>
+          <span>01 · ENTERPRISE / OPERATIONAL SYSTEMS</span>
+          <span>02 · RESEARCH / CLAIMS + REPRODUCTION</span>
         </div>
       </section>
 
-      <section className="partner-fit" aria-labelledby="partner-fit-title">
+      <section className="partner-pathways" aria-labelledby="partner-pathways-title">
         <div className="section-index">
-          <span>01 / WHERE WE ENGAGE</span>
-          <span>BOUNDED PROBLEMS · REVIEWABLE OUTCOMES</span>
+          <span>SELECT A PATH</span>
+          <span>TAILORED REVIEW · DISTINCT ROUTING</span>
         </div>
-        <div className="partner-fit-intro">
-          <p>PARTNERSHIP THESIS</p>
-          <h2 id="partner-fit-title">The strongest inquiry starts with a real consequence.</h2>
-          <p>
-            We are most useful when a team can name the action, authority, failure mode, and proof
-            requirement—not when the goal is simply to add AI to an existing product.
-          </p>
+        <div className="partner-pathways-lead">
+          <p>PARTNERSHIP ENTRY POINT</p>
+          <h2 id="partner-pathways-title">Two ways to begin. One evidence standard.</h2>
         </div>
-        <div className="partner-path-grid">
-          {engagementPaths.map((path) => (
-            <article key={path.id}>
-              <span>{path.id}</span>
-              <h3>{path.title}</h3>
-              <p>{path.copy}</p>
-            </article>
-          ))}
+
+        <div className="partner-pathway-grid">
+          <article className="partner-pathway-card partner-pathway-enterprise">
+            <div className="partner-pathway-code">01 / ENTERPRISE</div>
+            <h3>For teams deploying systems that can act.</h3>
+            <p>
+              Explore bounded evaluations, design partnerships, and strategic integrations
+              for workflows where authority, recovery, and execution evidence matter.
+            </p>
+            <ul>
+              <li>Operational and product systems</li>
+              <li>Consequential automation</li>
+              <li>Evidence and control architecture</li>
+              <li>Integration or evaluation planning</li>
+            </ul>
+            <a className="partner-pathway-link" href="/partners/enterprise">
+              ENTERPRISE PATHWAY <span aria-hidden="true">→</span>
+            </a>
+          </article>
+
+          <article className="partner-pathway-card partner-pathway-research">
+            <div className="partner-pathway-code">02 / RESEARCH</div>
+            <h3>For teams testing what a claim can support.</h3>
+            <p>
+              Propose replication, methods, benchmark, standards, or joint-publication work
+              with explicit artifacts, assumptions, and disclosure boundaries.
+            </p>
+            <ul>
+              <li>Independent reproduction</li>
+              <li>Methods and measurement</li>
+              <li>Benchmarks and evidence artifacts</li>
+              <li>Publication and standards work</li>
+            </ul>
+            <a className="partner-pathway-link" href="/partners/research">
+              RESEARCH PATHWAY <span aria-hidden="true">→</span>
+            </a>
+          </article>
         </div>
       </section>
 
-      <section className="partner-brief" aria-labelledby="partner-brief-title">
+      <section className="partner-shared-standard" aria-labelledby="shared-standard-title">
         <div className="section-index light">
-          <span>02 / THE USEFUL BRIEF</span>
-          <span>CONTEXT BEFORE CALLS</span>
+          <span>SHARED STANDARD</span>
+          <span>EVIDENCE BEFORE SCHEDULING</span>
         </div>
-        <div className="partner-brief-layout">
+        <div className="partner-shared-layout">
           <div>
-            <p className="partner-kicker">A GOOD FIRST NOTE</p>
-            <h2 id="partner-brief-title">Give us enough evidence to identify the boundary.</h2>
+            <p className="partner-kicker">EVERY INQUIRY</p>
+            <h2 id="shared-standard-title">Start with the boundary, not the pitch.</h2>
           </div>
           <div className="partner-signal-list">
-            {inquirySignals.map(([label, copy]) => (
+            {sharedStandard.map(([label, copy]) => (
               <article key={label}>
                 <span>{label}</span>
                 <p>{copy}</p>
               </article>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="partner-inquiry" aria-labelledby="partner-inquiry-title">
-        <div className="section-index">
-          <span>03 / PARTNER INQUIRY</span>
-          <span>DIRECT TO JCEE LABS</span>
-        </div>
-        <div className="partner-inquiry-layout">
-          <div className="partner-inquiry-copy">
-            <p className="partner-kicker">INITIATE REVIEW</p>
-            <h2 id="partner-inquiry-title">Tell us what must be proved before it can act.</h2>
-            <p>
-              We review each inquiry for technical fit, evidence boundaries, and a concrete next
-              decision. If there is a credible starting point, we will reply with the smallest useful
-              engagement—not a generic sales process.
-            </p>
-            <dl>
-              <div><dt>RESPONSE</dt><dd>Direct review by JCEE Labs</dd></div>
-              <div><dt>FORMAT</dt><dd>Written brief before scheduling</dd></div>
-              <div><dt>CONTACT</dt><dd><a href="mailto:support@jceelabs.com">support@jceelabs.com</a></dd></div>
-            </dl>
-          </div>
-
-          <form className="partner-form" onSubmit={openInquiryDraft}>
-            <div className="partner-form-row">
-              <label>
-                <span>NAME *</span>
-                <input name="name" autoComplete="name" required />
-              </label>
-              <label>
-                <span>WORK EMAIL *</span>
-                <input name="email" type="email" autoComplete="email" required />
-              </label>
-            </div>
-            <div className="partner-form-row">
-              <label>
-                <span>COMPANY *</span>
-                <input name="company" autoComplete="organization" required />
-              </label>
-              <label>
-                <span>ROLE</span>
-                <input name="role" autoComplete="organization-title" />
-              </label>
-            </div>
-            <div className="partner-form-row">
-              <label>
-                <span>ENGAGEMENT</span>
-                <select name="engagement" defaultValue="">
-                  <option value="" disabled>Select a path</option>
-                  <option>Design partnership</option>
-                  <option>Technical evaluation</option>
-                  <option>Research collaboration</option>
-                  <option>Strategic integration</option>
-                  <option>Not sure yet</option>
-                </select>
-              </label>
-              <label>
-                <span>TIMELINE</span>
-                <input name="timeline" placeholder="e.g. Q4 evaluation" />
-              </label>
-            </div>
-            <label>
-              <span>SYSTEM / PROBLEM *</span>
-              <textarea
-                name="problem"
-                rows={6}
-                required
-                placeholder="Describe the system, the action it takes, and the consequence that needs stronger assurance."
-              />
-            </label>
-            <label>
-              <span>CURRENT EVIDENCE OR CONTROL BOUNDARY</span>
-              <textarea
-                name="evidence"
-                rows={4}
-                placeholder="What logs, receipts, authority checks, recovery guarantees, or verification controls exist today?"
-              />
-            </label>
-            <div className="partner-form-submit">
-              <button type="submit">OPEN EMAIL DRAFT <span aria-hidden="true">→</span></button>
-              <p>Your details stay in this browser until your email client opens. Nothing is uploaded by this page.</p>
-            </div>
-          </form>
         </div>
       </section>
 

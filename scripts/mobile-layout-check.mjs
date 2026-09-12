@@ -220,10 +220,16 @@ async function evaluateProfile(send, profileName, profile, baseUrl) {
   const registry = await readLayout(send, ".curlicue-stage");
 
   await navigate(send, `${baseUrl}/partners?mobile-layout-check=${profileName}`);
-  const partners = await readLayout(send, ".partner-form-submit button");
+  const partners = await readLayout(send, ".partner-pathway-link");
+
+  await navigate(send, `${baseUrl}/partners/enterprise?mobile-layout-check=${profileName}`);
+  const enterprise = await readLayout(send, ".enterprise-partner-form .partner-form-submit button");
+
+  await navigate(send, `${baseUrl}/partners/research?mobile-layout-check=${profileName}`);
+  const research = await readLayout(send, ".research-partner-form .partner-form-submit button");
 
   const failures = [];
-  for (const [surface, checks] of [["homepage", homepage], ["registry", registry], ["partners", partners]]) {
+  for (const [surface, checks] of [["homepage", homepage], ["registry", registry], ["partners", partners], ["enterprise", enterprise], ["research", research]]) {
     if (
       checks.scrollWidth !== checks.viewportWidth ||
       checks.bodyScrollWidth > checks.viewportWidth
@@ -243,14 +249,22 @@ async function evaluateProfile(send, profileName, profile, baseUrl) {
   }
 
   if (!partners.element || partners.element.width < 40 || partners.element.height < 40) {
-    failures.push("partner inquiry submit control is missing or smaller than 40px");
+    failures.push("partner pathway control is missing or smaller than 40px");
   }
 
-  if (homepage.touchPoints < 1 || registry.touchPoints < 1 || partners.touchPoints < 1) {
+  if (!enterprise.element || enterprise.element.width < 40 || enterprise.element.height < 40) {
+    failures.push("enterprise inquiry submit control is missing or smaller than 40px");
+  }
+
+  if (!research.element || research.element.width < 40 || research.element.height < 40) {
+    failures.push("research inquiry submit control is missing or smaller than 40px");
+  }
+
+  if (homepage.touchPoints < 1 || registry.touchPoints < 1 || partners.touchPoints < 1 || enterprise.touchPoints < 1 || research.touchPoints < 1) {
     failures.push("touch emulation did not activate");
   }
 
-  return { profileName, profile, homepage, registry, partners, failures };
+  return { profileName, profile, homepage, registry, partners, enterprise, research, failures };
 }
 
 const projectRoot = process.cwd();
