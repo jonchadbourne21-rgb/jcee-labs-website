@@ -1,0 +1,42 @@
+# Copyright (c) 2026 JceeLabs and Jonathan Chadbourne. All rights reserved.
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vow-lang"
+version = "1.1.0"
+description = "VOW: a quest-oriented language with scar memory, strategy tournaments, proof gating, deontic capability gating, and a self-learning loop. Transpiles to auditable Shadow Python."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Proprietary" }
+authors = [{ name = "JceeLabs" }, { name = "Jonathan Chadbourne" }]
+keywords = ["vow", "quest-oriented", "agentic", "ai-safety", "scar-memory",
+            "eu-ai-act", "auditability"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Interpreters",
+]
+dependencies = [
+    "cryptography>=41",
+]
+
+[project.optional-dependencies]
+test = [
+    "pgserver>=0.1.4",
+    "psycopg[binary]>=3.1",
+    "pytest>=8",
+]
+
+[project.urls]
+Documentation = "https://github.com/jceelabs/vow"
+
+[project.scripts]
+vow = "vow_cli:main"
+
+[tool.setuptools]
+license-files = ["LICENSE"]
+packages = ["vow"]
+py-modules = ["main", "vow_cli"]

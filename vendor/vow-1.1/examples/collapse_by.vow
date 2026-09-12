@@ -1,0 +1,35 @@
+# Copyright (c) 2026 JceeLabs and Jonathan Chadbourne. All rights reserved.
+# collapse_by.vow
+# `collapse by` scores strategies on their OUTPUTS, not just engine
+# metrics. Both routes prove profitable; classic `score by` would crown
+# the safer discount route (safety 0.9 vs 0.5), but `collapse by margin`
+# selects the route that actually makes more money — the superposition's
+# selection criterion on the existing tournament substrate.
+
+quest BestDeal {
+  goal "pick the most profitable compliant route"
+
+  believe cost_basis = 100 confidence 1.0 source "ledger"
+
+  tournament {
+    collapse by margin
+
+    strategy premium_route {
+      cost 1
+      risk 0.5
+      let price = 180
+      let margin = price - cost_basis
+      prove margin > 0
+    }
+
+    strategy discount_route {
+      cost 1
+      risk 0.1
+      let price = 130
+      let margin = price - cost_basis
+      prove margin > 0
+    }
+  }
+
+  success when margin > 0
+}

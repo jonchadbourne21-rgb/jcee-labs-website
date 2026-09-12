@@ -10,10 +10,20 @@ from typing import Any
 
 from fastapi import FastAPI, HTTPException, Response, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 
 from backend.models import AnalyzeRequest, ApprovalDecision, ApprovalRequest, HomeownerSubmission
 from backend.pricing import compute_claim_estimate, recompute_adjusted_estimate, regional_multiplier
 from backend.storage import ClaimsRepository
+from backend.vow_assurance import (
+    VowAssuranceError,
+    VowPolicyDenied,
+    authorize_settlement,
+    default_data_dir,
+    evidence_pack_path,
+    verify_evidence,
+    verify_frozen_core,
+)
 
 DEFAULT_DATA_FILE = Path(__file__).with_name("claims_data.json")
 DEFAULT_ALLOWED_ORIGINS = "http://localhost:3000,http://127.0.0.1:3000,http://localhost:3001,http://127.0.0.1:3001"
@@ -184,6 +194,7 @@ def build_submission_claim(claim_id: str, submission: HomeownerSubmission) -> di
         "stages": stage_records(1, now),
         "vision": None,
         "estimate": None,
+        "assurance": None,
         "approval": {"status": "NOT_REVIEWED", "reviewed_at": None, "approved_at": None, "adjuster_name": None, "notes": None},
         "audit_history": [audit_event("CLAIM_SUBMITTED", now, "HOMEOWNER", {"peril": intake["peril"], "evidence_count": len(evidence)})],
     }
@@ -198,11 +209,17 @@ def input_assumptions(claim: dict[str, Any], request: AnalyzeRequest | None) -> 
     )
 
 
-def create_app(data_file: str | Path | None = None, allowed_origins: list[str] | None = None) -> FastAPI:
+def create_app(
+    data_file: str | Path | None = None,
+    allowed_origins: list[str] | None = None,
+    vow_data_dir: str | Path | None = None,
+) -> FastAPI:
     """Create the application. ``data_file`` exists to support isolated deployments/tests."""
     resolved_data_file = data_file or os.getenv("CLAIMS_DATA_FILE") or DEFAULT_DATA_FILE
+    resolved_vow_data_dir = Path(vow_data_dir).expanduser().resolve() if vow_data_dir else default_data_dir()
     origins = allowed_origins or [origin.strip() for origin in os.getenv("CLAIMS_ALLOWED_ORIGINS", DEFAULT_ALLOWED_ORIGINS).split(",") if origin.strip()]
     repository = ClaimsRepository(resolved_data_file)
+    vow_integrity = verify_frozen_core()
 
     application = FastAPI(
         title="AI Property Claims API",
@@ -218,10 +235,23 @@ def create_app(data_file: str | Path | None = None, allowed_origins: list[str] |
     )
     application.state.repository = repository
     application.state.data_file = str(Path(resolved_data_file).expanduser())
+    application.state.vow_data_dir = str(resolved_vow_data_dir)
+    application.state.vow_integrity = vow_integrity
 
     @application.get("/health")
     def health() -> dict[str, Any]:
-        return {"status": "ok", "service": "ai-property-claims-api", "timestamp": utc_now(), "claim_count": repository.count()}
+        return {
+            "status": "ok",
+            "service": "ai-property-claims-api",
+            "timestamp": utc_now(),
+            "claim_count": repository.count(),
+            "vow": {
+                "status": vow_integrity["status"],
+                "version": vow_integrity["version"],
+                "files_verified": vow_integrity["files_verified"],
+                "manifest_sha256": vow_integrity["manifest_sha256"],
+            },
+        }
 
     @application.post("/api/claims/submit", status_code=status.HTTP_201_CREATED)
     def submit_claim(submission: HomeownerSubmission) -> dict[str, Any]:
@@ -247,6 +277,7 @@ def create_app(data_file: str | Path | None = None, allowed_origins: list[str] |
             # Put assumptions next to (not inside) the canonical source-algorithm result.
             claim["vision"] = vision
             claim["estimate"] = estimate
+            claim["assurance"] = None
             claim["pricing_context"] = {
                 "zip_code": zip_code,
                 "regional_index": regional_multiplier(zip_code),
@@ -272,6 +303,36 @@ def create_app(data_file: str | Path | None = None, allowed_origins: list[str] |
         if claim is None:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Claim not found")
         return serialize_dossier(claim)
+
+    @application.get("/api/claims/{claim_id}/assurance/evidence")
+    def download_assurance_evidence(claim_id: str) -> FileResponse:
+        claim = repository.get(claim_id)
+        if claim is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Claim not found")
+        assurance = claim.get("assurance")
+        if not assurance:
+            raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Claim has no VOW assurance evidence")
+        try:
+            pack_path = evidence_pack_path(assurance, data_dir=resolved_vow_data_dir)
+        except VowAssuranceError as exc:
+            raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(exc)) from exc
+        if not pack_path.is_file():
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="VOW assurance evidence pack is missing")
+        return FileResponse(pack_path, media_type="application/json", filename=f"{claim_id}-vow-evidence.json")
+
+    @application.get("/api/claims/{claim_id}/assurance/verify")
+    def verify_assurance_evidence(claim_id: str) -> dict[str, Any]:
+        claim = repository.get(claim_id)
+        if claim is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Claim not found")
+        assurance = claim.get("assurance")
+        if not assurance:
+            raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Claim has no VOW assurance evidence")
+        try:
+            result = verify_evidence(assurance, data_dir=resolved_vow_data_dir)
+        except VowAssuranceError as exc:
+            raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail=str(exc)) from exc
+        return {"claim_id": claim_id, "status": "VERIFIED" if result.get("ok") else "FAILED", "verification": result}
 
     @application.post("/api/claims/{claim_id}/approve")
     def approve_claim(claim_id: str, request: ApprovalRequest) -> dict[str, Any]:
@@ -299,8 +360,25 @@ def create_app(data_file: str | Path | None = None, allowed_origins: list[str] |
             revised_estimate = recompute_adjusted_estimate(
                 claim["estimate"], claim["vision"], pricing_context["material_age_years"], pricing_context["deductible"], adjustments
             )
-            claim["estimate"] = revised_estimate
             is_approved = request.decision == ApprovalDecision.APPROVE
+            adjuster_name = request.adjuster_name or "Adjuster"
+            if is_approved:
+                try:
+                    assurance = authorize_settlement(
+                        claim_id=claim_id,
+                        estimate=revised_estimate,
+                        adjuster_name=adjuster_name,
+                        notes=request.notes,
+                        data_dir=resolved_vow_data_dir,
+                    )
+                except VowPolicyDenied as exc:
+                    raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(exc)) from exc
+                except VowAssuranceError as exc:
+                    raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail=str(exc)) from exc
+            else:
+                assurance = claim.get("assurance")
+            claim["estimate"] = revised_estimate
+            claim["assurance"] = assurance
             claim["status"] = "APPROVED" if is_approved else "IN_REVIEW"
             claim["updated_at"] = now
             claim["approval"] = {
@@ -308,11 +386,24 @@ def create_app(data_file: str | Path | None = None, allowed_origins: list[str] |
                 "decision": request.decision.value,
                 "reviewed_at": now,
                 "approved_at": now if is_approved else None,
-                "adjuster_name": request.adjuster_name or "Adjuster",
+                "adjuster_name": adjuster_name,
                 "notes": request.notes,
                 "settlement": {"currency": "USD", "net_payout": revised_estimate["net_payout"], "status": "APPROVED" if is_approved else "PENDING_APPROVAL"},
             }
-            claim["audit_history"].append(audit_event("SETTLEMENT_APPROVED" if is_approved else "REVIEW_SAVED", now, request.adjuster_name or "ADJUSTER", {"decision": request.decision.value, "modified_zone_ids": sorted(requested_zone_ids), "net_payout": revised_estimate["net_payout"]}))
+            claim["audit_history"].append(
+                audit_event(
+                    "SETTLEMENT_APPROVED" if is_approved else "REVIEW_SAVED",
+                    now,
+                    adjuster_name,
+                    {
+                        "decision": request.decision.value,
+                        "modified_zone_ids": sorted(requested_zone_ids),
+                        "net_payout": revised_estimate["net_payout"],
+                        "vow_run_id": assurance.get("run_id") if assurance else None,
+                        "vow_authorization_sha256": assurance.get("authorization_sha256") if assurance else None,
+                    },
+                )
+            )
             return serialize_dossier(claim)
 
         outcome = repository.mutate(claim_id, approve)

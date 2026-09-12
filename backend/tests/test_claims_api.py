@@ -13,7 +13,11 @@ from backend.storage import ClaimsRepository
 
 @pytest.fixture
 def client(tmp_path: Path) -> TestClient:
-    app = create_app(tmp_path / "claims.json", allowed_origins=["http://localhost:3000"])
+    app = create_app(
+        tmp_path / "claims.json",
+        allowed_origins=["http://localhost:3000"],
+        vow_data_dir=tmp_path / "vow",
+    )
     with TestClient(app) as test_client:
         yield test_client
 
@@ -137,7 +141,26 @@ def test_submit_analyze_get_save_review_and_approval_lifecycle(client: TestClien
     assert approved.status_code == 200, approved.json()
     assert approved.json()["status"] == "APPROVED"
     assert approved.json()["approval"]["settlement"] == {"currency": "USD", "net_payout": 924.37, "status": "APPROVED"}
+    assurance = approved.json()["assurance"]
+    assert assurance["status"] == "VERIFIED"
+    assert assurance["runtime"] == "VOW"
+    assert assurance["version"] == "1.1.0"
+    assert assurance["journal"]["chain_intact"] is True
+    assert assurance["journal"]["event_count"] == 4
+    assert assurance["effect"]["outcome"] == "ok"
+    assert assurance["evidence"]["signature_verified"] is True
+    assert assurance["files_verified"] >= 100
     assert [event["event"] for event in approved.json()["audit_history"]] == ["CLAIM_SUBMITTED", "ANALYSIS_COMPLETED", "REVIEW_SAVED", "SETTLEMENT_APPROVED"]
+    assert approved.json()["audit_history"][-1]["details"]["vow_run_id"] == assurance["run_id"]
+
+    evidence = client.get(f"/api/claims/{claim_id}/assurance/evidence")
+    assert evidence.status_code == 200
+    assert evidence.json()["format"] == "vow-evidence-pack/1"
+    verified = client.get(f"/api/claims/{claim_id}/assurance/verify")
+    assert verified.status_code == 200
+    assert verified.json()["status"] == "VERIFIED"
+    assert verified.json()["verification"]["checks"]["signature"]["ok"] is True
+    assert verified.json()["verification"]["checks"]["journal_chains"]["ok"] is True
 
     fetched = client.get(f"/api/claims/{claim_id}")
     assert fetched.status_code == 200
@@ -188,6 +211,9 @@ def test_health_and_cors_preflight(client: TestClient) -> None:
     assert health.status_code == 200
     assert health.json()["status"] == "ok"
     assert health.json()["timestamp"].endswith("Z")
+    assert health.json()["vow"]["status"] == "VERIFIED"
+    assert health.json()["vow"]["version"] == "1.1.0"
+    assert health.json()["vow"]["files_verified"] >= 100
     preflight = client.options("/api/claims/submit", headers={"Origin": "http://localhost:3000", "Access-Control-Request-Method": "POST"})
     assert preflight.status_code == 200
     assert preflight.headers["access-control-allow-origin"] == "http://localhost:3000"
@@ -199,3 +225,21 @@ def test_repository_mutation_writes_complete_json(tmp_path: Path) -> None:
     repository.mutate("CLM_UNIT", lambda claim: claim.update({"number": 2}))
     assert repository.get("CLM_UNIT") == {"claim_id": "CLM_UNIT", "number": 2}
     assert json.loads((tmp_path / "claims.json").read_text())["claims"]["CLM_UNIT"]["number"] == 2
+
+
+def test_vow_policy_gate_fails_closed_before_zero_value_approval(client: TestClient) -> None:
+    claim_id, dossier = submit_and_analyze(client)
+    zeroed = [
+        {"zone_id": item["zone_id"], "quantity": 0, "unit_price": item["unit_price"]}
+        for item in dossier["estimate"]["line_items"]
+    ]
+    denied = client.post(
+        f"/api/claims/{claim_id}/approve",
+        json={"decision": "APPROVE", "adjuster_name": "A. Adjuster", "line_items": zeroed},
+    )
+    assert denied.status_code == 409
+    assert "VOW settlement authorization failed" in denied.json()["detail"]
+    fetched = client.get(f"/api/claims/{claim_id}").json()
+    assert fetched["status"] == "IN_REVIEW"
+    assert fetched["assurance"] is None
+    assert client.get(f"/api/claims/{claim_id}/assurance/evidence").status_code == 409

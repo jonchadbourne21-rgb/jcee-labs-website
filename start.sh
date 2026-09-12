@@ -7,6 +7,9 @@ FRONTEND_PORT="${FRONTEND_PORT:-3000}"
 BACKEND_HOST="${BACKEND_HOST:-0.0.0.0}"
 FRONTEND_HOST="${FRONTEND_HOST:-0.0.0.0}"
 NEXT_PUBLIC_API_URL="${NEXT_PUBLIC_API_URL:-http://localhost:${BACKEND_PORT}}"
+VOW_ASSURANCE_DIR="${VOW_ASSURANCE_DIR:-$ROOT_DIR/backend/.data/vow}"
+VOW_SWEEP_INTERVAL_SECONDS="${VOW_SWEEP_INTERVAL_SECONDS:-60}"
+export VOW_ASSURANCE_DIR VOW_SWEEP_INTERVAL_SECONDS
 
 for command_name in uv pnpm; do
   if ! command -v "$command_name" >/dev/null 2>&1; then
@@ -26,12 +29,14 @@ printf 'Preparing frontend dependencies...\n'
 
 backend_pid=""
 frontend_pid=""
+worker_pid=""
 
 cleanup() {
   trap - EXIT INT TERM
   [[ -n "$backend_pid" ]] && kill "$backend_pid" 2>/dev/null || true
   [[ -n "$frontend_pid" ]] && kill "$frontend_pid" 2>/dev/null || true
-  wait "$backend_pid" "$frontend_pid" 2>/dev/null || true
+  [[ -n "$worker_pid" ]] && kill "$worker_pid" 2>/dev/null || true
+  wait "$backend_pid" "$frontend_pid" "$worker_pid" 2>/dev/null || true
 }
 trap cleanup EXIT INT TERM
 
@@ -42,6 +47,13 @@ printf 'Starting API at http://localhost:%s\n' "$BACKEND_PORT"
 ) &
 backend_pid=$!
 
+printf 'Starting VOW recovery worker (interval: %ss)\n' "$VOW_SWEEP_INTERVAL_SECONDS"
+(
+  cd "$ROOT_DIR"
+  exec uv run --project "$ROOT_DIR/backend" python -m backend.vow_worker
+) &
+worker_pid=$!
+
 printf 'Starting web app at http://localhost:%s\n' "$FRONTEND_PORT"
 (
   cd "$ROOT_DIR/frontend"
@@ -49,10 +61,10 @@ printf 'Starting web app at http://localhost:%s\n' "$FRONTEND_PORT"
 ) &
 frontend_pid=$!
 
-if wait -n "$backend_pid" "$frontend_pid"; then
+if wait -n "$backend_pid" "$frontend_pid" "$worker_pid"; then
   exit_code=0
 else
   exit_code=$?
 fi
-printf 'One service stopped (exit %s); stopping the other service.\n' "$exit_code" >&2
+printf 'One service stopped (exit %s); stopping the remaining services.\n' "$exit_code" >&2
 exit "$exit_code"

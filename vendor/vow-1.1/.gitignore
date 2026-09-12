@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+*.egg-info/
+build/
+dist/
+*.db
+*.sqlite
+*.sqlite3
+VOW-BRIEFING.txt
+vow-junit.xml

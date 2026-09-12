@@ -1,0 +1,34 @@
+# Copyright (c) 2026 JceeLabs and Jonathan Chadbourne. All rights reserved.
+# The self-learning loop, language-side:
+# @learn marks the quest as learning-enabled, `recall scars` loads past
+# lessons into scope, and `on fail` runs when the quest fails.
+@learn
+quest CheckoutBatcher {
+  goal "Process checkout batches safely using lessons from past failures"
+
+  recall scars
+
+  tournament {
+    score by proof_success * 0.6 + safety * 0.4
+
+    strategy big_batch {
+      cost 2
+      risk 0.7
+      let batch_size = 600
+      prove batch_size < 500
+    }
+
+    strategy learned_batch {
+      cost 1
+      risk 0.1
+      let batch_size = 250
+      prove batch_size < 500
+    }
+  }
+
+  on fail {
+    scar "batch planning failed despite recalled lessons"
+  }
+
+  success when batch_size < 500
+}
