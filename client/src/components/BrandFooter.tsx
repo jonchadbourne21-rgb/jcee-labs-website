@@ -10,7 +10,7 @@ export default function BrandFooter({ backToTopHref = "/#top" }: BrandFooterProp
           <img src="/brand/jcee-labs-mark.png" alt="" aria-hidden="true" />
           <span>
             <strong>JCEE LABS</strong>
-            <small>INDEPENDENT SOFTWARE LAB · DALLAS, TEXAS</small>
+            <small>PRECISION RESEARCH + INTELLIGENCE · DALLAS, TEXAS</small>
           </span>
         </a>
         <p>We build for the distance between what software claims and what it can prove.</p>

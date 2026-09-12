@@ -1,0 +1,1405 @@
+/* JCEE Labs — Precision Research System
+   One cinematic environment. Two evidence instruments. Everything else is grid, type, and proof. */
+
+:root {
+  --precision-black: #050609;
+  --precision-black-2: #0a0c11;
+  --precision-graphite: #151821;
+  --precision-white: #f5f6f8;
+  --precision-paper: #eceff3;
+  --precision-blue: #315cff;
+  --precision-blue-soft: #6c8cff;
+  --precision-ink: #090b10;
+  --precision-muted-dark: #747b8a;
+  --precision-muted-light: #a4abba;
+  --precision-line-dark: rgba(7, 11, 19, 0.16);
+  --precision-line-light: rgba(245, 246, 248, 0.16);
+  --precision-grid-light: rgba(49, 92, 255, 0.055);
+  --precision-grid-dark: rgba(49, 92, 255, 0.05);
+  --precision-ease: cubic-bezier(0.23, 1, 0.32, 1);
+  --signal: var(--precision-blue) !important;
+  --signal-readable: var(--precision-blue-soft) !important;
+}
+
+html.dark,
+html.dark body {
+  background: var(--precision-black);
+  color: var(--precision-white);
+}
+
+body {
+  font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif !important;
+  font-weight: 400;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Global frame */
+.site-header {
+  background: rgba(5, 6, 9, 0.95) !important;
+  border-bottom: 1px solid var(--precision-line-light) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  height: 72px !important;
+  padding-inline: clamp(20px, 4vw, 64px) !important;
+}
+
+.wordmark {
+  color: var(--precision-white) !important;
+  font-family: "IBM Plex Sans", sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.18em !important;
+}
+
+.wordmark-mark {
+  filter: saturate(0.82) contrast(1.12);
+  height: 31px !important;
+  width: 29px !important;
+}
+
+.desktop-nav {
+  gap: clamp(16px, 2vw, 34px) !important;
+}
+
+.desktop-nav a,
+.header-contact {
+  color: rgba(245, 246, 248, 0.62) !important;
+  font-family: "IBM Plex Mono", ui-monospace, monospace !important;
+  font-size: 9px !important;
+  letter-spacing: 0.1em !important;
+  transition: color 160ms var(--precision-ease) !important;
+}
+
+.desktop-nav a:hover,
+.desktop-nav a[aria-current="page"],
+.header-contact:hover {
+  color: var(--precision-white) !important;
+}
+
+nav a::after {
+  background: var(--precision-blue) !important;
+  height: 1px !important;
+}
+
+.mobile-menu-toggle {
+  background: var(--precision-black) !important;
+  border: 1px solid rgba(245, 246, 248, 0.28) !important;
+  border-radius: 0 !important;
+  color: var(--precision-white) !important;
+}
+
+.mobile-nav {
+  background: var(--precision-black-2) !important;
+  border: 1px solid rgba(245, 246, 248, 0.18) !important;
+  border-radius: 0 !important;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.44) !important;
+}
+
+.mobile-nav a {
+  font-family: "IBM Plex Mono", ui-monospace, monospace !important;
+}
+
+.mobile-nav a:hover,
+.mobile-nav a:focus-visible,
+.mobile-nav a[aria-current="page"] {
+  background: rgba(49, 92, 255, 0.12) !important;
+  color: var(--precision-white) !important;
+}
+
+/* Homepage opening */
+.precision-home {
+  background: var(--precision-black);
+  color: var(--precision-white);
+}
+
+.precision-home .hybrid-hero {
+  background:
+    linear-gradient(90deg, var(--precision-black) 0%, rgba(5, 6, 9, 0.96) 34%, rgba(5, 6, 9, 0.22) 64%, rgba(5, 6, 9, 0.06) 100%),
+    var(--precision-black) url("https://jceelabs.com/manus-storage/01-signature-hero-exposed_8b945d8c.webp") no-repeat center / cover !important;
+  color: var(--precision-white) !important;
+  display: grid !important;
+  gap: 0 !important;
+  grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+  min-height: calc(100svh - 72px) !important;
+  overflow: hidden;
+  padding: 0 clamp(24px, 4vw, 64px) !important;
+  position: relative;
+}
+
+.precision-home .hybrid-hero::before {
+  background:
+    linear-gradient(90deg, transparent calc(50% - 0.5px), rgba(245, 246, 248, 0.11) 50%, transparent calc(50% + 0.5px)),
+    linear-gradient(180deg, transparent calc(74% - 0.5px), rgba(245, 246, 248, 0.09) 74%, transparent calc(74% + 0.5px));
+  content: "";
+  inset: 0 clamp(24px, 4vw, 64px);
+  pointer-events: none;
+  position: absolute;
+}
+
+.precision-home .hybrid-hero::after {
+  background: var(--precision-blue) !important;
+  content: "";
+  height: 2px !important;
+  left: clamp(24px, 4vw, 64px) !important;
+  opacity: 1 !important;
+  position: absolute !important;
+  top: 20% !important;
+  width: 54px !important;
+}
+
+.precision-home .hybrid-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.precision-home .hero-copy {
+  grid-column: 1 / 8;
+  justify-content: flex-end !important;
+  min-height: calc(100svh - 72px) !important;
+  padding: clamp(56px, 8vh, 96px) 0 clamp(32px, 5vh, 64px) !important;
+}
+
+.precision-home .eyebrow {
+  color: rgba(245, 246, 248, 0.56) !important;
+  font-family: "IBM Plex Mono", ui-monospace, monospace !important;
+  font-size: 9px !important;
+  letter-spacing: 0.12em !important;
+  margin-bottom: auto !important;
+}
+
+.precision-home .eyebrow span,
+.program-masthead .eyebrow span {
+  background: var(--precision-blue) !important;
+  border-color: var(--precision-blue) !important;
+  box-shadow: none !important;
+  height: 6px !important;
+  width: 6px !important;
+}
+
+.precision-home .hybrid-hero h1 {
+  color: var(--precision-white) !important;
+  font-family: "IBM Plex Sans", sans-serif !important;
+  font-size: clamp(68px, 8.6vw, 138px) !important;
+  font-weight: 300 !important;
+  letter-spacing: -0.07em !important;
+  line-height: 0.83 !important;
+  margin: clamp(90px, 17vh, 210px) 0 0 !important;
+  max-width: 930px !important;
+}
+
+.precision-home .hybrid-hero h1 em {
+  color: var(--precision-blue-soft) !important;
+  font-family: "IBM Plex Sans", sans-serif !important;
+  font-style: normal !important;
+  font-weight: 300 !important;
+  letter-spacing: -0.07em !important;
+  text-shadow: none !important;
+}
+
+.precision-home .hero-deck {
+  color: rgba(245, 246, 248, 0.68) !important;
+  font-size: clamp(16px, 1.25vw, 19px) !important;
+  line-height: 1.65 !important;
+  margin-top: clamp(34px, 5vh, 62px) !important;
+  max-width: 610px !important;
+}
+
+.precision-home .hero-actions {
+  border-color: rgba(245, 246, 248, 0.18) !important;
+  margin-top: clamp(36px, 6vh, 70px) !important;
+}
+
+.precision-home .primary-link,
+.precision-home .availability {
+  color: var(--precision-white) !important;
+  font-family: "IBM Plex Mono", ui-monospace, monospace !important;
+}
+
+.precision-home .primary-link span,
+.precision-home .availability i {
+  background: var(--precision-blue) !important;
+  box-shadow: none !important;
+  color: var(--precision-blue-soft) !important;
+}
+
+.hero-proof-index {
+  align-self: end;
+  background: rgba(5, 6, 9, 0.88);
+  border: 1px solid rgba(245, 246, 248, 0.22);
+  border-radius: 0;
+  grid-column: 9 / 13;
+  margin-bottom: clamp(32px, 5vh, 64px);
+  padding: clamp(20px, 2.1vw, 32px);
+}
+
+.hero-proof-index > span {
+  color: var(--precision-blue-soft);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+}
+
+.hero-proof-index ol {
+  list-style: none;
+  margin: 34px 0 0;
+  padding: 0;
+}
+
+.hero-proof-index li {
+  border-top: 1px solid rgba(245, 246, 248, 0.15);
+  display: grid;
+  gap: 5px 14px;
+  grid-template-columns: 28px 1fr;
+  padding: 15px 0;
+}
+
+.hero-proof-index b {
+  color: var(--precision-muted-light);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 8px;
+  font-weight: 400;
+  grid-row: 1 / 3;
+}
+
+.hero-proof-index strong {
+  color: var(--precision-white);
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.hero-proof-index small {
+  color: rgba(245, 246, 248, 0.5);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.precision-home .statement-band {
+  background: var(--precision-blue) !important;
+  border: 0 !important;
+  color: #ffffff !important;
+  font-family: "IBM Plex Mono", ui-monospace, monospace !important;
+  gap: clamp(36px, 7vw, 110px) !important;
+  min-height: 54px !important;
+}
+
+.precision-home .statement-band span:nth-child(even) {
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+
+/* Public homepage chapters */
+.precision-home .company-section,
+.precision-home .vow-section,
+.precision-home .qcs-section,
+.precision-home .assurance-section,
+.precision-home .registry-section,
+.precision-home .first-principle-section {
+  background-image: none !important;
+  border-top: 0 !important;
+  overflow: hidden !important;
+  padding: clamp(88px, 10vw, 156px) clamp(24px, 5vw, 76px) !important;
+  position: relative;
+}
+
+.precision-home .company-section::before,
+.precision-home .company-section::after,
+.precision-home .assurance-section::before,
+.precision-home .assurance-section::after,
+.precision-home .registry-section::before,
+.precision-home .registry-section::after,
+.precision-home .first-principle-section::before,
+.precision-home .first-principle-section::after {
+  display: none !important;
+}
+
+.precision-home .company-section,
+.precision-home .qcs-section,
+.precision-home .registry-section {
+  background: var(--precision-white) !important;
+  color: var(--precision-ink) !important;
+}
+
+.precision-home .vow-section,
+.precision-home .assurance-section,
+.precision-home .first-principle-section {
+  background: var(--precision-black) !important;
+  color: var(--precision-white) !important;
+}
+
+.precision-home .company-section,
+.precision-home .vow-section,
+.precision-home .qcs-section,
+.precision-home .assurance-section,
+.precision-home .registry-section,
+.precision-home .first-principle-section {
+  background-size: 64px 64px !important;
+}
+
+.precision-home .company-section,
+.precision-home .qcs-section,
+.precision-home .registry-section {
+  background-image:
+    linear-gradient(var(--precision-grid-light) 1px, transparent 1px),
+    linear-gradient(90deg, var(--precision-grid-light) 1px, transparent 1px) !important;
+}
+
+.precision-home .vow-section,
+.precision-home .assurance-section,
+.precision-home .first-principle-section {
+  background-image:
+    linear-gradient(var(--precision-grid-dark) 1px, transparent 1px),
+    linear-gradient(90deg, var(--precision-grid-dark) 1px, transparent 1px) !important;
+}
+
+.precision-home .section-index,
+.precision-home .section-index.light {
+  border-color: currentColor !important;
+  color: inherit !important;
+  font-family: "IBM Plex Mono", ui-monospace, monospace !important;
+  font-size: 9px !important;
+  letter-spacing: 0.1em !important;
+  opacity: 0.48 !important;
+}
+
+.precision-home .company-statement,
+.precision-home .vow-intro,
+.precision-home .qcs-layout,
+.precision-home .assurance-intro,
+.precision-home .registry-intro,
+.precision-home .first-principle-lead {
+  margin-top: clamp(72px, 9vw, 128px) !important;
+}
+
+.precision-home .company-statement > p,
+.precision-home .qcs-kicker,
+.precision-home .assurance-kicker,
+.precision-home .registry-kicker,
+.precision-home .first-principle-lead > p:first-child {
+  color: var(--precision-blue) !important;
+  font-family: "IBM Plex Mono", ui-monospace, monospace !important;
+  font-size: 9px !important;
+  letter-spacing: 0.11em !important;
+}
+
+.precision-home .company-statement h2,
+.precision-home .vow-intro h2,
+.precision-home .qcs-layout h2,
+.precision-home .assurance-intro h2,
+.precision-home .registry-intro h2,
+.precision-home .first-principle-lead h2 {
+  font-family: "IBM Plex Sans", sans-serif !important;
+  font-weight: 300 !important;
+  letter-spacing: -0.06em !important;
+  line-height: 0.95 !important;
+}
+
+.precision-home .company-statement h2 {
+  color: var(--precision-ink) !important;
+  font-size: clamp(50px, 7vw, 106px) !important;
+}
+
+.precision-home .company-statement h2 em {
+  color: var(--precision-ink) !important;
+  font-family: "IBM Plex Sans", sans-serif !important;
+  font-style: normal !important;
+  font-weight: 300 !important;
+}
+
+.precision-home .company-bottom {
+  border-top: 1px solid var(--precision-line-dark) !important;
+  margin-top: clamp(58px, 8vw, 112px) !important;
+  padding-top: 28px !important;
+}
+
+.precision-home .company-bottom p {
+  color: rgba(9, 11, 16, 0.68) !important;
+  font-size: clamp(16px, 1.3vw, 20px) !important;
+  line-height: 1.65 !important;
+}
+
+.precision-home .company-bottom a,
+.precision-home .section-detail-link {
+  color: var(--precision-blue) !important;
+  font-family: "IBM Plex Mono", ui-monospace, monospace !important;
+  font-size: 9px !important;
+  letter-spacing: 0.08em !important;
+}
+
+.precision-home .breath {
+  display: none !important;
+}
+
+/* Exactly two supporting visual moments */
+.chapter-visual {
+  border: 1px solid currentColor;
+  margin: clamp(54px, 7vw, 104px) 0 0 auto;
+  max-width: 1120px;
+  overflow: hidden;
+  position: relative;
+}
+
+.chapter-visual img {
+  display: block;
+  filter: saturate(0.92) contrast(1.04);
+  height: auto;
+  width: 100%;
+}
+
+.chapter-visual figcaption {
+  align-items: center;
+  background: var(--precision-black);
+  border-top: 1px solid var(--precision-line-light);
+  color: rgba(245, 246, 248, 0.58);
+  display: flex;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 9px;
+  gap: 20px;
+  letter-spacing: 0.05em;
+  padding: 14px 16px;
+  position: static;
+}
+
+.chapter-visual figcaption span {
+  color: var(--precision-blue-soft);
+  letter-spacing: 0.1em;
+}
+
+.chapter-visual-qcs {
+  border-color: var(--precision-line-dark);
+}
+
+/* VOW: generated receipt + live product proof */
+.precision-home .vow-intro h2 {
+  color: var(--precision-white) !important;
+  font-size: clamp(48px, 6.2vw, 88px) !important;
+}
+
+.precision-home .vow-intro p,
+.precision-home .vow-intro .quiet {
+  color: rgba(245, 246, 248, 0.62) !important;
+}
+
+.vow-proof-stack {
+  align-items: start;
+  border-top: 1px solid var(--precision-line-light);
+  display: grid;
+  gap: clamp(36px, 6vw, 92px);
+  grid-template-columns: minmax(240px, 0.55fr) minmax(0, 1.45fr);
+  margin-top: clamp(70px, 8vw, 112px);
+  padding-top: clamp(34px, 5vw, 64px);
+}
+
+.vow-proof-copy {
+  position: sticky;
+  top: 106px;
+}
+
+.vow-proof-copy > span {
+  color: var(--precision-blue-soft);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+}
+
+.vow-proof-copy h3 {
+  color: var(--precision-white);
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: clamp(34px, 3.8vw, 56px);
+  font-weight: 300;
+  letter-spacing: -0.045em;
+  line-height: 1.02;
+  margin: 24px 0 0;
+}
+
+.vow-proof-copy p {
+  color: rgba(245, 246, 248, 0.55);
+  line-height: 1.68;
+  margin: 24px 0 0;
+}
+
+.vow-proof-stack .hex-inspector {
+  --hex-green: var(--precision-blue);
+  --hex-green-soft: rgba(49, 92, 255, 0.14);
+  --hex-cyan: var(--precision-blue-soft);
+  --hex-cyan-soft: rgba(108, 140, 255, 0.12);
+  animation: none !important;
+  background: var(--precision-black-2) !important;
+  border: 1px solid rgba(245, 246, 248, 0.2) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  width: 100% !important;
+}
+
+.vow-proof-stack .hex-inspector::before,
+.vow-proof-stack .hex-inspector-wave::before {
+  display: none !important;
+}
+
+.vow-proof-stack .hex-window-status i {
+  animation: none !important;
+  background: var(--precision-blue) !important;
+  box-shadow: none !important;
+}
+
+.vow-proof-stack .hex-table-head,
+.vow-proof-stack .hex-table-row,
+.vow-proof-stack .hex-inspector-wave,
+.vow-proof-stack .hex-inspector-topbar,
+.vow-proof-stack .hex-inspector-footer > div {
+  border-color: rgba(245, 246, 248, 0.1) !important;
+}
+
+.vow-proof-stack .hex-table-row.is-selected::before {
+  background: rgba(49, 92, 255, 0.1) !important;
+  border-color: var(--precision-blue) !important;
+  animation: none !important;
+}
+
+.vow-proof-stack .hex-table-row.is-selected code,
+.vow-proof-stack .hex-table-row.is-selected code:first-child,
+.vow-proof-stack .hex-inspector-footer strong,
+.vow-proof-stack .hex-inspector-wave path {
+  color: var(--precision-blue-soft) !important;
+  stroke: var(--precision-blue) !important;
+  text-shadow: none !important;
+}
+
+.precision-home .guarantee-grid {
+  background: var(--precision-line-light) !important;
+  border-color: var(--precision-line-light) !important;
+  margin-top: clamp(70px, 8vw, 112px) !important;
+}
+
+.precision-home .guarantee-grid article {
+  background: var(--precision-black) !important;
+}
+
+.precision-home .guarantee-grid article > span {
+  color: var(--precision-blue-soft) !important;
+  font-family: "IBM Plex Mono", ui-monospace, monospace !important;
+}
+
+.precision-home .guarantee-grid h3 {
+  color: var(--precision-white) !important;
+  font-family: "IBM Plex Sans", sans-serif !important;
+  font-size: clamp(24px, 2.2vw, 34px) !important;
+  font-weight: 400 !important;
+}
+
+.precision-home .guarantee-grid p {
+  color: rgba(245, 246, 248, 0.55) !important;
+}
+
+.durability-demo {
+  border-color: var(--precision-line-light) !important;
+}
+
+.durability-kicker,
+.durability-mode,
+.machine-head,
+.machine-row,
+.machine-proofline,
+.machine-actionbar,
+.durability-rail,
+.durability-sidecar {
+  font-family: "IBM Plex Mono", ui-monospace, monospace !important;
+}
+
+.durability-topline h3,
+.durability-topline h3 em {
+  font-family: "IBM Plex Sans", sans-serif !important;
+  font-style: normal !important;
+  font-weight: 300 !important;
+}
+
+.durability-live-dot {
+  animation: none !important;
+  background: var(--precision-blue) !important;
+  box-shadow: none !important;
+}
+
+.durability-console {
+  background:
+    linear-gradient(rgba(245, 246, 248, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245, 246, 248, 0.025) 1px, transparent 1px),
+    var(--precision-black-2) !important;
+  background-size: 40px 40px !important;
+  border-color: rgba(245, 246, 248, 0.18) !important;
+  box-shadow: none !important;
+}
+
+.durability-console::after {
+  display: none !important;
+}
+
+.machine-head strong,
+.is-verified .machine-head strong,
+.machine-row b {
+  color: var(--precision-blue-soft) !important;
+}
+
+.is-crashed .machine-head strong,
+.is-recovering .machine-head strong,
+.machine-row.is-failure strong,
+.machine-row.is-failure b {
+  color: var(--precision-white) !important;
+}
+
+.machine-row.is-failure {
+  background: rgba(245, 246, 248, 0.035) !important;
+}
+
+/* QCS: white research field + causal instrument */
+.precision-home .qcs-layout h2 {
+  color: var(--precision-ink) !important;
+  font-size: clamp(48px, 6vw, 86px) !important;
+}
+
+.precision-home .qcs-copy p {
+  color: rgba(9, 11, 16, 0.68) !important;
+}
+
+.precision-home .qcs-copy .quiet {
+  color: rgba(9, 11, 16, 0.48) !important;
+}
+
+.precision-home .qcs-status-grid,
+.precision-home .qcs-status-grid div {
+  border-color: var(--precision-line-dark) !important;
+}
+
+.precision-home .qcs-status-grid dt,
+.precision-home .qcs-status-grid dd {
+  color: var(--precision-blue) !important;
+  font-family: "IBM Plex Mono", ui-monospace, monospace !important;
+}
+
+.qcs-gate {
+  background:
+    linear-gradient(rgba(49, 92, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(49, 92, 255, 0.035) 1px, transparent 1px),
+    var(--precision-black) !important;
+  background-size: 56px 56px !important;
+  border-color: rgba(245, 246, 248, 0.18) !important;
+}
+
+.qcs-gate::before {
+  display: none !important;
+}
+
+.qcs-gate__decision,
+.qcs-gate__state {
+  background: var(--precision-black-2) !important;
+  border-color: rgba(245, 246, 248, 0.24) !important;
+  box-shadow: none !important;
+}
+
+.qcs-gate__decision::after,
+.qcs-gate__state::after {
+  display: none !important;
+}
+
+.qcs-gate__topline,
+.qcs-gate__state small,
+.qcs-gate__state strong,
+.qcs-gate__state span,
+.qcs-gate__decision small,
+.qcs-gate__decision strong,
+.qcs-gate__decision span,
+.qcs-gate__rail span,
+.qcs-gate__kicker,
+.qcs-gate__evidence span,
+.qcs-gate__evidence strong,
+.qcs-gate__verdict > span,
+.qcs-gate__verdict > strong,
+.qcs-gate__controls button {
+  font-family: "IBM Plex Mono", ui-monospace, monospace !important;
+}
+
+.qcs-gate__panel h3 {
+  font-family: "IBM Plex Sans", sans-serif !important;
+  font-weight: 300 !important;
+}
+
+.qcs-gate__pulse {
+  background: var(--precision-blue-soft) !important;
+  box-shadow: none !important;
+}
+
+.qcs-gate--proved .qcs-gate__decision {
+  border-color: var(--precision-blue) !important;
+  box-shadow: none !important;
+}
+
+.qcs-gate--proved .qcs-gate__decision strong,
+.qcs-gate--proved .qcs-gate__verdict > strong,
+.qcs-gate__evidence [data-status="ok"] strong {
+  color: var(--precision-blue-soft) !important;
+}
+
+.qcs-gate--unknown .qcs-gate__decision strong,
+.qcs-gate--stale .qcs-gate__decision strong,
+.qcs-gate--disproved .qcs-gate__decision strong,
+.qcs-gate--unknown .qcs-gate__verdict > strong,
+.qcs-gate--stale .qcs-gate__verdict > strong,
+.qcs-gate--disproved .qcs-gate__verdict > strong,
+.qcs-gate__evidence [data-status="wait"] strong,
+.qcs-gate__evidence [data-status="bad"] strong {
+  color: var(--precision-white) !important;
+}
+
+/* Assurance: no supporting art, only an explicit verification sequence */
+.precision-home .assurance-intro h2 {
+  color: var(--precision-white) !important;
+  font-size: clamp(48px, 6vw, 86px) !important;
+}
+
+.precision-home .assurance-intro-copy p,
+.precision-home .assurance-intro-copy .quiet {
+  color: rgba(245, 246, 248, 0.6) !important;
+}
+
+.precision-home .assurance-flow {
+  border-color: var(--precision-line-light) !important;
+  margin-top: clamp(66px, 8vw, 108px) !important;
+}
+
+.precision-home .assurance-flow article {
+  background: var(--precision-black) !important;
+  border-color: var(--precision-line-light) !important;
+}
+
+.precision-home .assurance-flow span,
+.precision-home .infrastructure-grid > article > span {
+  color: var(--precision-blue-soft) !important;
+  font-family: "IBM Plex Mono", ui-monospace, monospace !important;
+}
+
+.precision-home .assurance-flow strong {
+  color: var(--precision-white) !important;
+  font-family: "IBM Plex Mono", ui-monospace, monospace !important;
+}
+
+.precision-home .assurance-flow p,
+.precision-home .infrastructure-grid p {
+  color: rgba(245, 246, 248, 0.55) !important;
+}
+
+.precision-home .infrastructure-grid {
+  background: var(--precision-line-light) !important;
+  border-color: var(--precision-line-light) !important;
+}
+
+.precision-home .infrastructure-grid article {
+  background: var(--precision-black) !important;
+}
+
+.precision-home .infrastructure-grid h3 {
+  color: var(--precision-white) !important;
+  font-family: "IBM Plex Sans", sans-serif !important;
+  font-weight: 400 !important;
+}
+
+/* Registry: plain public record, not scenery */
+.precision-home .registry-intro h2 {
+  color: var(--precision-ink) !important;
+  font-size: clamp(48px, 5.8vw, 82px) !important;
+}
+
+.precision-home .registry-intro > div:last-child p {
+  color: rgba(9, 11, 16, 0.66) !important;
+}
+
+.precision-home .registry-preview {
+  border-color: var(--precision-line-dark) !important;
+  margin-top: clamp(64px, 8vw, 108px) !important;
+}
+
+.precision-home .registry-preview article {
+  border-color: var(--precision-line-dark) !important;
+  transition: background-color 160ms var(--precision-ease) !important;
+}
+
+.precision-home .registry-preview article:hover {
+  background: rgba(49, 92, 255, 0.045) !important;
+  padding-inline: 0 !important;
+}
+
+.precision-home .registry-preview .registry-state,
+.precision-home .registry-sequence {
+  color: var(--precision-blue) !important;
+  font-family: "IBM Plex Mono", ui-monospace, monospace !important;
+}
+
+.precision-home .registry-preview h3 {
+  color: var(--precision-ink) !important;
+  font-family: "IBM Plex Sans", sans-serif !important;
+  font-weight: 400 !important;
+}
+
+.precision-home .registry-preview p {
+  color: rgba(9, 11, 16, 0.6) !important;
+}
+
+/* Charter: black conclusion, no decorative scene */
+.precision-home .first-principle-lead {
+  max-width: 1180px !important;
+}
+
+.precision-home .first-principle-lead h2 {
+  color: var(--precision-white) !important;
+  font-size: clamp(52px, 6.8vw, 100px) !important;
+}
+
+.precision-home .first-principle-lead h2 em {
+  color: var(--precision-blue-soft) !important;
+  font-style: normal !important;
+}
+
+.precision-home .first-principle-lead > p:last-child {
+  color: rgba(245, 246, 248, 0.62) !important;
+}
+
+.precision-home .first-principle-grid {
+  background: var(--precision-line-light) !important;
+  border-color: var(--precision-line-light) !important;
+  margin-top: clamp(66px, 8vw, 108px) !important;
+}
+
+.precision-home .first-principle-grid article {
+  background: var(--precision-black) !important;
+}
+
+.precision-home .first-principle-grid span {
+  color: var(--precision-blue-soft) !important;
+  font-family: "IBM Plex Mono", ui-monospace, monospace !important;
+}
+
+.precision-home .first-principle-grid h3 {
+  color: var(--precision-white) !important;
+  font-family: "IBM Plex Sans", sans-serif !important;
+  font-weight: 400 !important;
+}
+
+.precision-home .first-principle-grid p {
+  color: rgba(245, 246, 248, 0.56) !important;
+}
+
+/* Program pages: technical grid, with imagery only for VOW and QCS */
+.program-page,
+.qcs-program-page,
+.assurance-program-page,
+.registry-page,
+.charter-v11-page {
+  background: var(--precision-black) !important;
+  color: var(--precision-white) !important;
+}
+
+.program-masthead {
+  background-color: var(--precision-black) !important;
+  background-image:
+    linear-gradient(var(--precision-grid-dark) 1px, transparent 1px),
+    linear-gradient(90deg, var(--precision-grid-dark) 1px, transparent 1px) !important;
+  background-position: center !important;
+  background-repeat: repeat !important;
+  background-size: 64px 64px !important;
+  min-height: calc(100svh - 72px) !important;
+  position: relative;
+}
+
+.program-masthead::before {
+  background: linear-gradient(90deg, var(--precision-black) 0%, rgba(5, 6, 9, 0.92) 48%, rgba(5, 6, 9, 0.18) 100%) !important;
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.program-masthead::after {
+  background: var(--precision-blue);
+  content: "";
+  height: 2px;
+  left: clamp(24px, 4vw, 64px);
+  position: absolute;
+  top: 20%;
+  width: 54px;
+}
+
+.program-masthead > * {
+  position: relative;
+  z-index: 1;
+}
+
+.vow-program {
+  background-image: url("https://jceelabs.com/manus-storage/02-vow-receipt_372bf105.webp") !important;
+  background-position: right center !important;
+  background-repeat: no-repeat !important;
+  background-size: min(64vw, 980px) auto !important;
+}
+
+.qcs-program {
+  background-image: url("https://jceelabs.com/manus-storage/03-qcs-causal-rail_731e5c1a.webp") !important;
+  background-position: right center !important;
+  background-repeat: no-repeat !important;
+  background-size: min(62vw, 940px) auto !important;
+}
+
+.assurance-program,
+.registry-program,
+.charter-v11-program {
+  background-image:
+    linear-gradient(var(--precision-grid-dark) 1px, transparent 1px),
+    linear-gradient(90deg, var(--precision-grid-dark) 1px, transparent 1px) !important;
+  background-position: center !important;
+  background-repeat: repeat !important;
+  background-size: 64px 64px !important;
+}
+
+.program-masthead .eyebrow,
+.program-status-row,
+.program-number,
+.charter-section-label {
+  color: rgba(245, 246, 248, 0.54) !important;
+  font-family: "IBM Plex Mono", ui-monospace, monospace !important;
+  letter-spacing: 0.1em !important;
+}
+
+.program-status-row {
+  border-color: var(--precision-line-light) !important;
+}
+
+.program-masthead h1,
+.program-statement h2,
+.assurance-architecture > h2,
+.registry-classifications > h2,
+.registry-records > h2,
+.charter-openness > h2,
+.registry-disclosure h2,
+.charter-relationship h2,
+.program-next h2 {
+  font-family: "IBM Plex Sans", sans-serif !important;
+  font-style: normal !important;
+  font-weight: 300 !important;
+  letter-spacing: -0.055em !important;
+}
+
+.program-masthead h1 {
+  color: var(--precision-white) !important;
+  max-width: 880px !important;
+  text-shadow: none !important;
+}
+
+.program-masthead h1 em {
+  color: var(--precision-white) !important;
+  font-family: "IBM Plex Sans", sans-serif !important;
+  font-style: normal !important;
+  font-weight: 300 !important;
+  letter-spacing: inherit !important;
+}
+
+.program-deck {
+  color: rgba(245, 246, 248, 0.67) !important;
+  max-width: 640px !important;
+}
+
+.program-links a {
+  border-color: rgba(245, 246, 248, 0.3) !important;
+  border-radius: 0 !important;
+  color: var(--precision-white) !important;
+  font-family: "IBM Plex Mono", ui-monospace, monospace !important;
+}
+
+.program-links a:hover {
+  background: var(--precision-blue) !important;
+  border-color: var(--precision-blue) !important;
+  color: #ffffff !important;
+}
+
+.program-statement,
+.program-boundaries,
+.assurance-architecture,
+.registry-classifications,
+.registry-records,
+.charter-openness {
+  background:
+    linear-gradient(var(--precision-grid-light) 1px, transparent 1px),
+    linear-gradient(90deg, var(--precision-grid-light) 1px, transparent 1px),
+    var(--precision-white) !important;
+  background-size: 64px 64px !important;
+  color: var(--precision-ink) !important;
+}
+
+.program-statement-dark,
+.registry-disclosure,
+.charter-relationship,
+.program-next {
+  background:
+    linear-gradient(var(--precision-grid-dark) 1px, transparent 1px),
+    linear-gradient(90deg, var(--precision-grid-dark) 1px, transparent 1px),
+    var(--precision-black) !important;
+  background-size: 64px 64px !important;
+  color: var(--precision-white) !important;
+}
+
+.program-statement:not(.program-statement-dark) h2,
+.program-statement:not(.program-statement-dark) p,
+.program-boundaries h2,
+.program-boundaries p,
+.assurance-architecture h2,
+.assurance-architecture h3,
+.registry-classifications h2,
+.registry-records h2,
+.charter-openness h2 {
+  color: var(--precision-ink) !important;
+}
+
+.program-statement:not(.program-statement-dark) .section-index,
+.program-boundaries .section-index,
+.assurance-architecture .section-index,
+.registry-classifications .section-index,
+.registry-records .section-index,
+.charter-openness .section-index {
+  border-color: var(--precision-line-dark) !important;
+  color: rgba(9, 11, 16, 0.48) !important;
+}
+
+.program-boundary-list,
+.assurance-architecture-grid article,
+.registry-entry,
+.registry-entry dl,
+.registry-entry dl > div + div,
+.registry-classification-grid,
+.registry-classification-grid article,
+.charter-openness-grid article,
+.charter-law-grid article {
+  border-color: var(--precision-line-dark) !important;
+}
+
+.program-boundary-list {
+  border-top-width: 1px !important;
+}
+
+.program-boundary-list article > span,
+.assurance-layer-number,
+.registry-entry-index,
+.registry-entry dt,
+.registry-entry a span,
+.registry-classification-grid span,
+.charter-openness-grid span,
+.charter-law-grid article > span {
+  color: var(--precision-blue) !important;
+  font-family: "IBM Plex Mono", ui-monospace, monospace !important;
+}
+
+.registry-classification-grid {
+  background: var(--precision-line-light) !important;
+}
+
+.registry-classification-grid article {
+  background: var(--precision-black) !important;
+}
+
+.registry-classification-grid p {
+  color: rgba(245, 246, 248, 0.58) !important;
+}
+
+.registry-entry h3 {
+  color: var(--precision-ink) !important;
+  font-family: "IBM Plex Sans", sans-serif !important;
+  font-weight: 400 !important;
+}
+
+.registry-entry-topline {
+  color: rgba(9, 11, 16, 0.48) !important;
+  font-family: "IBM Plex Mono", ui-monospace, monospace !important;
+}
+
+.registry-entry-summary,
+.registry-entry a {
+  color: var(--precision-ink) !important;
+}
+
+.registry-entry dd {
+  color: rgba(9, 11, 16, 0.64) !important;
+}
+
+.registry-status-verified {
+  color: var(--precision-blue) !important;
+}
+
+.registry-status-experimental,
+.registry-status-defined,
+.registry-status-adopted {
+  color: var(--precision-ink) !important;
+}
+
+.registry-disclosure h2,
+.charter-relationship h2,
+.program-next h2 {
+  color: var(--precision-white) !important;
+}
+
+.registry-disclosure > div:last-child p,
+.charter-relationship > div:last-child p,
+.program-next > p,
+.program-statement-dark .program-statement-copy p {
+  color: rgba(245, 246, 248, 0.62) !important;
+}
+
+.charter-openness-grid,
+.charter-law-grid {
+  background: var(--precision-line-light) !important;
+  border-color: var(--precision-line-light) !important;
+}
+
+.charter-openness-grid article,
+.charter-law-grid article {
+  background: var(--precision-black) !important;
+  border-color: var(--precision-line-light) !important;
+}
+
+.charter-openness-grid p,
+.charter-law-grid p {
+  color: rgba(245, 246, 248, 0.6) !important;
+}
+
+.charter-law-grid h3 {
+  color: var(--precision-white) !important;
+  font-family: "IBM Plex Sans", sans-serif !important;
+  font-weight: 400 !important;
+}
+
+/* Remove non-evidentiary decorative scenes */
+.registry-curlicue,
+.company-section > .company-cubes,
+.company-section .cube-stage,
+.hex-wave-field,
+.hex-ambient-data,
+.orbit,
+.mirror-orbit {
+  display: none !important;
+}
+
+/* Footer */
+.brand-footer {
+  background: var(--precision-black) !important;
+  border-top: 1px solid var(--precision-line-light) !important;
+  color: var(--precision-white) !important;
+}
+
+.brand-footer,
+.brand-footer a,
+.brand-footer span,
+.brand-footer p,
+.brand-footer strong,
+.brand-footer small,
+.brand-footer div {
+  color: var(--precision-white) !important;
+}
+
+.brand-footer-wordmark,
+.brand-footer-wordmark span,
+.brand-footer-wordmark em {
+  color: var(--precision-white) !important;
+  font-family: "IBM Plex Sans", sans-serif !important;
+  font-style: normal !important;
+  font-weight: 300 !important;
+  letter-spacing: -0.05em !important;
+}
+
+.brand-footer-links,
+.brand-footer-meta,
+.brand-footer-lockup small {
+  color: rgba(245, 246, 248, 0.5) !important;
+  font-family: "IBM Plex Mono", ui-monospace, monospace !important;
+}
+
+/* Motion is limited to functional state changes */
+.chapter-visual img,
+.registry-preview article,
+.hex-inspector,
+.program-masthead {
+  animation: none !important;
+  transform: none !important;
+}
+
+@media (max-width: 980px) {
+  .precision-home .hybrid-hero {
+    grid-template-columns: repeat(8, minmax(0, 1fr)) !important;
+  }
+
+  .precision-home .hero-copy {
+    grid-column: 1 / 7;
+  }
+
+  .hero-proof-index {
+    grid-column: 5 / 9;
+  }
+
+  .vow-proof-stack {
+    grid-template-columns: 1fr;
+  }
+
+  .vow-proof-copy {
+    max-width: 660px;
+    position: static;
+  }
+}
+
+@media (max-width: 700px) {
+  .site-header {
+    height: 66px !important;
+    padding-inline: 18px !important;
+  }
+
+  .wordmark-mark {
+    height: 30px !important;
+    width: 27px !important;
+  }
+
+  .precision-home .hybrid-hero {
+    background:
+      linear-gradient(180deg, rgba(5, 6, 9, 0.04) 0%, rgba(5, 6, 9, 0.28) 28%, rgba(5, 6, 9, 0.84) 48%, rgba(5, 6, 9, 0.98) 64%, var(--precision-black) 100%),
+      var(--precision-black) url("https://jceelabs.com/manus-storage/01-signature-hero-exposed-mobile_1b03fe3f.webp") no-repeat 50% top / auto 54% !important;
+    display: block !important;
+    min-height: auto !important;
+    padding: 0 20px 28px !important;
+  }
+
+  .precision-home .hybrid-hero::before {
+    background:
+      linear-gradient(90deg, transparent calc(50% - 0.5px), rgba(245, 246, 248, 0.09) 50%, transparent calc(50% + 0.5px)),
+      linear-gradient(180deg, transparent calc(54% - 0.5px), rgba(245, 246, 248, 0.08) 54%, transparent calc(54% + 0.5px));
+    inset: 0 20px;
+  }
+
+  .precision-home .hybrid-hero::after {
+    left: 20px !important;
+    top: 12% !important;
+    width: 44px !important;
+  }
+
+  .precision-home .hero-copy {
+    min-height: 760px !important;
+    padding: 34px 0 42px !important;
+  }
+
+  .precision-home .eyebrow {
+    max-width: 250px;
+  }
+
+  .precision-home .hybrid-hero h1 {
+    font-size: clamp(56px, 16.5vw, 78px) !important;
+    line-height: 0.87 !important;
+    margin-top: 315px !important;
+  }
+
+  .precision-home .hero-deck {
+    font-size: 15px !important;
+    margin-top: 34px !important;
+  }
+
+  .precision-home .hero-actions {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    margin-top: 38px !important;
+  }
+
+  .hero-proof-index {
+    background: var(--precision-black-2);
+    margin: 0;
+    max-width: none;
+    width: 100%;
+  }
+
+  .precision-home .statement-band {
+    justify-content: flex-start !important;
+  }
+
+  .precision-home .company-section,
+  .precision-home .vow-section,
+  .precision-home .qcs-section,
+  .precision-home .assurance-section,
+  .precision-home .registry-section,
+  .precision-home .first-principle-section {
+    background-size: 48px 48px !important;
+    padding: 76px 20px !important;
+  }
+
+  .chapter-visual {
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+
+  .chapter-visual img {
+    height: 58vw;
+    min-height: 225px;
+    object-fit: cover;
+  }
+
+  .chapter-visual-vow img { object-position: 58% center; }
+  .chapter-visual-qcs img { object-position: 50% center; }
+
+  .chapter-visual figcaption {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .vow-proof-stack {
+    margin-top: 72px;
+  }
+
+  .precision-home .assurance-flow,
+  .precision-home .infrastructure-grid,
+  .precision-home .first-principle-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .precision-home .assurance-flow article {
+    border-bottom: 1px solid var(--precision-line-light) !important;
+    border-right: 0 !important;
+    min-height: auto !important;
+  }
+
+  .program-masthead {
+    min-height: calc(100svh - 66px) !important;
+  }
+
+  .program-masthead::before {
+    background: linear-gradient(180deg, rgba(5, 6, 9, 0.2) 0%, rgba(5, 6, 9, 0.58) 44%, var(--precision-black) 78%) !important;
+  }
+
+  .program-masthead::after {
+    left: 20px;
+    top: 12%;
+    width: 44px;
+  }
+
+  .vow-program,
+  .qcs-program {
+    background-position: center top !important;
+    background-size: auto 52% !important;
+  }
+
+  .assurance-program,
+  .registry-program,
+  .charter-v11-program {
+    background-size: 48px 48px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}

@@ -79,12 +79,12 @@ export default function Home() {
   const revealRef = useScrollReveal();
 
   return (
-    <main id="top" className="hybrid-home" ref={revealRef as any}>
+    <main id="top" className="precision-home" ref={revealRef as any}>
       <CoreHeader current="jcee" />
 
       <section className="hero hybrid-hero">
         <div className="hero-copy">
-          <p className="eyebrow"><span /> INDEPENDENT SOFTWARE LAB · DALLAS, TX</p>
+          <p className="eyebrow"><span /> PRECISION RESEARCH + INTELLIGENCE · DALLAS, TX</p>
           <h1>
             AI can act.
             <br />
@@ -101,8 +101,8 @@ export default function Home() {
           </div>
         </div>
 
-        <aside className="hero-proof-index" aria-label="JCEE Labs operating principles">
-          <span>THE EVIDENCE BOUNDARY</span>
+        <aside className="hero-proof-index" aria-label="JCEE Labs verification sequence">
+          <span>VERIFICATION SEQUENCE</span>
           <ol>
             <li><b>01</b><strong>Observe</strong><small>Establish the authoritative state.</small></li>
             <li><b>02</b><strong>Authorize</strong><small>Earn permission for the next effect.</small></li>
@@ -122,7 +122,7 @@ export default function Home() {
       <section className="company-section" id="company">
         <div className="section-index">
           <span>01 / JCEE LABS</span>
-          <span>INDEPENDENT SOFTWARE LAB · DALLAS, TEXAS</span>
+          <span>RESEARCH · INTELLIGENCE · EXECUTION ASSURANCE</span>
         </div>
         <div className="company-statement">
           <p>OUR STANDARD</p>
@@ -152,11 +152,11 @@ export default function Home() {
 
         <figure className="chapter-visual chapter-visual-vow">
           <img
-            src="https://jceelabs.com/manus-storage/02-vow-receipt_742d4ab7.webp"
-            alt="Layered archival evidence sheets joined by a continuous green registration line"
+            src="https://jceelabs.com/manus-storage/02-vow-receipt_372bf105.webp"
+            alt="Three aligned execution receipts joined by one electric-blue verification line"
             loading="lazy"
           />
-          <figcaption><span>CONTINUITY</span> Intent, authority, effect, and outcome remain joined.</figcaption>
+          <figcaption><span>EXECUTION RECEIPT / 01</span> Intent, effect, and outcome remain joined.</figcaption>
         </figure>
 
         <div className="vow-intro">
@@ -250,11 +250,11 @@ export default function Home() {
 
         <figure className="chapter-visual chapter-visual-qcs">
           <img
-            src="https://jceelabs.com/manus-storage/03-qcs-gate_f2ce0552.webp"
-            alt="A mineral landscape divided by a precise physical gate at an evidence boundary"
+            src="https://jceelabs.com/manus-storage/03-qcs-causal-rail_731e5c1a.webp"
+            alt="A causal rail with three state blocks stopped at a transparent evidence boundary"
             loading="lazy"
           />
-          <figcaption><span>TRANSITION</span> A proposed effect stops where authority is unresolved.</figcaption>
+          <figcaption><span>CAUSAL BOUNDARY / 02</span> A proposed effect stops where authority is unresolved.</figcaption>
         </figure>
 
         <QcsTransitionGate />
@@ -285,15 +285,6 @@ export default function Home() {
             </p>
           </div>
         </div>
-
-        <figure className="chapter-visual chapter-visual-assurance">
-          <img
-            src="https://jceelabs.com/manus-storage/04-assurance-layers_bdea77ce.webp"
-            alt="Independent archival evidence objects held in separate smoked-glass review planes"
-            loading="lazy"
-          />
-          <figcaption><span>SEPARATION</span> Evidence crosses independent layers without inheriting trust.</figcaption>
-        </figure>
 
         <div className="assurance-flow" aria-label="JCEE assurance flow">
           <article><span>01</span><strong>EXECUTION</strong><p>A system proposes, acts, waits, recovers, or refuses.</p></article>
@@ -340,15 +331,6 @@ export default function Home() {
           </div>
         </div>
 
-        <figure className="chapter-visual chapter-visual-registry">
-          <img
-            src="https://jceelabs.com/manus-storage/05-registry-drawers_0844a485.webp"
-            alt="Graphite archival drawers with one public evidence record opened for inspection"
-            loading="lazy"
-          />
-          <figcaption><span>DISCLOSURE</span> A living record of status, evidence boundary, and limitation.</figcaption>
-        </figure>
-
         <div className="registry-preview">
           {registryPreview.map((entry, index) => (
             <article key={entry.name}>
@@ -373,15 +355,6 @@ export default function Home() {
           <span>06 / CHARTER</span>
           <span>PUBLIC STANDARD · VERSION 1.1</span>
         </div>
-
-        <figure className="chapter-visual chapter-visual-charter">
-          <img
-            src="https://jceelabs.com/manus-storage/06-charter-threshold_9c5fe973.webp"
-            alt="A luminous sheet suspended at a monumental architectural threshold"
-            loading="lazy"
-          />
-          <figcaption><span>AUTHORITY</span> A hypothesis may cross the threshold only after authority is earned.</figcaption>
-        </figure>
 
         <div className="first-principle-lead">
           <p>JCEE FIRST PRINCIPLE</p>
