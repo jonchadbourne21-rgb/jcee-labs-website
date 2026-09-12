@@ -219,8 +219,11 @@ async function evaluateProfile(send, profileName, profile, baseUrl) {
   await navigate(send, `${baseUrl}/registry?mobile-layout-check=${profileName}`);
   const registry = await readLayout(send, ".curlicue-stage");
 
+  await navigate(send, `${baseUrl}/partners?mobile-layout-check=${profileName}`);
+  const partners = await readLayout(send, ".partner-form-submit button");
+
   const failures = [];
-  for (const [surface, checks] of [["homepage", homepage], ["registry", registry]]) {
+  for (const [surface, checks] of [["homepage", homepage], ["registry", registry], ["partners", partners]]) {
     if (
       checks.scrollWidth !== checks.viewportWidth ||
       checks.bodyScrollWidth > checks.viewportWidth
@@ -239,11 +242,15 @@ async function evaluateProfile(send, profileName, profile, baseUrl) {
     failures.push("registry curlicue stage is missing or exceeds the mobile viewport");
   }
 
-  if (homepage.touchPoints < 1 || registry.touchPoints < 1) {
+  if (!partners.element || partners.element.width < 40 || partners.element.height < 40) {
+    failures.push("partner inquiry submit control is missing or smaller than 40px");
+  }
+
+  if (homepage.touchPoints < 1 || registry.touchPoints < 1 || partners.touchPoints < 1) {
     failures.push("touch emulation did not activate");
   }
 
-  return { profileName, profile, homepage, registry, failures };
+  return { profileName, profile, homepage, registry, partners, failures };
 }
 
 const projectRoot = process.cwd();

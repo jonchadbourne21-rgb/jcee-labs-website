@@ -215,6 +215,7 @@ try {
     ["/terms", "Terms"],
     ["/registry", "Public Registry"],
     ["/assurance", "JCEE Assurance"],
+    ["/partners", "Partner with JCEE Labs"],
   ];
   if (!footer.present) failures.push("shared footer is missing from homepage");
   for (const [href, text] of requiredFooterLinks) {
@@ -237,6 +238,7 @@ try {
     ["/registry", "A living record."],
     ["/assurance", "The actor is not"],
     ["/charter", "Hypotheses may"],
+    ["/partners", "Bring us the system"],
   ]) {
     await navigate(page.send, baseUrl, route);
     if (!(await readBody(page.send)).includes(expectedHeading)) {

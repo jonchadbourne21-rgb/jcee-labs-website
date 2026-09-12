@@ -19,6 +19,7 @@ const AdminPage = lazy(() => import("./pages/AdminPage"));
 const PricingAdmin = lazy(() => import("./pages/PricingAdmin"));
 const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
 const TermsPage = lazy(() => import("./pages/TermsPage"));
+const PartnersPage = lazy(() => import("./pages/PartnersPage"));
 
 function RouteShimmer() {
   return (
@@ -48,6 +49,7 @@ function Router() {
         <Route path="/research/jrp-000" component={Jrp000} />
         <Route path="/vow" component={VowPage} />
         <Route path="/qcs" component={QcsPage} />
+        <Route path="/partners" component={PartnersPage} />
         <Route path="/admin" component={AdminPage} />
         <Route path="/admin/pricing" component={PricingAdmin} />
         <Route path="/privacy" component={PrivacyPage} />

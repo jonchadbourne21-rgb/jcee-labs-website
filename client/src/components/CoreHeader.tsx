@@ -8,6 +8,7 @@ export type CoreHeaderCurrent =
   | "assurance"
   | "registry"
   | "charter"
+  | "partners"
   | "research"
   | "mirrored";
 
@@ -22,6 +23,7 @@ export const publicNavigationLinks = [
   { id: "assurance", label: "ASSURANCE", href: "/assurance" },
   { id: "registry", label: "REGISTRY", href: "/registry" },
   { id: "charter", label: "CHARTER", href: "/charter" },
+  { id: "partners", label: "PARTNERS", href: "/partners" },
 ] as const;
 
 export const getMobileMenuLabel = (menuOpen: boolean) =>
