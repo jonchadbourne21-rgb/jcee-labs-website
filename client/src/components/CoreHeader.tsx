@@ -1,6 +1,5 @@
-import { Menu, Moon, Sun, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { useTheme } from "@/contexts/ThemeContext";
 
 export type CoreHeaderCurrent =
   | "jcee"
@@ -32,8 +31,6 @@ export const getMobileMenuState = (menuOpen: boolean) =>
   menuOpen ? "is-open" : "is-closed";
 
 export default function CoreHeader({ current }: CoreHeaderProps) {
-  const { theme, toggleTheme } = useTheme();
-  const isDark = theme === "dark";
   const [menuOpen, setMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const mobileMenuToggleRef = useRef<HTMLButtonElement>(null);
@@ -132,21 +129,6 @@ export default function CoreHeader({ current }: CoreHeaderProps) {
         <a className="header-contact" href="mailto:support@jceelabs.com">
           CONTACT <span aria-hidden="true">↗</span>
         </a>
-        <button
-          className="theme-toggle"
-          type="button"
-          onClick={() => toggleTheme?.()}
-          aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-          aria-pressed={!isDark}
-          title={isDark ? "Switch to light mode" : "Switch to dark mode"}
-        >
-          {isDark ? (
-            <Sun aria-hidden="true" size={13} />
-          ) : (
-            <Moon aria-hidden="true" size={13} />
-          )}
-          <span>{isDark ? "LIGHT" : "DARK"}</span>
-        </button>
       </div>
     </header>
   );
