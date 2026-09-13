@@ -2,13 +2,13 @@
    Scope: improve homepage Operating Cloud image fidelity and add a cinematic Assurance hero.
    Program copy/claim boundaries remain unchanged. */
 
-/* Operating Cloud: use the 2K ultra-wide asset at its natural panoramic scale instead of
-   stretching a square/low-resolution image through the full section height. */
+/* Operating Cloud: use the compressed 2K ultra-wide asset at its natural panoramic scale instead
+   of stretching a square/low-resolution image through the full section height. */
 .precision-home .operating-cloud-home::before {
   background:
     linear-gradient(90deg, rgba(5, 6, 9, 0.9) 0%, rgba(5, 6, 9, 0.62) 42%, rgba(5, 6, 9, 0.28) 70%, rgba(5, 6, 9, 0.68) 100%),
     linear-gradient(180deg, rgba(5, 6, 9, 0.08) 0%, rgba(5, 6, 9, 0.18) 24%, rgba(5, 6, 9, 0.88) 53%, #050609 72%),
-    url("https://d8j0ntlcm91z4.cloudfront.net/user_3Ef0blYk8J0Q4PEe6OMhNJQ9UTw/hf_20260913_121011_cde0c27f-604a-4cab-a462-f13e11da1288.png") top center / 100% auto no-repeat,
+    url("https://d2ol7oe51mr4n9.cloudfront.net/user_3Ef0blYk8J0Q4PEe6OMhNJQ9UTw/8eb43ee0-7cad-47f8-8667-2f7c6df92076.webp") top center / 100% auto no-repeat,
     #050609 !important;
 }
 
@@ -28,13 +28,13 @@
   margin-top: clamp(52px, 6vw, 84px) !important;
 }
 
-/* Assurance: the user-selected possibility -> evidence -> boundary -> consequence visual
-   becomes a true masthead environment. Native HTML remains responsible for every claim. */
+/* Assurance: the approved possibility -> evidence -> boundary -> consequence visual becomes
+   a true masthead environment. Native HTML remains responsible for every public claim. */
 .assurance-program {
   background-color: #050609 !important;
   background-image:
-    linear-gradient(180deg, rgba(5, 6, 9, 0.05) 0%, rgba(5, 6, 9, 0.2) 66%, #050609 100%),
-    url("https://d8j0ntlcm91z4.cloudfront.net/user_3Ef0blYk8J0Q4PEe6OMhNJQ9UTw/hf_20260913_121026_ac53d071-079c-47eb-96c9-665ae97c35de.png") !important;
+    linear-gradient(180deg, rgba(5, 6, 9, 0.03) 0%, rgba(5, 6, 9, 0.12) 62%, #050609 100%),
+    url("https://d2ol7oe51mr4n9.cloudfront.net/user_3Ef0blYk8J0Q4PEe6OMhNJQ9UTw/ecc115d0-76eb-4a5c-bf41-bddd5e579065.webp") !important;
   background-position: center, center !important;
   background-repeat: no-repeat, no-repeat !important;
   background-size: cover, cover !important;
@@ -42,16 +42,16 @@
 
 .assurance-program::before {
   background:
-    linear-gradient(90deg, rgba(5, 6, 9, 0.98) 0%, rgba(5, 6, 9, 0.88) 36%, rgba(5, 6, 9, 0.36) 66%, rgba(5, 6, 9, 0.16) 100%) !important;
+    linear-gradient(90deg, rgba(5, 6, 9, 0.96) 0%, rgba(5, 6, 9, 0.78) 36%, rgba(5, 6, 9, 0.28) 68%, rgba(5, 6, 9, 0.08) 100%) !important;
 }
 
 .assurance-program .program-deck {
-  color: rgba(245, 246, 248, 0.8) !important;
+  color: rgba(245, 246, 248, 0.84) !important;
   max-width: 620px !important;
 }
 
 .assurance-program .program-status-row {
-  background: rgba(5, 6, 9, 0.58) !important;
+  background: rgba(5, 6, 9, 0.5) !important;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-color: rgba(245, 246, 248, 0.22) !important;
@@ -61,7 +61,7 @@
   .precision-home .operating-cloud-home::before {
     background:
       linear-gradient(180deg, rgba(5, 6, 9, 0.42) 0%, rgba(5, 6, 9, 0.72) 26%, rgba(5, 6, 9, 0.96) 50%, #050609 68%),
-      url("https://d8j0ntlcm91z4.cloudfront.net/user_3Ef0blYk8J0Q4PEe6OMhNJQ9UTw/hf_20260913_121011_cde0c27f-604a-4cab-a462-f13e11da1288.png") 56% top / auto 520px no-repeat,
+      url("https://d2ol7oe51mr4n9.cloudfront.net/user_3Ef0blYk8J0Q4PEe6OMhNJQ9UTw/8eb43ee0-7cad-47f8-8667-2f7c6df92076.webp") 56% top / auto 520px no-repeat,
       #050609 !important;
   }
 
@@ -72,7 +72,7 @@
 
   .assurance-program::before {
     background:
-      linear-gradient(180deg, rgba(5, 6, 9, 0.28) 0%, rgba(5, 6, 9, 0.6) 43%, rgba(5, 6, 9, 0.94) 76%, #050609 100%) !important;
+      linear-gradient(180deg, rgba(5, 6, 9, 0.18) 0%, rgba(5, 6, 9, 0.5) 42%, rgba(5, 6, 9, 0.9) 76%, #050609 100%) !important;
   }
 }
 
@@ -80,7 +80,7 @@
   .precision-home .operating-cloud-home::before {
     background:
       linear-gradient(180deg, rgba(5, 6, 9, 0.5) 0%, rgba(5, 6, 9, 0.8) 22%, rgba(5, 6, 9, 0.98) 44%, #050609 64%),
-      url("https://d8j0ntlcm91z4.cloudfront.net/user_3Ef0blYk8J0Q4PEe6OMhNJQ9UTw/hf_20260913_121011_cde0c27f-604a-4cab-a462-f13e11da1288.png") 58% top / auto 430px no-repeat,
+      url("https://d2ol7oe51mr4n9.cloudfront.net/user_3Ef0blYk8J0Q4PEe6OMhNJQ9UTw/8eb43ee0-7cad-47f8-8667-2f7c6df92076.webp") 58% top / auto 430px no-repeat,
       #050609 !important;
   }
 
