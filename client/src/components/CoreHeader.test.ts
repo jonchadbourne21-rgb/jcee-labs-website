@@ -28,7 +28,6 @@ describe("CoreHeader public information architecture", () => {
       "qcs",
       "assurance",
       "registry",
-      "charter",
       "partners",
     ]);
     expect(publicNavigationLinks.map((link) => link.label)).toEqual([
@@ -37,7 +36,6 @@ describe("CoreHeader public information architecture", () => {
       "QCS",
       "ASSURANCE",
       "REGISTRY",
-      "CHARTER",
       "PARTNERS",
     ]);
   });

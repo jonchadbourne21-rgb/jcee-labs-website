@@ -1,10 +1,29 @@
 import BrandFooter from "@/components/BrandFooter";
 import CoreHeader from "@/components/CoreHeader";
-import HexInspector from "@/components/HexInspector";
 import QcsTransitionGate from "@/components/QcsTransitionGate";
 import VowDurabilityDemo from "@/components/VowDurabilityDemo";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import "@/home-hex.css";
+
+const customerProblems = [
+  {
+    title: "A request timed out. Did it act?",
+    copy: "When an operation stops halfway through, teams need evidence of what happened before deciding whether to retry.",
+    href: "/vow",
+    link: "Explore VOW recovery",
+  },
+  {
+    title: "Permission changed. Can it continue?",
+    copy: "A previous approval may no longer cover the next action. QCS studies how to bind a transition to current authority and evidence.",
+    href: "/qcs",
+    link: "Explore QCS research",
+  },
+  {
+    title: "The system says it worked. What supports that?",
+    copy: "A reviewer needs an inspectable record. JCEE Assurance explores portable evidence and verification with explicit limits.",
+    href: "/assurance",
+    link: "Explore JCEE Assurance",
+  },
+];
 
 const guarantees = [
   {
@@ -68,11 +87,6 @@ const registryPreview = [
     name: "JCEE Assurance",
     boundary: "Bounded verifier stages and portable evidence work; no universal certification claim.",
   },
-  {
-    status: "ADOPTED STANDARD",
-    name: "JCEE First Principle",
-    boundary: "Hypotheses may begin anywhere. Consequential authority must still be earned.",
-  },
 ];
 
 export default function Home() {
@@ -91,13 +105,14 @@ export default function Home() {
             <em>Can it prove it?</em>
           </h1>
           <p className="hero-deck">
-            JCEE Labs builds execution-assurance infrastructure for intelligent
-            systems that act beyond the chat window—where authority, evidence,
-            execution, recovery, and verification matter.
+            JCEE Labs builds assurance and execution infrastructure between
+            machine intelligence and real-world consequence. For teams managing
+            automated actions, we focus on current permission, recovery after
+            failure, and evidence of what happened.
           </p>
           <div className="hero-actions">
             <a className="primary-link" href="#vow">SEE THE RUNTIME <span>↓</span></a>
-            <span className="availability"><i /> BUILDING IN PUBLIC · 2026</span>
+            <a className="primary-link" href="/partners/enterprise">DISCUSS YOUR WORKFLOW <span>→</span></a>
           </div>
         </div>
 
@@ -125,21 +140,28 @@ export default function Home() {
           <span>RESEARCH · INTELLIGENCE · EXECUTION ASSURANCE</span>
         </div>
         <div className="company-statement">
-          <p>OUR STANDARD</p>
+          <p>THE PROBLEMS WE WORK ON</p>
           <h2>
-            A claim is not a feature.<br />
-            <em>A demo is not proof.</em><br />
-            Intelligence should leave receipts.
+            When software acts,<br />
+            <em>your team needs answers.</em>
           </h2>
+        </div>
+        <div className="customer-problem-grid">
+          {customerProblems.map((problem) => (
+            <article key={problem.href}>
+              <h3>{problem.title}</h3>
+              <p>{problem.copy}</p>
+              <a href={problem.href}>{problem.link} <span aria-hidden="true">→</span></a>
+            </article>
+          ))}
         </div>
         <div className="company-bottom">
           <p>
-            JCEE Labs discovers and engineers the infrastructure between an
-            intelligent system&apos;s intention and its real-world consequence.
-            Our work joins bounded authority, durable execution, portable
-            evidence, independent verification, and public claim discipline.
+            Start with one workflow, its existing controls, and a failure your
+            team needs to resolve. Explore a bounded technical evaluation with
+            JCEE Labs.
           </p>
-          <a href="/charter">READ OUR CHARTER <span>→</span></a>
+          <a href="/partners/enterprise">DISCUSS YOUR WORKFLOW <span>→</span></a>
         </div>
         <div className="breath" aria-hidden="true" />
       </section>
@@ -169,24 +191,12 @@ export default function Home() {
               fails halfway through.
             </p>
             <p className="quiet">
-              Not another model. The execution layer beneath the claim.
+              Scope and limitations are documented in the public VOW overview.
             </p>
           </div>
         </div>
 
         <VowDurabilityDemo />
-
-        <div className="vow-proof-stack">
-          <div className="vow-proof-copy">
-            <span>PRODUCT ARTIFACT / LIVE EVIDENCE VIEW</span>
-            <h3>The binary belongs where the claim can be inspected.</h3>
-            <p>
-              The evidence view remains part of VOW—not the visual identity of
-              every JCEE program. It exposes a bounded record for review.
-            </p>
-          </div>
-          <HexInspector />
-        </div>
 
         <div className="guarantee-grid">
           {guarantees.map((item) => (
@@ -322,11 +332,10 @@ export default function Home() {
           </div>
           <div>
             <p>
-              The JCEE Public Registry is a sanitized projection of our internal
-              research and build record. It shows public status, evidence
-              boundary, and known limitation without exposing private source,
-              attack corpora, counsel material, or enabling implementation
-              detail.
+              Review each program&apos;s recorded milestone, supporting public
+              references, and known limitations. Demonstrations explain the
+              concepts; the registry distinguishes verified results from
+              experimental work.
             </p>
           </div>
         </div>
@@ -350,47 +359,10 @@ export default function Home() {
       </section>
       <div className="breath" aria-hidden="true" />
 
-      <section className="first-principle-section" id="charter" aria-labelledby="first-principle-title">
-        <div className="section-index light">
-          <span>06 / CHARTER</span>
-          <span>PUBLIC STANDARD · VERSION 1.1</span>
-        </div>
-
-        <div className="first-principle-lead">
-          <p>JCEE FIRST PRINCIPLE</p>
-          <h2 id="first-principle-title">
-            Hypotheses may begin anywhere.<br />
-            <em>Authority cannot.</em>
-          </h2>
-          <p>
-            Experience, intuition, coherence, imagination, serendipity, faith,
-            love, and felt meaning may generate questions worth investigating.
-            They do not, by themselves, establish shared-world empirical facts
-            or grant authority for consequential action.
-          </p>
-        </div>
-
-        <div className="first-principle-grid">
-          <article>
-            <span>01</span>
-            <h3>State is not authority.</h3>
-            <p>A model output, simulation, prediction, memory, or internal state does not become permission merely because it exists.</p>
-          </article>
-          <article>
-            <span>02</span>
-            <h3>Unknown is not permission.</h3>
-            <p>Missing evidence, timeout, ambiguity, or expected success cannot silently become authorization.</p>
-          </article>
-          <article>
-            <span>03</span>
-            <h3>Human responsibility remains.</h3>
-            <p>Intelligent software does not absorb responsibility from the people and institutions that direct, authorize, and deploy it.</p>
-          </article>
-        </div>
-
-        <a className="section-detail-link" href="/charter">
-          READ THE JCEE LABS CHARTER <span>→</span>
-        </a>
+      <section className="principles-summary" id="charter" aria-labelledby="principles-title">
+        <h2 id="principles-title">Intelligence should leave receipts.</h2>
+        <p>We test our claims, preserve evidence including failures, and require
+          current authority before consequential action. Human accountability remains.</p>
       </section>
 
       <BrandFooter backToTopHref="#top" />

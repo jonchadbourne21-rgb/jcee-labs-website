@@ -114,8 +114,8 @@ export default function ResearchPartnersPage() {
             <p className="partner-kicker">INITIATE RESEARCH REVIEW</p>
             <h2 id="research-inquiry-title">Show us the claim, the artifacts, and the test.</h2>
             <p>
-              This form creates a separately addressed Research inquiry for the JCEE Labs inbox.
-              We review for methodological fit, reproducibility, disclosure boundaries, and a useful joint outcome.
+              Describe the question, available evidence, and the result you want to test.
+              This form opens an email draft for you to review and send.
             </p>
             <dl>
               <div><dt>ROUTE</dt><dd>Research collaboration review</dd></div>
@@ -163,7 +163,7 @@ export default function ResearchPartnersPage() {
             </label>
             <div className="partner-form-submit">
               <button type="submit">OPEN RESEARCH DRAFT <span aria-hidden="true">→</span></button>
-              <p>Routed as RESEARCH. Your details remain in this browser until your email client opens.</p>
+              <p>Opens your email app. Review the draft, then send it to start an inquiry.</p>
             </div>
           </form>
         </div>

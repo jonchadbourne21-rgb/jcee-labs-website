@@ -1613,6 +1613,13 @@ nav a::after {
   margin-top: clamp(70px, 9vw, 128px);
 }
 
+/* The inquiry pairs prose with a form, not a narrow label with a heading. */
+.partner-inquiry-layout {
+  align-items: start;
+  gap: clamp(32px, 4vw, 64px);
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+}
+
 .partner-fit-intro > p:first-child,
 .partner-kicker {
   color: var(--precision-blue);
@@ -1718,6 +1725,8 @@ nav a::after {
 
 .partner-inquiry-copy h2 {
   color: var(--precision-ink);
+  font-size: clamp(2rem, 3.6vw, 3.5rem);
+  line-height: 1.08;
   margin-top: 28px;
 }
 
@@ -1788,9 +1797,9 @@ nav a::after {
 }
 
 .partner-form label > span {
-  color: rgba(245, 246, 248, 0.52);
+  color: var(--precision-muted-light);
   font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 8px;
+  font-size: 12px;
   letter-spacing: 0.11em;
 }
 
@@ -1804,7 +1813,7 @@ nav a::after {
   border-radius: 0;
   color: var(--precision-white);
   font-family: "IBM Plex Sans", sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.5;
   min-height: 44px;
   outline: 0;
@@ -1836,7 +1845,7 @@ nav a::after {
 
 .partner-form input::placeholder,
 .partner-form textarea::placeholder {
-  color: rgba(245, 246, 248, 0.32);
+  color: var(--precision-muted-light);
 }
 
 .partner-form input:focus,
@@ -1851,7 +1860,7 @@ nav a::after {
   background: var(--precision-black-2);
   display: grid;
   gap: 22px;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: minmax(0, 1fr);
   padding: 22px;
 }
 
@@ -1861,11 +1870,11 @@ nav a::after {
   border-radius: 0;
   color: #ffffff;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.09em;
   min-height: 48px;
-  padding: 0 20px;
+  padding: 12px 20px;
   transition: background-color 160ms var(--precision-ease), color 160ms var(--precision-ease), transform 140ms var(--precision-ease);
 }
 
@@ -1881,9 +1890,9 @@ nav a::after {
 }
 
 .partner-form-submit p {
-  color: rgba(245, 246, 248, 0.42);
+  color: var(--precision-muted-light);
   font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 8px;
+  font-size: 12px;
   line-height: 1.55;
   margin: 0;
 }
@@ -2278,5 +2287,198 @@ nav a::after {
     bottom: 78px;
     left: 20px;
     right: 20px;
+  }
+}
+
+/* Text must fit its own column, including when the viewport or text size changes. */
+:where(main, .brand-footer) :is(h1, h2, h3, p, a, dt, dd, strong, small, label, button) {
+  overflow-wrap: anywhere;
+}
+
+:where(main) [id] {
+  scroll-margin-top: 90px;
+}
+
+:where(.precision-home, .program-page) :is(section, article, aside, form, label, dl, dd),
+.partner-inquiry-layout > *,
+.partner-form-row > *,
+.partner-form input,
+.partner-form select,
+.partner-form textarea {
+  min-width: 0;
+}
+
+.partner-form :is(input, select, textarea) {
+  max-width: 100%;
+}
+
+.brand-footer :is(div, span, p, a) {
+  min-width: 0;
+}
+
+.brand-footer-lockup,
+.brand-footer-links a {
+  max-width: 100%;
+}
+
+.brand-footer-lockup {
+  width: 100%;
+}
+
+.brand-footer-top {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+  .brand-footer-top {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.brand-footer-lockup img {
+  flex-shrink: 0;
+}
+
+.brand-footer :is(span, small, a) {
+  overflow-wrap: anywhere;
+}
+
+.partner-inquiry-copy dl div {
+  grid-template-columns: minmax(0, 90px) minmax(0, 1fr);
+  gap: 16px;
+}
+
+.partner-inquiry-copy :is(dt, dd, a) {
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.partner-inquiry .partner-kicker {
+  color: var(--precision-blue);
+}
+
+.partner-page .partner-shared-layout h2 {
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 1.08;
+}
+
+.partner-pathway-link {
+  min-width: 0;
+  max-width: 100%;
+  gap: 16px;
+  padding-block: 12px;
+}
+
+/* Customer problems and evidence carry the homepage; principles stay brief. */
+.customer-problem-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  margin-top: 56px;
+}
+
+.customer-problem-grid article {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--precision-line-dark);
+  padding-top: 24px;
+}
+
+.customer-problem-grid h3 {
+  color: var(--precision-ink);
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.035em;
+  margin: 0 0 20px;
+}
+
+.customer-problem-grid p {
+  color: #4d5563;
+  font-size: 16px;
+  line-height: 1.65;
+  margin: 0 0 24px;
+}
+
+.customer-problem-grid a {
+  color: var(--precision-blue);
+  font-size: 14px;
+  margin-top: auto;
+  padding-block: 12px;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.principles-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 24px 48px;
+  padding: 48px clamp(24px, 5vw, 76px);
+}
+
+.principles-summary h2 {
+  color: var(--precision-white);
+  font-size: clamp(1.5rem, 2.6vw, 2.5rem);
+  font-weight: 300;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.principles-summary p {
+  color: var(--precision-muted-light);
+  font-size: 16px;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 65ch;
+}
+
+.precision-home .hero-actions {
+  flex-wrap: wrap;
+  gap: 20px 32px;
+}
+
+.precision-home .hero-actions a {
+  white-space: normal;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .customer-problem-grid,
+  .principles-summary {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .partner-masthead h1 {
+    font-size: clamp(2.25rem, 10.5vw, 4rem) !important;
+    line-height: 1.04 !important;
+  }
+
+  .partner-form label {
+    padding: 20px 16px;
+  }
+
+  .partner-sequence li {
+    grid-template-columns: 28px minmax(0, 1fr);
+  }
+
+  .partner-sequence p {
+    grid-column: 2;
+  }
+
+  .principles-summary {
+    padding: 40px 20px;
+  }
+
+  .precision-home .statement-band {
+    flex-wrap: wrap;
+    gap: 10px 20px !important;
+    padding-block: 18px;
+    white-space: normal;
+  }
+
+  .precision-home .statement-band span:nth-child(even) {
+    display: none;
   }
 }
