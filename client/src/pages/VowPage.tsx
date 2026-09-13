@@ -18,7 +18,7 @@ export default function VowPage() {
 
   return (
     <main className="program-page" id="top">
-      <CoreHeader current="technology" />
+      <CoreHeader current="vow" />
 
       <section className="program-masthead vow-program">
         <p className="eyebrow"><span /> PUBLIC OVERVIEW · ACTIVE</p>
@@ -77,9 +77,9 @@ export default function VowPage() {
           survives. If it does not, the claim will narrow.
         </p>
         <div className="program-links">
-          <a href="/technology">BACK TO TECHNOLOGY <span>→</span></a>
           <a href="/registry">VIEW THE PUBLIC REGISTRY <span>→</span></a>
           <a href="/assurance">VIEW JCEE ASSURANCE <span>→</span></a>
+          <a href="/charter">READ THE CHARTER <span>→</span></a>
         </div>
       </section>
 
