@@ -156,7 +156,7 @@ async function setProfile(send, profile) {
   });
   await send("Emulation.setTouchEmulationEnabled", {
     enabled: profile.mobile,
-    maxTouchPoints: profile.mobile ? 5 : 0,
+    maxTouchPoints: profile.mobile ? 5 : 1,
   });
   await send("Emulation.setEmulatedMedia", {
     features: [
