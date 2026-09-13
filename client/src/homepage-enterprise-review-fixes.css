@@ -1,3 +1,5 @@
+@import "./enterprise-visual-pass.css";
+
 /* PR20 review hardening.
    Keep a dark backing behind the QCS homepage hero so high text scaling or
    unexpected wrapping can never expose white copy against the legacy white
