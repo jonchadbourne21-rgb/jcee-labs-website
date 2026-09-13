@@ -1,6 +1,10 @@
 # Dependencies
 **/node_modules
 .pnpm-store/
+**/.venv/
+**/__pycache__/
+**/*.egg-info/
+.pytest_cache/
 
 # Build outputs
 dist/
@@ -45,6 +49,7 @@ pids
 *.seed
 *.pid.lock
 *.bak
+backend/.data/
 
 # Coverage directory used by tools like istanbul
 coverage/

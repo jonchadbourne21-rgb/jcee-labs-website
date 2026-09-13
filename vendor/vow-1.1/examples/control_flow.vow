@@ -1,0 +1,28 @@
+# Copyright (c) 2026 JceeLabs and Jonathan Chadbourne. All rights reserved.
+# Control flow: if/else, repeat N times, set (reassignment of let-bound names)
+quest CompoundTiers {
+  goal "compound a value and assign a tier"
+
+  let principal = 100
+  let rate = 0.1
+  let compounded = principal
+
+  repeat 3 times {
+    set compounded = compounded * (1.0 + rate)
+  }
+
+  let tier_label = 0
+  if compounded >= 130 {
+    set tier_label = 1
+  }
+
+  let tier = 2
+  if tier_label == 1 {
+    set tier = 1
+  } else {
+    set tier = 3
+  }
+
+  prove compounded > 133
+  success when tier == 1
+}

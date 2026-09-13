@@ -1,0 +1,35 @@
+# Copyright (c) 2026 JceeLabs and Jonathan Chadbourne. All rights reserved.
+# 03 — extended parser surface: list/dict literals, lambdas, method
+# chaining (.filter/.map/.sort_by/.group_by), and enforced type
+# annotations (let x: T = ...). Annotations are contracts: a violation
+# fails the strategy with a type_violation reason in the evidence.
+quest collections {
+  goal "Exercise collections, lambdas, chaining, and annotations"
+  capability model
+
+  strategy pipeline {
+    let scores: list = [5, 1, 4, 1, 9]
+    let big = scores.filter(lambda x: x > 2)
+    prove len(big) == 3
+
+    let doubled = big.map(lambda x: x * 2)
+    let ordered = doubled.sort_by(lambda x: 0 - x)
+    prove len(ordered) == 3
+
+    let leads = [{"name": "ada", "tier": 1}, {"name": "bob", "tier": 2},
+                 {"name": "cy", "tier": 1}]
+    let grouped = leads.group_by(lambda lead: lead.tier)
+    prove len(grouped) == 2
+
+    let cfg: dict = {"limit": 500, "mode": "safe"}
+    prove cfg.limit == 500
+
+    let n: int = 7
+    let ratio: float = 1.5
+    let label: str = "ok"
+    let flag: bool = true
+    prove n + 3 == 10
+  }
+
+  success when true
+}

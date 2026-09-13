@@ -1,0 +1,69 @@
+# Copyright (c) 2026 JceeLabs and Jonathan Chadbourne. All rights reserved.
+# capabilities.vow
+# Demonstrates dry-run vs live side effects, expressed in pure VOW.
+#
+# In the VOW runtime, side effects are guarded by VowCapability: in dry-run
+# mode (the default) an effect is recorded in VowSideEffectRecorder and a
+# shadow placeholder is returned; in --live mode the effect executes for
+# real and is still recorded. Pure VOW source stays effect-safe by
+# construction: expressions may only call whitelisted pure functions
+# (abs, min, max, round, len), so a quest cannot fire a raw effect.
+#
+# This quest therefore models the same discipline with data: every would-be
+# effect starts life as a "shadow" (a recorded plan, not an execution) and
+# is only promoted to "live" by a strategy whose proofs all pass. The
+# tournament scores shadow rehearsal highest on safety; running the CLI
+# with --live flips the engine's VOW_DRY_RUN flag for real capabilities.
+#
+# Try:
+#   python vow_cli.py run examples/capabilities.vow          # dry-run trace
+#   python vow_cli.py run examples/capabilities.vow --live   # live trace
+
+quest Capabilities {
+  goal "ship the release without ever running an unproven side effect"
+
+  constraint attempts <= 4
+
+  # What we believe about the world, with confidence and provenance.
+  believe tests_green = 1 confidence 0.95 source "ci pipeline"
+  believe traffic_low = 1 confidence 0.7 source "metrics dashboard"
+
+  # The shadow effect: a description of the deploy, recorded - not executed.
+  let shadow_effect = "deploy v2 to production as a recorded shadow"
+
+  tournament {
+    score by proof_success * 0.5 + safety * 0.3 + speed * 0.2
+
+    strategy shadow_rehearsal {
+      cost 0
+      risk 0.0
+      let plan = "record effect deploy v2 and return shadow placeholder"
+      let executed = 0
+      prove tests_green == 1
+    }
+
+    strategy proven_live_release {
+      cost 3
+      risk 0.4
+      let plan = "execute effect deploy v2 for real after proofs pass"
+      let executed = 1
+      prove tests_green == 1
+      prove traffic_low == 1
+    }
+
+    strategy unproven_live_deploy {
+      cost 1
+      risk 0.9
+      let plan = "execute effect deploy v2 with no proof gate"
+      let executed = 1
+      prove tests_green == 0
+    }
+  }
+
+  # Scar carried forward: last time an unproven live effect hurt us.
+  scar "2024 incident: deployed without green tests and rollback took 3 hours"
+
+  # The winner rehearsed safely or proved its live release; either way the
+  # tests were green before any effect went live.
+  success when tests_green == 1
+}
