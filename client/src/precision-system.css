@@ -2312,6 +2312,23 @@ nav a::after {
   max-width: 100%;
 }
 
+.brand-footer :is(div, span, p, a) {
+  min-width: 0;
+}
+
+.brand-footer-lockup,
+.brand-footer-links a {
+  max-width: 100%;
+}
+
+.brand-footer-lockup img {
+  flex-shrink: 0;
+}
+
+.brand-footer :is(span, small, a) {
+  overflow-wrap: anywhere;
+}
+
 .partner-inquiry-copy dl div {
   grid-template-columns: minmax(0, 90px) minmax(0, 1fr);
   gap: 16px;
