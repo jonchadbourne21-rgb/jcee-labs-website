@@ -26,7 +26,7 @@ export default function QcsPage() {
 
   return (
     <main className="program-page qcs-program-page" id="top">
-      <CoreHeader current="technology" />
+      <CoreHeader current="qcs" />
 
       <section className="program-masthead qcs-program">
         <p className="eyebrow"><span /> RESEARCH PROGRAM · VERIFIED MILESTONE</p>
@@ -117,9 +117,9 @@ export default function QcsPage() {
           independent third-party certification.
         </p>
         <div className="program-links">
-          <a href="/technology">BACK TO TECHNOLOGY <span>→</span></a>
           <a href="/registry">VIEW THE PUBLIC REGISTRY <span>→</span></a>
           <a href="/assurance">VIEW JCEE ASSURANCE <span>→</span></a>
+          <a href="/vow">VIEW JCEE VOW <span>→</span></a>
         </div>
       </section>
 

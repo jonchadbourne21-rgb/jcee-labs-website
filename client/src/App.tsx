@@ -10,12 +10,9 @@ const AssurancePage = lazy(() => import("./pages/AssurancePage"));
 const CareerPortfolio = lazy(() => import("./pages/CareerPortfolio"));
 const CharterV11 = lazy(() => import("./pages/CharterV11"));
 const CharterV10 = lazy(() => import("./pages/Charter"));
-const DistributionPage = lazy(() => import("./pages/DistributionPage"));
-const OperatingCloudPage = lazy(() => import("./pages/OperatingCloudPage"));
 const PublicRegistry = lazy(() => import("./pages/PublicRegistry"));
 const Jrp000 = lazy(() => import("./pages/Jrp000"));
 const NotFound = lazy(() => import("./pages/NotFound"));
-const TechnologyPage = lazy(() => import("./pages/TechnologyPage"));
 const VowPage = lazy(() => import("./pages/VowPage"));
 const QcsPage = lazy(() => import("./pages/QcsPage"));
 const AdminPage = lazy(() => import("./pages/AdminPage"));
@@ -45,9 +42,6 @@ function Router() {
     <Suspense fallback={<RouteShimmer />}>
       <Switch>
         <Route path="/" component={Home} />
-        <Route path="/operating-cloud" component={OperatingCloudPage} />
-        <Route path="/distribution" component={DistributionPage} />
-        <Route path="/technology" component={TechnologyPage} />
         <Route path="/portfolio" component={CareerPortfolio} />
         <Route path="/charter/archive/v1.0" component={CharterV10} />
         <Route path="/charter" component={CharterV11} />

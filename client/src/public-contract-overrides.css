@@ -1,7 +1,0 @@
-/* Preserve existing evidence-page contract while the broader commercial surface
-   receives a higher-contrast typography pass. This exact tone is asserted by the
-   public-surface release gate and remains intentionally scoped to Assurance copy. */
-
-.assurance-architecture-grid article > div > p:last-child {
-  color: rgba(9, 11, 16, 0.68) !important;
-}
