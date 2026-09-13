@@ -22,7 +22,6 @@ export const publicNavigationLinks = [
   { id: "qcs", label: "QCS", href: "/qcs" },
   { id: "assurance", label: "ASSURANCE", href: "/assurance" },
   { id: "registry", label: "REGISTRY", href: "/registry" },
-  { id: "charter", label: "CHARTER", href: "/charter" },
   { id: "partners", label: "PARTNERS", href: "/partners" },
 ] as const;
 

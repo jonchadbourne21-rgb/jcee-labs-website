@@ -10,6 +10,7 @@ const requestedProfile = process.argv
   ?.split("=")[1];
 
 const profiles = {
+  smallPhone: { label: "320px narrow viewport", width: 320, height: 740, deviceScaleFactor: 1 },
   iphone: {
     label: "iPhone Safari profile",
     width: 390,
@@ -26,7 +27,17 @@ const profiles = {
     userAgent:
       "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36",
   },
+  tablet: { label: "768px tablet viewport", width: 768, height: 1024, deviceScaleFactor: 1 },
+  compact: { label: "1024px compact laptop viewport", width: 1024, height: 768, deviceScaleFactor: 1, desktop: true },
+  chromebook: { label: "1280px Chromebook viewport", width: 1280, height: 800, deviceScaleFactor: 1, desktop: true },
+  desktop: { label: "1440px desktop viewport", width: 1440, height: 900, deviceScaleFactor: 1, desktop: true },
 };
+
+const publicRoutes = [
+  "/", "/partners", "/partners/enterprise", "/partners/research", "/vow", "/qcs",
+  "/assurance", "/registry", "/research-evidence", "/charter", "/charter/archive/v1.0",
+  "/research/jrp-000", "/privacy", "/terms", "/portfolio", "/404",
+];
 
 const profileEntries = requestedProfile
   ? [[requestedProfile, profiles[requestedProfile]]]
@@ -201,9 +212,13 @@ async function evaluateProfile(send, profileName, profile, baseUrl) {
     width: profile.width,
     height: profile.height,
     deviceScaleFactor: profile.deviceScaleFactor,
-    mobile: true,
+    mobile: !profile.desktop,
   });
-  await send("Emulation.setUserAgentOverride", { userAgent: profile.userAgent });
+  if (profile.userAgent) {
+    await send("Emulation.setUserAgentOverride", { userAgent: profile.userAgent });
+  } else {
+    await send("Emulation.setUserAgentOverride", { userAgent: "" });
+  }
   await send("Emulation.setTouchEmulationEnabled", { enabled: true, maxTouchPoints: 5 });
   await send("Emulation.setEmulatedMedia", {
     features: [
@@ -240,7 +255,7 @@ async function evaluateProfile(send, profileName, profile, baseUrl) {
     }
   }
 
-  if (!homepage.element || homepage.element.width < 40 || homepage.element.height < 40) {
+  if (!profile.desktop && (!homepage.element || homepage.element.width < 40 || homepage.element.height < 40)) {
     failures.push("mobile menu control is missing or smaller than 40px");
   }
 
@@ -264,7 +279,48 @@ async function evaluateProfile(send, profileName, profile, baseUrl) {
     failures.push("touch emulation did not activate");
   }
 
-  return { profileName, profile, homepage, registry, partners, enterprise, research, failures };
+  // Page width alone misses text painted underneath an adjacent grid column.
+  // Inspect each heading's actual text fragments against its own box as well.
+  const routeChecks = [];
+  for (const route of publicRoutes) {
+    await navigate(send, `${baseUrl}${route}`);
+    const result = await send("Runtime.evaluate", {
+      returnByValue: true,
+      awaitPromise: true,
+      expression: `(async () => {
+        await document.fonts.ready;
+        const escapedHeadings = [];
+        for (const heading of document.querySelectorAll('h1, h2, h3')) {
+          const box = heading.getBoundingClientRect();
+          if (!box.width || !box.height) continue;
+          const range = document.createRange();
+          range.selectNodeContents(heading);
+          const escaped = [...range.getClientRects()].some(rect =>
+            rect.width > 0 && (rect.left < box.left - 3 || rect.right > box.right + 3)
+          );
+          if (escaped) escapedHeadings.push(heading.textContent.trim());
+        }
+        const overflowingControls = [...document.querySelectorAll('.partner-form input, .partner-form select, .partner-form textarea, .partner-form-submit button')]
+          .filter(el => {
+            const a=el.getBoundingClientRect(), b=el.parentElement.getBoundingClientRect();
+            return a.width && (a.left < b.left - 1 || a.right > b.right + 1);
+          }).map(el => el.getAttribute('name') || el.textContent.trim());
+        return {
+          width: innerWidth, scrollWidth: document.documentElement.scrollWidth,
+          bodyWidth: document.body.scrollWidth, escapedHeadings, overflowingControls,
+          title: document.title, headingCount: document.querySelectorAll('h1').length,
+        };
+      })()`,
+    });
+    const check = result.result.value;
+    routeChecks.push({ route, ...check });
+    if (check.headingCount !== 1) failures.push(`${route}: expected one page heading`);
+    if (check.scrollWidth > check.width || check.bodyWidth > check.width) failures.push(`${route}: horizontal page overflow`);
+    for (const heading of check.escapedHeadings) failures.push(`${route}: heading escapes its column: ${heading}`);
+    for (const control of check.overflowingControls) failures.push(`${route}: form control escapes its field: ${control}`);
+  }
+
+  return { profileName, profile, homepage, registry, partners, enterprise, research, routeChecks, failures };
 }
 
 const projectRoot = process.cwd();

@@ -112,10 +112,10 @@ export default function EnterprisePartnersPage() {
         <div className="partner-inquiry-layout">
           <div className="partner-inquiry-copy">
             <p className="partner-kicker">INITIATE ENTERPRISE REVIEW</p>
-            <h2 id="enterprise-inquiry-title">Show us where the system becomes consequential.</h2>
+            <h2 id="enterprise-inquiry-title">Where does your system need stronger control?</h2>
             <p>
-              This form creates a separately addressed Enterprise inquiry for the JCEE Labs inbox.
-              We review for technical fit and respond with the smallest useful next step.
+              Describe the workflow and the decision your team needs to make.
+              This form opens an email draft for you to review and send.
             </p>
             <dl>
               <div><dt>ROUTE</dt><dd>Enterprise partnership review</dd></div>
@@ -163,7 +163,7 @@ export default function EnterprisePartnersPage() {
             </label>
             <div className="partner-form-submit">
               <button type="submit">OPEN ENTERPRISE DRAFT <span aria-hidden="true">→</span></button>
-              <p>Routed as ENTERPRISE. Your details remain in this browser until your email client opens.</p>
+              <p>Opens your email app. Review the draft, then send it to start an inquiry.</p>
             </div>
           </form>
         </div>
