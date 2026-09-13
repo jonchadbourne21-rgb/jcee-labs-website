@@ -2321,6 +2321,20 @@ nav a::after {
   max-width: 100%;
 }
 
+.brand-footer-lockup {
+  width: 100%;
+}
+
+.brand-footer-top {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+  .brand-footer-top {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 .brand-footer-lockup img {
   flex-shrink: 0;
 }
