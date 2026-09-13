@@ -29,8 +29,9 @@
 }
 
 /* Assurance: the approved possibility -> evidence -> boundary -> consequence visual becomes
-   a true masthead environment. Native HTML remains responsible for every public claim. */
-.assurance-program {
+   a true masthead environment. Scope to the Assurance page because /portfolio also reuses the
+   legacy `assurance-program` class for a different public surface. */
+.assurance-program-page .assurance-program {
   background-color: #050609 !important;
   background-image:
     linear-gradient(180deg, rgba(5, 6, 9, 0.03) 0%, rgba(5, 6, 9, 0.12) 62%, #050609 100%),
@@ -40,17 +41,17 @@
   background-size: cover, cover !important;
 }
 
-.assurance-program::before {
+.assurance-program-page .assurance-program::before {
   background:
     linear-gradient(90deg, rgba(5, 6, 9, 0.96) 0%, rgba(5, 6, 9, 0.78) 36%, rgba(5, 6, 9, 0.28) 68%, rgba(5, 6, 9, 0.08) 100%) !important;
 }
 
-.assurance-program .program-deck {
+.assurance-program-page .assurance-program .program-deck {
   color: rgba(245, 246, 248, 0.84) !important;
   max-width: 620px !important;
 }
 
-.assurance-program .program-status-row {
+.assurance-program-page .assurance-program .program-status-row {
   background: rgba(5, 6, 9, 0.5) !important;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -65,12 +66,12 @@
       #050609 !important;
   }
 
-  .assurance-program {
+  .assurance-program-page .assurance-program {
     background-position: center, 64% center !important;
     background-size: cover, auto 100% !important;
   }
 
-  .assurance-program::before {
+  .assurance-program-page .assurance-program::before {
     background:
       linear-gradient(180deg, rgba(5, 6, 9, 0.18) 0%, rgba(5, 6, 9, 0.5) 42%, rgba(5, 6, 9, 0.9) 76%, #050609 100%) !important;
   }
@@ -84,7 +85,7 @@
       #050609 !important;
   }
 
-  .assurance-program {
+  .assurance-program-page .assurance-program {
     background-position: center, 67% top !important;
     background-size: cover, auto 64% !important;
   }
