@@ -12,16 +12,34 @@ const customerProblems = [
     link: "Explore VOW recovery",
   },
   {
-    title: "Permission changed. Can it continue?",
-    copy: "A previous approval may no longer cover the next action. QCS studies how to bind a transition to current authority and evidence.",
-    href: "/qcs",
-    link: "Explore QCS research",
+    title: "Two systems disagree. Which one controls the next step?",
+    copy: "Critical instructions can live in email, a purchase order, and an ERP at the same time. JCEE is building a way to surface the mismatch before it becomes an operational error.",
+    href: "/distribution",
+    link: "Explore JCEE Distribution",
   },
   {
     title: "The system says it worked. What supports that?",
     copy: "A reviewer needs an inspectable record. JCEE Assurance explores portable evidence and verification with explicit limits.",
     href: "/assurance",
     link: "Explore JCEE Assurance",
+  },
+];
+
+const cloudPillars = [
+  {
+    index: "01",
+    title: "Connect the work",
+    copy: "Bring the minimum required context together from the systems a team already uses instead of forcing a rip-and-replace project.",
+  },
+  {
+    index: "02",
+    title: "Reconcile the differences",
+    copy: "Apply industry-specific rules and agent assistance where records, instructions, or workflow state disagree.",
+  },
+  {
+    index: "03",
+    title: "Control the action",
+    copy: "Keep consequential writes behind explicit authority, evidence, and human review until the operating record supports more automation.",
   },
 ];
 
@@ -105,13 +123,13 @@ export default function Home() {
             <em>Can it prove it?</em>
           </h1>
           <p className="hero-deck">
-            JCEE Labs builds assurance and execution infrastructure between
-            machine intelligence and real-world consequence. For teams managing
-            automated actions, we focus on current permission, recovery after
-            failure, and evidence of what happened.
+            JCEE Labs builds operating and assurance infrastructure for software
+            that crosses from intelligence into real-world work. We focus on the
+            seams where systems disagree, authority changes, execution fails, or
+            a consequential action needs an evidence trail.
           </p>
           <div className="hero-actions">
-            <a className="primary-link" href="#vow">SEE THE RUNTIME <span>↓</span></a>
+            <a className="primary-link" href="/operating-cloud">EXPLORE OPERATING CLOUD <span>→</span></a>
             <a className="primary-link" href="/partners/enterprise">DISCUSS YOUR WORKFLOW <span>→</span></a>
           </div>
         </div>
@@ -142,7 +160,7 @@ export default function Home() {
         <div className="company-statement">
           <p>THE PROBLEMS WE WORK ON</p>
           <h2>
-            When software acts,<br />
+            When software crosses systems,<br />
             <em>your team needs answers.</em>
           </h2>
         </div>
@@ -157,13 +175,86 @@ export default function Home() {
         </div>
         <div className="company-bottom">
           <p>
-            Start with one workflow, its existing controls, and a failure your
-            team needs to resolve. Explore a bounded technical evaluation with
-            JCEE Labs.
+            Start with one workflow, its existing controls, and a failure or
+            mismatch your team needs to prevent. JCEE Labs evaluates the smallest
+            useful boundary before asking anyone to replace a system that already works.
           </p>
           <a href="/partners/enterprise">DISCUSS YOUR WORKFLOW <span>→</span></a>
         </div>
-        <div className="breath" aria-hidden="true" />
+      </section>
+
+      <section className="operating-cloud-section" id="operating-cloud" aria-labelledby="operating-cloud-title">
+        <div className="operating-cloud-shell">
+          <div className="operating-cloud-topline">
+            <span>PLATFORM / JCEE OPERATING CLOUD</span>
+            <span>PLATFORM DIRECTION · IN DEVELOPMENT</span>
+          </div>
+
+          <div className="operating-cloud-lead">
+            <div>
+              <p>COMMON CORE · INDUSTRY-SPECIFIC OPERATING SYSTEMS</p>
+              <h2 id="operating-cloud-title">Keep the systems that work. Add intelligence at the seams.</h2>
+            </div>
+            <div className="operating-cloud-lead-copy">
+              <p>
+                JCEE Operating Cloud is the platform direction for connecting
+                existing business systems, specialized agents, and assurance
+                controls around work that crosses tools and teams.
+              </p>
+              <a href="/operating-cloud">EXPLORE THE PLATFORM DIRECTION <span>→</span></a>
+            </div>
+          </div>
+
+          <div className="operating-cloud-flow" aria-label="JCEE Operating Cloud operating flow">
+            <div className="cloud-system-column">
+              <span>EXISTING SYSTEMS</span>
+              <div><strong>EMAIL / PO</strong><small>Instructions + source documents</small></div>
+              <div><strong>ERP / CRM</strong><small>Operational system of record</small></div>
+              <div><strong>HUMAN REVIEW</strong><small>Exceptions + approval</small></div>
+            </div>
+            <div className="cloud-bridge" aria-hidden="true"><span>→</span></div>
+            <div className="cloud-core-column">
+              <span>JCEE OPERATING CLOUD</span>
+              <strong>CONNECT</strong>
+              <strong>RECONCILE</strong>
+              <strong>CONTROL</strong>
+            </div>
+            <div className="cloud-bridge" aria-hidden="true"><span>→</span></div>
+            <div className="cloud-outcome-column">
+              <span>OPERATING OUTCOME</span>
+              <div><strong>FLAG</strong><small>Surface exact mismatches</small></div>
+              <div><strong>ASSIST</strong><small>Prepare the next step</small></div>
+              <div><strong>ACT</strong><small>Only when authority permits</small></div>
+            </div>
+          </div>
+
+          <div className="operating-cloud-pillars">
+            {cloudPillars.map((pillar) => (
+              <article key={pillar.index}>
+                <span>{pillar.index}</span>
+                <h3>{pillar.title}</h3>
+                <p>{pillar.copy}</p>
+              </article>
+            ))}
+          </div>
+
+          <article className="distribution-spotlight">
+            <div>
+              <span>FIRST INDUSTRY OPERATING SYSTEM</span>
+              <h3>JCEE Distribution</h3>
+              <p>
+                Built first for industrial distribution workflows where quotes,
+                purchase orders, shipping instructions, fees, and ERP records can
+                disagree across systems. The first evaluation target is simple:
+                catch costly mismatches before they become margin loss.
+              </p>
+            </div>
+            <div className="distribution-spotlight-meta">
+              <span>DESIGN-STAGE · BOUNDED PILOT WORKFLOWS</span>
+              <a href="/distribution">EXPLORE JCEE DISTRIBUTION <span>→</span></a>
+            </div>
+          </article>
+        </div>
       </section>
 
       <section className="vow-section" id="vow">
@@ -172,31 +263,37 @@ export default function Home() {
           <span>EVIDENCE-FIRST EXECUTION RUNTIME</span>
         </div>
 
-        <figure className="chapter-visual chapter-visual-vow">
-          <img
-            src="https://jceelabs.com/manus-storage/02-vow-receipt_372bf105.webp"
-            alt="Three aligned execution receipts joined by one electric-blue verification line"
-            loading="lazy"
-          />
-          <figcaption><span>EXECUTION RECEIPT / 01</span> Intent, effect, and outcome remain joined.</figcaption>
-        </figure>
+        <div className="integrated-technology-surface integrated-technology-dark">
+          <div className="vow-intro">
+            <h2>The runtime between<br />intention and action.</h2>
+            <div>
+              <p>
+                JCEE VOW is an evidence-first execution runtime for consequential
+                software and AI-directed actions. It is designed to make covered
+                work inspectable, resumable, and accountable—even when a process
+                fails halfway through.
+              </p>
+              <p className="quiet">
+                Scope and limitations are documented in the public VOW overview.
+              </p>
+            </div>
+          </div>
 
-        <div className="vow-intro">
-          <h2>The runtime between<br />intention and action.</h2>
-          <div>
-            <p>
-              JCEE VOW is an evidence-first execution runtime for consequential
-              software and AI-directed actions. It is designed to make covered
-              work inspectable, resumable, and accountable—even when a process
-              fails halfway through.
-            </p>
-            <p className="quiet">
-              Scope and limitations are documented in the public VOW overview.
-            </p>
+          <div className="native-evidence-rail" aria-label="VOW evidence flow">
+            <article><span>01</span><strong>INTENT</strong><small>Name the effect before execution.</small></article>
+            <i aria-hidden="true">→</i>
+            <article><span>02</span><strong>AUTHORITY</strong><small>Check what may happen now.</small></article>
+            <i aria-hidden="true">→</i>
+            <article><span>03</span><strong>EFFECT</strong><small>Execute through a bounded capability.</small></article>
+            <i aria-hidden="true">→</i>
+            <article><span>04</span><strong>RECEIPT</strong><small>Preserve the outcome for recovery and review.</small></article>
           </div>
         </div>
 
-        <VowDurabilityDemo />
+        <div className="instrument-frame instrument-frame-dark">
+          <div className="instrument-label"><span>LIVE PUBLIC MODEL</span><strong>Crash, recover, inspect.</strong></div>
+          <VowDurabilityDemo />
+        </div>
 
         <div className="guarantee-grid">
           {guarantees.map((item) => (
@@ -220,56 +317,61 @@ export default function Home() {
           READ THE PUBLIC JCEE VOW OVERVIEW <span>→</span>
         </a>
       </section>
-      <div className="breath" aria-hidden="true" />
 
       <section className="qcs-section" id="qcs" aria-labelledby="qcs-title">
         <div className="section-index light">
           <span>03 / QCS</span>
-          <span>WORKFLOW-FREE TRANSITION CALCULUS · RESEARCH</span>
+          <span>TRANSITION-LEGITIMACY RESEARCH</span>
         </div>
-        <div className="qcs-layout">
-          <div>
-            <p className="qcs-kicker">VERIFIED MILESTONE · QCS-2.0 CORE FROZEN</p>
-            <h2 id="qcs-title">When does the evidence justify the next action?</h2>
+
+        <div className="integrated-technology-surface integrated-technology-light">
+          <div className="qcs-layout">
+            <div>
+              <p className="qcs-kicker">VERIFIED MILESTONE · QCS-2.0 CORE FROZEN</p>
+              <h2 id="qcs-title">When does the evidence justify the next action?</h2>
+            </div>
+            <div className="qcs-copy">
+              <p>
+                QCS is a separate research program for determining whether the
+                currently proven authoritative state justifies a proposed causal
+                transition.
+              </p>
+              <p>
+                The frozen QCS-2.0 specification passed its planned reproduction
+                gate across PostgreSQL transactional authority and a remote
+                network-effect authority without changing the frozen calculus.
+              </p>
+              <p className="quiet">
+                Verified milestone, bounded scope. The result applies to the
+                tested specification, authority classes, and adversarial
+                conditions. It is not a universal correctness,
+                production-readiness, or third-party certification claim.
+              </p>
+              <dl className="qcs-status-grid">
+                <div><dt>SPECIFICATION</dt><dd>QCS-2.0 CORE FROZEN</dd></div>
+                <div><dt>REPRODUCTION GATE</dt><dd>PASS · TWO AUTHORITY CLASSES</dd></div>
+                <div><dt>JUDGMENT</dt><dd>PROVED · DISPROVED · UNKNOWN</dd></div>
+              </dl>
+              <a href="/qcs">VIEW QCS <span aria-hidden="true">→</span></a>
+            </div>
           </div>
-          <div className="qcs-copy">
-            <p>
-              QCS is a separate research program for determining whether the
-              currently proven authoritative state justifies a proposed causal
-              transition.
-            </p>
-            <p>
-              The frozen QCS-2.0 specification passed its planned reproduction
-              gate across PostgreSQL transactional authority and a remote
-              network-effect authority without changing the frozen calculus.
-            </p>
-            <p className="quiet">
-              Verified milestone, bounded scope. The result applies to the
-              tested specification, authority classes, and adversarial
-              conditions. It is not a universal correctness,
-              production-readiness, or third-party certification claim.
-            </p>
-            <dl className="qcs-status-grid">
-              <div><dt>SPECIFICATION</dt><dd>QCS-2.0 CORE FROZEN</dd></div>
-              <div><dt>REPRODUCTION GATE</dt><dd>PASS · TWO AUTHORITY CLASSES</dd></div>
-              <div><dt>JUDGMENT</dt><dd>PROVED · DISPROVED · UNKNOWN</dd></div>
-            </dl>
-            <a href="/qcs">VIEW QCS <span aria-hidden="true">→</span></a>
+
+          <div className="native-causal-rail" aria-label="QCS transition decision flow">
+            <article><span>01</span><strong>PROVEN STATE</strong><small>What is authoritative now?</small></article>
+            <i aria-hidden="true">→</i>
+            <article><span>02</span><strong>PROPOSED CHANGE</strong><small>What effect is being requested?</small></article>
+            <i aria-hidden="true">→</i>
+            <article className="native-causal-boundary"><span>03</span><strong>EVIDENCE BOUNDARY</strong><small>Current enough to authorize?</small></article>
+            <i aria-hidden="true">→</i>
+            <article><span>04</span><strong>ACT / WAIT</strong><small>Never turn unknown into permission.</small></article>
           </div>
         </div>
 
-        <figure className="chapter-visual chapter-visual-qcs">
-          <img
-            src="https://jceelabs.com/manus-storage/03-qcs-causal-rail_731e5c1a.webp"
-            alt="A causal rail with three state blocks stopped at a transparent evidence boundary"
-            loading="lazy"
-          />
-          <figcaption><span>CAUSAL BOUNDARY / 02</span> A proposed effect stops where authority is unresolved.</figcaption>
-        </figure>
-
-        <QcsTransitionGate />
+        <div className="instrument-frame instrument-frame-light">
+          <div className="instrument-label"><span>PUBLIC TRANSITION MODEL</span><strong>Change the evidence. Watch the verdict move.</strong></div>
+          <QcsTransitionGate />
+        </div>
       </section>
-      <div className="breath" aria-hidden="true" />
 
       <section className="assurance-section" id="assurance" aria-labelledby="assurance-title">
         <div className="section-index light">
@@ -317,7 +419,6 @@ export default function Home() {
           VIEW THE PUBLIC ASSURANCE OVERVIEW <span>→</span>
         </a>
       </section>
-      <div className="breath" aria-hidden="true" />
 
       <section className="registry-section" id="registry" aria-labelledby="registry-title">
         <div className="section-index">
@@ -357,7 +458,6 @@ export default function Home() {
           OPEN THE JCEE PUBLIC REGISTRY <span>→</span>
         </a>
       </section>
-      <div className="breath" aria-hidden="true" />
 
       <section className="principles-summary" id="charter" aria-labelledby="principles-title">
         <h2 id="principles-title">Intelligence should leave receipts.</h2>
