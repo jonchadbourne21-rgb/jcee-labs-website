@@ -3,6 +3,7 @@ import CoreHeader from "@/components/CoreHeader";
 import QcsTransitionGate from "@/components/QcsTransitionGate";
 import VowDurabilityDemo from "@/components/VowDurabilityDemo";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import "@/homepage-enterprise.css";
 
 const customerProblems = [
   {
@@ -22,6 +23,24 @@ const customerProblems = [
     copy: "A reviewer needs an inspectable record. JCEE Assurance explores portable evidence and verification with explicit limits.",
     href: "/assurance",
     link: "Explore JCEE Assurance",
+  },
+];
+
+const operatingCloudModules = [
+  {
+    index: "01",
+    title: "Connect",
+    copy: "Bring instructions, records, approvals, and operational context together without replacing the systems a business already depends on.",
+  },
+  {
+    index: "02",
+    title: "Reconcile",
+    copy: "Compare what was requested with what the systems currently say before a mismatch becomes a fee, delay, duplicate action, or recovery problem.",
+  },
+  {
+    index: "03",
+    title: "Control",
+    copy: "Assist or act only inside declared authority, preserve the evidence behind the decision, and surface exceptions that still require a person.",
   },
 ];
 
@@ -111,7 +130,7 @@ export default function Home() {
             failure, and evidence of what happened.
           </p>
           <div className="hero-actions">
-            <a className="primary-link" href="#vow">SEE THE RUNTIME <span>↓</span></a>
+            <a className="primary-link" href="#operating-cloud">EXPLORE OPERATING CLOUD <span>↓</span></a>
             <a className="primary-link" href="/partners/enterprise">DISCUSS YOUR WORKFLOW <span>→</span></a>
           </div>
         </div>
@@ -166,22 +185,81 @@ export default function Home() {
         <div className="breath" aria-hidden="true" />
       </section>
 
-      <section className="vow-section" id="vow">
-        <div className="section-index">
-          <span>02 / JCEE VOW</span>
+      <section className="operating-cloud-home" id="operating-cloud" aria-labelledby="operating-cloud-title">
+        <div className="operating-cloud-home__ambient" aria-hidden="true" />
+        <div className="operating-cloud-home__frame">
+          <div className="operating-cloud-home__topline">
+            <span>02 / JCEE OPERATING CLOUD</span>
+            <span>DESIGN-STAGE PLATFORM DIRECTION · OPERATING INFRASTRUCTURE</span>
+          </div>
+
+          <div className="operating-cloud-home__lead">
+            <div>
+              <p className="operating-cloud-home__kicker">OPERATING INFRASTRUCTURE FOR INTELLIGENT WORK</p>
+              <h2 id="operating-cloud-title">One operating layer between intelligence and consequence.</h2>
+            </div>
+            <div className="operating-cloud-home__lead-copy">
+              <p>
+                JCEE Operating Cloud is the platform direction for connecting the systems a business already uses,
+                reconciling the state they disagree about, and controlling what intelligent software may do next.
+              </p>
+              <p className="operating-cloud-home__boundary">
+                The platform is in development. Public research milestones describe verified components and bounded results—not production certification.
+              </p>
+            </div>
+          </div>
+
+          <div className="operating-cloud-home__systems" aria-label="Existing systems Operating Cloud is designed to work across">
+            <span>WORK ACROSS</span>
+            <div>
+              <b>EMAIL + DOCUMENTS</b>
+              <b>ERP + CRM</b>
+              <b>APIS + WORKFLOWS</b>
+              <b>HUMAN APPROVAL</b>
+            </div>
+          </div>
+
+          <div className="operating-cloud-home__modules">
+            {operatingCloudModules.map((module) => (
+              <article key={module.index}>
+                <span>{module.index}</span>
+                <h3>{module.title}</h3>
+                <p>{module.copy}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="operating-cloud-home__distribution">
+            <div>
+              <span>FIRST INDUSTRY OPERATING SYSTEM</span>
+              <h3>JCEE Distribution</h3>
+            </div>
+            <div>
+              <p>
+                The first industry system being designed on this platform direction focuses on industrial distribution:
+                quotes, purchase orders, shipping instructions, fees, exceptions, and cross-system reconciliation before mistakes become margin loss.
+              </p>
+              <a href="/partners/enterprise">DISCUSS A DISTRIBUTION WORKFLOW <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="vow-section home-chapter-background" id="vow">
+        <div className="section-index home-chapter-copy">
+          <span>03 / JCEE VOW</span>
           <span>EVIDENCE-FIRST EXECUTION RUNTIME</span>
         </div>
 
-        <figure className="chapter-visual chapter-visual-vow">
+        <figure className="chapter-visual chapter-visual-vow home-chapter-visual" aria-hidden="true">
           <img
             src="https://jceelabs.com/manus-storage/02-vow-receipt_372bf105.webp"
-            alt="Three aligned execution receipts joined by one electric-blue verification line"
+            alt=""
             loading="lazy"
           />
-          <figcaption><span>EXECUTION RECEIPT / 01</span> Intent, effect, and outcome remain joined.</figcaption>
         </figure>
 
-        <div className="vow-intro">
+        <div className="vow-intro home-chapter-copy home-chapter-intro">
           <h2>The runtime between<br />intention and action.</h2>
           <div>
             <p>
@@ -222,12 +300,21 @@ export default function Home() {
       </section>
       <div className="breath" aria-hidden="true" />
 
-      <section className="qcs-section" id="qcs" aria-labelledby="qcs-title">
-        <div className="section-index light">
-          <span>03 / QCS</span>
+      <section className="qcs-section home-chapter-background" id="qcs" aria-labelledby="qcs-title">
+        <div className="section-index light home-chapter-copy">
+          <span>04 / QCS</span>
           <span>WORKFLOW-FREE TRANSITION CALCULUS · RESEARCH</span>
         </div>
-        <div className="qcs-layout">
+
+        <figure className="chapter-visual chapter-visual-qcs home-chapter-visual" aria-hidden="true">
+          <img
+            src="https://jceelabs.com/manus-storage/03-qcs-causal-rail_731e5c1a.webp"
+            alt=""
+            loading="lazy"
+          />
+        </figure>
+
+        <div className="qcs-layout home-chapter-copy home-chapter-intro">
           <div>
             <p className="qcs-kicker">VERIFIED MILESTONE · QCS-2.0 CORE FROZEN</p>
             <h2 id="qcs-title">When does the evidence justify the next action?</h2>
@@ -258,22 +345,13 @@ export default function Home() {
           </div>
         </div>
 
-        <figure className="chapter-visual chapter-visual-qcs">
-          <img
-            src="https://jceelabs.com/manus-storage/03-qcs-causal-rail_731e5c1a.webp"
-            alt="A causal rail with three state blocks stopped at a transparent evidence boundary"
-            loading="lazy"
-          />
-          <figcaption><span>CAUSAL BOUNDARY / 02</span> A proposed effect stops where authority is unresolved.</figcaption>
-        </figure>
-
         <QcsTransitionGate />
       </section>
       <div className="breath" aria-hidden="true" />
 
       <section className="assurance-section" id="assurance" aria-labelledby="assurance-title">
         <div className="section-index light">
-          <span>04 / JCEE ASSURANCE</span>
+          <span>05 / JCEE ASSURANCE</span>
           <span>PORTABLE EVIDENCE · INDEPENDENT VERIFICATION</span>
         </div>
 
@@ -321,7 +399,7 @@ export default function Home() {
 
       <section className="registry-section" id="registry" aria-labelledby="registry-title">
         <div className="section-index">
-          <span>05 / PUBLIC REGISTRY</span>
+          <span>06 / PUBLIC REGISTRY</span>
           <span>A LIVING RECORD · NOT A HIGHLIGHT REEL</span>
         </div>
 
