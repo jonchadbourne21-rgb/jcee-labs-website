@@ -99,8 +99,16 @@ async function connect(debugPort) {
   let sequence = 0;
   const pending = new Map();
   const runtimeErrors = [];
+  const networkFailures = [];
   socket.addEventListener("message", event => {
     const message = JSON.parse(event.data);
+    if (message.method === "Network.responseReceived") {
+      const { response, type } = message.params;
+      if (response.url.startsWith("http://127.0.0.1:") &&
+          ((response.status >= 400 && type !== "Document") || response.url.includes("/api/"))) {
+        networkFailures.push(`${response.status} ${response.url}`);
+      }
+    }
     if (message.method === "Runtime.exceptionThrown") {
       runtimeErrors.push(message.params.exceptionDetails.text);
     }
@@ -123,7 +131,8 @@ async function connect(debugPort) {
 
   await send("Page.enable");
   await send("Runtime.enable");
-  return { send, runtimeErrors, close: () => socket.close() };
+  await send("Network.enable");
+  return { send, runtimeErrors, networkFailures, close: () => socket.close() };
 }
 
 async function waitForApp(send) {
@@ -161,7 +170,9 @@ async function evaluate(send, expression) {
 }
 
 const projectRoot = process.cwd();
-const distEntry = path.join(projectRoot, "dist", "index.js");
+const staticMode = Object.hasOwn(process.env, "PAGES_BASE_PATH");
+const prefix = staticMode ? process.env.PAGES_BASE_PATH : "";
+const distEntry = path.join(projectRoot, staticMode ? "scripts/serve-pages-test.mjs" : "dist/index.js");
 if (!existsSync(distEntry)) {
   throw new Error("Missing dist/index.js. Run pnpm build before pnpm test:public-surface.");
 }
@@ -184,8 +195,8 @@ const browser = start(process.env.CHROMIUM_BIN || "chromium", [
 
 let exitCode = 0;
 try {
-  const baseUrl = `http://127.0.0.1:${appPort}`;
-  await waitForUrl(baseUrl, "production server");
+  const baseUrl = `http://127.0.0.1:${appPort}${prefix}`;
+  await waitForUrl(`${baseUrl}/`, staticMode ? "static Pages server" : "production server");
   const page = await connect(debugPort);
   const failures = [];
 
@@ -221,12 +232,35 @@ try {
   ];
   if (!footer.present) failures.push("shared footer is missing from homepage");
   for (const [href, text] of requiredFooterLinks) {
-    if (!footer.links.some(link => link.href === href && link.text === text)) {
+    if (!footer.links.some(link => link.href === `${prefix}${href}` && link.text === text)) {
       failures.push(`footer is missing ${text} link (${href})`);
     }
   }
 
+  if (staticMode) {
+    const manifestResponse = await fetch(`${baseUrl}/deployment.json`);
+    if (!manifestResponse.ok) throw new Error("Missing static deployment manifest");
+    const manifest = await manifestResponse.json();
+    for (const route of manifest.publicRoutes) {
+      const response = await fetch(`${baseUrl}${route}`);
+      if (response.status !== 200) failures.push(`Static public route returned ${response.status}: ${route}`);
+    }
+    const cloudPanel = await evaluate(page.send,
+      "Boolean(document.querySelector('.operating-cloud-home'))");
+    if (!cloudPanel) failures.push("Latest Operating Cloud panel is missing");
+    for (const name of ["01-signature-hero-exposed.webp", "01-signature-hero-exposed-mobile.webp",
+                        "02-vow-receipt.webp", "03-qcs-causal-rail.webp"]) {
+      const response = await fetch(`${baseUrl}/visuals/${name}`);
+      if (!response.ok || !response.headers.get("content-type")?.startsWith("image/")) {
+        failures.push(`Static image is missing: ${name}`);
+      }
+    }
+  }
+
   for (const route of retiredRoutes) {
+    if (staticMode && (await fetch(`${baseUrl}${route}`)).status !== 404) {
+      failures.push(`Retired static route did not return HTTP 404: ${route}`);
+    }
     await navigate(page.send, baseUrl, route);
     const text = await readBody(page.send);
     if (!text.includes("404 / UNKNOWN STATE") || !text.includes("is not in evidence")) {
@@ -290,7 +324,7 @@ try {
   await navigate(page.send, baseUrl, "/registry");
   const registryDownloadLink = await evaluate(
     page.send,
-    "Boolean(document.querySelector('a[download][href=\"/JCEE_Labs_Public_Registry_v1.0.md\"]'))"
+    `Boolean(document.querySelector('a[download][href="${prefix}/JCEE_Labs_Public_Registry_v1.0.md"]'))`
   );
   if (!registryDownloadLink) {
     failures.push("Public Registry page is missing its Markdown download link");
@@ -337,7 +371,7 @@ try {
   await navigate(page.send, baseUrl, "/charter");
   const charterV11Link = await evaluate(
     page.send,
-    "Boolean(document.querySelector('a[download][href=\"/JCEE_Labs_Charter_v1.1.md\"]'))"
+    `Boolean(document.querySelector('a[download][href="${prefix}/JCEE_Labs_Charter_v1.1.md"]'))`
   );
   if (!charterV11Link) {
     failures.push("Charter v1.1 page is missing the addendum download link");
@@ -356,7 +390,7 @@ try {
   await navigate(page.send, baseUrl, "/charter/archive/v1.0");
   const charterV10Link = await evaluate(
     page.send,
-    "Boolean(document.querySelector('a[download][href=\"/JCEE_Labs_Charter_v1.0.md\"]'))"
+    `Boolean(document.querySelector('a[download][href="${prefix}/JCEE_Labs_Charter_v1.0.md"]'))`
   );
   if (!charterV10Link) {
     failures.push("Preserved Charter v1.0 page is missing its Markdown download link");
@@ -370,6 +404,23 @@ try {
     !charterV10Text.startsWith("# The JCEE Labs Charter")
   ) {
     failures.push("Preserved Charter v1.0 Markdown endpoint is not valid");
+  }
+
+  if (staticMode) {
+    await navigate(page.send, baseUrl, "/research/jrp-000");
+    // This request formerly escaped the project prefix and silently loaded 404 HTML.
+    const paper = await fetch(`${baseUrl}/JRP-000_The_Evidence_Boundary_v1.0.md`);
+    if (!paper.ok || !(await paper.text()).startsWith("#")) failures.push("Research paper download failed");
+    let paperRendered = false;
+    for (let attempt = 0; attempt < 60; attempt += 1) {
+      paperRendered = await evaluate(page.send,
+        "Boolean(document.querySelector('.paper-markdown h2'))");
+      if (paperRendered) break;
+      await sleep(100);
+    }
+    if (!paperRendered) failures.push("Research paper body did not render from its static Markdown source");
+    if (page.networkFailures.length) failures.push(`Static resource/API failures: ${page.networkFailures.join("; ")}`);
+    console.log(`Static Pages checks completed for ${prefix || "/"}: direct routes, local images, documents, and no application API.`);
   }
 
   if (page.runtimeErrors.length) {
