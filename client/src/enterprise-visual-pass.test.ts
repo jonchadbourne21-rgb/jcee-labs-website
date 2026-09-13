@@ -16,8 +16,9 @@ describe("enterprise visual pass", () => {
     expect(visualCss).toContain("top center / 100% auto no-repeat");
   });
 
-  it("uses the approved optimized Assurance hero while keeping claims in native page markup", () => {
-    expect(visualCss).toContain(".assurance-program");
+  it("scopes the optimized Assurance hero to the Assurance page only", () => {
+    expect(visualCss).toContain(".assurance-program-page .assurance-program {");
     expect(visualCss).toContain("ecc115d0-76eb-4a5c-bf41-bddd5e579065.webp");
+    expect(visualCss).not.toMatch(/(^|\n)\.assurance-program\s*\{/);
   });
 });
