@@ -11,13 +11,13 @@ describe("enterprise visual pass", () => {
     expect(reviewCss).toContain('@import "./enterprise-visual-pass.css"');
   });
 
-  it("uses the high-resolution Operating Cloud panorama without full-height cover stretching", () => {
-    expect(visualCss).toContain("hf_20260913_121011_cde0c27f-604a-4cab-a462-f13e11da1288.png");
+  it("uses the optimized high-resolution Operating Cloud panorama without full-height cover stretching", () => {
+    expect(visualCss).toContain("8eb43ee0-7cad-47f8-8667-2f7c6df92076.webp");
     expect(visualCss).toContain("top center / 100% auto no-repeat");
   });
 
-  it("uses the approved Assurance hero while keeping claims in native page markup", () => {
+  it("uses the approved optimized Assurance hero while keeping claims in native page markup", () => {
     expect(visualCss).toContain(".assurance-program");
-    expect(visualCss).toContain("hf_20260913_121026_ac53d071-079c-47eb-96c9-665ae97c35de.png");
+    expect(visualCss).toContain("ecc115d0-76eb-4a5c-bf41-bddd5e579065.webp");
   });
 });
