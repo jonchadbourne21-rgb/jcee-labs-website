@@ -190,6 +190,7 @@ async function readLayout(send, selector) {
       const rect = element?.getBoundingClientRect();
       return {
         viewportWidth: innerWidth,
+        clientWidth: document.documentElement.clientWidth,
         scrollWidth: document.documentElement.scrollWidth,
         bodyScrollWidth: document.body.scrollWidth,
         element: rect
@@ -246,8 +247,9 @@ async function evaluateProfile(send, profileName, profile, baseUrl) {
   const failures = [];
   for (const [surface, checks] of [["homepage", homepage], ["registry", registry], ["partners", partners], ["enterprise", enterprise], ["research", research]]) {
     if (
-      checks.scrollWidth !== checks.viewportWidth ||
-      checks.bodyScrollWidth > checks.viewportWidth
+      checks.scrollWidth > checks.clientWidth + 1 ||
+      checks.bodyScrollWidth > checks.clientWidth + 1 ||
+      checks.viewportWidth > profile.width + 1
     ) {
       failures.push(
         `${surface} horizontal overflow (${checks.scrollWidth}/${checks.bodyScrollWidth} at ${checks.viewportWidth}px)`
@@ -306,8 +308,13 @@ async function evaluateProfile(send, profileName, profile, baseUrl) {
             return a.width && (a.left < b.left - 1 || a.right > b.right + 1);
           }).map(el => el.getAttribute('name') || el.textContent.trim());
         return {
-          width: innerWidth, scrollWidth: document.documentElement.scrollWidth,
+          width: innerWidth, clientWidth: document.documentElement.clientWidth,
+          scrollWidth: document.documentElement.scrollWidth,
           bodyWidth: document.body.scrollWidth, escapedHeadings, overflowingControls,
+          expandedElements: [...document.querySelectorAll('body *')].filter(el => {
+            const box=el.getBoundingClientRect();
+            return box.width > 0 && box.right > ${profile.width} + 1 && getComputedStyle(el).visibility !== 'hidden';
+          }).slice(0, 12).map(el => ({ tag: el.tagName, class: el.className, right: el.getBoundingClientRect().right })),
           title: document.title, headingCount: document.querySelectorAll('h1').length,
         };
       })()`,
@@ -315,7 +322,7 @@ async function evaluateProfile(send, profileName, profile, baseUrl) {
     const check = result.result.value;
     routeChecks.push({ route, ...check });
     if (check.headingCount !== 1) failures.push(`${route}: expected one page heading`);
-    if (check.scrollWidth > check.width || check.bodyWidth > check.width) failures.push(`${route}: horizontal page overflow`);
+    if (check.scrollWidth > check.clientWidth + 1 || check.bodyWidth > check.clientWidth + 1 || check.width > profile.width + 1) failures.push(`${route}: horizontal page overflow: ${JSON.stringify(check.expandedElements)}`);
     for (const heading of check.escapedHeadings) failures.push(`${route}: heading escapes its column: ${heading}`);
     for (const control of check.overflowingControls) failures.push(`${route}: form control escapes its field: ${control}`);
   }
