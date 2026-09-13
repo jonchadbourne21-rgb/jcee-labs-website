@@ -98,6 +98,24 @@ async function waitForApp(send) {
   throw new Error("Application did not finish rendering");
 }
 
+async function waitForImage(send, url) {
+  const urlLiteral = JSON.stringify(url);
+  const result = await send("Runtime.evaluate", {
+    awaitPromise: true,
+    returnByValue: true,
+    expression: `new Promise((resolve, reject) => {
+      const image = new Image();
+      const timer = setTimeout(() => reject(new Error('Timed out loading visual asset')), 10000);
+      image.onload = () => { clearTimeout(timer); resolve({width:image.naturalWidth,height:image.naturalHeight}); };
+      image.onerror = () => { clearTimeout(timer); reject(new Error('Failed to load visual asset')); };
+      image.src = ${urlLiteral};
+    })`,
+  });
+  const dimensions = result.result.value;
+  if (!dimensions?.width || !dimensions?.height) throw new Error(`Visual asset did not decode: ${url}`);
+  return dimensions;
+}
+
 async function capture(send, baseUrl, spec) {
   await send("Emulation.setDeviceMetricsOverride", {
     width: spec.width,
@@ -112,17 +130,22 @@ async function capture(send, baseUrl, spec) {
 
   await send("Page.navigate", { url: `${baseUrl}${spec.route}?visual-review=${Date.now()}` });
   await waitForApp(send);
+  const assetDimensions = await waitForImage(send, spec.assetUrl);
 
   const selectorLiteral = JSON.stringify(spec.selector);
   await send("Runtime.evaluate", {
+    returnByValue: true,
     expression: `(() => {
       const el = document.querySelector(${selectorLiteral});
       if (!el) throw new Error('Missing selector: ' + ${selectorLiteral});
-      el.scrollIntoView({block:'start'});
-      window.scrollBy(0, -72);
+      document.documentElement.style.scrollBehavior = 'auto';
+      document.body.style.scrollBehavior = 'auto';
+      const top = el.getBoundingClientRect().top + window.scrollY - 72;
+      window.scrollTo(0, Math.max(0, top));
+      return {scrollY: window.scrollY, targetTop: top};
     })()`,
   });
-  await wait(900);
+  await wait(250);
 
   const state = await send("Runtime.evaluate", {
     returnByValue: true,
@@ -133,6 +156,7 @@ async function capture(send, baseUrl, spec) {
       const pseudo = getComputedStyle(el, '::before');
       return {
         viewport: [innerWidth, innerHeight],
+        scrollY: window.scrollY,
         clientWidth: document.documentElement.clientWidth,
         scrollWidth: document.documentElement.scrollWidth,
         bodyScrollWidth: document.body.scrollWidth,
@@ -152,6 +176,9 @@ async function capture(send, baseUrl, spec) {
   if (value.rect.width < Math.min(spec.width - 40, 300) || value.rect.height < 300) {
     throw new Error(`${spec.name}: target geometry is unexpectedly small ${JSON.stringify(value.rect)}`);
   }
+  if (value.rect.y > 110 || value.rect.y + value.rect.height < 200) {
+    throw new Error(`${spec.name}: target did not scroll into the review viewport ${JSON.stringify(value.rect)}`);
+  }
 
   const screenshot = await send("Page.captureScreenshot", {
     format: "png",
@@ -159,7 +186,7 @@ async function capture(send, baseUrl, spec) {
     captureBeyondViewport: false,
   });
   await writeFile(path.join(outputDir, spec.file), Buffer.from(screenshot.data, "base64"));
-  return { name: spec.name, ...value };
+  return { name: spec.name, assetDimensions, ...value };
 }
 
 await mkdir(outputDir, { recursive: true });
@@ -180,27 +207,30 @@ const browser = spawn(chromium, [
   "about:blank",
 ], { stdio: ["ignore", "pipe", "pipe"] });
 
+const operatingAsset = "https://d2ol7oe51mr4n9.cloudfront.net/user_3Ef0blYk8J0Q4PEe6OMhNJQ9UTw/8eb43ee0-7cad-47f8-8667-2f7c6df92076.webp";
+const assuranceAsset = "https://d2ol7oe51mr4n9.cloudfront.net/user_3Ef0blYk8J0Q4PEe6OMhNJQ9UTw/ecc115d0-76eb-4a5c-bf41-bddd5e579065.webp";
+
 try {
   const baseUrl = `http://127.0.0.1:${serverPort}`;
   await waitForUrl(baseUrl, "production server");
   const { send, close } = await connect(debugPort);
   const specs = [
-    { name: "Operating Cloud desktop", route: "/", selector: "#operating-cloud", width: 1440, height: 900, file: "operating-cloud-desktop.png" },
-    { name: "Assurance desktop", route: "/assurance", selector: ".assurance-program", width: 1440, height: 900, file: "assurance-desktop.png" },
-    { name: "Operating Cloud iPhone", route: "/", selector: "#operating-cloud", width: 390, height: 844, mobile: true, file: "operating-cloud-iphone.png" },
-    { name: "Assurance iPhone", route: "/assurance", selector: ".assurance-program", width: 390, height: 844, mobile: true, file: "assurance-iphone.png" },
+    { name: "Operating Cloud desktop", route: "/", selector: "#operating-cloud", width: 1440, height: 900, file: "operating-cloud-desktop.png", assetUrl: operatingAsset },
+    { name: "Assurance desktop", route: "/assurance", selector: ".assurance-program", width: 1440, height: 900, file: "assurance-desktop.png", assetUrl: assuranceAsset },
+    { name: "Operating Cloud iPhone", route: "/", selector: "#operating-cloud", width: 390, height: 844, mobile: true, file: "operating-cloud-iphone.png", assetUrl: operatingAsset },
+    { name: "Assurance iPhone", route: "/assurance", selector: ".assurance-program", width: 390, height: 844, mobile: true, file: "assurance-iphone.png", assetUrl: assuranceAsset },
   ];
   const results = [];
   for (const spec of specs) results.push(await capture(send, baseUrl, spec));
   close();
 
   const operating = results.filter(item => item.name.startsWith("Operating Cloud"));
-  if (operating.some(item => !item.pseudoBackgroundImage.includes("cde0c27f-604a-4cab-a462-f13e11da1288"))) {
-    throw new Error("Operating Cloud high-resolution panorama is not active in captured render");
+  if (operating.some(item => !item.pseudoBackgroundImage.includes("8eb43ee0-7cad-47f8-8667-2f7c6df92076"))) {
+    throw new Error("Operating Cloud optimized panorama is not active in captured render");
   }
   const assurance = results.filter(item => item.name.startsWith("Assurance"));
-  if (assurance.some(item => !item.backgroundImage.includes("ac53d071-079c-47eb-96c9-665ae97c35de"))) {
-    throw new Error("Assurance high-resolution hero is not active in captured render");
+  if (assurance.some(item => !item.backgroundImage.includes("ecc115d0-76eb-4a5c-bf41-bddd5e579065"))) {
+    throw new Error("Assurance optimized hero is not active in captured render");
   }
 
   await writeFile(path.join(outputDir, "layout-manifest.json"), JSON.stringify(results, null, 2));
