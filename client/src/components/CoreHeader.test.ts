@@ -21,21 +21,21 @@ describe("CoreHeader mobile navigation", () => {
 });
 
 describe("CoreHeader public information architecture", () => {
-  it("exposes the approved research and partnership navigation", () => {
+  it("leads with customer-facing platform surfaces and keeps evidence visible", () => {
     expect(publicNavigationLinks.map((link) => link.id)).toEqual([
       "jcee",
-      "vow",
-      "qcs",
-      "assurance",
-      "registry",
+      "cloud",
+      "distribution",
+      "technology",
+      "evidence",
       "partners",
     ]);
     expect(publicNavigationLinks.map((link) => link.label)).toEqual([
       "JCEE LABS",
-      "JCEE VOW",
-      "QCS",
-      "ASSURANCE",
-      "REGISTRY",
+      "OPERATING CLOUD",
+      "DISTRIBUTION",
+      "TECHNOLOGY",
+      "EVIDENCE",
       "PARTNERS",
     ]);
   });

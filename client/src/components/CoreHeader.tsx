@@ -3,14 +3,13 @@ import { useEffect, useRef, useState } from "react";
 
 export type CoreHeaderCurrent =
   | "jcee"
-  | "vow"
-  | "qcs"
-  | "assurance"
-  | "registry"
-  | "charter"
+  | "cloud"
+  | "distribution"
+  | "technology"
+  | "evidence"
   | "partners"
-  | "research"
-  | "mirrored";
+  | "charter"
+  | "research";
 
 type CoreHeaderProps = {
   current?: CoreHeaderCurrent;
@@ -18,10 +17,10 @@ type CoreHeaderProps = {
 
 export const publicNavigationLinks = [
   { id: "jcee", label: "JCEE LABS", href: "/#company" },
-  { id: "vow", label: "JCEE VOW", href: "/vow" },
-  { id: "qcs", label: "QCS", href: "/qcs" },
-  { id: "assurance", label: "ASSURANCE", href: "/assurance" },
-  { id: "registry", label: "REGISTRY", href: "/registry" },
+  { id: "cloud", label: "OPERATING CLOUD", href: "/operating-cloud" },
+  { id: "distribution", label: "DISTRIBUTION", href: "/distribution" },
+  { id: "technology", label: "TECHNOLOGY", href: "/technology" },
+  { id: "evidence", label: "EVIDENCE", href: "/registry" },
   { id: "partners", label: "PARTNERS", href: "/partners" },
 ] as const;
 

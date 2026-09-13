@@ -157,7 +157,7 @@ export default function PublicRegistry() {
 
   return (
     <main className="program-page registry-page" id="top">
-      <CoreHeader current="registry" />
+      <CoreHeader current="evidence" />
 
       <section className="program-masthead registry-program">
         <p className="eyebrow"><span /> PUBLIC RECORD · CURRENT</p>
@@ -171,8 +171,8 @@ export default function PublicRegistry() {
           selected systems, research programs, and governing standards.
         </p>
         <div className="program-status-row">
-          <span>PUBLIC PROJECTION · SANITIZED</span>
-          <span>PRIVATE SOURCE AND COUNSEL MATERIAL · EXCLUDED</span>
+          <span>PUBLIC SUMMARY · CURRENT</span>
+          <span>PRIVATE SOURCE / SECURITY / COUNSEL MATERIAL · EXCLUDED</span>
         </div>
       </section>
 
@@ -186,10 +186,9 @@ export default function PublicRegistry() {
             restart points, next gates, and protected materials.
           </p>
           <p>
-            This page is a controlled public derivative. It provides enough
-            information to understand our claims without publishing private
-            code, attack corpora, verifier internals, patent-counsel material,
-            or enabling implementation details.
+            This public version provides enough information to understand our
+            claims without publishing private code, security test corpora,
+            verifier internals, patent-counsel material, or customer information.
           </p>
           <div className="program-links">
             <a href="/JCEE_Labs_Public_Registry_v1.0.md" download>
@@ -265,10 +264,9 @@ export default function PublicRegistry() {
         </div>
         <div>
           <p>
-            JCEE may withhold source code, private evidence packages, attack
-            corpora, security-sensitive details, patent material, customer
-            information, and counsel work product while still keeping each
-            public claim inside a clear evidence boundary.
+            JCEE may withhold source code, private evidence packages, security-test
+            material, patent material, customer information, and counsel work
+            product while still keeping each public claim inside a clear evidence boundary.
           </p>
           <p>
             A withheld artifact cannot be used to make an unlimited public

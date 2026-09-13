@@ -56,7 +56,7 @@ export default function AssurancePage() {
 
   return (
     <main className="program-page assurance-program-page" id="top">
-      <CoreHeader current="assurance" />
+      <CoreHeader current="technology" />
 
       <section className="program-masthead assurance-program">
         <p className="eyebrow"><span /> PUBLIC OVERVIEW · ACTIVE RESEARCH</p>
@@ -145,9 +145,9 @@ export default function AssurancePage() {
           assumed merely because the layers were designed by the same lab.
         </p>
         <div className="program-links">
+          <a href="/technology">BACK TO TECHNOLOGY <span>→</span></a>
           <a href="/registry">VIEW THE PUBLIC REGISTRY <span>→</span></a>
           <a href="/vow">VIEW JCEE VOW <span>→</span></a>
-          <a href="/qcs">VIEW QCS <span>→</span></a>
         </div>
       </section>
 

@@ -13,8 +13,9 @@
     "smoke:mobile:iphone": "pnpm build && node scripts/mobile-layout-check.mjs --profile=iphone",
     "smoke:mobile:android": "pnpm build && node scripts/mobile-layout-check.mjs --profile=android",
     "test:mobile-layout": "node scripts/mobile-layout-check.mjs",
+    "test:operating-cloud": "node scripts/operating-cloud-check.mjs",
     "test:public-surface": "node scripts/public-surface-check.mjs",
-    "release:check": "pnpm check && pnpm test && pnpm build && pnpm test:mobile-layout && pnpm test:public-surface",
+    "release:check": "pnpm check && pnpm test && pnpm build && pnpm test:mobile-layout && pnpm test:operating-cloud && pnpm test:public-surface",
     "db:push": "drizzle-kit generate && drizzle-kit migrate"
   },
   "dependencies": {
