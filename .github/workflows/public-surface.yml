@@ -18,10 +18,6 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      
-
-       
-
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
 
@@ -30,8 +26,6 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
-          
-      
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -43,3 +37,15 @@ jobs:
         env:
           CHROMIUM_BIN: chromium
         run: pnpm release:check
+
+      - name: Capture enterprise visual review surfaces
+        env:
+          CHROMIUM_BIN: chromium
+        run: node scripts/enterprise-visual-capture.mjs
+
+      - name: Upload enterprise visual review evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: jcee-enterprise-visual-review
+          path: artifacts/enterprise-visual-review
+          if-no-files-found: error
