@@ -15,6 +15,8 @@ import "./curlicue.css";
 import "./qcs-gate.css";
 import "./site-vnext.css";
 import "./precision-system.css";
+import "./homepage-enterprise.css";
+import "./homepage-enterprise-review-fixes.css";
 
 const queryClient = new QueryClient();
 
@@ -23,7 +25,6 @@ const redirectToLoginIfUnauthorized = (error: unknown) => {
   if (typeof window === "undefined") return;
 
   const isUnauthorized = error.message === UNAUTHED_ERR_MSG;
-
   if (!isUnauthorized) return;
 
   window.location.href = getLoginUrl();
