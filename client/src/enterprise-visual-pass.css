@@ -1,0 +1,91 @@
+/* JCEE Labs enterprise visual pass — 2026-09-13
+   Scope: improve homepage Operating Cloud image fidelity and add a cinematic Assurance hero.
+   Program copy/claim boundaries remain unchanged. */
+
+/* Operating Cloud: use the 2K ultra-wide asset at its natural panoramic scale instead of
+   stretching a square/low-resolution image through the full section height. */
+.precision-home .operating-cloud-home::before {
+  background:
+    linear-gradient(90deg, rgba(5, 6, 9, 0.9) 0%, rgba(5, 6, 9, 0.62) 42%, rgba(5, 6, 9, 0.28) 70%, rgba(5, 6, 9, 0.68) 100%),
+    linear-gradient(180deg, rgba(5, 6, 9, 0.08) 0%, rgba(5, 6, 9, 0.18) 24%, rgba(5, 6, 9, 0.88) 53%, #050609 72%),
+    url("https://d8j0ntlcm91z4.cloudfront.net/user_3Ef0blYk8J0Q4PEe6OMhNJQ9UTw/hf_20260913_121011_cde0c27f-604a-4cab-a462-f13e11da1288.png") top center / 100% auto no-repeat,
+    #050609 !important;
+}
+
+.precision-home .operating-cloud-home::after {
+  background:
+    radial-gradient(circle at 76% 18%, rgba(49, 92, 255, 0.16), transparent 25%),
+    linear-gradient(rgba(108, 140, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(108, 140, 255, 0.045) 1px, transparent 1px) !important;
+  background-size: auto, 64px 64px, 64px 64px !important;
+}
+
+.precision-home .operating-cloud-home__lead {
+  margin-top: clamp(54px, 7vw, 96px) !important;
+}
+
+.precision-home .operating-cloud-home__systems {
+  margin-top: clamp(52px, 6vw, 84px) !important;
+}
+
+/* Assurance: the user-selected possibility -> evidence -> boundary -> consequence visual
+   becomes a true masthead environment. Native HTML remains responsible for every claim. */
+.assurance-program {
+  background-color: #050609 !important;
+  background-image:
+    linear-gradient(180deg, rgba(5, 6, 9, 0.05) 0%, rgba(5, 6, 9, 0.2) 66%, #050609 100%),
+    url("https://d8j0ntlcm91z4.cloudfront.net/user_3Ef0blYk8J0Q4PEe6OMhNJQ9UTw/hf_20260913_121026_ac53d071-079c-47eb-96c9-665ae97c35de.png") !important;
+  background-position: center, center !important;
+  background-repeat: no-repeat, no-repeat !important;
+  background-size: cover, cover !important;
+}
+
+.assurance-program::before {
+  background:
+    linear-gradient(90deg, rgba(5, 6, 9, 0.98) 0%, rgba(5, 6, 9, 0.88) 36%, rgba(5, 6, 9, 0.36) 66%, rgba(5, 6, 9, 0.16) 100%) !important;
+}
+
+.assurance-program .program-deck {
+  color: rgba(245, 246, 248, 0.8) !important;
+  max-width: 620px !important;
+}
+
+.assurance-program .program-status-row {
+  background: rgba(5, 6, 9, 0.58) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-color: rgba(245, 246, 248, 0.22) !important;
+}
+
+@media (max-width: 980px) {
+  .precision-home .operating-cloud-home::before {
+    background:
+      linear-gradient(180deg, rgba(5, 6, 9, 0.42) 0%, rgba(5, 6, 9, 0.72) 26%, rgba(5, 6, 9, 0.96) 50%, #050609 68%),
+      url("https://d8j0ntlcm91z4.cloudfront.net/user_3Ef0blYk8J0Q4PEe6OMhNJQ9UTw/hf_20260913_121011_cde0c27f-604a-4cab-a462-f13e11da1288.png") 56% top / auto 520px no-repeat,
+      #050609 !important;
+  }
+
+  .assurance-program {
+    background-position: center, 64% center !important;
+    background-size: cover, auto 100% !important;
+  }
+
+  .assurance-program::before {
+    background:
+      linear-gradient(180deg, rgba(5, 6, 9, 0.28) 0%, rgba(5, 6, 9, 0.6) 43%, rgba(5, 6, 9, 0.94) 76%, #050609 100%) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .precision-home .operating-cloud-home::before {
+    background:
+      linear-gradient(180deg, rgba(5, 6, 9, 0.5) 0%, rgba(5, 6, 9, 0.8) 22%, rgba(5, 6, 9, 0.98) 44%, #050609 64%),
+      url("https://d8j0ntlcm91z4.cloudfront.net/user_3Ef0blYk8J0Q4PEe6OMhNJQ9UTw/hf_20260913_121011_cde0c27f-604a-4cab-a462-f13e11da1288.png") 58% top / auto 430px no-repeat,
+      #050609 !important;
+  }
+
+  .assurance-program {
+    background-position: center, 67% top !important;
+    background-size: cover, auto 64% !important;
+  }
+}
