@@ -322,7 +322,7 @@ try {
   }
   await navigate(page.send, baseUrl, "/resources");
   await evaluate(page.send, `(() => { [...document.querySelectorAll('.resource-filters button')].find(b=>b.textContent === 'Engineering blog')?.click(); })()`);
-  await wait(100);
+  await sleep(100);
   const filtered = await evaluate(page.send, `({ count:document.querySelectorAll('.resource-card').length, text:document.querySelector('.resource-card')?.textContent })`);
   if (filtered.count !== 1 || !filtered.text.includes('order-integrity')) failures.push('Resource filter did not show the engineering article');
 
