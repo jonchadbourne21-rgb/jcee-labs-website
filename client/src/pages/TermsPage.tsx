@@ -14,7 +14,7 @@ export default function TermsPage() {
           </div>
 
           <div className="prose prose-invert max-w-none space-y-8 text-[#E2E8F0]/80 leading-relaxed">
-            <section className="space-y-4">
+            <section id="page-content" tabIndex={-1} className="space-y-4">
               <h2 className="text-xl font-display font-bold text-white">1. Agreement to Terms</h2>
               <p>
                 By accessing or using the website jceelabs.com and any services provided by HOWM HOLDINGS LLC, doing business as JCEE Labs ("Company," "we," "our"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.

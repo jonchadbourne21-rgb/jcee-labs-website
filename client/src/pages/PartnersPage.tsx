@@ -21,7 +21,7 @@ export default function PartnersPage() {
     <main className="program-page partner-page partner-gateway" id="top">
       <CoreHeader current="partners" />
 
-      <section className="program-masthead partner-masthead">
+      <section id="page-content" tabIndex={-1} className="program-masthead partner-masthead">
         <p className="eyebrow"><span /> JCEE LABS PARTNERSHIPS · TWO PATHWAYS</p>
         <div className="program-number">JCEE LABS / PARTNERS</div>
         <h1>

@@ -58,7 +58,7 @@ export default function AssurancePage() {
     <main className="program-page assurance-program-page" id="top">
       <CoreHeader current="assurance" />
 
-      <section className="program-masthead assurance-program">
+      <section id="page-content" tabIndex={-1} className="program-masthead assurance-program">
         <p className="eyebrow"><span /> PUBLIC OVERVIEW · ACTIVE RESEARCH</p>
         <div className="program-number">JCEE ASSURANCE / PUBLIC OVERVIEW</div>
         <h1>

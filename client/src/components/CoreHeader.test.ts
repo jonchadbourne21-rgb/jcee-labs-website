@@ -23,24 +23,14 @@ describe("CoreHeader mobile navigation", () => {
 describe("CoreHeader public information architecture", () => {
   it("exposes the approved research and partnership navigation", () => {
     expect(publicNavigationLinks.map((link) => link.id)).toEqual([
-      "jcee",
-      "vow",
-      "qcs",
-      "assurance",
-      "registry",
-      "partners",
+      "solutions", "technology", "research", "resources", "company",
     ]);
     expect(publicNavigationLinks.map((link) => link.label)).toEqual([
-      "JCEE LABS",
-      "JCEE VOW",
-      "QCS",
-      "ASSURANCE",
-      "REGISTRY",
-      "PARTNERS",
+      "Solutions", "Technology", "Research", "Resources", "Company",
     ]);
   });
 
   it("does not present Mirrored as part of the JCEE public site", () => {
-    expect(publicNavigationLinks.some((link) => link.label === "MIRRORED")).toBe(false);
+    expect(publicNavigationLinks.some((link) => String(link.label) === "MIRRORED")).toBe(false);
   });
 });

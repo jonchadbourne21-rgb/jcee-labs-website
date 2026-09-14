@@ -23,6 +23,13 @@ const PartnersPage = lazy(() => import("./pages/PartnersPage"));
 const EnterprisePartnersPage = lazy(() => import("./pages/EnterprisePartnersPage"));
 const ResearchPartnersPage = lazy(() => import("./pages/ResearchPartnersPage"));
 
+const DistributionPage = lazy(() => import("./pages/DistributionPage"));
+const TechnologyPage = lazy(() => import("./pages/TechnologyPage"));
+const ResearchPage = lazy(() => import("./pages/ResearchPage"));
+const ResourcesPage = lazy(() => import("./pages/ResourcesPage"));
+const CompanyPage = lazy(() => import("./pages/CompanyPage"));
+const PublicationPage = lazy(() => import("./pages/PublicationPage"));
+
 function RouteShimmer() {
   return (
     <div className="route-shimmer-container">
@@ -42,6 +49,15 @@ function Router() {
     <Suspense fallback={<RouteShimmer />}>
       <Switch>
         <Route path="/" component={Home} />
+        <Route path="/solutions/distribution" component={DistributionPage} />
+        <Route path="/technology" component={TechnologyPage} />
+        <Route path="/research" component={ResearchPage} />
+        <Route path="/resources" component={ResourcesPage} />
+        <Route path="/company" component={CompanyPage} />
+        <Route path="/blog/start-with-the-workflow" component={PublicationPage} />
+        <Route path="/blog/distribution-first-dry-run" component={PublicationPage} />
+        <Route path="/research/qcs-frozen-specification-reproduction" component={PublicationPage} />
+        <Route path="/research/crucible-semantic-kernel" component={PublicationPage} />
         <Route path="/portfolio" component={CareerPortfolio} />
         <Route path="/charter/archive/v1.0" component={CharterV10} />
         <Route path="/charter" component={CharterV11} />

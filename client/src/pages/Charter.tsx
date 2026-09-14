@@ -34,7 +34,7 @@ export default function Charter() {
     <main className="charter-page" id="top">
       <CoreHeader />
 
-      <section className="charter-masthead">
+      <section id="page-content" tabIndex={-1} className="charter-masthead">
         <p className="eyebrow"><span /> PUBLIC STANDARD · VERSION 1.0</p>
         <h1 className="charter-title">The JCEE Labs<br /><em>Charter</em></h1>
         <p className="charter-position">

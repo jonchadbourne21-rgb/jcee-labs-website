@@ -38,7 +38,7 @@ export default function CharterV11() {
     <main className="program-page charter-v11-page" id="top">
       <CoreHeader current="charter" />
 
-      <section className="program-masthead charter-v11-program">
+      <section id="page-content" tabIndex={-1} className="program-masthead charter-v11-program">
         <p className="eyebrow"><span /> PUBLIC STANDARD · VERSION 1.1</p>
         <div className="program-number">THE JCEE LABS CHARTER</div>
         <h1>
