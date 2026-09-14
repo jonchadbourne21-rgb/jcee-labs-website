@@ -223,6 +223,16 @@ export default function Jrp000() {
               className="paper-markdown"
               controls={false}
               components={{
+                table: ({ children }) => (
+                  <div
+                    data-streamdown="table-wrapper"
+                    role="region"
+                    aria-label="Research table; scroll horizontally for all columns"
+                    tabIndex={0}
+                  >
+                    <table>{children}</table>
+                  </div>
+                ),
                 h2: ({ children }) => (
                   <h2 id={slugify(childText(children))}>{children}</h2>
                 ),

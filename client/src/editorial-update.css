@@ -234,8 +234,17 @@ main :is(h1, h2, h3) {
   font-size: 0.8125rem !important;
   letter-spacing: 0.08em !important;
 }
+.brand-footer-links {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.brand-footer-links > div {
+  grid-template-columns: minmax(0, 1fr);
+}
 .brand-footer-links a {
   color: #d3dbe9 !important;
+  width: fit-content;
+  max-width: 100%;
+  white-space: normal;
 }
 .brand-footer-links a:hover {
   color: white !important;
@@ -251,6 +260,43 @@ main :is(h1, h2, h3) {
 }
 .brand-footer-wordmark {
   overflow: hidden;
+}
+.brand-footer-meta {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.paper-markdown,
+.paper-markdown [data-streamdown="table-wrapper"] {
+  min-width: 0;
+  width: 100%;
+}
+.paper-markdown [data-streamdown="table-wrapper"] {
+  display: block;
+}
+.paper-markdown :is(th, td) {
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+.paper-markdown th {
+  font-size: 0.8125rem;
+}
+@media (max-width: 960px) {
+  .brand-footer-links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+  }
+  .paper-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 420px) {
+  .brand-footer-links,
+  .brand-footer-meta {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .brand-footer-meta span:nth-child(2),
+  .brand-footer-meta a {
+    text-align: left;
+  }
 }
 /* A shorter, customer-led homepage. The existing signature image remains. */
 .commercial-home .hybrid-hero {

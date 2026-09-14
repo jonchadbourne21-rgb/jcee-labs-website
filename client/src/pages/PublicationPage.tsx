@@ -4,7 +4,8 @@ import { publications } from "@/content/publications";
 import NotFound from "./NotFound";
 export default function PublicationPage() {
   const [location] = useLocation();
-  const item = publications.find(p => location.endsWith(`/${p.slug}`));
+  const pathname = location.replace(/\/+$/, "");
+  const item = publications.find(p => pathname.endsWith(`/${p.slug}`));
   if (!item) return <NotFound />;
   const research = !item.kind.includes("blog");
   return (

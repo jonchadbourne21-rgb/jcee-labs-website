@@ -248,7 +248,7 @@ export default function Home() {
         id="charter"
         aria-labelledby="principles-title"
       >
-        <h2>Intelligence should leave receipts.</h2>
+        <h2 id="principles-title">Intelligence should leave receipts.</h2>
         <p>
           We test our claims, preserve evidence including failures, and require
           current authority before consequential action. Human accountability
