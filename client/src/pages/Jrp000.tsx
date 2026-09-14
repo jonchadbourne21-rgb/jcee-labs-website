@@ -133,7 +133,7 @@ export default function Jrp000() {
     <main className="paper-page" id="top">
       <CoreHeader current="research" />
 
-      <section className="paper-masthead">
+      <section id="page-content" tabIndex={-1} className="paper-masthead">
         <p className="eyebrow">
           <span /> JCEE LABS RESEARCH PAPERS · ADOPTED
         </p>

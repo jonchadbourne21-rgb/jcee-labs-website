@@ -1,3 +1,4 @@
+import VowDurabilityDemo from "@/components/VowDurabilityDemo";
 import { useEffect } from "react";
 import BrandFooter from "@/components/BrandFooter";
 import CoreHeader from "@/components/CoreHeader";
@@ -6,7 +7,7 @@ const boundaries = [
   ["WHAT IT IS", "JCEE VOW is an evidence-first execution runtime for consequential software and AI-directed actions."],
   ["WHAT IT RECORDS", "A durable account of covered execution, interruption, recovery, and the resulting verdict."],
   ["WHAT IT IS NOT", "A model, a claim of universal safety, or an automatic statement of legal compliance."],
-  ["CURRENT STATUS", "VOW 1.1 has reached a bounded internal verification milestone and remains under active hardening and reproduction."],
+  ["CURRENT STATUS", "VOW 1.1 remains the frozen verified milestone. The 1.1.1.dev3 candidate was admitted to private source control on September 10; release, deployment, and active-root promotion remain on hold."],
 ];
 
 export default function VowPage() {
@@ -20,7 +21,7 @@ export default function VowPage() {
     <main className="program-page" id="top">
       <CoreHeader current="vow" />
 
-      <section className="program-masthead vow-program">
+      <section id="page-content" tabIndex={-1} className="program-masthead vow-program">
         <p className="eyebrow"><span /> PUBLIC OVERVIEW · ACTIVE</p>
         <div className="program-number">JCEE VOW / PUBLIC OVERVIEW</div>
         <h1>Execution should<br /><em>leave evidence.</em></h1>
@@ -30,7 +31,7 @@ export default function VowPage() {
         </p>
         <div className="program-status-row">
           <span>HISTORICAL RELEASE · VOW 1.1</span>
-          <span>STATUS · VERIFIED MILESTONE / ACTIVE HARDENING</span>
+          <span>PRIVATE CANDIDATE · 1.1.1.dev3 · RELEASE ON HOLD</span>
         </div>
       </section>
 
@@ -68,13 +69,13 @@ export default function VowPage() {
         </div>
       </section>
 
+      <section className="program-next"><VowDurabilityDemo /></section>
+
       <section className="program-next">
         <p className="charter-section-label">THE NEXT GATE</p>
-        <h2>Reproduce the result outside the environment that created it.</h2>
+        <h2>Keep candidate admission separate from runtime proof.</h2>
         <p>
-          Current work is focused on independent runtime reproduction and external
-          integration hardening. The public claim will expand only if that evidence
-          survives. If it does not, the claim will narrow.
+          Source-control admission is not a new runtime-validation result. The sealed integration-correctness candidate remains unexecuted in the current register. Additional integration and reproduction claims require their own completed gates.
         </p>
         <div className="program-links">
           <a href="/registry">VIEW THE PUBLIC REGISTRY <span>→</span></a>

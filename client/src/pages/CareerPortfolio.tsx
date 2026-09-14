@@ -38,7 +38,7 @@ export default function CareerPortfolio() {
     <main className="program-page" id="top">
       <CoreHeader />
 
-      <section className="program-masthead assurance-program">
+      <section id="page-content" tabIndex={-1} className="program-masthead assurance-program">
         <p className="eyebrow"><span /> CAREER TECHNICAL PORTFOLIO · PUBLIC-SAFE</p>
         <div className="program-number">JONATHAN CHADBOURNE / FOUNDER & CHIEF ARCHITECT</div>
         <h1>I build systems that make consequential AI actions<br /><em>harder to get wrong — and easier to verify.</em></h1>

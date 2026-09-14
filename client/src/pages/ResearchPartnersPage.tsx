@@ -45,7 +45,7 @@ export default function ResearchPartnersPage() {
     <main className="program-page partner-page partner-path-page research-partner-page" id="top">
       <CoreHeader current="partners" />
 
-      <section className="program-masthead partner-masthead research-partner-masthead">
+      <section id="page-content" tabIndex={-1} className="program-masthead partner-masthead research-partner-masthead">
         <p className="eyebrow"><span /> RESEARCH PARTNERSHIPS · CLAIMS + REPRODUCTION</p>
         <div className="program-number">JCEE LABS / PARTNERS / RESEARCH</div>
         <h1>

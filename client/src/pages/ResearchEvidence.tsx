@@ -41,7 +41,7 @@ export default function ResearchEvidence() {
     <main className="charter-page evidence-page" id="top">
       <CoreHeader current="research" />
 
-      <section className="charter-masthead evidence-masthead">
+      <section id="page-content" tabIndex={-1} className="charter-masthead evidence-masthead">
         <p className="eyebrow"><span /> PUBLIC RECORD · VERSION 1.2</p>
         <img
           className="evidence-brand-lockup"

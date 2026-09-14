@@ -45,7 +45,7 @@ export default function EnterprisePartnersPage() {
     <main className="program-page partner-page partner-path-page enterprise-partner-page" id="top">
       <CoreHeader current="partners" />
 
-      <section className="program-masthead partner-masthead enterprise-partner-masthead">
+      <section id="page-content" tabIndex={-1} className="program-masthead partner-masthead enterprise-partner-masthead">
         <p className="eyebrow"><span /> ENTERPRISE PARTNERSHIPS · OPERATIONAL SYSTEMS</p>
         <div className="program-number">JCEE LABS / PARTNERS / ENTERPRISE</div>
         <h1>

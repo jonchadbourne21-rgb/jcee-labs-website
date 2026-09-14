@@ -34,6 +34,9 @@ const profiles = {
 };
 
 const publicRoutes = [
+  "/solutions/distribution", "/technology", "/research", "/resources", "/company",
+  "/blog/start-with-the-workflow", "/blog/distribution-first-dry-run",
+  "/research/qcs-frozen-specification-reproduction", "/research/crucible-semantic-kernel",
   "/", "/partners", "/partners/enterprise", "/partners/research", "/vow", "/qcs",
   "/assurance", "/registry", "/research-evidence", "/charter", "/charter/archive/v1.0",
   "/research/jrp-000", "/privacy", "/terms", "/portfolio", "/404",

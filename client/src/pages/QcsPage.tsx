@@ -28,7 +28,7 @@ export default function QcsPage() {
     <main className="program-page qcs-program-page" id="top">
       <CoreHeader current="qcs" />
 
-      <section className="program-masthead qcs-program">
+      <section id="page-content" tabIndex={-1} className="program-masthead qcs-program">
         <p className="eyebrow"><span /> RESEARCH PROGRAM · VERIFIED MILESTONE</p>
         <div className="program-number">QCS / RESEARCH PROGRAM</div>
         <h1>What evidence justifies<br /><em>the next action?</em></h1>
@@ -117,6 +117,7 @@ export default function QcsPage() {
           independent third-party certification.
         </p>
         <div className="program-links">
+          <a href="/research/qcs-frozen-specification-reproduction">READ THE REPRODUCTION REPORT <span>→</span></a>
           <a href="/registry">VIEW THE PUBLIC REGISTRY <span>→</span></a>
           <a href="/assurance">VIEW JCEE ASSURANCE <span>→</span></a>
           <a href="/vow">VIEW JCEE VOW <span>→</span></a>

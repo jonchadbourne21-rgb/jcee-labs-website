@@ -10,19 +10,22 @@ export type CoreHeaderCurrent =
   | "charter"
   | "partners"
   | "research"
-  | "mirrored";
+  | "mirrored"
+  | "solutions"
+  | "technology"
+  | "resources"
+  | "company";
 
 type CoreHeaderProps = {
   current?: CoreHeaderCurrent;
 };
 
 export const publicNavigationLinks = [
-  { id: "jcee", label: "JCEE LABS", href: "/#company" },
-  { id: "vow", label: "JCEE VOW", href: "/vow" },
-  { id: "qcs", label: "QCS", href: "/qcs" },
-  { id: "assurance", label: "ASSURANCE", href: "/assurance" },
-  { id: "registry", label: "REGISTRY", href: "/registry" },
-  { id: "partners", label: "PARTNERS", href: "/partners" },
+  { id: "solutions", label: "Solutions", href: "/solutions/distribution" },
+  { id: "technology", label: "Technology", href: "/technology" },
+  { id: "research", label: "Research", href: "/research" },
+  { id: "resources", label: "Resources", href: "/resources" },
+  { id: "company", label: "Company", href: "/company" },
 ] as const;
 
 export const getMobileMenuLabel = (menuOpen: boolean) =>
@@ -74,7 +77,16 @@ export default function CoreHeader({ current }: CoreHeaderProps) {
       <a
         key={link.id}
         href={link.href}
-        aria-current={current === link.id ? "page" : undefined}
+        aria-current={
+          current === link.id ||
+          (link.id === "technology" &&
+            ["vow", "qcs", "assurance"].includes(current ?? "")) ||
+          (link.id === "resources" && current === "registry") ||
+          (link.id === "company" &&
+            ["jcee", "charter", "partners"].includes(current ?? ""))
+            ? "page"
+            : undefined
+        }
         tabIndex={mobile && !menuOpen ? -1 : undefined}
         ref={mobile && index === 0 ? firstMobileLinkRef : undefined}
         onClick={mobile ? closeMobileMenu : undefined}
@@ -85,6 +97,9 @@ export default function CoreHeader({ current }: CoreHeaderProps) {
 
   return (
     <header className="site-header">
+      <a className="skip-link" href="#page-content">
+        Skip to content
+      </a>
       <a className="wordmark" href="/" aria-label="JCEE Labs home">
         <img
           className="wordmark-mark"
@@ -109,7 +124,7 @@ export default function CoreHeader({ current }: CoreHeaderProps) {
             aria-controls="mobile-navigation"
             aria-label={mobileMenuLabel}
             title={mobileMenuLabel}
-            onClick={() => setMenuOpen((open) => !open)}
+            onClick={() => setMenuOpen(open => !open)}
           >
             {menuOpen ? (
               <X aria-hidden="true" size={17} />
@@ -127,8 +142,8 @@ export default function CoreHeader({ current }: CoreHeaderProps) {
           </nav>
         </div>
 
-        <a className="header-contact" href="mailto:support@jceelabs.com">
-          CONTACT <span aria-hidden="true">↗</span>
+        <a className="header-contact" href="/partners/enterprise">
+          Let’s talk <span aria-hidden="true">↗</span>
         </a>
       </div>
     </header>

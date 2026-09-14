@@ -6,7 +6,7 @@ export default function NotFound() {
     <main className="program-page" id="top">
       <CoreHeader />
 
-      <section className="program-masthead">
+      <section id="page-content" tabIndex={-1} className="program-masthead">
         <p className="eyebrow"><span /> ROUTE STATUS · NOT FOUND</p>
         <div className="program-number">404 / UNKNOWN STATE</div>
         <h1>The requested route<br /><em>is not in evidence.</em></h1>

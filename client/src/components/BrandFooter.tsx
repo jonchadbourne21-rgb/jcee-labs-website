@@ -2,7 +2,9 @@ type BrandFooterProps = {
   backToTopHref?: string;
 };
 
-export default function BrandFooter({ backToTopHref = "/#top" }: BrandFooterProps) {
+export default function BrandFooter({
+  backToTopHref = "/#top",
+}: BrandFooterProps) {
   return (
     <footer className="brand-footer">
       <div className="brand-footer-top">
@@ -13,24 +15,30 @@ export default function BrandFooter({ backToTopHref = "/#top" }: BrandFooterProp
             <small>PRECISION RESEARCH + INTELLIGENCE · DALLAS, TEXAS</small>
           </span>
         </a>
-        <p>We build for the distance between what software claims and what it can prove.</p>
+        <p>
+          We build for the distance between what software claims and what it can
+          prove.
+        </p>
       </div>
 
       <div className="brand-footer-links">
         <div>
-          <span>INSTITUTION</span>
-          <a href="/#company">JCEE Labs</a>
+          <span>COMPANY</span>
+          <a href="/company">JCEE Labs</a>
           <a href="/charter">Charter</a>
           <a href="/charter/archive/v1.0">Charter v1.0 Archive</a>
         </div>
         <div>
-          <span>INFRASTRUCTURE</span>
+          <span>TECHNOLOGY</span>
+          <a href="/solutions/distribution">JCEE Distribution</a>
           <a href="/vow">JCEE VOW</a>
           <a href="/qcs">QCS</a>
           <a href="/assurance">JCEE Assurance</a>
         </div>
         <div>
-          <span>EVIDENCE</span>
+          <span>RESOURCES</span>
+          <a href="/resources">Blog and resources</a>
+          <a href="/research">Research publications</a>
           <a href="/registry">Public Registry</a>
           <a href="/research/jrp-000">JRP-000 · Evidence Boundary</a>
         </div>

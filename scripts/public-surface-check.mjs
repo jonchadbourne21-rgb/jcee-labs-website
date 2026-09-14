@@ -304,6 +304,28 @@ try {
     failures.push(`Assurance architecture label is missing its subtle hover transition: ${assuranceArchitectureColors.labelTransition}`);
   }
 
+  for (const [route, heading] of [
+    ["/solutions/distribution", "Keep the order true"], ["/technology", "Intelligence should leave receipts"],
+    ["/research", "Results you can examine"], ["/resources", "Ideas, builds"], ["/company", "Build useful intelligence"],
+    ["/blog/start-with-the-workflow", "Start with the workflow"],
+    ["/blog/distribution-first-dry-run", "the first order-integrity dry run"],
+    ["/research/qcs-frozen-specification-reproduction", "reproducing a frozen specification"],
+    ["/research/crucible-semantic-kernel", "conventional parity"],
+  ]) {
+    await navigate(page.send, baseUrl, route);
+    if (!(await readBody(page.send)).includes(heading)) failures.push(`${route}: missing publication or page`);
+  }
+  for (const asset of ["JCEE_Labs_Public_Registry_v1.1.md", "publications/start-with-the-workflow.md", "publications/distribution-first-dry-run.md", "publications/qcs-frozen-specification-reproduction.md", "publications/crucible-semantic-kernel.md"]) {
+    const response = await fetch(`${baseUrl}/${asset}`);
+    const text = await response.text();
+    if (!response.ok || !text.startsWith("# ")) failures.push(`${asset}: missing Markdown publication`);
+  }
+  await navigate(page.send, baseUrl, "/resources");
+  await evaluate(page.send, `(() => { [...document.querySelectorAll('.resource-filters button')].find(b=>b.textContent === 'Engineering blog')?.click(); })()`);
+  await wait(100);
+  const filtered = await evaluate(page.send, `({ count:document.querySelectorAll('.resource-card').length, text:document.querySelector('.resource-card')?.textContent })`);
+  if (filtered.count !== 1 || !filtered.text.includes('order-integrity')) failures.push('Resource filter did not show the engineering article');
+
   await navigate(page.send, baseUrl, "/terms");
   const termsText = await readBody(page.send);
   if (termsText.toUpperCase().includes("MIRRORED")) {
