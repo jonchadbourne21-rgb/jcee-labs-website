@@ -1,5 +1,10 @@
+import BuildStatusList from "@/components/BuildStatusList";
 import EditorialLayout from "@/components/EditorialLayout";
-import { publications, publicationHref } from "@/content/publications";
+import {
+  publications,
+  publicationHref,
+  isResearch,
+} from "@/content/publications";
 export default function ResearchPage() {
   return (
     <EditorialLayout
@@ -20,7 +25,7 @@ export default function ResearchPage() {
         </p>
         <div className="resource-grid">
           {publications
-            .filter(p => !p.kind.includes("blog"))
+            .filter(p => isResearch(p))
             .map(item => (
               <article className="resource-card" key={item.slug}>
                 <p className="editorial-kicker">
@@ -46,6 +51,25 @@ export default function ResearchPage() {
             <span aria-hidden="true">→</span>
           </a>
         </div>
+      </section>
+      <section className="editorial-section">
+        <h2>Research programs and recorded outcomes</h2>
+        <p>
+          Completed gates, negative results, and open evaluations all remain
+          part of the record.
+        </p>
+        <BuildStatusList
+          ids={[
+            "crucible-p03",
+            "autography",
+            "lem",
+            "lam",
+            "vela",
+            "tot",
+            "rtl",
+            "gmda",
+          ]}
+        />
       </section>
       <section className="editorial-section editorial-section-dark">
         <p className="editorial-kicker">Reproduction and review</p>

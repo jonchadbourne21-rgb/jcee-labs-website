@@ -305,6 +305,7 @@ try {
   }
 
   for (const [route, heading] of [
+    ["/operating-cloud", "A common foundation"], ["/blog/the-work-nobody-sees", "The Work Nobody Sees"], ["/research/crucible-composition-tax", "testing the cost of composition"],
     ["/solutions/distribution", "Keep the order true"], ["/technology", "Intelligence should leave receipts"],
     ["/research", "Results you can examine"], ["/resources", "Ideas, builds"], ["/company", "Build useful intelligence"],
     ["/blog/start-with-the-workflow", "Start with the workflow"],
@@ -315,7 +316,7 @@ try {
     await navigate(page.send, baseUrl, route);
     if (!(await readBody(page.send)).includes(heading)) failures.push(`${route}: missing publication or page`);
   }
-  for (const asset of ["JCEE_Labs_Public_Registry_v1.1.md", "publications/start-with-the-workflow.md", "publications/distribution-first-dry-run.md", "publications/qcs-frozen-specification-reproduction.md", "publications/crucible-semantic-kernel.md"]) {
+  for (const asset of ["publications/the-work-nobody-sees.md", "publications/crucible-composition-tax.md", "JCEE_Labs_Public_Registry_v1.2.md", "publications/start-with-the-workflow.md", "publications/distribution-first-dry-run.md", "publications/qcs-frozen-specification-reproduction.md", "publications/crucible-semantic-kernel.md"]) {
     const response = await fetch(`${baseUrl}/${asset}`);
     const text = await response.text();
     if (!response.ok || !text.startsWith("# ")) failures.push(`${asset}: missing Markdown publication`);
@@ -326,6 +327,13 @@ try {
   const filtered = await evaluate(page.send, `({ count:document.querySelectorAll('.resource-card').length, text:document.querySelector('.resource-card')?.textContent })`);
   if (filtered.count !== 1 || !filtered.text.includes('order-integrity')) failures.push('Resource filter did not show the engineering article');
 
+  for (const [label, count] of [["From the Founder", 1], ["Research", 3]]) {
+    await evaluate(page.send, `(() => { [...document.querySelectorAll('.resource-filters button')].find(b=>b.textContent === '${label}')?.click(); })()`);
+    await sleep(100);
+    const cards = await evaluate(page.send, `({ count:document.querySelectorAll('.resource-card').length, text:document.querySelector('.resource-grid')?.textContent })`);
+    if (cards.count !== count) failures.push(`${label}: wrong category count`);
+    if (label === "Research" && cards.text.includes("The Work Nobody Sees")) failures.push('Founder essay incorrectly classified as research');
+  }
   await navigate(page.send, baseUrl, "/terms");
   const termsText = await readBody(page.send);
   if (termsText.toUpperCase().includes("MIRRORED")) {

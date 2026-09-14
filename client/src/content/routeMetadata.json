@@ -7,6 +7,10 @@
     "title": "JCEE Distribution — Order Integrity",
     "description": "Compare purchase orders with sales orders, investigate exceptions, and measure operating improvement. Explore the JCEE Distribution prototype and its next gate."
   },
+  "/operating-cloud": {
+    "title": "JCEE Operating Cloud — Platform Direction",
+    "description": "A common foundation for industry operating software, beginning with JCEE Distribution. Explore the direction and current evidence."
+  },
   "/technology": {
     "title": "Technology — JCEE Labs",
     "description": "Explore JCEE VOW, QCS, and JCEE Assurance: execution, recovery, current authority, and portable evidence."
@@ -42,5 +46,13 @@
   "/research/crucible-semantic-kernel": {
     "title": "CRUCIBLE P0.2: a bounded result, with conventional parity — JCEE Labs",
     "description": "What the latest synthetic benchmark supports—and why the conventional comparator belongs beside the result."
+  },
+  "/blog/the-work-nobody-sees": {
+    "title": "The Work Nobody Sees — JCEE Labs",
+    "description": "Why JCEE Labs starts with observation, evidence, and the workflows between systems."
+  },
+  "/research/crucible-composition-tax": {
+    "title": "CRUCIBLE P0.3: testing the cost of composition — JCEE Labs",
+    "description": "The broad operational-burden claim did not survive the tested comparison. A narrower integration-surface result remains."
   }
 }

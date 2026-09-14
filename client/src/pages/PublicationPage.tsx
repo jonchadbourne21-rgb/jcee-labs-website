@@ -1,17 +1,17 @@
 import { useLocation } from "wouter";
 import EditorialLayout from "@/components/EditorialLayout";
-import { publications } from "@/content/publications";
+import { publications, isResearch } from "@/content/publications";
 import NotFound from "./NotFound";
 export default function PublicationPage() {
   const [location] = useLocation();
   const pathname = location.replace(/\/+$/, "");
   const item = publications.find(p => pathname.endsWith(`/${p.slug}`));
   if (!item) return <NotFound />;
-  const research = !item.kind.includes("blog");
+  const research = isResearch(item);
   return (
     <EditorialLayout
       current={research ? "research" : "resources"}
-      eyebrow={`${item.kind} · September 14, 2026 · JCEE Labs`}
+      eyebrow={`${item.kind} · September 14, 2026 · ${item.author || "JCEE Labs"}`}
       title={item.title}
       description={item.summary}
     >
@@ -51,6 +51,20 @@ export default function PublicationPage() {
               )}
             </section>
           ))}
+          {item.related && (
+            <nav className="publication-related" aria-label="Continue reading">
+              <h2>Continue reading</h2>
+              {item.related.map(link => (
+                <a
+                  className="editorial-text-link"
+                  key={link.href}
+                  href={link.href}
+                >
+                  {link.label} →
+                </a>
+              ))}
+            </nav>
+          )}
           <footer>
             <p>Published September 14, 2026 · Version 1.0</p>
             <a href="/registry">See current build status →</a>

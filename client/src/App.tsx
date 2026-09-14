@@ -24,6 +24,7 @@ const EnterprisePartnersPage = lazy(() => import("./pages/EnterprisePartnersPage
 const ResearchPartnersPage = lazy(() => import("./pages/ResearchPartnersPage"));
 
 const DistributionPage = lazy(() => import("./pages/DistributionPage"));
+const OperatingCloudPage = lazy(() => import("./pages/OperatingCloudPage"));
 const TechnologyPage = lazy(() => import("./pages/TechnologyPage"));
 const ResearchPage = lazy(() => import("./pages/ResearchPage"));
 const ResourcesPage = lazy(() => import("./pages/ResourcesPage"));
@@ -50,6 +51,9 @@ function Router() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/solutions/distribution" component={DistributionPage} />
+        <Route path="/operating-cloud" component={OperatingCloudPage} />
+        <Route path="/blog/the-work-nobody-sees" component={PublicationPage} />
+        <Route path="/research/crucible-composition-tax" component={PublicationPage} />
         <Route path="/technology" component={TechnologyPage} />
         <Route path="/research" component={ResearchPage} />
         <Route path="/resources" component={ResourcesPage} />

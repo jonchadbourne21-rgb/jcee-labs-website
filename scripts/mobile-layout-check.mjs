@@ -34,7 +34,7 @@ const profiles = {
 };
 
 const publicRoutes = [
-  "/solutions/distribution", "/technology", "/research", "/resources", "/company",
+  "/operating-cloud", "/blog/the-work-nobody-sees", "/research/crucible-composition-tax", "/solutions/distribution", "/technology", "/research", "/resources", "/company",
   "/blog/start-with-the-workflow", "/blog/distribution-first-dry-run",
   "/research/qcs-frozen-specification-reproduction", "/research/crucible-semantic-kernel",
   "/", "/partners", "/partners/enterprise", "/partners/research", "/vow", "/qcs",

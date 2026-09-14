@@ -3,7 +3,7 @@ import BrandFooter from "@/components/BrandFooter";
 import CoreHeader from "@/components/CoreHeader";
 import CurlicueField from "@/components/CurlicueField";
 
-import { entries } from "@/content/registryEntries";
+import { entries, registryGroups, groupId } from "@/content/registryEntries";
 
 const classifications = [
   [
@@ -77,8 +77,8 @@ export default function PublicRegistry() {
             questions.
           </p>
           <div className="program-links">
-            <a href="/JCEE_Labs_Public_Registry_v1.1.md" download>
-              DOWNLOAD CURRENT REGISTRY · VERSION 1.1 <span>↓</span>
+            <a href="/JCEE_Labs_Public_Registry_v1.2.md" download>
+              DOWNLOAD CURRENT REGISTRY · VERSION 1.2 <span>↓</span>
             </a>
             <a href="/JCEE_Labs_Public_Registry_v1.0.md" download>
               ARCHIVE · REGISTRY VERSION 1.0 <span>↓</span>
@@ -118,57 +118,72 @@ export default function PublicRegistry() {
           <span>REVIEWED · SEPTEMBER 14, 2026</span>
         </div>
         <h2 id="registry-records-title">Current public entries.</h2>
-        <nav className="registry-jump-links" aria-label="Jump to a build">
-          {entries.map(entry => (
-            <a key={entry.id} href={`#${entry.id}`}>
-              {entry.name}
+        <nav className="registry-jump-links" aria-label="Build categories">
+          {registryGroups.map(group => (
+            <a key={group} href={`#${groupId(group)}`}>
+              {group}
             </a>
           ))}
         </nav>
 
-        <div className="registry-grid">
-          {entries.map((entry, index) => (
-            <article className="registry-entry" id={entry.id} key={entry.id}>
-              <div className="registry-entry-index">
-                {String(index + 1).padStart(2, "0")}
-              </div>
-              <div className="registry-entry-body">
-                <div className="registry-entry-topline">
-                  <span>{entry.kind}</span>
-                  <span>{entry.date}</span>
-                </div>
-                <h3>{entry.name}</h3>
-                <span
-                  className={`registry-status registry-status-${entry.status}`}
-                >
-                  {entry.statusLabel}
-                </span>
-                <p className="registry-entry-summary">{entry.summary}</p>
-                <dl>
-                  <div>
-                    <dt>WHAT THE RECORD SUPPORTS</dt>
-                    <dd>{entry.supports}</dd>
-                  </div>
-                  <div>
-                    <dt>KNOWN BOUNDARY</dt>
-                    <dd>{entry.boundary}</dd>
-                  </div>
-                  {entry.next && (
-                    <div>
-                      <dt>NEXT GATE</dt>
-                      <dd>{entry.next}</dd>
+        {registryGroups.map(group => (
+          <section
+            className="registry-group"
+            key={group}
+            aria-labelledby={groupId(group)}
+          >
+            <h2 id={groupId(group)}>{group}</h2>
+            <div className="registry-grid">
+              {entries
+                .filter(entry => entry.group === group)
+                .map((entry, index) => (
+                  <article
+                    className="registry-entry"
+                    id={entry.id}
+                    key={entry.id}
+                  >
+                    <div className="registry-entry-index">
+                      {String(index + 1).padStart(2, "0")}
                     </div>
-                  )}
-                </dl>
-                {entry.href ? (
-                  <a href={entry.href}>
-                    VIEW PUBLIC CONTEXT <span>→</span>
-                  </a>
-                ) : null}
-              </div>
-            </article>
-          ))}
-        </div>
+                    <div className="registry-entry-body">
+                      <div className="registry-entry-topline">
+                        <span>{entry.kind}</span>
+                        <span>{entry.date}</span>
+                      </div>
+                      <h3>{entry.name}</h3>
+                      <span
+                        className={`registry-status registry-status-${entry.status}`}
+                      >
+                        {entry.statusLabel}
+                      </span>
+                      <p className="registry-entry-summary">{entry.summary}</p>
+                      <dl>
+                        <div>
+                          <dt>WHAT THE RECORD SUPPORTS</dt>
+                          <dd>{entry.supports}</dd>
+                        </div>
+                        <div>
+                          <dt>KNOWN BOUNDARY</dt>
+                          <dd>{entry.boundary}</dd>
+                        </div>
+                        {entry.next && (
+                          <div>
+                            <dt>NEXT GATE</dt>
+                            <dd>{entry.next}</dd>
+                          </div>
+                        )}
+                      </dl>
+                      {entry.href ? (
+                        <a href={entry.href}>
+                          VIEW PUBLIC CONTEXT <span>→</span>
+                        </a>
+                      ) : null}
+                    </div>
+                  </article>
+                ))}
+            </div>
+          </section>
+        ))}
       </section>
 
       <section className="registry-disclosure">

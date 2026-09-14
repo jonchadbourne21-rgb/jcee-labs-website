@@ -1,3 +1,4 @@
+import BuildStatusList from "@/components/BuildStatusList";
 import EditorialLayout from "@/components/EditorialLayout";
 const checks = [
   ["Order existence", "Did the purchase order produce a matching sales order?"],
@@ -141,6 +142,10 @@ export default function DistributionPage() {
           This is the product roadmap. Progress depends on observed operating
           value and explicit authority at each stage.
         </p>
+      </section>
+      <section className="editorial-section">
+        <h2>Latest build record</h2>
+        <BuildStatusList ids={["distribution"]} />
       </section>
     </EditorialLayout>
   );

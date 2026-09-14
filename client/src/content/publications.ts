@@ -2,11 +2,14 @@ export type Publication = {
   slug: string;
   title: string;
   kind:
+    | "From the Founder"
     | "Company blog"
     | "Engineering blog"
     | "Technical report"
     | "Research brief";
   date: string;
+  author?: string;
+  related?: { label: string; href: string }[];
   summary: string;
   sections: { title: string; paragraphs: string[]; bullets?: string[] }[];
 };
@@ -204,4 +207,132 @@ export const publications: Publication[] = [
 ];
 
 export const publicationHref = (item: Publication) =>
-  `${import.meta.env.BASE_URL}${item.kind.includes("blog") ? "blog" : "research"}/${item.slug}`;
+  `${import.meta.env?.BASE_URL || "/"}${!isResearch(item) ? "blog" : "research"}/${item.slug}`;
+
+export function isResearch(p: Publication) {
+  return p.kind === "Technical report" || p.kind === "Research brief";
+}
+
+publications.push(
+  {
+    slug: "the-work-nobody-sees",
+    title: "The Work Nobody Sees",
+    kind: "From the Founder",
+    date: "2026-09-14",
+    author: "Jonathan Chadbourne, Founder",
+    summary:
+      "Why JCEE Labs starts with observation, evidence, and the workflows between systems.",
+    sections: [
+      {
+        title: "Start with what actually happened",
+        paragraphs: [
+          "JCEE Labs grew out of a question I kept returning to: what supports the claim? A system can report success. A person can explain a decision. An AI can give a convincing account of its work. The account matters, but I want to know what someone else could inspect to establish what actually happened.",
+          "That question shaped the principle of verification before judgment. Preserve the evidence before deciding what it means. Keep failures, missing information, and uncertainty visible. A result becomes more useful when its limits are understandable.",
+          "The company did not arrive fully formed. Its direction developed as those questions moved from research into the practical problem of making software useful to the people who rely on it.",
+        ],
+      },
+      {
+        title: "Intelligence that leaves receipts",
+        paragraphs: [
+          "As AI systems take on more responsibility, the questions become sharper. What information did the system have? What did it attempt? What effect can we establish? Did it have current authority to act? If a process stopped halfway through, what would another person need to recover it?",
+          "This is the thinking behind intelligence that leaves receipts. A receipt is an inspectable account with a defined scope. It should help a reviewer distinguish a supported conclusion from an assumption. A signature or a confident explanation cannot supply evidence that was never captured.",
+          "Our work on execution, authority, portable evidence, and verification explores different parts of that problem. Each component has its own milestones and unfinished work. Putting them together creates another question to test; a collection of completed parts does not establish a completed operating system.",
+        ],
+      },
+      {
+        title: "The work between the official systems",
+        paragraphs: [
+          "Ordinary businesses face a closely related problem. Their software describes part of the operation. People do the work that keeps those descriptions aligned with reality.",
+          "Consider a sticky note that records an exception. A spreadsheet that never appears in the software architecture diagram. A person comparing a purchase order with an ERP screen because the freight account sometimes needs another check. A late reconciliation. A phone call that finally resolves the discrepancy.",
+          "These are illustrative situations, not accounts of a particular employer or customer. They make the same point: the work around a system can show where its model of the business stops matching the business itself.",
+          "The people doing that work often know what the formal process leaves out. A useful software company has to learn from them. Before deciding which step to automate, understand the exception, the judgment it requires, and the reason the workaround exists.",
+        ],
+      },
+      {
+        title: "Why observation matters",
+        paragraphs: [
+          "My thesis is that as AI makes formalized information easier to analyze, observation becomes more valuable. The information that is easiest to retrieve is not necessarily the information that explains how a business gets its work done.",
+          "By proprietary observation, I mean knowledge earned through permission, attention, and sustained work with a specific workflow. It includes understanding which exceptions recur, what people check, where responsibility changes hands, and which apparent inefficiencies are protecting the business from a real failure.",
+          "The advantage I want JCEE to earn is an increasingly accurate understanding of the work, coupled with evidence that our software improves it. Observation needs discipline: record what was seen, separate it from interpretation, and let the people responsible for the workflow correct the model.",
+        ],
+      },
+      {
+        title: "Why Distribution comes first",
+        paragraphs: [
+          "Industrial distribution gives this philosophy a concrete place to begin. Purchase orders and sales orders need to agree. Freight instructions, quantities, prices, and delivery details need to survive the handoff. Exceptions need enough context for a person to investigate them.",
+          "JCEE Distribution starts with order integrity alongside existing systems. The first synthetic evaluation is a development milestone. A real workflow still has to establish whether the checks are useful, whether exceptions are understandable, and whether the improvement is worth the team’s attention.",
+          "Our deployment approach follows from that: observe one workflow, overlay the systems already in use, measure improvement, and earn the next step. Broader responsibility needs both evidence and permission.",
+        ],
+      },
+      {
+        title: "The foundation we intend to build",
+        paragraphs: [
+          "The longer-term direction is JCEE Operating Cloud: a common foundation for operating software shaped around the work of particular industries. Evidence, authority, recovery, and review should be reusable; the workflows should reflect the industry and the people doing the work.",
+          "That is a direction we are working toward. Distribution is the first commercial focus, and the research remains a set of bounded results with open questions. The foundation has to be earned through useful deployments, not assumed from the ambition.",
+          "The thread connecting that ambition to the earliest questions is straightforward. Observe carefully. Preserve what supports the conclusion. Make uncertainty understandable. Build something that helps with the work people are already carrying.",
+        ],
+      },
+    ],
+    related: [
+      {
+        label: "How we deploy: start with the workflow",
+        href: "/blog/start-with-the-workflow",
+      },
+      {
+        label: "JCEE Operating Cloud: the platform direction",
+        href: "/operating-cloud",
+      },
+      {
+        label: "Explore JCEE Distribution",
+        href: "/solutions/distribution",
+      },
+    ],
+  },
+  {
+    slug: "crucible-composition-tax",
+    title: "CRUCIBLE P0.3: testing the cost of composition",
+    kind: "Research brief",
+    date: "2026-09-14",
+    summary:
+      "The broad operational-burden claim did not survive the tested comparison. A narrower integration-surface result remains.",
+    sections: [
+      {
+        title: "The question after P0.2",
+        paragraphs: [
+          "P0.2 preserved a six-part semantic kernel and demonstrated conventional parity within its synthetic benchmark. P0.3 asked a different question: did the JCEE composition materially reduce operational burden against a strong conventional composition? The earlier semantic result remains a distinct, preserved milestone.",
+        ],
+      },
+      {
+        title: "The terminal result",
+        paragraphs: [
+          "The terminal disposition is KILL_BROAD_COMPOSITION_COMPRESSION_CLAIM. Both implementations met the safety criteria in the tested synthetic worlds. Late misconfiguration escapes, manual recovery actions, diagnosis burden, and offline audit burden tied. This comparison did not establish a broad operational-burden advantage for JCEE.",
+          "A narrow integration-surface difference remained: three versus five integration touchpoints in both the payment and cold-domain evaluations. That observation supports a narrower future question, not a general superiority claim.",
+        ],
+      },
+      {
+        title: "Reproduction and scope",
+        paragraphs: [
+          "The recorded GitHub Actions reproduction passed on Python 3.10 and 3.12. It checked the frozen source and preregistration identities, 160 payment fault trials, the frozen integration boundary, the subsequent cold-domain reveal, and 20 cold-domain fault trials. Both environments reproduced the terminal disposition.",
+          "This is a second execution environment for the same controlled research. It does not establish independent-team authorship, customer economics, production safety, or general transfer to real integrations.",
+        ],
+      },
+      {
+        title: "What follows",
+        paragraphs: [
+          "P0.3 is frozen. The broad composition-compression claim is retired for this tested comparison. The P0.2 semantic result remains intact.",
+          "A further study would need a separately defined question about the narrow integration-surface difference, using heterogeneous real adapters or independent implementers. No such result is claimed here.",
+        ],
+      },
+    ],
+    related: [
+      {
+        label: "Read the preserved P0.2 semantic-kernel report",
+        href: "/research/crucible-semantic-kernel",
+      },
+      {
+        label: "Current CRUCIBLE status",
+        href: "/registry#crucible-p03",
+      },
+    ],
+  }
+);
