@@ -1,13 +1,17 @@
 import { useState } from "react";
 import EditorialLayout from "@/components/EditorialLayout";
-import { publications, publicationHref } from "@/content/publications";
+import {
+  publications,
+  publicationHref,
+  isResearch,
+} from "@/content/publications";
 
 export default function ResourcesPage() {
   const [filter, setFilter] = useState("All");
   const visible = publications.filter(
     p =>
       filter === "All" ||
-      (filter === "Research" ? !p.kind.includes("blog") : p.kind === filter)
+      (filter === "Research" ? isResearch(p) : p.kind === filter)
   );
   return (
     <EditorialLayout
@@ -26,18 +30,22 @@ export default function ResourcesPage() {
           role="group"
           aria-label="Filter resources"
         >
-          {["All", "Company blog", "Engineering blog", "Research"].map(
-            label => (
-              <button
-                type="button"
-                key={label}
-                aria-pressed={filter === label}
-                onClick={() => setFilter(label)}
-              >
-                {label}
-              </button>
-            )
-          )}
+          {[
+            "All",
+            "From the Founder",
+            "Company blog",
+            "Engineering blog",
+            "Research",
+          ].map(label => (
+            <button
+              type="button"
+              key={label}
+              aria-pressed={filter === label}
+              onClick={() => setFilter(label)}
+            >
+              {label}
+            </button>
+          ))}
         </div>
         <p className="sr-only" role="status">
           {visible.length} resources shown
@@ -54,7 +62,7 @@ export default function ResourcesPage() {
               </h3>
               <p>{item.summary}</p>
               <a className="editorial-text-link" href={publicationHref(item)}>
-                Read {item.kind.includes("blog") ? "article" : "report"}{" "}
+                Read {isResearch(item) ? "report" : "article"}{" "}
                 <span aria-hidden="true">→</span>
               </a>
             </article>

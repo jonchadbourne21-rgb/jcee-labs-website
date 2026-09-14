@@ -1,3 +1,4 @@
+import BuildStatusList from "@/components/BuildStatusList";
 import EditorialLayout from "@/components/EditorialLayout";
 export default function CompanyPage() {
   return (
@@ -20,6 +21,41 @@ export default function CompanyPage() {
         <a className="editorial-text-link" href="/blog/start-with-the-workflow">
           Read our approach →
         </a>
+      </section>
+      <section
+        className="editorial-section editorial-section-muted"
+        aria-labelledby="founder-title"
+      >
+        <p className="editorial-kicker">
+          From the Founder · Jonathan Chadbourne
+        </p>
+        <h2 id="founder-title">The Work Nobody Sees</h2>
+        <p className="editorial-intro">
+          Why JCEE Labs starts with observation, evidence, and the workflows
+          between systems. The thinking that connects our research to the work
+          of ordinary businesses.
+        </p>
+        <a className="editorial-text-link" href="/blog/the-work-nobody-sees">
+          Read the founder essay →
+        </a>
+      </section>
+      <section className="editorial-section">
+        <p className="editorial-kicker">The wider company</p>
+        <h2>Operating software and personal applications.</h2>
+        <p>
+          Distribution is our first industry focus. JCEE Operating Cloud
+          describes the longer-term platform direction. Howm.ai is our separate
+          personal-app suite in development, including Mirrored and MISE.
+        </p>
+        <div className="editorial-actions">
+          <a className="editorial-text-link" href="/operating-cloud">
+            Operating Cloud direction →
+          </a>
+          <a className="editorial-text-link" href="/registry#personal-apps">
+            Howm and app build status →
+          </a>
+        </div>
+        <BuildStatusList ids={["howm", "mise", "mirrored"]} />
       </section>
       <section className="editorial-section editorial-section-muted">
         <h2>The standard behind the work.</h2>

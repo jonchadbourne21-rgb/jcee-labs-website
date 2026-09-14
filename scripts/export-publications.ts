@@ -1,21 +1,31 @@
 import fs from "node:fs";
-import { publications } from "../client/src/content/publications";
+import {
+  publications,
+  publicationHref,
+} from "../client/src/content/publications";
 import { entries } from "../client/src/content/registryEntries";
 fs.mkdirSync("client/public/publications", { recursive: true });
 for (const item of publications) {
   const text =
-    `# ${item.title}\n\n${item.kind} · JCEE Labs · ${item.date} · Version 1.0\n\n${item.summary}\n\n` +
+    `# ${item.title}\n\n${item.kind} · ${item.author || "JCEE Labs"} · ${item.date} · Version 1.0\n\n${item.summary}\n\n` +
     item.sections
       .map(
         s =>
           `## ${s.title}\n\n${s.paragraphs.join("\n\n")}\n${s.bullets ? "\n" + s.bullets.map(b => `- ${b}`).join("\n") + "\n" : ""}`
       )
-      .join("\n");
+      .join("\n") +
+    (item.related
+      ? "\n## Continue reading\n\n" +
+        item.related
+          .map(link => `- [${link.label}](https://jceelabs.com${link.href})`)
+          .join("\n") +
+        "\n"
+      : "");
   fs.writeFileSync(`client/public/publications/${item.slug}.md`, text);
 }
 fs.writeFileSync(
-  "client/public/JCEE_Labs_Public_Registry_v1.1.md",
-  "# JCEE Labs Public Registry — Version 1.1\n\nReviewed September 14, 2026. Public summary of selected portfolio records. Historical milestone dates remain distinct from this review date. This publication is not a new experimental execution.\n\n" +
+  "client/public/JCEE_Labs_Public_Registry_v1.2.md",
+  "# JCEE Labs Public Registry — Version 1.2\n\nReviewed September 14, 2026. Public summary of selected portfolio records. Historical milestone dates remain distinct from this review date. This publication is not a new experimental execution.\n\n" +
     entries
       .map(
         e =>
@@ -37,6 +47,11 @@ const routeMetadata: Record<string, { title: string; description: string }> = {
     title: "JCEE Distribution — Order Integrity",
     description:
       "Compare purchase orders with sales orders, investigate exceptions, and measure operating improvement. Explore the JCEE Distribution prototype and its next gate.",
+  },
+  "/operating-cloud": {
+    title: "JCEE Operating Cloud — Platform Direction",
+    description:
+      "A common foundation for industry operating software, beginning with JCEE Distribution. Explore the direction and current evidence.",
   },
   "/technology": {
     title: "Technology — JCEE Labs",
@@ -65,9 +80,10 @@ const routeMetadata: Record<string, { title: string; description: string }> = {
   },
 };
 for (const p of publications)
-  routeMetadata[
-    `${p.kind.includes("blog") ? "/blog" : "/research"}/${p.slug}`
-  ] = { title: `${p.title} — JCEE Labs`, description: p.summary };
+  routeMetadata[publicationHref(p)] = {
+    title: `${p.title} — JCEE Labs`,
+    description: p.summary,
+  };
 fs.writeFileSync(
   "client/src/content/routeMetadata.json",
   JSON.stringify(routeMetadata, null, 2) + "\n"

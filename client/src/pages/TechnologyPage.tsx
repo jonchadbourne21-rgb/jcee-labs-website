@@ -1,3 +1,4 @@
+import BuildStatusList from "@/components/BuildStatusList";
 import EditorialLayout from "@/components/EditorialLayout";
 export default function TechnologyPage() {
   return (
@@ -39,6 +40,9 @@ export default function TechnologyPage() {
       <section className="editorial-section editorial-section-muted">
         <p className="editorial-kicker">Applied development</p>
         <h2>From components to useful workflows.</h2>
+        <a className="editorial-text-link" href="/operating-cloud">
+          JCEE Operating Cloud: platform direction →
+        </a>
         <p className="editorial-intro">
           JCEE Distribution applies the company’s operating-improvement
           direction to purchase-order integrity. AP Gate explores controlled
@@ -55,6 +59,8 @@ export default function TechnologyPage() {
         </div>
       </section>
       <section className="editorial-section">
+        <h2>Execution tooling in development.</h2>
+        <BuildStatusList ids={["ap-gate", "aeel", "vow-dx"]} />
         <h2>Understand the current build.</h2>
         <p>
           The public registry separates preserved milestones, development

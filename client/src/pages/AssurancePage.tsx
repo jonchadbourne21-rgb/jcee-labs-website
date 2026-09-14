@@ -1,3 +1,4 @@
+import BuildStatusList from "@/components/BuildStatusList";
 import { useEffect } from "react";
 import BrandFooter from "@/components/BrandFooter";
 import CoreHeader from "@/components/CoreHeader";
@@ -58,11 +59,18 @@ export default function AssurancePage() {
     <main className="program-page assurance-program-page" id="top">
       <CoreHeader current="assurance" />
 
-      <section id="page-content" tabIndex={-1} className="program-masthead assurance-program">
-        <p className="eyebrow"><span /> PUBLIC OVERVIEW · ACTIVE RESEARCH</p>
+      <section
+        id="page-content"
+        tabIndex={-1}
+        className="program-masthead assurance-program"
+      >
+        <p className="eyebrow">
+          <span /> PUBLIC OVERVIEW · ACTIVE RESEARCH
+        </p>
         <div className="program-number">JCEE ASSURANCE / PUBLIC OVERVIEW</div>
         <h1>
-          The actor is not<br />
+          The actor is not
+          <br />
           <em>the final judge.</em>
         </h1>
         <p className="program-deck">
@@ -77,7 +85,9 @@ export default function AssurancePage() {
 
       <section className="program-statement">
         <p className="charter-section-label">THE POSITION</p>
-        <h2>Execution, evidence, verification, and review are different jobs.</h2>
+        <h2>
+          Execution, evidence, verification, and review are different jobs.
+        </h2>
         <div className="program-statement-copy">
           <p>
             A runtime can record what it attempted and observed. That does not
@@ -93,14 +103,19 @@ export default function AssurancePage() {
         </div>
       </section>
 
-      <section className="assurance-architecture" aria-labelledby="assurance-architecture-title">
+      <section
+        className="assurance-architecture"
+        aria-labelledby="assurance-architecture-title"
+      >
         <div className="section-index">
           <span>PUBLIC ARCHITECTURE</span>
           <span>ROLES · NOT IMPLEMENTATION DISCLOSURE</span>
         </div>
-        <h2 id="assurance-architecture-title">One lab. Distinct layers. Separate evidence.</h2>
+        <h2 id="assurance-architecture-title">
+          One lab. Distinct layers. Separate evidence.
+        </h2>
         <div className="assurance-architecture-grid">
-          {assuranceLayers.map((layer) => (
+          {assuranceLayers.map(layer => (
             <article key={layer.id}>
               <span className="assurance-layer-number">{layer.id}</span>
               <div>
@@ -113,7 +128,10 @@ export default function AssurancePage() {
         </div>
       </section>
 
-      <section className="program-boundaries" aria-labelledby="assurance-supported">
+      <section
+        className="program-boundaries"
+        aria-labelledby="assurance-supported"
+      >
         <div className="section-index">
           <span>PUBLIC CLAIM BOUNDARY</span>
           <span>WHAT THE CURRENT RECORD SUPPORTS</span>
@@ -123,21 +141,48 @@ export default function AssurancePage() {
           <article>
             <span>SUPPORTED</span>
             <ul>
-              {supported.map((item) => <li key={item}>{item}</li>)}
+              {supported.map(item => (
+                <li key={item}>{item}</li>
+              ))}
             </ul>
           </article>
           <article>
             <span>NOT CLAIMED</span>
             <ul>
-              {notClaimed.map((item) => <li key={item}>{item}</li>)}
+              {notClaimed.map(item => (
+                <li key={item}>{item}</li>
+              ))}
             </ul>
           </article>
         </div>
       </section>
 
+      <section className="program-boundaries" aria-labelledby="current-builds">
+        <div className="section-index">
+          <span>CURRENT BUILD RECORDS</span>
+          <span>REVIEWED SEPTEMBER 14, 2026</span>
+        </div>
+        <h2 id="current-builds">
+          The built components and their current limits.
+        </h2>
+        <BuildStatusList
+          ids={[
+            "jec-1-0",
+            "ja-p03",
+            "ja-p04",
+            "iej",
+            "evidence-engine",
+            "jec-ea",
+            "compound",
+          ]}
+        />
+      </section>
       <section className="program-next">
         <p className="charter-section-label">RELATION TO JCEE VOW AND QCS</p>
-        <h2>The runtime acts. The calculus constrains. Assurance checks the evidence.</h2>
+        <h2>
+          The runtime acts. The calculus constrains. Assurance checks the
+          evidence.
+        </h2>
         <p>
           JCEE VOW, QCS, JEC, JCEE Assurance, IEJ, and the Evidence Engine are
           distinct public identities with different responsibilities and
@@ -145,9 +190,15 @@ export default function AssurancePage() {
           assumed merely because the layers were designed by the same lab.
         </p>
         <div className="program-links">
-          <a href="/registry">VIEW THE PUBLIC REGISTRY <span>→</span></a>
-          <a href="/vow">VIEW JCEE VOW <span>→</span></a>
-          <a href="/qcs">VIEW QCS <span>→</span></a>
+          <a href="/registry">
+            VIEW THE PUBLIC REGISTRY <span>→</span>
+          </a>
+          <a href="/vow">
+            VIEW JCEE VOW <span>→</span>
+          </a>
+          <a href="/qcs">
+            VIEW QCS <span>→</span>
+          </a>
         </div>
       </section>
 
