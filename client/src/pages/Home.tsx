@@ -5,112 +5,119 @@ import { publications, publicationHref } from "@/content/publications";
 
 export default function Home() {
   useEffect(() => {
-    document.title = "JCEE Labs — AI Workflow Assurance";
+    document.title = "JCEE Labs — From Possibility to Trusted Claim";
   }, []);
+
   return (
     <main id="top" className="precision-home commercial-home">
       <CoreHeader />
       <section id="page-content" tabIndex={-1} className="hero hybrid-hero">
         <div className="hero-copy">
           <p className="eyebrow">
-            <span /> AI WORKFLOW ASSURANCE
+            <span /> JCEE ASSURANCE METHOD
           </p>
           <h1>
-            AI can act.
+            From possibility
             <br />
-            <em>Make it accountable.</em>
+            <em>to trusted claim.</em>
           </h1>
           <p className="hero-deck">
-            JCEE Labs helps teams examine consequential AI and automated
-            workflows: what happened, what evidence supports the next action,
-            and whether current permission allows it. Start with one bounded
-            assessment. Implement controls where the evidence shows they are needed.
+            JCEE Labs builds assurance and execution infrastructure for work where
+            AI, automation, or complex software can produce convincing answers
+            faster than teams can establish whether those answers are warranted.
+            Evidence decides what can be claimed. Policy decides what can be done.
           </p>
           <div className="hero-actions">
-            <a className="primary-link" href="/partners/enterprise">
-              Discuss an assessment <span>→</span>
-            </a>
             <a className="primary-link" href="/assurance">
-              Explore the method <span>↗</span>
+              Explore the method <span>→</span>
+            </a>
+            <a className="primary-link" href="/partners/enterprise">
+              Discuss an assessment <span>↗</span>
             </a>
           </div>
         </div>
-        <aside className="hero-proof-index" aria-label="The assurance approach">
-          <span>ONE WORKFLOW FIRST</span>
+        <aside className="hero-proof-index" aria-label="The assurance path">
+          <span>POSSIBILITY → EVIDENCE → CONSEQUENCE</span>
           <ol>
             <li>
               <b>01</b>
-              <strong>Establish</strong>
-              <small>Separate observed facts from inferred state.</small>
+              <strong>Define</strong>
+              <small>State a consequential question and a claim that can lose.</small>
             </li>
             <li>
               <b>02</b>
-              <strong>Bound</strong>
-              <small>Identify what current permission allows.</small>
+              <strong>Establish</strong>
+              <small>Separate observation, inference, judgment, and authority.</small>
             </li>
             <li>
               <b>03</b>
-              <strong>Preserve</strong>
-              <small>Leave evidence a reviewer can inspect.</small>
+              <strong>Bound</strong>
+              <small>Permit only the consequence the evidence and policy support.</small>
             </li>
           </ol>
           <a href="/registry">Inspect the public evidence →</a>
         </aside>
       </section>
+
       <div className="statement-band" aria-label="JCEE Labs principles">
-        <span>CONFIDENCE IS NOT AUTHORITY</span>
+        <span>VERIFICATION BEFORE JUDGMENT</span>
         <span aria-hidden="true">•</span>
-        <span>EVIDENCE BEFORE ACTION</span>
+        <span>OBSERVATION IS NOT AUTHORITY</span>
         <span aria-hidden="true">•</span>
-        <span>HUMAN ACCOUNTABILITY</span>
+        <span>CONSEQUENCES LEAVE RECEIPTS</span>
       </div>
+
       <section className="company-section" id="company">
         <div className="section-index">
-          <span>01 / START WITH AN EXPENSIVE UNCERTAINTY</span>
-          <span>CONSEQUENTIAL WORKFLOW ASSESSMENT</span>
+          <span>01 / THE METHOD</span>
+          <span>METHOD ABOVE MECHANISMS</span>
         </div>
         <div className="company-statement">
-          <p>ONE WORKFLOW. A CLEARER DECISION.</p>
+          <p>A METHOD, NOT A MARKETING PROMISE.</p>
           <h2>
-            It says it worked.
+            What has to be true
             <br />
-            <em>What does the evidence say?</em>
+            <em>before the claim changes the world?</em>
           </h2>
         </div>
         <div className="customer-problem-grid">
           <article>
-            <h3>The request timed out. Did it act?</h3>
+            <h3>Can the claim lose?</h3>
             <p>
-              Examine the evidence available after an interrupted payment,
-              refund, or automated action before deciding whether to retry.
+              Define the actor, property, conditions, threshold, consequence,
+              and disproof condition before the result is known.
             </p>
-            <a href="/vow">Evidence-aware recovery →</a>
+            <a href="/assurance">Claim and disproof →</a>
           </article>
           <article>
-            <h3>The approval changed. Can it continue?</h3>
+            <h3>What was actually observed?</h3>
             <p>
-              Map the action to its authority source, scope, and freshness.
-              A plausible answer is not permission to change another system.
+              Keep authoritative external facts distinct from deterministic
+              transforms, inferred state, and bounded judgment.
             </p>
-            <a href="/assurance">Evidence and authority →</a>
+            <a href="/assurance">Observation and evidence →</a>
           </article>
           <article>
-            <h3>The team cannot explain the outcome.</h3>
+            <h3>What is permitted now?</h3>
             <p>
-              Identify missing observations, failure paths, and review records.
-              Leave with a bounded report and a prioritized control plan.
+              Evidence can justify a conclusion. Only explicit, current policy
+              can justify a consequential action. Preserve the decision in a receipt.
             </p>
-            <a href="/partners/enterprise">Scope an assessment →</a>
+            <a href="/partners/enterprise">Assess a real boundary →</a>
           </article>
         </div>
         <div className="company-bottom">
           <p>
-            Learn the method. Assess one workflow. Implement the needed controls.
-            Expand only when evidence and delivery readiness justify it.
+            The method is intentionally usable before a team adopts JCEE software.
+            Start with one expensive ambiguity or high-consequence workflow and
+            make the evidence boundary explicit.
           </p>
-          <a href="/assurance">HOW JCEE ASSURANCE WORKS <span>→</span></a>
+          <a href="/assurance">
+            EXPLORE THE JCEE ASSURANCE METHOD <span>→</span>
+          </a>
         </div>
       </section>
+
       <section
         className="operating-cloud-home"
         id="operating-cloud"
@@ -119,42 +126,40 @@ export default function Home() {
         <div className="operating-cloud-home__ambient" aria-hidden="true" />
         <div className="operating-cloud-home__frame">
           <div className="operating-cloud-home__topline">
-            <span>02 / ASSURANCE IN OPERATING SOFTWARE</span>
+            <span>02 / METHOD INTO SOFTWARE</span>
             <span>PLATFORM DIRECTION · IN DEVELOPMENT</span>
           </div>
           <div className="operating-cloud-home__lead">
             <div>
-              <p className="operating-cloud-home__kicker">
-                JCEE OPERATING CLOUD
-              </p>
+              <p className="operating-cloud-home__kicker">JCEE OPERATING CLOUD</p>
               <h2 id="operating-cloud-title">
-                Prove value in one workflow. Earn the next.
+                The method sits above the mechanisms.
               </h2>
             </div>
             <div className="operating-cloud-home__lead-copy">
               <p>
-                Our direction starts with an overlay on existing email and
-                business systems. Reconcile records, preserve the evidence, and
-                help a person find the next useful check.
+                JCEE systems implement different assurance obligations: evidence
+                capture, authority and contract boundaries, durable execution,
+                recovery, verification, replay, and review. The layers stay
+                distinct so one green signal cannot silently stand in for truth.
               </p>
               <p className="operating-cloud-home__boundary">
-                Broader workflow ownership and industry operating software are
-                roadmap stages. Customer savings and production integration
-                remain to be demonstrated.
+                Operating Cloud is a platform direction, not a production-certification
+                claim. Broader workflow ownership remains to be demonstrated.
               </p>
             </div>
           </div>
           <div
             className="operating-cloud-home__systems"
-            aria-label="Planned progression"
+            aria-label="Assurance architecture"
           >
-            <span>THE ROADMAP</span>
+            <span>THE STACK</span>
             <div>
-              <b>OVERLAY</b>
-              <b>ASSURE</b>
-              <b>ASSIST</b>
-              <b>OWN WORKFLOW</b>
-              <b>VERTICAL OS</b>
+              <b>METHOD</b>
+              <b>EVIDENCE</b>
+              <b>AUTHORITY</b>
+              <b>RUNTIME</b>
+              <b>RECEIPT</b>
             </div>
           </div>
           <div className="operating-cloud-home__distribution">
@@ -175,6 +180,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
       <section
         className="editorial-section editorial-section-light"
         id="technology"
@@ -182,37 +188,38 @@ export default function Home() {
       >
         <div className="editorial-section-heading">
           <div>
-            <p className="editorial-kicker">03 / THE TECHNOLOGY</p>
-            <h2 id="technology-title">The method guides. The software implements.</h2>
+            <p className="editorial-kicker">03 / IMPLEMENTATION LAYERS</p>
+            <h2 id="technology-title">The method guides. The systems implement.</h2>
           </div>
           <a href="/technology">Explore the technology →</a>
         </div>
         <div className="technology-grid">
           <article>
             <p className="editorial-kicker">JCEE VOW</p>
-            <h3>Recover with evidence.</h3>
+            <h3>Execute and recover with evidence.</h3>
             <p>
-              Preserve what happened when an execution stops or a response is
-              lost. VOW 1.1 remains the frozen milestone; 1.1.1.dev3 is a
-              private development candidate.
+              VOW preserves intent, ambiguity, recovery decisions, effect identity,
+              and receipts around consequential workflows. VOW 1.1 remains the
+              frozen milestone; 1.1.1.dev3 is a private development candidate.
             </p>
             <a href="/vow">Runtime and interactive demo →</a>
           </article>
           <article>
             <p className="editorial-kicker">QCS</p>
-            <h3>Check the next action.</h3>
+            <h3>Reason about the next action.</h3>
             <p>
               The frozen QCS-2.0 specification passed its recorded reproduction
-              gate across two tested authority classes.
+              gate across two tested authority classes. Its scope remains bounded
+              to the evidence behind that result.
             </p>
             <a href="/qcs">Research and interactive model →</a>
           </article>
           <article>
             <p className="editorial-kicker">JCEE ASSURANCE</p>
-            <h3>Make the result inspectable.</h3>
+            <h3>Make the judgment inspectable.</h3>
             <p>
-              Portable evidence and bounded verification help a reviewer examine
-              the record behind a conclusion.
+              Portable evidence, named verification rules, and bounded conclusions
+              help a reviewer see where the evidence supports a claim and where it stops.
             </p>
             <a href="/assurance">Method and verification →</a>
           </article>
@@ -222,6 +229,7 @@ export default function Home() {
           <a href="/registry">Milestones, candidates, and open gates →</a>
         </div>
       </section>
+
       <section
         className="editorial-section home-resources"
         aria-labelledby="resources-title"
@@ -250,16 +258,16 @@ export default function Home() {
           ))}
         </div>
       </section>
+
       <section
         className="principles-summary"
         id="charter"
         aria-labelledby="principles-title"
       >
-        <h2 id="principles-title">Intelligence should leave receipts.</h2>
+        <h2 id="principles-title">We build intelligence that leaves receipts.</h2>
         <p>
-          We test our claims, preserve evidence including failures, and require
-          current authority before consequential action. Human accountability
-          remains.
+          Possibility is welcome. Evidence is explicit. Boundaries are visible.
+          Consequences are earned. Receipts remain.
         </p>
         <a className="editorial-text-link" href="/company">
           Meet JCEE Labs →
