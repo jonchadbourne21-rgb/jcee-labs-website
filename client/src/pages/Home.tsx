@@ -5,7 +5,7 @@ import { publications, publicationHref } from "@/content/publications";
 
 export default function Home() {
   useEffect(() => {
-    document.title = "JCEE Labs — Verified Operating Improvement";
+    document.title = "JCEE Labs — AI Workflow Assurance";
   }, []);
   return (
     <main id="top" className="precision-home commercial-home">
@@ -13,95 +13,102 @@ export default function Home() {
       <section id="page-content" tabIndex={-1} className="hero hybrid-hero">
         <div className="hero-copy">
           <p className="eyebrow">
-            <span /> OPERATING SOFTWARE + EXECUTION ASSURANCE
+            <span /> AI WORKFLOW ASSURANCE
           </p>
           <h1>
-            Make everyday operations
+            AI can act.
             <br />
-            <em>more accurate.</em>
+            <em>Make it accountable.</em>
           </h1>
           <p className="hero-deck">
-            JCEE Labs is developing software that helps industrial distributors
-            reconcile purchase orders with sales orders, investigate exceptions,
-            and measure operational improvement—starting alongside the systems
-            their teams already use.
+            JCEE Labs helps teams examine consequential AI and automated
+            workflows: what happened, what evidence supports the next action,
+            and whether current permission allows it. Start with one bounded
+            assessment. Implement controls where the evidence shows they are needed.
           </p>
           <div className="hero-actions">
-            <a className="primary-link" href="/solutions/distribution">
-              Explore Distribution <span>→</span>
-            </a>
             <a className="primary-link" href="/partners/enterprise">
-              Discuss your workflow <span>↗</span>
+              Discuss an assessment <span>→</span>
+            </a>
+            <a className="primary-link" href="/assurance">
+              Explore the method <span>↗</span>
             </a>
           </div>
         </div>
-        <aside className="hero-proof-index" aria-label="Our approach">
-          <span>START WITH THE WORK</span>
+        <aside className="hero-proof-index" aria-label="The assurance approach">
+          <span>ONE WORKFLOW FIRST</span>
           <ol>
             <li>
               <b>01</b>
-              <strong>Compare</strong>
-              <small>Keep records true to the instructions.</small>
+              <strong>Establish</strong>
+              <small>Separate observed facts from inferred state.</small>
             </li>
             <li>
               <b>02</b>
-              <strong>Investigate</strong>
-              <small>Give every exception its context.</small>
+              <strong>Bound</strong>
+              <small>Identify what current permission allows.</small>
             </li>
             <li>
               <b>03</b>
-              <strong>Measure</strong>
-              <small>Expand when the results justify it.</small>
+              <strong>Preserve</strong>
+              <small>Leave evidence a reviewer can inspect.</small>
             </li>
           </ol>
-          <a href="/blog/start-with-the-workflow">Read our approach →</a>
+          <a href="/registry">Inspect the public evidence →</a>
         </aside>
       </section>
       <div className="statement-band" aria-label="JCEE Labs principles">
-        <span>EVIDENCE OVER CLAIMS</span>
+        <span>CONFIDENCE IS NOT AUTHORITY</span>
         <span aria-hidden="true">•</span>
-        <span>CURRENT AUTHORITY</span>
+        <span>EVIDENCE BEFORE ACTION</span>
         <span aria-hidden="true">•</span>
         <span>HUMAN ACCOUNTABILITY</span>
       </div>
       <section className="company-section" id="company">
         <div className="section-index">
-          <span>01 / THE CUSTOMER’S WORK</span>
-          <span>INDUSTRIAL DISTRIBUTION</span>
+          <span>01 / START WITH AN EXPENSIVE UNCERTAINTY</span>
+          <span>CONSEQUENTIAL WORKFLOW ASSESSMENT</span>
         </div>
         <div className="company-statement">
-          <p>SMALL DISCREPANCIES. REAL WORK.</p>
+          <p>ONE WORKFLOW. A CLEARER DECISION.</p>
           <h2>
-            The order arrived.
+            It says it worked.
             <br />
-            <em>Did the details carry through?</em>
+            <em>What does the evidence say?</em>
           </h2>
         </div>
         <div className="customer-problem-grid">
           <article>
-            <h3>The freight account was missed.</h3>
+            <h3>The request timed out. Did it act?</h3>
             <p>
-              The purchase order names a customer account. The sales order does
-              not. Surface the difference with the instructions beside it.
+              Examine the evidence available after an interrupted payment,
+              refund, or automated action before deciding whether to retry.
             </p>
-            <a href="/solutions/distribution">Order integrity →</a>
+            <a href="/vow">Evidence-aware recovery →</a>
           </article>
           <article>
-            <h3>The price or quantity changed.</h3>
+            <h3>The approval changed. Can it continue?</h3>
             <p>
-              Compare the order with its approved basis, so a person can
-              investigate the discrepancy before deciding what to change.
+              Map the action to its authority source, scope, and freshness.
+              A plausible answer is not permission to change another system.
             </p>
-            <a href="/solutions/distribution">The first checks →</a>
+            <a href="/assurance">Evidence and authority →</a>
           </article>
           <article>
-            <h3>The team keeps checking by hand.</h3>
+            <h3>The team cannot explain the outcome.</h3>
             <p>
-              Measure the time spent checking, correcting, and escalating. The
-              product should earn its place through supported operating value.
+              Identify missing observations, failure paths, and review records.
+              Leave with a bounded report and a prioritized control plan.
             </p>
-            <a href="/blog/start-with-the-workflow">Our approach →</a>
+            <a href="/partners/enterprise">Scope an assessment →</a>
           </article>
+        </div>
+        <div className="company-bottom">
+          <p>
+            Learn the method. Assess one workflow. Implement the needed controls.
+            Expand only when evidence and delivery readiness justify it.
+          </p>
+          <a href="/assurance">HOW JCEE ASSURANCE WORKS <span>→</span></a>
         </div>
       </section>
       <section
@@ -112,13 +119,13 @@ export default function Home() {
         <div className="operating-cloud-home__ambient" aria-hidden="true" />
         <div className="operating-cloud-home__frame">
           <div className="operating-cloud-home__topline">
-            <span>02 / JCEE OPERATING CLOUD</span>
+            <span>02 / ASSURANCE IN OPERATING SOFTWARE</span>
             <span>PLATFORM DIRECTION · IN DEVELOPMENT</span>
           </div>
           <div className="operating-cloud-home__lead">
             <div>
               <p className="operating-cloud-home__kicker">
-                BEGIN ALONGSIDE YOUR SYSTEMS
+                JCEE OPERATING CLOUD
               </p>
               <h2 id="operating-cloud-title">
                 Prove value in one workflow. Earn the next.
@@ -152,7 +159,7 @@ export default function Home() {
           </div>
           <div className="operating-cloud-home__distribution">
             <div>
-              <span>FIRST INDUSTRY FOCUS</span>
+              <span>INDUSTRY APPLICATION · IN DEVELOPMENT</span>
               <h3>JCEE Distribution</h3>
             </div>
             <div>
@@ -176,7 +183,7 @@ export default function Home() {
         <div className="editorial-section-heading">
           <div>
             <p className="editorial-kicker">03 / THE TECHNOLOGY</p>
-            <h2 id="technology-title">Built on execution assurance.</h2>
+            <h2 id="technology-title">The method guides. The software implements.</h2>
           </div>
           <a href="/technology">Explore the technology →</a>
         </div>
@@ -207,7 +214,7 @@ export default function Home() {
               Portable evidence and bounded verification help a reviewer examine
               the record behind a conclusion.
             </p>
-            <a href="/assurance">Evidence and verification →</a>
+            <a href="/assurance">Method and verification →</a>
           </article>
         </div>
         <div className="home-status-strip">

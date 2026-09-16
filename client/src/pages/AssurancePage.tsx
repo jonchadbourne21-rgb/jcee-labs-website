@@ -49,7 +49,7 @@ const notClaimed = [
 export default function AssurancePage() {
   useEffect(() => {
     const previousTitle = document.title;
-    document.title = "JCEE Assurance — Public Overview";
+    document.title = "JCEE Assurance — Method and Workflow Assessments";
     return () => {
       document.title = previousTitle;
     };
@@ -65,26 +65,100 @@ export default function AssurancePage() {
         className="program-masthead assurance-program"
       >
         <p className="eyebrow">
-          <span /> PUBLIC OVERVIEW · ACTIVE RESEARCH
+          <span /> METHOD · ASSESSMENT · IMPLEMENTATION
         </p>
         <div className="program-number">JCEE ASSURANCE / PUBLIC OVERVIEW</div>
         <h1>
-          The actor is not
+          Confidence is not
           <br />
-          <em>the final judge.</em>
+          <em>authority.</em>
         </h1>
         <p className="program-deck">
-          JCEE Assurance is the infrastructure between execution evidence and a
-          bounded, independently reviewable conclusion.
+          A practical method for separating what a system claims, what the
+          evidence establishes, and what it is permitted to do next.
         </p>
         <div className="program-status-row">
-          <span>SYSTEM · MULTI-LAYER ASSURANCE RESEARCH</span>
+          <span>START · ONE CONSEQUENTIAL WORKFLOW</span>
           <span>PUBLIC CLAIM · BOUNDED</span>
+        </div>
+        <div className="program-links">
+          <a href="/partners/enterprise">DISCUSS AN ASSESSMENT <span>→</span></a>
+          <a href="/registry">INSPECT THE EVIDENCE <span>→</span></a>
+        </div>
+      </section>
+
+      <section className="program-statement" aria-labelledby="assurance-method-title">
+        <p className="charter-section-label">THE METHOD ABOVE THE MECHANISMS</p>
+        <h2 id="assurance-method-title">
+          Possibility. Evidence. Boundary. Permitted consequence. Receipt.
+        </h2>
+        <div className="program-statement-copy">
+          <p>
+            Begin with a claim that can fail. Name the required observations,
+            preserve the test conditions, and examine failure and recovery paths.
+            Keep a supported result separate from permission to act.
+          </p>
+          <p>
+            The method can guide work before a team adopts JCEE software.
+            The Assurance Playbook explains that operating discipline; VOW and
+            the other research layers are distinct implementation paths, each
+            with its own evidence and readiness boundary.
+          </p>
+        </div>
+      </section>
+
+      <section className="program-boundaries" aria-labelledby="assurance-offer-title">
+        <div className="section-index">
+          <span>THE FIRST ENGAGEMENT</span>
+          <span>AGREED SCOPE · WRITTEN DELIVERABLES</span>
+        </div>
+        <h2 id="assurance-offer-title">Consequential Workflow Assessment</h2>
+        <div className="assurance-boundary-columns">
+          <article>
+            <span>WHAT WE EXAMINE</span>
+            <p>
+              One workflow, one consequential action, and its existing controls.
+              Examples include payment or refund retries, provisioning, approval
+              changes, and deployment decisions. An example is not a claim of
+              production support for every system.
+            </p>
+          </article>
+          <article>
+            <span>WHAT YOU RECEIVE</span>
+            <p>
+              An Assurance Boundary Report, a Failure Map, an Evidence
+              Architecture, and a prioritized control plan. The report states
+              what was examined, what remains unknown, and the next useful test.
+            </p>
+          </article>
+        </div>
+        <div className="program-links">
+          <a href="/partners/enterprise">SCOPE YOUR WORKFLOW <span>→</span></a>
+        </div>
+      </section>
+
+      <section className="program-statement" aria-labelledby="assurance-adoption-title">
+        <p className="charter-section-label">ADOPTION WITHOUT A PLATFORM LEAP</p>
+        <h2 id="assurance-adoption-title">Learn the method. Implement where it earns its place.</h2>
+        <div className="program-statement-copy">
+          <p>
+            Start with an assessment. A separately scoped implementation sprint
+            can define controls, observations, failure tests, and receipts.
+            Software adoption and ongoing assurance follow only where the
+            workflow, evidence, and delivery readiness justify them.
+          </p>
+          <p>
+            Our direction is an open method, selectively released reference
+            tooling, and proprietary implementation and operating services.
+            Public release and licensing are decided artifact by artifact.
+            This overview does not release the full playbook or private code,
+            grant a software license, or certify a customer system.
+          </p>
         </div>
       </section>
 
       <section className="program-statement">
-        <p className="charter-section-label">THE POSITION</p>
+        <p className="charter-section-label">THE RESEARCH AND IMPLEMENTATION LAYERS</p>
         <h2>
           Execution, evidence, verification, and review are different jobs.
         </h2>
