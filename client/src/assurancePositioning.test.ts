@@ -11,12 +11,42 @@ const inquiry = read("EnterprisePartnersPage.tsx");
 const plain = (source: string) => source.replace(/\s+/g, " ");
 
 describe("playbook-baselined public positioning", () => {
-  it("leads with the method before the commercial conversion path", () => {
+  it("leads with a plain-language accountable-operation promise", () => {
     expect(home).toContain("JCEE ASSURANCE METHOD");
-    expect(home).toContain("From possibility");
-    expect(home).toContain("Explore the method");
-    expect(home).toContain('href="/assurance"');
+    expect(home).toContain("Keep AI-assisted work");
+    expect(plain(home)).toContain(
+      "JCEE is developing methods and software that connect operational actions to clear permissions, reviewable evidence, and human control."
+    );
+    expect(home).toContain('href="#distribution-demo"');
     expect(home).toContain('href="/partners/enterprise"');
+  });
+
+  it("puts a bounded Distribution demonstration directly on the homepage", () => {
+    expect(home).toContain('id="distribution-demo"');
+    expect(home).toContain("SYNTHETIC WORKFLOW DEMONSTRATION");
+    expect(home).toContain("Use customer freight account");
+    expect(home).toContain("Freight account not recorded");
+    expect(home).toContain("Needs review");
+    expect(plain(home)).toContain(
+      "No external change. A person investigates the discrepancy."
+    );
+    expect(plain(home)).toContain(
+      "Distribution demonstrates JCEE; it does not define JCEE's limits."
+    );
+  });
+
+  it("makes the first commercial step explicit without overstating maturity", () => {
+    for (const phrase of [
+      "Who it is for",
+      "What happens",
+      "What you receive",
+      "DISCUSS AN ASSURANCE ASSESSMENT",
+    ]) {
+      expect(home).toContain(phrase);
+    }
+    expect(plain(home)).toContain(
+      "An assurance assessment is not a certification, deployment, or promise of production readiness."
+    );
   });
 
   it("preserves the baseline doctrine and twelve-step operating loop", () => {
