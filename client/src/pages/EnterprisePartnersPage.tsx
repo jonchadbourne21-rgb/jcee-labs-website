@@ -55,8 +55,8 @@ export default function EnterprisePartnersPage() {
         <p className="program-deck">
           Start with the operational problem, not JCEE terminology. Tell us what the work is,
           where it gets stuck or becomes uncertain, which systems are involved, and what your
-          team needs to know at the end. The deeper engineering goal is to make consequential software
-          answerable in operation without asking the buyer to learn our internal vocabulary first.
+          team needs to know at the end. Make consequential software answerable in operation
+          without asking the buyer to learn our internal vocabulary first.
         </p>
         <div className="program-status-row">
           <span>FIRST STEP · WRITTEN BOUNDARY REVIEW</span>
