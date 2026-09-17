@@ -1,109 +1,157 @@
 import { useEffect } from "react";
 import BrandFooter from "@/components/BrandFooter";
 import CoreHeader from "@/components/CoreHeader";
+import VowDurabilityDemo from "@/components/VowDurabilityDemo";
 import { publications, publicationHref } from "@/content/publications";
+
+const buyerProblems = [
+  {
+    title: "Did the automated action actually happen?",
+    copy: "When a request times out or a process stops halfway through, establish what happened before deciding whether to retry.",
+  },
+  {
+    title: "Is the action still allowed now?",
+    copy: "Re-check the current state, approval, policy, and other facts that matter before consequential work continues.",
+  },
+  {
+    title: "Can another person verify the result?",
+    copy: "Preserve an inspectable record of what was proposed, what evidence was used, what happened, and what remains uncertain.",
+  },
+];
 
 export default function Home() {
   useEffect(() => {
-    document.title = "JCEE Labs — Verified Operating Improvement";
+    document.title = "JCEE Labs — Software for Answerable Automated Work";
   }, []);
+
   return (
     <main id="top" className="precision-home commercial-home">
       <CoreHeader />
       <section id="page-content" tabIndex={-1} className="hero hybrid-hero">
         <div className="hero-copy">
           <p className="eyebrow">
-            <span /> OPERATING SOFTWARE + EXECUTION ASSURANCE
+            <span /> SOFTWARE + EXECUTION ASSURANCE
           </p>
           <h1>
-            Make everyday operations
+            Know what happened.
             <br />
-            <em>more accurate.</em>
+            <em>Know what can happen next.</em>
           </h1>
           <p className="hero-deck">
-            JCEE Labs is developing software that helps industrial distributors
-            reconcile purchase orders with sales orders, investigate exceptions,
-            and measure operational improvement—starting alongside the systems
-            their teams already use.
+            JCEE Labs builds software and assurance infrastructure for automated
+            work with real consequences. We help teams check the current basis
+            for an action, recover safely when outcomes are unclear, and preserve
+            evidence of what happened.
           </p>
           <div className="hero-actions">
-            <a className="primary-link" href="/solutions/distribution">
-              Explore Distribution <span>→</span>
+            <a className="primary-link" href="#working-example">
+              See a working example <span>↓</span>
             </a>
             <a className="primary-link" href="/partners/enterprise">
-              Discuss your workflow <span>↗</span>
+              Bring us one workflow <span>↗</span>
             </a>
           </div>
+          <p className="quiet">
+            Reference software and bounded research milestones are available now.
+            Customer savings and production performance have not yet been established.
+          </p>
         </div>
-        <aside className="hero-proof-index" aria-label="Our approach">
-          <span>START WITH THE WORK</span>
+        <aside className="hero-proof-index" aria-label="How JCEE approaches automated work">
+          <span>THE OPERATING LOOP</span>
           <ol>
             <li>
               <b>01</b>
-              <strong>Compare</strong>
-              <small>Keep records true to the instructions.</small>
+              <strong>Define</strong>
+              <small>Name the action, owner, inputs, and required outcome.</small>
             </li>
             <li>
               <b>02</b>
-              <strong>Investigate</strong>
-              <small>Give every exception its context.</small>
+              <strong>Check</strong>
+              <small>Establish what the current evidence supports.</small>
             </li>
             <li>
               <b>03</b>
-              <strong>Measure</strong>
-              <small>Expand when the results justify it.</small>
+              <strong>Act or stop</strong>
+              <small>Continue only inside the supported boundary.</small>
+            </li>
+            <li>
+              <b>04</b>
+              <strong>Record</strong>
+              <small>Leave an inspectable receipt of the result.</small>
             </li>
           </ol>
-          <a href="/blog/start-with-the-workflow">Read our approach →</a>
         </aside>
       </section>
+
       <div className="statement-band" aria-label="JCEE Labs principles">
-        <span>EVIDENCE OVER CLAIMS</span>
+        <span>CLEAR OWNERSHIP</span>
         <span aria-hidden="true">•</span>
-        <span>CURRENT AUTHORITY</span>
+        <span>CURRENT CHECKS</span>
         <span aria-hidden="true">•</span>
-        <span>HUMAN ACCOUNTABILITY</span>
+        <span>SAFE RECOVERY</span>
+        <span aria-hidden="true">•</span>
+        <span>INSPECTABLE RESULTS</span>
       </div>
+
       <section className="company-section" id="company">
         <div className="section-index">
-          <span>01 / THE CUSTOMER’S WORK</span>
-          <span>INDUSTRIAL DISTRIBUTION</span>
+          <span>01 / THE PROBLEM</span>
+          <span>START IN PLAIN ENGLISH</span>
         </div>
         <div className="company-statement">
-          <p>SMALL DISCREPANCIES. REAL WORK.</p>
+          <p>AUTOMATED WORK NEEDS AN ANSWERABLE CONTROL PATH</p>
           <h2>
-            The order arrived.
+            When software acts,
             <br />
-            <em>Did the details carry through?</em>
+            <em>your team needs answers.</em>
           </h2>
         </div>
         <div className="customer-problem-grid">
-          <article>
-            <h3>The freight account was missed.</h3>
-            <p>
-              The purchase order names a customer account. The sales order does
-              not. Surface the difference with the instructions beside it.
-            </p>
-            <a href="/solutions/distribution">Order integrity →</a>
-          </article>
-          <article>
-            <h3>The price or quantity changed.</h3>
-            <p>
-              Compare the order with its approved basis, so a person can
-              investigate the discrepancy before deciding what to change.
-            </p>
-            <a href="/solutions/distribution">The first checks →</a>
-          </article>
-          <article>
-            <h3>The team keeps checking by hand.</h3>
-            <p>
-              Measure the time spent checking, correcting, and escalating. The
-              product should earn its place through supported operating value.
-            </p>
-            <a href="/blog/start-with-the-workflow">Our approach →</a>
-          </article>
+          {buyerProblems.map(problem => (
+            <article key={problem.title}>
+              <h3>{problem.title}</h3>
+              <p>{problem.copy}</p>
+            </article>
+          ))}
+        </div>
+        <div className="company-bottom">
+          <p>
+            Start with one recurring workflow, the controls already in place,
+            and the point where work becomes unclear, repetitive, or difficult to verify.
+          </p>
+          <a href="/partners/enterprise">DISCUSS ONE WORKFLOW <span>→</span></a>
         </div>
       </section>
+
+      <section className="vow-section" id="working-example" aria-labelledby="working-example-title">
+        <div className="section-index light">
+          <span>02 / WORKING SOFTWARE</span>
+          <span>REFERENCE DEMONSTRATION · NOT A CUSTOMER DEPLOYMENT</span>
+        </div>
+        <div className="vow-intro">
+          <h2 id="working-example-title">
+            Interrupt the work.
+            <br />
+            Inspect what survives.
+          </h2>
+          <div>
+            <p>
+              The interactive reference below demonstrates one implemented JCEE
+              behavior: preserving execution evidence across interruption and recovery.
+              It lets you inspect the operating idea rather than relying on prose alone.
+            </p>
+            <p className="quiet">
+              Synthetic execution and demonstration data. This is software evidence,
+              not a customer case study, production deployment, or proof of customer ROI.
+            </p>
+          </div>
+        </div>
+        <VowDurabilityDemo />
+        <a className="section-detail-link" href="/vow">
+          READ THE TECHNICAL JCEE VOW OVERVIEW <span>→</span>
+        </a>
+      </section>
+
       <section
         className="operating-cloud-home"
         id="operating-cloud"
@@ -112,7 +160,7 @@ export default function Home() {
         <div className="operating-cloud-home__ambient" aria-hidden="true" />
         <div className="operating-cloud-home__frame">
           <div className="operating-cloud-home__topline">
-            <span>02 / JCEE OPERATING CLOUD</span>
+            <span>03 / JCEE OPERATING CLOUD</span>
             <span>PLATFORM DIRECTION · IN DEVELOPMENT</span>
           </div>
           <div className="operating-cloud-home__lead">
@@ -168,6 +216,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
       <section
         className="editorial-section editorial-section-light"
         id="technology"
@@ -175,8 +224,8 @@ export default function Home() {
       >
         <div className="editorial-section-heading">
           <div>
-            <p className="editorial-kicker">03 / THE TECHNOLOGY</p>
-            <h2 id="technology-title">Built on execution assurance.</h2>
+            <p className="editorial-kicker">04 / THE TECHNOLOGY</p>
+            <h2 id="technology-title">The deeper machinery, when you need it.</h2>
           </div>
           <a href="/technology">Explore the technology →</a>
         </div>
@@ -215,13 +264,50 @@ export default function Home() {
           <a href="/registry">Milestones, candidates, and open gates →</a>
         </div>
       </section>
+
+      <section className="company-section" id="engage" aria-labelledby="engage-title">
+        <div className="section-index">
+          <span>05 / WORK WITH JCEE</span>
+          <span>ONE WORKFLOW FIRST</span>
+        </div>
+        <div className="company-statement">
+          <p>THE FIRST ENGAGEMENT</p>
+          <h2 id="engage-title">
+            Bring one workflow that keeps getting
+            <br />
+            <em>stuck, repeated, or disputed.</em>
+          </h2>
+        </div>
+        <div className="customer-problem-grid">
+          <article>
+            <h3>1. Boundary review</h3>
+            <p>We review the workflow, current tools, owners, checks, and failure mode.</p>
+          </article>
+          <article>
+            <h3>2. Fit decision</h3>
+            <p>We identify whether a bounded JCEE assessment, implementation, or experiment is useful.</p>
+          </article>
+          <article>
+            <h3>3. Written scope</h3>
+            <p>Before paid work begins, deliverables, acceptance criteria, required access, exclusions, timing, and commercial terms are agreed in writing.</p>
+          </article>
+        </div>
+        <div className="company-bottom">
+          <p>
+            A completed engagement should leave inspectable results and explicit limits,
+            not a vague success claim.
+          </p>
+          <a href="/partners/enterprise">BRING US ONE WORKFLOW <span>→</span></a>
+        </div>
+      </section>
+
       <section
         className="editorial-section home-resources"
         aria-labelledby="resources-title"
       >
         <div className="editorial-section-heading">
           <div>
-            <p className="editorial-kicker">04 / FROM THE LAB</p>
+            <p className="editorial-kicker">06 / FROM THE LAB</p>
             <h2 id="resources-title">The work, in readable form.</h2>
           </div>
           <a href="/resources">All resources →</a>
@@ -243,21 +329,23 @@ export default function Home() {
           ))}
         </div>
       </section>
+
       <section
         className="principles-summary"
         id="charter"
         aria-labelledby="principles-title"
       >
-        <h2 id="principles-title">Intelligence should leave receipts.</h2>
+        <h2 id="principles-title">We build intelligence that leaves receipts.</h2>
         <p>
-          We test our claims, preserve evidence including failures, and require
-          current authority before consequential action. Human accountability
-          remains.
+          The technical depth remains available. The commercial starting point is
+          simpler: one consequential workflow, the evidence it needs, and a result
+          your team can inspect.
         </p>
         <a className="editorial-text-link" href="/company">
           Meet JCEE Labs →
         </a>
       </section>
+
       <BrandFooter backToTopHref="#top" />
     </main>
   );
