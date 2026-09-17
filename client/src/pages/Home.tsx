@@ -5,7 +5,7 @@ import { publications, publicationHref } from "@/content/publications";
 
 export default function Home() {
   useEffect(() => {
-    document.title = "JCEE Labs — From Possibility to Trusted Claim";
+    document.title = "JCEE Labs — Accountable AI-Assisted Operations";
   }, []);
 
   return (
@@ -17,100 +17,160 @@ export default function Home() {
             <span /> JCEE ASSURANCE METHOD
           </p>
           <h1>
-            From possibility
+            Keep AI-assisted work
             <br />
-            <em>to trusted claim.</em>
+            <em>accountable.</em>
           </h1>
           <p className="hero-deck">
-            JCEE Labs builds assurance and execution infrastructure for work where
-            AI, automation, or complex software can produce convincing answers
-            faster than teams can establish whether those answers are warranted.
-            Evidence decides what can be claimed. Policy decides what can be done.
+            JCEE is developing methods and software that connect operational
+            actions to clear permissions, reviewable evidence, and human control.
+            Start with one workflow where being wrong would matter, make the
+            evidence boundary visible, and let the result earn the next step.
           </p>
           <div className="hero-actions">
-            <a className="primary-link" href="/assurance">
-              Explore the method <span>→</span>
+            <a className="primary-link" href="#distribution-demo">
+              See it in one workflow <span>↓</span>
             </a>
             <a className="primary-link" href="/partners/enterprise">
               Discuss an assessment <span>↗</span>
             </a>
           </div>
         </div>
-        <aside className="hero-proof-index" aria-label="The assurance path">
-          <span>POSSIBILITY → EVIDENCE → CONSEQUENCE</span>
+        <aside className="hero-proof-index" aria-label="What accountable operation means">
+          <span>PLAIN-LANGUAGE CONTROL PATH</span>
           <ol>
             <li>
               <b>01</b>
-              <strong>Define</strong>
-              <small>State a consequential question and a claim that can lose.</small>
+              <strong>See</strong>
+              <small>Keep the source instructions and observed state separate.</small>
             </li>
             <li>
               <b>02</b>
-              <strong>Establish</strong>
-              <small>Separate observation, inference, judgment, and authority.</small>
+              <strong>Decide</strong>
+              <small>Show what the evidence supports and what is still unresolved.</small>
             </li>
             <li>
               <b>03</b>
-              <strong>Bound</strong>
-              <small>Permit only the consequence the evidence and policy support.</small>
+              <strong>Act</strong>
+              <small>Allow only the next action that current permission supports.</small>
             </li>
           </ol>
-          <a href="/registry">Inspect the public evidence →</a>
+          <a href="/assurance">Explore the full method →</a>
         </aside>
       </section>
 
       <div className="statement-band" aria-label="JCEE Labs principles">
-        <span>VERIFICATION BEFORE JUDGMENT</span>
+        <span>EVIDENCE BEFORE CLAIM</span>
         <span aria-hidden="true">•</span>
-        <span>OBSERVATION IS NOT AUTHORITY</span>
+        <span>PERMISSION BEFORE CONSEQUENCE</span>
         <span aria-hidden="true">•</span>
-        <span>CONSEQUENCES LEAVE RECEIPTS</span>
+        <span>HUMAN ACCOUNTABILITY REMAINS</span>
       </div>
+
+      <section
+        className="editorial-section editorial-section-light distribution-intro"
+        id="distribution-demo"
+        aria-labelledby="distribution-demo-title"
+      >
+        <div>
+          <p className="editorial-kicker">01 / SEE THE METHOD IN ONE WORKFLOW</p>
+          <h2 id="distribution-demo-title">
+            A mismatch should create a question, not silently create authority.
+          </h2>
+          <p>
+            JCEE Distribution is the first concrete application of the method.
+            In the current synthetic prototype, a purchase order can be compared
+            with the entered sales order and a discrepancy can be surfaced for a
+            person to investigate.
+          </p>
+          <p>
+            Distribution demonstrates JCEE; it does not define JCEE&apos;s limits.
+            The same separation among evidence, judgment, permission, and action
+            is the broader company direction.
+          </p>
+          <a className="editorial-text-link" href="/blog/distribution-first-dry-run">
+            Read the recorded dry-run result →
+          </a>
+        </div>
+        <div
+          className="order-example"
+          aria-label="Illustrative rendering of the tested synthetic order-integrity workflow, not customer data"
+        >
+          <p className="editorial-kicker">SYNTHETIC WORKFLOW DEMONSTRATION</p>
+          <h3>Purchase-order instruction → sales-order review</h3>
+          <dl>
+            <div>
+              <dt>Source instruction</dt>
+              <dd>Use customer freight account</dd>
+            </div>
+            <div>
+              <dt>Observed sales order</dt>
+              <dd>Freight account not recorded</dd>
+            </div>
+            <div>
+              <dt>Comparison result</dt>
+              <dd>
+                <span className="status-label">Needs review</span>
+              </dd>
+            </div>
+            <div>
+              <dt>Permitted consequence</dt>
+              <dd>No external change. A person investigates the discrepancy.</dd>
+            </div>
+          </dl>
+          <p>
+            Illustrative rendering, not customer data. The September 14 synthetic
+            dry run matched 20 of 20 expected classifications with zero external
+            effects. Customer ROI, live integration, and production readiness
+            remain unestablished.
+          </p>
+        </div>
+      </section>
 
       <section className="company-section" id="company">
         <div className="section-index">
-          <span>01 / THE METHOD</span>
+          <span>02 / THE METHOD</span>
           <span>METHOD ABOVE MECHANISMS</span>
         </div>
         <div className="company-statement">
-          <p>A METHOD, NOT A MARKETING PROMISE.</p>
+          <p>MAKE THE BOUNDARY VISIBLE.</p>
           <h2>
             What has to be true
             <br />
-            <em>before the claim changes the world?</em>
+            <em>before software changes the world?</em>
           </h2>
         </div>
         <div className="customer-problem-grid">
           <article>
-            <h3>Can the claim lose?</h3>
-            <p>
-              Define the actor, property, conditions, threshold, consequence,
-              and disproof condition before the result is known.
-            </p>
-            <a href="/assurance">Claim and disproof →</a>
-          </article>
-          <article>
             <h3>What was actually observed?</h3>
             <p>
-              Keep authoritative external facts distinct from deterministic
-              transforms, inferred state, and bounded judgment.
+              Keep source records and authoritative external facts distinct from
+              transformed state, inference, and model judgment.
             </p>
             <a href="/assurance">Observation and evidence →</a>
           </article>
           <article>
-            <h3>What is permitted now?</h3>
+            <h3>What does the evidence support?</h3>
             <p>
-              Evidence can justify a conclusion. Only explicit, current policy
-              can justify a consequential action. Preserve the decision in a receipt.
+              Define a claim that can fail, test it against frozen rules, and say
+              exactly where the conclusion stops.
             </p>
-            <a href="/partners/enterprise">Assess a real boundary →</a>
+            <a href="/assurance">Claim and boundary →</a>
+          </article>
+          <article>
+            <h3>What is allowed now?</h3>
+            <p>
+              A supported conclusion does not create permission. Current policy
+              still decides whether a consequential action may happen.
+            </p>
+            <a href="/assurance">Authority and consequence →</a>
           </article>
         </div>
         <div className="company-bottom">
           <p>
             The method is intentionally usable before a team adopts JCEE software.
-            Start with one expensive ambiguity or high-consequence workflow and
-            make the evidence boundary explicit.
+            Start with one consequential question, preserve what happened, and
+            expand only when the evidence justifies it.
           </p>
           <a href="/assurance">
             EXPLORE THE JCEE ASSURANCE METHOD <span>→</span>
@@ -126,7 +186,7 @@ export default function Home() {
         <div className="operating-cloud-home__ambient" aria-hidden="true" />
         <div className="operating-cloud-home__frame">
           <div className="operating-cloud-home__topline">
-            <span>02 / METHOD INTO SOFTWARE</span>
+            <span>03 / METHOD INTO SOFTWARE</span>
             <span>PLATFORM DIRECTION · IN DEVELOPMENT</span>
           </div>
           <div className="operating-cloud-home__lead">
@@ -138,11 +198,11 @@ export default function Home() {
             </div>
             <div className="operating-cloud-home__lead-copy">
               <p>
-                Reconcile records and observations before promoting a conclusion.
                 JCEE systems implement different assurance obligations: evidence
                 capture, authority and contract boundaries, durable execution,
                 recovery, verification, replay, and review. The layers stay
-                distinct so one green signal cannot silently stand in for truth.
+                distinct so one green signal cannot silently stand in for truth
+                or permission.
               </p>
               <p className="operating-cloud-home__boundary">
                 Operating Cloud is a platform direction, not a production-certification
@@ -165,7 +225,7 @@ export default function Home() {
           </div>
           <div className="operating-cloud-home__distribution">
             <div>
-              <span>INDUSTRY APPLICATION · IN DEVELOPMENT</span>
+              <span>FIRST INDUSTRY APPLICATION · IN DEVELOPMENT</span>
               <h3>JCEE Distribution</h3>
             </div>
             <div>
@@ -175,10 +235,61 @@ export default function Home() {
                 shadow evaluation is the next commercial gate.
               </p>
               <a href="/solutions/distribution">
-                EXPLORE THE WORKFLOW <span aria-hidden="true">→</span>
+                EXPLORE THE DISTRIBUTION APPLICATION <span aria-hidden="true">→</span>
               </a>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="company-section" id="assessment-start">
+        <div className="section-index">
+          <span>04 / START HERE</span>
+          <span>ONE QUESTION · ONE BOUNDARY · ONE WRITTEN RESULT</span>
+        </div>
+        <div className="company-statement">
+          <p>THE FIRST COMMERCIAL STEP.</p>
+          <h2>
+            Start with one place
+            <br />
+            <em>where being wrong matters.</em>
+          </h2>
+        </div>
+        <div className="customer-problem-grid">
+          <article>
+            <h3>Who it is for</h3>
+            <p>
+              Product, operations, platform, security, infrastructure, and risk
+              teams using AI or automation where a wrong or unexplained action has
+              a real operational cost.
+            </p>
+          </article>
+          <article>
+            <h3>What happens</h3>
+            <p>
+              We scope one workflow or claim, map its evidence and current
+              authority, identify unresolved recovery or control gaps, and apply a
+              bounded review.
+            </p>
+          </article>
+          <article>
+            <h3>What you receive</h3>
+            <p>
+              A written finding that states what the evidence supports, what
+              remains unresolved, and the next justified test or implementation
+              step.
+            </p>
+          </article>
+        </div>
+        <div className="company-bottom">
+          <p>
+            An assurance assessment is not a certification, deployment, or promise
+            of production readiness. Software implementation and production
+            changes remain separately scoped and authorized.
+          </p>
+          <a href="/partners/enterprise">
+            DISCUSS AN ASSURANCE ASSESSMENT <span>→</span>
+          </a>
         </div>
       </section>
 
@@ -189,7 +300,7 @@ export default function Home() {
       >
         <div className="editorial-section-heading">
           <div>
-            <p className="editorial-kicker">03 / IMPLEMENTATION LAYERS</p>
+            <p className="editorial-kicker">05 / IMPLEMENTATION LAYERS</p>
             <h2 id="technology-title">The method guides. The systems implement.</h2>
           </div>
           <a href="/technology">Explore the technology →</a>
@@ -237,7 +348,7 @@ export default function Home() {
       >
         <div className="editorial-section-heading">
           <div>
-            <p className="editorial-kicker">04 / FROM THE LAB</p>
+            <p className="editorial-kicker">06 / FROM THE LAB</p>
             <h2 id="resources-title">The work, in readable form.</h2>
           </div>
           <a href="/resources">All resources →</a>
