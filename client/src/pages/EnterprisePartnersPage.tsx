@@ -4,16 +4,16 @@ import CoreHeader from "@/components/CoreHeader";
 import { buildPartnerInquiryMailto } from "@/lib/partnerInquiry";
 
 const enterpriseFit = [
-  ["ACTION", "Software or an agent can change an external system, initiate a transaction, or continue work without its original operator."],
-  ["AUTHORITY", "Permission changes over time, across tools, or at a boundary the acting system cannot safely infer."],
-  ["RECOVERY", "Retries, partial completion, duplicate effects, or interrupted workflows create real operational exposure."],
-  ["EVIDENCE", "Operators, customers, auditors, or counterparties need a durable account of what happened and why."],
+  ["WORK GETS STUCK", "A recurring workflow needs manual follow-up, repeated checking, or reconstruction before anyone knows it is finished."],
+  ["OUTCOMES GET UNCLEAR", "A timeout, partial completion, duplicate request, or handoff makes it difficult to tell what actually happened."],
+  ["PERMISSION CAN CHANGE", "Approvals, policies, ownership, or source data can change between a decision and the action that follows."],
+  ["THE RECORD MATTERS", "Operators, customers, auditors, or counterparties need an inspectable account of what happened and why."],
 ];
 
 export default function EnterprisePartnersPage() {
   useEffect(() => {
     const previousTitle = document.title;
-    document.title = "Enterprise Partnerships — JCEE Labs";
+    document.title = "Discuss a Workflow — JCEE Labs";
     return () => {
       document.title = previousTitle;
     };
@@ -32,11 +32,11 @@ export default function EnterprisePartnersPage() {
       role: String(data.get("role") || ""),
       focus: String(data.get("domain") || ""),
       timeline: String(data.get("timeline") || ""),
-      primaryLabel: "System and consequential action",
+      primaryLabel: "Workflow and where it gets stuck",
       primary: String(data.get("system") || ""),
-      evidenceLabel: "Current controls and evidence",
+      evidenceLabel: "Current tools, checks, and handoffs",
       evidence: String(data.get("controls") || ""),
-      outcomeLabel: "Decision or outcome required",
+      outcomeLabel: "What a useful first engagement should establish",
       outcome: String(data.get("outcome") || ""),
     });
   };
@@ -46,33 +46,34 @@ export default function EnterprisePartnersPage() {
       <CoreHeader current="partners" />
 
       <section id="page-content" tabIndex={-1} className="program-masthead partner-masthead enterprise-partner-masthead">
-        <p className="eyebrow"><span /> ENTERPRISE PARTNERSHIPS · OPERATIONAL SYSTEMS</p>
-        <div className="program-number">JCEE LABS / PARTNERS / ENTERPRISE</div>
+        <p className="eyebrow"><span /> WORK WITH JCEE · ONE WORKFLOW FIRST</p>
+        <div className="program-number">JCEE LABS / WORKFLOW INQUIRY</div>
         <h1>
-          Make consequential software<br />
-          <em>answerable in operation.</em>
+          Bring us the workflow<br />
+          <em>your team cannot confidently close.</em>
         </h1>
         <p className="program-deck">
-          For product, platform, security, infrastructure, and risk teams that need stronger
-          execution evidence, bounded authority, and recovery guarantees around systems that act.
+          Start with the operational problem, not JCEE terminology. Tell us what the work is,
+          where it gets stuck or becomes uncertain, which systems are involved, and what your
+          team needs to know at the end.
         </p>
         <div className="program-status-row">
-          <span>PATH · DESIGN / EVALUATION / INTEGRATION</span>
-          <span>ROUTING · ENTERPRISE REVIEW</span>
+          <span>FIRST STEP · WRITTEN BOUNDARY REVIEW</span>
+          <span>NO PAID WORK BEFORE AGREED SCOPE</span>
         </div>
       </section>
 
       <section className="partner-fit enterprise-fit" aria-labelledby="enterprise-fit-title">
         <div className="section-index">
-          <span>01 / FIT SIGNALS</span>
-          <span>CONSEQUENCE · CONTROL · OPERATIONS</span>
+          <span>01 / GOOD FIT</span>
+          <span>WORKFLOW · HANDOFF · RECOVERY · EVIDENCE</span>
         </div>
         <div className="partner-fit-intro">
-          <p>ENTERPRISE FIT</p>
-          <h2 id="enterprise-fit-title">A system boundary worth engineering.</h2>
+          <p>START HERE</p>
+          <h2 id="enterprise-fit-title">A specific workflow with a specific failure.</h2>
           <p>
-            The best fit is a specific operational path where a wrong, duplicated, stale,
-            unauthorized, or unexplained action would materially matter.
+            We are most useful when the problem can be tied to an action, an owner,
+            the systems involved, and an outcome that can be checked.
           </p>
         </div>
         <div className="partner-signal-grid">
@@ -87,45 +88,45 @@ export default function EnterprisePartnersPage() {
 
       <section className="partner-engagement-model" aria-labelledby="enterprise-engagement-title">
         <div className="section-index light">
-          <span>02 / ENGAGEMENT MODEL</span>
-          <span>SMALLEST USEFUL BOUNDARY FIRST</span>
+          <span>02 / WHAT HAPPENS NEXT</span>
+          <span>CLEAR SCOPE BEFORE COMMITMENT</span>
         </div>
         <div className="partner-shared-layout">
           <div>
-            <p className="partner-kicker">HOW WE START</p>
-            <h2 id="enterprise-engagement-title">One workflow. One evidence boundary. One decision.</h2>
+            <p className="partner-kicker">THE FIRST ENGAGEMENT</p>
+            <h2 id="enterprise-engagement-title">Understand the workflow before prescribing software.</h2>
           </div>
           <ol className="partner-sequence">
-            <li><span>01</span><strong>Frame</strong><p>Name the action, authority source, failure mode, and required record.</p></li>
-            <li><span>02</span><strong>Evaluate</strong><p>Map current controls and identify where evidence or recovery becomes ambiguous.</p></li>
-            <li><span>03</span><strong>Design</strong><p>Specify the smallest integration, experiment, or architecture change worth testing.</p></li>
-            <li><span>04</span><strong>Decide</strong><p>Return a bounded result: proceed, narrow, reproduce, or stop.</p></li>
+            <li><span>01</span><strong>Review</strong><p>We read the workflow, current tools, owners, checks, and failure mode.</p></li>
+            <li><span>02</span><strong>Map</strong><p>We identify the smallest boundary where clearer ownership, evidence, recovery, or software could help.</p></li>
+            <li><span>03</span><strong>Scope</strong><p>If there is a fit, we define deliverables, acceptance criteria, required access, exclusions, timing, and commercial terms in writing.</p></li>
+            <li><span>04</span><strong>Decide</strong><p>You receive a bounded recommendation. If JCEE is not useful for the problem, we say so rather than forcing an engagement.</p></li>
           </ol>
         </div>
       </section>
 
       <section className="partner-inquiry" aria-labelledby="enterprise-inquiry-title">
         <div className="section-index">
-          <span>03 / ENTERPRISE INQUIRY</span>
-          <span>ROUTED · ENTERPRISE</span>
+          <span>03 / WORKFLOW INQUIRY</span>
+          <span>REVIEW BEFORE SEND</span>
         </div>
         <div className="partner-inquiry-layout">
           <div className="partner-inquiry-copy">
-            <p className="partner-kicker">INITIATE ENTERPRISE REVIEW</p>
-            <h2 id="enterprise-inquiry-title">Where does your system need stronger control?</h2>
+            <p className="partner-kicker">DESCRIBE THE WORK</p>
+            <h2 id="enterprise-inquiry-title">Where does the workflow stop being clear?</h2>
             <p>
-              Describe the workflow and the decision your team needs to make.
               This form opens an email draft for you to review and send.
+              It does not create a contract or authorize paid work.
             </p>
             <dl>
-              <div><dt>ROUTE</dt><dd>Enterprise partnership review</dd></div>
-              <div><dt>FIRST STEP</dt><dd>Written boundary assessment</dd></div>
+              <div><dt>FIRST STEP</dt><dd>Written workflow boundary review</dd></div>
+              <div><dt>IF THERE IS A FIT</dt><dd>Written scope and commercial proposal before paid work</dd></div>
               <div><dt>DIRECT</dt><dd><a href="mailto:support+enterprise@jceelabs.com">support+enterprise@jceelabs.com</a></dd></div>
             </dl>
           </div>
 
           <form className="partner-form enterprise-partner-form" onSubmit={openInquiryDraft}>
-            <div className="partner-form-route">ENTERPRISE / OPERATIONAL INQUIRY</div>
+            <div className="partner-form-route">JCEE / WORKFLOW INQUIRY</div>
             <div className="partner-form-row">
               <label><span>NAME *</span><input name="name" autoComplete="name" required /></label>
               <label><span>WORK EMAIL *</span><input name="email" type="email" autoComplete="email" required /></label>
@@ -136,34 +137,35 @@ export default function EnterprisePartnersPage() {
             </div>
             <div className="partner-form-row">
               <label>
-                <span>OPERATIONAL DOMAIN *</span>
+                <span>WORKFLOW AREA *</span>
                 <select name="domain" defaultValue="" required>
-                  <option value="" disabled>Select a domain</option>
+                  <option value="" disabled>Select an area</option>
+                  <option>Distribution or back-office operations</option>
                   <option>AI and agent systems</option>
                   <option>Payments or financial operations</option>
                   <option>Cloud, data, or infrastructure</option>
                   <option>Regulated operations</option>
                   <option>Enterprise workflow automation</option>
-                  <option>Other consequential system</option>
+                  <option>Other operational workflow</option>
                 </select>
               </label>
-              <label><span>TIMELINE</span><input name="timeline" placeholder="e.g. Q4 evaluation" /></label>
+              <label><span>TIMELINE</span><input name="timeline" placeholder="e.g. evaluating this quarter" /></label>
             </div>
             <label>
-              <span>SYSTEM AND CONSEQUENTIAL ACTION *</span>
-              <textarea name="system" rows={6} required placeholder="What does the system do, what can it change, and who or what is affected?" />
+              <span>WORKFLOW AND WHERE IT GETS STUCK *</span>
+              <textarea name="system" rows={6} required placeholder="What starts the work? Who owns it? Which systems are involved? Where does it stall, repeat, or become unclear?" />
             </label>
             <label>
-              <span>CURRENT CONTROLS AND EVIDENCE</span>
-              <textarea name="controls" rows={4} placeholder="Describe authorization, logs, receipts, recovery, review, or compliance controls that exist today." />
+              <span>CURRENT TOOLS, CHECKS, AND HANDOFFS</span>
+              <textarea name="controls" rows={4} placeholder="How does your team handle this today? Include the systems, approvals, manual checks, logs, spreadsheets, or follow-up involved." />
             </label>
             <label>
-              <span>DECISION OR OUTCOME REQUIRED *</span>
-              <textarea name="outcome" rows={4} required placeholder="What should a successful first engagement let your team decide or de-risk?" />
+              <span>WHAT SHOULD A USEFUL FIRST ENGAGEMENT ESTABLISH? *</span>
+              <textarea name="outcome" rows={4} required placeholder="What decision, measurable improvement, or evidence would make the first engagement useful?" />
             </label>
             <div className="partner-form-submit">
-              <button type="submit">OPEN ENTERPRISE DRAFT <span aria-hidden="true">→</span></button>
-              <p>Opens your email app. Review the draft, then send it to start an inquiry.</p>
+              <button type="submit">OPEN EMAIL DRAFT <span aria-hidden="true">→</span></button>
+              <p>Review the draft in your email app before sending.</p>
             </div>
           </form>
         </div>
