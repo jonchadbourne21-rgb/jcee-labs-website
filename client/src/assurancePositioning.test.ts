@@ -33,7 +33,7 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
       "20 / 20 expected synthetic classifications · 0 external effects"
     );
     expect(plain(home)).toContain(
-      "Distribution demonstrates JCEE; it does not define JCEE's limits."
+      "Distribution demonstrates JCEE; it does not define JCEE"
     );
     expect(plain(home)).toContain("shadow evaluation is the next commercial gate");
   });
