@@ -235,6 +235,7 @@ export default function Home() {
             </div>
             <div className="operating-cloud-home__lead-copy">
               <p>
+                Reconcile records and observations before promoting a conclusion.
                 JCEE systems implement different assurance obligations: evidence
                 capture, authority and contract boundaries, durable execution,
                 recovery, verification, replay, and review. The layers stay
