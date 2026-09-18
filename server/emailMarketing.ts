@@ -18,6 +18,8 @@
  * - Send transactional emails (inquiry confirmations)
  */
 
+import { authorityHeaders, requireAuthority, type AuthorityIdentity } from "./authorityBoundary";
+
 interface LoopsContact {
   email: string;
   firstName?: string;
@@ -42,7 +44,8 @@ export function isLoopsConfigured(): boolean {
 /**
  * Add a contact to Loops audience
  */
-export async function addContactToLoops(contact: LoopsContact): Promise<{ success: boolean; message: string }> {
+export async function addContactToLoops(authority: AuthorityIdentity, contact: LoopsContact): Promise<{ success: boolean; message: string }> {
+  const identity = requireAuthority(authority);
   const apiKey = process.env.LOOPS_API_KEY;
   
   if (!apiKey) {
@@ -56,6 +59,7 @@ export async function addContactToLoops(contact: LoopsContact): Promise<{ succes
       headers: {
         "Authorization": `Bearer ${apiKey}`,
         "Content-Type": "application/json",
+        ...authorityHeaders(identity),
       },
       body: JSON.stringify({
         email: contact.email,
@@ -86,7 +90,8 @@ export async function addContactToLoops(contact: LoopsContact): Promise<{ succes
 /**
  * Send an event to Loops (triggers automations)
  */
-export async function sendLoopsEvent(payload: LoopsEventPayload): Promise<{ success: boolean }> {
+export async function sendLoopsEvent(authority: AuthorityIdentity, payload: LoopsEventPayload): Promise<{ success: boolean }> {
+  const identity = requireAuthority(authority);
   const apiKey = process.env.LOOPS_API_KEY;
   
   if (!apiKey) {
@@ -100,6 +105,7 @@ export async function sendLoopsEvent(payload: LoopsEventPayload): Promise<{ succ
       headers: {
         "Authorization": `Bearer ${apiKey}`,
         "Content-Type": "application/json",
+        ...authorityHeaders(identity),
       },
       body: JSON.stringify({
         email: payload.email,
@@ -118,16 +124,16 @@ export async function sendLoopsEvent(payload: LoopsEventPayload): Promise<{ succ
 /**
  * Sync a new lead to Loops and trigger welcome event
  */
-export async function syncLeadToLoops(email: string, source: string): Promise<void> {
+export async function syncLeadToLoops(authority: AuthorityIdentity, email: string, source: string): Promise<void> {
   // Add contact
-  await addContactToLoops({
+  await addContactToLoops(authority, {
     email,
     source,
     userGroup: "leads",
   });
 
   // Trigger welcome event (can be used to start email sequence in Loops)
-  await sendLoopsEvent({
+  await sendLoopsEvent(authority, {
     email,
     eventName: "new_lead_signup",
     eventProperties: { source },
@@ -138,6 +144,7 @@ export async function syncLeadToLoops(email: string, source: string): Promise<vo
  * Sync a business inquiry to Loops and trigger event
  */
 export async function syncInquiryToLoops(
+  authority: AuthorityIdentity,
   email: string,
   contactName: string,
   companyName: string
@@ -146,7 +153,7 @@ export async function syncInquiryToLoops(
   const lastName = lastParts.join(" ");
 
   // Add contact
-  await addContactToLoops({
+  await addContactToLoops(authority, {
     email,
     firstName,
     lastName,
@@ -155,7 +162,7 @@ export async function syncInquiryToLoops(
   });
 
   // Trigger inquiry event
-  await sendLoopsEvent({
+  await sendLoopsEvent(authority, {
     email,
     eventName: "business_inquiry_submitted",
     eventProperties: { companyName },
