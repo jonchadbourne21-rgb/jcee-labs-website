@@ -13,6 +13,32 @@ export default function ResearchPage() {
       title="Results you can examine."
       description="Research into execution, authority, and evidence. Each publication states what was tested, what was observed, and what remains unresolved."
     >
+      <section
+        className="editorial-section editorial-section-muted"
+        aria-labelledby="portfolio-title"
+      >
+        <p className="editorial-kicker">
+          CURRENT RESEARCH PORTFOLIO · PREPARED SEPTEMBER 18, 2026
+        </p>
+        <h2 id="portfolio-title">25 fields. One unifying research question.</h2>
+        <p className="editorial-intro">
+          The portfolio spans trustworthy AI, distributed and resilient computing,
+          formal verification, quantum information, information theory, causal
+          assurance, complex systems, human-AI interaction, and applied
+          computational intelligence.
+        </p>
+        <div className="research-question">
+          <span>UNIFYING RESEARCH QUESTION</span>
+          <blockquote>
+            How do you determine what a system actually knows, what that evidence
+            permits it to conclude, what authority it possesses, and what
+            consequences it may safely produce?
+          </blockquote>
+        </div>
+        <a className="editorial-text-link" href="/research/fields">
+          Explore all 25 research fields →
+        </a>
+      </section>
       <section className="editorial-section" aria-labelledby="papers-title">
         <div className="editorial-section-heading">
           <h2 id="papers-title">Reports and research notes</h2>
