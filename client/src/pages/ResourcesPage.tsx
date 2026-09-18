@@ -82,6 +82,13 @@ export default function ResourcesPage() {
             </span>
             <span aria-hidden="true">→</span>
           </a>
+          <a href="/research/fields">
+            <strong>Research fields</strong>
+            <span>
+              The current 25-field research portfolio and its unifying question.
+            </span>
+            <span aria-hidden="true">→</span>
+          </a>
           <a href="/research/jrp-000">
             <strong>The Evidence Boundary</strong>
             <span>
