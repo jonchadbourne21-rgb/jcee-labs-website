@@ -31,6 +31,43 @@ jobs:
             base: ""
     steps:
       - uses: actions/checkout@v6
+      - name: Bind direct-human deployment authority
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib, json, os
+          if os.environ.get("GITHUB_EVENT_NAME") != "workflow_dispatch":
+              raise SystemExit("AUTHORITY_IDENTITY_UNAVAILABLE")
+          repo=os.environ["GITHUB_REPOSITORY"]
+          sha=os.environ["GITHUB_SHA"]
+          actor=os.environ["GITHUB_ACTOR"]
+          run_id=os.environ["GITHUB_RUN_ID"]
+          namespace="github-actions.direct-human.v1"
+          key=f"pages-deploy:{repo}:{sha}"
+          mechanism="DIRECT_HUMAN_WORKFLOW_DISPATCH"
+          payload="|".join([namespace,key,run_id,actor,mechanism])
+          receipt={
+              "namespace":namespace,
+              "authority_key":key,
+              "generation":int(run_id),
+              "sigma":hashlib.sha256(payload.encode()).hexdigest(),
+              "mechanism":mechanism,
+              "actor":actor,
+              "source_sha":sha,
+              "run_id":int(run_id),
+          }
+          os.makedirs("artifacts/authority",exist_ok=True)
+          open("artifacts/authority/pages-deploy.json","w").write(
+              json.dumps(receipt,indent=2)+"\n"
+          )
+          print(json.dumps(receipt))
+          PY
+      - name: Preserve deployment authority receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: jcee-pages-deploy-authority
+          path: artifacts/authority/pages-deploy.json
+          retention-days: 30
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
@@ -62,7 +99,7 @@ jobs:
           retention-days: 14
 
   build:
-    if: github.event_name != 'pull_request'
+    if: github.event_name == 'workflow_dispatch'
     needs: validate
     runs-on: ubuntu-latest
     permissions:
@@ -88,7 +125,7 @@ jobs:
           path: dist/public
 
   deploy:
-    if: github.event_name != 'pull_request'
+    if: github.event_name == 'workflow_dispatch'
     needs: build
     runs-on: ubuntu-latest
     permissions:
