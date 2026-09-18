@@ -54,5 +54,9 @@
   "/research/crucible-composition-tax": {
     "title": "CRUCIBLE P0.3: testing the cost of composition — JCEE Labs",
     "description": "The broad operational-burden claim did not survive the tested comparison. A narrower integration-surface result remains."
+  },
+  "/research/fields": {
+    "title": "Research Fields — JCEE Labs",
+    "description": "Explore JCEE Labs' current 25-field research portfolio across trustworthy AI, distributed systems, formal verification, quantum information, causal assurance, and applied computational intelligence."
   }
 }
