@@ -27,6 +27,7 @@ const DistributionPage = lazy(() => import("./pages/DistributionPage"));
 const OperatingCloudPage = lazy(() => import("./pages/OperatingCloudPage"));
 const TechnologyPage = lazy(() => import("./pages/TechnologyPage"));
 const ResearchPage = lazy(() => import("./pages/ResearchPage"));
+const ResearchFieldsPage = lazy(() => import("./pages/ResearchFieldsPage"));
 const ResourcesPage = lazy(() => import("./pages/ResourcesPage"));
 const CompanyPage = lazy(() => import("./pages/CompanyPage"));
 const PublicationPage = lazy(() => import("./pages/PublicationPage"));
@@ -55,6 +56,7 @@ function Router() {
         <Route path="/blog/the-work-nobody-sees" component={PublicationPage} />
         <Route path="/research/crucible-composition-tax" component={PublicationPage} />
         <Route path="/technology" component={TechnologyPage} />
+        <Route path="/research/fields" component={ResearchFieldsPage} />
         <Route path="/research" component={ResearchPage} />
         <Route path="/resources" component={ResourcesPage} />
         <Route path="/company" component={CompanyPage} />
