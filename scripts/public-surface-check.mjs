@@ -307,7 +307,7 @@ try {
   for (const [route, heading] of [
     ["/operating-cloud", "A common foundation"], ["/blog/the-work-nobody-sees", "The Work Nobody Sees"], ["/research/crucible-composition-tax", "testing the cost of composition"],
     ["/solutions/distribution", "Keep the order true"], ["/technology", "Intelligence should leave receipts"],
-    ["/research", "Results you can examine"], ["/resources", "Ideas, builds"], ["/company", "Build useful intelligence"],
+    ["/research", "Results you can examine"], ["/research/fields", "25 fields. One unifying question"], ["/resources", "Ideas, builds"], ["/company", "Build useful intelligence"],
     ["/blog/start-with-the-workflow", "Start with the workflow"],
     ["/blog/distribution-first-dry-run", "the first order-integrity dry run"],
     ["/research/qcs-frozen-specification-reproduction", "reproducing a frozen specification"],
