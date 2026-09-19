@@ -92,6 +92,7 @@ export default function AssurancePage() {
         <div className="section-index"><span>ASSURANCE STACK</span><span>METHOD ABOVE MECHANISMS</span></div>
         <h2 id="assurance-architecture-title">One operating method. Distinct implementation responsibilities.</h2>
         <div className="assurance-architecture-grid">{methodLayers.map(layer => <article key={layer.id}><span className="assurance-layer-number">{layer.id}</span><div><p>{layer.name}</p><h3>{layer.role}</h3><p>{layer.copy}</p></div></article>)}</div>
+        <p>The Assurance Method governs the reasoning boundary. The <a href="/technology#integration-law">integration architecture</a> shows how that boundary is carried into a consequential workflow without collapsing evidence, authority, execution, and verification into one step.</p>
       </section>
 
       <section className="program-boundaries" aria-labelledby="commercial-path-title">
