@@ -37,6 +37,26 @@ export default function TechnologyPage() {
           </a>
         </div>
       </section>
+      <section className="editorial-section" id="integration-law" aria-labelledby="integration-law-title">
+        <p className="editorial-kicker">HOW JCEE INTEGRATES</p>
+        <h2 id="integration-law-title">The integration is a chain of boundaries, not a library call.</h2>
+        <p className="editorial-intro">
+          JCEE sits between a proposed consequential action and its effect. It binds the action to current evidence and authority, carries that decision to a customer-controlled consequence boundary, preserves execution and recovery evidence when outcomes are ambiguous, and leaves a result that can be checked independently of the originating process.
+        </p>
+        <div className="editorial-link-list" aria-label="JCEE integration boundaries">
+          <div><strong>Agent / application — proposes</strong><span>Names the candidate action. Proposal carries no effect authority.</span></div>
+          <div><strong>Current evidence + authority — establishes the basis</strong><span>Keeps the decision tied to what is current for the proposed action.</span></div>
+          <div><strong>JCEE evaluation — judges</strong><span>Determines what the current record supports. A supported claim is not execution permission.</span></div>
+          <div><strong>Customer-controlled consequence boundary — allows or refuses</strong><span>The target retains final consequence control. JCEE cannot manufacture that authority.</span></div>
+          <div><strong>VOW execution + recovery — preserves</strong><span>Carries durable execution evidence through interruption and ambiguous outcomes before another consequential action is taken.</span></div>
+          <div><strong>Authoritative external systems — establish</strong><span>The systems competent for the relevant facts remain authoritative; JCEE does not replace them.</span></div>
+          <div><strong>Independent verification — checks</strong><span>Reviews the retained evidence without relying on the originating agent&apos;s narrative.</span></div>
+          <div><strong>Bounded receipt — records</strong><span>States what was supported and what remains unresolved.</span></div>
+        </div>
+        <p className="quiet">
+          This diagram describes JCEE&apos;s integration model. It is not a public SDK, production certification, universal non-bypassability claim, or customer-deployment claim. Concrete recovery rules, enforcement mechanics, adapters, proof internals, attack corpora, and customer topology remain private.
+        </p>
+      </section>
       <section className="editorial-section editorial-section-muted">
         <p className="editorial-kicker">Applied development</p>
         <h2>From components to useful workflows.</h2>
