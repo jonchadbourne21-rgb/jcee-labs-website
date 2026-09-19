@@ -9,6 +9,7 @@ import { getAllLeads, insertLead, insertBusinessInquiry, getAllBusinessInquiries
 import { getPricing, getAvailableTrades } from "./pricingApi";
 import { syncLeadToLoops, syncInquiryToLoops } from "./emailMarketing";
 import { systemRouter } from "./_core/systemRouter";
+import { authorityFromDurableRecord } from "./authorityBoundary";
 
 export const appRouter = router({
   system: systemRouter,
@@ -34,13 +35,33 @@ export const appRouter = router({
         if (!result.success) {
           throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Could not save your email. Please try again." });
         }
-        // Notify owner of new lead
-        await notifyOwner({
+        if (!result.id) {
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message: "Lead authority identity was not established.",
+          });
+        }
+        const notifyAuthority = authorityFromDurableRecord(
+          "lead",
+          result.id,
+          "notify-owner"
+        );
+        const loopsAuthority = authorityFromDurableRecord(
+          "lead",
+          result.id,
+          "loops-sync"
+        );
+        // Secondary automatic effects are permitted only after the durable
+        // direct-human request record exists.
+        await notifyOwner(notifyAuthority, {
           title: "New Jcee Labs Lead",
           content: `New priority queue signup: ${input.email} (source: ${input.source ?? "homepage"})`,
         });
-        // Sync to Loops email marketing (non-blocking)
-        syncLeadToLoops(input.email, input.source ?? "homepage").catch(() => {});
+        syncLeadToLoops(
+          loopsAuthority,
+          input.email,
+          input.source ?? "homepage"
+        ).catch(() => {});
         return { success: true, message: "You're in the queue!" };
       }),
 
@@ -70,13 +91,32 @@ export const appRouter = router({
         if (!result.success) {
           throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Could not submit inquiry. Please try again." });
         }
-        // Notify owner of new business inquiry
-        await notifyOwner({
+        if (!result.id) {
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message: "Inquiry authority identity was not established.",
+          });
+        }
+        const notifyAuthority = authorityFromDurableRecord(
+          "business-inquiry",
+          result.id,
+          "notify-owner"
+        );
+        const loopsAuthority = authorityFromDurableRecord(
+          "business-inquiry",
+          result.id,
+          "loops-sync"
+        );
+        await notifyOwner(notifyAuthority, {
           title: "New Business Inquiry",
           content: `Company: ${input.companyName}\nContact: ${input.contactName} (${input.email})\nPhone: ${input.phone || "Not provided"}\nProject: ${input.projectDescription}\nBudget: ${input.budget || "Not specified"}\nTimeline: ${input.timeline || "Not specified"}`,
         });
-        // Sync to Loops email marketing (non-blocking)
-        syncInquiryToLoops(input.email, input.contactName, input.companyName).catch(() => {});
+        syncInquiryToLoops(
+          loopsAuthority,
+          input.email,
+          input.contactName,
+          input.companyName
+        ).catch(() => {});
         return { success: true, message: "Thank you! We'll be in touch shortly." };
       }),
 

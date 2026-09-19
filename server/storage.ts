@@ -3,6 +3,7 @@
 // Downloads return /manus-storage/{key} paths served via 307 redirect.
 
 import { ENV } from "./_core/env";
+import { authorityHeaders, requireAuthority, type AuthorityIdentity } from "./authorityBoundary";
 
 function getForgeConfig() {
   const forgeUrl = ENV.forgeApiUrl;
@@ -29,10 +30,12 @@ function appendHashSuffix(relKey: string): string {
 }
 
 export async function storagePut(
+  authority: AuthorityIdentity,
   relKey: string,
   data: Buffer | Uint8Array | string,
   contentType = "application/octet-stream",
 ): Promise<{ key: string; url: string }> {
+  const identity = requireAuthority(authority);
   const { forgeUrl, forgeKey } = getForgeConfig();
   const key = appendHashSuffix(normalizeKey(relKey));
 
@@ -41,7 +44,10 @@ export async function storagePut(
   presignUrl.searchParams.set("path", key);
 
   const presignResp = await fetch(presignUrl, {
-    headers: { Authorization: `Bearer ${forgeKey}` },
+    headers: {
+      Authorization: `Bearer ${forgeKey}`,
+      ...authorityHeaders(identity),
+    },
   });
 
   if (!presignResp.ok) {
@@ -60,7 +66,10 @@ export async function storagePut(
 
   const uploadResp = await fetch(s3Url, {
     method: "PUT",
-    headers: { "Content-Type": contentType },
+    headers: {
+      "Content-Type": contentType,
+      ...authorityHeaders(identity),
+    },
     body: blob,
   });
 

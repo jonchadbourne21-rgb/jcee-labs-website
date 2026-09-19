@@ -90,15 +90,19 @@ export async function getUserByOpenId(openId: string) {
 }
 
 // Lead capture helpers
-export async function insertLead(email: string, source: string = "homepage"): Promise<{ success: boolean; duplicate: boolean }> {
+export async function insertLead(email: string, source: string = "homepage"): Promise<{ success: boolean; duplicate: boolean; id?: number }> {
   const db = await getDb();
   if (!db) {
     console.warn("[Database] Cannot insert lead: database not available");
     return { success: false, duplicate: false };
   }
   try {
-    await db.insert(leads).values({ email, source });
-    return { success: true, duplicate: false };
+    const result = await db.insert(leads).values({ email, source });
+    return {
+      success: true,
+      duplicate: false,
+      id: result[0].insertId as number,
+    };
   } catch (err: unknown) {
     const mysqlErr = err as { code?: string };
     if (mysqlErr?.code === "ER_DUP_ENTRY") {

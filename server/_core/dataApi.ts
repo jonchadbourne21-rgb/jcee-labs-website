@@ -5,18 +5,25 @@
  *   })
  */
 import { ENV } from "./env";
+import { authorityHeaders, requireAuthority, type AuthorityIdentity } from "../authorityBoundary";
 
 export type DataApiCallOptions = {
   query?: Record<string, unknown>;
   body?: Record<string, unknown>;
   pathParams?: Record<string, unknown>;
   formData?: Record<string, unknown>;
+  authority?: AuthorityIdentity;
 };
 
 export async function callDataApi(
   apiId: string,
   options: DataApiCallOptions = {}
 ): Promise<unknown> {
+  const mutationShaped = !!options.body || !!options.formData;
+  const identity = mutationShaped
+    ? requireAuthority(options.authority)
+    : null;
+
   if (!ENV.forgeApiUrl) {
     throw new Error("BUILT_IN_FORGE_API_URL is not configured");
   }
@@ -35,6 +42,7 @@ export async function callDataApi(
       "content-type": "application/json",
       "connect-protocol-version": "1",
       authorization: `Bearer ${ENV.forgeApiKey}`,
+      ...(identity ? authorityHeaders(identity) : {}),
     },
     body: JSON.stringify({
       apiId,
