@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#111317" />
+    <meta
+      name="description"
+      content="FrameForge turns scene briefs into cinematic, generation-ready shot decks."
+    />
+    <title>FrameForge — Pre-Visualization Engine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="FrameForge home">
+        <span class="brand-mark"><i></i><i></i><i></i></span>
+        <span>FrameForge</span>
+      </a>
+      <div class="topbar-center">
+        <span class="system-dot"></span>
+        <span id="systemLabel">Pre-visualization engine ready</span>
+      </div>
+      <nav class="top-actions" aria-label="Project actions">
+        <button class="button button-quiet hidden" id="copyLinkButton" type="button">
+          Copy review link
+        </button>
+        <a class="button button-light hidden" id="jsonButton" href="#">Shot JSON</a>
+        <a class="button button-signal hidden" id="exportButton" href="#">Export pitch</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="brief-shell" id="briefShell">
+        <div class="brief-intro">
+          <p class="kicker">Director's workspace · v1.0</p>
+          <h1>Turn a scene into a <em>shootable point of view.</em></h1>
+          <p class="lede">
+            Paste the creative intent. FrameForge breaks it into a continuity-safe,
+            Higgsfield-ready camera plan and builds the client deck while shots render.
+          </p>
+          <div class="process-line" aria-label="Workflow">
+            <span><b>01</b> Brief</span><i></i><span><b>02</b> Block</span><i></i
+            ><span><b>03</b> Render</span><i></i><span><b>04</b> Pitch</span>
+          </div>
+        </div>
+
+        <form class="brief-form" id="briefForm">
+          <div class="form-heading">
+            <div>
+              <span class="mono-label">New sequence</span>
+              <h2>Creative brief</h2>
+            </div>
+            <span class="draft-tag">Draft 01</span>
+          </div>
+          <label class="field compact-field">
+            <span>Working title</span>
+            <input id="titleInput" name="title" value="Midnight Exchange" maxlength="120" />
+          </label>
+          <label class="field">
+            <span>Scene, screenplay, or beat sheet</span>
+            <textarea id="sceneInput" name="scene_text" rows="10" required>A lone courier in a rain-darkened train terminal checks the analog clock: 11:57 PM.
+She spots a silver briefcase beneath an empty bench and crosses the concourse.
+As her hand reaches for it, every departure board flickers to the same impossible destination.
+A second figure appears in the glass reflection behind her, but the platform itself remains empty.
+She opens the case. Warm golden light floods her face. The clock stops.</textarea>
+            <small><span id="characterCount">0</span> / 20,000 characters</small>
+          </label>
+          <div class="form-grid">
+            <label class="field">
+              <span>Canvas</span>
+              <select id="aspectInput" name="aspect_ratio">
+                <option value="16:9">16:9 · Landscape</option>
+                <option value="9:16">9:16 · Vertical</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Visual language</span>
+              <select id="styleInput" name="visual_style">
+                <option>Neo-Noir</option>
+                <option>35mm Film</option>
+                <option>Modern Commercial</option>
+                <option>Sci-Fi</option>
+              </select>
+            </label>
+          </div>
+          <div class="form-footer">
+            <p><span class="asterisk">*</span> Character, lighting, and camera continuity are locked across the sequence.</p>
+            <button class="button button-signal generate-button" id="generateButton" type="submit">
+              <span>Build shot deck</span><span aria-hidden="true">↗</span>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="deck-shell hidden" id="deckShell" aria-live="polite">
+        <div class="deck-header">
+          <div>
+            <p class="kicker" id="deckKicker">Sequence 01 · Treatment</p>
+            <h1 id="projectTitle">Untitled sequence</h1>
+          </div>
+          <div class="deck-stats" id="deckStats"></div>
+        </div>
+
+        <div class="progress-rail">
+          <div class="progress-label">
+            <span id="progressText">Building camera plan</span>
+            <strong id="progressPercent">0%</strong>
+          </div>
+          <div class="progress-track"><span id="progressBar"></span></div>
+        </div>
+
+        <div class="warning-banner hidden" id="warningBanner"></div>
+
+        <div class="timeline-heading">
+          <div>
+            <span class="mono-label">Sequence timeline</span>
+            <p>Scroll horizontally to review the editorial progression.</p>
+          </div>
+          <div class="timeline-controls">
+            <button type="button" id="previousShot" aria-label="Previous shot">←</button>
+            <button type="button" id="nextShot" aria-label="Next shot">→</button>
+          </div>
+        </div>
+
+        <div class="timeline" id="timeline" tabindex="0"></div>
+
+        <aside class="continuity-strip" id="continuityStrip">
+          <div><span class="mono-label">Continuity lock</span><strong id="aestheticLabel">—</strong></div>
+          <div><span class="mono-label">Render state</span><strong id="renderStateLabel">—</strong></div>
+          <div><span class="mono-label">Seed</span><strong id="seedLabel">—</strong></div>
+        </aside>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status"></div>
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>

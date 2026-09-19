@@ -103,8 +103,17 @@ temp/
 
 # Database
 *.db
+*.db-*
 *.sqlite
 *.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.coverage
+htmlcov/
 
 # Webdev artifacts (checkpoint zips, migrations, etc.)
 .webdev/
