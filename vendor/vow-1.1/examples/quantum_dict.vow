@@ -1,0 +1,36 @@
+# Copyright (c) 2026 JceeLabs and Jonathan Chadbourne. All rights reserved.
+# quantum_dict.vow
+# The Quantum Dict quest: `counts` is a list belief — a MUTABLE value that
+# every strategy's shallow env copy shares by reference. Mutation is
+# inexpressible in VOW today, so the hazard is latent, but the engine
+# watches it instead of trusting it: a `shared_reference` whisper marks the
+# key, every strategy's read/write footprint is logged, and sloppy_sum's
+# proof failure is recorded with `entangled_refs` — it failed in the
+# presence of shared mutable state.
+
+quest InventoryCheck {
+  goal "reconcile the inventory batch"
+
+  believe counts = [10, 20, 30] confidence 1.0 source "warehouse"
+  believe target = 60 confidence 1.0 source "manifest"
+
+  tournament {
+    score by proof_success * 0.8 + safety * 0.2
+
+    strategy sloppy_sum {
+      cost 1
+      risk 0.2
+      let total = 50
+      prove total == target
+    }
+
+    strategy careful_sum {
+      cost 1
+      risk 0.1
+      let total = target
+      prove total == 60
+    }
+  }
+
+  success when total == 60
+}

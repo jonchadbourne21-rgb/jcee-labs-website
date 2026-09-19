@@ -1,0 +1,42 @@
+# Copyright (c) 2026 JceeLabs and Jonathan Chadbourne. All rights reserved.
+# axioms.vow
+# Compile-time truths: max_discount is an axiom (immutable, resolved at
+# transpile time, hashed into every situation fingerprint). bulk_threshold
+# is arithmetic over an axiom; pricing_tier is DEDUCED from it at compile
+# time — no runtime evaluation needed, and the decision is stamped into
+# the run's evidence. rogue_quote violates the policy axiom and scars.
+
+axiom max_discount = 25
+axiom bulk_threshold = max_discount * 4
+
+deduce pricing_tier {
+  given bulk_threshold >= 100 -> "wholesale"
+  given bulk_threshold >= 50 -> "retail"
+}
+
+quest QuotePrice {
+  goal "quote within the discount policy"
+
+  believe units = 120 confidence 1.0 source "order book"
+
+  tournament {
+    score by proof_success * 0.8 + safety * 0.2
+
+    strategy compliant_quote {
+      cost 1
+      risk 0.1
+      let discount = max_discount
+      let tier = pricing_tier
+      prove tier == "wholesale"
+    }
+
+    strategy rogue_quote {
+      cost 1
+      risk 0.2
+      let discount = 40
+      prove discount <= max_discount
+    }
+  }
+
+  success when discount <= max_discount
+}

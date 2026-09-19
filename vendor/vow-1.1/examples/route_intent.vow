@@ -1,0 +1,30 @@
+# Copyright (c) 2026 JceeLabs and Jonathan Chadbourne. All rights reserved.
+# route_intent.vow
+# The two halves of intent, wired for enforcement:
+#  1. The route block classifies user input DETERMINISTICALLY — zero
+#     tokens, first match wins, fallback catches the rest. Try:
+#       vow route examples/route_intent.vow "can I get a refund?"
+#  2. The quest declares what it IS — intent "general_inquiry" — and what
+#     it must never DO under that intent. The file_write below is denied:
+#     blocked at the gate (never executed), recorded as a blocked shadow,
+#     and surfaced as an `intent_violation` whisper.
+
+route intent from user_input {
+  recognize "cancel", "refund" -> "termination_request"
+  recognize "status", "where", "track" -> "order_inquiry"
+  fallback -> "general_inquiry"
+}
+
+quest AnswerQuery {
+  goal "answer the customer safely"
+
+  intent "general_inquiry" denies file_write
+
+  capability file_write
+
+  believe note = "customer asked a general question" confidence 1.0 source "crm"
+  let logged = file_write("/tmp/vow_intent_demo_log.txt", note)
+
+  prove true
+  success when true
+}

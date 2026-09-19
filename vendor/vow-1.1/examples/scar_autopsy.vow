@@ -1,0 +1,73 @@
+# Copyright (c) 2026 JceeLabs and Jonathan Chadbourne. All rights reserved.
+# Scar autopsies: every failure explains WHY — with zero tokens.
+# prove statements are declared intent, so when one fails the runtime reads
+# the expectation itself and attaches a diagnosis to the scar:
+#   reason.prove    the exact expectation that failed ("batch_size < 500")
+#   reason.kind     threshold_violated / equality_mismatch / falsy_value / ...
+#   reason.bindings the values in play at the moment of failure
+#   reason.margin   how far off it was (actual vs expected, off_by)
+#   reason.diff_vs_success  what changed since the last time it WORKED
+# Run:  python vow_cli.py run examples/scar_autopsy.vow --quest SmallBatch --db vow.db
+# then: python vow_cli.py run examples/scar_autopsy.vow --quest BigBatch --db vow.db
+# BigBatch's scar will say: expected batch_size < 500, got 600 (off by 100),
+# and that last time it worked batch_size was 450.
+
+quest SmallBatch {
+  goal "process a small batch safely"
+
+  tournament {
+    score by proof_success * 0.8 + safety * 0.2
+
+    strategy big_batch {
+      cost 1
+      risk 0.3
+      let batch_size = 450
+      prove batch_size < 500
+      let done = batch_size
+    }
+  }
+
+  success when done > 0
+}
+
+quest BigBatch {
+  goal "process a big batch safely"
+
+  tournament {
+    score by proof_success * 0.8 + safety * 0.2
+
+    strategy big_batch {
+      cost 1
+      risk 0.3
+      let batch_size = 600
+      prove batch_size < 500
+      let done = batch_size
+    }
+  }
+
+  success when done > 0
+}
+
+quest Greeting {
+  goal "demonstrate the other autopsy kinds"
+
+  tournament {
+    score by proof_success
+
+    strategy exact_match {
+      cost 1
+      risk 0.1
+      let tier = "gold"
+      prove tier == "platinum"          # -> kind: equality_mismatch
+    }
+
+    strategy presence {
+      cost 1
+      risk 0.1
+      let config = ""
+      prove config                      # -> kind: falsy_value
+    }
+  }
+
+  success when tier == "platinum"
+}
