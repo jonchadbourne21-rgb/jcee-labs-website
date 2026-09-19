@@ -261,6 +261,9 @@ export default function Home() {
               <b>RECEIPT</b>
             </div>
           </div>
+          <a className="editorial-text-link" href="/technology#integration-law">
+            See how JCEE carries a proposed action to a checkable consequence →
+          </a>
           <div className="operating-cloud-home__distribution">
             <div>
               <span>FIRST INDUSTRY APPLICATION · IN DEVELOPMENT</span>
