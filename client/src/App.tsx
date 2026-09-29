@@ -54,6 +54,7 @@ function Router() {
         <Route path="/solutions/distribution" component={DistributionPage} />
         <Route path="/operating-cloud" component={OperatingCloudPage} />
         <Route path="/blog/the-work-nobody-sees" component={PublicationPage} />
+        <Route path="/blog/a-confident-model-still-needs-permission" component={PublicationPage} />
         <Route path="/research/crucible-composition-tax" component={PublicationPage} />
         <Route path="/technology" component={TechnologyPage} />
         <Route path="/research/fields" component={ResearchFieldsPage} />

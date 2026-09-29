@@ -1905,7 +1905,7 @@ nav a::after {
   .partner-fit-intro,
   .partner-inquiry-layout,
   .partner-brief-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .partner-fit-intro > p:last-child {

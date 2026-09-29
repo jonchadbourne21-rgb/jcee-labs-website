@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import BrandFooter from "./BrandFooter";
 import CoreHeader, { type CoreHeaderCurrent } from "./CoreHeader";
 import { useEffect } from "react";
+import { useLocation } from "wouter";
 
 export default function EditorialLayout({
   title,
@@ -16,6 +17,7 @@ export default function EditorialLayout({
   current: CoreHeaderCurrent;
   children: ReactNode;
 }) {
+  const [location] = useLocation();
   useEffect(() => {
     document.title = `${title} — JCEE Labs`;
     document
@@ -29,7 +31,15 @@ export default function EditorialLayout({
       document
         .querySelector(`meta[property="${key}"],meta[name="${key}"]`)
         ?.setAttribute("content", description);
-  }, [title, description]);
+    const pathname = location.split(/[?#]/)[0].replace(/\/+$/, "") || "/";
+    const canonical = `https://jceelabs.com${pathname}`;
+    document
+      .querySelector('link[rel="canonical"]')
+      ?.setAttribute("href", canonical);
+    document
+      .querySelector('meta[property="og:url"]')
+      ?.setAttribute("content", canonical);
+  }, [title, description, location]);
   return (
     <main className="editorial-page" id="top">
       <CoreHeader current={current} />

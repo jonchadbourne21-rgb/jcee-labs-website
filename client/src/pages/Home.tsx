@@ -2,7 +2,11 @@ import { useEffect } from "react";
 import BrandFooter from "@/components/BrandFooter";
 import CoreHeader from "@/components/CoreHeader";
 import VowDurabilityDemo from "@/components/VowDurabilityDemo";
-import { publications, publicationHref } from "@/content/publications";
+import {
+  publications,
+  publicationHref,
+  publicationDate,
+} from "@/content/publications";
 
 const methodQuestions = [
   {
@@ -39,9 +43,10 @@ export default function Home() {
           </h1>
           <p className="hero-deck">
             JCEE is developing methods and software that connect operational
-            actions to clear permissions, reviewable evidence, and human control.
-            Start with one workflow where being wrong would matter, make the
-            evidence boundary visible, and let the result earn the next step.
+            actions to clear permissions, reviewable evidence, and human
+            control. Start with one workflow where being wrong would matter,
+            make the evidence boundary visible, and let the result earn the next
+            step.
           </p>
           <div className="hero-actions">
             <a className="primary-link" href="#distribution-demo">
@@ -52,32 +57,44 @@ export default function Home() {
             </a>
           </div>
           <p className="quiet">
-            Reference software and bounded research milestones are available now.
-            Customer savings and production performance have not yet been established.
+            Reference software and bounded research milestones are available
+            now. Customer savings and production performance have not yet been
+            established.
           </p>
         </div>
-        <aside className="hero-proof-index" aria-label="What accountable operation means">
+        <aside
+          className="hero-proof-index"
+          aria-label="What accountable operation means"
+        >
           <span>THE CONTROL PATH</span>
           <ol>
             <li>
               <b>01</b>
               <strong>Observe</strong>
-              <small>Keep source instructions and observed state separate.</small>
+              <small>
+                Keep source instructions and observed state separate.
+              </small>
             </li>
             <li>
               <b>02</b>
               <strong>Judge</strong>
-              <small>Show what the evidence supports and what remains unresolved.</small>
+              <small>
+                Show what the evidence supports and what remains unresolved.
+              </small>
             </li>
             <li>
               <b>03</b>
               <strong>Authorize</strong>
-              <small>Allow only the next action that current permission supports.</small>
+              <small>
+                Allow only the next action that current permission supports.
+              </small>
             </li>
             <li>
               <b>04</b>
               <strong>Record</strong>
-              <small>Leave an inspectable receipt of the decision and result.</small>
+              <small>
+                Leave an inspectable receipt of the decision and result.
+              </small>
             </li>
           </ol>
           <a href="/assurance">Explore the full method →</a>
@@ -93,12 +110,88 @@ export default function Home() {
       </div>
 
       <section
+        className="editorial-section recent-progress"
+        aria-labelledby="progress-title"
+      >
+        <div className="editorial-section-heading">
+          <div>
+            <p className="editorial-kicker">LATEST / SEPTEMBER 2026</p>
+            <h2 id="progress-title">Recent progress.</h2>
+          </div>
+          <a href="/registry">The current public record →</a>
+        </div>
+        <div className="resource-grid">
+          <article className="resource-card">
+            <p className="editorial-kicker">
+              <time dateTime="2026-09-29">September 29, 2026</time> · NEW
+              ARTICLE
+            </p>
+            <h3>
+              <a href="/blog/a-confident-model-still-needs-permission">
+                A confident model still needs permission.
+              </a>
+            </h3>
+            <p>
+              A practical look at why evidence, judgment, permission, and
+              consequence need separate checks.
+            </p>
+            <a
+              className="editorial-text-link"
+              href="/blog/a-confident-model-still-needs-permission"
+            >
+              Read the article →
+            </a>
+          </article>
+          <article className="resource-card">
+            <p className="editorial-kicker">
+              <time dateTime="2026-09-29">September 29, 2026</time> · EVIDENCE
+              REVIEW
+            </p>
+            <h3>
+              <a href="/registry#mise">
+                MISE: the next question is repeated use.
+              </a>
+            </h3>
+            <p>
+              Preserved September 12 web MVP test evidence is now reflected in
+              the registry. Repeated cooking, retention, and user value remain
+              unvalidated.
+            </p>
+            <a className="editorial-text-link" href="/registry#mise">
+              Read the evidence boundary →
+            </a>
+          </article>
+          <article className="resource-card">
+            <p className="editorial-kicker">
+              <time dateTime="2026-09-29">September 29, 2026</time> · STATUS
+              RECONCILED
+            </p>
+            <h3>
+              <a href="/registry#distribution">
+                Distribution: source merged, real workflow still to test.
+              </a>
+            </h3>
+            <p>
+              The private source merge is verified. The synthetic baseline is
+              preserved; an approved, read-only shadow evaluation remains the
+              next gate.
+            </p>
+            <a className="editorial-text-link" href="/registry#distribution">
+              See current Distribution status →
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <section
         className="editorial-section editorial-section-light distribution-intro"
         id="distribution-demo"
         aria-labelledby="distribution-demo-title"
       >
         <div>
-          <p className="editorial-kicker">01 / SEE THE METHOD IN ONE WORKFLOW</p>
+          <p className="editorial-kicker">
+            01 / SEE THE METHOD IN ONE WORKFLOW
+          </p>
           <h2 id="distribution-demo-title">
             A mismatch should create a question, not silently create authority.
           </h2>
@@ -109,11 +202,14 @@ export default function Home() {
             person to investigate.
           </p>
           <p>
-            Distribution demonstrates JCEE; it does not define JCEE&apos;s limits.
-            The same separation among evidence, judgment, permission, and action
-            is the broader company direction.
+            Distribution demonstrates JCEE; it does not define JCEE&apos;s
+            limits. The same separation among evidence, judgment, permission,
+            and action is the broader company direction.
           </p>
-          <a className="editorial-text-link" href="/blog/distribution-first-dry-run">
+          <a
+            className="editorial-text-link"
+            href="/blog/distribution-first-dry-run"
+          >
             Read the recorded dry-run result →
           </a>
         </div>
@@ -140,17 +236,22 @@ export default function Home() {
             </div>
             <div>
               <dt>Human decision boundary</dt>
-              <dd>A person investigates. The discrepancy does not authorize a change.</dd>
+              <dd>
+                A person investigates. The discrepancy does not authorize a
+                change.
+              </dd>
             </div>
             <div>
               <dt>Current recorded result</dt>
-              <dd>20 / 20 expected synthetic classifications · 0 external effects</dd>
+              <dd>
+                20 / 20 expected synthetic classifications · 0 external effects
+              </dd>
             </div>
           </dl>
           <p>
             Illustrative rendering, not customer data. Customer ROI, live
-            integration, and production readiness remain unestablished. A limited,
-            approved shadow evaluation is the next commercial gate.
+            integration, and production readiness remain unestablished. A
+            limited, approved shadow evaluation is the next commercial gate.
           </p>
         </div>
       </section>
@@ -178,15 +279,21 @@ export default function Home() {
         </div>
         <div className="company-bottom">
           <p>
-            The method is intentionally usable before a team adopts JCEE software.
-            Start with one consequential question, preserve what happened, and
-            expand only when the evidence justifies it.
+            The method is intentionally usable before a team adopts JCEE
+            software. Start with one consequential question, preserve what
+            happened, and expand only when the evidence justifies it.
           </p>
-          <a href="/assurance">EXPLORE THE JCEE ASSURANCE METHOD <span>→</span></a>
+          <a href="/assurance">
+            EXPLORE THE JCEE ASSURANCE METHOD <span>→</span>
+          </a>
         </div>
       </section>
 
-      <section className="vow-section" id="working-example" aria-labelledby="working-example-title">
+      <section
+        className="vow-section"
+        id="working-example"
+        aria-labelledby="working-example-title"
+      >
         <div className="section-index light">
           <span>03 / WORKING SOFTWARE</span>
           <span>REFERENCE DEMONSTRATION · NOT A CUSTOMER DEPLOYMENT</span>
@@ -200,8 +307,9 @@ export default function Home() {
           <div>
             <p>
               This interactive VOW reference demonstrates one implemented JCEE
-              behavior: preserving execution evidence across interruption and recovery.
-              It provides software evidence alongside the Distribution workflow example.
+              behavior: preserving execution evidence across interruption and
+              recovery. It provides software evidence alongside the Distribution
+              workflow example.
             </p>
             <p className="quiet">
               Synthetic execution and demonstration data. This is not a customer
@@ -228,23 +336,26 @@ export default function Home() {
           </div>
           <div className="operating-cloud-home__lead">
             <div>
-              <p className="operating-cloud-home__kicker">JCEE OPERATING CLOUD</p>
+              <p className="operating-cloud-home__kicker">
+                JCEE OPERATING CLOUD
+              </p>
               <h2 id="operating-cloud-title">
                 The method sits above the mechanisms.
               </h2>
             </div>
             <div className="operating-cloud-home__lead-copy">
               <p>
-                Reconcile records and observations before promoting a conclusion.
-                JCEE systems implement different assurance obligations: evidence
-                capture, authority and contract boundaries, durable execution,
-                recovery, verification, replay, and review. The layers stay
-                distinct so one green signal cannot silently stand in for truth
-                or permission.
+                Reconcile records and observations before promoting a
+                conclusion. JCEE systems implement different assurance
+                obligations: evidence capture, authority and contract
+                boundaries, durable execution, recovery, verification, replay,
+                and review. The layers stay distinct so one green signal cannot
+                silently stand in for truth or permission.
               </p>
               <p className="operating-cloud-home__boundary">
-                Operating Cloud is a platform direction, not a production-certification
-                claim. Broader workflow ownership remains to be demonstrated.
+                Operating Cloud is a platform direction, not a
+                production-certification claim. Broader workflow ownership
+                remains to be demonstrated.
               </p>
             </div>
           </div>
@@ -270,10 +381,12 @@ export default function Home() {
               <p>
                 Distribution supplies a concrete operating environment for the
                 method. It remains one application of the broader assurance and
-                execution architecture, not the company&apos;s limiting identity.
+                execution architecture, not the company&apos;s limiting
+                identity.
               </p>
               <a href="/solutions/distribution">
-                EXPLORE THE DISTRIBUTION APPLICATION <span aria-hidden="true">→</span>
+                EXPLORE THE DISTRIBUTION APPLICATION{" "}
+                <span aria-hidden="true">→</span>
               </a>
             </div>
           </div>
@@ -288,7 +401,9 @@ export default function Home() {
         <div className="editorial-section-heading">
           <div>
             <p className="editorial-kicker">05 / IMPLEMENTATION LAYERS</p>
-            <h2 id="technology-title">The method guides. The systems implement.</h2>
+            <h2 id="technology-title">
+              The method guides. The systems implement.
+            </h2>
           </div>
           <a href="/technology">Explore the technology →</a>
         </div>
@@ -297,9 +412,10 @@ export default function Home() {
             <p className="editorial-kicker">JCEE VOW</p>
             <h3>Execute and recover with evidence.</h3>
             <p>
-              VOW preserves intent, ambiguity, recovery decisions, effect identity,
-              and receipts around consequential workflows. VOW 1.1 remains the
-              frozen milestone; 1.1.1.dev3 is a private development candidate.
+              VOW preserves intent, ambiguity, recovery decisions, effect
+              identity, and receipts around consequential workflows. VOW 1.1
+              remains the frozen milestone; 1.1.1.dev3 is a private development
+              candidate.
             </p>
             <a href="/vow">Runtime and interactive demo →</a>
           </article>
@@ -308,8 +424,8 @@ export default function Home() {
             <h3>Reason about the next action.</h3>
             <p>
               The frozen QCS-2.0 specification passed its recorded reproduction
-              gate across two tested authority classes. Its scope remains bounded
-              to the evidence behind that result.
+              gate across two tested authority classes. Its scope remains
+              bounded to the evidence behind that result.
             </p>
             <a href="/qcs">Research and interactive model →</a>
           </article>
@@ -317,19 +433,26 @@ export default function Home() {
             <p className="editorial-kicker">JCEE ASSURANCE</p>
             <h3>Make the judgment inspectable.</h3>
             <p>
-              Portable evidence, named verification rules, and bounded conclusions
-              help a reviewer see where the evidence supports a claim and where it stops.
+              Portable evidence, named verification rules, and bounded
+              conclusions help a reviewer see where the evidence supports a
+              claim and where it stops.
             </p>
             <a href="/assurance">Method and verification →</a>
           </article>
         </div>
         <div className="home-status-strip">
-          <span>PUBLIC REGISTRY · REVIEWED SEPTEMBER 14, 2026</span>
+          <span>
+            PUBLIC REGISTRY · SELECTED ENTRIES REVIEWED SEPTEMBER 29, 2026
+          </span>
           <a href="/registry">Milestones, candidates, and open gates →</a>
         </div>
       </section>
 
-      <section className="company-section" id="engage" aria-labelledby="engage-title">
+      <section
+        className="company-section"
+        id="engage"
+        aria-labelledby="engage-title"
+      >
         <div className="section-index">
           <span>06 / WORK WITH JCEE</span>
           <span>ONE QUESTION · ONE BOUNDARY · ONE WRITTEN RESULT</span>
@@ -347,16 +470,16 @@ export default function Home() {
             <h3>Who it is for</h3>
             <p>
               Product, operations, platform, security, infrastructure, and risk
-              teams using AI or automation where a wrong or unexplained action has
-              a real operational cost.
+              teams using AI or automation where a wrong or unexplained action
+              has a real operational cost.
             </p>
           </article>
           <article>
             <h3>What happens</h3>
             <p>
               We scope one workflow or claim, map its evidence and current
-              authority, identify unresolved recovery or control gaps, and apply a
-              bounded review.
+              authority, identify unresolved recovery or control gaps, and apply
+              a bounded review.
             </p>
           </article>
           <article>
@@ -370,11 +493,14 @@ export default function Home() {
         </div>
         <div className="company-bottom">
           <p>
-            An assurance assessment is not a certification, deployment, or promise
-            of production readiness. Software implementation, production changes,
-            timing, and commercial terms remain separately scoped and agreed in writing.
+            An assurance assessment is not a certification, deployment, or
+            promise of production readiness. Software implementation, production
+            changes, timing, and commercial terms remain separately scoped and
+            agreed in writing.
           </p>
-          <a href="/partners/enterprise">DISCUSS AN ASSURANCE ASSESSMENT <span>→</span></a>
+          <a href="/partners/enterprise">
+            DISCUSS AN ASSURANCE ASSESSMENT <span>→</span>
+          </a>
         </div>
       </section>
 
@@ -393,7 +519,8 @@ export default function Home() {
           {publications.map(item => (
             <article className="resource-card" key={item.slug}>
               <p className="editorial-kicker">
-                {item.kind} · September 14, 2026
+                {item.kind} ·{" "}
+                <time dateTime={item.date}>{publicationDate(item.date)}</time>
               </p>
               <h3>
                 <a href={publicationHref(item)}>{item.title}</a>
@@ -412,7 +539,9 @@ export default function Home() {
         id="charter"
         aria-labelledby="principles-title"
       >
-        <h2 id="principles-title">We build intelligence that leaves receipts.</h2>
+        <h2 id="principles-title">
+          We build intelligence that leaves receipts.
+        </h2>
         <p>
           Possibility is welcome. Evidence is explicit. Boundaries are visible.
           Consequences are earned. Receipts remain.

@@ -155,7 +155,16 @@ for (const route of routes) {
       .replace(
         /(<meta\s+property="og:url"\s+content=")[^"]*/,
         `$1${publicUrl.replace(/\/$/, "")}${route}`
+      )
+      .replace(
+        /(<link\s+rel="canonical"\s+href=")[^"]*/,
+        `$1${publicUrl.replace(/\/$/, "")}${route}`
+      )
+      .replace(
+        /(<meta\s+property="og:type"\s+content=")[^"]*/,
+        `$1${meta.type || "website"}`
       );
+    if (meta.publishedTime) routeHtml = routeHtml.replace("</head>", `<meta property="article:published_time" content="${escapeHtml(meta.publishedTime)}" />\n</head>`);
   }
   fs.writeFileSync(path.join(directory, "index.html"), routeHtml);
 }

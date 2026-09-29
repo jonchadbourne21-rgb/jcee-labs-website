@@ -1,7 +1,7 @@
 {
   "/": {
-    "title": "JCEE Labs — Verified Operating Improvement",
-    "description": "JCEE Labs develops operating software for industrial distribution and researches execution assurance. Explore our technology, research, and current build progress."
+    "title": "JCEE Labs — Accountable AI-Assisted Operations",
+    "description": "JCEE Labs develops methods and software that connect AI-assisted operational actions to clear permissions, reviewable evidence, and human control."
   },
   "/solutions/distribution": {
     "title": "JCEE Distribution — Order Integrity",
@@ -9,7 +9,7 @@
   },
   "/operating-cloud": {
     "title": "JCEE Operating Cloud — Platform Direction",
-    "description": "A common foundation for industry operating software, beginning with JCEE Distribution. Explore the direction and current evidence."
+    "description": "Explore JCEE’s platform direction for accountable AI-assisted operations, its current evidence, and the implementation gates still ahead."
   },
   "/technology": {
     "title": "Technology — JCEE Labs",
@@ -19,44 +19,62 @@
     "title": "Research — JCEE Labs",
     "description": "Read JCEE technical reports and research briefs with methods, recorded results, and explicit limitations."
   },
+  "/research/fields": {
+    "title": "Research Fields — JCEE Labs",
+    "description": "Explore JCEE Labs' current 25-field research portfolio across trustworthy AI, distributed systems, formal verification, quantum information, causal assurance, and applied computational intelligence."
+  },
   "/resources": {
     "title": "Resources — JCEE Labs",
     "description": "Company articles, engineering updates, research publications, and the current public build registry."
   },
   "/company": {
     "title": "Company — JCEE Labs",
-    "description": "JCEE Labs builds operating software and researches execution assurance in Dallas, Texas."
+    "description": "JCEE Labs develops methods and software for accountable AI-assisted operations. Read about the company, its principles, and its research."
   },
   "/registry": {
     "title": "Public Registry — JCEE Labs",
-    "description": "Selected JCEE build milestones, development candidates, and open gates. Reviewed September 14, 2026."
+    "description": "Selected JCEE build milestones, development candidates, and open gates. Selected entries reconciled September 29, 2026; historical evidence dates preserved."
+  },
+  "/blog/a-confident-model-still-needs-permission": {
+    "title": "A Confident Model Still Needs Permission — JCEE Labs",
+    "description": "A useful prediction does not grant authority to act. Why evidence, judgment, permission, and consequence need separate checks.",
+    "type": "article",
+    "publishedTime": "2026-09-29T00:00:00Z"
   },
   "/blog/start-with-the-workflow": {
     "title": "Start with the workflow. Earn the next step. — JCEE Labs",
-    "description": "Why JCEE begins alongside existing business systems and measures value before expanding its role."
+    "description": "Why JCEE begins alongside existing business systems and measures value before expanding its role.",
+    "type": "article",
+    "publishedTime": "2026-09-14T00:00:00Z"
   },
   "/blog/distribution-first-dry-run": {
     "title": "JCEE Distribution: the first order-integrity dry run — JCEE Labs",
-    "description": "Twenty synthetic purchase orders, four result categories, and a clear boundary for the next evaluation."
+    "description": "Twenty synthetic purchase orders, four result categories, and a clear boundary for the next evaluation.",
+    "type": "article",
+    "publishedTime": "2026-09-14T00:00:00Z"
   },
   "/research/qcs-frozen-specification-reproduction": {
     "title": "QCS-2.0: reproducing a frozen specification — JCEE Labs",
-    "description": "A public report of the August 13 reproduction across transactional and remote network authorities, including the preserved harness failure."
+    "description": "A public report of the August 13 reproduction across transactional and remote network authorities, including the preserved harness failure.",
+    "type": "article",
+    "publishedTime": "2026-09-14T00:00:00Z"
   },
   "/research/crucible-semantic-kernel": {
     "title": "CRUCIBLE P0.2: a bounded result, with conventional parity — JCEE Labs",
-    "description": "What the latest synthetic benchmark supports—and why the conventional comparator belongs beside the result."
+    "description": "What the latest synthetic benchmark supports—and why the conventional comparator belongs beside the result.",
+    "type": "article",
+    "publishedTime": "2026-09-14T00:00:00Z"
   },
   "/blog/the-work-nobody-sees": {
     "title": "The Work Nobody Sees — JCEE Labs",
-    "description": "Why JCEE Labs starts with observation, evidence, and the workflows between systems."
+    "description": "Why JCEE Labs starts with observation, evidence, and the workflows between systems.",
+    "type": "article",
+    "publishedTime": "2026-09-14T00:00:00Z"
   },
   "/research/crucible-composition-tax": {
     "title": "CRUCIBLE P0.3: testing the cost of composition — JCEE Labs",
-    "description": "The broad operational-burden claim did not survive the tested comparison. A narrower integration-surface result remains."
-  },
-  "/research/fields": {
-    "title": "Research Fields — JCEE Labs",
-    "description": "Explore JCEE Labs' current 25-field research portfolio across trustworthy AI, distributed systems, formal verification, quantum information, causal assurance, and applied computational intelligence."
+    "description": "The broad operational-burden claim did not survive the tested comparison. A narrower integration-surface result remains.",
+    "type": "article",
+    "publishedTime": "2026-09-14T00:00:00Z"
   }
 }
