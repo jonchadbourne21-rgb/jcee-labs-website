@@ -19,14 +19,14 @@ export const entries: RegistryEntry[] = [
     name: "JCEE Distribution P0.1",
     kind: "ORDER-INTEGRITY DEVELOPMENT",
     status: "experimental",
-    statusLabel: "VERIFIED SOURCE CANDIDATE · REAL WORKFLOW NOT RUN",
-    date: "SEPTEMBER 14, 2026",
+    statusLabel: "PRIVATE SOURCE MERGED · REAL WORKFLOW NOT RUN",
+    date: "REVIEWED SEPTEMBER 29, 2026",
     summary:
       "The initial industry workflow compares purchase orders with sales orders and records missing, mismatched, duplicate, or matching records.",
     supports:
-      "20/20 expected synthetic classifications matched: 13 PASS, one missing order, five field mismatches, and one duplicate. The frozen source candidate reproduced 3/3 local tests. Zero external effects.",
+      "The preserved September 14 dry run matched 20/20 expected synthetic classifications: 13 PASS, one missing order, five field mismatches, and one duplicate, with zero external effects. The private source merge is verified; the retained pre-merge CI record passed on Python 3.10 and 3.12.",
     boundary:
-      "The source review remains open and unmerged. A CI workflow exists, but no CI run was observed in the current receipt. No customer data, email, or live ERP connection; no customer ROI or real-world accuracy claim.",
+      "This review did not rerun the dry run or establish a post-merge CI result. No customer data, email, or live ERP connection; no customer ROI or real-world accuracy claim. Approval for a real shadow evaluation remains outstanding.",
     next: "Obtain a defined company/IT approval before calibration and a limited read-only shadow evaluation.",
     href: "/solutions/distribution",
     group: "Platforms",
@@ -70,15 +70,15 @@ export const entries: RegistryEntry[] = [
     name: "AP Gate",
     kind: "PAYMENT EXECUTION ASSURANCE DEVELOPMENT",
     status: "experimental",
-    statusLabel: "REFERENCE BUILD · GOVERNED-REPAIR COMPARISON COMPLETE",
-    date: "REVIEWED SEPTEMBER 14, 2026",
+    statusLabel: "BOUNDED COMPARISON RETAINED · SUCCESSOR NOT RUN",
+    date: "REVIEWED SEPTEMBER 29, 2026",
     summary:
       "Contract, execution/recovery, and independent-verifier reference code are present. The verifier derives bounded conclusions from declared evidence.",
     supports:
       "The practical comparison completed 78 local executions across 26 synthetic worlds and three lanes, with zero scored safety violations. Conventional governed repair fulfilled 9/9 eligible effects, the ELP verifier integration 8/9, and block-only 5/9.",
     boundary:
-      "No incremental ELP value was shown in this slice. One acknowledgement remained unresolved per lane. Native target integration and production payment control remain unqualified.",
-    next: "Use conventional governed repair as the reference; qualify the durable target and restart/observation boundary before product promotion.",
+      "No incremental ELP value was shown in this slice. One acknowledgement remained unresolved per lane. A successor equal-information comparison is design-only and has not been run. Native target integration and production payment control remain unqualified.",
+    next: "Resolve the separately governed execution bindings before implementing or running the successor comparison; retain the conventional governed-repair reference.",
     href: "/technology",
     group: "Execution",
   },
@@ -368,19 +368,37 @@ export const entries: RegistryEntry[] = [
   },
   {
     id: "mise",
-    name: "MISE / SOUS source lineage",
+    name: "MISE / SOUS",
     group: "Personal apps",
     kind: "PERSONAL CULINARY APPLICATION",
     status: "experimental",
-    statusLabel: "SOURCE SNAPSHOT VERIFIED · RUNTIME UNVERIFIED",
-    date: "REVIEWED SEPTEMBER 14, 2026",
+    statusLabel: "WEB MVP EVIDENCE RECOVERED · REPEATED USE NOT VALIDATED",
+    date: "REVIEWED SEPTEMBER 29, 2026",
     summary:
       "The personal culinary application in the Howm suite. The preserved source and earlier receipts use the SOUS name.",
     supports:
-      "A complete 214-file source snapshot was copied and matched by path, mode, and blob identity.",
+      "The canonical source contains the September 12 build and test report and a preserved passing end-to-end receipt covering AI meal options, recipe steps, cooking recovery, a profile signal, and a saved recipe. The report records 24 passing tests plus type and build checks. These are historical receipts, not new runs.",
     boundary:
-      "Snapshot identity is not a build, provider-connection, semantic-memory, deployment, or production-readiness result.",
+      "A working test flow does not establish repeated cooking, retention, willingness to pay, or an advantage from personalization. The current hosted pilot and native iOS/TestFlight readiness remain unresolved; no production-readiness claim is made.",
+    next: "Evaluate second and third cooking sessions, including a defined generic-versus-personalized comparison, before making user-value claims.",
     href: "/company",
+  },
+  {
+    id: "jev",
+    name: "JEV P0.1",
+    group: "Research",
+    kind: "LOCAL AUTHORITY-BOUNDARY STUDY",
+    status: "experimental",
+    statusLabel: "SYNTHETIC REPLAY RECOVERED · LIVE INTEGRATION NOT RUN",
+    date: "REVIEWED SEPTEMBER 29, 2026",
+    summary:
+      "A frozen local evaluator studies the separation between model confidence and permission using supplied synthetic state.",
+    supports:
+      "The September 24 recovered replay reproduced the preserved local result, including the confidence-sweep and provider-swap checks. It supports the specified local boundary only.",
+    boundary:
+      "No live JEV deployment, native JCEE component integration, independent verifier, or independent-team reproduction. An otherwise authorized wrong answer can be allowed: permission does not prove semantic correctness. The successor design remains NOT_RUN.",
+    next: "Keep successor implementation and execution on hold until its required bindings and verification boundary are established.",
+    href: "/blog/a-confident-model-still-needs-permission",
   },
   {
     id: "mirrored",

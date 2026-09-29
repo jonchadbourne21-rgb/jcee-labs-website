@@ -1,6 +1,10 @@
 import { useLocation } from "wouter";
 import EditorialLayout from "@/components/EditorialLayout";
-import { publications, isResearch } from "@/content/publications";
+import {
+  publications,
+  publicationDate,
+  isResearch,
+} from "@/content/publications";
 import NotFound from "./NotFound";
 export default function PublicationPage() {
   const [location] = useLocation();
@@ -11,7 +15,7 @@ export default function PublicationPage() {
   return (
     <EditorialLayout
       current={research ? "research" : "resources"}
-      eyebrow={`${item.kind} · September 14, 2026 · ${item.author || "JCEE Labs"}`}
+      eyebrow={`${item.kind} · ${publicationDate(item.date)} · ${item.author || "JCEE Labs"}`}
       title={item.title}
       description={item.summary}
     >
@@ -66,7 +70,11 @@ export default function PublicationPage() {
             </nav>
           )}
           <footer>
-            <p>Published September 14, 2026 · Version 1.0</p>
+            <p>
+              Published{" "}
+              <time dateTime={item.date}>{publicationDate(item.date)}</time> ·
+              Version 1.0
+            </p>
             <a href="/registry">See current build status →</a>
           </footer>
         </article>

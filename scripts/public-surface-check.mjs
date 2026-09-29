@@ -200,6 +200,24 @@ try {
   const page = await connect(debugPort);
   const failures = [];
 
+  // Sharing crawlers receive this HTML before any client-side effects run.
+  const articleRoute = "/blog/a-confident-model-still-needs-permission";
+  const articleResponse = await fetch(`${baseUrl}${articleRoute}?utm_source=release-check`);
+  const articleHtml = await articleResponse.text();
+  if (!articleResponse.ok || !articleHtml.includes("<title>A Confident Model Still Needs Permission — JCEE Labs</title>") ||
+      !articleHtml.includes('property="og:type" content="article"') ||
+      !articleHtml.includes('property="article:published_time" content="2026-09-29T00:00:00Z"')) {
+    failures.push("new article has missing server-rendered sharing metadata");
+  }
+  if (!staticMode && (!articleHtml.includes(`rel="canonical" href="https://jceelabs.com${articleRoute}"`) ||
+      !articleHtml.includes(`property="og:url" content="https://jceelabs.com${articleRoute}"`))) {
+    failures.push("new article canonical or Open Graph URL is incorrect");
+  }
+  const registryDownload = await fetch(`${baseUrl}/JCEE_Labs_Public_Registry_v1.3.md`);
+  if (!registryDownload.ok || !(await registryDownload.text()).startsWith("# JCEE Labs Public Registry — Version 1.3")) {
+    failures.push("current registry Markdown download is missing");
+  }
+
   await navigate(page.send, baseUrl, "/");
   const homepageText = await readBody(page.send);
   if (!homepageText.includes("JCEE ASSURANCE")) {

@@ -2,6 +2,7 @@ import { useState } from "react";
 import EditorialLayout from "@/components/EditorialLayout";
 import {
   publications,
+  publicationDate,
   publicationHref,
   isResearch,
 } from "@/content/publications";
@@ -55,7 +56,7 @@ export default function ResourcesPage() {
             <article key={item.slug} className="resource-card">
               <p className="editorial-kicker">
                 {item.kind} ·{" "}
-                <time dateTime={item.date}>September 14, 2026</time>
+                <time dateTime={item.date}>{publicationDate(item.date)}</time>
               </p>
               <h3>
                 <a href={publicationHref(item)}>{item.title}</a>

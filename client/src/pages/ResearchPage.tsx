@@ -2,6 +2,7 @@ import BuildStatusList from "@/components/BuildStatusList";
 import EditorialLayout from "@/components/EditorialLayout";
 import {
   publications,
+  publicationDate,
   publicationHref,
   isResearch,
 } from "@/content/publications";
@@ -22,17 +23,17 @@ export default function ResearchPage() {
         </p>
         <h2 id="portfolio-title">25 fields. One unifying research question.</h2>
         <p className="editorial-intro">
-          The portfolio spans trustworthy AI, distributed and resilient computing,
-          formal verification, quantum information, information theory, causal
-          assurance, complex systems, human-AI interaction, and applied
-          computational intelligence.
+          The portfolio spans trustworthy AI, distributed and resilient
+          computing, formal verification, quantum information, information
+          theory, causal assurance, complex systems, human-AI interaction, and
+          applied computational intelligence.
         </p>
         <div className="research-question">
           <span>UNIFYING RESEARCH QUESTION</span>
           <blockquote>
-            How do you determine what a system actually knows, what that evidence
-            permits it to conclude, what authority it possesses, and what
-            consequences it may safely produce?
+            How do you determine what a system actually knows, what that
+            evidence permits it to conclude, what authority it possesses, and
+            what consequences it may safely produce?
           </blockquote>
         </div>
         <a className="editorial-text-link" href="/research/fields">
@@ -55,7 +56,8 @@ export default function ResearchPage() {
             .map(item => (
               <article className="resource-card" key={item.slug}>
                 <p className="editorial-kicker">
-                  {item.kind} · September 14, 2026
+                  {item.kind} ·{" "}
+                  <time dateTime={item.date}>{publicationDate(item.date)}</time>
                 </p>
                 <h3>
                   <a href={publicationHref(item)}>{item.title}</a>

@@ -71,14 +71,17 @@ export default function PublicRegistry() {
             source-control change cannot be mistaken for a released product.
           </p>
           <p>
-            Reviewed against the September 14 portfolio records and current
-            source-control history. Historical milestone dates are preserved.
-            Read the linked reports for selected methods, results, and open
-            questions.
+            Distribution, MISE, AP Gate, and JEV were reconciled against the
+            current portfolio records and preserved evidence on September 29,
+            2026. Other entries retain their own dated evidence boundaries. This
+            review is not a new execution of the recorded studies.
           </p>
           <div className="program-links">
+            <a href="/JCEE_Labs_Public_Registry_v1.3.md" download>
+              DOWNLOAD CURRENT REGISTRY · VERSION 1.3 <span>↓</span>
+            </a>
             <a href="/JCEE_Labs_Public_Registry_v1.2.md" download>
-              DOWNLOAD CURRENT REGISTRY · VERSION 1.2 <span>↓</span>
+              ARCHIVE · REGISTRY VERSION 1.2 <span>↓</span>
             </a>
             <a href="/JCEE_Labs_Public_Registry_v1.0.md" download>
               ARCHIVE · REGISTRY VERSION 1.0 <span>↓</span>
@@ -115,7 +118,7 @@ export default function PublicRegistry() {
       >
         <div className="section-index">
           <span>SELECTED PUBLIC RECORDS</span>
-          <span>REVIEWED · SEPTEMBER 14, 2026</span>
+          <span>SELECTED ENTRIES REVIEWED · SEPTEMBER 29, 2026</span>
         </div>
         <h2 id="registry-records-title">Current public entries.</h2>
         <nav className="registry-jump-links" aria-label="Build categories">
