@@ -1,0 +1,74 @@
+flowchart TB
+  subgraph people[Users]
+    PH[Policyholder]
+    FIELD[Field Adjuster]
+    DESK[Desk Adjuster]
+    SUP[Supervisor]
+    FIN[Finance]
+    OPS[Program Operations]
+  end
+
+  subgraph clients[AEGIS Client Surfaces]
+    PWA[Next.js Web + Installable PWA]
+    APP[Expo iOS / Android App]
+  end
+
+  subgraph api[Authoritative Claims Boundary]
+    FAST[FastAPI ClaimOS API]
+    DOMAIN[Claims, Assignments, Tasks, Notes]
+    PRICE[Deterministic Scope + Pricing]
+    FLOW[Controlled Lifecycle + Mock Payment]
+    VOW[VOW Proof-Gated Settlement]
+  end
+
+  subgraph evidence[Prototype Persistence]
+    CLAIMS[Atomic Claim Repository]
+    JOURNAL[Hash-Chained VOW Journal]
+    PACK[Signed Evidence Pack]
+    OUTBOX[Settlement Intent Outbox]
+  end
+
+  subgraph production[Production Integration Boundary]
+    IDP[SSO / MFA / Tenant RBAC]
+    CORE[Policy + Claims Core]
+    OBJECT[Encrypted Object Storage]
+    PAY[Payment Provider Adapter]
+    QUEUE[Durable Job Queue]
+  end
+
+  PH --> PWA
+  PH --> APP
+  FIELD --> APP
+  FIELD --> PWA
+  DESK --> PWA
+  SUP --> PWA
+  FIN --> PWA
+  OPS --> PWA
+
+  PWA --> FAST
+  APP --> FAST
+  FAST --> DOMAIN
+  DOMAIN --> PRICE
+  PRICE --> FLOW
+  FLOW --> VOW
+  DOMAIN --> CLAIMS
+  VOW --> JOURNAL
+  VOW --> PACK
+  VOW --> OUTBOX
+
+  IDP -. production gate .-> FAST
+  FAST -. production migration .-> CORE
+  FAST -. evidence bytes .-> OBJECT
+  OUTBOX -. reviewed adapter .-> PAY
+  FAST -. asynchronous jobs .-> QUEUE
+
+  classDef user fill:#f7f5ef,stroke:#64748b,color:#10233d;
+  classDef client fill:#dff9fb,stroke:#009aa6,color:#10233d,stroke-width:2px;
+  classDef service fill:#10233d,stroke:#10233d,color:#ffffff,stroke-width:2px;
+  classDef evidence fill:#ede9fe,stroke:#7c3aed,color:#3b0764,stroke-width:2px;
+  classDef future fill:#fff7ed,stroke:#e86532,color:#7c2d12,stroke-dasharray:5 3;
+  class PH,FIELD,DESK,SUP,FIN,OPS user;
+  class PWA,APP client;
+  class FAST,DOMAIN,PRICE,FLOW,VOW service;
+  class CLAIMS,JOURNAL,PACK,OUTBOX evidence;
+  class IDP,CORE,OBJECT,PAY,QUEUE future;

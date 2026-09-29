@@ -1,0 +1,17 @@
+# Copyright (c) 2026 JceeLabs and Jonathan Chadbourne. All rights reserved.
+# 05 — authoring scars: curated lessons, recorded by the strategy itself
+# (Worked Examples §5). prove false forces the failure so the pattern
+# analyzer sees it; the authored scars are the curated record.
+@learn
+quest scar_writer {
+  goal "Record lessons about flaky payment gateway timeouts"
+  capability model
+
+  strategy record_lessons {
+    scar "Payment gateway times out when batch size exceeds 500 records"
+    scar "Retry without exponential backoff caused an API ban for 1 hour"
+    prove false
+  }
+
+  success when true
+}

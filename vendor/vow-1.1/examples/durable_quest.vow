@@ -1,0 +1,28 @@
+# durable_quest.vow
+# Demonstrates durability journaling (Arc 3A, docs/DURABILITY.md): with a
+# SQLite --db backend every run is registered and hash-chained, and a
+# crashed run resumes with --resume — journaled effects never re-execute.
+#
+# Try:
+#   python vow_cli.py run examples/durable_quest.vow --db m.db --live
+#   python vow_cli.py runs --db m.db                 # registry
+#   python vow_cli.py journal <run_id> --db m.db     # hash-chained log
+
+quest DurableClaim {
+  goal "process a claim across durable, journaled effects"
+
+  capability file_write
+
+  # The effects are the point: each one is journaled before and after it
+  # executes. Dry-run records shadows (the same journal shape); --live
+  # executes for real.
+  let coverage_note = file_write("/tmp/vow_durable_1.txt", "coverage verified")
+  let liability_note = file_write("/tmp/vow_durable_2.txt", "liability assessed")
+  let reserve_note = file_write("/tmp/vow_durable_3.txt", "reserve set")
+
+  # Mode-agnostic success (dry-run shadows and live results both pass);
+  # the durability evidence is the journal itself.
+  let steps_completed = 3
+  prove steps_completed == 3
+  success when steps_completed == 3
+}

@@ -1,0 +1,37 @@
+# Copyright (c) 2026 JceeLabs and Jonathan Chadbourne. All rights reserved.
+# 02 — strategy tournament with learning (Worked Examples §2)
+# Corrected for Reconciled Path A: effectful calls (http_get, file_read)
+# live at QUEST level behind the deontic gate; strategies stay PURE
+# computation over whatever the quest gathered. (The pre-Reconciled
+# version of this example called http_get inside strategies — that is a
+# compile-time error in the canonical architecture.)
+@learn
+quest resilient_fetcher {
+  goal "Fetch mission data via the most reliable route"
+  capability network
+  capability file_read
+
+  # Deontic gate: in dry-run these record shadows; live they execute.
+  let fetched = http_get("https://api.primary.example.com/v1/data")
+  let cached = file_read("/tmp/vow_cache.json")
+
+  tournament {
+    score by proof_success
+
+    strategy prefer_live {
+      let live_len = len(fetched)
+      prove live_len > 0
+    }
+
+    strategy prefer_cache {
+      let cache_len = len(cached)
+      prove cache_len > 0
+    }
+  }
+
+  on fail {
+    scar "All fetch routes failed - primary and cache"
+  }
+
+  success when true
+}

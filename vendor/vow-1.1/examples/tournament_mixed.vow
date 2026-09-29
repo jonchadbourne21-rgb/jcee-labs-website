@@ -1,0 +1,41 @@
+# Copyright (c) 2026 JceeLabs and Jonathan Chadbourne. All rights reserved.
+# tournament_mixed.vow
+# The canonical VOW quest (mirrors the example embedded in main.py).
+# Three strategies compete in a tournament scored by proof success, speed,
+# and safety. The wrong answer fails its proof (scored 0 on proof_success),
+# the risky correct answer loses on safety, and the safe correct answer wins.
+
+quest TournamentMixed {
+  goal "find the answer to life, the universe, and everything"
+
+  constraint attempts <= 6
+
+  believe answer = 42 confidence 1.0 source "deep thought"
+
+  tournament {
+    score by proof_success * 0.6 + speed * 0.2 + safety * 0.2
+
+    strategy wrong_answer {
+      cost 1
+      risk 0.0
+      let result = 41
+      prove result == answer
+    }
+
+    strategy risky_but_correct {
+      cost 2
+      risk 0.8
+      let result = 42
+      prove result == answer
+    }
+
+    strategy safe_and_correct {
+      cost 1
+      risk 0.1
+      let result = answer
+      prove result == 42
+    }
+  }
+
+  success when result == 42
+}

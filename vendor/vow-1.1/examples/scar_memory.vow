@@ -1,0 +1,60 @@
+# Copyright (c) 2026 JceeLabs and Jonathan Chadbourne. All rights reserved.
+# scar_memory.vow
+# Demonstrates VOW scar memory: failures are recorded, not hidden.
+#
+# Quest 1 - RecallWisdom (run by default, succeeds):
+#   Explicit `scar` statements persist lessons from previous incidents into
+#   VowScarMemory, and beliefs carry those recalled lessons forward as
+#   confidence-tracked knowledge (source "scar memory"). The quest then
+#   proves it acted on the recalled wisdom.
+#
+# Quest 2 - LearnTheHardWay (run with --quest LearnTheHardWay):
+#   Its `prove` fails outside any strategy, so the runtime records a scar
+#   (with context) in VowScarMemory and raises VowProofFailure. The engine
+#   answers with status "failed_proof", and the trace's scars list is the
+#   recall surface: everything the quest learned the hard way.
+#
+# Try:
+#   python vow_cli.py run examples/scar_memory.vow
+#   python vow_cli.py run examples/scar_memory.vow --quest LearnTheHardWay
+
+quest RecallWisdom {
+  goal "act on lessons that previous failures left in scar memory"
+
+  # Lessons recorded by earlier runs, recalled before acting.
+  scar "previous run: trusted unverified input and produced a bad parse"
+  scar "previous run: skipped validation to save time and paid for it later"
+
+  # Recalled scars become beliefs: confidence-tracked, with provenance.
+  believe input_validated = 1 confidence 0.9 source "scar memory"
+  believe double_checked = 1 confidence 0.8 source "scar memory"
+
+  let ready = input_validated + double_checked
+
+  # Proof informed by recall: both lessons were applied before proceeding.
+  prove ready == 2
+
+  success when ready == 2
+}
+
+quest LearnTheHardWay {
+  goal "show that a failed proof is recorded as a scar, never hidden"
+
+  # A lesson carried in from the past...
+  scar "earlier attempt: assumed observed == expected without checking"
+
+  believe expected = 42 confidence 1.0 source "specification"
+  believe observed = 41 confidence 0.4 source "unverified upstream"
+
+  let delta = expected - observed
+
+  # ...and a new one recorded right now: this proof fails (delta is 1, not
+  # 0). The runtime records the failure as a scar with context, then raises
+  # VowProofFailure, so the trace shows status "failed_proof" plus every
+  # scar recalled from memory.
+  prove delta == 0
+
+  # Never reached: the proof above stops the quest. Kept to show the
+  # success condition the quest was aiming for.
+  success when delta == 0
+}

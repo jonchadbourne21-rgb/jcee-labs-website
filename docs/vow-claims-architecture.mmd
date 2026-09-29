@@ -1,0 +1,68 @@
+flowchart TB
+  subgraph clients[Claims Experience]
+    UI[Next.js Homeowner Intake and Adjuster Cockpit]
+  end
+
+  subgraph edge[Service Edge]
+    EDGE[TLS / Authentication / Rate Limits]
+  end
+
+  subgraph claims[Claims Service Boundary]
+    API[FastAPI Claims API]
+    PRICE[Deterministic Pricing Engine]
+    REVIEW[Adjuster Review Decision]
+    WRAP[VOW Integration Wrapper]
+  end
+
+  subgraph vow[VOW-Controlled Assurance Boundary]
+    CORE[Frozen VOW 1.1 Parser / Transpiler / Runtime]
+    PROOF[Authorization and Proof Gate]
+    CAP[Deontic Capability Gate]
+    ADAPTER[Settlement Effect Adapter]
+    RECOVERY[Recovery Worker / Sweeper]
+  end
+
+  subgraph effects[Effect Destinations]
+    OUTBOX[Local Settlement Intent Outbox]
+    PAYMENT[Future Payment Provider]
+  end
+
+  subgraph evidence[Persistence and Evidence]
+    CLAIMS[Claim Dossier Store]
+    JOURNAL[Durable Hash-Chained Journal]
+    STATE[Run / State Store]
+    SCARS[Scar Memory]
+    EFFECTS[Effect Records]
+    RECEIPTS[Signed Receipt / Evidence Packs]
+  end
+
+  VERIFY[Independent VOW Evidence Verifier]
+
+  UI --> EDGE --> API
+  API --> PRICE --> CLAIMS
+  API --> REVIEW
+  REVIEW --> WRAP --> CORE --> PROOF --> CAP --> ADAPTER
+  ADAPTER --> OUTBOX
+  ADAPTER -. future provider-specific adapter .-> PAYMENT
+  OUTBOX --> EFFECTS
+  PAYMENT --> EFFECTS
+  CORE --> JOURNAL
+  CORE --> STATE
+  CORE --> SCARS
+  EFFECTS --> RECEIPTS
+  JOURNAL --> RECEIPTS
+  STATE --> RECEIPTS
+  SCARS --> RECEIPTS
+  RECOVERY --> CORE
+  RECOVERY --> JOURNAL
+  RECEIPTS --> VERIFY
+  VERIFY -. verification result .-> API
+
+  classDef app fill:#f8fafc,stroke:#0f172a,color:#0f172a,stroke-width:2px;
+  classDef gate fill:#ccfbf1,stroke:#0f766e,color:#134e4a,stroke-width:2px;
+  classDef effect fill:#ffedd5,stroke:#ea580c,color:#7c2d12,stroke-width:2px;
+  classDef store fill:#e0e7ff,stroke:#4338ca,color:#312e81,stroke-width:2px;
+  class UI,EDGE,API,PRICE,REVIEW,WRAP app;
+  class CORE,PROOF,CAP,ADAPTER,RECOVERY,VERIFY gate;
+  class OUTBOX,PAYMENT effect;
+  class CLAIMS,JOURNAL,STATE,SCARS,EFFECTS,RECEIPTS store;

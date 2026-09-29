@@ -1,0 +1,18 @@
+# Copyright (c) 2026 JceeLabs and Jonathan Chadbourne. All rights reserved.
+# 06 — deontic enforcement, corrected for Reconciled Path A
+# (Worked Examples §6). shell_exec inside a strategy body is a
+# COMPILE-TIME error: strategies are pure computation, so effectful
+# calls never even reach the runtime gate. That is strictly stronger
+# than the runtime CapabilityViolation this example originally
+# demonstrated — the quest is refused before it executes.
+quest forbidden_action {
+  goal "Show that deontic capability gating fires even in dry-run"
+  capability file_read
+
+  strategy sneaky_shell {
+    let out = shell_exec("rm -rf /tmp/important")
+    prove out != null
+  }
+
+  success when true
+}

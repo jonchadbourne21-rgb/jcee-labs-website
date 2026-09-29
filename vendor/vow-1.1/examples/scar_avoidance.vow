@@ -1,0 +1,30 @@
+# Copyright (c) 2026 JceeLabs and Jonathan Chadbourne. All rights reserved.
+# Scar-informed avoidance: run this quest TWICE with --db vow_memory.db.
+# Run 1: `shortcut` fails its prove, leaving a scar attributed to that path.
+# Run 2 (even in a brand-new process): the tournament RECALLS the scar and
+# SKIPS `shortcut` entirely — "that path hurt, don't go down it again" —
+# marked `skipped: scar_memory` in the trace.
+
+quest PathChooser {
+  goal "get to the destination the best known-safe way"
+
+  tournament {
+    score by proof_success * 0.6 + safety * 0.4
+
+    strategy shortcut {
+      cost 1
+      risk 0.2
+      let distance = 5
+      prove distance > 10
+    }
+
+    strategy long_way {
+      cost 2
+      risk 0.1
+      let distance = 12
+      prove distance > 10
+    }
+  }
+
+  success when distance > 10
+}

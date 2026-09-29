@@ -1,0 +1,27 @@
+# suspension.vow
+# Demonstrates Arc 3B (docs/DURABILITY.md §5): a journaled run can PARK —
+# wait until a wall-clock time, or await a human approval — exit its
+# process, and resume later exactly where it stopped. Dry-run shadows the
+# pause (records where the run WOULD suspend, never suspends).
+#
+# Try (live):
+#   python vow_cli.py run examples/suspension.vow --db m.db --live
+#   python vow_cli.py approve <run_id> examples/suspension.vow --db m.db \
+#       --approver "j.doe" --note "authority verified"
+#   python vow_cli.py due --db m.db
+
+quest ClaimApproval {
+  goal "pause for a human decision inside a durable claim workflow"
+
+  capability file_write
+
+  let draft = file_write("/tmp/vow_suspension_note.txt", "settlement drafted")
+
+  # Suspends until a human grants (or denies) — the decision lands inside
+  # the run's own hash chain. Dry-run: whispered shadow, quest continues.
+  await approval "settlement exceeds adjuster authority — supervisor sign-off required"
+
+  let steps_completed = 2
+  prove steps_completed == 2
+  success when steps_completed == 2
+}

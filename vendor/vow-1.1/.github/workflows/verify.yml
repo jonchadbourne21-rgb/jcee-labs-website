@@ -1,0 +1,40 @@
+name: VOW verification
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  complete-suite:
+    name: Complete suite with live PostgreSQL
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install VOW and verification dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[test]"
+
+      - name: Run all 371 tests
+        run: |
+          python -m pytest tests/ --junitxml=vow-junit.xml -q
+          python tools/verify_junit_total.py vow-junit.xml --expected 371
+
+      - name: Verify causal delivery manifest
+        run: python verify_causal_delivery.py

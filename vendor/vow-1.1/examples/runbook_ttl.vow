@@ -1,0 +1,44 @@
+# runbook_ttl.vow
+# Owed 3: TTL leaves the command line and becomes CONFIGURATION —
+# versioned with the code it governs. Two operators, same runbook, same
+# database, same behavior. A --scar-ttl flag still exists, but it is a
+# deliberate override (journaled as scar_ttl_override in run_begin), not
+# the standing law.
+#
+# The runbook block is contextual syntax (like route/ontology): 'runbook'
+# is only special in declaration position. Rows are compile-time
+# constants — literals and axiom names — resolved at transpile.
+
+axiom hour = 3600
+
+runbook {
+  # an exact scar suppresses its strategy+seed for one hour; older
+  # wounds demote from 'skip' to a cautionary retry
+  scar_ttl = hour
+}
+
+quest WoundedPath {
+  goal "retry a wounded path only after its scar has aged out"
+
+  believe attempt = 1 confidence 1.0 source "operator runbook"
+
+  tournament {
+    score by proof_success * 0.8 + safety * 0.2
+
+    strategy careful_route {
+      cost 1
+      risk 0.1
+      let result = attempt + 1
+      prove result == 2
+    }
+
+    strategy hasty_route {
+      cost 1
+      risk 0.8
+      let result = attempt + 1
+      prove result == 2
+    }
+  }
+
+  success when result == 2
+}

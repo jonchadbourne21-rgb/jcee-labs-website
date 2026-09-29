@@ -1,0 +1,31 @@
+# Copyright (c) 2026 JceeLabs and Jonathan Chadbourne. All rights reserved.
+# Scar fingerprinting: exact-match avoidance + cautionary retry.
+#
+# quest BatchA hurts the path `big_batch` with batch size 600.
+# quest BatchB walks a SIMILAR path (same strategy name) but with a
+# different detail (batch size 450). It is NOT skipped — the seed differs —
+# it runs under `caution: similar_scar` and succeeds, teaching the system
+# the situations are different.
+# Run BatchA a second time and it IS skipped (exact same situation).
+
+quest BatchA {
+  goal "process a 600-record batch"
+  let batch_size = 600
+  tournament {
+    score by proof_success * 0.6 + safety * 0.4
+    strategy big_batch { cost 1 risk 0.3 let done = batch_size prove batch_size < 500 }
+    strategy split_batch { cost 1 risk 0.1 let done = 250 prove done < 500 }
+  }
+  success when done < 500
+}
+
+quest BatchB {
+  goal "process a 450-record batch"
+  let batch_size = 450
+  tournament {
+    score by proof_success * 0.6 + safety * 0.4
+    strategy big_batch { cost 1 risk 0.3 let done = batch_size prove batch_size < 500 }
+    strategy split_batch { cost 1 risk 0.1 let done = 250 prove done < 500 }
+  }
+  success when done < 500
+}

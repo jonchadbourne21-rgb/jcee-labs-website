@@ -1,0 +1,22 @@
+# Copyright (c) 2026 JceeLabs and Jonathan Chadbourne. All rights reserved.
+# ontology.vow
+# User-defined keywords: the ontology block declares that `audit` maps to
+# a HOST function named host_audit_log. `audit result` in the quest body
+# is a macro — it calls the host's function with the value. The engine
+# ships no host functions: run through the CLI, the keyword is unbound,
+# so it whispers `ontology_unbound` and passes the value through —
+# visible, never a silent transformation.
+
+ontology {
+  define_keyword "audit" -> "host_audit_log"
+}
+
+quest AuditedRun {
+  goal "compute and audit the result"
+
+  let result = 40 + 2
+  audit result
+
+  prove result == 42
+  success when result == 42
+}

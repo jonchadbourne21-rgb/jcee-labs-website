@@ -1,0 +1,18 @@
+# Copyright (c) 2026 JceeLabs and Jonathan Chadbourne. All rights reserved.
+# 01 — the basic quest / strategy / prove cycle (Worked Examples §1)
+quest hello_vow {
+  goal "Demonstrate the basic quest / strategy / prove cycle"
+  capability model
+
+  strategy greet {
+    let message = "Hello from VOW"
+    let excitement = 3
+    prove excitement > 0
+  }
+
+  on fail {
+    scar "Greeting failed: excitement was not positive"
+  }
+
+  success when true
+}

@@ -1,0 +1,19 @@
+# Copyright (c) 2026 JceeLabs and Jonathan Chadbourne. All rights reserved.
+# Deontic capability gating: quests must declare what they're permitted
+# to do. Gated calls (http_get, file_read, file_write, shell_exec,
+# model_ask) require the matching capability — checked at transpile time,
+# enforced even in dry-run. In dry-run these return recorded shadows;
+# with --live they execute for real.
+
+quest DeonticGate {
+  goal "fetch and cache data strictly through the permission layer"
+
+  capability network
+  capability file_read
+
+  let page = http_get("https://example.com/")
+  let host = file_read("/etc/hostname")
+
+  prove true
+  success when true
+}

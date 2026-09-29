@@ -1,0 +1,34 @@
+# Copyright (c) 2026 JceeLabs and Jonathan Chadbourne. All rights reserved.
+# 04 — beliefs with confidence/source, if/else, repeat (Worked Examples §4)
+quest lead_scorer {
+  goal "Score inbound leads and prove the pipeline math"
+  capability model
+
+  believe base_score = 40 confidence 0.9 source "crm_export"
+
+  strategy score_leads {
+    let bonus = 12
+    let total = base_score + bonus * 2
+    prove total == 64
+
+    let tier = 0
+    if total >= 60 {
+      set tier = 1
+    } else {
+      set tier = 2
+    }
+    prove tier == 1
+
+    let compounded = base_score
+    repeat 3 times {
+      set compounded = compounded + 10
+    }
+    prove compounded == 70
+  }
+
+  on fail {
+    scar "Lead scoring math failed - check base_score belief source"
+  }
+
+  success when true
+}
