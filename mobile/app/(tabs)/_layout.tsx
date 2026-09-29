@@ -1,0 +1,4 @@
+import { Tabs } from 'expo-router';
+import { AppIcon } from '@/components/brand-and-shell';
+import { tabIconMap } from '@/lib/icons';
+export default function TabsLayout() { return <Tabs screenOptions={{ headerShown: false, tabBarActiveTintColor: '#0B7178', tabBarInactiveTintColor: '#526273', tabBarStyle: { borderTopColor: '#DCE3E8' } }}><Tabs.Screen name="index" options={{ title: 'Home', tabBarIcon: ({ color, size }) => <AppIcon icon={tabIconMap.home} color={color} size={size} /> }} /><Tabs.Screen name="claims" options={{ title: 'Claims', tabBarIcon: ({ color, size }) => <AppIcon icon={tabIconMap.claims} color={color} size={size} /> }} /><Tabs.Screen name="inbox" options={{ title: 'Inbox', tabBarIcon: ({ color, size }) => <AppIcon icon={tabIconMap.inbox} color={color} size={size} /> }} /><Tabs.Screen name="settings" options={{ title: 'Settings', tabBarIcon: ({ color, size }) => <AppIcon icon={tabIconMap.settings} color={color} size={size} /> }} /></Tabs>; }

@@ -4,21 +4,72 @@
 
 :root { color-scheme: light; }
 * { box-sizing: border-box; }
-html { background: #f7f5ef; }
+html { background: #f7f5ef; scroll-behavior: smooth; }
 body { margin: 0; background: #f7f5ef; color: #10233d; font-family: Arial, Helvetica, sans-serif; }
 button, input, select, textarea { font: inherit; }
-button { cursor: pointer; }
-button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid rgba(0, 168, 181, .42); outline-offset: 2px; }
+button:not(:disabled), select:not(:disabled) { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid rgba(0, 168, 181, .52); outline-offset: 2px; }
 ::selection { background: #aeeff2; color: #10233d; }
 
 @layer components {
+  .page-frame { @apply mx-auto max-w-[1540px] px-4 py-6 sm:px-6 lg:px-8; }
   .card { @apply overflow-hidden border border-slate-200 bg-white shadow-sm; }
+  .section-heading { @apply flex items-center justify-between gap-3 border-b border-slate-200 px-5 py-4; }
+  .section-heading p { @apply text-[10px] font-bold uppercase tracking-[0.15em] text-cyan; }
+  .section-heading h2 { @apply mt-1 text-base font-extrabold tracking-tight text-ink; }
   .field-label { @apply mb-1.5 block text-xs font-bold uppercase tracking-[0.09em] text-slate-600; }
-  .field { @apply block w-full border border-slate-300 bg-white px-3 py-2 text-sm text-ink placeholder:text-slate-400 focus:border-cyan focus:outline-none; }
+  .field { @apply block w-full border border-slate-300 bg-white px-3 py-2 text-sm text-ink placeholder:text-slate-400 focus:border-cyan focus:outline-none disabled:bg-slate-100; }
   .table-input { @apply w-20 border border-slate-300 bg-white px-2 py-1.5 text-right text-sm font-medium text-ink focus:border-cyan focus:outline-none; }
-  .icon-button { @apply grid h-8 w-8 place-items-center border border-slate-300 bg-white text-slate-600 hover:border-cyan hover:text-cyan; }
+  .icon-button { @apply grid h-9 w-9 place-items-center border border-slate-300 bg-white text-slate-600 transition hover:border-cyan hover:text-cyan; }
+  .primary-button { @apply inline-flex items-center justify-center gap-2 bg-ink px-4 py-2.5 text-sm font-bold text-white transition hover:bg-[#18345b] disabled:opacity-60; }
+  .secondary-button { @apply inline-flex items-center justify-center gap-2 border border-slate-300 bg-white px-3 py-2 text-sm font-bold text-ink transition hover:border-cyan hover:text-cyan disabled:opacity-60; }
+  .back-button { @apply inline-flex items-center gap-2 text-sm font-bold text-slate-600 transition hover:text-cyan; }
+  .install-button { @apply hidden items-center gap-1.5 bg-ink px-3 py-2 text-xs font-bold text-white transition hover:bg-[#18345b] sm:inline-flex; }
+  .health-pill { @apply hidden items-center gap-1.5 border border-current px-2.5 py-1.5 text-xs font-bold sm:inline-flex; }
+  .role-switcher { @apply max-w-36 border border-slate-300 bg-white px-2 py-2 text-xs font-bold text-ink focus:border-cyan focus:outline-none sm:max-w-none; }
+  .nav-link { @apply flex w-full items-center gap-3 px-3 py-2.5 text-left text-sm font-bold text-slate-300 transition hover:bg-slate-800 hover:text-white; }
+  .nav-link-active { @apply bg-cyan text-ink hover:bg-cyan hover:text-ink; }
+  .state-error { @apply mb-5 flex flex-col gap-3 border border-red-300 bg-red-50 p-4 text-sm text-red-950 sm:flex-row sm:items-start sm:justify-between; }
+  .state-error p { @apply mt-1 leading-5 text-red-800; }
+  .state-success { @apply mb-5 flex items-start gap-3 border border-teal-200 bg-teal-50 p-4 text-sm text-teal-950; }
+  .metric-card { @apply flex min-h-28 items-start gap-4 border bg-white p-5 shadow-sm; }
+  .metric-card p { @apply text-xs font-bold uppercase tracking-[.1em] text-slate-500; }
+  .metric-card strong { @apply mt-2 block text-2xl font-extrabold tracking-tight; }
+  .metric-cyan { @apply border-cyan; }
+  .metric-cyan > svg { @apply text-cyan; }
+  .metric-teal { @apply border-teal-300; }
+  .metric-teal > svg { @apply text-teal-700; }
+  .metric-orange { @apply border-orange-300; }
+  .metric-orange > svg { @apply text-safety; }
+  .metric-ink { @apply border-ink; }
+  .metric-ink > svg { @apply text-ink; }
+  .skeleton-line { @apply h-4 animate-pulse rounded bg-slate-200; }
+  .status-badge { @apply inline-flex border border-slate-300 bg-slate-50 px-2 py-1 text-[10px] font-extrabold uppercase tracking-[.08em] text-slate-700; }
+  .claim-row-button { @apply flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition hover:bg-slate-50; }
+  .claim-row-button strong { @apply block text-sm text-ink; }
+  .claim-row-button small { @apply mt-1 block text-xs text-slate-500; }
+  .claim-row-button svg { @apply shrink-0 text-cyan; }
+  .row-action { @apply inline-flex items-center gap-1 text-sm font-bold text-cyan hover:text-ink disabled:opacity-50; }
+  .mobile-claim-card { @apply flex w-full items-start justify-between gap-3 p-4 text-left transition hover:bg-slate-50; }
+  .mobile-claim-card strong { @apply text-sm; }
+  .mobile-claim-card p { @apply mt-1 text-xs leading-5 text-slate-500; }
+  .estimate-table { @apply w-full min-w-[760px] text-left text-sm; }
+  .estimate-table thead { @apply bg-slate-50 text-[10px] font-bold uppercase tracking-[.1em] text-slate-500; }
+  .estimate-table th { @apply px-4 py-3; }
+  .estimate-table td { @apply border-t border-slate-100 px-4 py-3 text-slate-600; }
+  .estimate-table td:first-child small { @apply mb-1 block text-[10px] font-bold uppercase tracking-wider text-cyan; }
+  .estimate-table td:first-child strong { @apply block font-semibold text-ink; }
+  .overlay-tag { @apply absolute -top-6 left-0 whitespace-nowrap px-2 py-1 text-[9px] font-bold uppercase tracking-wide; }
+  .evidence-link { @apply inline-flex border border-teal-300 bg-white px-2 py-1.5 font-bold text-teal-950 hover:border-cyan; }
 }
 
 @media (max-width: 640px) {
   .field { min-height: 42px; }
+  .role-switcher { max-width: 150px; }
+  .health-pill { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }

@@ -6,14 +6,46 @@ import os
 import uuid
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any
+from typing import Annotated, Any
 
-from fastapi import FastAPI, HTTPException, Response, status
+from fastapi import FastAPI, HTTPException, Query, Response, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 
-from backend.models import AnalyzeRequest, ApprovalDecision, ApprovalRequest, HomeownerSubmission
-from backend.pricing import compute_claim_estimate, recompute_adjusted_estimate, regional_multiplier
+from backend.models import (
+    AnalyzeRequest,
+    ApprovalDecision,
+    ApprovalRequest,
+    AssignmentRequest,
+    DemoResetRequest,
+    HomeownerSubmission,
+    NoteCreateRequest,
+    PaymentAction,
+    PaymentRequest,
+    TaskCompletionRequest,
+    TaskCreateRequest,
+    WorkflowStatus,
+    WorkflowStatusRequest,
+)
+from backend.pricing import (
+    compute_claim_estimate,
+    recompute_adjusted_estimate,
+    regional_multiplier,
+)
+from backend.product import (
+    ASSIGNMENT_ROLES,
+    CONTROLLED_STATUS_TRANSITIONS,
+    NEXT_ACTION_BY_STATUS,
+    dashboard_payload,
+    enrich_claim_defaults,
+    evidence_readiness,
+    filter_claims,
+    make_note_id,
+    make_task_id,
+    seed_demo_claim,
+    team_member,
+    team_workload,
+)
 from backend.storage import ClaimsRepository
 from backend.vow_assurance import (
     VowAssuranceError,
@@ -161,9 +193,9 @@ def enrich_line_items(estimate: dict[str, Any]) -> list[dict[str, Any]]:
 
 def serialize_dossier(claim: dict[str, Any]) -> dict[str, Any]:
     """Return a defensive, frontend-ready representation of a persisted claim."""
-    output = copy.deepcopy(claim)
+    output = enrich_claim_defaults(claim)
     output["id"] = output["claim_id"]
-    output["agents"] = agent_records(output["stages"])
+    output["agents"] = agent_records(output.get("stages", []))
     vision = output.get("vision")
     output["telemetry"] = vision.get("telemetry_verification") if vision else None
     output["vision_data"] = vision
@@ -184,7 +216,7 @@ def build_submission_claim(claim_id: str, submission: HomeownerSubmission) -> di
         }
         for item in intake["evidence"]
     ]
-    return {
+    return enrich_claim_defaults({
         "claim_id": claim_id,
         "status": "SUBMITTED",
         "created_at": now,
@@ -197,7 +229,7 @@ def build_submission_claim(claim_id: str, submission: HomeownerSubmission) -> di
         "assurance": None,
         "approval": {"status": "NOT_REVIEWED", "reviewed_at": None, "approved_at": None, "adjuster_name": None, "notes": None},
         "audit_history": [audit_event("CLAIM_SUBMITTED", now, "HOMEOWNER", {"peril": intake["peril"], "evidence_count": len(evidence)})],
-    }
+    })
 
 
 def input_assumptions(claim: dict[str, Any], request: AnalyzeRequest | None) -> tuple[str, float, float]:
@@ -238,6 +270,30 @@ def create_app(
     application.state.vow_data_dir = str(resolved_vow_data_dir)
     application.state.vow_integrity = vow_integrity
 
+    def prepare_mutation(claim: dict[str, Any]) -> None:
+        """Persist defaults before operating on a legacy dossier in place."""
+        claim.update(enrich_claim_defaults(claim))
+
+    def require_demo_user(user_id: str, expected_role: str | None = None) -> None:
+        user = team_member(user_id)
+        if user is None:
+            raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_CONTENT, detail=f"Unknown demo user: {user_id}")
+        if expected_role is not None and user.role != expected_role:
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
+                detail=f"User {user_id} is not a {expected_role}",
+            )
+
+    def update_claim_metadata(claim: dict[str, Any], now: str) -> None:
+        claim["updated_at"] = now
+        claim["next_action"] = NEXT_ACTION_BY_STATUS.get(claim["status"], "Review claim")
+        # Re-enrichment refreshes readiness from canonical evidence/analysis data
+        # and makes the product fields safe before the repository writes.
+        claim["evidence_readiness"] = evidence_readiness(claim)
+
+    def append_event(claim: dict[str, Any], event: str, now: str, actor: str, details: dict[str, Any]) -> None:
+        claim["audit_history"].append(audit_event(event, now, actor, details))
+
     @application.get("/health")
     def health() -> dict[str, Any]:
         return {
@@ -252,6 +308,36 @@ def create_app(
                 "manifest_sha256": vow_integrity["manifest_sha256"],
             },
         }
+
+    @application.get("/api/dashboard")
+    def get_dashboard() -> dict[str, Any]:
+        return dashboard_payload(repository.list())
+
+    @application.get("/api/team")
+    def get_team() -> dict[str, Any]:
+        return {"team": team_workload(repository.list())}
+
+    @application.get("/api/claims")
+    def list_claims(
+        status_filter: Annotated[WorkflowStatus | None, Query(alias="status")] = None,
+        assignee: Annotated[str | None, Query(min_length=1, max_length=64)] = None,
+        search: Annotated[str | None, Query(max_length=500)] = None,
+        limit: Annotated[int, Query(ge=1, le=100)] = 25,
+        offset: Annotated[int, Query(ge=0)] = 0,
+    ) -> dict[str, Any]:
+        filtered = filter_claims(
+            repository.list(),
+            status=status_filter.value if status_filter else None,
+            assignee=assignee,
+            search=search,
+        )
+        page = [serialize_dossier(claim) for claim in filtered[offset : offset + limit]]
+        return {"items": page, "total": len(filtered), "limit": limit, "offset": offset}
+
+    @application.post("/api/demo/reset")
+    def reset_demo(_request: DemoResetRequest) -> dict[str, Any]:
+        claim = seed_demo_claim(repository, kitchen_water_vision_payload)
+        return serialize_dossier(claim)
 
     @application.post("/api/claims/submit", status_code=status.HTTP_201_CREATED)
     def submit_claim(submission: HomeownerSubmission) -> dict[str, Any]:
@@ -268,8 +354,14 @@ def create_app(
     @application.post("/api/claims/{claim_id}/analyze")
     def analyze_claim(claim_id: str, request: AnalyzeRequest | None = None) -> dict[str, Any]:
         def analyze(claim: dict[str, Any]) -> dict[str, Any]:
-            if claim["status"] == "APPROVED":
-                raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="An approved claim cannot be re-analyzed")
+            prepare_mutation(claim)
+            if claim["status"] in {
+                WorkflowStatus.APPROVED.value,
+                WorkflowStatus.PAYMENT_SCHEDULED.value,
+                WorkflowStatus.PAID.value,
+                WorkflowStatus.CLOSED.value,
+            }:
+                raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="A financially progressed claim cannot be re-analyzed")
             now = utc_now()
             zip_code, deductible, material_age_years = input_assumptions(claim, request)
             vision = kitchen_water_vision_payload(claim_id, now)
@@ -286,10 +378,10 @@ def create_app(
                 "price_book": "prototype-2026-09",
             }
             claim["status"] = "IN_REVIEW"
-            claim["updated_at"] = now
             claim["stages"] = stage_records(5, now)
             claim["approval"] = {"status": "NOT_REVIEWED", "reviewed_at": None, "approved_at": None, "adjuster_name": None, "notes": None}
-            claim["audit_history"].append(audit_event("ANALYSIS_COMPLETED", now, "AI_PIPELINE", {"inspection_id": vision["inspection_id"], "line_item_count": len(estimate["line_items"]), "regional_index": regional_multiplier(zip_code)}))
+            update_claim_metadata(claim, now)
+            append_event(claim, "ANALYSIS_COMPLETED", now, "AI_PIPELINE", {"inspection_id": vision["inspection_id"], "line_item_count": len(estimate["line_items"]), "regional_index": regional_multiplier(zip_code)})
             return serialize_dossier(claim)
 
         outcome = repository.mutate(claim_id, analyze)
@@ -303,6 +395,168 @@ def create_app(
         if claim is None:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Claim not found")
         return serialize_dossier(claim)
+
+    @application.post("/api/claims/{claim_id}/assign")
+    def assign_claim(claim_id: str, request: AssignmentRequest) -> dict[str, Any]:
+        def assign(claim: dict[str, Any]) -> dict[str, Any]:
+            prepare_mutation(claim)
+            changes: dict[str, str | None] = {}
+            for field_name, required_role in ASSIGNMENT_ROLES.items():
+                user_id = getattr(request, field_name)
+                if user_id is not None:
+                    require_demo_user(user_id, required_role)
+                    claim["assignments"][field_name] = user_id
+                    changes[field_name] = user_id
+            now = utc_now()
+            update_claim_metadata(claim, now)
+            append_event(claim, "CLAIM_ASSIGNED", now, "PROGRAM_ADMINISTRATOR", {"assignments": changes})
+            return serialize_dossier(claim)
+
+        outcome = repository.mutate(claim_id, assign)
+        if outcome is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Claim not found")
+        return outcome
+
+    @application.post("/api/claims/{claim_id}/tasks")
+    def create_task(claim_id: str, request: TaskCreateRequest) -> dict[str, Any]:
+        def add_task(claim: dict[str, Any]) -> dict[str, Any]:
+            prepare_mutation(claim)
+            require_demo_user(request.owner_id)
+            now = utc_now()
+            task = {
+                "task_id": make_task_id(),
+                "title": request.title,
+                "owner_id": request.owner_id,
+                "priority": request.priority.value,
+                "due_at": request.due_at.isoformat().replace("+00:00", "Z") if request.due_at else None,
+                "status": "OPEN",
+                "created_at": now,
+                "completed_at": None,
+                "completed_by": None,
+            }
+            claim["tasks"].append(task)
+            update_claim_metadata(claim, now)
+            append_event(claim, "TASK_CREATED", now, request.owner_id, {"task_id": task["task_id"], "priority": task["priority"]})
+            return serialize_dossier(claim)
+
+        outcome = repository.mutate(claim_id, add_task)
+        if outcome is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Claim not found")
+        return outcome
+
+    @application.post("/api/claims/{claim_id}/tasks/{task_id}/complete")
+    def complete_task(claim_id: str, task_id: str, request: TaskCompletionRequest) -> dict[str, Any]:
+        def complete(claim: dict[str, Any]) -> dict[str, Any]:
+            prepare_mutation(claim)
+            require_demo_user(request.actor_id)
+            task = next((item for item in claim["tasks"] if item.get("task_id") == task_id), None)
+            if task is None:
+                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Task not found")
+            if task.get("status") == "COMPLETED":
+                raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Task has already been completed")
+            now = utc_now()
+            task["status"] = "COMPLETED"
+            task["completed_at"] = now
+            task["completed_by"] = request.actor_id
+            update_claim_metadata(claim, now)
+            append_event(claim, "TASK_COMPLETED", now, request.actor_id, {"task_id": task_id})
+            return serialize_dossier(claim)
+
+        outcome = repository.mutate(claim_id, complete)
+        if outcome is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Claim not found")
+        return outcome
+
+    @application.post("/api/claims/{claim_id}/notes")
+    def create_note(claim_id: str, request: NoteCreateRequest) -> dict[str, Any]:
+        def add_note(claim: dict[str, Any]) -> dict[str, Any]:
+            prepare_mutation(claim)
+            author = team_member(request.author_id)
+            now = utc_now()
+            note = {
+                "note_id": make_note_id(),
+                "author_id": request.author_id,
+                "author_role": author.role if author else "EXTERNAL",
+                "body": request.body,
+                "visibility": request.visibility.value,
+                "created_at": now,
+            }
+            claim["notes"].append(note)
+            update_claim_metadata(claim, now)
+            append_event(claim, "NOTE_ADDED", now, request.author_id, {"note_id": note["note_id"], "visibility": note["visibility"]})
+            return serialize_dossier(claim)
+
+        outcome = repository.mutate(claim_id, add_note)
+        if outcome is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Claim not found")
+        return outcome
+
+    @application.post("/api/claims/{claim_id}/status")
+    def update_status(claim_id: str, request: WorkflowStatusRequest) -> dict[str, Any]:
+        def transition(claim: dict[str, Any]) -> dict[str, Any]:
+            prepare_mutation(claim)
+            require_demo_user(request.actor_id)
+            current_status = claim["status"]
+            target_status = request.status.value
+            permitted = CONTROLLED_STATUS_TRANSITIONS.get(current_status, frozenset())
+            if target_status not in permitted:
+                raise HTTPException(
+                    status_code=status.HTTP_409_CONFLICT,
+                    detail=f"Controlled status transition {current_status} -> {target_status} is not allowed",
+                )
+            now = utc_now()
+            claim["status"] = target_status
+            update_claim_metadata(claim, now)
+            append_event(claim, "STATUS_CHANGED", now, request.actor_id, {"from": current_status, "to": target_status})
+            return serialize_dossier(claim)
+
+        outcome = repository.mutate(claim_id, transition)
+        if outcome is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Claim not found")
+        return outcome
+
+    @application.post("/api/claims/{claim_id}/payment")
+    def record_payment(claim_id: str, request: PaymentRequest) -> dict[str, Any]:
+        def payment(claim: dict[str, Any]) -> dict[str, Any]:
+            prepare_mutation(claim)
+            require_demo_user(request.actor_id, "FINANCE")
+            now = utc_now()
+            if request.action == PaymentAction.SCHEDULE:
+                if claim["status"] != WorkflowStatus.APPROVED.value:
+                    raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Payment scheduling requires an APPROVED claim")
+                estimate = claim.get("estimate")
+                if not isinstance(estimate, dict):
+                    raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="An approved estimate is required for payment scheduling")
+                instruction = {
+                    "status": "SCHEDULED",
+                    "instruction_id": f"PMT_{claim_id}_V1",
+                    "method": request.method.value,
+                    "amount": estimate["net_payout"],
+                    "currency": "USD",
+                    "scheduled_at": now,
+                    "sent_at": None,
+                    "actor_id": request.actor_id,
+                    "mock": True,
+                }
+                claim["payment"] = instruction
+                claim["status"] = WorkflowStatus.PAYMENT_SCHEDULED.value
+                update_claim_metadata(claim, now)
+                append_event(claim, "PAYMENT_SCHEDULED", now, request.actor_id, {"instruction_id": instruction["instruction_id"], "method": instruction["method"], "amount": instruction["amount"], "mock": True})
+            else:
+                if claim["status"] != WorkflowStatus.PAYMENT_SCHEDULED.value or claim["payment"].get("status") != "SCHEDULED":
+                    raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Payment must be scheduled before it can be marked sent")
+                claim["payment"]["status"] = "SENT"
+                claim["payment"]["sent_at"] = now
+                claim["payment"]["actor_id"] = request.actor_id
+                claim["status"] = WorkflowStatus.PAID.value
+                update_claim_metadata(claim, now)
+                append_event(claim, "PAYMENT_MARKED_SENT", now, request.actor_id, {"instruction_id": claim["payment"].get("instruction_id"), "mock": True})
+            return serialize_dossier(claim)
+
+        outcome = repository.mutate(claim_id, payment)
+        if outcome is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Claim not found")
+        return outcome
 
     @application.get("/api/claims/{claim_id}/assurance/evidence")
     def download_assurance_evidence(claim_id: str) -> FileResponse:
@@ -337,10 +591,11 @@ def create_app(
     @application.post("/api/claims/{claim_id}/approve")
     def approve_claim(claim_id: str, request: ApprovalRequest) -> dict[str, Any]:
         def approve(claim: dict[str, Any]) -> dict[str, Any]:
+            prepare_mutation(claim)
             if claim["estimate"] is None or claim["vision"] is None:
                 raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Claim analysis must complete before review or approval")
-            if claim["status"] == "APPROVED":
-                raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Claim has already been approved")
+            if claim["status"] != WorkflowStatus.IN_REVIEW.value:
+                raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Only an IN_REVIEW claim can be approved")
             allowed_zone_ids = {item["zone_id"] for item in claim["estimate"]["line_items"]}
             requested_zone_ids = {line.zone_id for line in request.line_items}
             unknown_zone_ids = sorted(requested_zone_ids - allowed_zone_ids)
@@ -370,6 +625,7 @@ def create_app(
                         adjuster_name=adjuster_name,
                         notes=request.notes,
                         data_dir=resolved_vow_data_dir,
+                        settlement_slot=str(claim.get("settlement_slot") or "v1"),
                     )
                 except VowPolicyDenied as exc:
                     raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(exc)) from exc
@@ -380,7 +636,6 @@ def create_app(
             claim["estimate"] = revised_estimate
             claim["assurance"] = assurance
             claim["status"] = "APPROVED" if is_approved else "IN_REVIEW"
-            claim["updated_at"] = now
             claim["approval"] = {
                 "status": "APPROVED" if is_approved else "REVIEW_SAVED",
                 "decision": request.decision.value,
@@ -390,19 +645,19 @@ def create_app(
                 "notes": request.notes,
                 "settlement": {"currency": "USD", "net_payout": revised_estimate["net_payout"], "status": "APPROVED" if is_approved else "PENDING_APPROVAL"},
             }
-            claim["audit_history"].append(
-                audit_event(
-                    "SETTLEMENT_APPROVED" if is_approved else "REVIEW_SAVED",
-                    now,
-                    adjuster_name,
-                    {
-                        "decision": request.decision.value,
-                        "modified_zone_ids": sorted(requested_zone_ids),
-                        "net_payout": revised_estimate["net_payout"],
-                        "vow_run_id": assurance.get("run_id") if assurance else None,
-                        "vow_authorization_sha256": assurance.get("authorization_sha256") if assurance else None,
-                    },
-                )
+            update_claim_metadata(claim, now)
+            append_event(
+                claim,
+                "SETTLEMENT_APPROVED" if is_approved else "REVIEW_SAVED",
+                now,
+                adjuster_name,
+                {
+                    "decision": request.decision.value,
+                    "modified_zone_ids": sorted(requested_zone_ids),
+                    "net_payout": revised_estimate["net_payout"],
+                    "vow_run_id": assurance.get("run_id") if assurance else None,
+                    "vow_authorization_sha256": assurance.get("authorization_sha256") if assurance else None,
+                },
             )
             return serialize_dossier(claim)
 

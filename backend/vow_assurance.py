@@ -184,7 +184,15 @@ quest {QUEST_NAME} {{
 '''
 
 
-def authorize_settlement(*, claim_id: str, estimate: dict[str, Any], adjuster_name: str, notes: str | None, data_dir: str | Path | None = None) -> dict[str, Any]:
+def authorize_settlement(
+    *,
+    claim_id: str,
+    estimate: dict[str, Any],
+    adjuster_name: str,
+    notes: str | None,
+    data_dir: str | Path | None = None,
+    settlement_slot: str = "v1",
+) -> dict[str, Any]:
     """Run a live VOW proof gate and return a compact, verifiable receipt."""
     integrity = verify_frozen_core()
     paths = _prepare_paths(Path(data_dir).expanduser().resolve() if data_dir else default_data_dir())
@@ -198,9 +206,10 @@ def authorize_settlement(*, claim_id: str, estimate: dict[str, Any], adjuster_na
         "review_notes_sha256": _sha256_bytes((notes or "").encode("utf-8")),
     }
     authorization_sha256 = _canonical_sha256(authorization_body)
-    # A claim has one v1 settlement-authorization slot. Reusing this key with
-    # changed arguments is a VOW idempotency conflict, not a second effect.
-    effect_key = f"claim-settlement:{claim_id}:v1"
+    # A claim settlement slot is idempotent. Reusing this key with changed
+    # arguments is a VOW conflict, not a second effect; demo resets receive a
+    # new slot because they represent a new logical claim instance.
+    effect_key = f"claim-settlement:{claim_id}:{settlement_slot}"
     effect_payload = json.dumps(
         {**authorization_body, "authorization_sha256": authorization_sha256, "status": "AUTHORIZED"},
         sort_keys=True,

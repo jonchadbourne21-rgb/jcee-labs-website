@@ -42,7 +42,7 @@ class ClaimsRepository:
             raise RuntimeError(f"Unable to read claims data file: {self.path}") from exc
 
         if not isinstance(document, dict) or not isinstance(document.get("claims", {}), dict):
-            raise RuntimeError(f"Claims data file has an invalid document shape: {self.path}")
+            raise TypeError(f"Claims data file has an invalid document shape: {self.path}")
         self._claims = document.get("claims", {})
 
     def _write_unlocked(self) -> None:
@@ -82,6 +82,21 @@ class ClaimsRepository:
         with self._lock:
             claim = self._claims.get(claim_id)
             return copy.deepcopy(claim) if claim is not None else None
+
+    def list(self) -> list[dict[str, Any]]:
+        """Return defensive dossier copies ordered by newest update first.
+
+        ISO 8601 timestamps with the product's required ``Z`` suffix sort
+        lexicographically. Legacy claims without an update use their creation
+        time, and malformed/missing timestamps safely settle at the end.
+        """
+        with self._lock:
+            ordered = sorted(
+                self._claims.values(),
+                key=lambda claim: str(claim.get("updated_at") or claim.get("created_at") or ""),
+                reverse=True,
+            )
+            return copy.deepcopy(ordered)
 
     def mutate(self, claim_id: str, mutator: Callable[[dict[str, Any]], T]) -> T | None:
         """Run a mutation atomically; return ``None`` only when the claim is absent."""

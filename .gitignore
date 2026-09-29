@@ -92,6 +92,10 @@ jspm_packages/
 # Next.js build output
 .next
 
+# Expo local state and static export output
+mobile/.expo/
+mobile/dist/
+
 # Nuxt.js build / generate output
 .nuxt
 

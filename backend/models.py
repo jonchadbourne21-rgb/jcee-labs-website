@@ -5,7 +5,14 @@ from datetime import datetime
 from enum import Enum
 from typing import Annotated, Any
 
-from pydantic import AliasChoices, BaseModel, ConfigDict, Field, field_validator, model_validator
+from pydantic import (
+    AliasChoices,
+    BaseModel,
+    ConfigDict,
+    Field,
+    field_validator,
+    model_validator,
+)
 
 ZipCode = Annotated[str, Field(pattern=r"^\d{5}(?:-\d{4})?$")]
 NonNegativeFloat = Annotated[float, Field(ge=0)]
@@ -26,6 +33,44 @@ class EvidenceMediaType(str, Enum):
 class ApprovalDecision(str, Enum):
     SAVE_REVIEW = "SAVE_REVIEW"
     APPROVE = "APPROVE"
+
+
+class WorkflowStatus(str, Enum):
+    """Canonical lifecycle states persisted on every claim dossier."""
+
+    SUBMITTED = "SUBMITTED"
+    IN_REVIEW = "IN_REVIEW"
+    APPROVED = "APPROVED"
+    PAYMENT_SCHEDULED = "PAYMENT_SCHEDULED"
+    PAID = "PAID"
+    CLOSED = "CLOSED"
+
+
+class TaskPriority(str, Enum):
+    LOW = "LOW"
+    NORMAL = "NORMAL"
+    HIGH = "HIGH"
+    URGENT = "URGENT"
+
+
+class TaskStatus(str, Enum):
+    OPEN = "OPEN"
+    COMPLETED = "COMPLETED"
+
+
+class NoteVisibility(str, Enum):
+    INTERNAL = "INTERNAL"
+    POLICYHOLDER = "POLICYHOLDER"
+
+
+class PaymentAction(str, Enum):
+    SCHEDULE = "SCHEDULE"
+    MARK_SENT = "MARK_SENT"
+
+
+class PaymentMethod(str, Enum):
+    ACH = "ACH"
+    CHECK = "CHECK"
 
 
 class StrictModel(BaseModel):
@@ -96,7 +141,7 @@ class LineItemAdjustment(StrictModel):
     description: str | None = Field(default=None, min_length=1, max_length=500)
 
     @model_validator(mode="after")
-    def rcv_and_unit_price_are_not_ambiguous(self) -> "LineItemAdjustment":
+    def rcv_and_unit_price_are_not_ambiguous(self) -> LineItemAdjustment:
         if self.rcv is not None and self.unit_price is not None:
             raise ValueError("Provide either rcv or unit_price, not both")
         return self
@@ -124,7 +169,7 @@ class ApprovalRequest(StrictModel):
         return value
 
     @model_validator(mode="after")
-    def normalize_legacy_approve_flag(self) -> "ApprovalRequest":
+    def normalize_legacy_approve_flag(self) -> ApprovalRequest:
         if self.approve is True:
             self.decision = ApprovalDecision.APPROVE
         elif self.approve is False and self.decision == ApprovalDecision.APPROVE:
@@ -133,6 +178,47 @@ class ApprovalRequest(StrictModel):
         if len(zone_ids) != len(set(zone_ids)):
             raise ValueError("Only one adjustment per zone_id is allowed")
         return self
+
+
+class AssignmentRequest(StrictModel):
+    """Assign one or both operational adjuster roles on a claim."""
+
+    field_adjuster_id: str | None = Field(default=None, min_length=1, max_length=64)
+    desk_adjuster_id: str | None = Field(default=None, min_length=1, max_length=64)
+
+    @model_validator(mode="after")
+    def at_least_one_assignment_is_present(self) -> AssignmentRequest:
+        if self.field_adjuster_id is None and self.desk_adjuster_id is None:
+            raise ValueError("Provide field_adjuster_id and/or desk_adjuster_id")
+        return self
+
+
+class TaskCreateRequest(StrictModel):
+    title: str = Field(min_length=1, max_length=200)
+    owner_id: str = Field(min_length=1, max_length=64)
+    priority: TaskPriority = TaskPriority.NORMAL
+    due_at: datetime | None = None
+
+
+class TaskCompletionRequest(StrictModel):
+    actor_id: str = Field(min_length=1, max_length=64)
+
+
+class NoteCreateRequest(StrictModel):
+    author_id: str = Field(min_length=1, max_length=64)
+    body: str = Field(min_length=1, max_length=4000)
+    visibility: NoteVisibility = NoteVisibility.INTERNAL
+
+
+class WorkflowStatusRequest(StrictModel):
+    status: WorkflowStatus
+    actor_id: str = Field(min_length=1, max_length=64)
+
+
+class PaymentRequest(StrictModel):
+    action: PaymentAction
+    method: PaymentMethod = PaymentMethod.ACH
+    actor_id: str = Field(min_length=1, max_length=64)
 
 
 class DemoResetRequest(StrictModel):
