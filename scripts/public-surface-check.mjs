@@ -324,6 +324,7 @@ try {
 
   for (const [route, heading] of [
     ["/operating-cloud", "A common foundation"], ["/blog/the-work-nobody-sees", "The Work Nobody Sees"], ["/research/crucible-composition-tax", "testing the cost of composition"],
+    [articleRoute, "A Confident Model Still Needs Permission"],
     ["/solutions/distribution", "Keep the order true"], ["/technology", "Intelligence should leave receipts"],
     ["/research", "Results you can examine"], ["/research/fields", "25 fields. One unifying research question"], ["/resources", "Ideas, builds"], ["/company", "Build useful intelligence"],
     ["/blog/start-with-the-workflow", "Start with the workflow"],
@@ -333,6 +334,14 @@ try {
   ]) {
     await navigate(page.send, baseUrl, route);
     if (!(await readBody(page.send)).includes(heading)) failures.push(`${route}: missing publication or page`);
+    const metadata = await evaluate(page.send, `({
+      canonical: document.querySelector('link[rel="canonical"]')?.getAttribute('href'),
+      openGraphUrl: document.querySelector('meta[property="og:url"]')?.getAttribute('content'),
+    })`);
+    const expectedCanonical = `https://jceelabs.com${route}`;
+    if (metadata.canonical !== expectedCanonical || metadata.openGraphUrl !== expectedCanonical) {
+      failures.push(`${route}: rendered canonical or Open Graph URL includes a hosting prefix or wrong route`);
+    }
   }
   for (const asset of ["publications/the-work-nobody-sees.md", "publications/crucible-composition-tax.md", "JCEE_Labs_Public_Registry_v1.2.md", "publications/start-with-the-workflow.md", "publications/distribution-first-dry-run.md", "publications/qcs-frozen-specification-reproduction.md", "publications/crucible-semantic-kernel.md"]) {
     const response = await fetch(`${baseUrl}/${asset}`);
