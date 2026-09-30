@@ -32,7 +32,12 @@ export default function EditorialLayout({
         .querySelector(`meta[property="${key}"],meta[name="${key}"]`)
         ?.setAttribute("content", description);
     const pathname = location.split(/[?#]/)[0].replace(/\/+$/, "") || "/";
-    const canonical = `https://jceelabs.com${pathname}`;
+    const basePath = import.meta.env.BASE_URL.replace(/\/+$/, "");
+    const publicPath =
+      basePath && (pathname === basePath || pathname.startsWith(`${basePath}/`))
+        ? pathname.slice(basePath.length) || "/"
+        : pathname;
+    const canonical = `https://jceelabs.com${publicPath}`;
     document
       .querySelector('link[rel="canonical"]')
       ?.setAttribute("href", canonical);
