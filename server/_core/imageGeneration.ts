@@ -16,9 +16,11 @@
  *   });
  */
 import { storagePut } from "server/storage";
+import { authorityHeaders, requireAuthority, type AuthorityIdentity } from "../authorityBoundary";
 import { ENV } from "./env";
 
 export type GenerateImageOptions = {
+  authority: AuthorityIdentity;
   prompt: string;
   originalImages?: Array<{
     url?: string;
@@ -34,6 +36,7 @@ export type GenerateImageResponse = {
 export async function generateImage(
   options: GenerateImageOptions
 ): Promise<GenerateImageResponse> {
+  const identity = requireAuthority(options.authority);
   if (!ENV.forgeApiUrl) {
     throw new Error("BUILT_IN_FORGE_API_URL is not configured");
   }
@@ -57,6 +60,7 @@ export async function generateImage(
       "content-type": "application/json",
       "connect-protocol-version": "1",
       authorization: `Bearer ${ENV.forgeApiKey}`,
+      ...authorityHeaders(identity),
     },
     body: JSON.stringify({
       prompt: options.prompt,
@@ -82,6 +86,7 @@ export async function generateImage(
 
   // Save to S3
   const { url } = await storagePut(
+    identity,
     `generated/${Date.now()}.png`,
     buffer,
     result.image.mimeType

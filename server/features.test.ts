@@ -35,7 +35,7 @@ describe("leads.subscribe", () => {
   beforeEach(() => vi.clearAllMocks());
 
   it("returns success: true for a new email", async () => {
-    vi.mocked(insertLead).mockResolvedValue({ success: true, duplicate: false });
+    vi.mocked(insertLead).mockResolvedValue({ success: true, duplicate: false, id: 101 });
 
     const caller = appRouter.createCaller(buildCtx());
     const result = await caller.leads.subscribe({ email: "test@jceelabs.com", source: "homepage" });

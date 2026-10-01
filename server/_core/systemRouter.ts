@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { notifyOwner } from "./notification";
 import { adminProcedure, publicProcedure, router } from "./trpc";
 
 export const systemRouter = router({
@@ -20,10 +19,10 @@ export const systemRouter = router({
         content: z.string().min(1, "content is required"),
       })
     )
-    .mutation(async ({ input }) => {
-      const delivered = await notifyOwner(input);
-      return {
-        success: delivered,
-      } as const;
+    .mutation(async () => {
+      throw new Error(
+        "AUTHORITY_IDENTITY_UNAVAILABLE: direct admin notification " +
+        "requires a durable authority receipt"
+      );
     }),
 });
