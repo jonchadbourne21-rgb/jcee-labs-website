@@ -1,3 +1,4 @@
+import BB84PublicPreprint from "@/components/BB84PublicPreprint";
 import BuildStatusList from "@/components/BuildStatusList";
 import EditorialLayout from "@/components/EditorialLayout";
 import {
@@ -46,10 +47,11 @@ export default function ResearchPage() {
           <a href="/registry">View all public milestones ↗</a>
         </div>
         <p className="editorial-intro">
-          These are JCEE-authored publications. Technical reports, research
-          briefs, and governance standards are labeled separately; none is
-          presented as peer-reviewed certification.
+          These are JCEE-authored publications. Public preprints, technical
+          reports, research briefs, and governance standards are labeled
+          separately; none is presented as peer-reviewed certification.
         </p>
+        <BB84PublicPreprint />
         <div className="resource-grid">
           {publications
             .filter(p => isResearch(p))
