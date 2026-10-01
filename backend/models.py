@@ -1,6 +1,7 @@
 """Request contracts and controlled operational enums for the claims API."""
 from __future__ import annotations
 
+import base64
 from datetime import datetime
 from enum import Enum
 from typing import Annotated, Any
@@ -93,6 +94,25 @@ class EvidenceInput(StrictModel):
                 return EvidenceMediaType.IMAGE
             if normalized.startswith("VIDEO"):
                 return EvidenceMediaType.VIDEO
+        return value
+
+
+class EvidenceUploadRequest(StrictModel):
+    filename: str = Field(min_length=1, max_length=255)
+    media_type: str = Field(min_length=1, max_length=100)
+    content_base64: str = Field(min_length=1, max_length=40_000_000)
+
+    @field_validator("content_base64")
+    @classmethod
+    def valid_base64(cls, value: str) -> str:
+        try:
+            decoded = base64.b64decode(value, validate=True)
+        except ValueError as exc:
+            raise ValueError("content_base64 must be valid base64") from exc
+        if not decoded:
+            raise ValueError("Evidence content cannot be empty")
+        if len(decoded) > 25 * 1024 * 1024:
+            raise ValueError("Evidence content exceeds the 25 MB limit")
         return value
 
 

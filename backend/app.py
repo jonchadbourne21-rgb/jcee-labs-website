@@ -1,6 +1,7 @@
 """FastAPI service for the autonomous AI property claims prototype."""
 from __future__ import annotations
 
+import base64
 import copy
 import os
 import uuid
@@ -12,12 +13,15 @@ from fastapi import FastAPI, HTTPException, Query, Response, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 
+from backend.auth import principal_from_request
+from backend.config import Settings, get_settings
 from backend.models import (
     AnalyzeRequest,
     ApprovalDecision,
     ApprovalRequest,
     AssignmentRequest,
     DemoResetRequest,
+    EvidenceUploadRequest,
     HomeownerSubmission,
     NoteCreateRequest,
     PaymentAction,
@@ -27,6 +31,8 @@ from backend.models import (
     WorkflowStatus,
     WorkflowStatusRequest,
 )
+from backend.object_storage import evidence_store
+from backend.payments import PaymentInstruction, payment_provider
 from backend.pricing import (
     compute_claim_estimate,
     recompute_adjusted_estimate,
@@ -46,7 +52,8 @@ from backend.product import (
     team_member,
     team_workload,
 )
-from backend.storage import ClaimsRepository
+from backend.repositories import claims_repository
+from backend.security import SecurityMiddleware
 from backend.vow_assurance import (
     VowAssuranceError,
     VowPolicyDenied,
@@ -245,12 +252,19 @@ def create_app(
     data_file: str | Path | None = None,
     allowed_origins: list[str] | None = None,
     vow_data_dir: str | Path | None = None,
+    settings: Settings | None = None,
 ) -> FastAPI:
     """Create the application. ``data_file`` exists to support isolated deployments/tests."""
+    resolved_settings = settings or get_settings()
     resolved_data_file = data_file or os.getenv("CLAIMS_DATA_FILE") or DEFAULT_DATA_FILE
     resolved_vow_data_dir = Path(vow_data_dir).expanduser().resolve() if vow_data_dir else default_data_dir()
     origins = allowed_origins or [origin.strip() for origin in os.getenv("CLAIMS_ALLOWED_ORIGINS", DEFAULT_ALLOWED_ORIGINS).split(",") if origin.strip()]
-    repository = ClaimsRepository(resolved_data_file)
+    repository = claims_repository(resolved_settings, resolved_data_file)
+    provider = payment_provider(resolved_settings)
+    evidence_repository = evidence_store(
+        resolved_settings,
+        Path(os.getenv("CLAIMS_EVIDENCE_DIR", str(Path(__file__).with_name(".data") / "evidence"))),
+    )
     vow_integrity = verify_frozen_core()
 
     application = FastAPI(
@@ -265,10 +279,18 @@ def create_app(
         allow_methods=["GET", "POST", "OPTIONS"],
         allow_headers=["Content-Type", "Authorization"],
     )
+    application.add_middleware(
+        SecurityMiddleware,
+        settings=resolved_settings,
+        principal_resolver=lambda request: principal_from_request(request, resolved_settings),
+    )
     application.state.repository = repository
     application.state.data_file = str(Path(resolved_data_file).expanduser())
     application.state.vow_data_dir = str(resolved_vow_data_dir)
     application.state.vow_integrity = vow_integrity
+    application.state.settings = resolved_settings
+    application.state.payment_provider = provider
+    application.state.evidence_store = evidence_repository
 
     def prepare_mutation(claim: dict[str, Any]) -> None:
         """Persist defaults before operating on a legacy dossier in place."""
@@ -283,6 +305,10 @@ def create_app(
                 status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
                 detail=f"User {user_id} is not a {expected_role}",
             )
+        if resolved_settings.auth_mode != "demo":
+            from backend.tenant_context import current_actor_id
+            if user_id != current_actor_id():
+                raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Actor must match authenticated principal")
 
     def update_claim_metadata(claim: dict[str, Any], now: str) -> None:
         claim["updated_at"] = now
@@ -301,6 +327,7 @@ def create_app(
             "service": "ai-property-claims-api",
             "timestamp": utc_now(),
             "claim_count": repository.count(),
+            "configuration": resolved_settings.redacted(),
             "vow": {
                 "status": vow_integrity["status"],
                 "version": vow_integrity["version"],
@@ -527,33 +554,87 @@ def create_app(
                 estimate = claim.get("estimate")
                 if not isinstance(estimate, dict):
                     raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="An approved estimate is required for payment scheduling")
+                payment_instruction = provider.schedule(
+                    claim_id=claim_id,
+                    amount=float(estimate["net_payout"]),
+                    currency="USD",
+                    method=request.method.value,
+                    idempotency_key=f"claim-payment:{claim_id}:v1",
+                )
                 instruction = {
                     "status": "SCHEDULED",
-                    "instruction_id": f"PMT_{claim_id}_V1",
+                    "instruction_id": payment_instruction.provider_id,
                     "method": request.method.value,
-                    "amount": estimate["net_payout"],
-                    "currency": "USD",
+                    "amount": payment_instruction.amount,
+                    "currency": payment_instruction.currency,
                     "scheduled_at": now,
                     "sent_at": None,
                     "actor_id": request.actor_id,
-                    "mock": True,
+                    "mock": payment_instruction.mock,
                 }
                 claim["payment"] = instruction
+                claim["payment_provider"] = payment_instruction.provider
+                claim["payment_idempotency_key"] = payment_instruction.idempotency_key
                 claim["status"] = WorkflowStatus.PAYMENT_SCHEDULED.value
                 update_claim_metadata(claim, now)
-                append_event(claim, "PAYMENT_SCHEDULED", now, request.actor_id, {"instruction_id": instruction["instruction_id"], "method": instruction["method"], "amount": instruction["amount"], "mock": True})
+                append_event(claim, "PAYMENT_SCHEDULED", now, request.actor_id, {"instruction_id": instruction["instruction_id"], "method": instruction["method"], "amount": instruction["amount"], "provider": payment_instruction.provider, "mock": instruction["mock"]})
             else:
                 if claim["status"] != WorkflowStatus.PAYMENT_SCHEDULED.value or claim["payment"].get("status") != "SCHEDULED":
                     raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Payment must be scheduled before it can be marked sent")
+                provider_instruction = PaymentInstruction(
+                    provider=str(claim.get("payment_provider", "mock")),
+                    provider_id=str(claim["payment"].get("instruction_id")),
+                    idempotency_key=str(claim.get("payment_idempotency_key", f"claim-payment:{claim_id}:v1")),
+                    amount=float(claim["payment"].get("amount", 0)),
+                    currency=str(claim["payment"].get("currency", "USD")),
+                    status="SCHEDULED",
+                    mock=bool(claim["payment"].get("mock", True)),
+                )
+                provider.mark_sent(instruction=provider_instruction)
                 claim["payment"]["status"] = "SENT"
                 claim["payment"]["sent_at"] = now
                 claim["payment"]["actor_id"] = request.actor_id
                 claim["status"] = WorkflowStatus.PAID.value
                 update_claim_metadata(claim, now)
-                append_event(claim, "PAYMENT_MARKED_SENT", now, request.actor_id, {"instruction_id": claim["payment"].get("instruction_id"), "mock": True})
+                append_event(claim, "PAYMENT_MARKED_SENT", now, request.actor_id, {"instruction_id": claim["payment"].get("instruction_id"), "provider": claim.get("payment_provider", "mock"), "mock": claim["payment"].get("mock", True)})
             return serialize_dossier(claim)
 
         outcome = repository.mutate(claim_id, payment)
+        if outcome is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Claim not found")
+        return outcome
+
+    @application.post("/api/claims/{claim_id}/evidence", status_code=status.HTTP_201_CREATED)
+    def upload_evidence(claim_id: str, request: EvidenceUploadRequest) -> dict[str, Any]:
+        claim = repository.get(claim_id)
+        if claim is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Claim not found")
+        try:
+            stored = evidence_repository.put(
+                tenant_id=str(claim.get("tenant_id", "TENANT_DEMO")),
+                claim_id=claim_id,
+                filename=request.filename,
+                content=base64.b64decode(request.content_base64, validate=True),
+                media_type=request.media_type,
+            )
+        except (ValueError, PermissionError) as exc:
+            raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_CONTENT, detail=str(exc)) from exc
+
+        def append_evidence(current: dict[str, Any]) -> dict[str, Any]:
+            now = utc_now()
+            current.setdefault("evidence", []).append({
+                "media_url": stored.object_key,
+                "media_type": stored.media_type,
+                "file_name": request.filename,
+                "content_sha256": stored.content_sha256,
+                "byte_size": stored.byte_size,
+                "captured_at": now,
+            })
+            update_claim_metadata(current, now)
+            append_event(current, "EVIDENCE_UPLOADED", now, "AUTHENTICATED_PRINCIPAL", {"object_key": stored.object_key, "byte_size": stored.byte_size, "content_sha256": stored.content_sha256})
+            return serialize_dossier(current)
+
+        outcome = repository.mutate(claim_id, append_evidence)
         if outcome is None:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Claim not found")
         return outcome

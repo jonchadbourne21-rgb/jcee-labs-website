@@ -10,7 +10,10 @@ from collections.abc import Callable
 from pathlib import Path
 from typing import Any, TypeVar
 
+from backend.tenant_context import current_tenant_id
+
 T = TypeVar("T")
+_DEFAULT_TENANT = "TENANT_DEMO"
 
 
 class ClaimsRepository:
@@ -69,40 +72,46 @@ class ClaimsRepository:
             if temporary_path.exists():
                 temporary_path.unlink(missing_ok=True)
 
-    def create(self, claim: dict[str, Any]) -> dict[str, Any]:
+    def create(self, claim: dict[str, Any], tenant_id: str | None = None) -> dict[str, Any]:
         claim_id = claim["claim_id"]
+        tenant = tenant_id or claim.get("tenant_id") or current_tenant_id()
         with self._lock:
-            if claim_id in self._claims:
+            if tenant != _DEFAULT_TENANT or "tenant_id" in claim:
+                claim["tenant_id"] = tenant
+            if claim_id in self._claims and self._claims[claim_id].get("tenant_id", _DEFAULT_TENANT) == tenant:
                 raise KeyError(claim_id)
             self._claims[claim_id] = copy.deepcopy(claim)
             self._write_unlocked()
             return copy.deepcopy(self._claims[claim_id])
 
-    def get(self, claim_id: str) -> dict[str, Any] | None:
+    def get(self, claim_id: str, tenant_id: str | None = None) -> dict[str, Any] | None:
+        tenant = tenant_id or current_tenant_id()
         with self._lock:
             claim = self._claims.get(claim_id)
-            return copy.deepcopy(claim) if claim is not None else None
+            return copy.deepcopy(claim) if claim is not None and claim.get("tenant_id", _DEFAULT_TENANT) == tenant else None
 
-    def list(self) -> list[dict[str, Any]]:
+    def list(self, tenant_id: str | None = None) -> list[dict[str, Any]]:
         """Return defensive dossier copies ordered by newest update first.
 
         ISO 8601 timestamps with the product's required ``Z`` suffix sort
         lexicographically. Legacy claims without an update use their creation
         time, and malformed/missing timestamps safely settle at the end.
         """
+        tenant = tenant_id or current_tenant_id()
         with self._lock:
             ordered = sorted(
-                self._claims.values(),
+                (claim for claim in self._claims.values() if claim.get("tenant_id", _DEFAULT_TENANT) == tenant),
                 key=lambda claim: str(claim.get("updated_at") or claim.get("created_at") or ""),
                 reverse=True,
             )
             return copy.deepcopy(ordered)
 
-    def mutate(self, claim_id: str, mutator: Callable[[dict[str, Any]], T]) -> T | None:
+    def mutate(self, claim_id: str, mutator: Callable[[dict[str, Any]], T], tenant_id: str | None = None) -> T | None:
         """Run a mutation atomically; return ``None`` only when the claim is absent."""
+        tenant = tenant_id or current_tenant_id()
         with self._lock:
             current = self._claims.get(claim_id)
-            if current is None:
+            if current is None or current.get("tenant_id", _DEFAULT_TENANT) != tenant:
                 return None
             working = copy.deepcopy(current)
             result = mutator(working)
@@ -110,14 +119,21 @@ class ClaimsRepository:
             self._write_unlocked()
             return copy.deepcopy(result)
 
-    def replace(self, claim: dict[str, Any]) -> dict[str, Any]:
+    def replace(self, claim: dict[str, Any], tenant_id: str | None = None) -> dict[str, Any]:
         """Upsert a complete claim document, primarily for deterministic demos."""
         claim_id = claim["claim_id"]
+        tenant = tenant_id or claim.get("tenant_id") or current_tenant_id()
+        if tenant != _DEFAULT_TENANT or "tenant_id" in claim:
+            claim["tenant_id"] = tenant
         with self._lock:
+            current = self._claims.get(claim_id)
+            if current is not None and current.get("tenant_id", _DEFAULT_TENANT) != tenant:
+                raise KeyError(claim_id)
             self._claims[claim_id] = copy.deepcopy(claim)
             self._write_unlocked()
             return copy.deepcopy(self._claims[claim_id])
 
-    def count(self) -> int:
+    def count(self, tenant_id: str | None = None) -> int:
+        tenant = tenant_id or current_tenant_id()
         with self._lock:
-            return len(self._claims)
+            return sum(1 for claim in self._claims.values() if claim.get("tenant_id", _DEFAULT_TENANT) == tenant)
