@@ -1,6 +1,7 @@
 """Private evidence storage adapters."""
 from __future__ import annotations
 
+import base64
 import hashlib
 import mimetypes
 import re
@@ -13,6 +14,7 @@ from backend.config import Settings
 
 _SAFE_NAME = re.compile(r"[^A-Za-z0-9._-]+")
 _ALLOWED_TYPES = {"image/jpeg", "image/png", "image/webp", "video/mp4", "application/pdf"}
+_MAX_SCOPE_BYTES = 256
 
 
 @dataclass(frozen=True)
@@ -24,17 +26,52 @@ class StoredEvidence:
 
 
 class EvidenceStore(Protocol):
-    def put(self, *, tenant_id: str, claim_id: str, filename: str, content: bytes, media_type: str | None = None) -> StoredEvidence: ...
-    def signed_url(self, *, tenant_id: str, object_key: str, expires_in: int) -> str: ...
+    def put(
+        self,
+        *,
+        tenant_id: str,
+        claim_id: str,
+        filename: str,
+        content: bytes,
+        media_type: str | None = None,
+    ) -> StoredEvidence: ...
+
+    def signed_url(
+        self,
+        *,
+        tenant_id: str,
+        claim_id: str,
+        object_key: str,
+        expires_in: int,
+    ) -> str: ...
+
+
+def _scope_segment(value: str, *, label: str) -> str:
+    """Encode identity losslessly into a path-safe component.
+
+    Do not normalize, truncate, or replace identity characters: authorization
+    scope must remain one-to-one with the authenticated tenant/claim value.
+    """
+    if not isinstance(value, str) or not value:
+        raise ValueError(f"Evidence {label} is invalid")
+    raw = value.encode("utf-8")
+    if len(raw) > _MAX_SCOPE_BYTES:
+        raise ValueError(f"Evidence {label} exceeds {_MAX_SCOPE_BYTES} UTF-8 bytes")
+    return base64.urlsafe_b64encode(raw).rstrip(b"=").decode("ascii")
+
+
+def evidence_scope_prefix(tenant_id: str, claim_id: str) -> str:
+    return (
+        f"tenants/{_scope_segment(tenant_id, label='tenant_id')}/"
+        f"claims/{_scope_segment(claim_id, label='claim_id')}/"
+    )
 
 
 def object_key(tenant_id: str, claim_id: str, filename: str) -> str:
-    clean_tenant = _SAFE_NAME.sub("-", tenant_id).strip(".-")[:80]
-    clean_claim = _SAFE_NAME.sub("-", claim_id).strip(".-")[:80]
     clean_name = _SAFE_NAME.sub("-", Path(filename).name).strip(".-")[:160]
-    if not clean_tenant or not clean_claim or not clean_name:
-        raise ValueError("Evidence filename or scope is invalid")
-    return f"tenants/{clean_tenant}/claims/{clean_claim}/{uuid.uuid4().hex}-{clean_name}"
+    if not clean_name:
+        raise ValueError("Evidence filename is invalid")
+    return f"{evidence_scope_prefix(tenant_id, claim_id)}{uuid.uuid4().hex}-{clean_name}"
 
 
 def validate_media(content: bytes, filename: str, media_type: str | None) -> str:
@@ -52,39 +89,91 @@ class LocalEvidenceStore:
     def __init__(self, root: str | Path) -> None:
         self.root = Path(root).expanduser().resolve()
 
-    def put(self, *, tenant_id: str, claim_id: str, filename: str, content: bytes, media_type: str | None = None) -> StoredEvidence:
+    def put(
+        self,
+        *,
+        tenant_id: str,
+        claim_id: str,
+        filename: str,
+        content: bytes,
+        media_type: str | None = None,
+    ) -> StoredEvidence:
         resolved_type = validate_media(content, filename, media_type)
         key = object_key(tenant_id, claim_id, filename)
-        destination = self.root / key
+        destination = (self.root / key).resolve()
+        try:
+            destination.relative_to(self.root)
+        except ValueError as exc:
+            raise PermissionError("Evidence destination is outside the configured root") from exc
         destination.parent.mkdir(parents=True, exist_ok=True)
         destination.write_bytes(content)
         return StoredEvidence(key, hashlib.sha256(content).hexdigest(), len(content), resolved_type)
 
-    def signed_url(self, *, tenant_id: str, object_key: str, expires_in: int) -> str:
-        path = (self.root / object_key).resolve()
-        if not str(path).startswith(str(self.root)) or not path.is_file():
-            raise FileNotFoundError(object_key)
-        return f"/api/evidence/local/{object_key}?tenant_id={tenant_id}&expires_in={expires_in}"
+    def signed_url(
+        self,
+        *,
+        tenant_id: str,
+        claim_id: str,
+        object_key: str,
+        expires_in: int,
+    ) -> str:
+        # Local demo files currently have no authenticated evidence-download
+        # endpoint. Refuse to manufacture a URL that only looks signed.
+        raise NotImplementedError("Local evidence delivery requires an authenticated proxy")
 
 
 class S3EvidenceStore:
     def __init__(self, settings: Settings) -> None:
         import boto3
+
         self.bucket = settings.storage_bucket
-        self.client = boto3.client("s3", endpoint_url=settings.storage_endpoint, region_name=settings.storage_region, aws_access_key_id=settings.storage_access_key_id, aws_secret_access_key=settings.storage_secret_access_key)
+        self.client = boto3.client(
+            "s3",
+            endpoint_url=settings.storage_endpoint,
+            region_name=settings.storage_region,
+            aws_access_key_id=settings.storage_access_key_id,
+            aws_secret_access_key=settings.storage_secret_access_key,
+        )
         self.ttl = settings.evidence_url_ttl_seconds
 
-    def put(self, *, tenant_id: str, claim_id: str, filename: str, content: bytes, media_type: str | None = None) -> StoredEvidence:
+    def put(
+        self,
+        *,
+        tenant_id: str,
+        claim_id: str,
+        filename: str,
+        content: bytes,
+        media_type: str | None = None,
+    ) -> StoredEvidence:
         resolved_type = validate_media(content, filename, media_type)
         key = object_key(tenant_id, claim_id, filename)
-        self.client.put_object(Bucket=self.bucket, Key=key, Body=content, ContentType=resolved_type, ServerSideEncryption="AES256")
+        self.client.put_object(
+            Bucket=self.bucket,
+            Key=key,
+            Body=content,
+            ContentType=resolved_type,
+            ServerSideEncryption="AES256",
+        )
         return StoredEvidence(key, hashlib.sha256(content).hexdigest(), len(content), resolved_type)
 
-    def signed_url(self, *, tenant_id: str, object_key: str, expires_in: int) -> str:
-        expected_prefix = f"tenants/{_SAFE_NAME.sub('-', tenant_id).strip('.-')}/"
+    def signed_url(
+        self,
+        *,
+        tenant_id: str,
+        claim_id: str,
+        object_key: str,
+        expires_in: int,
+    ) -> str:
+        expected_prefix = evidence_scope_prefix(tenant_id, claim_id)
         if not object_key.startswith(expected_prefix):
-            raise PermissionError("Evidence object is outside the tenant scope")
-        return self.client.generate_presigned_url("get_object", Params={"Bucket": self.bucket, "Key": object_key}, ExpiresIn=min(expires_in, self.ttl))
+            raise PermissionError("Evidence object is outside the authorized tenant/claim scope")
+        if expires_in <= 0:
+            raise ValueError("Evidence URL expiry must be positive")
+        return self.client.generate_presigned_url(
+            "get_object",
+            Params={"Bucket": self.bucket, "Key": object_key},
+            ExpiresIn=min(expires_in, self.ttl),
+        )
 
 
 def evidence_store(settings: Settings, root: str | Path) -> EvidenceStore:

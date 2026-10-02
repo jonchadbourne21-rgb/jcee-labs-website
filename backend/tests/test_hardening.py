@@ -3,7 +3,7 @@ from __future__ import annotations
 import pytest
 
 from backend.config import ConfigurationError, Settings
-from backend.object_storage import LocalEvidenceStore
+from backend.object_storage import LocalEvidenceStore, S3EvidenceStore, evidence_scope_prefix
 from backend.payments import MockPaymentProvider, payment_provider
 from backend.storage import ClaimsRepository
 from backend.tenant_context import bind_request
@@ -34,7 +34,7 @@ def test_json_repository_cannot_cross_tenant_read_or_mutate(tmp_path) -> None:
 def test_local_evidence_store_scopes_keys_and_rejects_unsafe_content(tmp_path) -> None:
     store = LocalEvidenceStore(tmp_path)
     stored = store.put(tenant_id="TENANT_A", claim_id="CLM_1", filename="../kitchen.jpg", content=b"jpeg", media_type="image/jpeg")
-    assert stored.object_key.startswith("tenants/TENANT_A/claims/CLM_1/")
+    assert stored.object_key.startswith(evidence_scope_prefix("TENANT_A", "CLM_1"))
     assert (tmp_path / stored.object_key).read_bytes() == b"jpeg"
     with pytest.raises(ValueError):
         store.put(tenant_id="TENANT_A", claim_id="CLM_1", filename="secret.exe", content=b"x", media_type="application/octet-stream")
@@ -141,3 +141,86 @@ def test_postgres_explicit_tenant_cannot_override_authenticated_tenant() -> None
     with bind_request(tenant_id="TENANT_A", actor_id="actor", request_id="r1"):
         with pytest.raises(PermissionError, match="conflicts with authenticated request tenant"):
             repository.get("CLM_1", tenant_id="TENANT_B")
+
+
+
+class _FakeS3Client:
+    def __init__(self) -> None:
+        self.calls: list[tuple[str, dict, int]] = []
+
+    def generate_presigned_url(self, operation: str, *, Params: dict, ExpiresIn: int) -> str:
+        self.calls.append((operation, Params, ExpiresIn))
+        return f"https://signed.example/{Params['Key']}"
+
+
+def _fake_s3_store(ttl: int = 300) -> S3EvidenceStore:
+    store = object.__new__(S3EvidenceStore)
+    store.bucket = "private-evidence"
+    store.client = _FakeS3Client()
+    store.ttl = ttl
+    return store
+
+
+def test_evidence_scope_encoding_is_lossless_and_collision_resistant() -> None:
+    slash = evidence_scope_prefix("tenant/a", "claim:1")
+    colon = evidence_scope_prefix("tenant:a", "claim:1")
+    assert slash != colon
+    assert "/" not in slash.removeprefix("tenants/").split("/claims/", 1)[0]
+    long_tenant = "tenant-" + ("x" * 180)
+    long_prefix = evidence_scope_prefix(long_tenant, "CLM_LONG")
+    assert long_prefix.startswith("tenants/")
+    assert long_prefix.endswith("/claims/Q0xNX0xPTkc/")
+
+
+def test_s3_signed_url_requires_exact_tenant_and_claim_scope() -> None:
+    store = _fake_s3_store(ttl=120)
+    key = f"{evidence_scope_prefix('tenant/a', 'CLM_1')}evidence.jpg"
+
+    signed = store.signed_url(
+        tenant_id="tenant/a",
+        claim_id="CLM_1",
+        object_key=key,
+        expires_in=999,
+    )
+    assert signed.endswith(key)
+    assert store.client.calls[-1][2] == 120
+
+    with pytest.raises(PermissionError):
+        store.signed_url(
+            tenant_id="tenant:a",
+            claim_id="CLM_1",
+            object_key=key,
+            expires_in=60,
+        )
+    with pytest.raises(PermissionError):
+        store.signed_url(
+            tenant_id="tenant/a",
+            claim_id="CLM_2",
+            object_key=key,
+            expires_in=60,
+        )
+    with pytest.raises(ValueError):
+        store.signed_url(
+            tenant_id="tenant/a",
+            claim_id="CLM_1",
+            object_key=key,
+            expires_in=0,
+        )
+
+
+def test_local_evidence_store_refuses_fake_signed_delivery(tmp_path) -> None:
+    store = LocalEvidenceStore(tmp_path)
+    key = store.put(
+        tenant_id="TENANT_A",
+        claim_id="CLM_1",
+        filename="inspection.jpg",
+        content=b"jpeg",
+        media_type="image/jpeg",
+    ).object_key
+    with pytest.raises(NotImplementedError, match="authenticated proxy"):
+        store.signed_url(
+            tenant_id="TENANT_A",
+            claim_id="CLM_1",
+            object_key=key,
+            expires_in=60,
+        )

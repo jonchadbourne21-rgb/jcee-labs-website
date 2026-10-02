@@ -11,6 +11,7 @@ from fastapi.testclient import TestClient
 
 from backend.app import create_app
 from backend.config import Settings
+from backend.object_storage import evidence_scope_prefix
 
 
 def jwt(payload: dict, secret: str) -> str:
@@ -40,7 +41,7 @@ def test_evidence_upload_uses_private_local_store(tmp_path: Path) -> None:
         response = client.post(f"/api/claims/{claim_id}/evidence", json={"filename": "inspection.jpg", "media_type": "image/jpeg", "content_base64": base64.b64encode(b"jpeg").decode()})
     assert response.status_code == 201
     uploaded = response.json()["evidence"][-1]
-    assert uploaded["media_url"].startswith("tenants/TENANT_DEMO/claims/")
+    assert uploaded["media_url"].startswith(evidence_scope_prefix("TENANT_DEMO", claim_id))
     assert uploaded["content_sha256"] == hashlib.sha256(b"jpeg").hexdigest()
 
 
