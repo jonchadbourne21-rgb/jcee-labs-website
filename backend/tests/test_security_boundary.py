@@ -58,3 +58,163 @@ def test_jwt_mode_requires_mfa_and_binds_tenant(tmp_path: Path) -> None:
         response = client.get("/health", headers={"Authorization": f"Bearer {verified}"})
     assert response.status_code == 200
     assert response.json()["claim_count"] == 0
+
+
+def auth_headers(payload: dict, secret: str) -> dict[str, str]:
+    return {"Authorization": f"Bearer {jwt(payload, secret)}"}
+
+
+def test_jwt_roles_fail_closed_before_sensitive_mutations(tmp_path: Path) -> None:
+    secret = "hardening-test-secret"
+    settings = Settings(environment="test", auth_mode="jwt", jwt_secret=secret)
+    app = create_app(tmp_path / "claims.json", vow_data_dir=tmp_path / "vow", settings=settings)
+    no_role = {
+        "sub": "USR_FINANCE_01",
+        "tenant_id": "TENANT_A",
+        "roles": [],
+        "amr": ["pwd", "mfa"],
+        "exp": time.time() + 60,
+    }
+    headers = auth_headers(no_role, secret)
+    with TestClient(app) as client:
+        created = client.post(
+            "/api/claims/submit",
+            json={"incident_description": "Water loss", "zip_code": "75201", "evidence": []},
+            headers=headers,
+        )
+        assert created.status_code == 201
+        claim_id = created.json()["claim_id"]
+        assert client.post("/api/demo/reset", json={}, headers=headers).status_code == 403
+        assert client.post(
+            f"/api/claims/{claim_id}/assign",
+            json={"field_adjuster_id": "USR_FIELD_01"},
+            headers=headers,
+        ).status_code == 403
+        assert client.post(
+            f"/api/claims/{claim_id}/payment",
+            json={"action": "SCHEDULE", "actor_id": "USR_FINANCE_01"},
+            headers=headers,
+        ).status_code == 403
+        assert client.post(
+            f"/api/claims/{claim_id}/evidence",
+            json={
+                "filename": "inspection.jpg",
+                "media_type": "image/jpeg",
+                "content_base64": base64.b64encode(b"jpeg").decode(),
+            },
+            headers=headers,
+        ).status_code == 403
+
+
+def test_jwt_program_admin_can_assign_another_team_member_without_impersonation(tmp_path: Path) -> None:
+    secret = "hardening-test-secret"
+    settings = Settings(environment="test", auth_mode="jwt", jwt_secret=secret)
+    app = create_app(tmp_path / "claims.json", vow_data_dir=tmp_path / "vow", settings=settings)
+    admin = {
+        "sub": "USR_ADMIN_01",
+        "tenant_id": "TENANT_A",
+        "roles": ["PROGRAM_ADMINISTRATOR"],
+        "amr": ["pwd", "mfa"],
+        "exp": time.time() + 60,
+    }
+    headers = auth_headers(admin, secret)
+    with TestClient(app) as client:
+        created = client.post(
+            "/api/claims/submit",
+            json={"incident_description": "Water loss", "zip_code": "75201", "evidence": []},
+            headers=headers,
+        )
+        claim_id = created.json()["claim_id"]
+        assigned = client.post(
+            f"/api/claims/{claim_id}/assign",
+            json={"field_adjuster_id": "USR_FIELD_01"},
+            headers=headers,
+        )
+    assert assigned.status_code == 200, assigned.json()
+    assert assigned.json()["assignments"]["field_adjuster_id"] == "USR_FIELD_01"
+    assert assigned.json()["audit_history"][-1]["actor"] == "USR_ADMIN_01"
+
+
+def test_jwt_rejects_forged_note_actor_and_uses_verified_principal(tmp_path: Path) -> None:
+    secret = "hardening-test-secret"
+    settings = Settings(environment="test", auth_mode="jwt", jwt_secret=secret)
+    app = create_app(tmp_path / "claims.json", vow_data_dir=tmp_path / "vow", settings=settings)
+    desk = {
+        "sub": "USR_DESK_01",
+        "tenant_id": "TENANT_A",
+        "roles": ["DESK_ADJUSTER"],
+        "amr": ["pwd", "mfa"],
+        "exp": time.time() + 60,
+    }
+    headers = auth_headers(desk, secret)
+    with TestClient(app) as client:
+        created = client.post(
+            "/api/claims/submit",
+            json={"incident_description": "Water loss", "zip_code": "75201", "evidence": []},
+            headers=headers,
+        )
+        claim_id = created.json()["claim_id"]
+        forged = client.post(
+            f"/api/claims/{claim_id}/notes",
+            json={"author_id": "USR_FIELD_01", "body": "forged"},
+            headers=headers,
+        )
+        accepted = client.post(
+            f"/api/claims/{claim_id}/notes",
+            json={"author_id": "USR_DESK_01", "body": "verified"},
+            headers=headers,
+        )
+    assert forged.status_code == 403
+    assert accepted.status_code == 200, accepted.json()
+    assert accepted.json()["notes"][-1]["author_id"] == "USR_DESK_01"
+    assert accepted.json()["audit_history"][-1]["actor"] == "USR_DESK_01"
+
+
+def test_jwt_review_role_is_distinct_from_settlement_approval_role(tmp_path: Path) -> None:
+    secret = "hardening-test-secret"
+    settings = Settings(environment="test", auth_mode="jwt", jwt_secret=secret)
+    app = create_app(tmp_path / "claims.json", vow_data_dir=tmp_path / "vow", settings=settings)
+    admin = {
+        "sub": "USR_ADMIN_01",
+        "tenant_id": "TENANT_A",
+        "roles": ["PROGRAM_ADMINISTRATOR"],
+        "amr": ["pwd", "mfa"],
+        "exp": time.time() + 60,
+    }
+    desk = {
+        "sub": "USR_DESK_01",
+        "tenant_id": "TENANT_A",
+        "roles": ["DESK_ADJUSTER"],
+        "amr": ["pwd", "mfa"],
+        "exp": time.time() + 60,
+    }
+    with TestClient(app) as client:
+        created = client.post(
+            "/api/claims/submit",
+            json={
+                "incident_description": "Water loss",
+                "zip_code": "75201",
+                "evidence": [{"media_url": "https://example.test/a.jpg", "media_type": "IMAGE"}],
+            },
+            headers=auth_headers(admin, secret),
+        )
+        claim_id = created.json()["claim_id"]
+        analyzed = client.post(
+            f"/api/claims/{claim_id}/analyze",
+            json={},
+            headers=auth_headers(admin, secret),
+        )
+        assert analyzed.status_code == 200, analyzed.json()
+        saved = client.post(
+            f"/api/claims/{claim_id}/approve",
+            json={"decision": "SAVE_REVIEW", "adjuster_name": "Untrusted display name"},
+            headers=auth_headers(desk, secret),
+        )
+        denied = client.post(
+            f"/api/claims/{claim_id}/approve",
+            json={"decision": "APPROVE", "adjuster_name": "Untrusted display name"},
+            headers=auth_headers(desk, secret),
+        )
+    assert saved.status_code == 200, saved.json()
+    assert saved.json()["audit_history"][-1]["actor"] == "USR_DESK_01"
+    assert denied.status_code == 403

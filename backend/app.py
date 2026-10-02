@@ -54,6 +54,7 @@ from backend.product import (
 )
 from backend.repositories import claims_repository
 from backend.security import SecurityMiddleware
+from backend.tenant_context import current_actor_id, current_roles
 from backend.vow_assurance import (
     VowAssuranceError,
     VowPolicyDenied,
@@ -296,7 +297,8 @@ def create_app(
         """Persist defaults before operating on a legacy dossier in place."""
         claim.update(enrich_claim_defaults(claim))
 
-    def require_demo_user(user_id: str, expected_role: str | None = None) -> None:
+    def validate_team_member(user_id: str, expected_role: str | None = None) -> None:
+        """Validate an assignment/owner target without treating it as the caller identity."""
         user = team_member(user_id)
         if user is None:
             raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_CONTENT, detail=f"Unknown demo user: {user_id}")
@@ -305,10 +307,45 @@ def create_app(
                 status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
                 detail=f"User {user_id} is not a {expected_role}",
             )
-        if resolved_settings.auth_mode != "demo":
-            from backend.tenant_context import current_actor_id
-            if user_id != current_actor_id():
-                raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Actor must match authenticated principal")
+
+    def require_authenticated_actor(actor_id: str | None = None) -> str:
+        """Return the verified actor and reject client-side impersonation outside demo mode."""
+        if resolved_settings.auth_mode == "demo":
+            if actor_id is not None:
+                validate_team_member(actor_id)
+                return actor_id
+            return current_actor_id()
+        actor = current_actor_id()
+        if actor_id is not None and actor_id != actor:
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Actor must match authenticated principal")
+        return actor
+
+    def require_roles(*allowed_roles: str) -> None:
+        """Authorize from server-verified principal roles; demo mode keeps its role-switcher behavior."""
+        if resolved_settings.auth_mode == "demo":
+            return
+        principal_roles = set(current_roles())
+        if "PROGRAM_ADMIN" in principal_roles:
+            principal_roles.add("PROGRAM_ADMINISTRATOR")
+        if "ADMIN" in principal_roles or any(role in principal_roles for role in allowed_roles):
+            return
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Insufficient role for this operation")
+
+    def authenticated_author_role(author_id: str) -> str:
+        if resolved_settings.auth_mode == "demo":
+            author = team_member(author_id)
+            return author.role if author else "EXTERNAL"
+        principal_roles = set(current_roles())
+        if "PROGRAM_ADMIN" in principal_roles:
+            principal_roles.add("PROGRAM_ADMINISTRATOR")
+        operational = (
+            "PROGRAM_ADMINISTRATOR",
+            "SUPERVISOR",
+            "FINANCE",
+            "DESK_ADJUSTER",
+            "FIELD_ADJUSTER",
+        )
+        return next((role for role in operational if role in principal_roles), "AUTHENTICATED")
 
     def update_claim_metadata(claim: dict[str, Any], now: str) -> None:
         claim["updated_at"] = now
@@ -363,6 +400,8 @@ def create_app(
 
     @application.post("/api/demo/reset")
     def reset_demo(_request: DemoResetRequest) -> dict[str, Any]:
+        if resolved_settings.auth_mode != "demo":
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Demo reset is unavailable outside demo mode")
         claim = seed_demo_claim(repository, kitchen_water_vision_payload)
         return serialize_dossier(claim)
 
@@ -380,6 +419,7 @@ def create_app(
 
     @application.post("/api/claims/{claim_id}/analyze")
     def analyze_claim(claim_id: str, request: AnalyzeRequest | None = None) -> dict[str, Any]:
+        require_roles("DESK_ADJUSTER", "SUPERVISOR", "PROGRAM_ADMINISTRATOR")
         def analyze(claim: dict[str, Any]) -> dict[str, Any]:
             prepare_mutation(claim)
             if claim["status"] in {
@@ -425,18 +465,20 @@ def create_app(
 
     @application.post("/api/claims/{claim_id}/assign")
     def assign_claim(claim_id: str, request: AssignmentRequest) -> dict[str, Any]:
+        require_roles("PROGRAM_ADMINISTRATOR")
+        actor_id = require_authenticated_actor()
         def assign(claim: dict[str, Any]) -> dict[str, Any]:
             prepare_mutation(claim)
             changes: dict[str, str | None] = {}
             for field_name, required_role in ASSIGNMENT_ROLES.items():
                 user_id = getattr(request, field_name)
                 if user_id is not None:
-                    require_demo_user(user_id, required_role)
+                    validate_team_member(user_id, required_role)
                     claim["assignments"][field_name] = user_id
                     changes[field_name] = user_id
             now = utc_now()
             update_claim_metadata(claim, now)
-            append_event(claim, "CLAIM_ASSIGNED", now, "PROGRAM_ADMINISTRATOR", {"assignments": changes})
+            append_event(claim, "CLAIM_ASSIGNED", now, actor_id, {"assignments": changes})
             return serialize_dossier(claim)
 
         outcome = repository.mutate(claim_id, assign)
@@ -446,9 +488,11 @@ def create_app(
 
     @application.post("/api/claims/{claim_id}/tasks")
     def create_task(claim_id: str, request: TaskCreateRequest) -> dict[str, Any]:
+        require_roles("FIELD_ADJUSTER", "DESK_ADJUSTER", "SUPERVISOR", "PROGRAM_ADMINISTRATOR")
+        actor_id = require_authenticated_actor()
         def add_task(claim: dict[str, Any]) -> dict[str, Any]:
             prepare_mutation(claim)
-            require_demo_user(request.owner_id)
+            validate_team_member(request.owner_id)
             now = utc_now()
             task = {
                 "task_id": make_task_id(),
@@ -463,7 +507,7 @@ def create_app(
             }
             claim["tasks"].append(task)
             update_claim_metadata(claim, now)
-            append_event(claim, "TASK_CREATED", now, request.owner_id, {"task_id": task["task_id"], "priority": task["priority"]})
+            append_event(claim, "TASK_CREATED", now, actor_id, {"task_id": task["task_id"], "priority": task["priority"]})
             return serialize_dossier(claim)
 
         outcome = repository.mutate(claim_id, add_task)
@@ -473,9 +517,10 @@ def create_app(
 
     @application.post("/api/claims/{claim_id}/tasks/{task_id}/complete")
     def complete_task(claim_id: str, task_id: str, request: TaskCompletionRequest) -> dict[str, Any]:
+        require_roles("FIELD_ADJUSTER", "DESK_ADJUSTER", "SUPERVISOR", "PROGRAM_ADMINISTRATOR")
+        actor_id = require_authenticated_actor(request.actor_id)
         def complete(claim: dict[str, Any]) -> dict[str, Any]:
             prepare_mutation(claim)
-            require_demo_user(request.actor_id)
             task = next((item for item in claim["tasks"] if item.get("task_id") == task_id), None)
             if task is None:
                 raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Task not found")
@@ -484,9 +529,9 @@ def create_app(
             now = utc_now()
             task["status"] = "COMPLETED"
             task["completed_at"] = now
-            task["completed_by"] = request.actor_id
+            task["completed_by"] = actor_id
             update_claim_metadata(claim, now)
-            append_event(claim, "TASK_COMPLETED", now, request.actor_id, {"task_id": task_id})
+            append_event(claim, "TASK_COMPLETED", now, actor_id, {"task_id": task_id})
             return serialize_dossier(claim)
 
         outcome = repository.mutate(claim_id, complete)
@@ -496,21 +541,22 @@ def create_app(
 
     @application.post("/api/claims/{claim_id}/notes")
     def create_note(claim_id: str, request: NoteCreateRequest) -> dict[str, Any]:
+        require_roles("FIELD_ADJUSTER", "DESK_ADJUSTER", "SUPERVISOR", "PROGRAM_ADMINISTRATOR")
+        author_id = require_authenticated_actor(request.author_id)
         def add_note(claim: dict[str, Any]) -> dict[str, Any]:
             prepare_mutation(claim)
-            author = team_member(request.author_id)
             now = utc_now()
             note = {
                 "note_id": make_note_id(),
-                "author_id": request.author_id,
-                "author_role": author.role if author else "EXTERNAL",
+                "author_id": author_id,
+                "author_role": authenticated_author_role(author_id),
                 "body": request.body,
                 "visibility": request.visibility.value,
                 "created_at": now,
             }
             claim["notes"].append(note)
             update_claim_metadata(claim, now)
-            append_event(claim, "NOTE_ADDED", now, request.author_id, {"note_id": note["note_id"], "visibility": note["visibility"]})
+            append_event(claim, "NOTE_ADDED", now, author_id, {"note_id": note["note_id"], "visibility": note["visibility"]})
             return serialize_dossier(claim)
 
         outcome = repository.mutate(claim_id, add_note)
@@ -520,9 +566,10 @@ def create_app(
 
     @application.post("/api/claims/{claim_id}/status")
     def update_status(claim_id: str, request: WorkflowStatusRequest) -> dict[str, Any]:
+        require_roles("DESK_ADJUSTER", "SUPERVISOR", "PROGRAM_ADMINISTRATOR", "FINANCE")
+        actor_id = require_authenticated_actor(request.actor_id)
         def transition(claim: dict[str, Any]) -> dict[str, Any]:
             prepare_mutation(claim)
-            require_demo_user(request.actor_id)
             current_status = claim["status"]
             target_status = request.status.value
             permitted = CONTROLLED_STATUS_TRANSITIONS.get(current_status, frozenset())
@@ -534,7 +581,7 @@ def create_app(
             now = utc_now()
             claim["status"] = target_status
             update_claim_metadata(claim, now)
-            append_event(claim, "STATUS_CHANGED", now, request.actor_id, {"from": current_status, "to": target_status})
+            append_event(claim, "STATUS_CHANGED", now, actor_id, {"from": current_status, "to": target_status})
             return serialize_dossier(claim)
 
         outcome = repository.mutate(claim_id, transition)
@@ -544,9 +591,12 @@ def create_app(
 
     @application.post("/api/claims/{claim_id}/payment")
     def record_payment(claim_id: str, request: PaymentRequest) -> dict[str, Any]:
+        require_roles("FINANCE")
+        actor_id = require_authenticated_actor(request.actor_id)
+        if resolved_settings.auth_mode == "demo":
+            validate_team_member(actor_id, "FINANCE")
         def payment(claim: dict[str, Any]) -> dict[str, Any]:
             prepare_mutation(claim)
-            require_demo_user(request.actor_id, "FINANCE")
             now = utc_now()
             if request.action == PaymentAction.SCHEDULE:
                 if claim["status"] != WorkflowStatus.APPROVED.value:
@@ -569,7 +619,7 @@ def create_app(
                     "currency": payment_instruction.currency,
                     "scheduled_at": now,
                     "sent_at": None,
-                    "actor_id": request.actor_id,
+                    "actor_id": actor_id,
                     "mock": payment_instruction.mock,
                 }
                 claim["payment"] = instruction
@@ -577,7 +627,7 @@ def create_app(
                 claim["payment_idempotency_key"] = payment_instruction.idempotency_key
                 claim["status"] = WorkflowStatus.PAYMENT_SCHEDULED.value
                 update_claim_metadata(claim, now)
-                append_event(claim, "PAYMENT_SCHEDULED", now, request.actor_id, {"instruction_id": instruction["instruction_id"], "method": instruction["method"], "amount": instruction["amount"], "provider": payment_instruction.provider, "mock": instruction["mock"]})
+                append_event(claim, "PAYMENT_SCHEDULED", now, actor_id, {"instruction_id": instruction["instruction_id"], "method": instruction["method"], "amount": instruction["amount"], "provider": payment_instruction.provider, "mock": instruction["mock"]})
             else:
                 if claim["status"] != WorkflowStatus.PAYMENT_SCHEDULED.value or claim["payment"].get("status") != "SCHEDULED":
                     raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Payment must be scheduled before it can be marked sent")
@@ -593,10 +643,10 @@ def create_app(
                 provider.mark_sent(instruction=provider_instruction)
                 claim["payment"]["status"] = "SENT"
                 claim["payment"]["sent_at"] = now
-                claim["payment"]["actor_id"] = request.actor_id
+                claim["payment"]["actor_id"] = actor_id
                 claim["status"] = WorkflowStatus.PAID.value
                 update_claim_metadata(claim, now)
-                append_event(claim, "PAYMENT_MARKED_SENT", now, request.actor_id, {"instruction_id": claim["payment"].get("instruction_id"), "provider": claim.get("payment_provider", "mock"), "mock": claim["payment"].get("mock", True)})
+                append_event(claim, "PAYMENT_MARKED_SENT", now, actor_id, {"instruction_id": claim["payment"].get("instruction_id"), "provider": claim.get("payment_provider", "mock"), "mock": claim["payment"].get("mock", True)})
             return serialize_dossier(claim)
 
         outcome = repository.mutate(claim_id, payment)
@@ -606,6 +656,8 @@ def create_app(
 
     @application.post("/api/claims/{claim_id}/evidence", status_code=status.HTTP_201_CREATED)
     def upload_evidence(claim_id: str, request: EvidenceUploadRequest) -> dict[str, Any]:
+        require_roles("FIELD_ADJUSTER", "DESK_ADJUSTER", "SUPERVISOR", "PROGRAM_ADMINISTRATOR")
+        actor_id = require_authenticated_actor()
         claim = repository.get(claim_id)
         if claim is None:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Claim not found")
@@ -631,7 +683,7 @@ def create_app(
                 "captured_at": now,
             })
             update_claim_metadata(current, now)
-            append_event(current, "EVIDENCE_UPLOADED", now, "AUTHENTICATED_PRINCIPAL", {"object_key": stored.object_key, "byte_size": stored.byte_size, "content_sha256": stored.content_sha256})
+            append_event(current, "EVIDENCE_UPLOADED", now, actor_id, {"object_key": stored.object_key, "byte_size": stored.byte_size, "content_sha256": stored.content_sha256})
             return serialize_dossier(current)
 
         outcome = repository.mutate(claim_id, append_evidence)
@@ -641,6 +693,7 @@ def create_app(
 
     @application.get("/api/claims/{claim_id}/assurance/evidence")
     def download_assurance_evidence(claim_id: str) -> FileResponse:
+        require_roles("DESK_ADJUSTER", "SUPERVISOR", "PROGRAM_ADMINISTRATOR", "FINANCE")
         claim = repository.get(claim_id)
         if claim is None:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Claim not found")
@@ -657,6 +710,7 @@ def create_app(
 
     @application.get("/api/claims/{claim_id}/assurance/verify")
     def verify_assurance_evidence(claim_id: str) -> dict[str, Any]:
+        require_roles("DESK_ADJUSTER", "SUPERVISOR", "PROGRAM_ADMINISTRATOR", "FINANCE")
         claim = repository.get(claim_id)
         if claim is None:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Claim not found")
@@ -671,6 +725,11 @@ def create_app(
 
     @application.post("/api/claims/{claim_id}/approve")
     def approve_claim(claim_id: str, request: ApprovalRequest) -> dict[str, Any]:
+        if request.decision == ApprovalDecision.APPROVE:
+            require_roles("SUPERVISOR", "PROGRAM_ADMINISTRATOR")
+        else:
+            require_roles("DESK_ADJUSTER", "SUPERVISOR", "PROGRAM_ADMINISTRATOR")
+        actor_id = require_authenticated_actor()
         def approve(claim: dict[str, Any]) -> dict[str, Any]:
             prepare_mutation(claim)
             if claim["estimate"] is None or claim["vision"] is None:
@@ -697,7 +756,7 @@ def create_app(
                 claim["estimate"], claim["vision"], pricing_context["material_age_years"], pricing_context["deductible"], adjustments
             )
             is_approved = request.decision == ApprovalDecision.APPROVE
-            adjuster_name = request.adjuster_name or "Adjuster"
+            adjuster_name = (request.adjuster_name or "Adjuster") if resolved_settings.auth_mode == "demo" else actor_id
             if is_approved:
                 try:
                     assurance = authorize_settlement(
@@ -731,7 +790,7 @@ def create_app(
                 claim,
                 "SETTLEMENT_APPROVED" if is_approved else "REVIEW_SAVED",
                 now,
-                adjuster_name,
+                adjuster_name if resolved_settings.auth_mode == "demo" else actor_id,
                 {
                     "decision": request.decision.value,
                     "modified_zone_ids": sorted(requested_zone_ids),

@@ -60,7 +60,12 @@ class SecurityMiddleware(BaseHTTPMiddleware):
             return JSONResponse({"detail": "Rate limit exceeded", "request_id": request_id}, status_code=429, headers={"Retry-After": "60", "X-Request-ID": request_id})
         try:
             principal = self.principal_resolver(request)
-            with bind_request(tenant_id=principal.tenant_id, actor_id=principal.subject, request_id=request_id):
+            with bind_request(
+                tenant_id=principal.tenant_id,
+                actor_id=principal.subject,
+                request_id=request_id,
+                roles=principal.roles,
+            ):
                 response = await call_next(request)
         except HTTPException as exc:
             return JSONResponse({"detail": exc.detail, "request_id": request_id}, status_code=exc.status_code, headers={"WWW-Authenticate": "Bearer"} if exc.status_code == 401 else None)
