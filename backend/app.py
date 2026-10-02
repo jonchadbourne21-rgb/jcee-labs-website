@@ -420,6 +420,7 @@ def create_app(
     @application.post("/api/claims/{claim_id}/analyze")
     def analyze_claim(claim_id: str, request: AnalyzeRequest | None = None) -> dict[str, Any]:
         require_roles("DESK_ADJUSTER", "SUPERVISOR", "PROGRAM_ADMINISTRATOR")
+
         def analyze(claim: dict[str, Any]) -> dict[str, Any]:
             prepare_mutation(claim)
             if claim["status"] in {
@@ -467,6 +468,7 @@ def create_app(
     def assign_claim(claim_id: str, request: AssignmentRequest) -> dict[str, Any]:
         require_roles("PROGRAM_ADMINISTRATOR")
         actor_id = require_authenticated_actor()
+
         def assign(claim: dict[str, Any]) -> dict[str, Any]:
             prepare_mutation(claim)
             changes: dict[str, str | None] = {}
@@ -490,6 +492,7 @@ def create_app(
     def create_task(claim_id: str, request: TaskCreateRequest) -> dict[str, Any]:
         require_roles("FIELD_ADJUSTER", "DESK_ADJUSTER", "SUPERVISOR", "PROGRAM_ADMINISTRATOR")
         actor_id = require_authenticated_actor()
+
         def add_task(claim: dict[str, Any]) -> dict[str, Any]:
             prepare_mutation(claim)
             validate_team_member(request.owner_id)
@@ -519,6 +522,7 @@ def create_app(
     def complete_task(claim_id: str, task_id: str, request: TaskCompletionRequest) -> dict[str, Any]:
         require_roles("FIELD_ADJUSTER", "DESK_ADJUSTER", "SUPERVISOR", "PROGRAM_ADMINISTRATOR")
         actor_id = require_authenticated_actor(request.actor_id)
+
         def complete(claim: dict[str, Any]) -> dict[str, Any]:
             prepare_mutation(claim)
             task = next((item for item in claim["tasks"] if item.get("task_id") == task_id), None)
@@ -543,6 +547,7 @@ def create_app(
     def create_note(claim_id: str, request: NoteCreateRequest) -> dict[str, Any]:
         require_roles("FIELD_ADJUSTER", "DESK_ADJUSTER", "SUPERVISOR", "PROGRAM_ADMINISTRATOR")
         author_id = require_authenticated_actor(request.author_id)
+
         def add_note(claim: dict[str, Any]) -> dict[str, Any]:
             prepare_mutation(claim)
             now = utc_now()
@@ -568,6 +573,7 @@ def create_app(
     def update_status(claim_id: str, request: WorkflowStatusRequest) -> dict[str, Any]:
         require_roles("DESK_ADJUSTER", "SUPERVISOR", "PROGRAM_ADMINISTRATOR", "FINANCE")
         actor_id = require_authenticated_actor(request.actor_id)
+
         def transition(claim: dict[str, Any]) -> dict[str, Any]:
             prepare_mutation(claim)
             current_status = claim["status"]
@@ -595,6 +601,7 @@ def create_app(
         actor_id = require_authenticated_actor(request.actor_id)
         if resolved_settings.auth_mode == "demo":
             validate_team_member(actor_id, "FINANCE")
+
         def payment(claim: dict[str, Any]) -> dict[str, Any]:
             prepare_mutation(claim)
             now = utc_now()
@@ -730,6 +737,7 @@ def create_app(
         else:
             require_roles("DESK_ADJUSTER", "SUPERVISOR", "PROGRAM_ADMINISTRATOR")
         actor_id = require_authenticated_actor()
+
         def approve(claim: dict[str, Any]) -> dict[str, Any]:
             prepare_mutation(claim)
             if claim["estimate"] is None or claim["vision"] is None:
