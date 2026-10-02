@@ -403,3 +403,135 @@ def test_rate_limit_response_keeps_security_headers(tmp_path: Path) -> None:
     assert limited.headers["x-request-id"] == "req-429"
     assert limited.headers["x-content-type-options"] == "nosniff"
     assert limited.headers["x-frame-options"] == "DENY"
+
+
+
+def jwt_objects(header: object, payload: object, secret: str) -> str:
+    def encode(value: object) -> str:
+        return base64.urlsafe_b64encode(
+            json.dumps(value, separators=(",", ":")).encode()
+        ).rstrip(b"=").decode()
+
+    encoded_header = encode(header)
+    encoded_payload = encode(payload)
+    signature = base64.urlsafe_b64encode(
+        hmac.new(
+            secret.encode(),
+            f"{encoded_header}.{encoded_payload}".encode(),
+            hashlib.sha256,
+        ).digest()
+    ).rstrip(b"=").decode()
+    return f"{encoded_header}.{encoded_payload}.{signature}"
+
+
+def test_jwt_malformed_objects_and_numeric_dates_fail_as_401_not_500(tmp_path: Path) -> None:
+    secret = "hardening-test-secret"
+    settings = Settings(environment="test", auth_mode="jwt", jwt_secret=secret)
+    app = create_app(tmp_path / "claims.json", vow_data_dir=tmp_path / "vow", settings=settings)
+    base = {
+        "sub": "USR_ADMIN_01",
+        "tenant_id": "TENANT_A",
+        "roles": ["ADMIN"],
+        "amr": ["mfa"],
+    }
+    tokens = [
+        jwt_objects(["HS256"], {**base, "exp": time.time() + 60}, secret),
+        jwt_objects({"alg": "HS256", "typ": "JWT"}, ["not", "an", "object"], secret),
+        jwt({**base, "exp": "later"}, secret),
+        jwt({**base, "exp": float("inf")}, secret),
+        jwt({**base, "exp": time.time() + 60, "nbf": time.time() + 600}, secret),
+    ]
+    with TestClient(app) as client:
+        responses = [
+            client.get("/health", headers={"Authorization": f"Bearer {token}"})
+            for token in tokens
+        ]
+    assert [response.status_code for response in responses] == [401] * len(tokens)
+
+
+def test_jwt_mfa_fallback_is_strict_boolean(tmp_path: Path) -> None:
+    secret = "hardening-test-secret"
+    settings = Settings(environment="test", auth_mode="jwt", jwt_secret=secret)
+    app = create_app(tmp_path / "claims.json", vow_data_dir=tmp_path / "vow", settings=settings)
+    base = {
+        "sub": "USR_ADMIN_01",
+        "tenant_id": "TENANT_A",
+        "roles": ["ADMIN"],
+        "exp": time.time() + 60,
+    }
+    with TestClient(app) as client:
+        malformed_amr = client.get(
+            "/health",
+            headers={"Authorization": f"Bearer {jwt({**base, 'amr': None, 'mfa_verified': True}, secret)}"},
+        )
+        string_false = client.get(
+            "/health",
+            headers={"Authorization": f"Bearer {jwt({**base, 'mfa_verified': 'false'}, secret)}"},
+        )
+        boolean_true = client.get(
+            "/health",
+            headers={"Authorization": f"Bearer {jwt({**base, 'mfa_verified': True}, secret)}"},
+        )
+    assert malformed_amr.status_code == 403
+    assert string_false.status_code == 403
+    assert boolean_true.status_code == 200
+
+
+def test_jwt_optional_expected_issuer_and_audience_are_enforced(tmp_path: Path) -> None:
+    secret = "hardening-test-secret"
+    settings = Settings(
+        environment="test",
+        auth_mode="jwt",
+        jwt_secret=secret,
+        oidc_issuer="https://issuer.example",
+        oidc_audience="aegis-api",
+    )
+    app = create_app(tmp_path / "claims.json", vow_data_dir=tmp_path / "vow", settings=settings)
+    base = {
+        "sub": "USR_ADMIN_01",
+        "tenant_id": "TENANT_A",
+        "roles": ["ADMIN"],
+        "amr": ["mfa"],
+        "exp": time.time() + 60,
+    }
+    with TestClient(app) as client:
+        wrong_issuer = client.get(
+            "/health",
+            headers={
+                "Authorization": f"Bearer {jwt({**base, 'iss': 'https://wrong.example', 'aud': 'aegis-api'}, secret)}"
+            },
+        )
+        wrong_audience = client.get(
+            "/health",
+            headers={
+                "Authorization": f"Bearer {jwt({**base, 'iss': 'https://issuer.example', 'aud': 'other'}, secret)}"
+            },
+        )
+        correct = client.get(
+            "/health",
+            headers={
+                "Authorization": f"Bearer {jwt({**base, 'iss': 'https://issuer.example', 'aud': ['aegis-api', 'other']}, secret)}"
+            },
+        )
+    assert wrong_issuer.status_code == 401
+    assert wrong_audience.status_code == 401
+    assert correct.status_code == 200
+
+
+def test_jwt_malformed_roles_fail_closed(tmp_path: Path) -> None:
+    secret = "hardening-test-secret"
+    settings = Settings(environment="test", auth_mode="jwt", jwt_secret=secret)
+    app = create_app(tmp_path / "claims.json", vow_data_dir=tmp_path / "vow", settings=settings)
+    token = jwt(
+        {
+            "sub": "USR_ADMIN_01",
+            "tenant_id": "TENANT_A",
+            "roles": {"role": "ADMIN"},
+            "amr": ["mfa"],
+            "exp": time.time() + 60,
+        },
+        secret,
+    )
+    with TestClient(app) as client:
+        response = client.get("/health", headers={"Authorization": f"Bearer {token}"})
+    assert response.status_code == 403
