@@ -1,5 +1,9 @@
 from __future__ import annotations
 
+import subprocess
+import sys
+from pathlib import Path
+
 import pytest
 
 from backend.config import ConfigurationError, Settings
@@ -343,3 +347,24 @@ def test_evidence_delete_is_scoped_to_exact_tenant_and_claim(tmp_path) -> None:
     assert (tmp_path / stored.object_key).is_file()
     store.delete(tenant_id="TENANT_A", claim_id="CLM_1", object_key=stored.object_key)
     assert not (tmp_path / stored.object_key).exists()
+
+
+
+@pytest.mark.parametrize(
+    ("argument", "value"),
+    [
+        ("--duration", "0"),
+        ("--concurrency", "0"),
+        ("--timeout", "0"),
+    ],
+)
+def test_capacity_smoke_rejects_nonpositive_control_values(argument: str, value: str) -> None:
+    script = Path(__file__).with_name("capacity_smoke.py")
+    completed = subprocess.run(
+        [sys.executable, str(script), argument, value],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert completed.returncode == 2
+    assert "must be > 0" in completed.stderr
