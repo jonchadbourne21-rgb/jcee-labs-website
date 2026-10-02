@@ -257,6 +257,8 @@ def create_app(
 ) -> FastAPI:
     """Create the application. ``data_file`` exists to support isolated deployments/tests."""
     resolved_settings = settings or get_settings()
+    # Explicitly supplied Settings must pass the same fail-closed validation as env-backed settings.
+    resolved_settings.validate()
     resolved_data_file = data_file or os.getenv("CLAIMS_DATA_FILE") or DEFAULT_DATA_FILE
     resolved_vow_data_dir = Path(vow_data_dir).expanduser().resolve() if vow_data_dir else default_data_dir()
     origins = allowed_origins or [origin.strip() for origin in os.getenv("CLAIMS_ALLOWED_ORIGINS", DEFAULT_ALLOWED_ORIGINS).split(",") if origin.strip()]

@@ -256,3 +256,59 @@ def test_payment_operation_key_scopes_tenant_and_logical_settlement() -> None:
     assert a_v1 == payment_operation_key("TENANT_A", "CLM_SHARED", "v1")
     assert a_v1 != payment_operation_key("TENANT_B", "CLM_SHARED", "v1")
     assert a_v1 != payment_operation_key("TENANT_A", "CLM_SHARED", "v2")
+
+
+
+@pytest.mark.parametrize(
+    ("settings", "message"),
+    [
+        (Settings(environment="prodution"), "Unsupported CLAIMS_ENV"),
+        (Settings(storage_backend="filesystem"), "Unsupported CLAIMS_STORAGE_BACKEND"),
+        (Settings(auth_mode="none"), "Unsupported CLAIMS_AUTH_MODE"),
+        (Settings(payment_provider="other"), "Unsupported CLAIMS_PAYMENT_PROVIDER"),
+        (Settings(rate_limit_per_minute=0), "CLAIMS_RATE_LIMIT_PER_MINUTE"),
+        (Settings(rate_limit_per_minute=100_001), "CLAIMS_RATE_LIMIT_PER_MINUTE"),
+        (Settings(max_request_bytes=0), "CLAIMS_MAX_REQUEST_BYTES"),
+        (Settings(max_request_bytes=(64 * 1024 * 1024) + 1), "CLAIMS_MAX_REQUEST_BYTES"),
+        (Settings(evidence_url_ttl_seconds=0), "CLAIMS_EVIDENCE_URL_TTL_SECONDS"),
+        (Settings(evidence_url_ttl_seconds=3601), "CLAIMS_EVIDENCE_URL_TTL_SECONDS"),
+    ],
+)
+def test_settings_reject_unknown_modes_and_unbounded_limits(settings: Settings, message: str) -> None:
+    with pytest.raises(ConfigurationError, match=message):
+        settings.validate()
+
+
+def test_production_settings_require_the_documented_s3_oidc_and_stripe_seams() -> None:
+    base = dict(
+        environment="production",
+        database_url="postgresql://example/aegis",
+        auth_mode="oidc",
+        oidc_issuer="https://issuer.example",
+        oidc_audience="aegis",
+        payment_provider="stripe",
+        stripe_secret_key="sk_test_only",
+        stripe_webhook_secret="whsec_test_only",
+    )
+    with pytest.raises(ConfigurationError, match="CLAIMS_STORAGE_BACKEND=s3"):
+        Settings(**base).validate()
+
+    valid = Settings(
+        **base,
+        storage_backend="s3",
+        storage_bucket="private-evidence",
+        storage_access_key_id="test-access",
+        storage_secret_access_key="test-secret",
+    )
+    valid.validate()
+
+
+def test_injected_settings_are_validated_before_adapter_construction(tmp_path) -> None:
+    from backend.app import create_app
+
+    with pytest.raises(ConfigurationError, match="Unsupported CLAIMS_STORAGE_BACKEND"):
+        create_app(
+            tmp_path / "claims.json",
+            vow_data_dir=tmp_path / "vow",
+            settings=Settings(environment="test", storage_backend="filesystem"),
+        )
