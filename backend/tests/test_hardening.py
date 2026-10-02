@@ -63,3 +63,81 @@ def test_json_repository_rejects_cross_tenant_duplicate_claim_id_without_data_lo
         preserved = reloaded.get("CLM_SHARED")
         assert preserved is not None
         assert preserved["marker"] == "tenant-a"
+
+
+class _RecordingResult:
+    def __init__(self, scalar=None) -> None:
+        self.scalar = scalar
+
+    def scalar_one_or_none(self):
+        return self.scalar
+
+    def scalar_one(self):
+        return 0 if self.scalar is None else self.scalar
+
+    def scalars(self):
+        return self
+
+    def all(self):
+        return []
+
+
+class _RecordingConnection:
+    def __init__(self, statements: list[tuple[str, dict | None]]) -> None:
+        self.statements = statements
+
+    def execute(self, statement, params=None):
+        self.statements.append((str(statement), params))
+        return _RecordingResult()
+
+
+class _RecordingBegin:
+    def __init__(self, connection: _RecordingConnection) -> None:
+        self.connection = connection
+
+    def __enter__(self):
+        return self.connection
+
+    def __exit__(self, exc_type, exc, tb):
+        return False
+
+
+class _RecordingEngine:
+    def __init__(self) -> None:
+        self.statements: list[tuple[str, dict | None]] = []
+        self.connection = _RecordingConnection(self.statements)
+
+    def begin(self):
+        return _RecordingBegin(self.connection)
+
+
+def test_postgres_repository_requires_bound_context_and_sets_rls_tenant_each_transaction() -> None:
+    from backend.postgres_storage import PostgresClaimsRepository
+
+    engine = _RecordingEngine()
+    repository = PostgresClaimsRepository("postgresql://unused", engine=engine)
+    assert engine.statements == []
+
+    with pytest.raises(RuntimeError, match="tenant context is not bound"):
+        repository.get("CLM_1")
+
+    for tenant, request_id in (("TENANT_A", "r1"), ("TENANT_B", "r2"), ("TENANT_A", "r3")):
+        with bind_request(tenant_id=tenant, actor_id="actor", request_id=request_id):
+            assert repository.get("CLM_1") is None
+
+    bindings = [
+        params["tenant_id"]
+        for sql, params in engine.statements
+        if "set_config('aegis.tenant_id'" in sql and params is not None
+    ]
+    assert bindings == ["TENANT_A", "TENANT_B", "TENANT_A"]
+
+
+def test_postgres_explicit_tenant_cannot_override_authenticated_tenant() -> None:
+    from backend.postgres_storage import PostgresClaimsRepository
+
+    engine = _RecordingEngine()
+    repository = PostgresClaimsRepository("postgresql://unused", engine=engine)
+    with bind_request(tenant_id="TENANT_A", actor_id="actor", request_id="r1"):
+        with pytest.raises(PermissionError, match="conflicts with authenticated request tenant"):
+            repository.get("CLM_1", tenant_id="TENANT_B")

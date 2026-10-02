@@ -10,6 +10,7 @@ _current_tenant: ContextVar[str] = ContextVar("aegis_tenant", default=_DEFAULT_T
 _current_actor: ContextVar[str] = ContextVar("aegis_actor", default="SYSTEM")
 _current_request_id: ContextVar[str] = ContextVar("aegis_request_id", default="-")
 _current_roles: ContextVar[frozenset[str]] = ContextVar("aegis_roles", default=frozenset())
+_request_context_bound: ContextVar[bool] = ContextVar("aegis_request_bound", default=False)
 
 
 def current_tenant_id() -> str:
@@ -28,6 +29,10 @@ def current_roles() -> frozenset[str]:
     return _current_roles.get()
 
 
+def request_context_bound() -> bool:
+    return _request_context_bound.get()
+
+
 @contextmanager
 def bind_request(
     *,
@@ -40,6 +45,7 @@ def bind_request(
     actor_token = _current_actor.set(actor_id)
     request_token = _current_request_id.set(request_id)
     roles_token = _current_roles.set(roles or frozenset())
+    bound_token = _request_context_bound.set(True)
     try:
         yield
     finally:
@@ -47,3 +53,4 @@ def bind_request(
         _current_actor.reset(actor_token)
         _current_request_id.reset(request_token)
         _current_roles.reset(roles_token)
+        _request_context_bound.reset(bound_token)
