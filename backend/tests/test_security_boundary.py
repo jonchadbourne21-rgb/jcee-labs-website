@@ -41,11 +41,11 @@ def test_evidence_upload_uses_private_local_store(tmp_path: Path) -> None:
     with TestClient(app) as client:
         submitted = client.post("/api/claims/submit", json={"incident_description": "Water loss", "zip_code": "75201", "evidence": []})
         claim_id = submitted.json()["claim_id"]
-        response = client.post(f"/api/claims/{claim_id}/evidence", json={"filename": "inspection.jpg", "media_type": "image/jpeg", "content_base64": base64.b64encode(b"jpeg").decode()})
+        response = client.post(f"/api/claims/{claim_id}/evidence", json={"filename": "inspection.jpg", "media_type": "image/jpeg", "content_base64": base64.b64encode(b"\xff\xd8\xff\xe0jpeg").decode()})
     assert response.status_code == 201
     uploaded = response.json()["evidence"][-1]
     assert uploaded["media_url"].startswith(evidence_scope_prefix("TENANT_DEMO", claim_id))
-    assert uploaded["content_sha256"] == hashlib.sha256(b"jpeg").hexdigest()
+    assert uploaded["content_sha256"] == hashlib.sha256(b"\xff\xd8\xff\xe0jpeg").hexdigest()
 
 
 def test_jwt_mode_requires_mfa_and_binds_tenant(tmp_path: Path) -> None:
@@ -104,7 +104,7 @@ def test_jwt_roles_fail_closed_before_sensitive_mutations(tmp_path: Path) -> Non
             json={
                 "filename": "inspection.jpg",
                 "media_type": "image/jpeg",
-                "content_base64": base64.b64encode(b"jpeg").decode(),
+                "content_base64": base64.b64encode(b"\xff\xd8\xff\xe0jpeg").decode(),
             },
             headers=headers,
         ).status_code == 403
@@ -609,3 +609,69 @@ def test_rate_limiter_state_is_bounded() -> None:
     for index in range(100):
         assert limiter.allowed(f"client-{index}")
     assert limiter.key_count == 5
+
+
+
+def test_evidence_object_is_removed_when_metadata_persistence_fails(tmp_path: Path) -> None:
+    evidence_dir = tmp_path / "evidence"
+    app = create_app(
+        tmp_path / "claims.json",
+        vow_data_dir=tmp_path / "vow",
+        evidence_dir=evidence_dir,
+    )
+    repository = app.state.repository
+    original_write = repository._write_unlocked
+    with TestClient(app, raise_server_exceptions=False) as client:
+        submitted = client.post(
+            "/api/claims/submit",
+            json={"incident_description": "Water loss", "zip_code": "75201", "evidence": []},
+        )
+        claim_id = submitted.json()["claim_id"]
+
+        def fail_write():
+            raise OSError("simulated metadata persistence failure")
+
+        repository._write_unlocked = fail_write
+        failed = client.post(
+            f"/api/claims/{claim_id}/evidence",
+            json={
+                "filename": "inspection.jpg",
+                "media_type": "image/jpeg",
+                "content_base64": base64.b64encode(b"\xff\xd8\xff\xe0jpeg").decode(),
+            },
+        )
+        repository._write_unlocked = original_write
+
+    assert failed.status_code == 500
+    assert list(evidence_dir.rglob("*.*")) == []
+    persisted = repository.get(claim_id)
+    assert persisted is not None
+    assert persisted["evidence"] == []
+
+
+def test_evidence_audit_records_verified_actor_and_request_id(tmp_path: Path) -> None:
+    app = create_app(
+        tmp_path / "claims.json",
+        vow_data_dir=tmp_path / "vow",
+        evidence_dir=tmp_path / "evidence",
+    )
+    with TestClient(app) as client:
+        submitted = client.post(
+            "/api/claims/submit",
+            json={"incident_description": "Water loss", "zip_code": "75201", "evidence": []},
+        )
+        claim_id = submitted.json()["claim_id"]
+        uploaded = client.post(
+            f"/api/claims/{claim_id}/evidence",
+            headers={"X-Request-ID": "evidence-request-1"},
+            json={
+                "filename": "inspection.jpg",
+                "media_type": "image/jpeg",
+                "content_base64": base64.b64encode(b"\xff\xd8\xff\xe0jpeg").decode(),
+            },
+        )
+    assert uploaded.status_code == 201
+    event = uploaded.json()["audit_history"][-1]
+    assert event["actor"] == "USR_ADMIN_01"
+    assert event["request_id"] == "evidence-request-1"
+    assert event["tenant_id"] == "TENANT_DEMO"

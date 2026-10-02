@@ -53,7 +53,7 @@ from backend.product import (
 )
 from backend.repositories import claims_repository
 from backend.security import RequestSizeLimitMiddleware, SecurityMiddleware
-from backend.tenant_context import current_actor_id, current_roles, current_tenant_id
+from backend.tenant_context import current_actor_id, current_request_id, current_roles, current_tenant_id
 from backend.vow_assurance import (
     VowAssuranceError,
     VowPolicyDenied,
@@ -182,7 +182,14 @@ def kitchen_water_vision_payload(claim_id: str, timestamp: str) -> dict[str, Any
 
 
 def audit_event(event: str, occurred_at: str, actor: str, details: dict[str, Any] | None = None) -> dict[str, Any]:
-    return {"event": event, "occurred_at": occurred_at, "actor": actor, "details": details or {}}
+    return {
+        "event": event,
+        "occurred_at": occurred_at,
+        "actor": actor,
+        "tenant_id": current_tenant_id(),
+        "request_id": current_request_id(),
+        "details": details or {},
+    }
 
 
 def enrich_line_items(estimate: dict[str, Any]) -> list[dict[str, Any]]:
@@ -252,6 +259,7 @@ def create_app(
     data_file: str | Path | None = None,
     allowed_origins: list[str] | None = None,
     vow_data_dir: str | Path | None = None,
+    evidence_dir: str | Path | None = None,
     settings: Settings | None = None,
 ) -> FastAPI:
     """Create the application. ``data_file`` exists to support isolated deployments/tests."""
@@ -263,10 +271,17 @@ def create_app(
     origins = allowed_origins or [origin.strip() for origin in os.getenv("CLAIMS_ALLOWED_ORIGINS", DEFAULT_ALLOWED_ORIGINS).split(",") if origin.strip()]
     repository = claims_repository(resolved_settings, resolved_data_file)
     provider = payment_provider(resolved_settings)
-    evidence_repository = evidence_store(
-        resolved_settings,
-        Path(os.getenv("CLAIMS_EVIDENCE_DIR", str(Path(__file__).with_name(".data") / "evidence"))),
+    resolved_evidence_dir = (
+        Path(evidence_dir).expanduser().resolve()
+        if evidence_dir is not None
+        else Path(
+            os.getenv(
+                "CLAIMS_EVIDENCE_DIR",
+                str(Path(__file__).with_name(".data") / "evidence"),
+            )
+        ).expanduser().resolve()
     )
+    evidence_repository = evidence_store(resolved_settings, resolved_evidence_dir)
     vow_integrity = verify_frozen_core()
 
     application = FastAPI(
@@ -300,6 +315,7 @@ def create_app(
     application.state.settings = resolved_settings
     application.state.payment_provider = provider
     application.state.evidence_store = evidence_repository
+    application.state.evidence_dir = str(resolved_evidence_dir)
 
     def prepare_mutation(claim: dict[str, Any]) -> None:
         """Persist defaults before operating on a legacy dossier in place."""
@@ -732,8 +748,26 @@ def create_app(
             append_event(current, "EVIDENCE_UPLOADED", now, actor_id, {"object_key": stored.object_key, "byte_size": stored.byte_size, "content_sha256": stored.content_sha256})
             return serialize_dossier(current)
 
-        outcome = repository.mutate(claim_id, append_evidence)
+        try:
+            outcome = repository.mutate(claim_id, append_evidence)
+        except Exception:
+            try:
+                evidence_repository.delete(
+                    tenant_id=current_tenant_id(),
+                    claim_id=claim_id,
+                    object_key=stored.object_key,
+                )
+            except Exception as cleanup_exc:
+                raise RuntimeError(
+                    "Evidence metadata persistence failed and object cleanup also failed"
+                ) from cleanup_exc
+            raise
         if outcome is None:
+            evidence_repository.delete(
+                tenant_id=current_tenant_id(),
+                claim_id=claim_id,
+                object_key=stored.object_key,
+            )
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Claim not found")
         return outcome
 

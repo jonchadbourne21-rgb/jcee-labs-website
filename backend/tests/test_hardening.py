@@ -33,7 +33,7 @@ def test_json_repository_cannot_cross_tenant_read_or_mutate(tmp_path) -> None:
 
 def test_local_evidence_store_scopes_keys_and_rejects_unsafe_content(tmp_path) -> None:
     store = LocalEvidenceStore(tmp_path)
-    stored = store.put(tenant_id="TENANT_A", claim_id="CLM_1", filename="../kitchen.jpg", content=b"jpeg", media_type="image/jpeg")
+    stored = store.put(tenant_id="TENANT_A", claim_id="CLM_1", filename="../kitchen.jpg", content=b"\xff\xd8\xff\xe0jpeg", media_type="image/jpeg")
     assert stored.object_key.startswith(evidence_scope_prefix("TENANT_A", "CLM_1"))
     assert (tmp_path / stored.object_key).read_bytes() == b"jpeg"
     with pytest.raises(ValueError):
@@ -214,7 +214,7 @@ def test_local_evidence_store_refuses_fake_signed_delivery(tmp_path) -> None:
         tenant_id="TENANT_A",
         claim_id="CLM_1",
         filename="inspection.jpg",
-        content=b"jpeg",
+        content=b"\xff\xd8\xff\xe0jpeg",
         media_type="image/jpeg",
     ).object_key
     with pytest.raises(NotImplementedError, match="authenticated proxy"):
@@ -312,3 +312,34 @@ def test_injected_settings_are_validated_before_adapter_construction(tmp_path) -
             vow_data_dir=tmp_path / "vow",
             settings=Settings(environment="test", storage_backend="filesystem"),
         )
+
+
+
+def test_evidence_media_type_is_checked_against_content_signature(tmp_path) -> None:
+    store = LocalEvidenceStore(tmp_path)
+    with pytest.raises(ValueError, match="does not match"):
+        store.put(
+            tenant_id="TENANT_A",
+            claim_id="CLM_1",
+            filename="spoof.jpg",
+            content=b"%PDF-1.7\nnot really a jpeg",
+            media_type="image/jpeg",
+        )
+
+
+def test_evidence_delete_is_scoped_to_exact_tenant_and_claim(tmp_path) -> None:
+    store = LocalEvidenceStore(tmp_path)
+    stored = store.put(
+        tenant_id="TENANT_A",
+        claim_id="CLM_1",
+        filename="inspection.jpg",
+        content=b"\xff\xd8\xff\xe0jpeg",
+        media_type="image/jpeg",
+    )
+    with pytest.raises(PermissionError):
+        store.delete(tenant_id="TENANT_B", claim_id="CLM_1", object_key=stored.object_key)
+    with pytest.raises(PermissionError):
+        store.delete(tenant_id="TENANT_A", claim_id="CLM_2", object_key=stored.object_key)
+    assert (tmp_path / stored.object_key).is_file()
+    store.delete(tenant_id="TENANT_A", claim_id="CLM_1", object_key=stored.object_key)
+    assert not (tmp_path / stored.object_key).exists()

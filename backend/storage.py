@@ -116,7 +116,11 @@ class ClaimsRepository:
             working = copy.deepcopy(current)
             result = mutator(working)
             self._claims[claim_id] = working
-            self._write_unlocked()
+            try:
+                self._write_unlocked()
+            except Exception:
+                self._claims[claim_id] = current
+                raise
             return copy.deepcopy(result)
 
     def replace(self, claim: dict[str, Any], tenant_id: str | None = None) -> dict[str, Any]:

@@ -45,6 +45,8 @@ class EvidenceStore(Protocol):
         expires_in: int,
     ) -> str: ...
 
+    def delete(self, *, tenant_id: str, claim_id: str, object_key: str) -> None: ...
+
 
 def _scope_segment(value: str, *, label: str) -> str:
     """Encode identity losslessly into a path-safe component.
@@ -67,11 +69,30 @@ def evidence_scope_prefix(tenant_id: str, claim_id: str) -> str:
     )
 
 
+def _require_scoped_key(tenant_id: str, claim_id: str, key: str) -> None:
+    if not key.startswith(evidence_scope_prefix(tenant_id, claim_id)):
+        raise PermissionError("Evidence object is outside the authorized tenant/claim scope")
+
+
 def object_key(tenant_id: str, claim_id: str, filename: str) -> str:
     clean_name = _SAFE_NAME.sub("-", Path(filename).name).strip(".-")[:160]
     if not clean_name:
         raise ValueError("Evidence filename is invalid")
     return f"{evidence_scope_prefix(tenant_id, claim_id)}{uuid.uuid4().hex}-{clean_name}"
+
+
+def _sniff_media_type(content: bytes) -> str | None:
+    if content.startswith(b"\xff\xd8\xff"):
+        return "image/jpeg"
+    if content.startswith(b"\x89PNG\r\n\x1a\n"):
+        return "image/png"
+    if len(content) >= 12 and content[:4] == b"RIFF" and content[8:12] == b"WEBP":
+        return "image/webp"
+    if content.startswith(b"%PDF-"):
+        return "application/pdf"
+    if len(content) >= 12 and content[4:8] == b"ftyp":
+        return "video/mp4"
+    return None
 
 
 def validate_media(content: bytes, filename: str, media_type: str | None) -> str:
@@ -82,6 +103,9 @@ def validate_media(content: bytes, filename: str, media_type: str | None) -> str
         raise ValueError("Evidence content cannot be empty")
     if len(content) > 25 * 1024 * 1024:
         raise ValueError("Evidence content exceeds the 25 MB limit")
+    detected = _sniff_media_type(content)
+    if detected != resolved:
+        raise ValueError("Evidence content does not match its declared media type")
     return resolved
 
 
@@ -120,6 +144,16 @@ class LocalEvidenceStore:
         # Local demo files currently have no authenticated evidence-download
         # endpoint. Refuse to manufacture a URL that only looks signed.
         raise NotImplementedError("Local evidence delivery requires an authenticated proxy")
+
+    def delete(self, *, tenant_id: str, claim_id: str, object_key: str) -> None:
+        _require_scoped_key(tenant_id, claim_id, object_key)
+        path = (self.root / object_key).resolve()
+        try:
+            path.relative_to(self.root)
+        except ValueError as exc:
+            raise PermissionError("Evidence object is outside the configured root") from exc
+        if path.is_file():
+            path.unlink()
 
 
 class S3EvidenceStore:
@@ -164,9 +198,7 @@ class S3EvidenceStore:
         object_key: str,
         expires_in: int,
     ) -> str:
-        expected_prefix = evidence_scope_prefix(tenant_id, claim_id)
-        if not object_key.startswith(expected_prefix):
-            raise PermissionError("Evidence object is outside the authorized tenant/claim scope")
+        _require_scoped_key(tenant_id, claim_id, object_key)
         if expires_in <= 0:
             raise ValueError("Evidence URL expiry must be positive")
         return self.client.generate_presigned_url(
@@ -174,6 +206,10 @@ class S3EvidenceStore:
             Params={"Bucket": self.bucket, "Key": object_key},
             ExpiresIn=min(expires_in, self.ttl),
         )
+
+    def delete(self, *, tenant_id: str, claim_id: str, object_key: str) -> None:
+        _require_scoped_key(tenant_id, claim_id, object_key)
+        self.client.delete_object(Bucket=self.bucket, Key=object_key)
 
 
 def evidence_store(settings: Settings, root: str | Path) -> EvidenceStore:

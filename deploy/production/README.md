@@ -2,7 +2,7 @@
 
 ## Deployment shape
 
-Run FastAPI behind a TLS-terminating reverse proxy with multiple Uvicorn workers. Use PostgreSQL for dossiers, events, tenants, and evidence metadata; use a private S3-compatible bucket for binary evidence; and run the VOW recovery worker as a separately supervised process. Apply migrations with an owner/migration role, but run the API with a separate non-owner PostgreSQL role that has no BYPASSRLS privilege. Runtime code does not create or repair schema. The Next.js/PWA and Expo clients must use the API's public origin and never receive database, object-storage, payment, or OIDC client secrets.
+Run FastAPI behind a TLS-terminating reverse proxy with multiple Uvicorn workers. Use PostgreSQL for tenant-scoped dossier JSONB and a private S3-compatible bucket for binary evidence. The migration also defines normalized event/evidence tables, but this build does not yet populate them and therefore does not claim an append-only normalized audit ledger; and run the VOW recovery worker as a separately supervised process. Apply migrations with an owner/migration role, but run the API with a separate non-owner PostgreSQL role that has no BYPASSRLS privilege. Runtime code does not create or repair schema. The Next.js/PWA and Expo clients must use the API's public origin and never receive database, object-storage, payment, or OIDC client secrets.
 
 ## Required configuration
 
