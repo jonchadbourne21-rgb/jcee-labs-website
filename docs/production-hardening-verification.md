@@ -1,0 +1,31 @@
+# AEGIS ClaimOS Production-Hardening Verification
+
+**Scope:** PostgreSQL/object-storage migration seams, tenant isolation, SSO/MFA-ready authentication, provider-backed payments, API security controls, and capacity testing.
+
+## Implemented boundary
+
+The application now selects adapters through explicit configuration. Demo/test mode remains local JSON, local evidence storage, demo identity, and mock payments. Production/staging configuration validation requires PostgreSQL, OIDC authentication, private S3-compatible storage, Stripe configuration including a webhook secret, and bounded request/rate/URL-TTL limits. Unknown environment or adapter names fail closed. The frozen VOW 1.1 tree remains an unchanged verification boundary.
+
+Every JSON repository operation is tenant-filtered through request context, and the PostgreSQL adapter uses `(tenant_id, claim_id)` keys plus row locks. Evidence uploads use lossless tenant/claim-scoped keys, content hashes, lightweight file-signature checks, and compensating object deletion if dossier metadata cannot be committed. Binary evidence delivery remains gated until authenticated retrieval is implemented. The normalized `aegis_claim_events` and `aegis_claim_evidence` tables in the migration are schema groundwork; the current repository still persists audit/evidence metadata inside the tenant-scoped dossier JSONB and must not be described as an append-only normalized ledger. Mock payment scheduling uses a tenant/claim/logical-settlement operation key through the provider protocol, and the VOW integration key uses the same scope boundary without changing the frozen VOW core. Stripe is a configuration seam only in this build: real claimant disbursement scheduling and manual completion are deliberately disabled until a durable pre-dispatch operation record, supported money-movement semantics, and verified provider reconciliation exist.
+
+## Verification commands
+
+```bash
+cd /home/ubuntu/jcee-labs-website
+uvx ruff check backend
+uv run --directory backend --extra test pytest tests
+bash -n start.sh start-all.sh scripts/capacity-smoke.sh
+python3 - <<'PY'
+from pathlib import Path
+sql = Path('backend/migrations/001_claims.sql').read_text()
+assert 'ROW LEVEL SECURITY' in sql
+assert 'aegis_claims' in sql
+print('migration static checks: PASS')
+PY
+```
+
+**Historical observation at the original PR head (2026-10-01):** Ruff passed and the backend suite was reported as 28 tests passing. Those results predate the security-repair commits and are not evidence that the repaired head has executed the expanded suite. The repaired head still requires a clean runner/CI receipt before merge consideration.
+
+## Remaining gates before real production traffic
+
+The environment still needs a provisioned PostgreSQL instance exercised with the intended non-owner RLS role, a private object-storage bucket, OIDC provider/JWKS verifier integration, authenticated binary-evidence retrieval, a supported real disbursement/reconciliation path, shared multi-worker rate limiting, secret-manager injection, a post-write-safe restore drill, and an authenticated staging capacity run. These are deployment gates, not claims that the local demo has completed them.

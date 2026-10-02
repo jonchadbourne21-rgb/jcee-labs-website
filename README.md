@@ -67,14 +67,16 @@ Open the web/PWA at port `3000` (or `3100` above). In Expo Go, scan the QR code 
 ### Backend
 
 ```bash
-uv sync --project backend --extra test
-uv run --project backend uvicorn backend.app:app --reload --host 0.0.0.0 --port 8000
+cd backend
+uv sync --extra test
+uv run uvicorn backend.app:app --reload --host 0.0.0.0 --port 8000
 ```
 
 To run backend tests:
 
 ```bash
-uv run --project backend pytest backend/tests
+cd backend
+uv run --extra test pytest tests
 ```
 
 Set `CLAIMS_DATA_FILE` to override the default local JSON persistence path. See `backend/README.md` for API request details.
@@ -132,6 +134,7 @@ Use `pnpm check`, `pnpm lint`, `pnpm test`, and `pnpm build:web` to validate the
 | `POST` | `/api/claims/{claim_id}/notes` | Add an internal or policyholder-visible note |
 | `POST` | `/api/claims/{claim_id}/status` | Move through controlled non-financial workflow states |
 | `POST` | `/api/claims/{claim_id}/payment` | Schedule or mark the mock payment instruction sent |
+| `POST` | `/api/claims/{claim_id}/evidence` | Upload validated evidence to private local/S3-compatible storage |
 | `GET` | `/api/claims/{claim_id}/assurance/evidence` | Download the signed VOW evidence pack |
 | `GET` | `/api/claims/{claim_id}/assurance/verify` | Re-run independent VOW evidence verification |
 
@@ -145,3 +148,15 @@ pnpm dev
 ```
 
 Its existing checks remain unchanged and can be run with `pnpm release:check`.
+
+## Production hardening
+
+The backend now has explicit adapter boundaries for tenant-scoped PostgreSQL persistence, private local/S3-compatible evidence upload, JWT test authentication plus an OIDC seam that remains fail-closed until JWKS verification exists, mock payments plus a disabled non-mock payment seam, request IDs, security headers, bounded process-local rate limiting, and capacity smoke testing. The default demo remains credential-free and uses local JSON, local evidence files, demo users, and mock payments.
+
+For deployment configuration, migration/rollback procedures, and release gates, read [`deploy/production/README.md`](deploy/production/README.md) and [`docs/production-hardening-verification.md`](docs/production-hardening-verification.md). Apply the PostgreSQL schema from [`backend/migrations/001_claims.sql`](backend/migrations/001_claims.sql). Run a staging capacity check with:
+
+```bash
+./scripts/capacity-smoke.sh --base-url http://127.0.0.1:8000 --duration 30 --concurrency 8
+```
+
+Production configuration validation is fail-closed and requires `CLAIMS_DATABASE_URL`, `CLAIMS_AUTH_MODE=oidc`, private S3 settings, and Stripe configuration. That is not a production-readiness claim: OIDC JWKS verification, authenticated binary-evidence retrieval, real disbursement/reconciliation, shared rate limiting, restore drills, and staging capacity evidence remain deployment gates. No production credentials are committed or required for the Kitchen Water Damage demo.
