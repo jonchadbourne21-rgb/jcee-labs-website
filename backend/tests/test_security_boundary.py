@@ -12,6 +12,7 @@ from fastapi.testclient import TestClient
 from backend.app import create_app
 from backend.config import Settings
 from backend.object_storage import evidence_scope_prefix
+from backend.security import RateLimiter, RequestSizeLimitMiddleware
 from backend.tenant_context import bind_request
 
 
@@ -535,3 +536,75 @@ def test_jwt_malformed_roles_fail_closed(tmp_path: Path) -> None:
     with TestClient(app) as client:
         response = client.get("/health", headers={"Authorization": f"Bearer {token}"})
     assert response.status_code == 403
+
+
+
+def test_request_body_limit_rejects_before_model_parsing(tmp_path: Path) -> None:
+    settings = Settings(environment="test", max_request_bytes=1024)
+    app = create_app(tmp_path / "claims.json", vow_data_dir=tmp_path / "vow", settings=settings)
+    with TestClient(app) as client:
+        too_large = client.post(
+            "/api/claims/submit",
+            content=b"x" * 1025,
+            headers={"Content-Type": "application/octet-stream", "X-Request-ID": "req-413"},
+        )
+        at_limit = client.post(
+            "/api/claims/submit",
+            content=b"x" * 1024,
+            headers={"Content-Type": "application/octet-stream"},
+        )
+    assert too_large.status_code == 413
+    assert too_large.headers["x-request-id"] == "req-413"
+    assert too_large.headers["x-content-type-options"] == "nosniff"
+    assert at_limit.status_code != 413
+
+
+def test_request_body_limit_catches_stream_without_content_length() -> None:
+    async def inner(scope, receive, send):
+        while True:
+            message = await receive()
+            if message["type"] != "http.request" or not message.get("more_body", False):
+                break
+        response = JSONResponse({"ok": True})
+        await response(scope, receive, send)
+
+    settings = Settings(environment="test", max_request_bytes=1024)
+    middleware = RequestSizeLimitMiddleware(inner, settings=settings)
+    scope = {
+        "type": "http",
+        "http_version": "1.1",
+        "method": "POST",
+        "scheme": "https",
+        "path": "/stream",
+        "raw_path": b"/stream",
+        "query_string": b"",
+        "headers": [(b"x-request-id", b"req-stream")],
+        "client": ("127.0.0.1", 1234),
+        "server": ("test", 443),
+    }
+    messages = [
+        {"type": "http.request", "body": b"a" * 800, "more_body": True},
+        {"type": "http.request", "body": b"b" * 300, "more_body": False},
+    ]
+    sent = []
+
+    async def receive():
+        return messages.pop(0)
+
+    async def send(message):
+        sent.append(message)
+
+    import asyncio
+
+    asyncio.run(middleware(scope, receive, send))
+    start = next(message for message in sent if message["type"] == "http.response.start")
+    headers = dict(start["headers"])
+    assert start["status"] == 413
+    assert headers[b"x-request-id"] == b"req-stream"
+
+
+def test_rate_limiter_state_is_bounded() -> None:
+    limiter = RateLimiter(limit=10, max_keys=5)
+    for index in range(100):
+        assert limiter.allowed(f"client-{index}")
+    assert limiter.key_count == 5

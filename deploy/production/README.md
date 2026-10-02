@@ -20,7 +20,7 @@ Set `CLAIMS_ENV=production`, `CLAIMS_DATABASE_URL`, `CLAIMS_STORAGE_BACKEND=s3`,
 
 ## Operational gates
 
-The release is blocked if any cross-tenant read or mutation is observed, if payment idempotency keys are not stable across retries, if the VOW frozen manifest differs, if evidence buckets are public, if MFA assurance is absent, or if the restore drill fails. Record p50/p95/p99 latency and error rate from `scripts/capacity-smoke.sh` against a staging deployment before production promotion.
+The release is blocked if any cross-tenant read or mutation is observed, if payment idempotency keys are not stable across retries, if the VOW frozen manifest differs, if evidence buckets are public, if MFA assurance is absent, or if the restore drill fails. The in-process rate limiter is bounded but process-local; production promotion also requires a shared limiter or equivalent reverse-proxy enforcement across workers. Record p50/p95/p99 latency and error rate from `scripts/capacity-smoke.sh` against a staging deployment before production promotion.
 
 ## Backup and recovery
 

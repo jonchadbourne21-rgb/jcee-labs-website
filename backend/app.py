@@ -1,7 +1,6 @@
 """FastAPI service for the autonomous AI property claims prototype."""
 from __future__ import annotations
 
-import base64
 import copy
 import os
 import uuid
@@ -53,7 +52,7 @@ from backend.product import (
     team_workload,
 )
 from backend.repositories import claims_repository
-from backend.security import SecurityMiddleware
+from backend.security import RequestSizeLimitMiddleware, SecurityMiddleware
 from backend.tenant_context import current_actor_id, current_roles, current_tenant_id
 from backend.vow_assurance import (
     VowAssuranceError,
@@ -275,12 +274,17 @@ def create_app(
         version="0.1.0",
         description="Deterministic prototype for AI-assisted property claim intake, scoping, pricing, review, and settlement.",
     )
-    # Add security first, then CORS. Starlette places the last-added middleware
-    # outermost, so CORS handles preflight and decorates authentication errors.
+    # Starlette places the last-added middleware outermost. CORS stays outer,
+    # request-size enforcement runs before authentication/body parsing, and the
+    # security boundary remains inside both.
     application.add_middleware(
         SecurityMiddleware,
         settings=resolved_settings,
         principal_resolver=lambda request: principal_from_request(request, resolved_settings),
+    )
+    application.add_middleware(
+        RequestSizeLimitMiddleware,
+        settings=resolved_settings,
     )
     application.add_middleware(
         CORSMiddleware,
@@ -708,7 +712,7 @@ def create_app(
                 tenant_id=str(claim.get("tenant_id", "TENANT_DEMO")),
                 claim_id=claim_id,
                 filename=request.filename,
-                content=base64.b64decode(request.content_base64, validate=True),
+                content=request.content_bytes(),
                 media_type=request.media_type,
             )
         except (ValueError, PermissionError) as exc:

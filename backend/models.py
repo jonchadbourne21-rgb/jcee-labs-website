@@ -11,6 +11,7 @@ from pydantic import (
     BaseModel,
     ConfigDict,
     Field,
+    PrivateAttr,
     field_validator,
     model_validator,
 )
@@ -101,19 +102,23 @@ class EvidenceUploadRequest(StrictModel):
     filename: str = Field(min_length=1, max_length=255)
     media_type: str = Field(min_length=1, max_length=100)
     content_base64: str = Field(min_length=1, max_length=40_000_000)
+    _decoded_content: bytes = PrivateAttr(default=b"")
 
-    @field_validator("content_base64")
-    @classmethod
-    def valid_base64(cls, value: str) -> str:
+    @model_validator(mode="after")
+    def decode_content_once(self) -> EvidenceUploadRequest:
         try:
-            decoded = base64.b64decode(value, validate=True)
+            decoded = base64.b64decode(self.content_base64, validate=True)
         except ValueError as exc:
             raise ValueError("content_base64 must be valid base64") from exc
         if not decoded:
             raise ValueError("Evidence content cannot be empty")
         if len(decoded) > 25 * 1024 * 1024:
             raise ValueError("Evidence content exceeds the 25 MB limit")
-        return value
+        self._decoded_content = decoded
+        return self
+
+    def content_bytes(self) -> bytes:
+        return self._decoded_content
 
 
 class HomeownerSubmission(StrictModel):
