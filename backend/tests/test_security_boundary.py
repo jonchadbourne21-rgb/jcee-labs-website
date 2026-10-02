@@ -12,6 +12,7 @@ from fastapi.testclient import TestClient
 from backend.app import create_app
 from backend.config import Settings
 from backend.object_storage import evidence_scope_prefix
+from backend.tenant_context import bind_request
 
 
 def jwt(payload: dict, secret: str) -> str:
@@ -219,3 +220,94 @@ def test_jwt_review_role_is_distinct_from_settlement_approval_role(tmp_path: Pat
     assert saved.status_code == 200, saved.json()
     assert saved.json()["audit_history"][-1]["actor"] == "USR_DESK_01"
     assert denied.status_code == 403
+
+
+
+def test_nonmock_payment_cannot_be_manually_promoted_to_paid(tmp_path: Path) -> None:
+    secret = "hardening-test-secret"
+    settings = Settings(
+        environment="test",
+        auth_mode="jwt",
+        jwt_secret=secret,
+        payment_provider="stripe",
+        stripe_secret_key="sk_test_only",
+    )
+    app = create_app(tmp_path / "claims.json", vow_data_dir=tmp_path / "vow", settings=settings)
+    with bind_request(tenant_id="TENANT_A", actor_id="seed", request_id="seed"):
+        app.state.repository.create({
+            "claim_id": "CLM_STRIPE",
+            "status": "PAYMENT_SCHEDULED",
+            "payment": {
+                "status": "SCHEDULED",
+                "instruction_id": "pi_test",
+                "method": "ACH",
+                "amount": 10.0,
+                "currency": "USD",
+                "scheduled_at": "2026-10-02T12:00:00Z",
+                "sent_at": None,
+                "actor_id": "USR_FINANCE_01",
+                "mock": False,
+            },
+            "payment_provider": "stripe",
+            "payment_idempotency_key": "claim-payment:TENANT_A:CLM_STRIPE:v1",
+            "audit_history": [],
+        })
+
+    finance = {
+        "sub": "USR_FINANCE_01",
+        "tenant_id": "TENANT_A",
+        "roles": ["FINANCE"],
+        "amr": ["pwd", "mfa"],
+        "exp": time.time() + 60,
+    }
+    with TestClient(app) as client:
+        response = client.post(
+            "/api/claims/CLM_STRIPE/payment",
+            json={"action": "MARK_SENT", "actor_id": "USR_FINANCE_01"},
+            headers=auth_headers(finance, secret),
+        )
+    assert response.status_code == 409
+    with bind_request(tenant_id="TENANT_A", actor_id="verify", request_id="verify"):
+        persisted = app.state.repository.get("CLM_STRIPE")
+    assert persisted is not None
+    assert persisted["status"] == "PAYMENT_SCHEDULED"
+    assert persisted["payment"]["status"] == "SCHEDULED"
+
+
+def test_nonmock_payment_schedule_is_disabled_before_provider_call(tmp_path: Path) -> None:
+    secret = "hardening-test-secret"
+    settings = Settings(
+        environment="test",
+        auth_mode="jwt",
+        jwt_secret=secret,
+        payment_provider="stripe",
+        stripe_secret_key="sk_test_only",
+    )
+    app = create_app(tmp_path / "claims.json", vow_data_dir=tmp_path / "vow", settings=settings)
+    with bind_request(tenant_id="TENANT_A", actor_id="seed", request_id="seed"):
+        app.state.repository.create({
+            "claim_id": "CLM_APPROVED",
+            "status": "APPROVED",
+            "estimate": {"net_payout": 10.0},
+            "payment": {"status": "NOT_SCHEDULED", "mock": False},
+            "audit_history": [],
+        })
+
+    finance = {
+        "sub": "USR_FINANCE_01",
+        "tenant_id": "TENANT_A",
+        "roles": ["FINANCE"],
+        "amr": ["pwd", "mfa"],
+        "exp": time.time() + 60,
+    }
+    with TestClient(app) as client:
+        response = client.post(
+            "/api/claims/CLM_APPROVED/payment",
+            json={"action": "SCHEDULE", "actor_id": "USR_FINANCE_01"},
+            headers=auth_headers(finance, secret),
+        )
+    assert response.status_code == 503
+    with bind_request(tenant_id="TENANT_A", actor_id="verify", request_id="verify"):
+        persisted = app.state.repository.get("CLM_APPROVED")
+    assert persisted is not None
+    assert persisted["status"] == "APPROVED"

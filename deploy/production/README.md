@@ -6,7 +6,7 @@ Run FastAPI behind a TLS-terminating reverse proxy with multiple Uvicorn workers
 
 ## Required configuration
 
-Set `CLAIMS_ENV=production`, `CLAIMS_DATABASE_URL`, `CLAIMS_STORAGE_BACKEND=s3`, `CLAIMS_S3_BUCKET`, `CLAIMS_S3_REGION`, `CLAIMS_S3_ACCESS_KEY_ID`, `CLAIMS_S3_SECRET_ACCESS_KEY`, `CLAIMS_AUTH_MODE=oidc`, `CLAIMS_OIDC_ISSUER`, `CLAIMS_OIDC_AUDIENCE`, `CLAIMS_PAYMENT_PROVIDER=stripe`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `CLAIMS_ALLOWED_ORIGINS`, and a bounded `CLAIMS_RATE_LIMIT_PER_MINUTE`. Inject secrets from the deployment secret manager; do not commit `.env` files.
+Set `CLAIMS_ENV=production`, `CLAIMS_DATABASE_URL`, `CLAIMS_STORAGE_BACKEND=s3`, `CLAIMS_S3_BUCKET`, `CLAIMS_S3_REGION`, `CLAIMS_S3_ACCESS_KEY_ID`, `CLAIMS_S3_SECRET_ACCESS_KEY`, `CLAIMS_AUTH_MODE=oidc`, `CLAIMS_OIDC_ISSUER`, `CLAIMS_OIDC_AUDIENCE`, `CLAIMS_PAYMENT_PROVIDER=stripe`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `CLAIMS_ALLOWED_ORIGINS`, and a bounded `CLAIMS_RATE_LIMIT_PER_MINUTE`. Inject secrets from the deployment secret manager; do not commit `.env` files. These settings only select the production seams: this build still refuses real payment scheduling and manual completion until a supported disbursement adapter and verified reconciliation/webhook path are implemented.
 
 ## Migration and rollback
 

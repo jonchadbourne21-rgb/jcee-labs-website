@@ -606,6 +606,14 @@ def create_app(
             prepare_mutation(claim)
             now = utc_now()
             if request.action == PaymentAction.SCHEDULE:
+                if resolved_settings.payment_provider != "mock":
+                    raise HTTPException(
+                        status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                        detail=(
+                            "Non-mock payment scheduling is disabled until a supported "
+                            "disbursement and reconciliation boundary is implemented"
+                        ),
+                    )
                 if claim["status"] != WorkflowStatus.APPROVED.value:
                     raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Payment scheduling requires an APPROVED claim")
                 estimate = claim.get("estimate")
@@ -638,6 +646,11 @@ def create_app(
             else:
                 if claim["status"] != WorkflowStatus.PAYMENT_SCHEDULED.value or claim["payment"].get("status") != "SCHEDULED":
                     raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Payment must be scheduled before it can be marked sent")
+                if resolved_settings.payment_provider != "mock" or not bool(claim["payment"].get("mock", True)):
+                    raise HTTPException(
+                        status_code=status.HTTP_409_CONFLICT,
+                        detail="Manual mark-sent is available only for mock payments",
+                    )
                 provider_instruction = PaymentInstruction(
                     provider=str(claim.get("payment_provider", "mock")),
                     provider_id=str(claim["payment"].get("instruction_id")),
@@ -647,7 +660,12 @@ def create_app(
                     status="SCHEDULED",
                     mock=bool(claim["payment"].get("mock", True)),
                 )
-                provider.mark_sent(instruction=provider_instruction)
+                completed_instruction = provider.mark_sent(instruction=provider_instruction)
+                if completed_instruction.status != "SENT" or not completed_instruction.mock:
+                    raise HTTPException(
+                        status_code=status.HTTP_409_CONFLICT,
+                        detail="Payment provider did not confirm mock completion",
+                    )
                 claim["payment"]["status"] = "SENT"
                 claim["payment"]["sent_at"] = now
                 claim["payment"]["actor_id"] = actor_id

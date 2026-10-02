@@ -224,3 +224,27 @@ def test_local_evidence_store_refuses_fake_signed_delivery(tmp_path) -> None:
             object_key=key,
             expires_in=60,
         )
+
+
+
+def test_stripe_provider_does_not_claim_unimplemented_disbursement() -> None:
+    provider = payment_provider(Settings(payment_provider="stripe", stripe_secret_key="sk_test_only"))
+    with pytest.raises(RuntimeError, match="disbursement scheduling is not implemented"):
+        provider.schedule(
+            claim_id="CLM_1",
+            amount=10.0,
+            currency="USD",
+            method="ACH",
+            idempotency_key="claim-payment:TENANT_A:CLM_1:v1",
+        )
+    instruction = type("Instruction", (), {
+        "provider": "stripe",
+        "provider_id": "pi_test",
+        "idempotency_key": "claim-payment:TENANT_A:CLM_1:v1",
+        "amount": 10.0,
+        "currency": "USD",
+        "status": "SCHEDULED",
+        "mock": False,
+    })()
+    with pytest.raises(RuntimeError, match="verified provider reconciliation"):
+        provider.mark_sent(instruction=instruction)

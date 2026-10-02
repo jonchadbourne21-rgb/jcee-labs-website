@@ -6,7 +6,7 @@
 
 The application now selects adapters through explicit configuration. Demo/test mode remains local JSON, local evidence storage, demo identity, and mock payments. Production/staging configuration requires PostgreSQL, OIDC authentication, private S3-compatible storage, and a non-mock payment provider. The frozen VOW 1.1 tree remains an unchanged verification boundary.
 
-Every JSON repository operation is tenant-filtered through request context, and the PostgreSQL adapter uses `(tenant_id, claim_id)` keys plus row locks. Evidence keys are tenant/claim-prefixed, content-hashed, and served through private storage adapters. Payment scheduling uses claim-scoped idempotency keys and the provider protocol; Stripe is only selected when its server-side secret is configured.
+Every JSON repository operation is tenant-filtered through request context, and the PostgreSQL adapter uses `(tenant_id, claim_id)` keys plus row locks. Evidence keys are tenant/claim-prefixed and content-hashed; binary evidence delivery remains gated until authenticated retrieval is implemented. Mock payment scheduling uses the provider protocol. Stripe is a configuration seam only in this build: real claimant disbursement scheduling and manual completion are deliberately disabled until supported money-movement semantics and verified provider reconciliation exist.
 
 ## Verification commands
 

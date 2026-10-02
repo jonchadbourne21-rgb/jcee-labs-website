@@ -1,12 +1,8 @@
-"""Provider-backed payment boundary; no provider is called in demo mode."""
+"""Provider-backed payment boundary; real money movement remains disabled until reconciled."""
 from __future__ import annotations
 
-import json
-import urllib.error
-import urllib.parse
-import urllib.request
 from dataclasses import dataclass
-from typing import Any, Protocol
+from typing import Protocol
 
 from backend.config import ConfigurationError, Settings
 
@@ -23,39 +19,76 @@ class PaymentInstruction:
 
 
 class PaymentProvider(Protocol):
-    def schedule(self, *, claim_id: str, amount: float, currency: str, method: str, idempotency_key: str) -> PaymentInstruction: ...
+    def schedule(
+        self,
+        *,
+        claim_id: str,
+        amount: float,
+        currency: str,
+        method: str,
+        idempotency_key: str,
+    ) -> PaymentInstruction: ...
+
     def mark_sent(self, *, instruction: PaymentInstruction) -> PaymentInstruction: ...
 
 
 class MockPaymentProvider:
-    def schedule(self, *, claim_id: str, amount: float, currency: str, method: str, idempotency_key: str) -> PaymentInstruction:
-        return PaymentInstruction("mock", f"PMT_{claim_id}_V1", idempotency_key, amount, currency, "SCHEDULED", True)
+    def schedule(
+        self,
+        *,
+        claim_id: str,
+        amount: float,
+        currency: str,
+        method: str,
+        idempotency_key: str,
+    ) -> PaymentInstruction:
+        return PaymentInstruction(
+            "mock",
+            f"PMT_{claim_id}_V1",
+            idempotency_key,
+            amount,
+            currency,
+            "SCHEDULED",
+            True,
+        )
 
     def mark_sent(self, *, instruction: PaymentInstruction) -> PaymentInstruction:
-        return PaymentInstruction(instruction.provider, instruction.provider_id, instruction.idempotency_key, instruction.amount, instruction.currency, "SENT", True)
+        return PaymentInstruction(
+            instruction.provider,
+            instruction.provider_id,
+            instruction.idempotency_key,
+            instruction.amount,
+            instruction.currency,
+            "SENT",
+            True,
+        )
 
 
 class StripePaymentProvider:
+    """Configuration seam only; no claimant-disbursement semantics are claimed yet."""
+
     def __init__(self, settings: Settings) -> None:
         if not settings.stripe_secret_key:
             raise ConfigurationError("STRIPE_SECRET_KEY is required for Stripe payments")
         self.secret_key = settings.stripe_secret_key
 
-    def schedule(self, *, claim_id: str, amount: float, currency: str, method: str, idempotency_key: str) -> PaymentInstruction:
-        body = urllib.parse.urlencode({"amount": str(round(amount * 100)), "currency": currency.lower(), "metadata[claim_id]": claim_id, "metadata[method]": method, "payment_method_types[]": "customer_balance"}).encode()
-        request = urllib.request.Request("https://api.stripe.com/v1/payment_intents", data=body, method="POST", headers={"Authorization": f"Bearer {self.secret_key}", "Idempotency-Key": idempotency_key, "Content-Type": "application/x-www-form-urlencoded"})
-        try:
-            with urllib.request.urlopen(request, timeout=15) as response:
-                payload: dict[str, Any] = json.load(response)
-        except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError) as exc:
-            raise RuntimeError("Stripe payment scheduling failed") from exc
-        provider_id = payload.get("id")
-        if not isinstance(provider_id, str):
-            raise TypeError("Stripe returned no payment intent ID")
-        return PaymentInstruction("stripe", provider_id, idempotency_key, amount, currency, str(payload.get("status", "requires_confirmation")), False)
+    def schedule(
+        self,
+        *,
+        claim_id: str,
+        amount: float,
+        currency: str,
+        method: str,
+        idempotency_key: str,
+    ) -> PaymentInstruction:
+        raise RuntimeError(
+            "Stripe claimant disbursement scheduling is not implemented in this build"
+        )
 
     def mark_sent(self, *, instruction: PaymentInstruction) -> PaymentInstruction:
-        return instruction
+        raise RuntimeError(
+            "Stripe completion requires verified provider reconciliation; manual mark-sent is disabled"
+        )
 
 
 def payment_provider(settings: Settings) -> PaymentProvider:
