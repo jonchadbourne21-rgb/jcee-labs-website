@@ -1,6 +1,8 @@
 """Provider-backed payment boundary; real money movement remains disabled until reconciled."""
 from __future__ import annotations
 
+import hashlib
+import json
 from dataclasses import dataclass
 from typing import Protocol
 
@@ -16,6 +18,18 @@ class PaymentInstruction:
     currency: str
     status: str
     mock: bool
+
+
+def payment_operation_key(tenant_id: str, claim_id: str, settlement_slot: str) -> str:
+    """Stable logical payment identity; retries reuse it, new settlements do not."""
+    identity = {
+        "version": 1,
+        "tenant_id": tenant_id,
+        "claim_id": claim_id,
+        "settlement_slot": settlement_slot,
+    }
+    canonical = json.dumps(identity, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+    return f"claim-payment:v1:{hashlib.sha256(canonical.encode('utf-8')).hexdigest()}"
 
 
 class PaymentProvider(Protocol):

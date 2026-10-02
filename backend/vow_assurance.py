@@ -186,6 +186,7 @@ quest {QUEST_NAME} {{
 
 def authorize_settlement(
     *,
+    tenant_id: str,
     claim_id: str,
     estimate: dict[str, Any],
     adjuster_name: str,
@@ -198,7 +199,9 @@ def authorize_settlement(
     paths = _prepare_paths(Path(data_dir).expanduser().resolve() if data_dir else default_data_dir())
     estimate_sha256 = _canonical_sha256(estimate)
     authorization_body = {
+        "tenant_id": tenant_id,
         "claim_id": claim_id,
+        "settlement_slot": settlement_slot,
         "decision": "APPROVE",
         "estimate_sha256": estimate_sha256,
         "net_payout": float(estimate["net_payout"]),
@@ -206,10 +209,16 @@ def authorize_settlement(
         "review_notes_sha256": _sha256_bytes((notes or "").encode("utf-8")),
     }
     authorization_sha256 = _canonical_sha256(authorization_body)
-    # A claim settlement slot is idempotent. Reusing this key with changed
-    # arguments is a VOW conflict, not a second effect; demo resets receive a
-    # new slot because they represent a new logical claim instance.
-    effect_key = f"claim-settlement:{claim_id}:{settlement_slot}"
+    # The integration key is scoped by tenant + claim + logical settlement slot.
+    # Reusing that operation with changed arguments remains a VOW conflict; a
+    # genuinely new settlement slot receives a distinct key.
+    operation_identity = {
+        "version": 2,
+        "tenant_id": tenant_id,
+        "claim_id": claim_id,
+        "settlement_slot": settlement_slot,
+    }
+    effect_key = f"claim-settlement:v2:{_canonical_sha256(operation_identity)}"
     effect_payload = json.dumps(
         {**authorization_body, "authorization_sha256": authorization_sha256, "status": "AUTHORIZED"},
         sort_keys=True,

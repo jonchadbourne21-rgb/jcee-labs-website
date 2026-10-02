@@ -4,7 +4,7 @@ import pytest
 
 from backend.config import ConfigurationError, Settings
 from backend.object_storage import LocalEvidenceStore, S3EvidenceStore, evidence_scope_prefix
-from backend.payments import MockPaymentProvider, payment_provider
+from backend.payments import MockPaymentProvider, payment_operation_key, payment_provider
 from backend.storage import ClaimsRepository
 from backend.tenant_context import bind_request
 
@@ -248,3 +248,11 @@ def test_stripe_provider_does_not_claim_unimplemented_disbursement() -> None:
     })()
     with pytest.raises(RuntimeError, match="verified provider reconciliation"):
         provider.mark_sent(instruction=instruction)
+
+
+
+def test_payment_operation_key_scopes_tenant_and_logical_settlement() -> None:
+    a_v1 = payment_operation_key("TENANT_A", "CLM_SHARED", "v1")
+    assert a_v1 == payment_operation_key("TENANT_A", "CLM_SHARED", "v1")
+    assert a_v1 != payment_operation_key("TENANT_B", "CLM_SHARED", "v1")
+    assert a_v1 != payment_operation_key("TENANT_A", "CLM_SHARED", "v2")

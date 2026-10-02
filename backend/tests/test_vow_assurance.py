@@ -46,6 +46,7 @@ def test_frozen_vow_core_matches_release_manifest() -> None:
 
 def test_vow_keyed_effect_replays_without_duplicate_write(tmp_path: Path) -> None:
     first = authorize_settlement(
+        tenant_id="TENANT_A",
         claim_id="CLM_IDEMPOTENT",
         estimate=covered_estimate(),
         adjuster_name="A. Adjuster",
@@ -53,6 +54,7 @@ def test_vow_keyed_effect_replays_without_duplicate_write(tmp_path: Path) -> Non
         data_dir=tmp_path,
     )
     second = authorize_settlement(
+        tenant_id="TENANT_A",
         claim_id="CLM_IDEMPOTENT",
         estimate=covered_estimate(),
         adjuster_name="A. Adjuster",
@@ -85,3 +87,38 @@ def test_vow_keyed_effect_replays_without_duplicate_write(tmp_path: Path) -> Non
 def test_recovery_cycle_is_idle_before_first_assurance_run(tmp_path: Path) -> None:
     result = run_recovery_cycle(data_dir=tmp_path)
     assert result == {"status": "idle", "reason": "VOW assurance database has not been created"}
+
+
+
+def test_vow_settlement_identity_separates_tenant_and_logical_slot(tmp_path: Path) -> None:
+    tenant_a_v1 = authorize_settlement(
+        tenant_id="TENANT_A",
+        claim_id="CLM_SHARED",
+        estimate=covered_estimate(),
+        adjuster_name="A. Adjuster",
+        notes="same authorization",
+        data_dir=tmp_path,
+        settlement_slot="v1",
+    )
+    tenant_b_v1 = authorize_settlement(
+        tenant_id="TENANT_B",
+        claim_id="CLM_SHARED",
+        estimate=covered_estimate(),
+        adjuster_name="A. Adjuster",
+        notes="same authorization",
+        data_dir=tmp_path,
+        settlement_slot="v1",
+    )
+    tenant_a_v2 = authorize_settlement(
+        tenant_id="TENANT_A",
+        claim_id="CLM_SHARED",
+        estimate=covered_estimate(),
+        adjuster_name="A. Adjuster",
+        notes="same authorization",
+        data_dir=tmp_path,
+        settlement_slot="v2",
+    )
+
+    assert tenant_a_v1["effect"]["key"] != tenant_b_v1["effect"]["key"]
+    assert tenant_a_v1["effect"]["key"] != tenant_a_v2["effect"]["key"]
+    assert len({tenant_a_v1["authorization_sha256"], tenant_b_v1["authorization_sha256"], tenant_a_v2["authorization_sha256"]}) == 3

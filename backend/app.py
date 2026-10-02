@@ -32,7 +32,7 @@ from backend.models import (
     WorkflowStatusRequest,
 )
 from backend.object_storage import evidence_store
-from backend.payments import PaymentInstruction, payment_provider
+from backend.payments import PaymentInstruction, payment_operation_key, payment_provider
 from backend.pricing import (
     compute_claim_estimate,
     recompute_adjusted_estimate,
@@ -54,7 +54,7 @@ from backend.product import (
 )
 from backend.repositories import claims_repository
 from backend.security import SecurityMiddleware
-from backend.tenant_context import current_actor_id, current_roles
+from backend.tenant_context import current_actor_id, current_roles, current_tenant_id
 from backend.vow_assurance import (
     VowAssuranceError,
     VowPolicyDenied,
@@ -619,12 +619,18 @@ def create_app(
                 estimate = claim.get("estimate")
                 if not isinstance(estimate, dict):
                     raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="An approved estimate is required for payment scheduling")
+                settlement_slot = str(claim.get("settlement_slot") or "v1")
+                operation_key = payment_operation_key(
+                    current_tenant_id(),
+                    claim_id,
+                    settlement_slot,
+                )
                 payment_instruction = provider.schedule(
                     claim_id=claim_id,
                     amount=float(estimate["net_payout"]),
                     currency="USD",
                     method=request.method.value,
-                    idempotency_key=f"claim-payment:{claim_id}:v1",
+                    idempotency_key=operation_key,
                 )
                 instruction = {
                     "status": "SCHEDULED",
@@ -654,7 +660,14 @@ def create_app(
                 provider_instruction = PaymentInstruction(
                     provider=str(claim.get("payment_provider", "mock")),
                     provider_id=str(claim["payment"].get("instruction_id")),
-                    idempotency_key=str(claim.get("payment_idempotency_key", f"claim-payment:{claim_id}:v1")),
+                    idempotency_key=str(
+                        claim.get("payment_idempotency_key")
+                        or payment_operation_key(
+                            current_tenant_id(),
+                            claim_id,
+                            str(claim.get("settlement_slot") or "v1"),
+                        )
+                    ),
                     amount=float(claim["payment"].get("amount", 0)),
                     currency=str(claim["payment"].get("currency", "USD")),
                     status="SCHEDULED",
@@ -786,6 +799,7 @@ def create_app(
             if is_approved:
                 try:
                     assurance = authorize_settlement(
+                        tenant_id=current_tenant_id(),
                         claim_id=claim_id,
                         estimate=revised_estimate,
                         adjuster_name=adjuster_name,
