@@ -24,8 +24,8 @@ print('migration static checks: PASS')
 PY
 ```
 
-**Observed on 2026-10-01:** Ruff passed; backend suite passed with 28 tests. The existing Starlette/httpx deprecation warning is non-blocking and comes from the installed test-client compatibility layer.
+**Historical observation at the original PR head (2026-10-01):** Ruff passed and the backend suite was reported as 28 tests passing. Those results predate the security-repair commits and are not evidence that the repaired head has executed the expanded suite. The repaired head still requires a clean runner/CI receipt before merge consideration.
 
 ## Remaining gates before real production traffic
 
-The environment still needs a provisioned PostgreSQL instance, private object-storage bucket, OIDC provider/JWKS verifier integration, Stripe webhook endpoint, secret-manager injection, restore drill, and staging capacity run. These are deployment gates, not claims that the local demo has completed them.
+The environment still needs a provisioned PostgreSQL instance exercised with the intended non-owner RLS role, a private object-storage bucket, OIDC provider/JWKS verifier integration, authenticated binary-evidence retrieval, a supported real disbursement/reconciliation path, shared multi-worker rate limiting, secret-manager injection, a post-write-safe restore drill, and an authenticated staging capacity run. These are deployment gates, not claims that the local demo has completed them.
