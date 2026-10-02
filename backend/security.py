@@ -46,6 +46,15 @@ class RateLimiter:
             return True
 
 
+def _apply_security_headers(response: Any, request_id: str) -> Any:
+    response.headers["X-Request-ID"] = request_id
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Referrer-Policy"] = "no-referrer"
+    response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
+    return response
+
+
 class SecurityMiddleware(BaseHTTPMiddleware):
     def __init__(self, app: Any, *, settings: Settings, principal_resolver: Any) -> None:
         super().__init__(app)
@@ -57,7 +66,12 @@ class SecurityMiddleware(BaseHTTPMiddleware):
         request_id = request.headers.get("X-Request-ID") or uuid.uuid4().hex
         client_ip = request.client.host if request.client else "unknown"
         if not self.limiter.allowed(f"{client_ip}:{request.url.path}"):
-            return JSONResponse({"detail": "Rate limit exceeded", "request_id": request_id}, status_code=429, headers={"Retry-After": "60", "X-Request-ID": request_id})
+            response = JSONResponse(
+                {"detail": "Rate limit exceeded", "request_id": request_id},
+                status_code=429,
+                headers={"Retry-After": "60"},
+            )
+            return _apply_security_headers(response, request_id)
         try:
             principal = self.principal_resolver(request)
             with bind_request(
@@ -68,10 +82,10 @@ class SecurityMiddleware(BaseHTTPMiddleware):
             ):
                 response = await call_next(request)
         except HTTPException as exc:
-            return JSONResponse({"detail": exc.detail, "request_id": request_id}, status_code=exc.status_code, headers={"WWW-Authenticate": "Bearer"} if exc.status_code == 401 else None)
-        response.headers["X-Request-ID"] = request_id
-        response.headers["X-Content-Type-Options"] = "nosniff"
-        response.headers["X-Frame-Options"] = "DENY"
-        response.headers["Referrer-Policy"] = "no-referrer"
-        response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
-        return response
+            response = JSONResponse(
+                {"detail": exc.detail, "request_id": request_id},
+                status_code=exc.status_code,
+                headers={"WWW-Authenticate": "Bearer"} if exc.status_code == 401 else None,
+            )
+            return _apply_security_headers(response, request_id)
+        return _apply_security_headers(response, request_id)

@@ -275,17 +275,19 @@ def create_app(
         version="0.1.0",
         description="Deterministic prototype for AI-assisted property claim intake, scoping, pricing, review, and settlement.",
     )
+    # Add security first, then CORS. Starlette places the last-added middleware
+    # outermost, so CORS handles preflight and decorates authentication errors.
+    application.add_middleware(
+        SecurityMiddleware,
+        settings=resolved_settings,
+        principal_resolver=lambda request: principal_from_request(request, resolved_settings),
+    )
     application.add_middleware(
         CORSMiddleware,
         allow_origins=origins,
         allow_credentials=True,
         allow_methods=["GET", "POST", "OPTIONS"],
         allow_headers=["Content-Type", "Authorization"],
-    )
-    application.add_middleware(
-        SecurityMiddleware,
-        settings=resolved_settings,
-        principal_resolver=lambda request: principal_from_request(request, resolved_settings),
     )
     application.state.repository = repository
     application.state.data_file = str(Path(resolved_data_file).expanduser())

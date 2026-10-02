@@ -311,3 +311,95 @@ def test_nonmock_payment_schedule_is_disabled_before_provider_call(tmp_path: Pat
         persisted = app.state.repository.get("CLM_APPROVED")
     assert persisted is not None
     assert persisted["status"] == "APPROVED"
+
+
+
+def test_jwt_cors_preflight_is_handled_before_authentication(tmp_path: Path) -> None:
+    settings = Settings(environment="test", auth_mode="jwt", jwt_secret="hardening-test-secret")
+    app = create_app(
+        tmp_path / "claims.json",
+        allowed_origins=["https://app.example"],
+        vow_data_dir=tmp_path / "vow",
+        settings=settings,
+    )
+    with TestClient(app) as client:
+        response = client.options(
+            "/api/claims/submit",
+            headers={
+                "Origin": "https://app.example",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "authorization,content-type",
+            },
+        )
+    assert response.status_code == 200
+    assert response.headers["access-control-allow-origin"] == "https://app.example"
+
+
+def test_auth_errors_keep_cors_request_id_and_security_headers(tmp_path: Path) -> None:
+    secret = "hardening-test-secret"
+    settings = Settings(environment="test", auth_mode="jwt", jwt_secret=secret)
+    app = create_app(
+        tmp_path / "claims.json",
+        allowed_origins=["https://app.example"],
+        vow_data_dir=tmp_path / "vow",
+        settings=settings,
+    )
+    without_mfa = jwt(
+        {
+            "sub": "USR_DESK_01",
+            "tenant_id": "TENANT_A",
+            "roles": ["DESK_ADJUSTER"],
+            "exp": time.time() + 60,
+        },
+        secret,
+    )
+    with TestClient(app) as client:
+        unauthorized = client.get(
+            "/health",
+            headers={"Origin": "https://app.example", "X-Request-ID": "req-401"},
+        )
+        forbidden = client.get(
+            "/health",
+            headers={
+                "Origin": "https://app.example",
+                "X-Request-ID": "req-403",
+                "Authorization": f"Bearer {without_mfa}",
+            },
+        )
+        disallowed = client.get(
+            "/health",
+            headers={"Origin": "https://evil.example", "X-Request-ID": "req-no-cors"},
+        )
+
+    for response, request_id, code in (
+        (unauthorized, "req-401", 401),
+        (forbidden, "req-403", 403),
+    ):
+        assert response.status_code == code
+        assert response.headers["access-control-allow-origin"] == "https://app.example"
+        assert response.headers["x-request-id"] == request_id
+        assert response.headers["x-content-type-options"] == "nosniff"
+        assert response.headers["x-frame-options"] == "DENY"
+    assert "access-control-allow-origin" not in disallowed.headers
+
+
+def test_rate_limit_response_keeps_security_headers(tmp_path: Path) -> None:
+    settings = Settings(environment="test", rate_limit_per_minute=1)
+    app = create_app(
+        tmp_path / "claims.json",
+        allowed_origins=["https://app.example"],
+        vow_data_dir=tmp_path / "vow",
+        settings=settings,
+    )
+    with TestClient(app) as client:
+        first = client.get("/health", headers={"Origin": "https://app.example"})
+        limited = client.get(
+            "/health",
+            headers={"Origin": "https://app.example", "X-Request-ID": "req-429"},
+        )
+    assert first.status_code == 200
+    assert limited.status_code == 429
+    assert limited.headers["access-control-allow-origin"] == "https://app.example"
+    assert limited.headers["x-request-id"] == "req-429"
+    assert limited.headers["x-content-type-options"] == "nosniff"
+    assert limited.headers["x-frame-options"] == "DENY"
