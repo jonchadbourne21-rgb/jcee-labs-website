@@ -151,7 +151,7 @@ Its existing checks remain unchanged and can be run with `pnpm release:check`.
 
 ## Production hardening
 
-The backend now has explicit adapter boundaries for tenant-scoped PostgreSQL persistence, private local/S3-compatible evidence storage, JWT/OIDC-ready authentication with MFA assurance, provider-backed payments, request IDs, security headers, rate limiting, and capacity smoke testing. The default demo remains credential-free and uses local JSON, local evidence files, demo users, and mock payments.
+The backend now has explicit adapter boundaries for tenant-scoped PostgreSQL persistence, private local/S3-compatible evidence upload, JWT test authentication plus an OIDC seam that remains fail-closed until JWKS verification exists, mock payments plus a disabled non-mock payment seam, request IDs, security headers, bounded process-local rate limiting, and capacity smoke testing. The default demo remains credential-free and uses local JSON, local evidence files, demo users, and mock payments.
 
 For deployment configuration, migration/rollback procedures, and release gates, read [`deploy/production/README.md`](deploy/production/README.md) and [`docs/production-hardening-verification.md`](docs/production-hardening-verification.md). Apply the PostgreSQL schema from [`backend/migrations/001_claims.sql`](backend/migrations/001_claims.sql). Run a staging capacity check with:
 
@@ -159,4 +159,4 @@ For deployment configuration, migration/rollback procedures, and release gates, 
 ./scripts/capacity-smoke.sh --base-url http://127.0.0.1:8000 --duration 30 --concurrency 8
 ```
 
-Production mode is fail-closed: it requires `CLAIMS_DATABASE_URL`, `CLAIMS_AUTH_MODE=oidc`, private S3 settings, and a non-mock payment provider. No production credentials are committed or required for the Kitchen Water Damage demo.
+Production configuration validation is fail-closed and requires `CLAIMS_DATABASE_URL`, `CLAIMS_AUTH_MODE=oidc`, private S3 settings, and Stripe configuration. That is not a production-readiness claim: OIDC JWKS verification, authenticated binary-evidence retrieval, real disbursement/reconciliation, shared rate limiting, restore drills, and staging capacity evidence remain deployment gates. No production credentials are committed or required for the Kitchen Water Damage demo.
