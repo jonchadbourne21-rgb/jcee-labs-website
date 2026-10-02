@@ -8,6 +8,7 @@ import time
 from pathlib import Path
 
 from fastapi.testclient import TestClient
+from starlette.responses import JSONResponse
 
 from backend.app import create_app
 from backend.config import Settings
