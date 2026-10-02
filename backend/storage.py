@@ -78,7 +78,7 @@ class ClaimsRepository:
         with self._lock:
             if tenant != _DEFAULT_TENANT or "tenant_id" in claim:
                 claim["tenant_id"] = tenant
-            if claim_id in self._claims and self._claims[claim_id].get("tenant_id", _DEFAULT_TENANT) == tenant:
+            if claim_id in self._claims:
                 raise KeyError(claim_id)
             self._claims[claim_id] = copy.deepcopy(claim)
             self._write_unlocked()

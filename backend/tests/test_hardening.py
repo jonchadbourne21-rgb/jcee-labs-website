@@ -46,3 +46,20 @@ def test_mock_provider_is_idempotency_ready() -> None:
     assert instruction.provider == "mock"
     assert instruction.idempotency_key == "claim-payment:CLM_1:v1"
     assert provider.mark_sent(instruction=instruction).status == "SENT"
+
+
+def test_json_repository_rejects_cross_tenant_duplicate_claim_id_without_data_loss(tmp_path) -> None:
+    path = tmp_path / "claims.json"
+    repository = ClaimsRepository(path)
+    with bind_request(tenant_id="TENANT_A", actor_id="a", request_id="r1"):
+        repository.create({"claim_id": "CLM_SHARED", "status": "SUBMITTED", "marker": "tenant-a"})
+    with bind_request(tenant_id="TENANT_B", actor_id="b", request_id="r2"):
+        with pytest.raises(KeyError):
+            repository.create({"claim_id": "CLM_SHARED", "status": "SUBMITTED", "marker": "tenant-b"})
+        assert repository.get("CLM_SHARED") is None
+
+    reloaded = ClaimsRepository(path)
+    with bind_request(tenant_id="TENANT_A", actor_id="a", request_id="r3"):
+        preserved = reloaded.get("CLM_SHARED")
+        assert preserved is not None
+        assert preserved["marker"] == "tenant-a"
