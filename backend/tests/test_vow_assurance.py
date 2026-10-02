@@ -75,6 +75,7 @@ def test_vow_keyed_effect_replays_without_duplicate_write(tmp_path: Path) -> Non
 
     with pytest.raises(VowPolicyDenied):
         authorize_settlement(
+            tenant_id="TENANT_A",
             claim_id="CLM_IDEMPOTENT",
             estimate=covered_estimate(),
             adjuster_name="A. Adjuster",
