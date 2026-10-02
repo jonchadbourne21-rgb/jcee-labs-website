@@ -47,9 +47,6 @@ CREATE TABLE IF NOT EXISTS aegis_claim_evidence (
 ALTER TABLE aegis_claim_events ENABLE ROW LEVEL SECURITY;
 ALTER TABLE aegis_claim_evidence ENABLE ROW LEVEL SECURITY;
 ALTER TABLE aegis_claims ENABLE ROW LEVEL SECURITY;
-ALTER TABLE aegis_claim_events FORCE ROW LEVEL SECURITY;
-ALTER TABLE aegis_claim_evidence FORCE ROW LEVEL SECURITY;
-ALTER TABLE aegis_claims FORCE ROW LEVEL SECURITY;
 
 CREATE POLICY aegis_claims_tenant_isolation ON aegis_claims
   USING (tenant_id = current_setting('aegis.tenant_id', true))
