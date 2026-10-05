@@ -1,5 +1,6 @@
 import { useState } from "react";
 import EditorialLayout from "@/components/EditorialLayout";
+import BB84PublicPreprint from "@/components/BB84PublicPreprint";
 import {
   publications,
   publicationDate,
@@ -49,9 +50,13 @@ export default function ResourcesPage() {
           ))}
         </div>
         <p className="sr-only" role="status">
-          {visible.length} resources shown
+          {visible.length + (filter === "All" || filter === "Research" ? 1 : 0)}{" "}
+          resources shown
         </p>
         <div className="resource-grid">
+          {(filter === "All" || filter === "Research") && (
+            <BB84PublicPreprint />
+          )}
           {visible.map(item => (
             <article key={item.slug} className="resource-card">
               <p className="editorial-kicker">

@@ -1,4 +1,10 @@
 {
+  "/research/bb84-communication": {
+    "title": "Classical Communication in BB84 Monogamy Games: Perfect Recovery and One-Message Bounds — JCEE Labs",
+    "description": "Exact perfect-recovery communication cost, a bounded-error converse, and one-message bounds for simultaneous full-string recovery in BB84 monogamy games.",
+    "type": "article",
+    "publishedTime": "2026-10-01"
+  },
   "/": {
     "title": "JCEE Labs — Accountable AI-Assisted Operations",
     "description": "JCEE Labs develops methods and software that connect AI-assisted operational actions to clear permissions, reviewable evidence, and human control."
@@ -34,6 +40,18 @@
   "/registry": {
     "title": "Public Registry — JCEE Labs",
     "description": "Selected JCEE build milestones, development candidates, and open gates. Selected entries reconciled September 29, 2026; historical evidence dates preserved."
+  },
+  "/blog/after-an-ai-says-done": {
+    "title": "What Happens After an AI Says ‘Done’? — JCEE Labs",
+    "description": "An attempted action and a confirmed outcome are different facts. Accountable workflows keep that difference visible—especially when the connection goes quiet.",
+    "type": "article",
+    "publishedTime": "2026-10-05T00:00:00Z"
+  },
+  "/blog/a-research-result-needs-a-boundary": {
+    "title": "A Research Result Needs a Boundary — JCEE Labs",
+    "description": "Our BB84 preprint now has a dedicated reading page. Here is how to distinguish what its results establish, what the model assumes, and what remains open.",
+    "type": "article",
+    "publishedTime": "2026-10-05T00:00:00Z"
   },
   "/blog/a-confident-model-still-needs-permission": {
     "title": "A Confident Model Still Needs Permission — JCEE Labs",

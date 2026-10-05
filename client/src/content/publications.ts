@@ -16,6 +16,100 @@ export type Publication = {
 
 export const publications: Publication[] = [
   {
+    slug: "after-an-ai-says-done",
+    title: "What Happens After an AI Says ‘Done’?",
+    kind: "Engineering blog",
+    date: "2026-10-05",
+    summary: "An attempted action and a confirmed outcome are different facts. Accountable workflows keep that difference visible—especially when the connection goes quiet.",
+    sections: [
+      {
+        title: "The reply is not the result",
+        paragraphs: [
+          "An assistant prepares a change, receives approval, and sends it to another system. Then the request times out. Did the change fail? Did it succeed while the response was lost? A confident answer cannot resolve that uncertainty.",
+          "This is an illustrative workflow, not a report of a JCEE customer deployment. It exposes a practical distinction: permission to attempt an action, evidence that it was attempted, and evidence of its outcome are separate things. A conversation can finish before the work is known to be finished.",
+          "The word ‘done’ should describe an established result, not merely the end of the assistant’s turn. When the outcome is unknown, the useful answer is what was attempted, what is observable, and what remains unresolved.",
+        ],
+      },
+      {
+        title: "An unknown outcome is a real state",
+        paragraphs: [
+          "A missing response does not prove that nothing happened. Repeating a consequential action without resolving its earlier outcome can create a second change, a duplicate message, or an unexpected charge. On the other hand, silently abandoning an unresolved action can leave necessary work unfinished.",
+          "The accountable owner needs to know where the workflow stands. ‘Submitted; completion unconfirmed’ can be more useful than a green check mark. It tells a person that there is a specific question to investigate before deciding what happens next.",
+          "That distinction also belongs in the interface. A draft, an approved proposal, a submitted request, and a verified result should not share a single success label. The display should make the current evidence boundary visible without requiring the user to reconstruct a tool log.",
+        ],
+      },
+      {
+        title: "Three questions for the person responsible",
+        paragraphs: [
+          "Before handing a workflow back to its owner, make the action and its outcome legible. These are design questions, not claims that one implementation has solved every failure mode.",
+        ],
+        bullets: [
+          "What was authorized? Identify the particular operation and the person or policy responsible for permission.",
+          "What was attempted? Separate the intended action from the request that was actually submitted.",
+          "What can be confirmed? State the observed result, the evidence supporting it, and any remaining uncertainty.",
+        ],
+      },
+      {
+        title: "Human control continues after approval",
+        paragraphs: [
+          "Approval is not the last moment at which people need control. Someone must own unresolved outcomes, decide whether further action is appropriate, and recognize when a changed situation calls for new permission. A previous approval should not silently become unlimited authority to keep trying.",
+          "This is part of the motivation behind JCEE’s work on accountable AI-assisted operations. Our public research and build registry distinguish bounded evidence from broader platform direction. Neither an architectural description nor a local result is a blanket guarantee of production safety.",
+          "A useful assistant can move work forward and still say, precisely, ‘I cannot yet confirm the result.’ That is not an incomplete explanation. It is the information the accountable person needs next.",
+        ],
+      },
+    ],
+    related: [
+      { label: "A Confident Model Still Needs Permission", href: "/blog/a-confident-model-still-needs-permission" },
+      { label: "JCEE’s assurance method", href: "/assurance" },
+      { label: "Current public build status", href: "/registry" },
+    ],
+  },
+  {
+    slug: "a-research-result-needs-a-boundary",
+    title: "A Research Result Needs a Boundary",
+    kind: "Company blog",
+    date: "2026-10-05",
+    summary: "Our BB84 preprint now has a dedicated reading page. Here is how to distinguish what its results establish, what the model assumes, and what remains open.",
+    sections: [
+      {
+        title: "A paper is more than its headline",
+        paragraphs: [
+          "A research headline names a question. A mathematical result answers a specified version of that question, under specified assumptions. Removing those assumptions can make a short summary sound broader while making it less accurate.",
+          "JCEE’s public preprint, Classical Communication in BB84 Monogamy Games: Perfect Recovery and One-Message Bounds, asks how much classical communication two separated holders of quantum side information need to recover the same complete BB84 measurement outcome after a public basis reveal.",
+          "The dedicated paper page brings the released manuscript, its identity, and its limits together. The manuscript remains the authorized October 1, 2026 v0.4-P2 release. Adding a page is a publication step, not a new theorem or a revision of the accepted claims.",
+        ],
+      },
+      {
+        title: "Keep the result attached to its model",
+        paragraphs: [
+          "The paper establishes an exact perfect-recovery cost of n classical bits for an n-bit outcome under finite-round classical interaction, together with a bounded-error converse. It also gives one-message lower and upper bounds that meet when the communication budget is n − 1 bits. In that family, the optimal success probability is cos²(π/8).",
+          "These statements concern simultaneous recovery of the complete outcome string. The model permits arbitrary finite-dimensional prior entanglement prepared independently of the later basis choice, excludes post-split quantum communication, and uses the manuscript’s worst-case classical communication accounting. They should not be casually translated into claims about every quantum communication task.",
+          "The exact equations, definitions, and proofs live in the paper. The overview is a guide to reading them, not a substitute for them.",
+        ],
+      },
+      {
+        title: "An exact family is not the whole frontier",
+        paragraphs: [
+          "Solving the perfect-recovery cost does not settle every limited-budget guessing problem. The general one-message interior frontier, interactive near-full recovery for n ≥ 3, and the exact physical one-message (3,1) case remain open. Those limits belong beside the result, not out of sight beneath a broad success claim.",
+          "It is equally important not to erase what has been established. Clear boundaries preserve both sides: the stated results remain intact, and the unresolved questions remain unresolved. This website release neither expands nor automatically narrows the accepted mathematical claims.",
+        ],
+      },
+      {
+        title: "Publication and review are different milestones",
+        paragraphs: [
+          "The manuscript is a public preprint. No independent human expert review was obtained; it is not a peer-reviewed publication. Making it available to readers does not establish independent validation, novelty, priority, or a deployed cryptographic system.",
+          "A stable version and a PDF checksum let readers identify the exact artifact being discussed. That makes a subsequent comment or correction easier to connect to the relevant text. It does not replace substantive review.",
+          "We want the reader to be able to ask three simple questions and find direct answers: What is the claim? Under what assumptions? Which version contains the proof? The new paper page is organized around those questions.",
+        ],
+      },
+    ],
+    related: [
+      { label: "Read the BB84 paper and download v0.4-P2", href: "/research/bb84-communication" },
+      { label: "The Evidence Boundary", href: "/research/jrp-000" },
+      { label: "Explore JCEE research", href: "/research" },
+    ],
+  },
+  {
     slug: "a-confident-model-still-needs-permission",
     title: "A Confident Model Still Needs Permission",
     kind: "Company blog",

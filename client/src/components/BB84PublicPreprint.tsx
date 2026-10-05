@@ -2,6 +2,8 @@ import React from "react";
 import { bb84PublicRelease as paper } from "@/content/bb84Release";
 
 export default function BB84PublicPreprint() {
+  const landingUrl = `${import.meta.env.BASE_URL}${paper.landingUrl.slice(1)}`;
+  const pdfUrl = `${import.meta.env.BASE_URL}${paper.pdfUrl.slice(1)}`;
   return (
     <article
       id="bb84-preprint"
@@ -13,7 +15,7 @@ export default function BB84PublicPreprint() {
         <time dateTime={paper.date}>October 1, 2026</time>
       </p>
       <h3 id="bb84-preprint-title">
-        <a href={paper.landingUrl} target="_blank" rel="noopener noreferrer">
+        <a href={landingUrl} target="_blank" rel="noopener noreferrer">
           {paper.title}
         </a>
       </h3>
@@ -24,7 +26,7 @@ export default function BB84PublicPreprint() {
       <div className="flex flex-wrap gap-x-6 gap-y-3">
         <a
           className="editorial-text-link"
-          href={paper.landingUrl}
+          href={landingUrl}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -32,7 +34,7 @@ export default function BB84PublicPreprint() {
         </a>
         <a
           className="editorial-text-link"
-          href={paper.pdfUrl}
+          href={pdfUrl}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -41,7 +43,9 @@ export default function BB84PublicPreprint() {
       </div>
       <details className="mt-5">
         <summary>Release record and PDF checksum</summary>
-        <p>{paper.record} · {paper.version}</p>
+        <p>
+          {paper.record} · {paper.version}
+        </p>
         <p>{paper.correctionNote}</p>
         <p>
           Released PDF SHA-256:{" "}

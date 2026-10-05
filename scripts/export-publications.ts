@@ -4,6 +4,7 @@ import {
   publicationHref,
 } from "../client/src/content/publications";
 import { entries } from "../client/src/content/registryEntries";
+import { bb84PublicRelease as paper } from "../client/src/content/bb84Release";
 fs.mkdirSync("client/public/publications", { recursive: true });
 for (const item of publications) {
   const text =
@@ -22,6 +23,7 @@ for (const item of publications) {
         "\n"
       : "");
   fs.writeFileSync(`client/public/publications/${item.slug}.md`, text);
+  fs.writeFileSync(`client/public/publications/${item.slug}.txt`, text);
 }
 fs.writeFileSync(
   "client/public/JCEE_Labs_Public_Registry_v1.3.md",
@@ -41,6 +43,12 @@ const routeMetadata: Record<
   string,
   { title: string; description: string; type?: string; publishedTime?: string }
 > = {
+  [paper.landingUrl]: {
+    title: `${paper.title} — JCEE Labs`,
+    description: paper.summary,
+    type: "article",
+    publishedTime: paper.date,
+  },
   "/": {
     title: "JCEE Labs — Accountable AI-Assisted Operations",
     description:
