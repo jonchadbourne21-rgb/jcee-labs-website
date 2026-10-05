@@ -361,12 +361,13 @@ try {
   const filtered = await evaluate(page.send, `({ count:document.querySelectorAll('.resource-card').length, text:[...document.querySelectorAll('.resource-card')].map(card => card.textContent).join(' ') })`);
   if (filtered.count !== 2 || !filtered.text.includes('order-integrity') || !filtered.text.includes('What Happens After an AI Says')) failures.push('Resource filter did not show the engineering articles');
 
-  for (const [label, count] of [["From the Founder", 1], ["Research", 3]]) {
+  for (const [label, count] of [["From the Founder", 1], ["Research", 4]]) {
     await evaluate(page.send, `(() => { [...document.querySelectorAll('.resource-filters button')].find(b=>b.textContent === '${label}')?.click(); })()`);
     await sleep(100);
     const cards = await evaluate(page.send, `({ count:document.querySelectorAll('.resource-card').length, text:document.querySelector('.resource-grid')?.textContent })`);
     if (cards.count !== count) failures.push(`${label}: wrong category count`);
     if (label === "Research" && cards.text.includes("The Work Nobody Sees")) failures.push('Founder essay incorrectly classified as research');
+    if (label === "Research" && !cards.text.includes("Perfect Recovery and One-Message Bounds")) failures.push('Research filter is missing the BB84 paper');
   }
   await navigate(page.send, baseUrl, "/terms");
   const termsText = await readBody(page.send);
