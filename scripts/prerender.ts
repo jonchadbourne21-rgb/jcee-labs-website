@@ -4,7 +4,13 @@ import { createServer } from "vite";
 import react from "@vitejs/plugin-react";
 import { applyPublicPageMetadata } from "../server/publicPageMetadata";
 const root = path.resolve("dist/public");
-const template = fs.readFileSync(path.join(root, "index.html"), "utf8");
+const template = fs
+  .readFileSync(path.join(root, "index.html"), "utf8")
+  // Omit only unresolved development placeholders; configured analytics remain intact.
+  .replace(
+    /\s*<script\s+defer\s+src="%VITE_ANALYTICS_ENDPOINT%\/umami"[\s\S]*?<\/script>/g,
+    ""
+  );
 const routes: string[] = JSON.parse(
   fs.readFileSync("client/src/content/publicRoutes.json", "utf8")
 );
@@ -25,8 +31,6 @@ const server = await createServer({
 try {
   const { render } = await server.ssrLoadModule("/src/prerender.tsx");
   for (const route of routes) {
-    // Preserve the released standalone paper and its unchanged downloadable PDFs.
-    if (route === "/research/bb84-communication") continue;
     const body = await render(route);
     if (!body.includes("<h1")) throw new Error(`Missing rendered H1: ${route}`);
     const html = applyPublicPageMetadata(template, route).replace(
@@ -55,7 +59,7 @@ try {
       )
   );
   console.log(
-    `Prerendered ${routes.length - 1} public routes with visible HTML content.`
+    `Prerendered ${routes.length} public routes with visible HTML content.`
   );
 } finally {
   await server.close();
