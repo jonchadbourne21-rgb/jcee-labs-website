@@ -1,0 +1,30 @@
+{
+  "/": {
+    "title": "Accountable AI for AI-Assisted Operations | JCEE Labs",
+    "description": "JCEE Labs develops methods and software for accountable AI-assisted operations, connecting clear permissions, reviewable evidence, and human control."
+  },
+  "/assurance": {
+    "title": "AI Assurance Method: Permission & Evidence | JCEE Labs",
+    "description": "Explore the JCEE Assurance Method: observe, judge, authorize, and record. Connect AI-assisted actions to current permission, evidence, and human control."
+  },
+  "/vow": {
+    "title": "JCEE VOW: Evidence-First Execution Runtime | JCEE Labs",
+    "description": "Explore JCEE VOW, an evidence-first execution runtime. Review covered execution and recovery behavior, recorded milestones, and explicit evidence boundaries."
+  },
+  "/solutions/distribution": {
+    "title": "JCEE Distribution: Order Review & Evidence | JCEE Labs",
+    "description": "Explore JCEE Distribution's synthetic order-review workflow: compare instructions with observed records, surface discrepancies, and preserve human control."
+  },
+  "/company": {
+    "title": "About JCEE Labs: Accountable AI Research & Software",
+    "description": "Meet JCEE Labs in Dallas, Texas. Learn why we develop methods and software for AI-assisted operations grounded in permission, evidence, and human control."
+  },
+  "/registry": {
+    "title": "JCEE Labs Public Registry: Build & Research Evidence",
+    "description": "Review JCEE Labs build and research milestones, evidence boundaries, and unresolved questions. Distinguish recorded results from broader development goals."
+  },
+  "/resources": {
+    "title": "Accountable AI Articles & Research Guides | JCEE Labs",
+    "description": "Read JCEE Labs articles on accountable AI, execution evidence, permissions, and human control, with practical workflow examples and clear research limits."
+  }
+}

@@ -35,6 +35,12 @@ const built = spawnSync(
 if (built.status !== 0)
   throw new Error(`Vite build failed: ${built.error || built.status}`);
 
+const prerendered = spawnSync(
+  process.execPath,
+  ["--import", "tsx", "scripts/prerender.ts"],
+  { stdio: "inherit" }
+);
+if (prerendered.status !== 0) throw new Error("Prerender failed");
 const root = "dist/public";
 const assets = path.join(root, "assets");
 const media = new Map([
@@ -84,6 +90,21 @@ for (const name of fs.readdirSync(assets)) {
   fs.writeFileSync(file, source);
 }
 
+function cleanHtml(source) {
+  source = source
+    .replace(/\s*<script id="manus-runtime">[\s\S]*?<\/script>/g, "")
+    .replace(
+      /\s*<script\s+defer\s+src="%VITE_ANALYTICS_ENDPOINT%\/umami"[\s\S]*?<\/script>/g,
+      ""
+    );
+  if (prefix)
+    source = source
+      .replace(/(href|src|data)="\/(?!\/)/g, `$1="${prefix}/`)
+      .replaceAll(`${prefix}${prefix}/`, `${prefix}/`);
+  for (const [from, name] of media)
+    source = source.replaceAll(from, `${publicUrl}visuals/${name}`);
+  return source;
+}
 const indexPath = path.join(root, "index.html");
 let html = fs
   .readFileSync(indexPath, "utf8")
@@ -112,13 +133,16 @@ if (fs.existsSync(path.join(root, "CNAME")))
   throw new Error(
     "Remove stale CNAME file; configure the domain in GitHub Pages settings"
   );
+html = cleanHtml(html);
 fs.writeFileSync(indexPath, html);
-fs.writeFileSync(path.join(root, "404.html"), html);
+const errorPath = path.join(root, "404.html");
+fs.writeFileSync(errorPath, cleanHtml(fs.readFileSync(errorPath, "utf8")));
+// Keep the prerendered noindex error page.
 fs.writeFileSync(path.join(root, ".nojekyll"), "");
 
 // Public deep links return HTTP 200 on a static host. Unknown routes use 404.html.
 const appSource = fs.readFileSync("client/src/App.tsx", "utf8");
-const routes = [...appSource.matchAll(/<Route path="([^"]+)"/g)]
+const routes = [...appSource.matchAll(/<Route\s+path="([^"]+)"/g)]
   .map(match => match[1])
   .filter(
     route => route !== "/" && route !== "/404" && !route.startsWith("/admin")
@@ -133,7 +157,9 @@ for (const route of routes) {
       .replaceAll('"', "&quot;")
       .replaceAll("<", "&lt;")
       .replaceAll(">", "&gt;");
-  let routeHtml = html;
+  let routeHtml = fs.existsSync(path.join(directory, "index.html"))
+    ? fs.readFileSync(path.join(directory, "index.html"), "utf8")
+    : html;
   if (meta) {
     routeHtml = routeHtml
       .replace(
@@ -164,9 +190,20 @@ for (const route of routes) {
         /(<meta\s+property="og:type"\s+content=")[^"]*/,
         `$1${meta.type || "website"}`
       );
-    if (meta.publishedTime) routeHtml = routeHtml.replace("</head>", `<meta property="article:published_time" content="${escapeHtml(meta.publishedTime)}" />\n</head>`);
+    if (
+      meta.publishedTime &&
+      !routeHtml.includes('property="article:published_time"')
+    )
+      routeHtml = routeHtml.replace(
+        "</head>",
+        `<meta property="article:published_time" content="${escapeHtml(meta.publishedTime)}" />\n</head>`
+      );
   }
-  fs.writeFileSync(path.join(directory, "index.html"), routeHtml);
+  if (prefix)
+    routeHtml = routeHtml
+      .replace(/(href|src|data)="\/(?!\/)/g, `$1="${prefix}/`)
+      .replaceAll(`${prefix}${prefix}/`, `${prefix}/`);
+  fs.writeFileSync(path.join(directory, "index.html"), cleanHtml(routeHtml));
 }
 fs.writeFileSync(
   path.join(root, "deployment.json"),

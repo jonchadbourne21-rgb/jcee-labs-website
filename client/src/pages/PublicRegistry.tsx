@@ -1,3 +1,4 @@
+import usePageSeo from "@/components/usePageSeo";
 import { useEffect } from "react";
 import BrandFooter from "@/components/BrandFooter";
 import CoreHeader from "@/components/CoreHeader";
@@ -25,13 +26,7 @@ const classifications = [
 ];
 
 export default function PublicRegistry() {
-  useEffect(() => {
-    const previousTitle = document.title;
-    document.title = "JCEE Public Registry";
-    return () => {
-      document.title = previousTitle;
-    };
-  }, []);
+  usePageSeo("/registry");
 
   return (
     <main className="program-page registry-page" id="top">
@@ -47,9 +42,9 @@ export default function PublicRegistry() {
         </p>
         <div className="program-number">JCEE PUBLIC REGISTRY</div>
         <h1>
-          A living record.
+          JCEE Labs Public Registry:
           <br />
-          <em>Not a highlight reel.</em>
+          <em>results, boundaries, and status</em>
         </h1>
         <p className="program-deck">
           The public registry records what JCEE Labs can responsibly say about

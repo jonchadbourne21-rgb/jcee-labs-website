@@ -19,8 +19,8 @@ export default function ResourcesPage() {
     <EditorialLayout
       current="resources"
       eyebrow="The JCEE library"
-      title="Ideas, builds, and the evidence behind them."
-      description="Follow the company, explore engineering progress, and read the results with their limits attached."
+      title="Articles and guides to accountable AI-assisted operations"
+      description="Practical explanations of permissions, evidence, and human control in AI-assisted operations. Explore workflow examples, engineering notes, and research publications, with clear distinctions between demonstrated results and open questions."
     >
       <section className="editorial-section" aria-labelledby="library-title">
         <div className="editorial-section-heading">

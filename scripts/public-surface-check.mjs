@@ -21,7 +21,8 @@ const retiredRoutes = [
   "/mirrored",
 ];
 
-const sleep = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds));
+const sleep = milliseconds =>
+  new Promise(resolve => setTimeout(resolve, milliseconds));
 
 function findOpenPort() {
   return new Promise((resolve, reject) => {
@@ -39,7 +40,10 @@ function findOpenPort() {
 }
 
 function start(command, args, options = {}) {
-  const child = spawn(command, args, { stdio: ["ignore", "pipe", "pipe"], ...options });
+  const child = spawn(command, args, {
+    stdio: ["ignore", "pipe", "pipe"],
+    ...options,
+  });
   const output = [];
   child.stdout.on("data", chunk => output.push(chunk.toString()));
   child.stderr.on("data", chunk => output.push(chunk.toString()));
@@ -105,8 +109,11 @@ async function connect(debugPort) {
     const message = JSON.parse(event.data);
     if (message.method === "Network.responseReceived") {
       const { response, type } = message.params;
-      if (response.url.startsWith("http://127.0.0.1:") &&
-          ((response.status >= 400 && type !== "Document") || response.url.includes("/api/"))) {
+      if (
+        response.url.startsWith("http://127.0.0.1:") &&
+        ((response.status >= 400 && type !== "Document") ||
+          response.url.includes("/api/"))
+      ) {
         networkFailures.push(`${response.status} ${response.url}`);
       }
     }
@@ -125,7 +132,9 @@ async function connect(debugPort) {
     socket.send(JSON.stringify({ id, method, params }));
     return new Promise((resolve, reject) => {
       pending.set(id, message =>
-        message.error ? reject(new Error(message.error.message)) : resolve(message.result)
+        message.error
+          ? reject(new Error(message.error.message))
+          : resolve(message.result)
       );
     });
   };
@@ -136,22 +145,32 @@ async function connect(debugPort) {
   return { send, runtimeErrors, networkFailures, close: () => socket.close() };
 }
 
-async function waitForApp(send) {
+async function waitForApp(send, expectedUrl) {
+  const normalizePath = value =>
+    value.replace(/\/+$/, "").replace(/\/research-evidence$/, "/registry") ||
+    "/";
+  const expectedPath = normalizePath(new URL(expectedUrl).pathname);
   for (let attempt = 0; attempt < 80; attempt += 1) {
     const response = await send("Runtime.evaluate", {
       returnByValue: true,
       expression:
-        "({ ready: document.readyState, textLength: document.querySelector('#root')?.textContent?.trim().length ?? 0 })",
+        "({ path: location.pathname, clientReady: document.querySelector('#root')?.getAttribute('data-client-ready') === 'true', ready: document.readyState, textLength: document.querySelector('#root')?.textContent?.trim().length ?? 0 })",
     });
-    if (response.result.value.ready === "complete" && response.result.value.textLength > 100) return;
+    if (
+      normalizePath(response.result.value.path) === expectedPath &&
+      response.result.value.clientReady &&
+      response.result.value.ready === "complete" &&
+      response.result.value.textLength > 100
+    )
+      return;
     await sleep(75);
   }
-  throw new Error("Application root did not finish rendering");
+  throw new Error(`Application root did not finish rendering: ${expectedUrl}`);
 }
 
 async function navigate(send, baseUrl, route) {
   await send("Page.navigate", { url: `${baseUrl}${route}` });
-  await waitForApp(send);
+  await waitForApp(send, `${baseUrl}${route}`);
 }
 
 async function readBody(send) {
@@ -173,14 +192,22 @@ async function evaluate(send, expression) {
 const projectRoot = process.cwd();
 const staticMode = Object.hasOwn(process.env, "PAGES_BASE_PATH");
 const prefix = staticMode ? process.env.PAGES_BASE_PATH : "";
-const distEntry = path.join(projectRoot, staticMode ? "scripts/serve-pages-test.mjs" : "dist/index.js");
+const distEntry = path.join(
+  projectRoot,
+  staticMode ? "scripts/serve-pages-test.mjs" : "dist/index.js"
+);
 if (!existsSync(distEntry)) {
-  throw new Error("Missing dist/index.js. Run pnpm build before pnpm test:public-surface.");
+  throw new Error(
+    "Missing dist/index.js. Run pnpm build before pnpm test:public-surface."
+  );
 }
 
 const appPort = await findOpenPort();
 const debugPort = await findOpenPort();
-const profileDirectory = path.join(tmpdir(), `jcee-public-surface-${process.pid}`);
+const profileDirectory = path.join(
+  tmpdir(),
+  `jcee-public-surface-${process.pid}`
+);
 const app = start("node", [distEntry], {
   cwd: projectRoot,
   env: { ...process.env, NODE_ENV: "production", PORT: String(appPort) },
@@ -197,25 +224,51 @@ const browser = start(process.env.CHROMIUM_BIN || "chromium", [
 let exitCode = 0;
 try {
   const baseUrl = `http://127.0.0.1:${appPort}${prefix}`;
-  await waitForUrl(`${baseUrl}/`, staticMode ? "static Pages server" : "production server");
+  await waitForUrl(
+    `${baseUrl}/`,
+    staticMode ? "static Pages server" : "production server"
+  );
   const page = await connect(debugPort);
   const failures = [];
 
   // Sharing crawlers receive this HTML before any client-side effects run.
   const articleRoute = "/blog/a-confident-model-still-needs-permission";
-  const articleResponse = await fetch(`${baseUrl}${articleRoute}?utm_source=release-check`);
+  const articleResponse = await fetch(
+    `${baseUrl}${articleRoute}?utm_source=release-check`
+  );
   const articleHtml = await articleResponse.text();
-  if (!articleResponse.ok || !articleHtml.includes("<title>A Confident Model Still Needs Permission — JCEE Labs</title>") ||
-      !articleHtml.includes('property="og:type" content="article"') ||
-      !articleHtml.includes('property="article:published_time" content="2026-09-29T00:00:00Z"')) {
+  if (
+    !articleResponse.ok ||
+    !articleHtml.includes(
+      "<title>A Confident Model Still Needs Permission — JCEE Labs</title>"
+    ) ||
+    !articleHtml.includes('property="og:type" content="article"') ||
+    !articleHtml.includes(
+      'property="article:published_time" content="2026-09-29T00:00:00Z"'
+    )
+  ) {
     failures.push("new article has missing server-rendered sharing metadata");
   }
-  if (!staticMode && (!articleHtml.includes(`rel="canonical" href="https://jceelabs.com${articleRoute}"`) ||
-      !articleHtml.includes(`property="og:url" content="https://jceelabs.com${articleRoute}"`))) {
+  if (
+    !staticMode &&
+    (!articleHtml.includes(
+      `rel="canonical" href="https://jceelabs.com${articleRoute}"`
+    ) ||
+      !articleHtml.includes(
+        `property="og:url" content="https://jceelabs.com${articleRoute}"`
+      ))
+  ) {
     failures.push("new article canonical or Open Graph URL is incorrect");
   }
-  const registryDownload = await fetch(`${baseUrl}/JCEE_Labs_Public_Registry_v1.3.md`);
-  if (!registryDownload.ok || !(await registryDownload.text()).startsWith("# JCEE Labs Public Registry — Version 1.3")) {
+  const registryDownload = await fetch(
+    `${baseUrl}/JCEE_Labs_Public_Registry_v1.3.md`
+  );
+  if (
+    !registryDownload.ok ||
+    !(await registryDownload.text()).startsWith(
+      "# JCEE Labs Public Registry — Version 1.3"
+    )
+  ) {
     failures.push("current registry Markdown download is missing");
   }
 
@@ -231,14 +284,17 @@ try {
     failures.push("homepage still exposes Mirrored");
   }
 
-  const footer = await evaluate(page.send, `(() => {
+  const footer = await evaluate(
+    page.send,
+    `(() => {
     const footer = document.querySelector('.brand-footer');
     const links = [...(footer?.querySelectorAll('a') ?? [])].map(link => ({
       href: link.getAttribute('href'),
       text: link.textContent?.trim(),
     }));
     return { present: Boolean(footer), links };
-  })()`);
+  })()`
+  );
 
   const requiredFooterLinks = [
     ["/privacy", "Privacy"],
@@ -251,26 +307,43 @@ try {
   ];
   if (!footer.present) failures.push("shared footer is missing from homepage");
   for (const [href, text] of requiredFooterLinks) {
-    if (!footer.links.some(link => link.href === `${prefix}${href}` && link.text === text)) {
+    if (
+      !footer.links.some(
+        link => link.href === `${prefix}${href}` && link.text === text
+      )
+    ) {
       failures.push(`footer is missing ${text} link (${href})`);
     }
   }
 
   if (staticMode) {
     const manifestResponse = await fetch(`${baseUrl}/deployment.json`);
-    if (!manifestResponse.ok) throw new Error("Missing static deployment manifest");
+    if (!manifestResponse.ok)
+      throw new Error("Missing static deployment manifest");
     const manifest = await manifestResponse.json();
     for (const route of manifest.publicRoutes) {
       const response = await fetch(`${baseUrl}${route}`);
-      if (response.status !== 200) failures.push(`Static public route returned ${response.status}: ${route}`);
+      if (response.status !== 200)
+        failures.push(
+          `Static public route returned ${response.status}: ${route}`
+        );
     }
-    const cloudPanel = await evaluate(page.send,
-      "Boolean(document.querySelector('.operating-cloud-home'))");
+    const cloudPanel = await evaluate(
+      page.send,
+      "Boolean(document.querySelector('.operating-cloud-home'))"
+    );
     if (!cloudPanel) failures.push("Latest Operating Cloud panel is missing");
-    for (const name of ["01-signature-hero-exposed.webp", "01-signature-hero-exposed-mobile.webp",
-                        "02-vow-receipt.webp", "03-qcs-causal-rail.webp"]) {
+    for (const name of [
+      "01-signature-hero-exposed.webp",
+      "01-signature-hero-exposed-mobile.webp",
+      "02-vow-receipt.webp",
+      "03-qcs-causal-rail.webp",
+    ]) {
       const response = await fetch(`${baseUrl}/visuals/${name}`);
-      if (!response.ok || !response.headers.get("content-type")?.startsWith("image/")) {
+      if (
+        !response.ok ||
+        !response.headers.get("content-type")?.startsWith("image/")
+      ) {
         failures.push(`Static image is missing: ${name}`);
       }
     }
@@ -282,7 +355,10 @@ try {
     }
     await navigate(page.send, baseUrl, route);
     const text = await readBody(page.send);
-    if (!text.includes("404 / UNKNOWN STATE") || !text.includes("is not in evidence")) {
+    if (
+      !text.includes("404 / UNKNOWN STATE") ||
+      !text.includes("is not in evidence")
+    ) {
       failures.push(`retired route does not render the JCEE 404: ${route}`);
     }
   }
@@ -290,8 +366,8 @@ try {
   for (const [route, expectedHeading] of [
     ["/privacy", "Privacy Policy"],
     ["/terms", "Terms of Service"],
-    ["/registry", "A living record."],
-    ["/assurance", "The actor is not"],
+    ["/registry", "JCEE Labs Public Registry"],
+    ["/assurance", "The JCEE Assurance Method"],
     ["/charter", "Hypotheses may"],
     ["/partners", "Choose the boundary"],
     ["/partners/enterprise", "Make consequential software"],
@@ -299,12 +375,16 @@ try {
   ]) {
     await navigate(page.send, baseUrl, route);
     if (!(await readBody(page.send)).includes(expectedHeading)) {
-      failures.push(`${route} does not render expected text: ${expectedHeading}`);
+      failures.push(
+        `${route} does not render expected text: ${expectedHeading}`
+      );
     }
   }
 
   await navigate(page.send, baseUrl, "/assurance");
-  const assuranceArchitectureColors = await evaluate(page.send, `(() => {
+  const assuranceArchitectureColors = await evaluate(
+    page.send,
+    `(() => {
     const copy = document.querySelector('.assurance-architecture-grid article > div > p:last-child');
     const label = document.querySelector('.assurance-architecture-grid article > div > p:first-child');
     return {
@@ -312,62 +392,140 @@ try {
       label: label ? getComputedStyle(label).color : null,
       labelTransition: label ? getComputedStyle(label).transitionProperty : null,
     };
-  })()`);
+  })()`
+  );
   if (assuranceArchitectureColors.copy !== "rgba(9, 11, 16, 0.68)") {
-    failures.push(`Assurance architecture copy has unexpected low-contrast color: ${assuranceArchitectureColors.copy}`);
+    failures.push(
+      `Assurance architecture copy has unexpected low-contrast color: ${assuranceArchitectureColors.copy}`
+    );
   }
   if (assuranceArchitectureColors.label !== "rgb(49, 92, 255)") {
-    failures.push(`Assurance architecture label has unexpected color: ${assuranceArchitectureColors.label}`);
+    failures.push(
+      `Assurance architecture label has unexpected color: ${assuranceArchitectureColors.label}`
+    );
   }
-  if (!assuranceArchitectureColors.labelTransition?.includes("color") || !assuranceArchitectureColors.labelTransition?.includes("transform")) {
-    failures.push(`Assurance architecture label is missing its subtle hover transition: ${assuranceArchitectureColors.labelTransition}`);
+  if (
+    !assuranceArchitectureColors.labelTransition?.includes("color") ||
+    !assuranceArchitectureColors.labelTransition?.includes("transform")
+  ) {
+    failures.push(
+      `Assurance architecture label is missing its subtle hover transition: ${assuranceArchitectureColors.labelTransition}`
+    );
   }
 
   for (const [route, heading] of [
+    ["/blog/what-is-an-evidence-boundary", "What Is an Evidence Boundary"],
     ["/blog/after-an-ai-says-done", "What Happens After an AI Says"],
-    ["/blog/a-research-result-needs-a-boundary", "A Research Result Needs a Boundary"],
+    [
+      "/blog/a-research-result-needs-a-boundary",
+      "A Research Result Needs a Boundary",
+    ],
     ["/research/bb84-communication", "Perfect Recovery and One-Message Bounds"],
-    ["/operating-cloud", "A common foundation"], ["/blog/the-work-nobody-sees", "The Work Nobody Sees"], ["/research/crucible-composition-tax", "testing the cost of composition"],
+    ["/operating-cloud", "A common foundation"],
+    ["/blog/the-work-nobody-sees", "The Work Nobody Sees"],
+    ["/research/crucible-composition-tax", "testing the cost of composition"],
     [articleRoute, "A Confident Model Still Needs Permission"],
-    ["/solutions/distribution", "Keep the order true"], ["/technology", "Intelligence should leave receipts"],
-    ["/research", "Results you can examine"], ["/research/fields", "25 fields. One unifying research question"], ["/resources", "Ideas, builds"], ["/company", "Build useful intelligence"],
+    ["/solutions/distribution", "JCEE Distribution: order review"],
+    ["/technology", "Intelligence should leave receipts"],
+    ["/research", "Results you can examine"],
+    ["/research/fields", "25 fields. One unifying research question"],
+    ["/resources", "Articles and guides to accountable AI-assisted operations"],
+    ["/company", "About JCEE Labs: why we build for accountable operations"],
     ["/blog/start-with-the-workflow", "Start with the workflow"],
     ["/blog/distribution-first-dry-run", "the first order-integrity dry run"],
-    ["/research/qcs-frozen-specification-reproduction", "reproducing a frozen specification"],
+    [
+      "/research/qcs-frozen-specification-reproduction",
+      "reproducing a frozen specification",
+    ],
     ["/research/crucible-semantic-kernel", "conventional parity"],
   ]) {
     await navigate(page.send, baseUrl, route);
-    if (!(await readBody(page.send)).includes(heading)) failures.push(`${route}: missing publication or page`);
-    const metadata = await evaluate(page.send, `({
+    if (!(await readBody(page.send)).includes(heading))
+      failures.push(`${route}: missing publication or page`);
+    const metadata = await evaluate(
+      page.send,
+      `({
       canonical: document.querySelector('link[rel="canonical"]')?.getAttribute('href'),
       openGraphUrl: document.querySelector('meta[property="og:url"]')?.getAttribute('content'),
-    })`);
+    })`
+    );
     const expectedCanonical = `https://jceelabs.com${route}`;
-    if (metadata.canonical !== expectedCanonical || metadata.openGraphUrl !== expectedCanonical) {
-      failures.push(`${route}: rendered canonical or Open Graph URL includes a hosting prefix or wrong route`);
+    if (
+      metadata.canonical !== expectedCanonical ||
+      metadata.openGraphUrl !== expectedCanonical
+    ) {
+      failures.push(
+        `${route}: rendered canonical or Open Graph URL includes a hosting prefix or wrong route`
+      );
     }
   }
-  for (const asset of ["publications/after-an-ai-says-done.md", "publications/after-an-ai-says-done.txt", "publications/a-research-result-needs-a-boundary.md", "publications/a-research-result-needs-a-boundary.txt", "publications/the-work-nobody-sees.md", "publications/crucible-composition-tax.md", "JCEE_Labs_Public_Registry_v1.2.md", "publications/start-with-the-workflow.md", "publications/distribution-first-dry-run.md", "publications/qcs-frozen-specification-reproduction.md", "publications/crucible-semantic-kernel.md"]) {
+  for (const asset of [
+    "publications/after-an-ai-says-done.md",
+    "publications/after-an-ai-says-done.txt",
+    "publications/a-research-result-needs-a-boundary.md",
+    "publications/a-research-result-needs-a-boundary.txt",
+    "publications/the-work-nobody-sees.md",
+    "publications/crucible-composition-tax.md",
+    "JCEE_Labs_Public_Registry_v1.2.md",
+    "publications/start-with-the-workflow.md",
+    "publications/distribution-first-dry-run.md",
+    "publications/qcs-frozen-specification-reproduction.md",
+    "publications/crucible-semantic-kernel.md",
+  ]) {
     const response = await fetch(`${baseUrl}/${asset}`);
     const text = await response.text();
-    if (!response.ok || !text.startsWith("# ")) failures.push(`${asset}: missing Markdown publication`);
+    if (!response.ok || !text.startsWith("# "))
+      failures.push(`${asset}: missing Markdown publication`);
   }
   await navigate(page.send, baseUrl, "/resources");
-  const paperResponse = await fetch(`${baseUrl}/research/bb84-communication/BB84_Public_Release_v0.4-P2.pdf`);
+  const paperResponse = await fetch(
+    `${baseUrl}/research/bb84-communication/BB84_Public_Release_v0.4-P2.pdf`
+  );
   const paperBytes = Buffer.from(await paperResponse.arrayBuffer());
-  if (!paperResponse.ok || createHash("sha256").update(paperBytes).digest("hex") !== "63e3a02f11cce223d4ff803f136baace51ee5839b04d0b04abec737910b4da20") failures.push("Released BB84 P2 PDF missing or modified");
-  await evaluate(page.send, `(() => { [...document.querySelectorAll('.resource-filters button')].find(b=>b.textContent === 'Engineering blog')?.click(); })()`);
+  if (
+    !paperResponse.ok ||
+    createHash("sha256").update(paperBytes).digest("hex") !==
+      "63e3a02f11cce223d4ff803f136baace51ee5839b04d0b04abec737910b4da20"
+  )
+    failures.push("Released BB84 P2 PDF missing or modified");
+  await evaluate(
+    page.send,
+    `(() => { [...document.querySelectorAll('.resource-filters button')].find(b=>b.textContent === 'Engineering blog')?.click(); })()`
+  );
   await sleep(100);
-  const filtered = await evaluate(page.send, `({ count:document.querySelectorAll('.resource-card').length, text:[...document.querySelectorAll('.resource-card')].map(card => card.textContent).join(' ') })`);
-  if (filtered.count !== 2 || !filtered.text.includes('order-integrity') || !filtered.text.includes('What Happens After an AI Says')) failures.push('Resource filter did not show the engineering articles');
+  const filtered = await evaluate(
+    page.send,
+    `({ count:document.querySelectorAll('.resource-card').length, text:[...document.querySelectorAll('.resource-card')].map(card => card.textContent).join(' ') })`
+  );
+  if (
+    filtered.count !== 3 ||
+    !filtered.text.includes("order-integrity") ||
+    !filtered.text.includes("What Is an Evidence Boundary") ||
+    !filtered.text.includes("What Happens After an AI Says")
+  )
+    failures.push("Resource filter did not show the engineering articles");
 
-  for (const [label, count] of [["From the Founder", 1], ["Research", 4]]) {
-    await evaluate(page.send, `(() => { [...document.querySelectorAll('.resource-filters button')].find(b=>b.textContent === '${label}')?.click(); })()`);
+  for (const [label, count] of [
+    ["From the Founder", 1],
+    ["Research", 4],
+  ]) {
+    await evaluate(
+      page.send,
+      `(() => { [...document.querySelectorAll('.resource-filters button')].find(b=>b.textContent === '${label}')?.click(); })()`
+    );
     await sleep(100);
-    const cards = await evaluate(page.send, `({ count:document.querySelectorAll('.resource-card').length, text:document.querySelector('.resource-grid')?.textContent })`);
+    const cards = await evaluate(
+      page.send,
+      `({ count:document.querySelectorAll('.resource-card').length, text:document.querySelector('.resource-grid')?.textContent })`
+    );
     if (cards.count !== count) failures.push(`${label}: wrong category count`);
-    if (label === "Research" && cards.text.includes("The Work Nobody Sees")) failures.push('Founder essay incorrectly classified as research');
-    if (label === "Research" && !cards.text.includes("Perfect Recovery and One-Message Bounds")) failures.push('Research filter is missing the BB84 paper');
+    if (label === "Research" && cards.text.includes("The Work Nobody Sees"))
+      failures.push("Founder essay incorrectly classified as research");
+    if (
+      label === "Research" &&
+      !cards.text.includes("Perfect Recovery and One-Message Bounds")
+    )
+      failures.push("Research filter is missing the BB84 paper");
   }
   await navigate(page.send, baseUrl, "/terms");
   const termsText = await readBody(page.send);
@@ -382,7 +540,9 @@ try {
     "JCEE Labs Charter",
   ]) {
     if (!termsText.includes(requiredTermsSurface)) {
-      failures.push(`Terms are missing current public surface: ${requiredTermsSurface}`);
+      failures.push(
+        `Terms are missing current public surface: ${requiredTermsSurface}`
+      );
     }
   }
 
@@ -395,7 +555,9 @@ try {
     failures.push("Public Registry page is missing its Markdown download link");
   }
 
-  const registryInteractions = await evaluate(page.send, `(() => {
+  const registryInteractions = await evaluate(
+    page.send,
+    `(() => {
     const index = document.querySelector('.registry-entry-index');
     const label = document.querySelector('.registry-entry dt');
     const link = document.querySelector('.registry-entry a');
@@ -412,18 +574,36 @@ try {
         try { return containsFocusRule(sheet.cssRules); } catch { return false; }
       }),
     };
-  })()`);
-  if (!registryInteractions.indexTransition?.includes("color") || !registryInteractions.indexTransition?.includes("transform")) {
-    failures.push(`Registry entry index is missing its subtle label transition: ${registryInteractions.indexTransition}`);
+  })()`
+  );
+  if (
+    !registryInteractions.indexTransition?.includes("color") ||
+    !registryInteractions.indexTransition?.includes("transform")
+  ) {
+    failures.push(
+      `Registry entry index is missing its subtle label transition: ${registryInteractions.indexTransition}`
+    );
   }
-  if (!registryInteractions.labelTransition?.includes("color") || !registryInteractions.labelTransition?.includes("transform")) {
-    failures.push(`Registry evidence label is missing its subtle label transition: ${registryInteractions.labelTransition}`);
+  if (
+    !registryInteractions.labelTransition?.includes("color") ||
+    !registryInteractions.labelTransition?.includes("transform")
+  ) {
+    failures.push(
+      `Registry evidence label is missing its subtle label transition: ${registryInteractions.labelTransition}`
+    );
   }
-  if (!registryInteractions.linkFocused || !registryInteractions.focusRulePresent) {
-    failures.push(`Registry technical link is missing visible keyboard focus: ${JSON.stringify(registryInteractions)}`);
+  if (
+    !registryInteractions.linkFocused ||
+    !registryInteractions.focusRulePresent
+  ) {
+    failures.push(
+      `Registry technical link is missing visible keyboard focus: ${JSON.stringify(registryInteractions)}`
+    );
   }
 
-  const registryResponse = await fetch(`${baseUrl}/JCEE_Labs_Public_Registry_v1.0.md`);
+  const registryResponse = await fetch(
+    `${baseUrl}/JCEE_Labs_Public_Registry_v1.0.md`
+  );
   const registryText = await registryResponse.text();
   if (
     !registryResponse.ok ||
@@ -442,11 +622,15 @@ try {
     failures.push("Charter v1.1 page is missing the addendum download link");
   }
 
-  const charterV11Response = await fetch(`${baseUrl}/JCEE_Labs_Charter_v1.1.md`);
+  const charterV11Response = await fetch(
+    `${baseUrl}/JCEE_Labs_Charter_v1.1.md`
+  );
   const charterV11Text = await charterV11Response.text();
   if (
     !charterV11Response.ok ||
-    !charterV11Response.headers.get("content-type")?.includes("text/markdown") ||
+    !charterV11Response.headers
+      .get("content-type")
+      ?.includes("text/markdown") ||
     !charterV11Text.startsWith("# The JCEE Labs Charter — Version 1.1")
   ) {
     failures.push("Charter v1.1 Markdown download endpoint is not valid");
@@ -458,14 +642,20 @@ try {
     `Boolean(document.querySelector('a[download][href="${prefix}/JCEE_Labs_Charter_v1.0.md"]'))`
   );
   if (!charterV10Link) {
-    failures.push("Preserved Charter v1.0 page is missing its Markdown download link");
+    failures.push(
+      "Preserved Charter v1.0 page is missing its Markdown download link"
+    );
   }
 
-  const charterV10Response = await fetch(`${baseUrl}/JCEE_Labs_Charter_v1.0.md`);
+  const charterV10Response = await fetch(
+    `${baseUrl}/JCEE_Labs_Charter_v1.0.md`
+  );
   const charterV10Text = await charterV10Response.text();
   if (
     !charterV10Response.ok ||
-    !charterV10Response.headers.get("content-type")?.includes("text/markdown") ||
+    !charterV10Response.headers
+      .get("content-type")
+      ?.includes("text/markdown") ||
     !charterV10Text.startsWith("# The JCEE Labs Charter")
   ) {
     failures.push("Preserved Charter v1.0 Markdown endpoint is not valid");
@@ -474,18 +664,31 @@ try {
   if (staticMode) {
     await navigate(page.send, baseUrl, "/research/jrp-000");
     // This request formerly escaped the project prefix and silently loaded 404 HTML.
-    const paper = await fetch(`${baseUrl}/JRP-000_The_Evidence_Boundary_v1.0.md`);
-    if (!paper.ok || !(await paper.text()).startsWith("#")) failures.push("Research paper download failed");
+    const paper = await fetch(
+      `${baseUrl}/JRP-000_The_Evidence_Boundary_v1.0.md`
+    );
+    if (!paper.ok || !(await paper.text()).startsWith("#"))
+      failures.push("Research paper download failed");
     let paperRendered = false;
     for (let attempt = 0; attempt < 60; attempt += 1) {
-      paperRendered = await evaluate(page.send,
-        "Boolean(document.querySelector('.paper-markdown h2'))");
+      paperRendered = await evaluate(
+        page.send,
+        "Boolean(document.querySelector('.paper-markdown h2'))"
+      );
       if (paperRendered) break;
       await sleep(100);
     }
-    if (!paperRendered) failures.push("Research paper body did not render from its static Markdown source");
-    if (page.networkFailures.length) failures.push(`Static resource/API failures: ${page.networkFailures.join("; ")}`);
-    console.log(`Static Pages checks completed for ${prefix || "/"}: direct routes, local images, documents, and no application API.`);
+    if (!paperRendered)
+      failures.push(
+        "Research paper body did not render from its static Markdown source"
+      );
+    if (page.networkFailures.length)
+      failures.push(
+        `Static resource/API failures: ${page.networkFailures.join("; ")}`
+      );
+    console.log(
+      `Static Pages checks completed for ${prefix || "/"}: direct routes, local images, documents, and no application API.`
+    );
   }
 
   if (page.runtimeErrors.length) {

@@ -16,11 +16,70 @@ export type Publication = {
 
 export const publications: Publication[] = [
   {
+    slug: "what-is-an-evidence-boundary",
+    title: "What Is an Evidence Boundary in AI-Assisted Operations?",
+    kind: "Engineering blog",
+    date: "2026-10-05",
+    summary:
+      "An evidence boundary separates what a result supports from what remains unestablished. Learn how to evaluate AI-assisted workflows without overstating the evidence.",
+    sections: [
+      {
+        title: "A result needs its conditions",
+        paragraphs: [
+          "An evidence boundary separates what a result supports from what remains unestablished. For AI-assisted operations, that means identifying the workflow, conditions, observations, and limitations behind a claim.",
+          "Consider a synthetic order-review test. Software compares a purchase-order instruction with an entered sales-order record and identifies a missing freight account.",
+          "If the system produces the expected classifications across the test cases, that supports a statement about those cases and conditions. It does not establish how often the discrepancy occurs in customer operations, whether staff save time, or whether changing the order would be authorized. Those are separate questions requiring separate evidence.",
+        ],
+      },
+      {
+        title: "What to include in an evidence boundary",
+        paragraphs: ["Make the claim and its supporting conditions explicit."],
+        bullets: [
+          "What was evaluated? Record the workflow, software version, and specific claim.",
+          "Under what conditions? Record test inputs, environment, assumptions, and exclusions.",
+          "What was observed? Preserve the actual result, including failures and unresolved outcomes.",
+          "What does it support? State the narrow conclusion justified by those observations.",
+          "What remains open? Identify missing evidence and the next question to test.",
+        ],
+      },
+      {
+        title: "Evidence and permission answer different questions",
+        paragraphs: [
+          "Evidence can support a judgment that something needs attention. Permission determines whether a particular action may proceed.",
+          "Finding a mismatch does not itself authorize a correction. Likewise, approval to attempt a correction does not prove that it succeeded. Human control over AI actions depends on keeping those distinctions visible.",
+        ],
+      },
+      {
+        title: "How JCEE uses the idea",
+        paragraphs: [
+          "The JCEE Assurance Method separates observation, judgment, authorization, and recording. Our Public Registry records published milestones with their stated boundaries.",
+          "The purpose is to make a result usable without asking the reader to assume more than the evidence establishes.",
+          "Before relying on a result, ask: What was tested, what happened, and what would have to be shown before we use it in a different setting?",
+        ],
+      },
+    ],
+    related: [
+      {
+        label: "Explore the Assurance Method",
+        href: "/assurance",
+      },
+      {
+        label: "Review the Distribution example",
+        href: "/solutions/distribution",
+      },
+      {
+        label: "What Happens After an AI Says ‘Done’?",
+        href: "/blog/after-an-ai-says-done",
+      },
+    ],
+  },
+  {
     slug: "after-an-ai-says-done",
     title: "What Happens After an AI Says ‘Done’?",
     kind: "Engineering blog",
     date: "2026-10-05",
-    summary: "An attempted action and a confirmed outcome are different facts. Accountable workflows keep that difference visible—especially when the connection goes quiet.",
+    summary:
+      "An attempted action and a confirmed outcome are different facts. Accountable workflows keep that difference visible—especially when the connection goes quiet.",
     sections: [
       {
         title: "The reply is not the result",
@@ -59,7 +118,10 @@ export const publications: Publication[] = [
       },
     ],
     related: [
-      { label: "A Confident Model Still Needs Permission", href: "/blog/a-confident-model-still-needs-permission" },
+      {
+        label: "A Confident Model Still Needs Permission",
+        href: "/blog/a-confident-model-still-needs-permission",
+      },
       { label: "JCEE’s assurance method", href: "/assurance" },
       { label: "Current public build status", href: "/registry" },
     ],
@@ -69,7 +131,8 @@ export const publications: Publication[] = [
     title: "A Research Result Needs a Boundary",
     kind: "Company blog",
     date: "2026-10-05",
-    summary: "Our BB84 preprint now has a dedicated reading page. Here is how to distinguish what its results establish, what the model assumes, and what remains open.",
+    summary:
+      "Our BB84 preprint now has a dedicated reading page. Here is how to distinguish what its results establish, what the model assumes, and what remains open.",
     sections: [
       {
         title: "A paper is more than its headline",
@@ -104,7 +167,10 @@ export const publications: Publication[] = [
       },
     ],
     related: [
-      { label: "Read the BB84 paper and download v0.4-P2", href: "/research/bb84-communication" },
+      {
+        label: "Read the BB84 paper and download v0.4-P2",
+        href: "/research/bb84-communication",
+      },
       { label: "The Evidence Boundary", href: "/research/jrp-000" },
       { label: "Explore JCEE research", href: "/research" },
     ],

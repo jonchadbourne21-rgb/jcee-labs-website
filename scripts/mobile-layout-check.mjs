@@ -10,7 +10,12 @@ const requestedProfile = process.argv
   ?.split("=")[1];
 
 const profiles = {
-  smallPhone: { label: "320px narrow viewport", width: 320, height: 740, deviceScaleFactor: 1 },
+  smallPhone: {
+    label: "320px narrow viewport",
+    width: 320,
+    height: 740,
+    deviceScaleFactor: 1,
+  },
   iphone: {
     label: "iPhone Safari profile",
     width: 390,
@@ -27,21 +32,70 @@ const profiles = {
     userAgent:
       "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36",
   },
-  tablet: { label: "768px tablet viewport", width: 768, height: 1024, deviceScaleFactor: 1 },
-  compact: { label: "1024px compact laptop viewport", width: 1024, height: 768, deviceScaleFactor: 1, desktop: true },
-  chromebook: { label: "1280px Chromebook viewport", width: 1280, height: 800, deviceScaleFactor: 1, desktop: true },
-  desktop: { label: "1440px desktop viewport", width: 1440, height: 900, deviceScaleFactor: 1, desktop: true },
+  tablet: {
+    label: "768px tablet viewport",
+    width: 768,
+    height: 1024,
+    deviceScaleFactor: 1,
+  },
+  compact: {
+    label: "1024px compact laptop viewport",
+    width: 1024,
+    height: 768,
+    deviceScaleFactor: 1,
+    desktop: true,
+  },
+  chromebook: {
+    label: "1280px Chromebook viewport",
+    width: 1280,
+    height: 800,
+    deviceScaleFactor: 1,
+    desktop: true,
+  },
+  desktop: {
+    label: "1440px desktop viewport",
+    width: 1440,
+    height: 900,
+    deviceScaleFactor: 1,
+    desktop: true,
+  },
 };
 
 const publicRoutes = [
-  "/blog/after-an-ai-says-done", "/blog/a-research-result-needs-a-boundary", "/research/bb84-communication",
-  "/blog/a-confident-model-still-needs-permission", "/research/fields",
-  "/operating-cloud", "/blog/the-work-nobody-sees", "/research/crucible-composition-tax", "/solutions/distribution", "/technology", "/research", "/resources", "/company",
-  "/blog/start-with-the-workflow", "/blog/distribution-first-dry-run",
-  "/research/qcs-frozen-specification-reproduction", "/research/crucible-semantic-kernel",
-  "/", "/partners", "/partners/enterprise", "/partners/research", "/vow", "/qcs",
-  "/assurance", "/registry", "/research-evidence", "/charter", "/charter/archive/v1.0",
-  "/research/jrp-000", "/privacy", "/terms", "/portfolio", "/404",
+  "/blog/what-is-an-evidence-boundary",
+  "/blog/after-an-ai-says-done",
+  "/blog/a-research-result-needs-a-boundary",
+  "/research/bb84-communication",
+  "/blog/a-confident-model-still-needs-permission",
+  "/research/fields",
+  "/operating-cloud",
+  "/blog/the-work-nobody-sees",
+  "/research/crucible-composition-tax",
+  "/solutions/distribution",
+  "/technology",
+  "/research",
+  "/resources",
+  "/company",
+  "/blog/start-with-the-workflow",
+  "/blog/distribution-first-dry-run",
+  "/research/qcs-frozen-specification-reproduction",
+  "/research/crucible-semantic-kernel",
+  "/",
+  "/partners",
+  "/partners/enterprise",
+  "/partners/research",
+  "/vow",
+  "/qcs",
+  "/assurance",
+  "/registry",
+  "/research-evidence",
+  "/charter",
+  "/charter/archive/v1.0",
+  "/research/jrp-000",
+  "/privacy",
+  "/terms",
+  "/portfolio",
+  "/404",
 ];
 
 const profileEntries = requestedProfile
@@ -125,8 +179,13 @@ async function waitForUrl(url, description, timeoutMilliseconds = 15_000) {
 }
 
 async function connectToPage(debugPort) {
-  await waitForUrl(`http://127.0.0.1:${debugPort}/json/list`, "headless browser");
-  const targets = await (await fetch(`http://127.0.0.1:${debugPort}/json/list`)).json();
+  await waitForUrl(
+    `http://127.0.0.1:${debugPort}/json/list`,
+    "headless browser"
+  );
+  const targets = await (
+    await fetch(`http://127.0.0.1:${debugPort}/json/list`)
+  ).json();
   const target = targets.find(item => item.type === "page") ?? targets[0];
   if (!target?.webSocketDebuggerUrl) {
     throw new Error("Headless browser did not expose a page target");
@@ -159,7 +218,9 @@ async function connectToPage(debugPort) {
     socket.send(JSON.stringify({ id, method, params }));
     return new Promise((resolve, reject) => {
       pending.set(id, response =>
-        response.error ? reject(new Error(response.error.message)) : resolve(response.result)
+        response.error
+          ? reject(new Error(response.error.message))
+          : resolve(response.result)
       );
     });
   }
@@ -169,22 +230,32 @@ async function connectToPage(debugPort) {
   return { send, runtimeErrors, close: () => socket.close() };
 }
 
-async function waitForApp(send) {
+async function waitForApp(send, expectedUrl) {
+  const normalizePath = value =>
+    value.replace(/\/+$/, "").replace(/\/research-evidence$/, "/registry") ||
+    "/";
+  const expectedPath = normalizePath(new URL(expectedUrl).pathname);
   for (let attempt = 0; attempt < 40; attempt += 1) {
     const state = await send("Runtime.evaluate", {
       returnByValue: true,
       expression:
-        "({ readyState: document.readyState, textLength: document.querySelector('#root')?.textContent?.trim().length ?? 0 })",
+        "({ path: location.pathname, clientReady: document.querySelector('#root')?.getAttribute('data-client-ready') === 'true', readyState: document.readyState, textLength: document.querySelector('#root')?.textContent?.trim().length ?? 0 })",
     });
-    if (state.result.value.readyState === "complete" && state.result.value.textLength > 200) return;
+    if (
+      normalizePath(state.result.value.path) === expectedPath &&
+      state.result.value.clientReady &&
+      state.result.value.readyState === "complete" &&
+      state.result.value.textLength > 200
+    )
+      return;
     await wait(100);
   }
-  throw new Error("Application root did not finish rendering");
+  throw new Error(`Application root did not finish rendering: ${expectedUrl}`);
 }
 
 async function navigate(send, url) {
   await send("Page.navigate", { url });
-  await waitForApp(send);
+  await waitForApp(send, url);
 }
 
 async function readLayout(send, selector) {
@@ -221,11 +292,16 @@ async function evaluateProfile(send, profileName, profile, baseUrl) {
     mobile: !profile.desktop,
   });
   if (profile.userAgent) {
-    await send("Emulation.setUserAgentOverride", { userAgent: profile.userAgent });
+    await send("Emulation.setUserAgentOverride", {
+      userAgent: profile.userAgent,
+    });
   } else {
     await send("Emulation.setUserAgentOverride", { userAgent: "" });
   }
-  await send("Emulation.setTouchEmulationEnabled", { enabled: true, maxTouchPoints: 5 });
+  await send("Emulation.setTouchEmulationEnabled", {
+    enabled: true,
+    maxTouchPoints: 5,
+  });
   await send("Emulation.setEmulatedMedia", {
     features: [
       { name: "hover", value: "none" },
@@ -237,20 +313,44 @@ async function evaluateProfile(send, profileName, profile, baseUrl) {
   await navigate(send, `${baseUrl}/?mobile-layout-check=${profileName}`);
   const homepage = await readLayout(send, ".mobile-menu-toggle");
 
-  await navigate(send, `${baseUrl}/registry?mobile-layout-check=${profileName}`);
+  await navigate(
+    send,
+    `${baseUrl}/registry?mobile-layout-check=${profileName}`
+  );
   const registry = await readLayout(send, ".curlicue-stage");
 
-  await navigate(send, `${baseUrl}/partners?mobile-layout-check=${profileName}`);
+  await navigate(
+    send,
+    `${baseUrl}/partners?mobile-layout-check=${profileName}`
+  );
   const partners = await readLayout(send, ".partner-pathway-link");
 
-  await navigate(send, `${baseUrl}/partners/enterprise?mobile-layout-check=${profileName}`);
-  const enterprise = await readLayout(send, ".enterprise-partner-form .partner-form-submit button");
+  await navigate(
+    send,
+    `${baseUrl}/partners/enterprise?mobile-layout-check=${profileName}`
+  );
+  const enterprise = await readLayout(
+    send,
+    ".enterprise-partner-form .partner-form-submit button"
+  );
 
-  await navigate(send, `${baseUrl}/partners/research?mobile-layout-check=${profileName}`);
-  const research = await readLayout(send, ".research-partner-form .partner-form-submit button");
+  await navigate(
+    send,
+    `${baseUrl}/partners/research?mobile-layout-check=${profileName}`
+  );
+  const research = await readLayout(
+    send,
+    ".research-partner-form .partner-form-submit button"
+  );
 
   const failures = [];
-  for (const [surface, checks] of [["homepage", homepage], ["registry", registry], ["partners", partners], ["enterprise", enterprise], ["research", research]]) {
+  for (const [surface, checks] of [
+    ["homepage", homepage],
+    ["registry", registry],
+    ["partners", partners],
+    ["enterprise", enterprise],
+    ["research", research],
+  ]) {
     if (
       checks.scrollWidth > checks.clientWidth + 1 ||
       checks.bodyScrollWidth > checks.clientWidth + 1 ||
@@ -262,27 +362,60 @@ async function evaluateProfile(send, profileName, profile, baseUrl) {
     }
   }
 
-  if (!profile.desktop && (!homepage.element || homepage.element.width < 40 || homepage.element.height < 40)) {
+  if (
+    !profile.desktop &&
+    (!homepage.element ||
+      homepage.element.width < 40 ||
+      homepage.element.height < 40)
+  ) {
     failures.push("mobile menu control is missing or smaller than 40px");
   }
 
-  if (!registry.element || registry.element.right > registry.viewportWidth || registry.element.left < 0) {
-    failures.push("registry curlicue stage is missing or exceeds the mobile viewport");
+  if (
+    !registry.element ||
+    registry.element.right > registry.viewportWidth ||
+    registry.element.left < 0
+  ) {
+    failures.push(
+      "registry curlicue stage is missing or exceeds the mobile viewport"
+    );
   }
 
-  if (!partners.element || partners.element.width < 40 || partners.element.height < 40) {
+  if (
+    !partners.element ||
+    partners.element.width < 40 ||
+    partners.element.height < 40
+  ) {
     failures.push("partner pathway control is missing or smaller than 40px");
   }
 
-  if (!enterprise.element || enterprise.element.width < 40 || enterprise.element.height < 40) {
-    failures.push("enterprise inquiry submit control is missing or smaller than 40px");
+  if (
+    !enterprise.element ||
+    enterprise.element.width < 40 ||
+    enterprise.element.height < 40
+  ) {
+    failures.push(
+      "enterprise inquiry submit control is missing or smaller than 40px"
+    );
   }
 
-  if (!research.element || research.element.width < 40 || research.element.height < 40) {
-    failures.push("research inquiry submit control is missing or smaller than 40px");
+  if (
+    !research.element ||
+    research.element.width < 40 ||
+    research.element.height < 40
+  ) {
+    failures.push(
+      "research inquiry submit control is missing or smaller than 40px"
+    );
   }
 
-  if (homepage.touchPoints < 1 || registry.touchPoints < 1 || partners.touchPoints < 1 || enterprise.touchPoints < 1 || research.touchPoints < 1) {
+  if (
+    homepage.touchPoints < 1 ||
+    registry.touchPoints < 1 ||
+    partners.touchPoints < 1 ||
+    enterprise.touchPoints < 1 ||
+    research.touchPoints < 1
+  ) {
     failures.push("touch emulation did not activate");
   }
 
@@ -326,25 +459,50 @@ async function evaluateProfile(send, profileName, profile, baseUrl) {
     });
     const check = result.result.value;
     routeChecks.push({ route, ...check });
-    if (check.headingCount !== 1) failures.push(`${route}: expected one page heading`);
-    if (check.scrollWidth > check.clientWidth + 1 || check.bodyWidth > check.clientWidth + 1 || check.width > profile.width + 1) failures.push(`${route}: horizontal page overflow: ${JSON.stringify(check.expandedElements)}`);
-    for (const heading of check.escapedHeadings) failures.push(`${route}: heading escapes its column: ${heading}`);
-    for (const control of check.overflowingControls) failures.push(`${route}: form control escapes its field: ${control}`);
+    if (check.headingCount !== 1)
+      failures.push(`${route}: expected one page heading`);
+    if (
+      check.scrollWidth > check.clientWidth + 1 ||
+      check.bodyWidth > check.clientWidth + 1 ||
+      check.width > profile.width + 1
+    )
+      failures.push(
+        `${route}: horizontal page overflow: ${JSON.stringify(check.expandedElements)}`
+      );
+    for (const heading of check.escapedHeadings)
+      failures.push(`${route}: heading escapes its column: ${heading}`);
+    for (const control of check.overflowingControls)
+      failures.push(`${route}: form control escapes its field: ${control}`);
   }
 
-  return { profileName, profile, homepage, registry, partners, enterprise, research, routeChecks, failures };
+  return {
+    profileName,
+    profile,
+    homepage,
+    registry,
+    partners,
+    enterprise,
+    research,
+    routeChecks,
+    failures,
+  };
 }
 
 const projectRoot = process.cwd();
 const distEntry = path.join(projectRoot, "dist", "index.js");
 if (!existsSync(distEntry)) {
-  throw new Error("Missing dist/index.js. Run `pnpm build` before `pnpm test:mobile-layout`.");
+  throw new Error(
+    "Missing dist/index.js. Run `pnpm build` before `pnpm test:mobile-layout`."
+  );
 }
 
 const appPort = await findOpenPort();
 const debugPort = await findOpenPort();
 const chromium = process.env.CHROMIUM_BIN || "chromium";
-const profileDirectory = path.join(tmpdir(), `jcee-mobile-layout-${process.pid}`);
+const profileDirectory = path.join(
+  tmpdir(),
+  `jcee-mobile-layout-${process.pid}`
+);
 const app = startProcess("node", [distEntry], {
   cwd: projectRoot,
   env: { ...process.env, NODE_ENV: "production", PORT: String(appPort) },
@@ -366,7 +524,9 @@ try {
   const reports = [];
 
   for (const [profileName, profile] of profileEntries) {
-    reports.push(await evaluateProfile(page.send, profileName, profile, baseUrl));
+    reports.push(
+      await evaluateProfile(page.send, profileName, profile, baseUrl)
+    );
   }
 
   const failures = reports.flatMap(report =>

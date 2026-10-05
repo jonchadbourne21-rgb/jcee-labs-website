@@ -1,3 +1,4 @@
+import routeMetadata from "@/content/routeMetadata.json";
 import type { ReactNode } from "react";
 import BrandFooter from "./BrandFooter";
 import CoreHeader, { type CoreHeaderCurrent } from "./CoreHeader";
@@ -19,10 +20,18 @@ export default function EditorialLayout({
 }) {
   const [location] = useLocation();
   useEffect(() => {
-    document.title = `${title} — JCEE Labs`;
+    const route =
+      location
+        .replace(import.meta.env.BASE_URL.replace(/\/+$/, ""), "")
+        .replace(/\/+$/, "") || "/";
+    const meta = (
+      routeMetadata as Record<string, { title: string; description: string }>
+    )[route];
+    document.title = meta?.title || `${title} — JCEE Labs`;
+    const seoDescription = meta?.description || description;
     document
       .querySelector('meta[name="description"]')
-      ?.setAttribute("content", description);
+      ?.setAttribute("content", seoDescription);
     for (const key of ["og:title", "twitter:title"])
       document
         .querySelector(`meta[property="${key}"],meta[name="${key}"]`)
@@ -30,7 +39,7 @@ export default function EditorialLayout({
     for (const key of ["og:description", "twitter:description"])
       document
         .querySelector(`meta[property="${key}"],meta[name="${key}"]`)
-        ?.setAttribute("content", description);
+        ?.setAttribute("content", seoDescription);
     const pathname = location.split(/[?#]/)[0].replace(/\/+$/, "") || "/";
     const basePath = import.meta.env.BASE_URL.replace(/\/+$/, "");
     const publicPath =
