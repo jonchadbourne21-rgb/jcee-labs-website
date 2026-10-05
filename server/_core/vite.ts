@@ -1,3 +1,4 @@
+import publicRoutes from "../../client/src/content/publicRoutes.json";
 import express, { type Express } from "express";
 import fs from "fs";
 import { type Server } from "http";
@@ -66,10 +67,37 @@ export function serveStatic(app: Express) {
     path.resolve(distPath, "index.html"),
     "utf-8"
   );
+  app.use((req, res, next) => {
+    const route = req.path.replace(/\/+$/, "") || "/";
+    if (route === "/research-evidence") {
+      res.redirect(301, "/registry");
+      return;
+    }
+    if (publicRoutes.includes(route)) {
+      const file = path.join(distPath, route.slice(1), "index.html");
+      if (fs.existsSync(file)) {
+        res.sendFile(file);
+        return;
+      }
+    }
+    next();
+  });
   app.use(express.static(distPath, { index: false }));
 
   // fall through to index.html if the file doesn't exist
   app.use("*", (req, res) => {
-    res.type("html").send(applyPublicPageMetadata(template, req.originalUrl));
+    const route = req.path.replace(/\/+$/, "") || "/";
+    if (route.startsWith("/admin")) {
+      res
+        .type("html")
+        .send(
+          template.replace(
+            'content="index,follow,max-image-preview:large"',
+            'content="noindex,nofollow"'
+          )
+        );
+      return;
+    }
+    res.status(404).sendFile(path.join(distPath, "404.html"));
   });
 }

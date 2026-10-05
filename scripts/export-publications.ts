@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import pageSeo from "../client/src/content/pageSeo.json";
 import {
   publications,
   publicationHref,
@@ -95,6 +96,7 @@ const routeMetadata: Record<
       "Selected JCEE build milestones, development candidates, and open gates. Selected entries reconciled September 29, 2026; historical evidence dates preserved.",
   },
 };
+Object.assign(routeMetadata, pageSeo);
 for (const p of publications)
   routeMetadata[publicationHref(p)] = {
     title: `${p.title} — JCEE Labs`,
@@ -105,4 +107,29 @@ for (const p of publications)
 fs.writeFileSync(
   "client/src/content/routeMetadata.json",
   JSON.stringify(routeMetadata, null, 2) + "\n"
+);
+
+// Inventory is shared by sitemap generation, prerendering, and production routing.
+const publicRoutes = [
+  ...new Set(
+    [
+      ...fs
+        .readFileSync("client/src/App.tsx", "utf8")
+        .matchAll(/<Route\s+path="([^"]+)"/g),
+    ].map(m => m[1])
+  ),
+].filter(p => !p.startsWith("/admin") && p !== "/404");
+fs.writeFileSync(
+  "client/src/content/publicRoutes.json",
+  JSON.stringify(publicRoutes, null, 2) + "\n"
+);
+fs.copyFileSync("robots.txt", "client/public/robots.txt");
+const sitemapRoutes = publicRoutes.filter(p => p !== "/research-evidence");
+fs.writeFileSync(
+  "client/public/sitemap.xml",
+  '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+    sitemapRoutes
+      .map(p => `  <url><loc>https://jceelabs.com${p}</loc></url>`)
+      .join("\n") +
+    "\n</urlset>\n"
 );

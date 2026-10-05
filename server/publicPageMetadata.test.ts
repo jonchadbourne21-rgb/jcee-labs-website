@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { applyPublicPageMetadata } from "./publicPageMetadata";
+import pageSeo from "../client/src/content/pageSeo.json";
 
 const template = readFileSync(
   new URL("../client/index.html", import.meta.url),
@@ -9,6 +10,37 @@ const template = readFileSync(
 const article = "/blog/a-confident-model-still-needs-permission";
 
 describe("metadata in the HTML received by sharing crawlers", () => {
+  it("keeps the seven page titles and descriptions within the requested editorial lengths", () => {
+    for (const [route, meta] of Object.entries(pageSeo)) {
+      expect(meta.title.length, route).toBeGreaterThanOrEqual(50);
+      expect(meta.title.length, route).toBeLessThanOrEqual(60);
+      expect(meta.description.length, route).toBeGreaterThanOrEqual(145);
+      expect(meta.description.length, route).toBeLessThanOrEqual(160);
+    }
+  });
+
+  it("emits one article schema and publication date when metadata is applied twice", () => {
+    const once = applyPublicPageMetadata(
+      template,
+      "/blog/what-is-an-evidence-boundary"
+    );
+    const twice = applyPublicPageMetadata(
+      once,
+      "/blog/what-is-an-evidence-boundary"
+    );
+    expect(twice.match(/id="public-schema"/g)).toHaveLength(1);
+    expect(twice.match(/property="article:published_time"/g)).toHaveLength(1);
+    const schema = JSON.parse(
+      twice.match(
+        /<script id="public-schema" type="application\/ld\+json">([\s\S]*?)<\/script>/
+      )![1]
+    );
+    expect(schema["@type"]).toBe("Article");
+    expect(schema.author.name).toBe("JCEE Labs");
+    expect(schema.datePublished).toBe("2026-10-05");
+    expect(schema.dateModified).toBeUndefined();
+  });
+
   it("serves the article identity before JavaScript, with a canonical URL free of query parameters", () => {
     const html = applyPublicPageMetadata(
       template,

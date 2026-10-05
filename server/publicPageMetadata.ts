@@ -1,4 +1,5 @@
 import routeMetadata from "../client/src/content/routeMetadata.json";
+import { publications } from "../client/src/content/publications";
 
 type PageMetadata = {
   title: string;
@@ -22,6 +23,11 @@ export function applyPublicPageMetadata(html: string, requestPath: string) {
   if (!meta) return html;
   const canonical = `https://jceelabs.com${pathname}`;
   let result = html
+    .replace(
+      /<script id="public-schema" type="application\/ld\+json">[\s\S]*?<\/script>/g,
+      ""
+    )
+    .replace(/<meta property="article:published_time"[^>]*>/g, "")
     .replace(
       /<title>[^<]*<\/title>/,
       () => `<title>${escapeHtml(meta.title)}</title>`
@@ -56,5 +62,38 @@ export function applyPublicPageMetadata(html: string, requestPath: string) {
       `<meta property="article:published_time" content="${escapeHtml(meta.publishedTime)}" />\n</head>`
     );
   }
+  const organization = {
+    "@type": "Organization",
+    "@id": "https://jceelabs.com/#organization",
+    name: "JCEE Labs",
+    url: "https://jceelabs.com/",
+    logo: "https://jceelabs.com/brand/jcee-labs-mark.png",
+    location: { "@type": "Place", name: "Dallas, Texas" },
+  };
+  const publication = publications.find(item =>
+    pathname.endsWith(`/${item.slug}`)
+  );
+  const schema = publication
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: publication.title,
+        description: publication.summary,
+        datePublished: publication.date,
+        mainEntityOfPage: canonical,
+        url: canonical,
+        author: publication.author
+          ? { "@type": "Person", name: publication.author }
+          : organization,
+        publisher: organization,
+      }
+    : pathname === "/" || pathname === "/company"
+      ? { "@context": "https://schema.org", ...organization }
+      : null;
+  if (schema)
+    result = result.replace(
+      "</head>",
+      `<script id="public-schema" type="application/ld+json">${JSON.stringify(schema).replaceAll("<", "\\u003c")}</script>\n</head>`
+    );
   return result;
 }

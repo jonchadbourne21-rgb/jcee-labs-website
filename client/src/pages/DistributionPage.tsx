@@ -20,7 +20,7 @@ export default function DistributionPage() {
     <EditorialLayout
       current="solutions"
       eyebrow="Solutions / Industrial distribution"
-      title="Keep the order true to the instructions."
+      title="JCEE Distribution: order review with evidence and human control"
       description="JCEE Distribution is in development to help teams compare purchase orders with sales orders, investigate exceptions, and measure the work those exceptions create."
     >
       <section className="editorial-section distribution-intro">

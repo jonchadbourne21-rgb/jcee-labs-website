@@ -1,3 +1,4 @@
+import usePageSeo from "@/components/usePageSeo";
 import BuildStatusList from "@/components/BuildStatusList";
 import VowDurabilityDemo from "@/components/VowDurabilityDemo";
 import { useEffect } from "react";
@@ -24,13 +25,7 @@ const boundaries = [
 ];
 
 export default function VowPage() {
-  useEffect(() => {
-    const previousTitle = document.title;
-    document.title = "JCEE VOW — JCEE Labs";
-    return () => {
-      document.title = previousTitle;
-    };
-  }, []);
+  usePageSeo("/vow");
 
   return (
     <main className="program-page" id="top">
@@ -46,9 +41,9 @@ export default function VowPage() {
         </p>
         <div className="program-number">JCEE VOW / PUBLIC OVERVIEW</div>
         <h1>
-          Execution should
+          JCEE VOW:
           <br />
-          <em>leave evidence.</em>
+          <em>an evidence-first execution runtime</em>
         </h1>
         <p className="program-deck">
           JCEE VOW is JCEE Labs&apos; evidence-first runtime for software that

@@ -1,3 +1,5 @@
+import WhoThisIsFor from "@/components/WhoThisIsFor";
+import usePageSeo from "@/components/usePageSeo";
 import { useEffect } from "react";
 import BrandFooter from "@/components/BrandFooter";
 import CoreHeader from "@/components/CoreHeader";
@@ -24,9 +26,7 @@ const methodQuestions = [
 ];
 
 export default function Home() {
-  useEffect(() => {
-    document.title = "JCEE Labs — Accountable AI-Assisted Operations";
-  }, []);
+  usePageSeo("/");
 
   return (
     <main id="top" className="precision-home commercial-home">
@@ -34,23 +34,26 @@ export default function Home() {
       <section id="page-content" tabIndex={-1} className="hero hybrid-hero">
         <div className="hero-copy">
           <p className="eyebrow">
-            <span /> JCEE ASSURANCE METHOD
+            <span /> ACCOUNTABLE AI · PERMISSION · EVIDENCE
           </p>
           <h1>
-            Keep AI-assisted work
+            Keep AI-assisted operations
             <br />
             <em>accountable.</em>
           </h1>
           <p className="hero-deck">
-            JCEE is developing methods and software that connect operational
-            actions to clear permissions, reviewable evidence, and human
-            control. Start with one workflow where being wrong would matter,
-            make the evidence boundary visible, and let the result earn the next
-            step.
+            JCEE Labs is developing methods and software for accountable AI:
+            connecting operational actions to clear permissions, reviewable
+            evidence, and human control.
+          </p>
+          <p className="hero-deck">
+            Start with one workflow where a wrong or unexplained action has real
+            operational cost. Establish what the evidence supports, who can
+            authorize the next step, and how the outcome will be checked.
           </p>
           <div className="hero-actions">
             <a className="primary-link" href="#distribution-demo">
-              See it in one workflow <span>↓</span>
+              See the Distribution example <span>↓</span>
             </a>
             <a className="primary-link" href="/partners/enterprise">
               Discuss an assessment <span>↗</span>
@@ -256,6 +259,34 @@ export default function Home() {
         </div>
       </section>
 
+      <section
+        className="editorial-section"
+        aria-labelledby="evidence-boundary-title"
+      >
+        <h2 id="evidence-boundary-title">
+          Make the evidence boundary visible.
+        </h2>
+        <p>
+          An evidence boundary separates what a particular result supports from
+          what has not been established.
+        </p>
+        <p>
+          A successful synthetic test answers a question about that test. It
+          does not, by itself, establish customer savings, reliable performance
+          in a different environment, or production readiness.
+        </p>
+        <p>
+          We make the tested conditions, limitations, and unresolved questions
+          part of the explanation.
+        </p>
+        <div className="editorial-actions">
+          <a href="/registry">Review the Public Registry →</a>
+          <a href="/blog/what-is-an-evidence-boundary">
+            What is an evidence boundary? →
+          </a>
+        </div>
+      </section>
+      <WhoThisIsFor />
       <section className="company-section" id="company">
         <div className="section-index">
           <span>02 / THE METHOD</span>
@@ -551,6 +582,25 @@ export default function Home() {
         </a>
       </section>
 
+      <section className="editorial-section" aria-labelledby="workflow-cta">
+        <h2 id="workflow-cta">Start with one consequential workflow.</h2>
+        <p>
+          Where does an instruction become an action? Who can authorize it? What
+          evidence would let someone verify the outcome?
+        </p>
+        <p>
+          Bring a specific workflow, its constraints, and the decisions people
+          need to retain. We can discuss whether a bounded assessment is
+          appropriate.
+        </p>
+        <div className="editorial-actions">
+          <a className="editorial-button" href="/partners/enterprise">
+            Discuss your workflow →
+          </a>
+          <a href="/registry">Review current build evidence →</a>
+          <a href="/partners/research">Discuss a research question →</a>
+        </div>
+      </section>
       <BrandFooter backToTopHref="#top" />
     </main>
   );

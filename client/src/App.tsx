@@ -20,7 +20,9 @@ const PricingAdmin = lazy(() => import("./pages/PricingAdmin"));
 const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
 const TermsPage = lazy(() => import("./pages/TermsPage"));
 const PartnersPage = lazy(() => import("./pages/PartnersPage"));
-const EnterprisePartnersPage = lazy(() => import("./pages/EnterprisePartnersPage"));
+const EnterprisePartnersPage = lazy(
+  () => import("./pages/EnterprisePartnersPage")
+);
 const ResearchPartnersPage = lazy(() => import("./pages/ResearchPartnersPage"));
 
 const DistributionPage = lazy(() => import("./pages/DistributionPage"));
@@ -54,21 +56,46 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/solutions/distribution" component={DistributionPage} />
         <Route path="/operating-cloud" component={OperatingCloudPage} />
+        <Route
+          path="/blog/what-is-an-evidence-boundary"
+          component={PublicationPage}
+        />
         <Route path="/blog/the-work-nobody-sees" component={PublicationPage} />
         <Route path="/blog/after-an-ai-says-done" component={PublicationPage} />
-        <Route path="/blog/a-research-result-needs-a-boundary" component={PublicationPage} />
+        <Route
+          path="/blog/a-research-result-needs-a-boundary"
+          component={PublicationPage}
+        />
         <Route path="/research/bb84-communication" component={BB84PaperPage} />
-        <Route path="/blog/a-confident-model-still-needs-permission" component={PublicationPage} />
-        <Route path="/research/crucible-composition-tax" component={PublicationPage} />
+        <Route
+          path="/blog/a-confident-model-still-needs-permission"
+          component={PublicationPage}
+        />
+        <Route
+          path="/research/crucible-composition-tax"
+          component={PublicationPage}
+        />
         <Route path="/technology" component={TechnologyPage} />
         <Route path="/research/fields" component={ResearchFieldsPage} />
         <Route path="/research" component={ResearchPage} />
         <Route path="/resources" component={ResourcesPage} />
         <Route path="/company" component={CompanyPage} />
-        <Route path="/blog/start-with-the-workflow" component={PublicationPage} />
-        <Route path="/blog/distribution-first-dry-run" component={PublicationPage} />
-        <Route path="/research/qcs-frozen-specification-reproduction" component={PublicationPage} />
-        <Route path="/research/crucible-semantic-kernel" component={PublicationPage} />
+        <Route
+          path="/blog/start-with-the-workflow"
+          component={PublicationPage}
+        />
+        <Route
+          path="/blog/distribution-first-dry-run"
+          component={PublicationPage}
+        />
+        <Route
+          path="/research/qcs-frozen-specification-reproduction"
+          component={PublicationPage}
+        />
+        <Route
+          path="/research/crucible-semantic-kernel"
+          component={PublicationPage}
+        />
         <Route path="/portfolio" component={CareerPortfolio} />
         <Route path="/charter/archive/v1.0" component={CharterV10} />
         <Route path="/charter" component={CharterV11} />
