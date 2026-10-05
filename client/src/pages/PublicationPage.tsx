@@ -38,6 +38,12 @@ export default function PublicationPage() {
           >
             Download Markdown ↓
           </a>
+          <a
+            href={`${import.meta.env.BASE_URL}publications/${item.slug}.txt`}
+            download
+          >
+            Download text ↓
+          </a>
         </aside>
         <article className="publication-body">
           {item.sections.map((s, i) => (

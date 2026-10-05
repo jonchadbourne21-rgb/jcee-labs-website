@@ -31,6 +31,7 @@ const ResearchFieldsPage = lazy(() => import("./pages/ResearchFieldsPage"));
 const ResourcesPage = lazy(() => import("./pages/ResourcesPage"));
 const CompanyPage = lazy(() => import("./pages/CompanyPage"));
 const PublicationPage = lazy(() => import("./pages/PublicationPage"));
+const BB84PaperPage = lazy(() => import("./pages/BB84PaperPage"));
 
 function RouteShimmer() {
   return (
@@ -54,6 +55,9 @@ function Router() {
         <Route path="/solutions/distribution" component={DistributionPage} />
         <Route path="/operating-cloud" component={OperatingCloudPage} />
         <Route path="/blog/the-work-nobody-sees" component={PublicationPage} />
+        <Route path="/blog/after-an-ai-says-done" component={PublicationPage} />
+        <Route path="/blog/a-research-result-needs-a-boundary" component={PublicationPage} />
+        <Route path="/research/bb84-communication" component={BB84PaperPage} />
         <Route path="/blog/a-confident-model-still-needs-permission" component={PublicationPage} />
         <Route path="/research/crucible-composition-tax" component={PublicationPage} />
         <Route path="/technology" component={TechnologyPage} />

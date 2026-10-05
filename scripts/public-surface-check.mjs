@@ -1,4 +1,5 @@
 import { spawn } from "node:child_process";
+import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
 import { rm } from "node:fs/promises";
 import net from "node:net";
@@ -323,6 +324,9 @@ try {
   }
 
   for (const [route, heading] of [
+    ["/blog/after-an-ai-says-done", "What Happens After an AI Says"],
+    ["/blog/a-research-result-needs-a-boundary", "A Research Result Needs a Boundary"],
+    ["/research/bb84-communication", "Perfect Recovery and One-Message Bounds"],
     ["/operating-cloud", "A common foundation"], ["/blog/the-work-nobody-sees", "The Work Nobody Sees"], ["/research/crucible-composition-tax", "testing the cost of composition"],
     [articleRoute, "A Confident Model Still Needs Permission"],
     ["/solutions/distribution", "Keep the order true"], ["/technology", "Intelligence should leave receipts"],
@@ -343,16 +347,19 @@ try {
       failures.push(`${route}: rendered canonical or Open Graph URL includes a hosting prefix or wrong route`);
     }
   }
-  for (const asset of ["publications/the-work-nobody-sees.md", "publications/crucible-composition-tax.md", "JCEE_Labs_Public_Registry_v1.2.md", "publications/start-with-the-workflow.md", "publications/distribution-first-dry-run.md", "publications/qcs-frozen-specification-reproduction.md", "publications/crucible-semantic-kernel.md"]) {
+  for (const asset of ["publications/after-an-ai-says-done.md", "publications/after-an-ai-says-done.txt", "publications/a-research-result-needs-a-boundary.md", "publications/a-research-result-needs-a-boundary.txt", "publications/the-work-nobody-sees.md", "publications/crucible-composition-tax.md", "JCEE_Labs_Public_Registry_v1.2.md", "publications/start-with-the-workflow.md", "publications/distribution-first-dry-run.md", "publications/qcs-frozen-specification-reproduction.md", "publications/crucible-semantic-kernel.md"]) {
     const response = await fetch(`${baseUrl}/${asset}`);
     const text = await response.text();
     if (!response.ok || !text.startsWith("# ")) failures.push(`${asset}: missing Markdown publication`);
   }
   await navigate(page.send, baseUrl, "/resources");
+  const paperResponse = await fetch(`${baseUrl}/research/bb84-communication/BB84_Public_Release_v0.4-P2.pdf`);
+  const paperBytes = Buffer.from(await paperResponse.arrayBuffer());
+  if (!paperResponse.ok || createHash("sha256").update(paperBytes).digest("hex") !== "63e3a02f11cce223d4ff803f136baace51ee5839b04d0b04abec737910b4da20") failures.push("Released BB84 P2 PDF missing or modified");
   await evaluate(page.send, `(() => { [...document.querySelectorAll('.resource-filters button')].find(b=>b.textContent === 'Engineering blog')?.click(); })()`);
   await sleep(100);
-  const filtered = await evaluate(page.send, `({ count:document.querySelectorAll('.resource-card').length, text:document.querySelector('.resource-card')?.textContent })`);
-  if (filtered.count !== 1 || !filtered.text.includes('order-integrity')) failures.push('Resource filter did not show the engineering article');
+  const filtered = await evaluate(page.send, `({ count:document.querySelectorAll('.resource-card').length, text:[...document.querySelectorAll('.resource-card')].map(card => card.textContent).join(' ') })`);
+  if (filtered.count !== 2 || !filtered.text.includes('order-integrity') || !filtered.text.includes('What Happens After an AI Says')) failures.push('Resource filter did not show the engineering articles');
 
   for (const [label, count] of [["From the Founder", 1], ["Research", 3]]) {
     await evaluate(page.send, `(() => { [...document.querySelectorAll('.resource-filters button')].find(b=>b.textContent === '${label}')?.click(); })()`);

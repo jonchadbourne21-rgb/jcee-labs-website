@@ -7,24 +7,27 @@ import { describe, expect, it } from "vitest";
 import BB84PublicPreprint from "../components/BB84PublicPreprint";
 import { bb84PublicRelease as paper } from "./bb84Release";
 
-const publicDir = resolve(process.cwd(), "client/public/research/bb84-communication");
+const publicDir = resolve(
+  process.cwd(),
+  "client/public/research/bb84-communication"
+);
 const standaloneHtml = readFileSync(resolve(publicDir, "index.html"), "utf8");
 const render = () => renderToStaticMarkup(createElement(BB84PublicPreprint));
 
-describe("BB84 public preprint — R144 release boundary", () => {
+describe("BB84 public preprint — R146 release boundary", () => {
   it("pins the exact authorized release, external URLs, and checksum", () => {
-    expect(paper.record).toBe("R144");
+    expect(paper.record).toBe("R146");
     expect(paper.kind).toBe("Public preprint");
-    expect(paper.version).toBe("v0.4-P1.1");
+    expect(paper.version).toBe("v0.4-P2");
     expect(paper.releaseStatus).toBe(
-      "PUBLIC_PREPRINT_V0.4-P1.1_RELEASED / PUBLIC_ACCESS_VERIFIED",
+      "PUBLIC_PREPRINT_V0.4-P2_RELEASED / ACCEPTED_CLAIMS_FROZEN / PUBLIC_ACCESS_AND_BUTTONS_VERIFIED / NO_AUTOMATIC_NARROWING / GENERAL_FRONTIER_OPEN"
     );
-    expect(paper.landingUrl).toBe("https://jcee-bb84-paper.higgsfield.app");
+    expect(paper.landingUrl).toBe("/research/bb84-communication");
     expect(paper.pdfUrl).toBe(
-      "https://jcee-bb84-paper.higgsfield.app/BB84_Public_Release_v0.4-P1.1.pdf",
+      "/research/bb84-communication/BB84_Public_Release_v0.4-P2.pdf"
     );
     expect(paper.sha256).toBe(
-      "b1e45fc7d77b08a55801ab92553c361c51b052d959cd843cb7ca6119175bc624",
+      "63e3a02f11cce223d4ff803f136baace51ee5839b04d0b04abec737910b4da20"
     );
   });
 
@@ -44,11 +47,15 @@ describe("BB84 public preprint — R144 release boundary", () => {
 
   it("keeps the review status and unresolved cases visible outside details", () => {
     const visible = render().split("<details")[0];
-    expect(visible).toContain("No independent human expert review was obtained.");
+    expect(visible).toContain(
+      "No independent human expert review was obtained."
+    );
     expect(visible).toContain("not a peer-reviewed publication");
-    expect(visible).toContain("general one-message frontier");
-    expect(visible).toContain("arbitrary interactive n ≥ 3 closure");
-    expect(visible).toContain("exact physical one-message (3,1) case remain open");
+    expect(visible).toContain("general one-message interior frontier");
+    expect(visible).toContain("interactive near-full recovery for n ≥ 3");
+    expect(visible).toContain(
+      "exact physical one-message (3,1) case remain open"
+    );
     expect(visible).toContain("P0.45 R1 remains on hold");
   });
 
@@ -62,24 +69,37 @@ describe("BB84 public preprint — R144 release boundary", () => {
   });
 
   it("verifies the already committed PDF bytes against the authorized hash", () => {
-    const bytes = readFileSync(resolve(publicDir, "BB84_Public_Release_v0.4-P1.1.pdf"));
+    const bytes = readFileSync(
+      resolve(publicDir, "BB84_Public_Release_v0.4-P2.pdf")
+    );
     expect(bytes.subarray(0, 5).toString("ascii")).toBe("%PDF-");
     expect(createHash("sha256").update(bytes).digest("hex")).toBe(paper.sha256);
   });
 
   it("keeps the existing standalone reader on the same release", () => {
-    expect(standaloneHtml).toContain("Public preprint v0.4-P1.1");
-    expect(standaloneHtml).not.toContain("v0.4-P1.1.1");
+    expect(standaloneHtml).toContain("Public preprint v0.4-P2");
+    expect(standaloneHtml).not.toContain("v0.4-P1.1");
     expect(standaloneHtml).not.toContain("BB84_Public_Release_v0.4-P1.pdf");
-    expect(standaloneHtml).toContain(`href="${paper.landingUrl}"`);
+    expect(standaloneHtml).toContain(
+      `href="https://jceelabs.com${paper.landingUrl}"`
+    );
     expect(standaloneHtml).toContain(paper.sha256);
-    expect(standaloneHtml).toContain("No independent human expert review was obtained.");
+    expect(standaloneHtml).toContain(
+      "No independent human expert review was obtained."
+    );
   });
 
   it("mounts the card on the existing Research publications surface", () => {
-    const source = readFileSync(resolve(process.cwd(), "client/src/pages/ResearchPage.tsx"), "utf8");
-    expect(source).toContain('import BB84PublicPreprint from "@/components/BB84PublicPreprint"');
+    const source = readFileSync(
+      resolve(process.cwd(), "client/src/pages/ResearchPage.tsx"),
+      "utf8"
+    );
+    expect(source).toContain(
+      'import BB84PublicPreprint from "@/components/BB84PublicPreprint"'
+    );
     expect(source.match(/<BB84PublicPreprint\s*\/>/g)).toHaveLength(1);
-    expect(source.indexOf('<BB84PublicPreprint />')).toBeGreaterThan(source.indexOf('id="papers-title"'));
+    expect(source.indexOf("<BB84PublicPreprint />")).toBeGreaterThan(
+      source.indexOf('id="papers-title"')
+    );
   });
 });

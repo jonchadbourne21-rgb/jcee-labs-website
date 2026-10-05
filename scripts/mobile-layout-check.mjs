@@ -34,6 +34,7 @@ const profiles = {
 };
 
 const publicRoutes = [
+  "/blog/after-an-ai-says-done", "/blog/a-research-result-needs-a-boundary", "/research/bb84-communication",
   "/blog/a-confident-model-still-needs-permission", "/research/fields",
   "/operating-cloud", "/blog/the-work-nobody-sees", "/research/crucible-composition-tax", "/solutions/distribution", "/technology", "/research", "/resources", "/company",
   "/blog/start-with-the-workflow", "/blog/distribution-first-dry-run",
