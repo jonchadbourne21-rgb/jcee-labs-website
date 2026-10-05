@@ -145,26 +145,32 @@ async function connect(debugPort) {
   return { send, runtimeErrors, networkFailures, close: () => socket.close() };
 }
 
-async function waitForApp(send) {
+async function waitForApp(send, expectedUrl) {
+  const normalizePath = value =>
+    value.replace(/\/+$/, "").replace(/\/research-evidence$/, "/registry") ||
+    "/";
+  const expectedPath = normalizePath(new URL(expectedUrl).pathname);
   for (let attempt = 0; attempt < 80; attempt += 1) {
     const response = await send("Runtime.evaluate", {
       returnByValue: true,
       expression:
-        "({ ready: document.readyState, textLength: document.querySelector('#root')?.textContent?.trim().length ?? 0 })",
+        "({ path: location.pathname, clientReady: document.querySelector('#root')?.getAttribute('data-client-ready') === 'true', ready: document.readyState, textLength: document.querySelector('#root')?.textContent?.trim().length ?? 0 })",
     });
     if (
+      normalizePath(response.result.value.path) === expectedPath &&
+      response.result.value.clientReady &&
       response.result.value.ready === "complete" &&
       response.result.value.textLength > 100
     )
       return;
     await sleep(75);
   }
-  throw new Error("Application root did not finish rendering");
+  throw new Error(`Application root did not finish rendering: ${expectedUrl}`);
 }
 
 async function navigate(send, baseUrl, route) {
   await send("Page.navigate", { url: `${baseUrl}${route}` });
-  await waitForApp(send);
+  await waitForApp(send, `${baseUrl}${route}`);
 }
 
 async function readBody(send) {
@@ -360,8 +366,8 @@ try {
   for (const [route, expectedHeading] of [
     ["/privacy", "Privacy Policy"],
     ["/terms", "Terms of Service"],
-    ["/registry", "A living record."],
-    ["/assurance", "The actor is not"],
+    ["/registry", "JCEE Labs Public Registry"],
+    ["/assurance", "The JCEE Assurance Method"],
     ["/charter", "Hypotheses may"],
     ["/partners", "Choose the boundary"],
     ["/partners/enterprise", "Make consequential software"],
@@ -408,11 +414,8 @@ try {
   }
 
   for (const [route, heading] of [
-    [
-      "/blog/what-is-an-evidence-boundary",
-      "/blog/after-an-ai-says-done",
-      "What Happens After an AI Says",
-    ],
+    ["/blog/what-is-an-evidence-boundary", "What Is an Evidence Boundary"],
+    ["/blog/after-an-ai-says-done", "What Happens After an AI Says"],
     [
       "/blog/a-research-result-needs-a-boundary",
       "A Research Result Needs a Boundary",
@@ -495,8 +498,9 @@ try {
     `({ count:document.querySelectorAll('.resource-card').length, text:[...document.querySelectorAll('.resource-card')].map(card => card.textContent).join(' ') })`
   );
   if (
-    filtered.count !== 2 ||
+    filtered.count !== 3 ||
     !filtered.text.includes("order-integrity") ||
+    !filtered.text.includes("What Is an Evidence Boundary") ||
     !filtered.text.includes("What Happens After an AI Says")
   )
     failures.push("Resource filter did not show the engineering articles");

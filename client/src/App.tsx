@@ -120,6 +120,9 @@ function Router() {
 }
 
 function App() {
+  useEffect(() => {
+    document.getElementById("root")?.setAttribute("data-client-ready", "true");
+  }, []);
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="dark">

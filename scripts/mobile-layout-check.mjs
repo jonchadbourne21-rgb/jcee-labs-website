@@ -230,26 +230,32 @@ async function connectToPage(debugPort) {
   return { send, runtimeErrors, close: () => socket.close() };
 }
 
-async function waitForApp(send) {
+async function waitForApp(send, expectedUrl) {
+  const normalizePath = value =>
+    value.replace(/\/+$/, "").replace(/\/research-evidence$/, "/registry") ||
+    "/";
+  const expectedPath = normalizePath(new URL(expectedUrl).pathname);
   for (let attempt = 0; attempt < 40; attempt += 1) {
     const state = await send("Runtime.evaluate", {
       returnByValue: true,
       expression:
-        "({ readyState: document.readyState, textLength: document.querySelector('#root')?.textContent?.trim().length ?? 0 })",
+        "({ path: location.pathname, clientReady: document.querySelector('#root')?.getAttribute('data-client-ready') === 'true', readyState: document.readyState, textLength: document.querySelector('#root')?.textContent?.trim().length ?? 0 })",
     });
     if (
+      normalizePath(state.result.value.path) === expectedPath &&
+      state.result.value.clientReady &&
       state.result.value.readyState === "complete" &&
       state.result.value.textLength > 200
     )
       return;
     await wait(100);
   }
-  throw new Error("Application root did not finish rendering");
+  throw new Error(`Application root did not finish rendering: ${expectedUrl}`);
 }
 
 async function navigate(send, url) {
   await send("Page.navigate", { url });
-  await waitForApp(send);
+  await waitForApp(send, url);
 }
 
 async function readLayout(send, selector) {
