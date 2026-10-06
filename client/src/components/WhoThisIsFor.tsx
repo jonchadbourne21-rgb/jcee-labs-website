@@ -1,6 +1,6 @@
 export default function WhoThisIsFor() {
   return (
-    <section className="editorial-section" aria-labelledby="who-this-is-for">
+    <section className="editorial-section who-this-is-for" aria-labelledby="who-this-is-for">
       <h2 id="who-this-is-for">Who this is for</h2>
       <p>
         JCEE’s work is intended for teams using AI or automation where a wrong,
