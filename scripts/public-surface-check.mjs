@@ -350,11 +350,13 @@ try {
   }
 
   for (const route of retiredRoutes) {
-    if (staticMode && (await fetch(`${baseUrl}${route}`)).status !== 404) {
-      failures.push(`Retired static route did not return HTTP 404: ${route}`);
+    const retiredResponse = await fetch(`${baseUrl}${route}`);
+    if (retiredResponse.status !== 404) {
+      failures.push(
+        `Retired ${staticMode ? "static " : ""}route did not return HTTP 404: ${route}`
+      );
     }
-    await navigate(page.send, baseUrl, route);
-    const text = await readBody(page.send);
+    const text = await retiredResponse.text();
     if (
       !text.includes("404 / UNKNOWN STATE") ||
       !text.includes("is not in evidence")
@@ -366,7 +368,7 @@ try {
   for (const [route, expectedHeading] of [
     ["/privacy", "Privacy Policy"],
     ["/terms", "Terms of Service"],
-    ["/registry", "JCEE Labs Public Registry"],
+    ["/registry", "results, boundaries, and status"],
     ["/assurance", "The JCEE Assurance Method"],
     ["/charter", "Hypotheses may"],
     ["/partners", "Choose the boundary"],
