@@ -1,0 +1,24 @@
+name: JCEE AUTH P0.5R1 website boundary
+on:
+  push:
+    branches: [jcee-auth-p05r1-website-20260918]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  authority-conformance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check
+      - run: pnpm test
+      - run: node scripts/authority-boundary-check.mjs

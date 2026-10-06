@@ -1,5 +1,6 @@
 import { TRPCError } from "@trpc/server";
 import { ENV } from "./env";
+import { authorityHeaders, requireAuthority, type AuthorityIdentity } from "../authorityBoundary";
 
 export type NotificationPayload = {
   title: string;
@@ -64,8 +65,10 @@ const validatePayload = (input: NotificationPayload): NotificationPayload => {
  * bubble up as TRPC errors so callers can fix the payload.
  */
 export async function notifyOwner(
+  authority: AuthorityIdentity,
   payload: NotificationPayload
 ): Promise<boolean> {
+  const identity = requireAuthority(authority);
   const { title, content } = validatePayload(payload);
 
   if (!ENV.forgeApiUrl) {
@@ -92,6 +95,7 @@ export async function notifyOwner(
         authorization: `Bearer ${ENV.forgeApiKey}`,
         "content-type": "application/json",
         "connect-protocol-version": "1",
+        ...authorityHeaders(identity),
       },
       body: JSON.stringify({ title, content }),
     });
