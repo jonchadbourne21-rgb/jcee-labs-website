@@ -343,6 +343,11 @@ export default function Home() {
               <p>Shows selected milestones, boundaries, current status, and what remains unresolved.</p>
             </article>
           </div>
+          <div className="editorial-actions">
+            <a className="editorial-text-link" href="/assurance">Assurance method →</a>
+            <a className="editorial-text-link" href="/vow">VOW runtime →</a>
+            <a className="editorial-text-link" href="/qcs">QCS transition research →</a>
+          </div>
         </div>
 
         <div className="buyer-binding">
@@ -470,7 +475,7 @@ export default function Home() {
         <div className="operating-cloud-home__frame">
           <div className="operating-cloud-home__topline">
             <span>07 / PLATFORM DIRECTION</span>
-            <span>IN DEVELOPMENT · AFTER THE BOUNDED WORKFLOW</span>
+            <span>PLATFORM DIRECTION · IN DEVELOPMENT · AFTER THE BOUNDED WORKFLOW</span>
           </div>
           <div className="operating-cloud-home__lead">
             <div>
