@@ -37,6 +37,42 @@ export default function TechnologyPage() {
           </a>
         </div>
       </section>
+      <section className="editorial-section">
+        <p className="editorial-kicker">Public integration model</p>
+        <h2>Keep evidence, authority, execution, and verification distinct.</h2>
+        <div className="editorial-link-list" aria-label="JCEE public binding path">
+          <div>
+            <strong>01 · Claim or observation</strong>
+            <span>Start with the instruction, source record, or proposed action. A proposal is not authority.</span>
+          </div>
+          <div>
+            <strong>02 · Evidence boundary</strong>
+            <span>Bind the conclusion to the evidence and revision that support it. Inference does not silently become fact.</span>
+          </div>
+          <div>
+            <strong>03 · Current authority</strong>
+            <span>Check the competent source of permission at the time of action. Entitlement is not execution.</span>
+          </div>
+          <div>
+            <strong>04 · Consequence boundary</strong>
+            <span>The target system remains the owner of the real-world consequence; JCEE does not invent authority the target did not grant.</span>
+          </div>
+          <div>
+            <strong>05 · Durable execution and recovery</strong>
+            <span>Preserve intent and uncertainty across interruption. Missing evidence stays unknown; recovery does not become blind retry.</span>
+          </div>
+          <div>
+            <strong>06 · Terminal verification and receipt</strong>
+            <span>Verify the observable outcome independently where possible and preserve a reviewable receipt of what is known.</span>
+          </div>
+        </div>
+        <p className="editorial-intro">
+          This is the public semantic contract, not a published SDK or protocol specification.
+          Internal recovery law, verifier algorithms, receipt encoding, hostile-test corpora,
+          adapter mechanics, and bypass analysis remain private.
+        </p>
+      </section>
+
       <section className="editorial-section editorial-section-muted">
         <p className="editorial-kicker">Applied development</p>
         <h2>From components to useful workflows.</h2>
