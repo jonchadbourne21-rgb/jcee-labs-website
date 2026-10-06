@@ -51,7 +51,7 @@ export default function EnterprisePartnersPage() {
           team needs to know at the end. Make consequential software answerable in operation
           without asking the buyer to learn our internal vocabulary first.
         </p>
-        <div className="program-status-row"><span>FIRST STEP · WRITTEN BOUNDARY REVIEW</span><span>NO PAID WORK BEFORE AGREED SCOPE</span></div>
+        <div className="program-status-row"><span>FIRST STEP · WORKFLOW ASSURANCE ASSESSMENT</span><span>NO PAID WORK BEFORE AGREED SCOPE</span></div>
       </section>
 
       <section className="partner-fit enterprise-fit" aria-labelledby="enterprise-fit-title">
@@ -64,15 +64,16 @@ export default function EnterprisePartnersPage() {
         <div className="section-index light"><span>02 / WHAT HAPPENS NEXT</span><span>CLEAR SCOPE BEFORE COMMITMENT</span></div>
         <div className="partner-shared-layout">
           <div>
-            <p className="partner-kicker">THE FIRST ENGAGEMENT</p>
+            <p className="partner-kicker">WORKFLOW ASSURANCE ASSESSMENT</p>
             <h2 id="enterprise-engagement-title">Understand the workflow before prescribing software.</h2>
+            <p>The assessment maps one consequential workflow from instruction and evidence through current authority, execution boundary, recovery, and observable result. The deliverable is a written boundary map, findings, unresolved gaps, and the next justified test or implementation step.</p>
             <p>Production changes, software implementation, and deployment remain separately scoped and authorized. A workflow review does not grant execution authority.</p>
           </div>
           <ol className="partner-sequence">
             <li><span>01</span><strong>Review</strong><p>We read the workflow, current tools, owners, checks, and failure mode.</p></li>
             <li><span>02</span><strong>Map</strong><p>We identify the smallest boundary where clearer ownership, evidence, recovery, or software could help.</p></li>
             <li><span>03</span><strong>Scope</strong><p>If there is a fit, we define deliverables, acceptance criteria, required access, exclusions, timing, and commercial terms in writing.</p></li>
-            <li><span>04</span><strong>Decide</strong><p>You receive a bounded recommendation. If JCEE is not useful for the problem, we say so rather than forcing an engagement.</p></li>
+            <li><span>04</span><strong>Deliver</strong><p>You receive the boundary map, evidence and authority findings, unresolved recovery or control gaps, and a bounded recommendation. If JCEE is not useful for the problem, we say so.</p></li>
           </ol>
         </div>
       </section>
@@ -86,7 +87,7 @@ export default function EnterprisePartnersPage() {
             <p>This form opens an email draft for you to review and send. It does not create a contract or authorize paid work.</p>
             <p>Use a non-confidential summary. Do not include credentials, personal customer records, payment details, private source code, or sensitive incident evidence. Agree a secure exchange separately when necessary.</p>
             <dl>
-              <div><dt>FIRST STEP</dt><dd>Written workflow boundary review</dd></div>
+              <div><dt>FIRST STEP</dt><dd>Workflow Assurance Assessment</dd></div>
               <div><dt>IF THERE IS A FIT</dt><dd>Written scope and commercial proposal before paid work</dd></div>
               <div><dt>DIRECT</dt><dd><a href="mailto:support+enterprise@jceelabs.com">support+enterprise@jceelabs.com</a></dd></div>
             </dl>
