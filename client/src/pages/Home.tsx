@@ -220,7 +220,10 @@ export default function Home() {
           className="order-example"
           aria-label="Illustrative rendering of the tested synthetic order-integrity workflow, not customer data"
         >
-          <p className="editorial-kicker">SYNTHETIC WORKFLOW DEMONSTRATION</p>
+          <p className="editorial-kicker">
+            DISTRIBUTION REFERENCE IMPLEMENTATION · DEMONSTRATION DATA · NOT A
+            CUSTOMER DEPLOYMENT
+          </p>
           <h3>Purchase-order instruction → sales-order review</h3>
           <dl>
             <div>
@@ -471,6 +474,36 @@ export default function Home() {
             <a href="/assurance">Method and verification →</a>
           </article>
         </div>
+        <div className="technology-grid" aria-label="Current availability">
+          <article>
+            <p className="editorial-kicker">BUILT / TESTED</p>
+            <h3>Reference behaviors with recorded evidence.</h3>
+            <p>
+              The Public Registry records frozen or reproduced milestones,
+              including VOW and QCS evidence and the bounded synthetic
+              Distribution comparison result.
+            </p>
+          </article>
+          <article>
+            <p className="editorial-kicker">AVAILABLE TO SCOPE</p>
+            <h3>A Workflow Assurance Assessment.</h3>
+            <p>
+              JCEE can scope one consequential workflow, map evidence and
+              authority, identify recovery or control gaps, and define the next
+              justified test. Read-only shadow evaluation or implementation is
+              separately authorized.
+            </p>
+          </article>
+          <article>
+            <p className="editorial-kicker">NOT YET ESTABLISHED</p>
+            <h3>Production claims we do not make.</h3>
+            <p>
+              Customer ROI, production performance, generic public SDK or API
+              availability, production certification, and autonomous operating
+              authority have not been established.
+            </p>
+          </article>
+        </div>
         <div className="home-status-strip">
           <span>
             PUBLIC REGISTRY · SELECTED ENTRIES REVIEWED SEPTEMBER 29, 2026
@@ -489,7 +522,7 @@ export default function Home() {
           <span>ONE QUESTION · ONE BOUNDARY · ONE WRITTEN RESULT</span>
         </div>
         <div className="company-statement">
-          <p>THE FIRST COMMERCIAL STEP</p>
+          <p>THE FIRST COMMERCIAL STEP · WORKFLOW ASSURANCE ASSESSMENT</p>
           <h2 id="engage-title">
             Start with one place
             <br />
@@ -516,18 +549,19 @@ export default function Home() {
           <article>
             <h3>What you receive</h3>
             <p>
-              A written finding that states what the evidence supports, what
-              remains unresolved, and the next justified test or implementation
-              step.
+              A written boundary map, evidence and authority findings, unresolved
+              recovery or control gaps, and the next justified test or
+              implementation step.
             </p>
           </article>
         </div>
         <div className="company-bottom">
           <p>
             An assurance assessment is not a certification, deployment, or
-            promise of production readiness. Software implementation, production
-            changes, timing, and commercial terms remain separately scoped and
-            agreed in writing.
+            promise of production readiness. It does not grant execution
+            authority. Software implementation, production changes, timing,
+            access, and commercial terms remain separately scoped and agreed in
+            writing.
           </p>
           <a href="/partners/enterprise">
             DISCUSS AN ASSURANCE ASSESSMENT <span>→</span>
