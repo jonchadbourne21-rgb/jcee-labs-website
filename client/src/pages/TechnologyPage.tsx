@@ -37,6 +37,42 @@ export default function TechnologyPage() {
           </a>
         </div>
       </section>
+      <section className="editorial-section">
+        <p className="editorial-kicker">Public integration model</p>
+        <h2>Keep evidence, authority, execution, and verification distinct.</h2>
+        <div className="resource-grid" aria-label="JCEE public binding path">
+          <article className="resource-card">
+            <h3>01 · Claim or observation</h3>
+            <p>Start with the instruction, source record, or proposed action. A proposal is not authority.</p>
+          </article>
+          <article className="resource-card">
+            <h3>02 · Evidence boundary</h3>
+            <p>Bind the conclusion to the evidence and revision that support it. Inference does not silently become fact.</p>
+          </article>
+          <article className="resource-card">
+            <h3>03 · Current authority</h3>
+            <p>Check the competent source of permission at the time of action. Entitlement is not execution.</p>
+          </article>
+          <article className="resource-card">
+            <h3>04 · Consequence boundary</h3>
+            <p>The target system remains the owner of the real-world consequence; JCEE does not invent authority the target did not grant.</p>
+          </article>
+          <article className="resource-card">
+            <h3>05 · Durable execution and recovery</h3>
+            <p>Preserve intent and uncertainty across interruption. Missing evidence stays unknown; recovery does not become blind retry.</p>
+          </article>
+          <article className="resource-card">
+            <h3>06 · Terminal verification and receipt</h3>
+            <p>Verify the observable outcome independently where possible and preserve a reviewable receipt of what is known.</p>
+          </article>
+        </div>
+        <p className="editorial-intro">
+          This is the public semantic contract, not a published SDK or protocol specification.
+          Internal recovery law, verifier algorithms, receipt encoding, hostile-test corpora,
+          adapter mechanics, and bypass analysis remain private.
+        </p>
+      </section>
+
       <section className="editorial-section editorial-section-muted">
         <p className="editorial-kicker">Applied development</p>
         <h2>From components to useful workflows.</h2>

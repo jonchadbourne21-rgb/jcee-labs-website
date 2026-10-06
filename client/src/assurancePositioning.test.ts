@@ -7,6 +7,15 @@ const read = (name: string) =>
 const home = read("Home.tsx");
 const assurance = read("AssurancePage.tsx");
 const inquiry = read("EnterprisePartnersPage.tsx");
+const technology = read("TechnologyPage.tsx");
+const whoThisIsFor = readFileSync(
+  path.resolve(import.meta.dirname, "components", "WhoThisIsFor.tsx"),
+  "utf8"
+);
+const editorialCss = readFileSync(
+  path.resolve(import.meta.dirname, "editorial-update.css"),
+  "utf8"
+);
 const plain = (source: string) => source.replace(/\s+/g, " ");
 
 describe("buyer-readable public positioning with Assurance Playbook control", () => {
@@ -23,7 +32,7 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
 
   it("shows Distribution as a bounded concrete demonstration rather than the company identity", () => {
     expect(home).toContain('id="distribution-demo"');
-    expect(home).toContain("SYNTHETIC WORKFLOW DEMONSTRATION");
+    expect(home).toContain("DISTRIBUTION REFERENCE IMPLEMENTATION");
     expect(home).toContain("Use customer freight account");
     expect(home).toContain("Freight account not recorded");
     expect(home).toContain("Needs review");
@@ -66,6 +75,34 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
     expect(plain(home)).toContain(
       "An assurance assessment is not a certification, deployment, or promise of production readiness."
     );
+  });
+
+  it("makes maturity and the public integration contract explicit", () => {
+    for (const phrase of [
+      "BUILT / TESTED",
+      "AVAILABLE TO SCOPE",
+      "NOT YET ESTABLISHED",
+      "Workflow Assurance Assessment",
+      "generic public SDK or API",
+    ]) {
+      expect(home).toContain(phrase);
+    }
+    for (const phrase of [
+      "A proposal is not authority",
+      "Entitlement is not execution",
+      "Missing evidence stays unknown",
+      "public semantic contract",
+    ]) {
+      expect(technology).toContain(phrase);
+    }
+    expect(inquiry).toContain("WORKFLOW ASSURANCE ASSESSMENT");
+  });
+
+  it("keeps the Who This Is For surface readable without changing its background or type system", () => {
+    expect(whoThisIsFor).toContain("who-this-is-for");
+    expect(editorialCss).toContain(".who-this-is-for > h2");
+    expect(editorialCss).toContain(".who-this-is-for > p");
+    expect(editorialCss).toContain(".who-this-is-for .resource-card h3");
   });
 
   it("preserves the playbook method and twelve-step assurance loop", () => {
