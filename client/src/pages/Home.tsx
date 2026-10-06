@@ -31,7 +31,7 @@ export default function Home() {
   return (
     <main id="top" className="precision-home commercial-home">
       <CoreHeader />
-      <section id="page-content" tabIndex={-1} className="hero hybrid-hero">
+<section id="page-content" tabIndex={-1} className="hero hybrid-hero">
         <div className="hero-copy">
           <p className="eyebrow">
             <span /> ACCOUNTABLE AI · PERMISSION · EVIDENCE
@@ -42,21 +42,21 @@ export default function Home() {
             <em>accountable.</em>
           </h1>
           <p className="hero-deck">
-            JCEE Labs is developing methods and software for accountable AI:
-            connecting operational actions to clear permissions, reviewable
-            evidence, and human control.
+            JCEE Labs helps teams improve consequential AI-assisted workflows
+            with clear ownership, current permission, practical checks, and a
+            record of what actually happened.
           </p>
           <p className="hero-deck">
-            Start with one workflow where a wrong or unexplained action has real
-            operational cost. Establish what the evidence supports, who can
-            authorize the next step, and how the outcome will be checked.
+            Start with one workflow where “assigned” and “done” are separated by
+            manual checking, uncertain outcomes, or changing authority. Map the
+            boundary before changing the system.
           </p>
           <div className="hero-actions">
             <a className="primary-link" href="#distribution-demo">
-              See the Distribution example <span>↓</span>
+              See a working example <span>↓</span>
             </a>
             <a className="primary-link" href="/partners/enterprise">
-              Discuss an assessment <span>↗</span>
+              Discuss one workflow <span>↗</span>
             </a>
           </div>
           <p className="quiet">
@@ -104,7 +104,7 @@ export default function Home() {
         </aside>
       </section>
 
-      <div className="statement-band" aria-label="JCEE Labs principles">
+<div className="statement-band" aria-label="JCEE Labs principles">
         <span>EVIDENCE BEFORE CLAIM</span>
         <span aria-hidden="true">•</span>
         <span>PERMISSION BEFORE CONSEQUENCE</span>
@@ -112,13 +112,432 @@ export default function Home() {
         <span>HUMAN ACCOUNTABILITY REMAINS</span>
       </div>
 
-      <section
+<section
+        className="editorial-section editorial-section-light distribution-intro"
+        id="distribution-demo"
+        aria-labelledby="distribution-demo-title"
+      >
+        <div>
+          <p className="editorial-kicker">
+            01 / WORKING REFERENCE
+          </p>
+          <h2 id="distribution-demo-title">
+            A mismatch should create a question, not silently create authority.
+          </h2>
+          <p>
+            JCEE Distribution is a working reference implementation of one bounded
+            workflow. In the current demonstration, a purchase order is compared
+            with the entered sales order and a discrepancy is surfaced for a
+            person to investigate.
+          </p>
+          <p>
+            The point is not the order screen. The point is the control pattern:
+            preserve the source instruction, compare the observed state, surface
+            the mismatch, keep the decision with the accountable person, and
+            record the result.
+          </p>
+          <a
+            className="editorial-text-link"
+            href="/blog/distribution-first-dry-run"
+          >
+            Read the recorded dry-run result →
+          </a>
+        </div>
+        <div
+          className="order-example"
+          aria-label="Illustrative rendering of the tested synthetic order-integrity workflow, not customer data"
+        >
+          <p className="editorial-kicker">
+            DISTRIBUTION REFERENCE IMPLEMENTATION · DEMONSTRATION DATA · NOT A
+            CUSTOMER DEPLOYMENT
+          </p>
+          <h3>Purchase-order instruction → sales-order review</h3>
+          <dl>
+            <div>
+              <dt>Source instruction</dt>
+              <dd>Use customer freight account</dd>
+            </div>
+            <div>
+              <dt>Observed sales order</dt>
+              <dd>Freight account not recorded</dd>
+            </div>
+            <div>
+              <dt>Comparison result</dt>
+              <dd>
+                <span className="status-label">Needs review</span>
+              </dd>
+            </div>
+            <div>
+              <dt>Human decision boundary</dt>
+              <dd>
+                A person investigates. The discrepancy does not authorize a
+                change.
+              </dd>
+            </div>
+            <div>
+              <dt>Current recorded result</dt>
+              <dd>
+                20 / 20 expected synthetic classifications · 0 external effects
+              </dd>
+            </div>
+          </dl>
+          <p>
+            Illustrative rendering, not customer data. Customer ROI, live
+            integration, and production readiness remain unestablished. A
+            limited, approved shadow evaluation is the next commercial gate.
+          </p>
+        </div>
+      </section>
+
+      <WhoThisIsFor />
+
+<section
+        className="company-section"
+        id="engage"
+        aria-labelledby="engage-title"
+      >
+        <div className="section-index">
+          <span>03 / WORKFLOW ASSURANCE ASSESSMENT</span>
+          <span>ONE WORKFLOW · WRITTEN SCOPE · WRITTEN RESULT</span>
+        </div>
+        <div className="company-statement">
+          <p>THE FIRST COMMERCIAL ENGAGEMENT</p>
+          <h2 id="engage-title">
+            Map the work
+            <br />
+            <em>before you change it.</em>
+          </h2>
+        </div>
+        <div className="customer-problem-grid">
+          <article>
+            <h3>Who it is for</h3>
+            <p>
+              Teams with one recurring AI-assisted or automated workflow where
+              a wrong, duplicated, unauthorized, or unexplained action has real
+              operational cost.
+            </p>
+          </article>
+          <article>
+            <h3>What happens</h3>
+            <p>
+              We trace the workflow from instruction and evidence through
+              current authority, execution, recovery, and the observable result.
+              We do not begin by asking you to replace your systems.
+            </p>
+          </article>
+          <article>
+            <h3>Commercial model</h3>
+            <p>
+              The assessment is a separately scoped engagement. Deliverables,
+              access, exclusions, timing, and commercial terms are agreed in
+              writing after the workflow review. No SaaS tier is implied.
+            </p>
+          </article>
+        </div>
+        <div className="resource-grid assessment-deliverables" aria-label="Workflow Assurance Assessment deliverables">
+          <article className="resource-card">
+            <p className="editorial-kicker">DELIVERABLE 01</p>
+            <h3>Workflow boundary map</h3>
+            <p>Where the work starts, who owns it, which systems participate, and where a consequential effect can occur.</p>
+          </article>
+          <article className="resource-card">
+            <p className="editorial-kicker">DELIVERABLE 02</p>
+            <h3>Evidence and authority map</h3>
+            <p>Which records support the decision, which source grants permission, and where inference must remain separate from fact.</p>
+          </article>
+          <article className="resource-card">
+            <p className="editorial-kicker">DELIVERABLE 03</p>
+            <h3>Failure and recovery gaps</h3>
+            <p>Where timeout, partial completion, retry, revocation, or an uncertain external outcome can break accountability.</p>
+          </article>
+          <article className="resource-card">
+            <p className="editorial-kicker">DELIVERABLE 04</p>
+            <h3>Next justified step</h3>
+            <p>A bounded recommendation for the next test, shadow evaluation, implementation scope, or a finding that JCEE is not the right fit.</p>
+          </article>
+        </div>
+        <div className="company-bottom">
+          <p>
+            An assessment is not a certification, deployment, production-readiness
+            promise, or grant of execution authority. Production changes and
+            implementation remain separately authorized.
+          </p>
+          <a href="/partners/enterprise">
+            DISCUSS ONE WORKFLOW <span>→</span>
+          </a>
+        </div>
+      </section>
+
+<section
+        className="editorial-section editorial-section-light"
+        id="technology"
+        aria-labelledby="technology-title"
+      >
+        <div className="editorial-section-heading">
+          <div>
+            <p className="editorial-kicker">04 / PROOF AND INTEGRATION</p>
+            <h2 id="technology-title">
+              Know what exists today—and where the claim stops.
+            </h2>
+          </div>
+          <a href="/technology">Technical detail →</a>
+        </div>
+
+        <div className="resource-grid proof-status-grid" aria-label="Current JCEE availability">
+          <article className="resource-card">
+            <p className="editorial-kicker">BUILT / TESTED</p>
+            <h3>Reference behaviors with recorded evidence.</h3>
+            <p>
+              Frozen or reproduced VOW and QCS milestones, the interactive VOW
+              reference, and the bounded synthetic Distribution comparison are
+              represented in the Public Registry and supporting evidence.
+            </p>
+          </article>
+          <article className="resource-card">
+            <p className="editorial-kicker">AVAILABLE TO SCOPE</p>
+            <h3>One Workflow Assurance Assessment.</h3>
+            <p>
+              A buyer can scope one consequential workflow, receive the written
+              boundary and control findings, and decide whether a shadow
+              evaluation or implementation step is justified.
+            </p>
+          </article>
+          <article className="resource-card">
+            <p className="editorial-kicker">NOT YET ESTABLISHED</p>
+            <h3>Production claims we do not make.</h3>
+            <p>
+              Customer ROI, production performance, generic public SDK or API
+              availability, production certification, and autonomous operating
+              authority have not been established.
+            </p>
+          </article>
+        </div>
+
+        <div className="buyer-hierarchy">
+          <p className="editorial-kicker">WHAT JCEE IS</p>
+          <h2>Company, method, runtime, reference workflow, record.</h2>
+          <div className="technology-grid buyer-hierarchy-grid">
+            <article>
+              <p className="editorial-kicker">JCEE LABS</p>
+              <h3>The company.</h3>
+              <p>Researches and builds accountable execution and assurance systems.</p>
+            </article>
+            <article>
+              <p className="editorial-kicker">JCEE ASSURANCE</p>
+              <h3>The method.</h3>
+              <p>Separates evidence, judgment, permission, consequence, and the claim boundary.</p>
+            </article>
+            <article>
+              <p className="editorial-kicker">JCEE VOW</p>
+              <h3>The runtime reference.</h3>
+              <p>Preserves durable intent, uncertainty, recovery decisions, effect identity, and receipts.</p>
+            </article>
+            <article>
+              <p className="editorial-kicker">JCEE DISTRIBUTION</p>
+              <h3>The workflow reference.</h3>
+              <p>Applies the control pattern to a concrete order-integrity workflow using demonstration data.</p>
+            </article>
+            <article>
+              <p className="editorial-kicker">PUBLIC REGISTRY</p>
+              <h3>The evidence record.</h3>
+              <p>Shows selected milestones, boundaries, current status, and what remains unresolved.</p>
+            </article>
+          </div>
+        </div>
+
+        <div className="buyer-binding">
+          <p className="editorial-kicker">THE PUBLIC BINDING PATH</p>
+          <h2>From instruction to receipt without silently creating authority.</h2>
+          <ol className="growth-sequence buyer-binding-sequence">
+            <li>
+              <span>01</span>
+              <h3>Instruction / claim</h3>
+              <p>Start with the source record, observation, or proposed action. A proposal is not authority.</p>
+            </li>
+            <li>
+              <span>02</span>
+              <h3>Evidence</h3>
+              <p>Bind the conclusion to the records and revision that support it. Inference stays distinct from fact.</p>
+            </li>
+            <li>
+              <span>03</span>
+              <h3>Authority</h3>
+              <p>Check the competent source of permission at the time of action. Entitlement is not execution.</p>
+            </li>
+            <li>
+              <span>04</span>
+              <h3>Consequence</h3>
+              <p>The target system owns the real-world effect. JCEE does not invent authority the target did not grant.</p>
+            </li>
+            <li>
+              <span>05</span>
+              <h3>Recovery</h3>
+              <p>Preserve intent and uncertainty across interruption. Missing evidence stays unknown; recovery is not blind retry.</p>
+            </li>
+            <li>
+              <span>06</span>
+              <h3>Verification / receipt</h3>
+              <p>Check the observable outcome independently where possible and retain a reviewable record of what is known.</p>
+            </li>
+          </ol>
+          <p className="editorial-intro">
+            This is the public semantic contract, not a published SDK or
+            protocol specification. Internal recovery law, verifier algorithms,
+            receipt encoding, hostile-test corpora, adapter mechanics, and
+            bypass analysis remain private.
+          </p>
+        </div>
+
+        <div className="home-status-strip">
+          <span>PUBLIC REGISTRY · CURRENT EVIDENCE AND OPEN GATES</span>
+          <a href="/registry">Inspect the evidence record →</a>
+        </div>
+      </section>
+
+<section
+        className="vow-section"
+        id="working-example"
+        aria-labelledby="working-example-title"
+      >
+        <div className="section-index light">
+          <span>05 / WORKING SOFTWARE</span>
+          <span>REFERENCE DEMONSTRATION · NOT A CUSTOMER DEPLOYMENT</span>
+        </div>
+        <div className="vow-intro">
+          <h2 id="working-example-title">
+            Interrupt the work.
+            <br />
+            Inspect what survives.
+          </h2>
+          <div>
+            <p>
+              This interactive VOW reference demonstrates one implemented JCEE
+              behavior: preserving execution evidence across interruption and
+              recovery. It provides software evidence alongside the Distribution
+              workflow example.
+            </p>
+            <p className="quiet">
+              Synthetic execution and demonstration data. This is not a customer
+              case study, production deployment, or proof of customer ROI.
+            </p>
+          </div>
+        </div>
+        <VowDurabilityDemo />
+        <a className="section-detail-link" href="/vow">
+          READ THE TECHNICAL JCEE VOW OVERVIEW <span>→</span>
+        </a>
+      </section>
+
+<section className="company-section" id="company">
+        <div className="section-index">
+          <span>06 / THE METHOD</span>
+          <span>FULL METHOD · TECHNICAL DETAIL</span>
+        </div>
+        <div className="company-statement">
+          <p>JCEE ASSURANCE</p>
+          <h2>
+            What has to be true
+            <br />
+            <em>before software changes the world?</em>
+          </h2>
+        </div>
+        <div className="customer-problem-grid">
+          {methodQuestions.map(question => (
+            <article key={question.title}>
+              <h3>{question.title}</h3>
+              <p>{question.copy}</p>
+            </article>
+          ))}
+        </div>
+        <div className="company-bottom">
+          <p>
+            The method is intentionally usable before a team adopts JCEE
+            software. Start with one consequential question, preserve what
+            happened, and expand only when the evidence justifies it.
+          </p>
+          <a href="/assurance">
+            EXPLORE THE JCEE ASSURANCE METHOD <span>→</span>
+          </a>
+        </div>
+      </section>
+
+<section
+        className="operating-cloud-home"
+        id="operating-cloud"
+        aria-labelledby="operating-cloud-title"
+      >
+        <div className="operating-cloud-home__ambient" aria-hidden="true" />
+        <div className="operating-cloud-home__frame">
+          <div className="operating-cloud-home__topline">
+            <span>07 / PLATFORM DIRECTION</span>
+            <span>IN DEVELOPMENT · AFTER THE BOUNDED WORKFLOW</span>
+          </div>
+          <div className="operating-cloud-home__lead">
+            <div>
+              <p className="operating-cloud-home__kicker">
+                JCEE OPERATING CLOUD
+              </p>
+              <h2 id="operating-cloud-title">
+                The method sits above the mechanisms.
+              </h2>
+            </div>
+            <div className="operating-cloud-home__lead-copy">
+              <p>
+                Reconcile records and observations before promoting a
+                conclusion. JCEE systems implement different assurance
+                obligations: evidence capture, authority and contract
+                boundaries, durable execution, recovery, verification, replay,
+                and review. The layers stay distinct so one green signal cannot
+                silently stand in for truth or permission.
+              </p>
+              <p className="operating-cloud-home__boundary">
+                Operating Cloud is a platform direction, not a
+                production-certification claim. Broader workflow ownership
+                remains to be demonstrated.
+              </p>
+            </div>
+          </div>
+          <div
+            className="operating-cloud-home__systems"
+            aria-label="Assurance architecture"
+          >
+            <span>THE STACK</span>
+            <div>
+              <b>METHOD</b>
+              <b>EVIDENCE</b>
+              <b>AUTHORITY</b>
+              <b>RUNTIME</b>
+              <b>RECEIPT</b>
+            </div>
+          </div>
+          <div className="operating-cloud-home__distribution">
+            <div>
+              <span>FIRST INDUSTRY APPLICATION · IN DEVELOPMENT</span>
+              <h3>JCEE Distribution</h3>
+            </div>
+            <div>
+              <p>
+                Distribution supplies a concrete operating environment for the
+                method. It remains one application of the broader assurance and
+                execution architecture, not the company&apos;s limiting
+                identity.
+              </p>
+              <a href="/solutions/distribution">
+                EXPLORE THE DISTRIBUTION APPLICATION{" "}
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+<section
         className="editorial-section recent-progress"
         aria-labelledby="progress-title"
       >
         <div className="editorial-section-heading">
           <div>
-            <p className="editorial-kicker">LATEST / SEPTEMBER 2026</p>
+            <p className="editorial-kicker">08 / RECENT PROGRESS · SEPTEMBER 2026</p>
             <h2 id="progress-title">Recent progress.</h2>
           </div>
           <a href="/registry">The current public record →</a>
@@ -186,396 +605,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section
-        className="editorial-section editorial-section-light distribution-intro"
-        id="distribution-demo"
-        aria-labelledby="distribution-demo-title"
-      >
-        <div>
-          <p className="editorial-kicker">
-            01 / SEE THE METHOD IN ONE WORKFLOW
-          </p>
-          <h2 id="distribution-demo-title">
-            A mismatch should create a question, not silently create authority.
-          </h2>
-          <p>
-            JCEE Distribution is the first concrete application of the method.
-            In the current synthetic prototype, a purchase order can be compared
-            with the entered sales order and a discrepancy can be surfaced for a
-            person to investigate.
-          </p>
-          <p>
-            Distribution demonstrates JCEE; it does not define JCEE&apos;s
-            limits. The same separation among evidence, judgment, permission,
-            and action is the broader company direction.
-          </p>
-          <a
-            className="editorial-text-link"
-            href="/blog/distribution-first-dry-run"
-          >
-            Read the recorded dry-run result →
-          </a>
-        </div>
-        <div
-          className="order-example"
-          aria-label="Illustrative rendering of the tested synthetic order-integrity workflow, not customer data"
-        >
-          <p className="editorial-kicker">
-            DISTRIBUTION REFERENCE IMPLEMENTATION · DEMONSTRATION DATA · NOT A
-            CUSTOMER DEPLOYMENT
-          </p>
-          <h3>Purchase-order instruction → sales-order review</h3>
-          <dl>
-            <div>
-              <dt>Source instruction</dt>
-              <dd>Use customer freight account</dd>
-            </div>
-            <div>
-              <dt>Observed sales order</dt>
-              <dd>Freight account not recorded</dd>
-            </div>
-            <div>
-              <dt>Comparison result</dt>
-              <dd>
-                <span className="status-label">Needs review</span>
-              </dd>
-            </div>
-            <div>
-              <dt>Human decision boundary</dt>
-              <dd>
-                A person investigates. The discrepancy does not authorize a
-                change.
-              </dd>
-            </div>
-            <div>
-              <dt>Current recorded result</dt>
-              <dd>
-                20 / 20 expected synthetic classifications · 0 external effects
-              </dd>
-            </div>
-          </dl>
-          <p>
-            Illustrative rendering, not customer data. Customer ROI, live
-            integration, and production readiness remain unestablished. A
-            limited, approved shadow evaluation is the next commercial gate.
-          </p>
-        </div>
-      </section>
-
-      <section
-        className="editorial-section"
-        aria-labelledby="evidence-boundary-title"
-      >
-        <h2 id="evidence-boundary-title">
-          Make the evidence boundary visible.
-        </h2>
-        <p>
-          An evidence boundary separates what a particular result supports from
-          what has not been established.
-        </p>
-        <p>
-          A successful synthetic test answers a question about that test. It
-          does not, by itself, establish customer savings, reliable performance
-          in a different environment, or production readiness.
-        </p>
-        <p>
-          We make the tested conditions, limitations, and unresolved questions
-          part of the explanation.
-        </p>
-        <div className="editorial-actions">
-          <a href="/registry">Review the Public Registry →</a>
-          <a href="/blog/what-is-an-evidence-boundary">
-            What is an evidence boundary? →
-          </a>
-        </div>
-      </section>
-      <WhoThisIsFor />
-      <section className="company-section" id="company">
-        <div className="section-index">
-          <span>02 / THE METHOD</span>
-          <span>METHOD ABOVE MECHANISMS</span>
-        </div>
-        <div className="company-statement">
-          <p>MAKE THE BOUNDARY VISIBLE</p>
-          <h2>
-            What has to be true
-            <br />
-            <em>before software changes the world?</em>
-          </h2>
-        </div>
-        <div className="customer-problem-grid">
-          {methodQuestions.map(question => (
-            <article key={question.title}>
-              <h3>{question.title}</h3>
-              <p>{question.copy}</p>
-            </article>
-          ))}
-        </div>
-        <div className="company-bottom">
-          <p>
-            The method is intentionally usable before a team adopts JCEE
-            software. Start with one consequential question, preserve what
-            happened, and expand only when the evidence justifies it.
-          </p>
-          <a href="/assurance">
-            EXPLORE THE JCEE ASSURANCE METHOD <span>→</span>
-          </a>
-        </div>
-      </section>
-
-      <section
-        className="vow-section"
-        id="working-example"
-        aria-labelledby="working-example-title"
-      >
-        <div className="section-index light">
-          <span>03 / WORKING SOFTWARE</span>
-          <span>REFERENCE DEMONSTRATION · NOT A CUSTOMER DEPLOYMENT</span>
-        </div>
-        <div className="vow-intro">
-          <h2 id="working-example-title">
-            Interrupt the work.
-            <br />
-            Inspect what survives.
-          </h2>
-          <div>
-            <p>
-              This interactive VOW reference demonstrates one implemented JCEE
-              behavior: preserving execution evidence across interruption and
-              recovery. It provides software evidence alongside the Distribution
-              workflow example.
-            </p>
-            <p className="quiet">
-              Synthetic execution and demonstration data. This is not a customer
-              case study, production deployment, or proof of customer ROI.
-            </p>
-          </div>
-        </div>
-        <VowDurabilityDemo />
-        <a className="section-detail-link" href="/vow">
-          READ THE TECHNICAL JCEE VOW OVERVIEW <span>→</span>
-        </a>
-      </section>
-
-      <section
-        className="operating-cloud-home"
-        id="operating-cloud"
-        aria-labelledby="operating-cloud-title"
-      >
-        <div className="operating-cloud-home__ambient" aria-hidden="true" />
-        <div className="operating-cloud-home__frame">
-          <div className="operating-cloud-home__topline">
-            <span>04 / METHOD INTO SOFTWARE</span>
-            <span>PLATFORM DIRECTION · IN DEVELOPMENT</span>
-          </div>
-          <div className="operating-cloud-home__lead">
-            <div>
-              <p className="operating-cloud-home__kicker">
-                JCEE OPERATING CLOUD
-              </p>
-              <h2 id="operating-cloud-title">
-                The method sits above the mechanisms.
-              </h2>
-            </div>
-            <div className="operating-cloud-home__lead-copy">
-              <p>
-                Reconcile records and observations before promoting a
-                conclusion. JCEE systems implement different assurance
-                obligations: evidence capture, authority and contract
-                boundaries, durable execution, recovery, verification, replay,
-                and review. The layers stay distinct so one green signal cannot
-                silently stand in for truth or permission.
-              </p>
-              <p className="operating-cloud-home__boundary">
-                Operating Cloud is a platform direction, not a
-                production-certification claim. Broader workflow ownership
-                remains to be demonstrated.
-              </p>
-            </div>
-          </div>
-          <div
-            className="operating-cloud-home__systems"
-            aria-label="Assurance architecture"
-          >
-            <span>THE STACK</span>
-            <div>
-              <b>METHOD</b>
-              <b>EVIDENCE</b>
-              <b>AUTHORITY</b>
-              <b>RUNTIME</b>
-              <b>RECEIPT</b>
-            </div>
-          </div>
-          <div className="operating-cloud-home__distribution">
-            <div>
-              <span>FIRST INDUSTRY APPLICATION · IN DEVELOPMENT</span>
-              <h3>JCEE Distribution</h3>
-            </div>
-            <div>
-              <p>
-                Distribution supplies a concrete operating environment for the
-                method. It remains one application of the broader assurance and
-                execution architecture, not the company&apos;s limiting
-                identity.
-              </p>
-              <a href="/solutions/distribution">
-                EXPLORE THE DISTRIBUTION APPLICATION{" "}
-                <span aria-hidden="true">→</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section
-        className="editorial-section editorial-section-light"
-        id="technology"
-        aria-labelledby="technology-title"
-      >
-        <div className="editorial-section-heading">
-          <div>
-            <p className="editorial-kicker">05 / IMPLEMENTATION LAYERS</p>
-            <h2 id="technology-title">
-              The method guides. The systems implement.
-            </h2>
-          </div>
-          <a href="/technology">Explore the technology →</a>
-        </div>
-        <div className="technology-grid">
-          <article>
-            <p className="editorial-kicker">JCEE VOW</p>
-            <h3>Execute and recover with evidence.</h3>
-            <p>
-              VOW preserves intent, ambiguity, recovery decisions, effect
-              identity, and receipts around consequential workflows. VOW 1.1
-              remains the frozen milestone; 1.1.1.dev3 is a private development
-              candidate.
-            </p>
-            <a href="/vow">Runtime and interactive demo →</a>
-          </article>
-          <article>
-            <p className="editorial-kicker">QCS</p>
-            <h3>Reason about the next action.</h3>
-            <p>
-              The frozen QCS-2.0 specification passed its recorded reproduction
-              gate across two tested authority classes. Its scope remains
-              bounded to the evidence behind that result.
-            </p>
-            <a href="/qcs">Research and interactive model →</a>
-          </article>
-          <article>
-            <p className="editorial-kicker">JCEE ASSURANCE</p>
-            <h3>Make the judgment inspectable.</h3>
-            <p>
-              Portable evidence, named verification rules, and bounded
-              conclusions help a reviewer see where the evidence supports a
-              claim and where it stops.
-            </p>
-            <a href="/assurance">Method and verification →</a>
-          </article>
-        </div>
-        <div className="technology-grid" aria-label="Current availability">
-          <article>
-            <p className="editorial-kicker">BUILT / TESTED</p>
-            <h3>Reference behaviors with recorded evidence.</h3>
-            <p>
-              The Public Registry records frozen or reproduced milestones,
-              including VOW and QCS evidence and the bounded synthetic
-              Distribution comparison result.
-            </p>
-          </article>
-          <article>
-            <p className="editorial-kicker">AVAILABLE TO SCOPE</p>
-            <h3>A Workflow Assurance Assessment.</h3>
-            <p>
-              JCEE can scope one consequential workflow, map evidence and
-              authority, identify recovery or control gaps, and define the next
-              justified test. Read-only shadow evaluation or implementation is
-              separately authorized.
-            </p>
-          </article>
-          <article>
-            <p className="editorial-kicker">NOT YET ESTABLISHED</p>
-            <h3>Production claims we do not make.</h3>
-            <p>
-              Customer ROI, production performance, generic public SDK or API
-              availability, production certification, and autonomous operating
-              authority have not been established.
-            </p>
-          </article>
-        </div>
-        <div className="home-status-strip">
-          <span>
-            PUBLIC REGISTRY · SELECTED ENTRIES REVIEWED SEPTEMBER 29, 2026
-          </span>
-          <a href="/registry">Milestones, candidates, and open gates →</a>
-        </div>
-      </section>
-
-      <section
-        className="company-section"
-        id="engage"
-        aria-labelledby="engage-title"
-      >
-        <div className="section-index">
-          <span>06 / WORK WITH JCEE</span>
-          <span>ONE QUESTION · ONE BOUNDARY · ONE WRITTEN RESULT</span>
-        </div>
-        <div className="company-statement">
-          <p>THE FIRST COMMERCIAL STEP · WORKFLOW ASSURANCE ASSESSMENT</p>
-          <h2 id="engage-title">
-            Start with one place
-            <br />
-            <em>where being wrong matters.</em>
-          </h2>
-        </div>
-        <div className="customer-problem-grid">
-          <article>
-            <h3>Who it is for</h3>
-            <p>
-              Product, operations, platform, security, infrastructure, and risk
-              teams using AI or automation where a wrong or unexplained action
-              has a real operational cost.
-            </p>
-          </article>
-          <article>
-            <h3>What happens</h3>
-            <p>
-              We scope one workflow or claim, map its evidence and current
-              authority, identify unresolved recovery or control gaps, and apply
-              a bounded review.
-            </p>
-          </article>
-          <article>
-            <h3>What you receive</h3>
-            <p>
-              A written boundary map, evidence and authority findings, unresolved
-              recovery or control gaps, and the next justified test or
-              implementation step.
-            </p>
-          </article>
-        </div>
-        <div className="company-bottom">
-          <p>
-            An assurance assessment is not a certification, deployment, or
-            promise of production readiness. It does not grant execution
-            authority. Software implementation, production changes, timing,
-            access, and commercial terms remain separately scoped and agreed in
-            writing.
-          </p>
-          <a href="/partners/enterprise">
-            DISCUSS AN ASSURANCE ASSESSMENT <span>→</span>
-          </a>
-        </div>
-      </section>
-
-      <section
+<section
         className="editorial-section home-resources"
         aria-labelledby="resources-title"
       >
         <div className="editorial-section-heading">
           <div>
-            <p className="editorial-kicker">07 / FROM THE LAB</p>
+            <p className="editorial-kicker">09 / FROM THE LAB</p>
             <h2 id="resources-title">The work, in readable form.</h2>
           </div>
           <a href="/resources">All resources →</a>
@@ -599,7 +635,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section
+<section
         className="principles-summary"
         id="charter"
         aria-labelledby="principles-title"
@@ -614,26 +650,6 @@ export default function Home() {
         <a className="editorial-text-link" href="/company">
           Meet JCEE Labs →
         </a>
-      </section>
-
-      <section className="editorial-section" aria-labelledby="workflow-cta">
-        <h2 id="workflow-cta">Start with one consequential workflow.</h2>
-        <p>
-          Where does an instruction become an action? Who can authorize it? What
-          evidence would let someone verify the outcome?
-        </p>
-        <p>
-          Bring a specific workflow, its constraints, and the decisions people
-          need to retain. We can discuss whether a bounded assessment is
-          appropriate.
-        </p>
-        <div className="editorial-actions">
-          <a className="editorial-button" href="/partners/enterprise">
-            Discuss your workflow →
-          </a>
-          <a href="/registry">Review current build evidence →</a>
-          <a href="/partners/research">Discuss a research question →</a>
-        </div>
       </section>
       <BrandFooter backToTopHref="#top" />
     </main>
