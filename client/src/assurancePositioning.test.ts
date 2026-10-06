@@ -32,7 +32,7 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
 
   it("shows Distribution as a bounded concrete demonstration rather than the company identity", () => {
     expect(home).toContain('id="distribution-demo"');
-    expect(home).toContain("SYNTHETIC WORKFLOW DEMONSTRATION");
+    expect(home).toContain("DISTRIBUTION REFERENCE IMPLEMENTATION");
     expect(home).toContain("Use customer freight account");
     expect(home).toContain("Freight account not recorded");
     expect(home).toContain("Needs review");
