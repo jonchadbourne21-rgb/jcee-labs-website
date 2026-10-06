@@ -22,7 +22,7 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
   it("leads with a plain-language accountable-operation promise", () => {
     expect(home).toContain("Keep AI-assisted operations");
     expect(plain(home)).toContain(
-      "JCEE Labs is developing methods and software for accountable AI: connecting operational actions to clear permissions, reviewable evidence, and human control."
+      "JCEE Labs helps teams improve consequential AI-assisted workflows with clear ownership, current permission, practical checks, and a record of what actually happened."
     );
     expect(home).toContain('href="#distribution-demo"');
     expect(home).toContain('href="/partners/enterprise"');
@@ -43,7 +43,7 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
       "20 / 20 expected synthetic classifications · 0 external effects"
     );
     expect(plain(home)).toContain(
-      "Distribution demonstrates JCEE; it does not define JCEE"
+      "The point is not the order screen. The point is the control pattern"
     );
     expect(plain(home)).toContain(
       "shadow evaluation is the next commercial gate"
@@ -63,18 +63,59 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
     );
   });
 
-  it("makes the first commercial step explicit without overstating maturity", () => {
+  it("makes the first commercial step tangible without overstating maturity", () => {
     for (const phrase of [
-      "Who it is for",
-      "What happens",
-      "What you receive",
-      "DISCUSS AN ASSURANCE ASSESSMENT",
+      "WORKFLOW ASSURANCE ASSESSMENT",
+      "Workflow boundary map",
+      "Evidence and authority map",
+      "Failure and recovery gaps",
+      "Next justified step",
+      "Commercial model",
+      "DISCUSS ONE WORKFLOW",
     ]) {
       expect(home).toContain(phrase);
     }
     expect(plain(home)).toContain(
-      "An assurance assessment is not a certification, deployment, or promise of production readiness."
+      "An assessment is not a certification, deployment, production-readiness promise, or grant of execution authority."
     );
+    expect(home).toContain("No SaaS tier is implied.");
+  });
+
+  it("puts the buyer journey ahead of internal architecture", () => {
+    const hero = home.indexOf('className="hero hybrid-hero"');
+    const demo = home.indexOf('id="distribution-demo"');
+    const buyer = home.indexOf("<WhoThisIsFor />");
+    const assessment = home.indexOf('id="engage"');
+    const proof = home.indexOf('id="technology"');
+    const reference = home.indexOf('id="working-example"');
+    const method = home.indexOf('id="company"');
+    const platform = home.indexOf('id="operating-cloud"');
+    const progress = home.indexOf("recent-progress");
+
+    for (const index of [
+      hero,
+      demo,
+      buyer,
+      assessment,
+      proof,
+      reference,
+      method,
+      platform,
+      progress,
+    ]) {
+      expect(index).toBeGreaterThan(-1);
+    }
+
+    expect(hero).toBeLessThan(demo);
+    expect(demo).toBeLessThan(buyer);
+    expect(buyer).toBeLessThan(assessment);
+    expect(assessment).toBeLessThan(proof);
+    expect(proof).toBeLessThan(reference);
+    expect(reference).toBeLessThan(method);
+    expect(method).toBeLessThan(platform);
+    expect(platform).toBeLessThan(progress);
+    expect(home).not.toContain("Make the evidence boundary visible.");
+    expect(home).not.toContain('aria-labelledby="workflow-cta"');
   });
 
   it("makes maturity and the public integration contract explicit", () => {
@@ -93,6 +134,7 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
       "Missing evidence stays unknown",
       "public semantic contract",
     ]) {
+      expect(home).toContain(phrase);
       expect(technology).toContain(phrase);
     }
     expect(inquiry).toContain("WORKFLOW ASSURANCE ASSESSMENT");

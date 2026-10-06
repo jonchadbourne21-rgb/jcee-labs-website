@@ -1,39 +1,42 @@
 export default function WhoThisIsFor() {
   return (
     <section className="editorial-section who-this-is-for" aria-labelledby="who-this-is-for">
+      <p className="editorial-kicker">02 / WHERE THE WORK BREAKS</p>
       <h2 id="who-this-is-for">Who this is for</h2>
       <p>
-        JCEE’s work is intended for teams using AI or automation where a wrong,
-        repeated, unauthorized, or unexplained action has real operational cost.
+        Teams with recurring AI-assisted or automated work where “assigned” and
+        “done” are separated by manual checking, uncertain outcomes, or changing
+        permission.
       </p>
       <div className="resource-grid">
         <article className="resource-card">
           <h3>Product and operations</h3>
           <p>
-            Evaluate workflows that need explicit review and decision ownership.
+            Orders, approvals, reviews, or handoffs that require repeated
+            checking before anyone can say the work is actually complete.
           </p>
         </article>
         <article className="resource-card">
           <h3>Platform and infrastructure</h3>
           <p>
-            Investigate execution, interruption, recovery, and uncertain
-            outcomes.
+            Timeouts, partial completion, retries, and cross-system effects that
+            make the final state difficult to reconstruct with confidence.
           </p>
         </article>
         <article className="resource-card">
           <h3>Security and risk</h3>
           <p>
-            Examine how permission, scope, and evidence relate to consequential
-            actions.
+            Work where permission can change and a consequential action needs a
+            clear owner, current authority, and inspectable evidence.
           </p>
         </article>
       </div>
       <p>
-        A useful starting point is one workflow with identifiable instructions,
-        an accountable owner, and an observable result.
+        The starting point is one workflow, one accountable owner, and one
+        observable result—not a platform migration.
       </p>
       <a className="editorial-text-link" href="/partners/enterprise">
-        Discuss your workflow →
+        Discuss one workflow →
       </a>
     </section>
   );
