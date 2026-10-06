@@ -645,6 +645,16 @@ main :is(h1, h2, h3) {
 .resource-card h3 a {
   color: #101522;
 }
+
+.who-this-is-for > h2 {
+  color: #f5f6f8;
+}
+.who-this-is-for > p {
+  color: #c7d1e2 !important;
+}
+.who-this-is-for .resource-card h3 {
+  color: #101522;
+}
 .resource-card > p:not(.editorial-kicker) {
   color: #536076;
   font-size: 1rem;
