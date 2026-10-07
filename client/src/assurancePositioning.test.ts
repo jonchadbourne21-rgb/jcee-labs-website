@@ -106,10 +106,10 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
       expect(index).toBeGreaterThan(-1);
     }
 
-    expect(hero).toBeLessThan(demo);
-    expect(demo).toBeLessThan(buyer);
-    expect(buyer).toBeLessThan(assessment);
-    expect(assessment).toBeLessThan(proof);
+    expect(hero).toBeLessThan(assessment);
+    expect(assessment).toBeLessThan(buyer);
+    expect(buyer).toBeLessThan(demo);
+    expect(demo).toBeLessThan(proof);
     expect(proof).toBeLessThan(reference);
     expect(reference).toBeLessThan(method);
     expect(method).toBeLessThan(platform);
@@ -133,6 +133,8 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
       "Entitlement is not execution",
       "Missing evidence stays unknown",
       "public semantic contract",
+      "system of record",
+      "Each arrow is a binding",
     ]) {
       expect(home).toContain(phrase);
       expect(technology).toContain(phrase);
