@@ -71,21 +71,12 @@ export default function DistributionPage() {
           </p>
         </div>
       </section>
-      <section className="editorial-section editorial-section-muted">
-        <p className="editorial-kicker">The first checks</p>
-        <h2>Find the mismatch. Keep its context.</h2>
-        <div className="resource-grid">
-          {checks.map(([title, copy]) => (
-            <article className="resource-card" key={title}>
-              <h3>{title}</h3>
-              <p>{copy}</p>
-            </article>
-          ))}
-        </div>
-      </section>
       <section className="editorial-section">
         <div className="editorial-section-heading">
-          <h2>Progress, with a clear next step.</h2>
+          <div>
+            <p className="editorial-kicker">RECORDED PROOF · SEPTEMBER 14, 2026</p>
+            <h2>What the current synthetic result actually establishes.</h2>
+          </div>
           <span className="status-label">Synthetic prototype</span>
         </div>
         <div className="evidence-numbers">
@@ -103,9 +94,10 @@ export default function DistributionPage() {
           </div>
         </div>
         <p className="editorial-intro">
-          Recorded September 14, 2026. These results establish comparison
-          mechanics on the tested cases. Customer ROI, live integration, and
-          production readiness remain unestablished.
+          These results establish comparison mechanics on the tested cases:
+          the expected classifications were produced without external effects.
+          They do not establish customer ROI, live integration, or production
+          readiness. The next commercial gate is a limited, approved shadow evaluation.
         </p>
         <a
           className="editorial-text-link"
@@ -113,6 +105,18 @@ export default function DistributionPage() {
         >
           Read the engineering update →
         </a>
+      </section>
+      <section className="editorial-section editorial-section-muted">
+        <p className="editorial-kicker">The first checks</p>
+        <h2>Find the mismatch. Keep its context.</h2>
+        <div className="resource-grid">
+          {checks.map(([title, copy]) => (
+            <article className="resource-card" key={title}>
+              <h3>{title}</h3>
+              <p>{copy}</p>
+            </article>
+          ))}
+        </div>
       </section>
       <section className="editorial-section editorial-section-dark">
         <p className="editorial-kicker">The longer direction</p>

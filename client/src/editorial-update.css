@@ -495,6 +495,111 @@ main :is(h1, h2, h3) {
   }
 }
 
+
+/* Grok buyer-path pass: preserve the established visual system while making
+   integration bindings and recorded proof easier to scan. */
+.binding-strip {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  list-style: none;
+  margin: 36px 0 22px;
+  padding: 0;
+}
+.binding-strip li {
+  border-top: 2px solid #315cff;
+  min-width: 0;
+  padding: 20px 28px 0 0;
+  position: relative;
+}
+.binding-strip li:not(:last-child)::after {
+  color: #315cff;
+  content: "→";
+  font-size: 1.1rem;
+  position: absolute;
+  right: 8px;
+  top: 16px;
+}
+.binding-strip li > span {
+  color: #244cdb;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+}
+.binding-strip h3 {
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.35;
+  margin: 12px 0 10px;
+}
+.binding-strip p {
+  color: #536076;
+  font-size: 0.9rem;
+  line-height: 1.62;
+  margin: 0;
+}
+.binding-note {
+  border-left: 3px solid #315cff;
+  color: #44516a;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  margin: 22px 0 0;
+  max-width: 840px;
+  padding-left: 16px;
+}
+.buyer-binding-priority {
+  margin-top: 36px;
+}
+.proof-hierarchy {
+  margin-top: 64px;
+}
+.integration-posture-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 32px;
+}
+.order-example .distribution-proof-numbers {
+  gap: 14px;
+  margin: 24px 0;
+}
+.order-example .distribution-proof-numbers > div {
+  border-left-color: #6c8cff;
+  padding-left: 14px;
+}
+.order-example .distribution-proof-numbers strong {
+  font-size: clamp(1.45rem, 2.5vw, 2rem);
+}
+.order-example .distribution-proof-numbers span {
+  color: #becde4;
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 1000px) {
+  .binding-strip {
+    grid-template-columns: 1fr;
+    row-gap: 30px;
+  }
+  .binding-strip li {
+    padding-right: 0;
+  }
+  .binding-strip li:not(:last-child)::after {
+    bottom: -25px;
+    left: 0;
+    right: auto;
+    top: auto;
+    transform: rotate(90deg);
+  }
+  .integration-posture-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .order-example .distribution-proof-numbers {
+    grid-template-columns: 1fr;
+  }
+}
+
 .home-status-strip {
   display: flex;
   justify-content: space-between;

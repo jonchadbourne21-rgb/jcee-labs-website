@@ -39,9 +39,10 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
     expect(plain(home)).toContain(
       "A person investigates. The discrepancy does not authorize a change."
     );
-    expect(plain(home)).toContain(
-      "20 / 20 expected synthetic classifications · 0 external effects"
-    );
+    expect(home).toContain("20 / 20");
+    expect(home).toContain("Expected synthetic classifications matched");
+    expect(home).toContain("0");
+    expect(home).toContain("External effects");
     expect(plain(home)).toContain(
       "The point is not the order screen. The point is the control pattern"
     );
@@ -106,10 +107,10 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
       expect(index).toBeGreaterThan(-1);
     }
 
-    expect(hero).toBeLessThan(demo);
-    expect(demo).toBeLessThan(buyer);
-    expect(buyer).toBeLessThan(assessment);
-    expect(assessment).toBeLessThan(proof);
+    expect(hero).toBeLessThan(assessment);
+    expect(assessment).toBeLessThan(buyer);
+    expect(buyer).toBeLessThan(demo);
+    expect(demo).toBeLessThan(proof);
     expect(proof).toBeLessThan(reference);
     expect(reference).toBeLessThan(method);
     expect(method).toBeLessThan(platform);
@@ -133,6 +134,8 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
       "Entitlement is not execution",
       "Missing evidence stays unknown",
       "public semantic contract",
+      "system of record",
+      "Each arrow is a binding",
     ]) {
       expect(home).toContain(phrase);
       expect(technology).toContain(phrase);

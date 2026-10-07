@@ -39,40 +39,48 @@ export default function TechnologyPage() {
       </section>
       <section className="editorial-section">
         <p className="editorial-kicker">Public integration model</p>
-        <h2>Keep evidence, authority, execution, and verification distinct.</h2>
-        <div className="resource-grid" aria-label="JCEE public binding path">
+        <h2>Bind the workflow. Keep the competent systems in place.</h2>
+        <p className="editorial-intro">
+          JCEE has implemented reference software; this is not a generic public
+          SDK announcement. Private work begins with one bounded workflow and
+          connects to the systems that already hold evidence, permission, and
+          the external result.
+        </p>
+        <ol className="binding-strip" aria-label="JCEE public integration binding path">
+          <li><span>01</span><h3>Claim + evidence</h3><p>Bind the proposed conclusion to the source record, observation, and evidence revision that support it.</p></li>
+          <li><span>02</span><h3>Current authority</h3><p>Check the competent source of permission at action time. A proposal is not authority. Entitlement is not execution.</p></li>
+          <li><span>03</span><h3>Consequence</h3><p>The target system retains authority over the real-world effect. JCEE does not invent permission.</p></li>
+          <li><span>04</span><h3>Recovery</h3><p>Preserve durable intent, effect identity, and uncertainty. Missing evidence stays unknown; recovery is not blind retry.</p></li>
+          <li><span>05</span><h3>System of record</h3><p>Reconcile against the existing competent external record rather than treating an internal model assertion as the result.</p></li>
+          <li><span>06</span><h3>Receipt</h3><p>Preserve an inspectable record of the authorized occurrence, its evidence basis, and unresolved state.</p></li>
+        </ol>
+        <p className="binding-note">
+          Each arrow is a binding between evidence, authority, and external
+          systems—not a library call.
+        </p>
+        <div className="resource-grid integration-posture-grid" aria-label="Current JCEE integration posture">
           <article className="resource-card">
-            <h3>01 · Claim or observation</h3>
-            <p>Start with the instruction, source record, or proposed action. A proposal is not authority.</p>
+            <p className="editorial-kicker">CURRENTLY PUBLIC</p>
+            <h3>Method, reference behavior, and evidence.</h3>
+            <p>Public pages describe the semantic boundary, selected tested behavior, and registry status without publishing private implementation mechanics.</p>
           </article>
           <article className="resource-card">
-            <h3>02 · Evidence boundary</h3>
-            <p>Bind the conclusion to the evidence and revision that support it. Inference does not silently become fact.</p>
+            <p className="editorial-kicker">PRIVATE INTEGRATION</p>
+            <h3>One workflow at a time.</h3>
+            <p>Integration is scoped around the buyer's existing evidence sources, authority systems, consequence boundary, recovery path, and system of record.</p>
           </article>
           <article className="resource-card">
-            <h3>03 · Current authority</h3>
-            <p>Check the competent source of permission at the time of action. Entitlement is not execution.</p>
-          </article>
-          <article className="resource-card">
-            <h3>04 · Consequence boundary</h3>
-            <p>The target system remains the owner of the real-world consequence; JCEE does not invent authority the target did not grant.</p>
-          </article>
-          <article className="resource-card">
-            <h3>05 · Durable execution and recovery</h3>
-            <p>Preserve intent and uncertainty across interruption. Missing evidence stays unknown; recovery does not become blind retry.</p>
-          </article>
-          <article className="resource-card">
-            <h3>06 · Terminal verification and receipt</h3>
-            <p>Verify the observable outcome independently where possible and preserve a reviewable receipt of what is known.</p>
+            <p className="editorial-kicker">NOT OFFERED AS PUBLIC PRODUCT</p>
+            <h3>No generic SDK or blanket authority layer.</h3>
+            <p>A public package, universal API, production certification, or autonomous authority claim is not currently offered.</p>
           </article>
         </div>
         <p className="editorial-intro">
-          This is the public semantic contract, not a published SDK or protocol specification.
-          Internal recovery law, verifier algorithms, receipt encoding, hostile-test corpora,
-          adapter mechanics, and bypass analysis remain private.
+          This public semantic contract does not publish the internal recovery
+          law, verifier algorithms, receipt encoding, hostile-test corpora,
+          adapter mechanics, or bypass analysis; those remain private.
         </p>
       </section>
-
       <section className="editorial-section editorial-section-muted">
         <p className="editorial-kicker">Applied development</p>
         <h2>From components to useful workflows.</h2>
