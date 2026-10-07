@@ -39,9 +39,10 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
     expect(plain(home)).toContain(
       "A person investigates. The discrepancy does not authorize a change."
     );
-    expect(plain(home)).toContain(
-      "20 / 20 expected synthetic classifications · 0 external effects"
-    );
+    expect(home).toContain("20 / 20");
+    expect(home).toContain("Expected synthetic classifications matched");
+    expect(home).toContain("0");
+    expect(home).toContain("External effects");
     expect(plain(home)).toContain(
       "The point is not the order screen. The point is the control pattern"
     );
