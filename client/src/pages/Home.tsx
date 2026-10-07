@@ -113,13 +113,92 @@ export default function Home() {
       </div>
 
 <section
+        className="company-section"
+        id="engage"
+        aria-labelledby="engage-title"
+      >
+        <div className="section-index">
+          <span>01 / WORKFLOW ASSURANCE ASSESSMENT</span>
+          <span>ONE WORKFLOW · WRITTEN SCOPE · WRITTEN RESULT</span>
+        </div>
+        <div className="company-statement">
+          <p>THE OFFER</p>
+          <h2 id="engage-title">
+            Start with one workflow.
+            <br />
+            <em>Leave with a written boundary.</em>
+          </h2>
+        </div>
+        <div className="customer-problem-grid">
+          <article>
+            <h3>Who it is for</h3>
+            <p>
+              Teams with one recurring AI-assisted or automated workflow where
+              a wrong, duplicated, unauthorized, or unexplained action has real
+              operational cost.
+            </p>
+          </article>
+          <article>
+            <h3>What happens</h3>
+            <p>
+              We trace the workflow from instruction and evidence through
+              current authority, execution, recovery, and the observable result.
+              We do not begin by asking you to replace your systems.
+            </p>
+          </article>
+          <article>
+            <h3>Commercial model</h3>
+            <p>
+              The assessment is a separately scoped engagement. Deliverables,
+              access, exclusions, timing, and commercial terms are agreed in
+              writing after the workflow review. No SaaS tier is implied.
+            </p>
+          </article>
+        </div>
+        <div className="resource-grid assessment-deliverables" aria-label="Workflow Assurance Assessment deliverables">
+          <article className="resource-card">
+            <p className="editorial-kicker">DELIVERABLE 01</p>
+            <h3>Workflow boundary map</h3>
+            <p>Where the work starts, who owns it, which systems participate, and where a consequential effect can occur.</p>
+          </article>
+          <article className="resource-card">
+            <p className="editorial-kicker">DELIVERABLE 02</p>
+            <h3>Evidence and authority map</h3>
+            <p>Which records support the decision, which source grants permission, and where inference must remain separate from fact.</p>
+          </article>
+          <article className="resource-card">
+            <p className="editorial-kicker">DELIVERABLE 03</p>
+            <h3>Failure and recovery gaps</h3>
+            <p>Where timeout, partial completion, retry, revocation, or an uncertain external outcome can break accountability.</p>
+          </article>
+          <article className="resource-card">
+            <p className="editorial-kicker">DELIVERABLE 04</p>
+            <h3>Next justified step</h3>
+            <p>A bounded recommendation for the next test, shadow evaluation, implementation scope, or a finding that JCEE is not the right fit.</p>
+          </article>
+        </div>
+        <div className="company-bottom">
+          <p>
+            An assessment is not a certification, deployment, production-readiness
+            promise, or grant of execution authority. Production changes and
+            implementation remain separately authorized.
+          </p>
+          <a href="/partners/enterprise">
+            DISCUSS ONE WORKFLOW <span>→</span>
+          </a>
+        </div>
+      </section>
+
+      <WhoThisIsFor />
+
+<section
         className="editorial-section editorial-section-light distribution-intro"
         id="distribution-demo"
         aria-labelledby="distribution-demo-title"
       >
         <div>
           <p className="editorial-kicker">
-            01 / WORKING REFERENCE
+            03 / RECORDED PROOF
           </p>
           <h2 id="distribution-demo-title">
             A mismatch should create a question, not silently create authority.
@@ -186,85 +265,6 @@ export default function Home() {
             integration, and production readiness remain unestablished. A
             limited, approved shadow evaluation is the next commercial gate.
           </p>
-        </div>
-      </section>
-
-      <WhoThisIsFor />
-
-<section
-        className="company-section"
-        id="engage"
-        aria-labelledby="engage-title"
-      >
-        <div className="section-index">
-          <span>03 / WORKFLOW ASSURANCE ASSESSMENT</span>
-          <span>ONE WORKFLOW · WRITTEN SCOPE · WRITTEN RESULT</span>
-        </div>
-        <div className="company-statement">
-          <p>THE FIRST COMMERCIAL ENGAGEMENT</p>
-          <h2 id="engage-title">
-            Map the work
-            <br />
-            <em>before you change it.</em>
-          </h2>
-        </div>
-        <div className="customer-problem-grid">
-          <article>
-            <h3>Who it is for</h3>
-            <p>
-              Teams with one recurring AI-assisted or automated workflow where
-              a wrong, duplicated, unauthorized, or unexplained action has real
-              operational cost.
-            </p>
-          </article>
-          <article>
-            <h3>What happens</h3>
-            <p>
-              We trace the workflow from instruction and evidence through
-              current authority, execution, recovery, and the observable result.
-              We do not begin by asking you to replace your systems.
-            </p>
-          </article>
-          <article>
-            <h3>Commercial model</h3>
-            <p>
-              The assessment is a separately scoped engagement. Deliverables,
-              access, exclusions, timing, and commercial terms are agreed in
-              writing after the workflow review. No SaaS tier is implied.
-            </p>
-          </article>
-        </div>
-        <div className="resource-grid assessment-deliverables" aria-label="Workflow Assurance Assessment deliverables">
-          <article className="resource-card">
-            <p className="editorial-kicker">DELIVERABLE 01</p>
-            <h3>Workflow boundary map</h3>
-            <p>Where the work starts, who owns it, which systems participate, and where a consequential effect can occur.</p>
-          </article>
-          <article className="resource-card">
-            <p className="editorial-kicker">DELIVERABLE 02</p>
-            <h3>Evidence and authority map</h3>
-            <p>Which records support the decision, which source grants permission, and where inference must remain separate from fact.</p>
-          </article>
-          <article className="resource-card">
-            <p className="editorial-kicker">DELIVERABLE 03</p>
-            <h3>Failure and recovery gaps</h3>
-            <p>Where timeout, partial completion, retry, revocation, or an uncertain external outcome can break accountability.</p>
-          </article>
-          <article className="resource-card">
-            <p className="editorial-kicker">DELIVERABLE 04</p>
-            <h3>Next justified step</h3>
-            <p>A bounded recommendation for the next test, shadow evaluation, implementation scope, or a finding that JCEE is not the right fit.</p>
-          </article>
-        </div>
-        <div className="company-bottom">
-          <p>
-            An assessment is not a certification, deployment, production-readiness
-            promise, or grant of execution authority. Production changes and
-            implementation remain separately authorized.
-          </p>
-          <a href="/partners/enterprise">
-            DISCUSS ONE WORKFLOW <span>→</span>
-          </a>
         </div>
       </section>
 
