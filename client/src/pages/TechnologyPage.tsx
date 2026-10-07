@@ -76,9 +76,9 @@ export default function TechnologyPage() {
           </article>
         </div>
         <p className="editorial-intro">
-          Internal recovery law, verifier algorithms, receipt encoding,
-          hostile-test corpora, adapter mechanics, and bypass analysis remain
-          private.
+          This public semantic contract does not publish the internal recovery
+          law, verifier algorithms, receipt encoding, hostile-test corpora,
+          adapter mechanics, or bypass analysis; those remain private.
         </p>
       </section>
       <section className="editorial-section editorial-section-muted">
