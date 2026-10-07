@@ -81,6 +81,104 @@ export default function TechnologyPage() {
           adapter mechanics, or bypass analysis; those remain private.
         </p>
       </section>
+      <section
+        className="editorial-section editorial-section-muted"
+        id="infrastructure-build"
+        aria-labelledby="infrastructure-build-title"
+      >
+        <p className="editorial-kicker">JCEE-INFRA / UNIFIED ASSURANCE AND EXECUTION</p>
+        <h2 id="infrastructure-build-title">
+          Infrastructure that connects authority to an actual, reviewable effect.
+        </h2>
+        <p className="editorial-intro">
+          JCEE is building a bounded infrastructure layer for organizations
+          that must reconstruct which machine decision was authorized, what
+          external consequence occurred, and whether the surviving evidence
+          supports that conclusion. It connects existing authority sources,
+          external systems of record, durable execution, and reviewable receipts.
+        </p>
+        <div className="infrastructure-contract" aria-label="What the JCEE infrastructure is built to demonstrate">
+          <strong>THE CORE ASSURANCE QUESTION</strong>
+          <p>
+            Who authorized this exact action, under which current business
+            authority, what did the competent target actually commit, and
+            what evidence can another party inspect afterward?
+          </p>
+        </div>
+        <div className="infra-stage-grid" aria-label="JCEE infrastructure P0 through P3 evidence status">
+          <article className="infra-stage">
+            <p className="editorial-kicker">P0 / UNIFIED CONTRACT</p>
+            <span className="infra-stage__status">CONTRACT FROZEN</span>
+            <h3>JAIR v0.1</h3>
+            <p>
+              Establish a common semantic boundary across authority,
+              evidence, exact effect identity, execution, recovery, and
+              receipts without merging their distinct responsibilities.
+            </p>
+            <p className="infra-stage__limit">
+              A frozen contract is not proof of full system integration.
+            </p>
+          </article>
+          <article className="infra-stage">
+            <p className="editorial-kicker">P1 / GOLDEN EXECUTION PATH</p>
+            <span className="infra-stage__status">BOUNDED PASS</span>
+            <h3>One reconstructable path</h3>
+            <p>
+              Reproduce a scoped authorization-to-effect-to-evidence path,
+              including durable intent and the observable terminal outcome,
+              in the qualified test setting.
+            </p>
+            <p className="infra-stage__limit">
+              This is bounded test evidence, not customer production qualification.
+            </p>
+          </article>
+          <article className="infra-stage">
+            <p className="editorial-kicker">P2 / HOSTILE CONFORMANCE</p>
+            <span className="infra-stage__status">BOUNDED PASS</span>
+            <h3>Test disagreement and interruption</h3>
+            <p>
+              Challenge the semantics with stale or revoked authority,
+              duplicate attempts, missing responses, contradictory evidence,
+              and uncertain external state.
+            </p>
+            <p className="infra-stage__limit">
+              Covered tests do not establish universal safety or independent certification.
+            </p>
+          </article>
+          <article className="infra-stage">
+            <p className="editorial-kicker">P3 / HETEROGENEOUS ADAPTERS</p>
+            <span className="infra-stage__status infra-stage__status--hold">PARTIAL / GOVERNANCE HOLD</span>
+            <h3>Transfer across external boundaries</h3>
+            <p>
+              Qualify the same contract across materially different target
+              systems. A bounded infrastructure adapter result is retained;
+              the payment consequence lane has not qualified.
+            </p>
+            <p className="infra-stage__limit">
+              The authority-at-consequence mapping is frozen. No provider
+              execution, replacement adapter, or P3 completion is authorized.
+            </p>
+          </article>
+        </div>
+        <p className="editorial-intro">
+          <strong>Regulatory and organizational assurance:</strong> This work
+          is intended to help organizations produce inspectable evidence for
+          consequential AI controls. The applicable mandate, jurisdiction,
+          obligation-to-control mapping, independent evaluation, and operational
+          compliance must be assessed separately for each deployment.
+          JCEE does not claim blanket mandate compliance, regulatory approval,
+          production certification, or an authorized enterprise deployment.
+        </p>
+        <div className="editorial-actions">
+          <a className="editorial-text-link" href="/registry">
+            Recorded component milestones and limitations →
+          </a>
+          <a className="editorial-text-link" href="/partners/enterprise">
+            Discuss a bounded workflow assessment →
+          </a>
+        </div>
+      </section>
+
       <section className="editorial-section editorial-section-muted">
         <p className="editorial-kicker">Applied development</p>
         <h2>From components to useful workflows.</h2>
