@@ -201,13 +201,13 @@ export default function Home() {
             03 / RECORDED PROOF
           </p>
           <h2 id="distribution-demo-title">
-            A mismatch should create a question, not silently create authority.
+            A tested mismatch should create review—not silent authority.
           </h2>
           <p>
-            JCEE Distribution is a working reference implementation of one bounded
-            workflow. In the current demonstration, a purchase order is compared
-            with the entered sales order and a discrepancy is surfaced for a
-            person to investigate.
+            JCEE Distribution is the current public proof example: one bounded,
+            synthetic order-integrity workflow with a recorded result. A purchase
+            order is compared with the entered sales order and a discrepancy is
+            surfaced for a person to investigate.
           </p>
           <p>
             The point is not the order screen. The point is the control pattern:
@@ -227,8 +227,7 @@ export default function Home() {
           aria-label="Illustrative rendering of the tested synthetic order-integrity workflow, not customer data"
         >
           <p className="editorial-kicker">
-            DISTRIBUTION REFERENCE IMPLEMENTATION · DEMONSTRATION DATA · NOT A
-            CUSTOMER DEPLOYMENT
+            RECORDED PROOF · SYNTHETIC PROTOTYPE · SEPTEMBER 14, 2026
           </p>
           <h3>Purchase-order instruction → sales-order review</h3>
           <dl>
@@ -253,17 +252,25 @@ export default function Home() {
                 change.
               </dd>
             </div>
-            <div>
-              <dt>Current recorded result</dt>
-              <dd>
-                20 / 20 expected synthetic classifications · 0 external effects
-              </dd>
-            </div>
           </dl>
+          <div className="evidence-numbers distribution-proof-numbers" aria-label="Recorded Distribution proof">
+            <div>
+              <strong>20 / 20</strong>
+              <span>Expected synthetic classifications matched</span>
+            </div>
+            <div>
+              <strong>4</strong>
+              <span>Result categories exercised</span>
+            </div>
+            <div>
+              <strong>0</strong>
+              <span>External effects</span>
+            </div>
+          </div>
           <p>
-            Illustrative rendering, not customer data. Customer ROI, live
-            integration, and production readiness remain unestablished. A
-            limited, approved shadow evaluation is the next commercial gate.
+            This establishes comparison mechanics on the tested synthetic cases.
+            It does not establish customer ROI, live integration, or production
+            readiness. The next commercial gate is a limited, approved shadow evaluation.
           </p>
         </div>
       </section>
