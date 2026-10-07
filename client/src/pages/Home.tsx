@@ -302,7 +302,7 @@ export default function Home() {
           </p>
           <ol className="binding-strip" aria-label="JCEE public integration binding path">
             <li><span>01</span><h3>Claim + evidence</h3><p>Start with the source instruction, observation, and the evidence revision that supports the proposed conclusion.</p></li>
-            <li><span>02</span><h3>Current authority</h3><p>Check the competent source of permission at the time of action. A proposal is not authority; entitlement is not execution.</p></li>
+            <li><span>02</span><h3>Current authority</h3><p>Check the competent source of permission at the time of action. A proposal is not authority. Entitlement is not execution.</p></li>
             <li><span>03</span><h3>Consequence</h3><p>The target system retains authority over the real-world effect. JCEE does not invent authority the target did not grant.</p></li>
             <li><span>04</span><h3>Recovery</h3><p>Preserve intent, effect identity, and uncertainty across interruption. Missing evidence stays unknown; recovery is not blind retry.</p></li>
             <li><span>05</span><h3>System of record</h3><p>Reconcile against the existing competent external record instead of replacing it with an internal model assertion.</p></li>
