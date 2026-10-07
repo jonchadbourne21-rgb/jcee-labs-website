@@ -92,12 +92,17 @@ function Router() {
       }
     };
 
+    const onHashChange = () => {
+      clearObserver();
+      scrollToHashTarget();
+    };
+
     const frame = window.requestAnimationFrame(scrollToHashTarget);
-    window.addEventListener("hashchange", scrollToHashTarget);
+    window.addEventListener("hashchange", onHashChange);
 
     return () => {
       window.cancelAnimationFrame(frame);
-      window.removeEventListener("hashchange", scrollToHashTarget);
+      window.removeEventListener("hashchange", onHashChange);
       clearObserver();
     };
   }, [location]);
