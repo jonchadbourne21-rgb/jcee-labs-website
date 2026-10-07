@@ -576,17 +576,8 @@ main :is(h1, h2, h3) {
 
 @media (max-width: 1000px) {
   .binding-strip {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     row-gap: 30px;
-  }
-  .integration-posture-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 640px) {
-  .binding-strip {
-    grid-template-columns: 1fr;
   }
   .binding-strip li {
     padding-right: 0;
@@ -598,6 +589,12 @@ main :is(h1, h2, h3) {
     top: auto;
     transform: rotate(90deg);
   }
+  .integration-posture-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
   .order-example .distribution-proof-numbers {
     grid-template-columns: 1fr;
   }
