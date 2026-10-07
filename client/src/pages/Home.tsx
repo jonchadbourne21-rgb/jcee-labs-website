@@ -61,8 +61,8 @@ export default function Home() {
           </div>
           <p className="quiet">
             First commercial engagement: a bounded Workflow Assurance Assessment.
-            Reference software and recorded research evidence are available now;
-            customer savings and production performance have not yet been established.
+            Reference software and recorded research evidence are available now.
+            Customer savings and production performance have not yet been established.
           </p>
         </div>
         <aside
@@ -227,7 +227,8 @@ export default function Home() {
           aria-label="Illustrative rendering of the tested synthetic order-integrity workflow, not customer data"
         >
           <p className="editorial-kicker">
-            RECORDED PROOF · SYNTHETIC PROTOTYPE · SEPTEMBER 14, 2026
+            RECORDED PROOF · DISTRIBUTION REFERENCE IMPLEMENTATION · SYNTHETIC
+            PROTOTYPE · NOT A CUSTOMER DEPLOYMENT · SEPTEMBER 14, 2026
           </p>
           <h3>Purchase-order instruction → sales-order review</h3>
           <dl>
@@ -270,7 +271,7 @@ export default function Home() {
           <p>
             This establishes comparison mechanics on the tested synthetic cases.
             It does not establish customer ROI, live integration, or production
-            readiness. The next commercial gate is a limited, approved shadow evaluation.
+            readiness. A limited, approved shadow evaluation is the next commercial gate.
           </p>
         </div>
       </section>
