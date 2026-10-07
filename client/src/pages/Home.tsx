@@ -321,6 +321,7 @@ export default function Home() {
               <p className="editorial-kicker">BUILT / TESTED</p>
               <h3>Bounded reference behavior with recorded evidence.</h3>
               <p>Public evidence includes frozen or reproduced VOW and QCS milestones, the interactive VOW recovery reference, and the recorded Distribution synthetic comparison.</p>
+              <a className="editorial-text-link" href="/qcs">QCS transition research →</a>
             </article>
             <article className="resource-card">
               <p className="editorial-kicker">AVAILABLE TO SCOPE</p>
