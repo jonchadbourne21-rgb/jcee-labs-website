@@ -52,17 +52,17 @@ export default function Home() {
             boundary before changing the system.
           </p>
           <div className="hero-actions">
-            <a className="primary-link" href="#distribution-demo">
-              See a working example <span>↓</span>
-            </a>
             <a className="primary-link" href="/partners/enterprise">
-              Discuss one workflow <span>↗</span>
+              Scope one workflow <span>↗</span>
+            </a>
+            <a className="primary-link" href="#distribution-demo">
+              Inspect recorded proof <span>↓</span>
             </a>
           </div>
           <p className="quiet">
-            Reference software and bounded research milestones are available
-            now. Customer savings and production performance have not yet been
-            established.
+            First commercial engagement: a bounded Workflow Assurance Assessment.
+            Reference software and recorded research evidence are available now;
+            customer savings and production performance have not yet been established.
           </p>
         </div>
         <aside
