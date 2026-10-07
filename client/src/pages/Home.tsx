@@ -480,6 +480,59 @@ export default function Home() {
       </section>
 
 <section
+        className="editorial-section editorial-section-light evidence-frontier-home"
+        id="evidence-frontier"
+        aria-labelledby="evidence-frontier-title"
+      >
+        <div className="editorial-section-heading">
+          <div>
+            <p className="editorial-kicker">CURRENT EVIDENCE / OCTOBER 2026</p>
+            <h2 id="evidence-frontier-title">
+              What is established. What still needs a decisive test.
+            </h2>
+          </div>
+          <a href="/research#evidence-ladder">Full evidence ladder →</a>
+        </div>
+        <ol className="evidence-frontier-home__ladder" aria-label="Evidence classifications">
+          <li><strong>FORMAL / MODEL</strong><span>Proof within assumptions is not physical confirmation.</span></li>
+          <li><strong>SYNTHETIC / REPLAY</strong><span>VOW, QCS, and Distribution have specific bounded test records.</span></li>
+          <li><strong>PHYSICAL TEST PENDING</strong><span>Two research proposals have not been physically validated.</span></li>
+          <li><strong>FIELD / PRODUCTION</strong><span>Customer outcomes and production assurance are not established.</span></li>
+        </ol>
+        <div className="evidence-frontier-home__links">
+          <article>
+            <p className="editorial-kicker">TWO PHYSICAL EXPERIMENTS · NOT RUN</p>
+            <h3>Multicellular target-state restoration and two living-cell quantum nonseparability.</h3>
+            <p>
+              One asks whether prior morphological training changes repair
+              after a common starting state; the other asks whether an
+              entanglement witness can coexist with independently verified
+              cell viability. Neither is a physical discovery yet.
+            </p>
+            <a className="editorial-text-link" href="/research#physical-validation">
+              Questions, pass conditions, and claim limits →
+            </a>
+          </article>
+          <article>
+            <p className="editorial-kicker">JCEE-INFRA / P0–P3</p>
+            <h3>Unified AI assurance and execution infrastructure.</h3>
+            <p>
+              P0 contract frozen; P1 and P2 bounded test passes; P3 partial
+              and held. Current work separates competent authority, exact
+              external effect, recovery, and the independently reviewable receipt.
+            </p>
+            <a className="editorial-text-link" href="/technology#infrastructure-build">
+              Infrastructure gates, holds, and enterprise boundaries →
+            </a>
+          </article>
+        </div>
+        <p className="evidence-ladder__note">
+          A test status is not a compliance certification. Each claim retains
+          its own conditions, unresolved gates, and independent-review limits.
+        </p>
+      </section>
+
+<section
         className="editorial-section recent-progress"
         aria-labelledby="progress-title"
       >
