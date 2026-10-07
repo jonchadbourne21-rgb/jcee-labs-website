@@ -1,6 +1,7 @@
 import BB84PublicPreprint from "@/components/BB84PublicPreprint";
 import BuildStatusList from "@/components/BuildStatusList";
 import EditorialLayout from "@/components/EditorialLayout";
+import EvidenceLadder from "@/components/EvidenceLadder";
 import {
   publications,
   publicationDate,
@@ -41,6 +42,125 @@ export default function ResearchPage() {
           Explore all 25 research fields →
         </a>
       </section>
+      <section
+        className="editorial-section"
+        id="evidence-ladder"
+        aria-labelledby="evidence-ladder-title"
+      >
+        <p className="editorial-kicker">CURRENT CLAIMS / EVIDENCE STANDARD</p>
+        <h2 id="evidence-ladder-title">Different claims require different evidence.</h2>
+        <p className="editorial-intro">
+          A mathematical argument, a synthetic system test, a physical
+          observation, and a production result answer different questions.
+          JCEE does not promote one into another without a new qualifying gate.
+        </p>
+        <EvidenceLadder />
+        <a className="editorial-text-link" href="/registry">
+          Read selected recorded milestones and boundaries →
+        </a>
+      </section>
+
+      <section
+        className="editorial-section editorial-section-muted"
+        id="physical-validation"
+        aria-labelledby="physical-validation-title"
+      >
+        <p className="editorial-kicker">PHYSICAL RESEARCH / NOT YET RUN</p>
+        <h2 id="physical-validation-title">Two experiments. Two observations still to earn.</h2>
+        <p className="editorial-intro">
+          These are testable research hypotheses, not physical findings.
+          Their scientific implications are conditional on meeting their
+          respective frozen controls and decision thresholds.
+        </p>
+        <div className="physical-program-grid">
+          <article className="physical-program">
+            <p className="editorial-kicker">JCEE-MMC-P0.1 · LATENT TARGET-STATE RESTORATION</p>
+            <p className="research-status-line">PRE-EXECUTION QUALIFIED / PHYSICAL_NOT_RUN</p>
+            <h3>Can tissue reconstruction remember a prior geometric target?</h3>
+            <p>
+              The planned study transiently conditions living multicellular
+              material to different non-native morphologies, removes the
+              instructive condition, and tests whether recovery after matched
+              injury depends on that earlier history.
+            </p>
+            <dl>
+              <div>
+                <dt>DECISIVE OBSERVATION</dt>
+                <dd>
+                  A blinded, replicated history-dependent reconstruction
+                  difference after the groups are brought to a measured common
+                  state and external directional cues are excluded.
+                </dd>
+              </div>
+              <div>
+                <dt>IF THE PHYSICAL GATE PASSES</dt>
+                <dd>
+                  Evidence for target-specific morphological history dependence
+                  in that bounded material and preparation.
+                </dd>
+              </div>
+              <div>
+                <dt>WHAT IT WOULD NOT PROVE</dt>
+                <dd>
+                  Consciousness, psychological learning, generalized tissue
+                  intelligence, or the mechanism that stored the information.
+                </dd>
+              </div>
+            </dl>
+            <p className="research-status-detail">
+              Pre-execution statistical qualification and preregistration are
+              completed. Wet-lab host qualification and actual specimen testing
+              remain pending; a rescheduled feasibility discussion is not
+              experimental execution or laboratory endorsement.
+            </p>
+          </article>
+          <article className="physical-program">
+            <p className="editorial-kicker">JCEE-QBIO-P0.1 · TWO LIVING CELLS</p>
+            <p className="research-status-line">PRE-BIOLOGY QUALIFICATION / PHYSICAL_NOT_RUN</p>
+            <h3>Can a quantum nonseparability witness coexist with two viable cells?</h3>
+            <p>
+              The proposed experiment seeks an entanglement witness between
+              selected quantum degrees of freedom associated with two separate
+              living cells, while testing the viability of each cell independently.
+            </p>
+            <dl>
+              <div>
+                <dt>DECISIVE OBSERVATION</dt>
+                <dd>
+                  A qualifying nonseparability witness under the specified
+                  fidelity criterion, alongside separate evidence that both
+                  cells remain alive under the measured conditions.
+                </dd>
+              </div>
+              <div>
+                <dt>IF THE PHYSICAL GATE PASSES</dt>
+                <dd>
+                  Evidence for quantum nonseparability in that particular
+                  living-cell configuration, with contemporaneous viability.
+                </dd>
+              </div>
+              <div>
+                <dt>WHAT IT WOULD NOT PROVE</dt>
+                <dd>
+                  Quantum consciousness, generalized organism-scale
+                  entanglement, or a universal biological computing mechanism.
+                </dd>
+              </div>
+            </dl>
+            <p className="research-status-detail">
+              The physical Bell-fidelity and viability qualification has not
+              been adjudicated. Design screens and biophysical estimates are
+              not measurements of entanglement in living cells.
+            </p>
+          </article>
+        </div>
+        <p className="evidence-ladder__note">
+          Negative results, failed controls, and inconclusive observations
+          remain reportable outcomes. No patent priority, novel physical
+          mechanism, or independent reproduction is asserted here.
+        </p>
+      </section>
+
       <section className="editorial-section" aria-labelledby="papers-title">
         <div className="editorial-section-heading">
           <h2 id="papers-title">Reports and research notes</h2>

@@ -1435,3 +1435,192 @@ main :is(h1, h2, h3) {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* October evidence / physical qualification / JCEE-INFRA public status.
+   Reuse JCEE editorial colors, type system, and responsive grid conventions. */
+.evidence-ladder,
+.evidence-frontier-home__ladder {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  list-style: none;
+  margin: 32px 0 20px;
+  padding: 0;
+}
+.evidence-ladder__item,
+.evidence-frontier-home__ladder li {
+  min-width: 0;
+  background: #fff;
+  border: 1px solid #cfd7e3;
+  border-top: 3px solid #315cff;
+  padding: clamp(20px, 2.4vw, 30px);
+}
+.evidence-ladder__item h3 {
+  font-size: clamp(1.15rem, 1.45vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.32;
+  letter-spacing: -0.025em;
+  margin: 14px 0;
+}
+.evidence-ladder__item p:not(.editorial-kicker),
+.physical-program > p:not(.editorial-kicker),
+.infra-stage > p:not(.editorial-kicker) {
+  color: #475369;
+  font-size: 0.96rem;
+  line-height: 1.68;
+}
+.evidence-ladder__item .evidence-ladder__example {
+  border-top: 1px solid #e1e6ef;
+  color: #33465f;
+  margin: auto 0 0;
+  padding-top: 16px;
+}
+.evidence-ladder__item {
+  display: flex;
+  flex-direction: column;
+}
+.evidence-ladder__note {
+  color: #536076;
+  font-size: 0.91rem;
+  line-height: 1.7;
+  max-width: 980px;
+  margin: 22px 0;
+}
+.physical-program-grid,
+.infra-stage-grid,
+.evidence-frontier-home__links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  margin: 30px 0;
+}
+.physical-program,
+.infra-stage,
+.evidence-frontier-home__links article {
+  min-width: 0;
+  border: 1px solid #cbd4e3;
+  background: #fff;
+  padding: clamp(24px, 3vw, 38px);
+}
+.physical-program h3,
+.infra-stage h3,
+.evidence-frontier-home__links h3 {
+  color: #101522;
+  font-size: clamp(1.45rem, 2.2vw, 2.1rem);
+  font-weight: 500;
+  line-height: 1.27;
+  letter-spacing: -0.03em;
+  margin: 16px 0 22px;
+}
+.physical-program dl {
+  margin: 26px 0;
+}
+.physical-program dl > div {
+  border-top: 1px solid #dbe2ed;
+  padding: 15px 0;
+}
+.physical-program dt {
+  color: #244cdb;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.77rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+.physical-program dd {
+  color: #3a465b;
+  font-size: 0.96rem;
+  line-height: 1.65;
+  margin: 8px 0 0;
+}
+.physical-program .research-status-line,
+.infra-stage__status {
+  color: #1d3f98;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.78rem !important;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.physical-program .research-status-detail,
+.infra-stage .infra-stage__limit {
+  border-top: 1px solid #dbe2ed;
+  padding-top: 16px;
+  color: #536076;
+  font-size: 0.9rem;
+}
+.infrastructure-contract {
+  border-left: 3px solid #315cff;
+  background: #f5f6f8;
+  padding: 24px 30px;
+  max-width: 1040px;
+  margin: 24px 0 28px;
+}
+.infrastructure-contract strong {
+  color: #244cdb;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.07em;
+}
+.infrastructure-contract p {
+  color: #202d42;
+  font-size: 1.12rem;
+  line-height: 1.65;
+  margin: 12px 0 0;
+}
+.infra-stage__status--hold {
+  color: #87501d;
+}
+.infra-stage p:last-child {
+  margin-bottom: 0;
+}
+.evidence-frontier-home__ladder li strong,
+.evidence-frontier-home__ladder li span {
+  display: block;
+}
+.evidence-frontier-home__ladder li strong {
+  font-family: "IBM Plex Mono", monospace;
+  color: #244cdb;
+  font-size: 0.78rem;
+  margin-bottom: 14px;
+}
+.evidence-frontier-home__ladder li span {
+  color: #475369;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+.evidence-frontier-home__links article p:not(.editorial-kicker) {
+  color: #475369;
+  font-size: 1rem;
+  line-height: 1.68;
+}
+.evidence-frontier-home__links a {
+  margin-top: 16px;
+}
+@media (max-width: 1100px) {
+  .evidence-ladder,
+  .evidence-frontier-home__ladder {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 700px) {
+  .evidence-ladder,
+  .evidence-frontier-home__ladder,
+  .physical-program-grid,
+  .infra-stage-grid,
+  .evidence-frontier-home__links {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .physical-program,
+  .infra-stage,
+  .evidence-frontier-home__links article {
+    padding: 24px;
+  }
+}
+
+/* Preserve in-page landing space beneath the sticky site navigation. */
+#evidence-frontier,
+#evidence-ladder,
+#physical-validation,
+#infrastructure-build {
+  scroll-margin-top: 100px;
+}

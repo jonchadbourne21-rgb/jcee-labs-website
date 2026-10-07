@@ -47,7 +47,64 @@ function Router() {
   const [location] = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    let observer: MutationObserver | null = null;
+    let timeout: number | undefined;
+
+    const clearObserver = () => {
+      observer?.disconnect();
+      observer = null;
+      if (timeout !== undefined) window.clearTimeout(timeout);
+      timeout = undefined;
+    };
+
+    const scrollToHashTarget = () => {
+      const fragment = window.location.hash.slice(1);
+      if (!fragment) {
+        clearObserver();
+        window.scrollTo(0, 0);
+        return;
+      }
+
+      let targetId = fragment;
+      try {
+        targetId = decodeURIComponent(fragment);
+      } catch {
+        // Keep the literal fragment when it cannot be decoded.
+      }
+
+      const target = document.getElementById(targetId);
+      if (target) {
+        clearObserver();
+        target.scrollIntoView({ block: "start" });
+        return;
+      }
+
+      // Lazy route content may not have mounted when the pathname changes.
+      if (!observer) {
+        observer = new MutationObserver(() => {
+          if (document.getElementById(targetId)) scrollToHashTarget();
+        });
+        observer.observe(document.getElementById("root") ?? document.body, {
+          childList: true,
+          subtree: true,
+        });
+        timeout = window.setTimeout(clearObserver, 10000);
+      }
+    };
+
+    const onHashChange = () => {
+      clearObserver();
+      scrollToHashTarget();
+    };
+
+    const frame = window.requestAnimationFrame(scrollToHashTarget);
+    window.addEventListener("hashchange", onHashChange);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("hashchange", onHashChange);
+      clearObserver();
+    };
   }, [location]);
 
   return (
