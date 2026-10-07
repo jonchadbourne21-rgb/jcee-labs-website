@@ -1616,3 +1616,11 @@ main :is(h1, h2, h3) {
     padding: 24px;
   }
 }
+
+/* Preserve in-page landing space beneath the sticky site navigation. */
+#evidence-frontier,
+#evidence-ladder,
+#physical-validation,
+#infrastructure-build {
+  scroll-margin-top: 100px;
+}
