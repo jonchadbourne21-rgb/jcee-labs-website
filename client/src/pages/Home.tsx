@@ -295,7 +295,8 @@ export default function Home() {
           <h2>Claim + evidence → authority → consequence → recovery → system of record → receipt.</h2>
           <p className="editorial-intro">
             JCEE is implemented reference software, not a generic SDK announcement.
-            A private integration starts with one bounded workflow and keeps the
+            This public semantic contract describes the binding between systems;
+            a private integration starts with one bounded workflow and keeps the
             buyer's existing systems in place.
           </p>
           <ol className="binding-strip" aria-label="JCEE public integration binding path">
