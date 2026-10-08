@@ -82,7 +82,15 @@ export function serveStatic(app: Express) {
     }
     next();
   });
-  app.use(express.static(distPath, { index: false }));
+  app.use(
+    express.static(distPath, {
+      index: false,
+      setHeaders(res, file) {
+        if (path.basename(file) === "deployment.json")
+          res.setHeader("Cache-Control", "no-store");
+      },
+    })
+  );
 
   // fall through to index.html if the file doesn't exist
   app.use("*", (req, res) => {

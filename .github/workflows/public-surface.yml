@@ -36,7 +36,17 @@ jobs:
       - name: Run merge-blocking public-surface gate
         env:
           CHROMIUM_BIN: chromium
-        run: pnpm release:check
+          BUILD_SOURCE_COMMIT: ${{ github.sha }}
+        run: |
+          pnpm release:check
+          pnpm release:verify "$BUILD_SOURCE_COMMIT"
+
+      - name: Preserve source and build receipt
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: jcee-deployment-receipt
+          path: dist/public/deployment.json
+          if-no-files-found: error
 
       - name: Capture enterprise visual review surfaces
         env:

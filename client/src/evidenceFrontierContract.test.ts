@@ -10,7 +10,6 @@ const research = read("pages/ResearchPage.tsx");
 const technology = read("pages/TechnologyPage.tsx");
 const ladder = read("components/EvidenceLadder.tsx");
 const css = read("editorial-update.css");
-const app = read("App.tsx");
 
 describe("October evidence and infrastructure claim boundaries", () => {
   it("surfaces one bounded evidence ladder without treating classes as universal proof", () => {
@@ -72,11 +71,5 @@ describe("October evidence and infrastructure claim boundaries", () => {
     expect(css).toContain("scroll-margin-top: 100px");
   });
 
-  it("preserves cross-page fragment targets when lazy routes render", () => {
-    expect(app).toContain('window.location.hash.slice(1)');
-    expect(app).toContain("new MutationObserver");
-    expect(app).toContain('window.addEventListener("hashchange"');
-    expect(app).toContain('target.scrollIntoView({ block: "start" })');
-    expect(app).toContain("window.scrollTo(0, 0)");
-  });
+  // Fragment behavior is exercised in scripts/fragment-navigation-check.mjs.
 });

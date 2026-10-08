@@ -4,7 +4,7 @@ import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect, useLayoutEffect } from "react";
 
 const AssurancePage = lazy(() => import("./pages/AssurancePage"));
 const CareerPortfolio = lazy(() => import("./pages/CareerPortfolio"));
@@ -43,72 +43,62 @@ function RouteShimmer() {
   );
 }
 
-function Router() {
+// Layout effects inside Suspense run again when the lazy page becomes visible.
+// Finding an ID in prerendered/hidden markup alone does not mean it can scroll.
+function RouteScrollManager() {
   const [location] = useLocation();
 
-  useEffect(() => {
-    let observer: MutationObserver | null = null;
-    let timeout: number | undefined;
-
-    const clearObserver = () => {
-      observer?.disconnect();
-      observer = null;
-      if (timeout !== undefined) window.clearTimeout(timeout);
-      timeout = undefined;
+  useLayoutEffect(() => {
+    let firstFrame = 0;
+    let secondFrame = 0;
+    const cancel = () => {
+      window.cancelAnimationFrame(firstFrame);
+      window.cancelAnimationFrame(secondFrame);
     };
-
-    const scrollToHashTarget = () => {
-      const fragment = window.location.hash.slice(1);
-      if (!fragment) {
-        clearObserver();
-        window.scrollTo(0, 0);
-        return;
-      }
-
-      let targetId = fragment;
-      try {
-        targetId = decodeURIComponent(fragment);
-      } catch {
-        // Keep the literal fragment when it cannot be decoded.
-      }
-
-      const target = document.getElementById(targetId);
-      if (target) {
-        clearObserver();
-        target.scrollIntoView({ block: "start" });
-        return;
-      }
-
-      // Lazy route content may not have mounted when the pathname changes.
-      if (!observer) {
-        observer = new MutationObserver(() => {
-          if (document.getElementById(targetId)) scrollToHashTarget();
+    const scroll = () => {
+      cancel();
+      // A history event for a new route can arrive before React commits it.
+      if (window.location.pathname !== location) return;
+      firstFrame = window.requestAnimationFrame(() => {
+        secondFrame = window.requestAnimationFrame(() => {
+          let targetId = window.location.hash.slice(1);
+          if (!targetId) {
+            window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+            return;
+          }
+          try {
+            targetId = decodeURIComponent(targetId);
+          } catch {
+            // Malformed fragments are treated literally, not as selectors.
+          }
+          document.getElementById(targetId)?.scrollIntoView({
+            block: "start",
+            behavior: "instant",
+          });
         });
-        observer.observe(document.getElementById("root") ?? document.body, {
-          childList: true,
-          subtree: true,
-        });
-        timeout = window.setTimeout(clearObserver, 10000);
-      }
+      });
     };
-
-    const onHashChange = () => {
-      clearObserver();
-      scrollToHashTarget();
-    };
-
-    const frame = window.requestAnimationFrame(scrollToHashTarget);
-    window.addEventListener("hashchange", onHashChange);
-
+    // Wouter emits pushState/replaceState; neither fires native hashchange.
+    const events = ["hashchange", "popstate", "pushState", "replaceState"];
+    for (const event of events) window.addEventListener(event, scroll);
+    window.addEventListener("wheel", cancel, { passive: true });
+    window.addEventListener("touchstart", cancel, { passive: true });
+    scroll();
     return () => {
-      window.cancelAnimationFrame(frame);
-      window.removeEventListener("hashchange", onHashChange);
-      clearObserver();
+      cancel();
+      for (const event of events) window.removeEventListener(event, scroll);
+      window.removeEventListener("wheel", cancel);
+      window.removeEventListener("touchstart", cancel);
     };
   }, [location]);
 
+  return null;
+}
+
+function Router() {
   return (
     <Suspense fallback={<RouteShimmer />}>
+      <RouteScrollManager />
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/solutions/distribution" component={DistributionPage} />
