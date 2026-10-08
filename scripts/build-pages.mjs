@@ -1,6 +1,9 @@
 import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
+import { inspectSource, requireParity, writeReceipt } from "./deployment-receipt.mjs";
+const sourceBeforeBuild = inspectSource();
+if (process.env.BUILD_SOURCE_COMMIT) requireParity(sourceBeforeBuild);
 
 // Use the URL in Settings > Pages; validate both supported locations in CI.
 const site = new URL(
@@ -205,18 +208,7 @@ for (const route of routes) {
       .replaceAll(`${prefix}${prefix}/`, `${prefix}/`);
   fs.writeFileSync(path.join(directory, "index.html"), cleanHtml(routeHtml));
 }
-fs.writeFileSync(
-  path.join(root, "deployment.json"),
-  JSON.stringify(
-    {
-      source: process.env.GITHUB_SHA || "local",
-      publicUrl,
-      publicRoutes: ["/", ...routes],
-    },
-    null,
-    2
-  ) + "\n"
-);
+writeReceipt(sourceBeforeBuild, { publicUrl, kind: "pages" });
 console.log(
   `Pages artifact ready: ${publicUrl}; ${routes.length + 1} public routes; ${documents.length} Markdown files.`
 );

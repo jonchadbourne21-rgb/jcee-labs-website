@@ -41,6 +41,7 @@ jobs:
         run: |
           pnpm check
           pnpm test
+          pnpm test:receipt
       - name: Install Chromium
         run: |
           sudo apt-get update
@@ -48,11 +49,15 @@ jobs:
       - name: Build static artifact
         env:
           PAGES_BASE_URL: ${{ matrix.url }}
+          BUILD_SOURCE_COMMIT: ${{ github.sha }}
         run: node scripts/build-pages.mjs
       - name: Verify public pages on a static server
         env:
           PAGES_BASE_PATH: ${{ matrix.base }}
-        run: node scripts/public-surface-check.mjs
+        run: |
+          node scripts/public-surface-check.mjs
+          node scripts/fragment-navigation-check.mjs
+          pnpm release:verify "${{ github.sha }}"
       - name: Preserve validated artifact
         uses: actions/upload-artifact@v7.0.1
         with:
@@ -82,6 +87,7 @@ jobs:
       - name: Build for configured URL
         env:
           PAGES_BASE_URL: ${{ steps.pages.outputs.base_url }}
+          BUILD_SOURCE_COMMIT: ${{ github.sha }}
         run: node scripts/build-pages.mjs
       - uses: actions/upload-pages-artifact@v5.0.0
         with:
