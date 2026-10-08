@@ -22,12 +22,12 @@ if (
     local.sourceVerification.manifestSha256
 )
   throw new Error("Local receipt differs from canonical source");
-if (
-  JSON.stringify(outputManifest("dist/public")) !==
-  JSON.stringify(local.publicFiles)
-)
+const allFiles = [...local.publicFiles, ...local.hostingMetadataFiles].sort(
+  (a, b) => (a.path < b.path ? -1 : a.path > b.path ? 1 : 0)
+);
+if (JSON.stringify(outputManifest("dist/public")) !== JSON.stringify(allFiles))
   throw new Error("Local output differs from receipt (including extra files)");
-for (const file of local.publicFiles) {
+for (const file of allFiles) {
   const bytes = fs.readFileSync(path.join("dist/public", file.path));
   if (bytes.length !== file.bytes || sha256(bytes) !== file.sha256)
     throw new Error(`Local artifact changed: ${file.path}`);

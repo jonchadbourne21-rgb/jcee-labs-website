@@ -97,7 +97,9 @@ pnpm release:verify "$BUILD_SOURCE_COMMIT" https://jceelabs.com/
 ```
 
 This compares the public receipt and **every listed public output file** over
-HTTP against the retained build. Any mismatch or unavailable file keeps the
+HTTP against the retained build. The `.gitkeep` placeholder and `.nojekyll`
+hosting marker are hashed separately as hosting metadata: they are checked in the
+local artifact but are not expected to be publicly served by the host. Any mismatch or unavailable file keeps the
 release unverified. If the platform rebuilds during publication, retain and
 verify the receipt from that final build rather than attaching an earlier one.
 Public HTTP checks cannot prove private server runtime identity; preserve the

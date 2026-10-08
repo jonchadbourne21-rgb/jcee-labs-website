@@ -50,6 +50,7 @@ function fixture(t) {
     "// built asset\n"
   );
   fs.writeFileSync(path.join(root, "dist/index.js"), "// built server\n");
+  fs.writeFileSync(path.join(root, "dist/public/.gitkeep"), "");
   return {
     root,
     commit,
@@ -68,6 +69,10 @@ test("verified receipts bind source tree, full public output, and server output"
   verifyReceipt(receipt, f.commit);
   assert.equal(receipt.tree.length, 40);
   assert.equal(receipt.publicFiles.length, 2);
+  assert.deepEqual(
+    receipt.hostingMetadataFiles.map(file => file.path),
+    [".gitkeep"]
+  );
   assert.ok(receipt.server.sha256);
   assert.equal(receipt.sourceVerification.trackedFiles, 3);
   assert.equal(

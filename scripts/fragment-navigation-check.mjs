@@ -71,9 +71,9 @@ try {
       })()`
       );
       if (
-        state.path === `${prefix}${route}` &&
+        state.path.replace(/\/+$/, "") === `${prefix}${route}` &&
         state.hash === `#${id}` &&
-        state.path === `${prefix}${route}` &&
+        state.path.replace(/\/+$/, "") === `${prefix}${route}` &&
         state.hash === `#${id}` &&
         state.fonts === "loaded" &&
         state.ready &&
@@ -88,7 +88,7 @@ try {
       await sleep(100);
     }
     assert.ok(
-      state.path === `${prefix}${route}` &&
+      state.path.replace(/\/+$/, "") === `${prefix}${route}` &&
         state.hash === `#${id}` &&
         state.fonts === "loaded" &&
         state.ready &&

@@ -121,6 +121,7 @@ export function requireParity(snapshot) {
   if (snapshot.mismatches.length)
     throw new Error(`Source parity failed:\n${snapshot.mismatches.join("\n")}`);
 }
+export const hostingMetadataPaths = new Set([".gitkeep", ".nojekyll"]);
 export function outputManifest(publicRoot) {
   return filesIn(publicRoot)
     .filter(name => name !== "deployment.json")
@@ -159,7 +160,11 @@ export function writeReceipt(
     requireParity(after);
   }
   const publicRoot = path.join(root, "dist/public");
-  const files = outputManifest(publicRoot);
+  const outputs = outputManifest(publicRoot);
+  const metadataFiles = outputs.filter(file =>
+    hostingMetadataPaths.has(file.path)
+  );
+  const files = outputs.filter(file => !hostingMetadataPaths.has(file.path));
   const receipt = {
     schemaVersion: 1,
     repository,
@@ -194,6 +199,8 @@ export function writeReceipt(
         "utf8"
       )
     ),
+    hostingMetadataFiles: metadataFiles,
+    hostingMetadataSha256: sha256(JSON.stringify(metadataFiles)),
     publicFiles: files,
     publicManifestSha256: sha256(JSON.stringify(files)),
   };
@@ -236,6 +243,15 @@ export function verifyReceipt(receipt, expectedCommit) {
     sha256(JSON.stringify(receipt.publicFiles)) !== receipt.publicManifestSha256
   )
     throw new Error("Invalid public manifest");
+  if (
+    !Array.isArray(receipt.hostingMetadataFiles) ||
+    receipt.hostingMetadataFiles.some(
+      file => !hostingMetadataPaths.has(file.path)
+    ) ||
+    sha256(JSON.stringify(receipt.hostingMetadataFiles)) !==
+      receipt.hostingMetadataSha256
+  )
+    throw new Error("Invalid hosting metadata manifest");
   const paths = new Set();
   for (const file of receipt.publicFiles) {
     if (
