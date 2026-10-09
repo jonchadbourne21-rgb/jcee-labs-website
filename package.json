@@ -18,7 +18,8 @@
     "db:push": "drizzle-kit generate && drizzle-kit migrate",
     "build:app": "node --import tsx scripts/export-publications.ts && vite build && node --import tsx scripts/prerender.ts && esbuild server/_core/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
     "test:fragments": "node scripts/fragment-navigation-check.mjs",
-    "test:receipt": "node --test scripts/deployment-receipt.test.mjs",
+    "test:receipt": "node --test scripts/deployment-receipt.test.mjs scripts/release-source.test.mjs",
+    "release:prepare": "node scripts/release-source.mjs",
     "release:verify": "node scripts/verify-deployment.mjs"
   },
   "dependencies": {
