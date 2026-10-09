@@ -28,13 +28,17 @@ export const sourceExclusions = [
   ".env.*",
   ".project-config.json",
   "client/public/__manus__/version.json",
+  "release-source.bundle",
+  "release-source.json",
 ];
 function excluded(name) {
   return (
     excludedRoots.has(name.split("/")[0]) ||
     /^\.env(?:\..*)?$/.test(name) ||
     name === ".project-config.json" ||
-    name === "client/public/__manus__/version.json"
+    name === "client/public/__manus__/version.json" ||
+    name === "release-source.bundle" ||
+    name === "release-source.json"
   );
 }
 function filesIn(directory, prefix = "", ignore = () => false) {

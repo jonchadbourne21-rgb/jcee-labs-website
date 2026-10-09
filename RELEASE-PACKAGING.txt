@@ -1,0 +1,32 @@
+JCEE Labs: Manus source packaging
+Copyright (c) 2026 Jonathan Chadbourne.
+
+The normal Cloud Run source package omits .git. Before saving the publication
+checkpoint, synchronize the approved Git commit and run:
+
+  pnpm release:prepare FULL_APPROVED_COMMIT_SHA
+
+If the Manus workspace uses a separate canonical checkout, set
+BUILD_SOURCE_REPOSITORY to that checkout's path for this preparation command.
+The canonical checkout's HEAD must equal the approved commit.
+
+Include BOTH generated root files in the checkpoint and deployment package:
+  release-source.bundle
+  release-source.json
+
+These are private build inputs, not public assets. Do not put them under
+client/public, commit them to Git, or copy a previous deployment.json.
+
+The unchanged pnpm build command detects a staged directory without .git,
+verifies the bundle hash, restores its authentic Git objects and existing
+shallow boundary into a temporary canonical checkout, checks commit/tree
+identity, and compares all tracked application bytes and modes before and
+after the build. Extra source files still fail parity. Missing, corrupt,
+relabeled, or mismatched packages fail closed. No network checkout is needed.
+When an explicit BUILD_SOURCE_COMMIT is set, the package must match it.
+
+The bundle is source transport, not an independent approval authority. Retain
+the approved SHA outside the deployment, and compare the new build receipt to
+that SHA and canonical source. Retain the actual production build receipt and
+checkpoint/deployment record. Public HTTP parity cannot prove the identity of
+the private running server.
