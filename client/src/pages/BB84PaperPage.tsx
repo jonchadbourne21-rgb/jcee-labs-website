@@ -72,9 +72,8 @@ export default function BB84PaperPage() {
             <p>{paper.scopeNote}</p>
             <p>
               The perfect-recovery theorem does not settle the general guessing
-              frontier. A public preprint also does not establish independent
-              expert review, practical cryptographic security, or a production
-              implementation.
+              frontier. The external review does not establish publication acceptance,
+              practical cryptographic security, or a production implementation.
             </p>
           </section>
           <section id="paper">
