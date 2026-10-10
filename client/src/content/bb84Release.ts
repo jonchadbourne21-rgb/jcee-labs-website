@@ -17,7 +17,7 @@ export const bb84PublicRelease = {
   summary:
     "Exact perfect-recovery communication cost, a bounded-error converse, and one-message bounds for simultaneous full-string recovery in BB84 monogamy games.",
   reviewNote:
-    "No independent human expert review was obtained. This is a public preprint, not a peer-reviewed publication.",
+    "An external reviewer has recommended major revision and offered to reassess the manuscript. The public PDF remains a preprint; the review is not publication acceptance or peer-reviewed validation.",
   scopeNote:
     "The general one-message interior frontier, interactive near-full recovery for n ≥ 3, and the exact physical one-message (3,1) case remain open. P0.45 R1 remains on hold.",
   correctionNote:
