@@ -38,7 +38,7 @@ export default function PublicRegistry() {
         className="program-masthead registry-program"
       >
         <p className="eyebrow">
-          <span /> PUBLIC RECORD · CURRENT
+          <span /> PUBLIC RECORD · DATED ENTRIES
         </p>
         <div className="program-number">JCEE PUBLIC REGISTRY</div>
         <h1>
@@ -67,11 +67,16 @@ export default function PublicRegistry() {
           </p>
           <p>
             Distribution, MISE, AP Gate, and JEV were reconciled against the
-            current portfolio records and preserved evidence on September 29,
-            2026. Other entries retain their own dated evidence boundaries. This
-            review is not a new execution of the recorded studies.
+            portfolio records and preserved evidence on September 29, 2026.
+            Other entries retain their own dated evidence boundaries. For the
+            October infrastructure P0–P3 summary, including the P3 hold, see
+            the technology page. This page is a selected record, not a claim
+            that every program was freshly reviewed today.
           </p>
           <div className="program-links">
+            <a href="/technology#infrastructure-build">
+              OCTOBER INFRASTRUCTURE STATUS <span>→</span>
+            </a>
             <a href="/JCEE_Labs_Public_Registry_v1.3.md" download>
               DOWNLOAD CURRENT REGISTRY · VERSION 1.3 <span>↓</span>
             </a>
