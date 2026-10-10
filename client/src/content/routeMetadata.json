@@ -49,6 +49,12 @@
     "title": "JCEE VOW: Evidence-First Execution Runtime | JCEE Labs",
     "description": "Explore JCEE VOW, an evidence-first execution runtime. Review covered execution and recovery behavior, recorded milestones, and explicit evidence boundaries."
   },
+  "/blog/when-a-timeout-is-not-a-failure": {
+    "title": "When a Timeout Is Not a Failure: Authority, Evidence, and Recovery in Consequential AI Execution — JCEE Labs",
+    "description": "A timeout leaves an outcome uncertain. Recovery must establish the authorized occurrence before deciding whether another action is permitted.",
+    "type": "article",
+    "publishedTime": "2026-10-10T00:00:00Z"
+  },
   "/blog/what-is-an-evidence-boundary": {
     "title": "What Is an Evidence Boundary in AI-Assisted Operations? — JCEE Labs",
     "description": "An evidence boundary separates what a result supports from what remains unestablished. Learn how to evaluate AI-assisted workflows without overstating the evidence.",
