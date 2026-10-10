@@ -28,7 +28,7 @@ It is equally important not to erase what has been established. Clear boundaries
 
 ## Publication and review are different milestones
 
-The manuscript is a public preprint. No independent human expert review was obtained; it is not a peer-reviewed publication. Making it available to readers does not establish independent validation, novelty, priority, or a deployed cryptographic system.
+The manuscript is a public preprint. An external reviewer has recommended major revision and offered to reassess. This does not constitute publication acceptance or peer-reviewed validation. Making the preprint available does not establish novelty, priority, or a deployed cryptographic system.
 
 A stable version and a PDF checksum let readers identify the exact artifact being discussed. That makes a subsequent comment or correction easier to connect to the relevant text. It does not replace substantive review.
 

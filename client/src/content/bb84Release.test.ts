@@ -48,9 +48,9 @@ describe("BB84 public preprint — R146 release boundary", () => {
   it("keeps the review status and unresolved cases visible outside details", () => {
     const visible = render().split("<details")[0];
     expect(visible).toContain(
-      "No independent human expert review was obtained."
+      "An external reviewer has recommended major revision"
     );
-    expect(visible).toContain("not a peer-reviewed publication");
+    expect(visible).toContain("not publication acceptance or peer-reviewed validation");
     expect(visible).toContain("general one-message interior frontier");
     expect(visible).toContain("interactive near-full recovery for n ≥ 3");
     expect(visible).toContain(
@@ -85,7 +85,7 @@ describe("BB84 public preprint — R146 release boundary", () => {
     );
     expect(standaloneHtml).toContain(paper.sha256);
     expect(standaloneHtml).toContain(
-      "No independent human expert review was obtained."
+      "An external reviewer recommended major revision"
     );
   });
 

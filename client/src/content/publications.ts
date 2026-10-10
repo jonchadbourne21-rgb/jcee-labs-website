@@ -16,6 +16,50 @@ export type Publication = {
 
 export const publications: Publication[] = [
   {
+    slug: "when-a-timeout-is-not-a-failure",
+    title: "When a Timeout Is Not a Failure: Authority, Evidence, and Recovery in Consequential AI Execution",
+    kind: "Engineering blog",
+    date: "2026-10-10",
+    author: "Jonathan Chadbourne",
+    summary:
+      "A timeout leaves an outcome uncertain. Recovery must establish the authorized occurrence before deciding whether another action is permitted.",
+    sections: [
+      {
+        title: "A timeout describes the connection, not the consequence",
+        paragraphs: [
+          "An AI-assisted workflow may receive permission to perform a specific action, record its intent, send a request to an external system, and lose the response. The timeout establishes that the caller did not receive a conclusive reply. The target may still have committed the effect.",
+          "Treating the timeout as failure and immediately retrying can create a duplicate consequence. Treating it as success can hide an unfinished operation. The accountable result is an unresolved outcome until competent evidence establishes what occurred.",
+        ],
+      },
+      {
+        title: "Keep the transitions separate",
+        paragraphs: [
+          "The control path is AUTHORIZED → INTENT_DURABLE → DISPATCHED → TARGET_COMMITTED → OBSERVED → EVIDENCE_COMMITTED. Each transition has its own evidence requirement. A dispatch record does not prove target commitment; a target acknowledgement does not by itself prove the final independently reviewable record was committed.",
+          "The evidence of occurrence must be evidence of the authorized occurrence: the exact effect identity, relevant scope, and current business authority must still match. A record of some external change does not validate a change outside the permission that was granted.",
+        ],
+      },
+      {
+        title: "Idempotency and permission answer different questions",
+        paragraphs: [
+          "An idempotency key can help a target recognize a repeated request for the same effect. It does not grant authority to issue that request, extend an expired approval, or resolve a changed business state. Likewise, evidence that an earlier effect did not occur is not automatic permission to retry.",
+          "Before another consequential attempt, the workflow must reconcile the target's competent record, preserve uncertainty where the result cannot be established, and check whether current authority still covers the exact action. A revoked or stale ancestor approval cannot be repaired by a confident model answer.",
+        ],
+      },
+      {
+        title: "What the public example establishes",
+        paragraphs: [
+          "JCEE's VOW reference and infrastructure work investigate durable intent, recovery, current authority, external effects, and inspectable receipts in bounded settings. This note explains the architectural obligation; it does not claim that every provider or production workflow has qualified.",
+          "JCEE-INFRA P0 has a frozen contract, P1 and P2 have bounded test passes, and P3 remains partial under a governance hold. The payment consequence lane has not qualified. Customer production performance, a general safety guarantee, and independent certification remain unestablished.",
+        ],
+      },
+    ],
+    related: [
+      { label: "Infrastructure gates and holds", href: "/technology#infrastructure-build" },
+      { label: "What Happens After an AI Says ‘Done’?", href: "/blog/after-an-ai-says-done" },
+      { label: "Public Registry", href: "/registry" },
+    ],
+  },
+  {
     slug: "what-is-an-evidence-boundary",
     title: "What Is an Evidence Boundary in AI-Assisted Operations?",
     kind: "Engineering blog",
@@ -160,7 +204,7 @@ export const publications: Publication[] = [
       {
         title: "Publication and review are different milestones",
         paragraphs: [
-          "The manuscript is a public preprint. No independent human expert review was obtained; it is not a peer-reviewed publication. Making it available to readers does not establish independent validation, novelty, priority, or a deployed cryptographic system.",
+          "The manuscript is a public preprint. An external reviewer has recommended major revision and offered to reassess. This does not constitute publication acceptance or peer-reviewed validation. Making the preprint available does not establish novelty, priority, or a deployed cryptographic system.",
           "A stable version and a PDF checksum let readers identify the exact artifact being discussed. That makes a subsequent comment or correction easier to connect to the relevant text. It does not replace substantive review.",
           "We want the reader to be able to ask three simple questions and find direct answers: What is the claim? Under what assumptions? Which version contains the proof? The new paper page is organized around those questions.",
         ],

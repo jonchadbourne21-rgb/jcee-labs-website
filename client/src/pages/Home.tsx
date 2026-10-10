@@ -538,7 +538,7 @@ export default function Home() {
       >
         <div className="editorial-section-heading">
           <div>
-            <p className="editorial-kicker">08 / RECENT PROGRESS · SEPTEMBER 2026</p>
+            <p className="editorial-kicker">08 / RECORDED PROGRESS</p>
             <h2 id="progress-title">Recent progress.</h2>
           </div>
           <a href="/registry">The current public record →</a>
