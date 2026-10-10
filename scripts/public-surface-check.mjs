@@ -463,6 +463,7 @@ try {
   }
   for (const asset of [
     "publications/after-an-ai-says-done.md",
+    "publications/when-a-timeout-is-not-a-failure.md",
     "publications/after-an-ai-says-done.txt",
     "publications/a-research-result-needs-a-boundary.md",
     "publications/a-research-result-needs-a-boundary.txt",
@@ -500,10 +501,11 @@ try {
     `({ count:document.querySelectorAll('.resource-card').length, text:[...document.querySelectorAll('.resource-card')].map(card => card.textContent).join(' ') })`
   );
   if (
-    filtered.count !== 3 ||
+    filtered.count !== 4 ||
     !filtered.text.includes("order-integrity") ||
     !filtered.text.includes("What Is an Evidence Boundary") ||
-    !filtered.text.includes("What Happens After an AI Says")
+    !filtered.text.includes("What Happens After an AI Says") ||
+    !filtered.text.includes("When a Timeout Is Not a Failure")
   )
     failures.push("Resource filter did not show the engineering articles");
 
