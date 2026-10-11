@@ -353,7 +353,7 @@ export const entries: RegistryEntry[] = [
   },
   {
     id: "howm",
-    name: "Howm.ai Platform R3",
+    name: "Howm.io Platform R3",
     group: "Personal apps",
     kind: "PERSONAL APPLICATION SUITE",
     status: "experimental",
