@@ -304,7 +304,7 @@ Cross-domain software topology discovery research.
 
 [Public context](https://jceelabs.com/research)
 
-## Howm.ai Platform R3
+## Howm.io Platform R3
 
 PERSONAL APPLICATION SUITE · REVIEWED SEPTEMBER 14, 2026
 
