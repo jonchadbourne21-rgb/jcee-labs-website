@@ -62,7 +62,7 @@ export default function CompanyPage() {
         <h2>Operating software and personal applications.</h2>
         <p>
           Distribution is our first industry focus. JCEE Operating Cloud
-          describes the longer-term platform direction. Howm.ai is our separate
+          describes the longer-term platform direction. Howm.io is our separate
           personal-app suite in development, including Mirrored and MISE.
         </p>
         <div className="editorial-actions">
