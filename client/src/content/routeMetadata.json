@@ -6,8 +6,8 @@
     "publishedTime": "2026-10-01"
   },
   "/": {
-    "title": "Accountable AI for AI-Assisted Operations | JCEE Labs",
-    "description": "JCEE Labs develops methods and software for accountable AI-assisted operations, connecting clear permissions, reviewable evidence, and human control."
+    "title": "Engineering for Accountable AI Workflows | JCEE Labs",
+    "description": "JCEE Labs provides architecture, custom application development, testing, verification, technical research, and engineering design for accountable AI workflows."
   },
   "/solutions/distribution": {
     "title": "JCEE Distribution: Order Review & Evidence | JCEE Labs",
@@ -48,6 +48,10 @@
   "/vow": {
     "title": "JCEE VOW: Evidence-First Execution Runtime | JCEE Labs",
     "description": "Explore JCEE VOW, an evidence-first execution runtime. Review covered execution and recovery behavior, recorded milestones, and explicit evidence boundaries."
+  },
+  "/consultation": {
+    "title": "Free 10–30 Minute Technical Consultation | JCEE Labs",
+    "description": "Free 10–30-minute consultation for AI architecture, custom applications, testing, verification, technical research, systems analysis, and engineering design."
   },
   "/blog/when-a-timeout-is-not-a-failure": {
     "title": "When a Timeout Is Not a Failure: Authority, Evidence, and Recovery in Consequential AI Execution — JCEE Labs",

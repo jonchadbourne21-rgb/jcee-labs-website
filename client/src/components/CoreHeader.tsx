@@ -18,6 +18,8 @@ export type CoreHeaderCurrent =
 
 type CoreHeaderProps = {
   current?: CoreHeaderCurrent;
+  contactLabel?: string;
+  contactHref?: string;
 };
 
 export const publicNavigationLinks = [
@@ -34,7 +36,7 @@ export const getMobileMenuLabel = (menuOpen: boolean) =>
 export const getMobileMenuState = (menuOpen: boolean) =>
   menuOpen ? "is-open" : "is-closed";
 
-export default function CoreHeader({ current }: CoreHeaderProps) {
+export default function CoreHeader({ current, contactLabel = "Let’s talk", contactHref = "/partners/enterprise" }: CoreHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const mobileMenuToggleRef = useRef<HTMLButtonElement>(null);
@@ -142,8 +144,8 @@ export default function CoreHeader({ current }: CoreHeaderProps) {
           </nav>
         </div>
 
-        <a className="header-contact" href="/partners/enterprise">
-          Let’s talk <span aria-hidden="true">↗</span>
+        <a className="header-contact" href={contactHref}>
+          {contactLabel} <span aria-hidden="true">↗</span>
         </a>
       </div>
     </header>

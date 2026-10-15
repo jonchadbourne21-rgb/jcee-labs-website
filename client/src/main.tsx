@@ -70,3 +70,4 @@ createRoot(document.getElementById("root")!).render(
 );
 
 import "./editorial-update.css";
+import "./consultation-preview.css";
