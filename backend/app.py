@@ -12,6 +12,9 @@ from fastapi import FastAPI, HTTPException, Query, Response, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 
+from backend.approval_snapshot import digest
+from backend.approval_snapshot import matches as approval_matches
+from backend.approval_snapshot import snapshot as approval_snapshot
 from backend.auth import principal_from_request
 from backend.config import Settings, get_settings
 from backend.models import (
@@ -53,7 +56,12 @@ from backend.product import (
 )
 from backend.repositories import claims_repository
 from backend.security import RequestSizeLimitMiddleware, SecurityMiddleware
-from backend.tenant_context import current_actor_id, current_request_id, current_roles, current_tenant_id
+from backend.tenant_context import (
+    current_actor_id,
+    current_request_id,
+    current_roles,
+    current_tenant_id,
+)
 from backend.vow_assurance import (
     VowAssuranceError,
     VowPolicyDenied,
@@ -399,10 +407,12 @@ def create_app(
 
     @application.get("/api/dashboard")
     def get_dashboard() -> dict[str, Any]:
+        require_roles("FIELD_ADJUSTER", "DESK_ADJUSTER", "SUPERVISOR", "PROGRAM_ADMINISTRATOR", "FINANCE")
         return dashboard_payload(repository.list())
 
     @application.get("/api/team")
     def get_team() -> dict[str, Any]:
+        require_roles("FIELD_ADJUSTER", "DESK_ADJUSTER", "SUPERVISOR", "PROGRAM_ADMINISTRATOR", "FINANCE")
         return {"team": team_workload(repository.list())}
 
     @application.get("/api/claims")
@@ -413,6 +423,7 @@ def create_app(
         limit: Annotated[int, Query(ge=1, le=100)] = 25,
         offset: Annotated[int, Query(ge=0)] = 0,
     ) -> dict[str, Any]:
+        require_roles("FIELD_ADJUSTER", "DESK_ADJUSTER", "SUPERVISOR", "PROGRAM_ADMINISTRATOR", "FINANCE")
         filtered = filter_claims(
             repository.list(),
             status=status_filter.value if status_filter else None,
@@ -483,6 +494,7 @@ def create_app(
 
     @application.get("/api/claims/{claim_id}")
     def get_claim(claim_id: str) -> dict[str, Any]:
+        require_roles("FIELD_ADJUSTER", "DESK_ADJUSTER", "SUPERVISOR", "PROGRAM_ADMINISTRATOR", "FINANCE")
         claim = repository.get(claim_id)
         if claim is None:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Claim not found")
@@ -640,6 +652,13 @@ def create_app(
                     )
                 if claim["status"] != WorkflowStatus.APPROVED.value:
                     raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Payment scheduling requires an APPROVED claim")
+                if not approval_matches(claim, current_tenant_id()):
+                    raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Approval does not match the current dossier; re-review required")
+                try:
+                    if not verify_evidence(claim["assurance"], data_dir=resolved_vow_data_dir).get("ok"):
+                        raise VowAssuranceError("Approval evidence failed verification")
+                except VowAssuranceError as exc:
+                    raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Verified approval evidence is required") from exc
                 estimate = claim.get("estimate")
                 if not isinstance(estimate, dict):
                     raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="An approved estimate is required for payment scheduling")
@@ -735,6 +754,17 @@ def create_app(
             raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_CONTENT, detail=str(exc)) from exc
 
         def append_evidence(current: dict[str, Any]) -> dict[str, Any]:
+            if current["status"] in {"PAYMENT_SCHEDULED", "PAID", "CLOSED"}:
+                raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Evidence is frozen after payment scheduling")
+            if current["status"] == "APPROVED":
+                current.setdefault("approval_history", []).append({
+                    "approval": copy.deepcopy(current["approval"]),
+                    "assurance": copy.deepcopy(current["assurance"]),
+                    "reason": "EVIDENCE_CHANGED",
+                })
+                current["status"] = "IN_REVIEW"
+                current["approval"] = {"status": "INVALIDATED", "reason": "EVIDENCE_CHANGED"}
+                current["assurance"] = None
             now = utc_now()
             current.setdefault("evidence", []).append({
                 "media_url": stored.object_key,
@@ -801,7 +831,8 @@ def create_app(
             result = verify_evidence(assurance, data_dir=resolved_vow_data_dir)
         except VowAssuranceError as exc:
             raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail=str(exc)) from exc
-        return {"claim_id": claim_id, "status": "VERIFIED" if result.get("ok") else "FAILED", "verification": result}
+        current = approval_matches(claim, current_tenant_id())
+        return {"claim_id": claim_id, "status": "VERIFIED" if result.get("ok") and current else "FAILED", "snapshot_matches": current, "verification": result}
 
     @application.post("/api/claims/{claim_id}/approve")
     def approve_claim(claim_id: str, request: ApprovalRequest) -> dict[str, Any]:
@@ -839,6 +870,10 @@ def create_app(
             is_approved = request.decision == ApprovalDecision.APPROVE
             adjuster_name = (request.adjuster_name or "Adjuster") if resolved_settings.auth_mode == "demo" else actor_id
             if is_approved:
+                reviewed_snapshot = approval_snapshot(claim, tenant_id=current_tenant_id(), estimate=revised_estimate)
+                # Stable across an interrupted attempt; changed reviewed data/actor/notes
+                # creates a separate authorization. No wall-clock timestamp enters identity.
+                settlement_slot = digest({"snapshot": reviewed_snapshot, "actor": adjuster_name, "notes": request.notes or ""})
                 try:
                     assurance = authorize_settlement(
                         tenant_id=current_tenant_id(),
@@ -847,7 +882,8 @@ def create_app(
                         adjuster_name=adjuster_name,
                         notes=request.notes,
                         data_dir=resolved_vow_data_dir,
-                        settlement_slot=str(claim.get("settlement_slot") or "v1"),
+                        settlement_slot=settlement_slot,
+                        reviewed_snapshot=reviewed_snapshot,
                     )
                 except VowPolicyDenied as exc:
                     raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(exc)) from exc
@@ -856,6 +892,8 @@ def create_app(
             else:
                 assurance = claim.get("assurance")
             claim["estimate"] = revised_estimate
+            if is_approved:
+                claim["settlement_slot"] = settlement_slot
             claim["assurance"] = assurance
             claim["status"] = "APPROVED" if is_approved else "IN_REVIEW"
             claim["approval"] = {

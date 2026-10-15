@@ -26,6 +26,32 @@ PY
 
 **Historical observation at the original PR head (2026-10-01):** Ruff passed and the backend suite was reported as 28 tests passing. Those results predate the security-repair commits and are not evidence that the repaired head has executed the expanded suite. The repaired head still requires a clean runner/CI receipt before merge consideration.
 
-## Remaining gates before real production traffic
+## Review-boundary repair (2026-10-15)
+
+The mock workflow now binds a material reviewed snapshot (tenant, claim, submission,
+evidence metadata/content hashes, vision, pricing context, estimate and currency)
+inside the signed VOW authorization. Scheduling requires both current snapshot
+correspondence and verified signed intent correspondence. Legacy approvals without
+this binding cannot schedule. Evidence added after approval preserves the old
+receipt in approval history and returns the claim to review; evidence changes after
+scheduling are rejected. A new reviewed snapshot receives a separate logical
+settlement slot. Exact interrupted approval retries reuse the same slot.
+
+Operational claim/list/dashboard/team reads require an operational staff role.
+This version explicitly treats these staff roles as tenant-wide trusted readers;
+it does not provide claimant-facing or assignment-restricted read access. Roleless,
+homeowner and unknown-role tokens cannot read these surfaces. Demo mode retains
+its role-switcher behavior and must not be exposed as production identity.
+
+The repair tests cover evidence invalidation/reapproval, roleless reads, stale and
+rehashed dossier rejection, failed dossier persistence after VOW completion,
+abrupt process exit after VOW completion, completed-operation retries, mock
+scheduling persistence failure and unresolved VOW failure. These checks qualify
+local JSON/mock behavior only. They do not qualify PostgreSQL crash recovery,
+real disbursement, delegated-authority revocation, or distributed atomicity.
+
+The stale upload test now expects the exact uploaded JPEG-prefixed bytes.
+
+## Production gates remain open
 
 The environment still needs a provisioned PostgreSQL instance exercised with the intended non-owner RLS role, a private object-storage bucket, OIDC provider/JWKS verifier integration, authenticated binary-evidence retrieval, a supported real disbursement/reconciliation path, shared multi-worker rate limiting, secret-manager injection, a post-write-safe restore drill, and an authenticated staging capacity run. These are deployment gates, not claims that the local demo has completed them.

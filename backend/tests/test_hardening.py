@@ -39,7 +39,7 @@ def test_local_evidence_store_scopes_keys_and_rejects_unsafe_content(tmp_path) -
     store = LocalEvidenceStore(tmp_path)
     stored = store.put(tenant_id="TENANT_A", claim_id="CLM_1", filename="../kitchen.jpg", content=b"\xff\xd8\xff\xe0jpeg", media_type="image/jpeg")
     assert stored.object_key.startswith(evidence_scope_prefix("TENANT_A", "CLM_1"))
-    assert (tmp_path / stored.object_key).read_bytes() == b"jpeg"
+    assert (tmp_path / stored.object_key).read_bytes() == b"\xff\xd8\xff\xe0jpeg"
     with pytest.raises(ValueError):
         store.put(tenant_id="TENANT_A", claim_id="CLM_1", filename="secret.exe", content=b"x", media_type="application/octet-stream")
 
