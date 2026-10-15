@@ -186,30 +186,43 @@ quest {QUEST_NAME} {{
 
 def authorize_settlement(
     *,
+    tenant_id: str,
     claim_id: str,
     estimate: dict[str, Any],
     adjuster_name: str,
     notes: str | None,
     data_dir: str | Path | None = None,
     settlement_slot: str = "v1",
+    reviewed_snapshot: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Run a live VOW proof gate and return a compact, verifiable receipt."""
     integrity = verify_frozen_core()
     paths = _prepare_paths(Path(data_dir).expanduser().resolve() if data_dir else default_data_dir())
     estimate_sha256 = _canonical_sha256(estimate)
     authorization_body = {
+        "tenant_id": tenant_id,
         "claim_id": claim_id,
+        "settlement_slot": settlement_slot,
         "decision": "APPROVE",
         "estimate_sha256": estimate_sha256,
         "net_payout": float(estimate["net_payout"]),
         "adjuster": adjuster_name,
         "review_notes_sha256": _sha256_bytes((notes or "").encode("utf-8")),
     }
+    if reviewed_snapshot is not None:
+        authorization_body["reviewed_snapshot"] = reviewed_snapshot
+        authorization_body["reviewed_snapshot_sha256"] = _canonical_sha256(reviewed_snapshot)
     authorization_sha256 = _canonical_sha256(authorization_body)
-    # A claim settlement slot is idempotent. Reusing this key with changed
-    # arguments is a VOW conflict, not a second effect; demo resets receive a
-    # new slot because they represent a new logical claim instance.
-    effect_key = f"claim-settlement:{claim_id}:{settlement_slot}"
+    # The integration key is scoped by tenant + claim + logical settlement slot.
+    # Reusing that operation with changed arguments remains a VOW conflict; a
+    # genuinely new settlement slot receives a distinct key.
+    operation_identity = {
+        "version": 2,
+        "tenant_id": tenant_id,
+        "claim_id": claim_id,
+        "settlement_slot": settlement_slot,
+    }
+    effect_key = f"claim-settlement:v2:{_canonical_sha256(operation_identity)}"
     effect_payload = json.dumps(
         {**authorization_body, "authorization_sha256": authorization_sha256, "status": "AUTHORIZED"},
         sort_keys=True,
@@ -277,6 +290,9 @@ def authorize_settlement(
     effect_event_payload = effect_event.get("payload", {})
     return {
         "status": "VERIFIED",
+        **({"reviewed_snapshot": reviewed_snapshot,
+            "reviewed_snapshot_sha256": _canonical_sha256(reviewed_snapshot)}
+           if reviewed_snapshot is not None else {}),
         "runtime": "VOW",
         "version": VOW_VERSION,
         "quest": QUEST_NAME,
@@ -324,6 +340,26 @@ def verify_evidence(assurance: dict[str, Any], *, data_dir: str | Path | None = 
     )
     if return_code != 0:
         raise VowAssuranceError("VOW evidence verification failed")
+    # Verify correspondence as well as signature validity. A valid pack for an
+    # older/different dossier must not authorize the current snapshot.
+    if "reviewed_snapshot_sha256" in assurance:
+        try:
+            pack = json.loads(pack_path.read_text(encoding="utf-8"))
+            if pack["body"]["scope"] != assurance["run_id"]:
+                raise ValueError("Wrong run")
+            intents = [json.loads(event["payload"]) for event in pack["body"]["tables"]["journal_events"]
+                       if event["kind"] == "effect_intent" and event["run_id"] == assurance["run_id"]]
+            bodies = [json.loads(event["args"][1]) for event in intents
+                      if event["action"] == "file_write" and event["key"] == assurance["effect"]["key"]]
+            if len(bodies) != 1:
+                raise ValueError("Expected one authorization intent")
+            body = bodies[0]
+            if (body["reviewed_snapshot"] != assurance["reviewed_snapshot"]
+                    or body["reviewed_snapshot_sha256"] != assurance["reviewed_snapshot_sha256"]
+                    or body["authorization_sha256"] != assurance["authorization_sha256"]):
+                raise ValueError("Snapshot mismatch")
+        except (KeyError, ValueError, TypeError, IndexError) as exc:
+            raise VowAssuranceError("Signed authorization does not match the reviewed snapshot") from exc
     return result
 
 
