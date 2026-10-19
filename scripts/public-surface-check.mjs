@@ -261,12 +261,12 @@ try {
     failures.push("new article canonical or Open Graph URL is incorrect");
   }
   const registryDownload = await fetch(
-    `${baseUrl}/JCEE_Labs_Public_Registry_v1.3.md`
+    `${baseUrl}/JCEE_Labs_Public_Registry_v1.4.md`
   );
   if (
     !registryDownload.ok ||
     !(await registryDownload.text()).startsWith(
-      "# JCEE Labs Public Registry — Version 1.3"
+      "# JCEE Labs Public Registry — Version 1.4"
     )
   ) {
     failures.push("current registry Markdown download is missing");
@@ -419,6 +419,15 @@ try {
     ["/blog/what-is-an-evidence-boundary", "What Is an Evidence Boundary"],
     ["/blog/after-an-ai-says-done", "What Happens After an AI Says"],
     [
+      "/blog/when-tested-components-work-together",
+      "When Tested Components Work Together",
+    ],
+    [
+      "/blog/restoring-a-backup-without-restoring-permission",
+      "Restoring a Backup Without Restoring Permission",
+    ],
+    ["/blog/testing-the-evidence-pipeline", "Testing the Evidence Pipeline"],
+    [
       "/blog/a-research-result-needs-a-boundary",
       "A Research Result Needs a Boundary",
     ],
@@ -464,6 +473,15 @@ try {
   for (const asset of [
     "publications/after-an-ai-says-done.md",
     "publications/when-a-timeout-is-not-a-failure.md",
+    "publications/when-tested-components-work-together.md",
+    "publications/when-tested-components-work-together.txt",
+    "publications/restoring-a-backup-without-restoring-permission.md",
+    "publications/restoring-a-backup-without-restoring-permission.txt",
+    "publications/testing-the-evidence-pipeline.md",
+    "publications/testing-the-evidence-pipeline.txt",
+    "JCEE_INFRA_Software_Qualification_2026-10-19.md",
+    "JCEE_Labs_Public_Registry_v1.3.md",
+    "JCEE_Labs_Public_Registry_v1.4.md",
     "publications/after-an-ai-says-done.txt",
     "publications/a-research-result-needs-a-boundary.md",
     "publications/a-research-result-needs-a-boundary.txt",
@@ -501,11 +519,14 @@ try {
     `({ count:document.querySelectorAll('.resource-card').length, text:[...document.querySelectorAll('.resource-card')].map(card => card.textContent).join(' ') })`
   );
   if (
-    filtered.count !== 4 ||
+    filtered.count !== 7 ||
     !filtered.text.includes("order-integrity") ||
     !filtered.text.includes("What Is an Evidence Boundary") ||
     !filtered.text.includes("What Happens After an AI Says") ||
-    !filtered.text.includes("When a Timeout Is Not a Failure")
+    !filtered.text.includes("When a Timeout Is Not a Failure") ||
+    !filtered.text.includes("When Tested Components Work Together") ||
+    !filtered.text.includes("Restoring a Backup Without Restoring Permission") ||
+    !filtered.text.includes("Testing the Evidence Pipeline")
   )
     failures.push("Resource filter did not show the engineering articles");
 

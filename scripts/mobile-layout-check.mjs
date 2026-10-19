@@ -64,6 +64,9 @@ const profiles = {
 const publicRoutes = [
   "/blog/what-is-an-evidence-boundary",
   "/blog/after-an-ai-says-done",
+  "/blog/when-tested-components-work-together",
+  "/blog/restoring-a-backup-without-restoring-permission",
+  "/blog/testing-the-evidence-pipeline",
   "/blog/a-research-result-needs-a-boundary",
   "/research/bb84-communication",
   "/blog/a-confident-model-still-needs-permission",

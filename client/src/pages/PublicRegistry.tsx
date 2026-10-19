@@ -66,19 +66,22 @@ export default function PublicRegistry() {
             source-control change cannot be mistaken for a released product.
           </p>
           <p>
-            Distribution, MISE, AP Gate, and JEV were reconciled against the
-            portfolio records and preserved evidence on September 29, 2026.
-            Other entries retain their own dated evidence boundaries. For the
-            October infrastructure P0–P3 summary, including the P3 hold, see
-            the technology page. This page is a selected record, not a claim
-            that every program was freshly reviewed today.
+            The October 19, 2026 update adds the integrated software result,
+            protected restoration, current-use evidence work, qualification
+            repairs, and selected measurement-software records. Earlier entries
+            retain their own review dates and evidence boundaries, including
+            the September 29 Distribution, MISE, AP Gate, and JEV review. This
+            is a selected public record, not a new execution of every program.
           </p>
           <div className="program-links">
-            <a href="/technology#infrastructure-build">
-              OCTOBER INFRASTRUCTURE STATUS <span>→</span>
+            <a href="/technology#current-integration">
+              OCTOBER 19 INTEGRATED SOFTWARE RESULT <span>→</span>
+            </a>
+            <a href="/JCEE_Labs_Public_Registry_v1.4.md" download>
+              DOWNLOAD CURRENT REGISTRY · VERSION 1.4 <span>↓</span>
             </a>
             <a href="/JCEE_Labs_Public_Registry_v1.3.md" download>
-              DOWNLOAD CURRENT REGISTRY · VERSION 1.3 <span>↓</span>
+              ARCHIVE · REGISTRY VERSION 1.3 <span>↓</span>
             </a>
             <a href="/JCEE_Labs_Public_Registry_v1.2.md" download>
               ARCHIVE · REGISTRY VERSION 1.2 <span>↓</span>
@@ -118,7 +121,7 @@ export default function PublicRegistry() {
       >
         <div className="section-index">
           <span>SELECTED PUBLIC RECORDS</span>
-          <span>SELECTED ENTRIES REVIEWED · SEPTEMBER 29, 2026</span>
+          <span>SELECTED ENTRIES ADDED · OCTOBER 19, 2026</span>
         </div>
         <h2 id="registry-records-title">Current public entries.</h2>
         <nav className="registry-jump-links" aria-label="Build categories">

@@ -68,9 +68,12 @@ export default function OperatingCloudPage() {
         <p>
           VOW, QCS, and the Assurance components address execution, current
           authority, evidence, and verification. Their individual milestones are
-          recorded separately. Real integration has to establish how those
-          components behave together in a particular workflow.
+          recorded separately. The October 19 JCEE-INFRA candidate now provides
+          a bounded combined software result in a fictional-ledger test setting.
+          That working integration does not establish a production platform or
+          customer operating improvement.
         </p>
+        <a className="editorial-text-link" href="/technology#current-integration">Review the connected software result →</a>
         <div className="editorial-actions">
           <a className="editorial-text-link" href="/technology">
             Explore the components →
@@ -79,6 +82,21 @@ export default function OperatingCloudPage() {
             Why this strategy exists →
           </a>
         </div>
+      </section>
+      <section className="editorial-section editorial-section-muted">
+        <p className="editorial-kicker">PRODUCT DISCOVERY / PILOT MILESTONE</p>
+        <h2>Two approved exports. One useful report.</h2>
+        <p>
+          A focused ChatGPT workflow is being scoped around two real exports:
+          compare the supplied records, make mismatches and missing information
+          visible, and return a report the user can act on. The first milestone
+          is usefulness within one approved workflow.
+        </p>
+        <p>
+          This is a planned pilot milestone. Successful use with real exports,
+          repeated customer value, and a publicly available plugin have not
+          been established. It does not authorize changes to the source systems.
+        </p>
       </section>
     </EditorialLayout>
   );

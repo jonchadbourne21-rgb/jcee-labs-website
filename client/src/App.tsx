@@ -111,6 +111,9 @@ function Router() {
         <Route path="/blog/the-work-nobody-sees" component={PublicationPage} />
         <Route path="/blog/after-an-ai-says-done" component={PublicationPage} />
         <Route path="/blog/when-a-timeout-is-not-a-failure" component={PublicationPage} />
+        <Route path="/blog/when-tested-components-work-together" component={PublicationPage} />
+        <Route path="/blog/restoring-a-backup-without-restoring-permission" component={PublicationPage} />
+        <Route path="/blog/testing-the-evidence-pipeline" component={PublicationPage} />
         <Route
           path="/blog/a-research-result-needs-a-boundary"
           component={PublicationPage}

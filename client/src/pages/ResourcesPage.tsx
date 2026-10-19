@@ -91,7 +91,7 @@ export default function ResourcesPage() {
           <a href="/research/fields">
             <strong>Research fields</strong>
             <span>
-              The current 25-field research portfolio and its unifying question.
+              The dated 25-field research portfolio and its unifying question.
             </span>
             <span aria-hidden="true">→</span>
           </a>

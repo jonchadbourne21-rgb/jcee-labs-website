@@ -19,7 +19,7 @@ const boundaries = [
     "A model, a claim of universal safety, or an automatic statement of legal compliance.",
   ],
   [
-    "CURRENT STATUS",
+    "PRESERVED VOW RECORD",
     "VOW 1.1 remains the frozen verified milestone. The 1.1.1.dev3 candidate was admitted to private source control and its bounded founder-usability review closed on September 10; release, deployment, and active-root promotion remain on hold.",
   ],
 ];
@@ -99,22 +99,47 @@ export default function VowPage() {
         <VowDurabilityDemo />
       </section>
 
+      <section className="program-statement" aria-labelledby="vow-integration-update">
+        <p className="charter-section-label">SOFTWARE INTEGRATION · OCTOBER 19, 2026</p>
+        <h2 id="vow-integration-update">A connected recovery path, with a defined test boundary.</h2>
+        <div className="program-statement-copy">
+          <p>
+            The October 19 infrastructure candidate was merged into a working
+            integration branch with the qualified tree preserved. Its controlled
+            PostgreSQL test ledger uses fictional data. The tested authorized
+            controls completed, while uncertain outcomes remained held and
+            distinct from confirmed effects.
+          </p>
+          <p>
+            Protected-restoration coverage depends on a separately protected
+            checkpoint surviving the declared restore event. This is bounded
+            software evidence. Physical commitment, production qualification,
+            and external human review remain open.
+          </p>
+        </div>
+        <div className="program-links">
+          <a href="/technology#current-integration">READ THE INTEGRATION UPDATE <span>→</span></a>
+          <a href="/registry#infra-integrated-software">INSPECT THE RECORDED BOUNDARY <span>→</span></a>
+        </div>
+      </section>
+
       <section className="program-boundaries" aria-labelledby="current-builds">
         <div className="section-index">
-          <span>CURRENT BUILD RECORDS</span>
+          <span>PRESERVED COMPONENT RECORDS</span>
           <span>REVIEWED SEPTEMBER 14, 2026</span>
         </div>
-        <h2 id="current-builds">The current development lanes.</h2>
+        <h2 id="current-builds">Earlier VOW development lanes.</h2>
         <BuildStatusList ids={["vow-dev3", "vow-i1", "vow-dx"]} />
       </section>
       <section className="program-next">
         <p className="charter-section-label">THE NEXT GATE</p>
-        <h2>Keep candidate admission separate from runtime proof.</h2>
+        <h2>Keep each result attached to the candidate tested.</h2>
         <p>
-          Source-control admission is not a new runtime-validation result. The
-          sealed integration-correctness candidate remains unexecuted in the
-          current register. Additional integration and reproduction claims
-          require their own completed gates.
+          The earlier sealed VOW I1 integration-correctness candidate retains
+          its own unexecuted record. The October 19 infrastructure successor
+          does not retroactively qualify that different candidate. Further
+          operating environments and physical effects require their own
+          completed gates.
         </p>
         <div className="program-links">
           <a href="/registry">

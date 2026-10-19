@@ -89,15 +89,28 @@ export default function Home() {
         <ol className="preview-integration-steps" aria-label="JCEE public integration binding path">{integrationSteps.map(([number, label, copy]) => <li key={number}><span>{number}</span><h3>{label}</h3><p>{copy}</p></li>)}</ol>
         <p className="preview-panel-note">Each arrow is a binding between evidence, authority, and external systems—not a library call.</p>
         <div className="preview-proof-status" aria-label="Current JCEE evidence and availability">
-          <article><p className="preview-kicker">BUILT / TESTED</p><h3>Bounded reference behavior.</h3><p>Frozen or reproduced VOW and QCS milestones, the interactive VOW recovery reference, and the recorded Distribution synthetic comparison.</p><a className="preview-text-link" href="/qcs">QCS transition research →</a></article>
+          <article><p className="preview-kicker">BUILT / TESTED</p><h3>Connected software, tested together.</h3><p>The October 19 JCEE-INFRA candidate joins evidence, authority, target-owned action controls, and recovery in a qualified fictional-ledger setting. Earlier VOW, QCS, and Distribution results retain their own boundaries.</p><a className="preview-text-link" href="/technology#current-integration">October 19 integration result →</a><a className="preview-text-link" href="/qcs">QCS transition research →</a></article>
           <article><p className="preview-kicker">AVAILABLE TO SCOPE</p><h3>One Workflow Assurance Assessment.</h3><p>Map one consequential workflow, current evidence, authority, recovery gaps, and the next justified test or implementation step.</p><a className="preview-text-link" href="/partners/enterprise">Start a conversation →</a></article>
           <article><p className="preview-kicker">NOT YET ESTABLISHED</p><h3>Production claims we do not make.</h3><p>Customer ROI, production performance, generic public SDK or API availability, production certification, and autonomous operating authority have not been established.</p><a className="preview-text-link" href="/registry">PUBLIC REGISTRY →</a></article>
         </div>
       </section>
 
+      <section id="current-progress" className="preview-section preview-proof" aria-labelledby="current-progress-title">
+        <div className="preview-section-label"><span>CURRENT ENGINEERING CHECKPOINT</span><time dateTime="2026-10-19">OCTOBER 19, 2026</time></div>
+        <div className="preview-section-heading">
+          <h2 id="current-progress-title">Permission changed.<br /><em>Recovery had to account for it.</em></h2>
+          <div>
+            <p>One reconciled software candidate is now in working integration with its qualified source tree preserved. We tested shared-source revocation, competing work, lost responses, and restoration from older records against the same configuration.</p>
+            <p>Authorized controls completed. An already committed effect was reconciled without duplication. An uncertain outcome stayed held without permission to retry.</p>
+          </div>
+        </div>
+        <p className="preview-boundary-note">Recorded in a controlled PostgreSQL ledger with fictional data and a separately protected checkpoint that survives restoration. This is a bounded software result; production admission, external human review, and physical commitment qualification remain open.</p>
+        <div className="preview-evidence-links"><a href="/technology#current-integration">Inspect the result and scope ↗</a><a href="/registry#infra-integrated-software">Dated registry entry ↗</a></div>
+      </section>
+
       <section id="working-example" className="preview-section preview-recovery" aria-labelledby="working-example-title">
-        <div className="preview-section-label"><span>WORKING SOFTWARE / VOW</span><span>REFERENCE DEMONSTRATION · NOT A CUSTOMER DEPLOYMENT</span></div>
-        <div className="preview-section-heading"><h2 id="working-example-title">Interrupt the work.<br /><em>Inspect what survives.</em></h2><div><p>This interactive VOW reference demonstrates one implemented JCEE behavior: preserving execution evidence across interruption and recovery.</p><p className="preview-panel-note">Synthetic execution and demonstration data. This is not a customer case study, production deployment, or proof of customer ROI.</p></div></div>
+        <div className="preview-section-label"><span>VOW / RECOVERY ILLUSTRATION</span><span>EXAMPLE STATES · NOT LIVE EXECUTION</span></div>
+        <div className="preview-section-heading"><h2 id="working-example-title">Follow the interruption.<br /><em>Explore the recovery states.</em></h2><div><p>This interactive recovery illustration explains the states that a VOW workflow must distinguish. It uses example records and browser animation.</p><p className="preview-panel-note">This interaction does not run the VOW engine, persist a target effect, or produce a new test receipt. Recorded qualification evidence is described separately.</p></div></div>
         <VowDurabilityDemo />
         <a className="preview-text-link" href="/vow">Read the technical JCEE VOW overview <span aria-hidden="true">↗</span></a>
       </section>
@@ -175,7 +188,7 @@ export default function Home() {
         </div>
       </section>
       </div>
-        <div id="evidence-frontier" className="preview-evidence-row"><div><p className="preview-kicker">EVIDENCE / OPEN GATES</p><h3>Test status is not certification.</h3></div><div><p>JCEE-INFRA: P0 contract frozen; P1 and P2 bounded test passes; P3 partial and held. The payment consequence lane has not qualified. Two research proposals are not physically validated. Each claim retains its conditions, unresolved gates, and independent-review limits.</p><div className="preview-evidence-links"><a href="/research#evidence-ladder">Evidence ladder ↗</a><a href="/technology#infrastructure-build">Infrastructure gates ↗</a><a href="/research#physical-validation">Physical-test boundaries ↗</a></div></div></div>
+        <div id="evidence-frontier" className="preview-evidence-row"><div><p className="preview-kicker">EVIDENCE / OPEN GATES</p><h3>Test status is not certification.</h3></div><div><p>The October 19 integrated software result is recorded with its scope. P0 remains frozen; earlier P1 and P2 passes stay bounded; P3 is partial and held. The payment consequence lane and E003 physical commitment remain unqualified. Biological proposals are not physically validated; numerical models retain separate evidence boundaries.</p><div className="preview-evidence-links"><a href="/research#evidence-ladder">Evidence ladder ↗</a><a href="/technology#infrastructure-build">Infrastructure gates ↗</a><a href="/research#physical-validation">Physical-test boundaries ↗</a></div></div></div>
       </section>
 
       <section className="preview-section recent-progress preview-progress" aria-labelledby="progress-title">

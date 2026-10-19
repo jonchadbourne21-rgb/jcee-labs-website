@@ -16,12 +16,94 @@ export default function ResearchPage() {
       title="Results you can examine."
       description="Research into execution, authority, and evidence. Each publication states what was tested, what was observed, and what remains unresolved."
     >
+      <section className="editorial-section" aria-labelledby="current-research-priority">
+        <p className="editorial-kicker">CURRENT PRIORITY / OCTOBER 19, 2026</p>
+        <h2 id="current-research-priority">Qualify one connected assurance path.</h2>
+        <p className="editorial-intro">
+          The immediate engineering priority is to connect the components and
+          establish which guarantees survive when evidence changes, permission
+          is revoked, replies disappear, and recovery resumes. The latest
+          software candidate has passed its bounded combined qualification and
+          entered working integration with the reviewed source tree preserved.
+        </p>
+        <p>
+          The retained result covers a controlled fictional ledger and a
+          declared protected-checkpoint restore model. Independent human review,
+          production admission, and E003 physical commitment remain separate
+          gates. The broader research portfolio below is a dated map of the
+          questions we study, not a claim that every field is actively qualified.
+        </p>
+        <div className="editorial-actions">
+          <a className="editorial-text-link" href="/technology#current-integration">Integrated software result →</a>
+          <a className="editorial-text-link" href="/technology#physical-commitment">The physical commitment question →</a>
+        </div>
+      </section>
+      <section className="editorial-section editorial-section-muted" id="measurement-assurance" aria-labelledby="measurement-assurance-title">
+        <p className="editorial-kicker">MEASUREMENT WORK / OCTOBER 12–19, 2026</p>
+        <h2 id="measurement-assurance-title">Test the calculation and the evidence around it.</h2>
+        <p className="editorial-intro">
+          A convincing output can still fail to support its claim. Our
+          measurement work now includes a fixed-corpus numerical-assurance
+          evaluation, reproduction of an idealized wave model, and recovery
+          of a physical experiment's analysis software. These results answer
+          different questions.
+        </p>
+        <div className="resource-grid">
+          <article className="resource-card">
+            <p className="editorial-kicker">NUMERICAL ASSURANCE / OCTOBER 19</p>
+            <h3>A good sample fit can hide a wrong result.</h3>
+            <p>
+              In the fixed synthetic corpus, 8/8 valid controls passed;
+              6/6 unsuitable or numerically unqualified cases and 13/13 altered
+              receipts were held. One test fit its recorded samples closely
+              while missing an unmeasured midpoint.
+            </p>
+            <p>
+              This qualifies those fixtures. New-case numerical reasoning,
+              whole-domain error certification, and independent-host
+              reproduction remain to be established. Refusing an unsupported
+              input is recorded separately from detecting a bad calculation.
+            </p>
+            <a href="/registry#numerical-assurance-v01">Fixed-corpus result and next gate →</a>
+          </article>
+          <article className="resource-card">
+            <p className="editorial-kicker">WAVE ASSESSMENT 001 / OCTOBER 12</p>
+            <h3>Reproduce the model before extending the claim.</h3>
+            <p>
+              The archived baseline reproduced its frozen output. A separately
+              written simulation cross-checked ten configurations within the
+              same idealized model.
+            </p>
+            <p>
+              This establishes computational repeatability within that model.
+              Physical preparation, retention, readout, and device noise remain
+              unqualified; the broader cited source chain still has an unresolved
+              appendix hash discrepancy.
+            </p>
+            <a href="/registry#wave-assessment-001">Reproduction boundary →</a>
+          </article>
+          <article className="resource-card">
+            <p className="editorial-kicker">GRANULAR MEASUREMENT / OCTOBER 13</p>
+            <h3>Recover the analysis baseline faithfully.</h3>
+            <p>
+              The recovered private baseline matched its frozen source
+              inventory, reproduced 92/92 software tests, and regenerated
+              8/8 checked fixture files identically.
+            </p>
+            <p>
+              These are offline software results. Equipment qualification,
+              acquisition, and the physical experiment remain pending.
+            </p>
+            <a href="/registry#granular-measurement-software">Recovered software record →</a>
+          </article>
+        </div>
+      </section>
       <section
         className="editorial-section editorial-section-muted"
         aria-labelledby="portfolio-title"
       >
         <p className="editorial-kicker">
-          CURRENT RESEARCH PORTFOLIO · PREPARED SEPTEMBER 18, 2026
+          RESEARCH PORTFOLIO REFERENCE · PREPARED SEPTEMBER 18, 2026
         </p>
         <h2 id="portfolio-title">25 fields. One unifying research question.</h2>
         <p className="editorial-intro">

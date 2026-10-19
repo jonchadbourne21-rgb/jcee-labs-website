@@ -51,13 +51,13 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
     );
   });
 
-  it("preserves implemented reference software without promoting it to customer evidence", () => {
+  it("distinguishes the browser illustration from recorded software qualification", () => {
     expect(home).toContain("VowDurabilityDemo");
     expect(plain(home)).toContain(
-      "interactive VOW reference demonstrates one implemented JCEE behavior"
+      "interactive recovery illustration explains the states"
     );
     expect(plain(home)).toContain(
-      "not a customer case study, production deployment, or proof of customer ROI"
+      "does not run the VOW engine, persist a target effect, or produce a new test receipt"
     );
     expect(plain(home)).toContain(
       "Customer savings and production performance have not yet been established"
