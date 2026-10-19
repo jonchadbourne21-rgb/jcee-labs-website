@@ -112,7 +112,7 @@ SOURCE RECOVERY AND OFFLINE VERIFICATION · OCTOBER 13, 2026
 
 **Status:** SOFTWARE BASELINE RECOVERED · PHYSICAL NOT RUN
 
-The ALCHEMY-GRANULAR analysis baseline and deterministic fixtures were recovered into versioned private source control.
+The ALCHEMY-GRANULAR analysis baseline and deterministic fixture generators were recovered into versioned private source control.
 
 **Recorded support:** The recovery matched 52/52 frozen manifest entries, reproduced 92/92 software tests, and regenerated 8/8 checked fixture files identically.
 
