@@ -40,6 +40,11 @@
 .jcee-preview .hero h1 { max-width: none; margin: 28px 0 26px; font-size: clamp(50px,5.6vw,80px); line-height: 1.055; letter-spacing: -.047em; }
 .jcee-preview .hero h1::before { display: none; }
 .jcee-preview .preview-deck { max-width: 580px; font-size: 18px; line-height: 1.75; color: #c3cedd; }
+.jcee-preview .preview-founder-byline { display: grid; gap: 3px; margin-top: 24px; border-left: 2px solid var(--pv-blue); padding-left: 16px; }
+.jcee-preview .preview-founder-byline > span { color: var(--pv-muted); font: 10px/1.6 var(--pv-mono); letter-spacing: .07em; }
+.jcee-preview .preview-founder-byline > a { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 12px; width: fit-content; max-width: 100%; min-height: 44px; color: var(--pv-text); font-size: 17px; line-height: 1.45; }
+.jcee-preview .preview-founder-byline > a:hover { color: var(--pv-link); }
+.jcee-preview .preview-founder-byline > a > span { color: var(--pv-link); }
 .jcee-preview .preview-hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; margin-top: 28px; }
 .jcee-preview .preview-button { display: inline-flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 52px; padding: 13px 20px; border: 1px solid var(--pv-blue); border-radius: 2px; background: var(--pv-blue); color: #fff; font: 500 15px/1.4 "IBM Plex Sans",sans-serif; text-align: left; cursor: pointer; transition: background 160ms cubic-bezier(.23,1,.32,1), transform 160ms cubic-bezier(.23,1,.32,1); }
 .jcee-preview .preview-button:hover { background: #2546e6; border-color: #6d82ff; }

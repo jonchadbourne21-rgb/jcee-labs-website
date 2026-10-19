@@ -62,6 +62,14 @@ export function applyPublicPageMetadata(html: string, requestPath: string) {
       `<meta property="article:published_time" content="${escapeHtml(meta.publishedTime)}" />\n</head>`
     );
   }
+  const founder = {
+    "@type": "Person",
+    "@id": "https://jceelabs.com/founder#jonathan-chadbourne",
+    name: "Jonathan Matthew Chadbourne",
+    url: "https://jceelabs.com/founder",
+    jobTitle: "Founder",
+    worksFor: { "@id": "https://jceelabs.com/#organization" },
+  };
   const organization = {
     "@type": "Organization",
     "@id": "https://jceelabs.com/#organization",
@@ -69,6 +77,7 @@ export function applyPublicPageMetadata(html: string, requestPath: string) {
     url: "https://jceelabs.com/",
     logo: "https://jceelabs.com/brand/jcee-labs-mark.png",
     location: { "@type": "Place", name: "Dallas, Texas" },
+    founder,
   };
   const publication = publications.find(item =>
     pathname.endsWith(`/${item.slug}`)
@@ -87,9 +96,19 @@ export function applyPublicPageMetadata(html: string, requestPath: string) {
           : organization,
         publisher: organization,
       }
-    : pathname === "/" || pathname === "/company"
-      ? { "@context": "https://schema.org", ...organization }
-      : null;
+    : pathname === "/founder"
+      ? {
+          "@context": "https://schema.org",
+          "@type": "ProfilePage",
+          url: canonical,
+          name: meta.title,
+          description: meta.description,
+          mainEntity: founder,
+          publisher: organization,
+        }
+      : pathname === "/" || pathname === "/company"
+        ? { "@context": "https://schema.org", ...organization }
+        : null;
   if (schema)
     result = result.replace(
       "</head>",

@@ -79,6 +79,7 @@ const publicRoutes = [
   "/research",
   "/resources",
   "/company",
+  "/founder",
   "/blog/start-with-the-workflow",
   "/blog/distribution-first-dry-run",
   "/research/qcs-frozen-specification-reproduction",

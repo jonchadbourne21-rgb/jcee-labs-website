@@ -25,6 +25,7 @@ export default function BrandFooter({
         <div>
           <span>COMPANY</span>
           <a href="/company">JCEE Labs</a>
+          <a href="/founder">Meet the founder</a>
           <a href="/charter">Charter</a>
           <a href="/charter/archive/v1.0">Charter v1.0 Archive</a>
         </div>

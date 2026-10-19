@@ -272,6 +272,21 @@ try {
     failures.push("current registry Markdown download is missing");
   }
 
+  const founderResponse = await fetch(`${baseUrl}/founder`);
+  const founderHtml = await founderResponse.text();
+  const founderSchemaMatch = founderHtml.match(
+    /<script id="public-schema" type="application\/ld\+json">([\s\S]*?)<\/script>/
+  );
+  const founderSchema = founderSchemaMatch ? JSON.parse(founderSchemaMatch[1]) : null;
+  if (
+    !founderResponse.ok ||
+    founderSchema?.["@type"] !== "ProfilePage" ||
+    founderSchema?.mainEntity?.name !== "Jonathan Matthew Chadbourne" ||
+    founderSchema?.mainEntity?.url !== "https://jceelabs.com/founder"
+  ) {
+    failures.push("founder identity is missing from the HTML received by sharing crawlers");
+  }
+
   await navigate(page.send, baseUrl, "/");
   const homepageText = await readBody(page.send);
   if (!homepageText.includes("JCEE ASSURANCE")) {
@@ -279,6 +294,9 @@ try {
   }
   if (!homepageText.includes("PUBLIC REGISTRY")) {
     failures.push("homepage is missing the Public Registry section");
+  }
+  if (!homepageText.includes("Jonathan Matthew Chadbourne")) {
+    failures.push("homepage is missing the named founder introduction");
   }
   if (homepageText.includes("MIRRORED")) {
     failures.push("homepage still exposes Mirrored");
@@ -297,6 +315,7 @@ try {
   );
 
   const requiredFooterLinks = [
+    ["/founder", "Meet the founder"],
     ["/privacy", "Privacy"],
     ["/terms", "Terms"],
     ["/registry", "Public Registry"],
@@ -442,6 +461,7 @@ try {
     ["/research/fields", "25 fields. One unifying research question"],
     ["/resources", "Articles and guides to accountable AI-assisted operations"],
     ["/company", "About JCEE Labs: why we build for accountable operations"],
+    ["/founder", "Jonathan Matthew Chadbourne"],
     ["/blog/start-with-the-workflow", "Start with the workflow"],
     ["/blog/distribution-first-dry-run", "the first order-integrity dry run"],
     [

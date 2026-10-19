@@ -219,6 +219,12 @@ try {
     { name: "Assurance desktop", route: "/assurance", selector: ".assurance-program", width: 1440, height: 900, file: "assurance-desktop.png", assetUrl: assuranceAsset },
     { name: "Operating Cloud iPhone", route: "/", selector: "#operating-cloud", width: 390, height: 844, mobile: true, file: "operating-cloud-iphone.png", assetUrl: operatingAsset },
     { name: "Assurance iPhone", route: "/assurance", selector: ".assurance-program", width: 390, height: 844, mobile: true, file: "assurance-iphone.png", assetUrl: assuranceAsset },
+    { name: "Homepage founder desktop", route: "/", selector: ".hero.hybrid-hero", width: 1440, height: 900, file: "homepage-founder-desktop.png", assetUrl: "/brand/jcee-labs-mark.png" },
+    { name: "Homepage founder iPhone", route: "/", selector: ".hero.hybrid-hero", width: 390, height: 844, mobile: true, file: "homepage-founder-iphone.png", assetUrl: "/brand/jcee-labs-mark.png" },
+    { name: "Founder page desktop", route: "/founder", selector: ".editorial-masthead", width: 1440, height: 900, file: "founder-page-desktop.png", assetUrl: "/brand/jcee-labs-mark.png" },
+    { name: "Founder page iPhone", route: "/founder", selector: ".editorial-masthead", width: 390, height: 844, mobile: true, file: "founder-page-iphone.png", assetUrl: "/brand/jcee-labs-mark.png" },
+    { name: "Founder introduction desktop", route: "/founder", selector: ".founder-introduction", width: 1440, height: 900, file: "founder-introduction-desktop.png", assetUrl: "/brand/jcee-labs-mark.png" },
+    { name: "Founder introduction iPhone", route: "/founder", selector: ".founder-introduction", width: 390, height: 844, mobile: true, file: "founder-introduction-iphone.png", assetUrl: "/brand/jcee-labs-mark.png" },
   ];
   const results = [];
   for (const spec of specs) results.push(await capture(send, baseUrl, spec));

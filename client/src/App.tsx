@@ -33,6 +33,7 @@ const ResearchPage = lazy(() => import("./pages/ResearchPage"));
 const ResearchFieldsPage = lazy(() => import("./pages/ResearchFieldsPage"));
 const ResourcesPage = lazy(() => import("./pages/ResourcesPage"));
 const CompanyPage = lazy(() => import("./pages/CompanyPage"));
+const FounderPage = lazy(() => import("./pages/FounderPage"));
 const PublicationPage = lazy(() => import("./pages/PublicationPage"));
 const BB84PaperPage = lazy(() => import("./pages/BB84PaperPage"));
 
@@ -132,6 +133,7 @@ function Router() {
         <Route path="/research" component={ResearchPage} />
         <Route path="/resources" component={ResourcesPage} />
         <Route path="/company" component={CompanyPage} />
+        <Route path="/founder" component={FounderPage} />
         <Route
           path="/blog/start-with-the-workflow"
           component={PublicationPage}

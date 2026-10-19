@@ -13,10 +13,18 @@ const integrationSteps = [
   ["06", "Receipt", "Retain an inspectable record of the authorized occurrence, the evidence basis, and what remains unresolved."],
 ] as const;
 const assessmentDeliverables = [
-  ["01", "Workflow boundary map", "Where the work starts, who owns it, which systems participate, and where a consequential effect can occur."],
-  ["02", "Evidence and authority map", "Which records support the decision, which source grants permission, and where inference must remain separate from fact."],
-  ["03", "Failure and recovery gaps", "Where timeout, partial completion, retry, revocation, or an uncertain external outcome can break accountability."],
-  ["04", "Next justified step", "A bounded recommendation for the next test, shadow evaluation, implementation scope, or a finding that JCEE is not the right fit."],
+  ["01", "Map of the workflow", "Where the work starts, who is responsible, which systems are involved, and where a record or real-world result can change."],
+  ["02", "Records and permissions", "What information supports a decision, who can approve the action, and which facts still need checking."],
+  ["03", "Failure and recovery gaps", "What happens if the process stops, permission is withdrawn, or nobody can tell whether an action finished."],
+  ["04", "Written next step", "A clear recommendation for a test, an evaluation alongside the existing workflow, or an agreed implementation scope, including any fit concerns."],
+] as const;
+const workflowQuestions = [
+  "Read the request",
+  "Check current permission",
+  "Make the approved change",
+  "Handle an interruption",
+  "Check the system’s records",
+  "Keep the evidence for review",
 ] as const;
 const latest = [...publications].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
 
@@ -28,23 +36,27 @@ export default function Home() {
         <div className="preview-hero-copy">
           <p className="preview-kicker"><span className="preview-dot" /> AI WORKFLOW INFRASTRUCTURE + TECHNICAL SERVICES</p>
           <h1>Engineering for<br /><em>accountable</em><br />AI workflows.</h1>
-          <p className="preview-deck">From architecture and custom applications to testing and verification, JCEE Labs helps teams build systems with clear authority, recoverable workflows, and evidence of what happened.</p>
+          <p className="preview-deck">JCEE Labs helps teams design, build, and test AI-assisted software. We focus on clear permission, recovery when work is interrupted, and records that show what actually changed.</p>
+          <div className="preview-founder-byline">
+            <span>FOUNDER · DALLAS, TEXAS</span>
+            <a href="/founder">Jonathan Matthew Chadbourne <span aria-hidden="true">→</span></a>
+          </div>
           <div className="preview-hero-actions">
             <a className="preview-button" href="/consultation">Request a free consultation <span aria-hidden="true">↗</span></a>
             <p className="preview-call-detail">Free first call · 10–30 minutes</p>
-            <a className="preview-text-link" href="#distribution-demo">Inspect recorded proof <span aria-hidden="true">↓</span></a>
+            <a className="preview-text-link" href="#distribution-demo">See the tested example <span aria-hidden="true">↓</span></a>
           </div>
           <p className="preview-disclosure">Reference software and recorded research evidence are available now. Customer savings and production performance have not yet been established.</p>
         </div>
         <aside className="preview-path" aria-labelledby="path-title">
-          <div className="preview-panel-top"><span>THE PUBLIC INTEGRATION MODEL</span><span aria-hidden="true">01 — 06</span></div>
-          <h2 id="path-title">From a proposed action to an inspectable record.</h2>
+          <div className="preview-panel-top"><span>HOW WE EXAMINE A WORKFLOW</span><span aria-hidden="true">01 — 06</span></div>
+          <h2 id="path-title">Did it have permission?<br />What actually changed?</h2>
           <p className="preview-panel-note">Illustrative control path · not live telemetry</p>
           <ol className="preview-path-list">
-            {integrationSteps.map(([number, label]) => <li key={number}><span className="preview-path-number">{number}</span><strong>{label}</strong><span className="preview-path-check" aria-hidden="true">→</span></li>)}
+            {workflowQuestions.map((label, index) => <li key={label}><span className="preview-path-number">{String(index + 1).padStart(2, "0")}</span><strong>{label}</strong><span className="preview-path-check" aria-hidden="true">→</span></li>)}
           </ol>
-          <div className="preview-path-boundary"><span>THE BOUNDARY</span><p>A supported conclusion does not create permission. The target system retains authority over the consequence.</p></div>
-          <a className="preview-text-link" href="#technology">Inspect the integration contract <span aria-hidden="true">↘</span></a>
+          <div className="preview-path-boundary"><span>BEFORE SOFTWARE ACTS</span><p>Confirm permission with the system responsible for the change. Afterward, check its records to establish what happened.</p></div>
+          <a className="preview-text-link" href="#technology">See how the parts connect <span aria-hidden="true">↘</span></a>
         </aside>
       </section>
       <div className="preview-principles"><span>EVIDENCE BEFORE CLAIM</span><span>PERMISSION BEFORE CONSEQUENCE</span><span>HUMAN ACCOUNTABILITY REMAINS</span></div>
@@ -52,8 +64,8 @@ export default function Home() {
       <section id="engage" className="preview-section preview-offer" aria-labelledby="engage-title">
         <div className="preview-section-label"><span>01 / THE OFFER</span><span>ONE WORKFLOW · WRITTEN SCOPE · WRITTEN RESULT</span></div>
         <div className="preview-offer-layout">
-          <div><p className="preview-kicker">WORKFLOW ASSURANCE ASSESSMENT</p><h2 id="engage-title">Start with one workflow.<br /><em>Leave with a written boundary.</em></h2>
-            <p>Keep AI-assisted operations accountable. JCEE Labs helps teams improve consequential AI-assisted workflows with clear ownership, current permission, practical checks, and a record of what actually happened.</p>
+          <div><p className="preview-kicker">WORKFLOW ASSURANCE ASSESSMENT</p><h2 id="engage-title">Start with one workflow.<br /><em>Leave with a written assessment.</em></h2>
+            <p>Bring one process that is difficult to trust, check, or recover. We map the handoffs, examine the permissions, and identify what needs testing before you give the software more responsibility.</p>
             <div className="preview-commercial"><h3>Commercial model</h3><p>The free call is an introduction. The assessment is a separately scoped engagement: deliverables, access, exclusions, timing, and commercial terms are agreed in writing. No SaaS tier is implied.</p></div>
             <a className="preview-text-link" href="/partners/enterprise">DISCUSS ONE WORKFLOW <span aria-hidden="true">→</span></a>
           </div>

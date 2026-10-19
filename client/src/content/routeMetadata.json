@@ -49,6 +49,10 @@
     "title": "JCEE VOW: Evidence-First Execution Runtime | JCEE Labs",
     "description": "Explore JCEE VOW, an evidence-first execution runtime. Review covered execution and recovery behavior, recorded milestones, and explicit evidence boundaries."
   },
+  "/founder": {
+    "title": "Meet Jonathan Matthew Chadbourne, Founder | JCEE Labs",
+    "description": "Meet Jonathan Matthew Chadbourne, independent researcher and founder of JCEE Labs in Dallas. Read about his background, current software work, and approach."
+  },
   "/consultation": {
     "title": "Free 10–30 Minute Technical Consultation | JCEE Labs",
     "description": "Free 10–30-minute consultation for AI architecture, custom applications, testing, verification, technical research, systems analysis, and engineering design."
