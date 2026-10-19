@@ -13,10 +13,18 @@ const integrationSteps = [
   ["06", "Receipt", "Retain an inspectable record of the authorized occurrence, the evidence basis, and what remains unresolved."],
 ] as const;
 const assessmentDeliverables = [
-  ["01", "Workflow boundary map", "Where the work starts, who owns it, which systems participate, and where a consequential effect can occur."],
-  ["02", "Evidence and authority map", "Which records support the decision, which source grants permission, and where inference must remain separate from fact."],
-  ["03", "Failure and recovery gaps", "Where timeout, partial completion, retry, revocation, or an uncertain external outcome can break accountability."],
-  ["04", "Next justified step", "A bounded recommendation for the next test, shadow evaluation, implementation scope, or a finding that JCEE is not the right fit."],
+  ["01", "Map of the workflow", "Where the work starts, who is responsible, which systems are involved, and where a record or real-world result can change."],
+  ["02", "Records and permissions", "What information supports a decision, who can approve the action, and which facts still need checking."],
+  ["03", "Failure and recovery gaps", "What happens if the process stops, permission is withdrawn, or nobody can tell whether an action finished."],
+  ["04", "Written next step", "A clear recommendation for a test, an evaluation alongside the existing workflow, or an agreed implementation scope, including any fit concerns."],
+] as const;
+const workflowQuestions = [
+  "Read the request",
+  "Check current permission",
+  "Make the approved change",
+  "Handle an interruption",
+  "Check the system’s records",
+  "Keep the evidence for review",
 ] as const;
 const latest = [...publications].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
 
@@ -28,23 +36,27 @@ export default function Home() {
         <div className="preview-hero-copy">
           <p className="preview-kicker"><span className="preview-dot" /> AI WORKFLOW INFRASTRUCTURE + TECHNICAL SERVICES</p>
           <h1>Engineering for<br /><em>accountable</em><br />AI workflows.</h1>
-          <p className="preview-deck">From architecture and custom applications to testing and verification, JCEE Labs helps teams build systems with clear authority, recoverable workflows, and evidence of what happened.</p>
+          <p className="preview-deck">JCEE Labs helps teams design, build, and test AI-assisted software. We focus on clear permission, recovery when work is interrupted, and records that show what actually changed.</p>
+          <div className="preview-founder-byline">
+            <span>FOUNDER · DALLAS, TEXAS</span>
+            <a href="/founder">Jonathan Matthew Chadbourne <span aria-hidden="true">→</span></a>
+          </div>
           <div className="preview-hero-actions">
             <a className="preview-button" href="/consultation">Request a free consultation <span aria-hidden="true">↗</span></a>
             <p className="preview-call-detail">Free first call · 10–30 minutes</p>
-            <a className="preview-text-link" href="#distribution-demo">Inspect recorded proof <span aria-hidden="true">↓</span></a>
+            <a className="preview-text-link" href="#distribution-demo">See the tested example <span aria-hidden="true">↓</span></a>
           </div>
           <p className="preview-disclosure">Reference software and recorded research evidence are available now. Customer savings and production performance have not yet been established.</p>
         </div>
         <aside className="preview-path" aria-labelledby="path-title">
-          <div className="preview-panel-top"><span>THE PUBLIC INTEGRATION MODEL</span><span aria-hidden="true">01 — 06</span></div>
-          <h2 id="path-title">From a proposed action to an inspectable record.</h2>
+          <div className="preview-panel-top"><span>HOW WE EXAMINE A WORKFLOW</span><span aria-hidden="true">01 — 06</span></div>
+          <h2 id="path-title">Did it have permission?<br />What actually changed?</h2>
           <p className="preview-panel-note">Illustrative control path · not live telemetry</p>
           <ol className="preview-path-list">
-            {integrationSteps.map(([number, label]) => <li key={number}><span className="preview-path-number">{number}</span><strong>{label}</strong><span className="preview-path-check" aria-hidden="true">→</span></li>)}
+            {workflowQuestions.map((label, index) => <li key={label}><span className="preview-path-number">{String(index + 1).padStart(2, "0")}</span><strong>{label}</strong><span className="preview-path-check" aria-hidden="true">→</span></li>)}
           </ol>
-          <div className="preview-path-boundary"><span>THE BOUNDARY</span><p>A supported conclusion does not create permission. The target system retains authority over the consequence.</p></div>
-          <a className="preview-text-link" href="#technology">Inspect the integration contract <span aria-hidden="true">↘</span></a>
+          <div className="preview-path-boundary"><span>BEFORE SOFTWARE ACTS</span><p>Confirm permission with the system responsible for the change. Afterward, check its records to establish what happened.</p></div>
+          <a className="preview-text-link" href="#technology">See how the parts connect <span aria-hidden="true">↘</span></a>
         </aside>
       </section>
       <div className="preview-principles"><span>EVIDENCE BEFORE CLAIM</span><span>PERMISSION BEFORE CONSEQUENCE</span><span>HUMAN ACCOUNTABILITY REMAINS</span></div>
@@ -52,8 +64,8 @@ export default function Home() {
       <section id="engage" className="preview-section preview-offer" aria-labelledby="engage-title">
         <div className="preview-section-label"><span>01 / THE OFFER</span><span>ONE WORKFLOW · WRITTEN SCOPE · WRITTEN RESULT</span></div>
         <div className="preview-offer-layout">
-          <div><p className="preview-kicker">WORKFLOW ASSURANCE ASSESSMENT</p><h2 id="engage-title">Start with one workflow.<br /><em>Leave with a written boundary.</em></h2>
-            <p>Keep AI-assisted operations accountable. JCEE Labs helps teams improve consequential AI-assisted workflows with clear ownership, current permission, practical checks, and a record of what actually happened.</p>
+          <div><p className="preview-kicker">WORKFLOW ASSURANCE ASSESSMENT</p><h2 id="engage-title">Start with one workflow.<br /><em>Leave with a written assessment.</em></h2>
+            <p>Bring one process that is difficult to trust, check, or recover. We map the handoffs, examine the permissions, and identify what needs testing before you give the software more responsibility.</p>
             <div className="preview-commercial"><h3>Commercial model</h3><p>The free call is an introduction. The assessment is a separately scoped engagement: deliverables, access, exclusions, timing, and commercial terms are agreed in writing. No SaaS tier is implied.</p></div>
             <a className="preview-text-link" href="/partners/enterprise">DISCUSS ONE WORKFLOW <span aria-hidden="true">→</span></a>
           </div>
@@ -89,15 +101,28 @@ export default function Home() {
         <ol className="preview-integration-steps" aria-label="JCEE public integration binding path">{integrationSteps.map(([number, label, copy]) => <li key={number}><span>{number}</span><h3>{label}</h3><p>{copy}</p></li>)}</ol>
         <p className="preview-panel-note">Each arrow is a binding between evidence, authority, and external systems—not a library call.</p>
         <div className="preview-proof-status" aria-label="Current JCEE evidence and availability">
-          <article><p className="preview-kicker">BUILT / TESTED</p><h3>Bounded reference behavior.</h3><p>Frozen or reproduced VOW and QCS milestones, the interactive VOW recovery reference, and the recorded Distribution synthetic comparison.</p><a className="preview-text-link" href="/qcs">QCS transition research →</a></article>
+          <article><p className="preview-kicker">BUILT / TESTED</p><h3>Connected software, tested together.</h3><p>The October 19 JCEE-INFRA candidate joins evidence, authority, target-owned action controls, and recovery in a qualified fictional-ledger setting. Earlier VOW, QCS, and Distribution results retain their own boundaries.</p><a className="preview-text-link" href="/technology#current-integration">October 19 integration result →</a><a className="preview-text-link" href="/qcs">QCS transition research →</a></article>
           <article><p className="preview-kicker">AVAILABLE TO SCOPE</p><h3>One Workflow Assurance Assessment.</h3><p>Map one consequential workflow, current evidence, authority, recovery gaps, and the next justified test or implementation step.</p><a className="preview-text-link" href="/partners/enterprise">Start a conversation →</a></article>
           <article><p className="preview-kicker">NOT YET ESTABLISHED</p><h3>Production claims we do not make.</h3><p>Customer ROI, production performance, generic public SDK or API availability, production certification, and autonomous operating authority have not been established.</p><a className="preview-text-link" href="/registry">PUBLIC REGISTRY →</a></article>
         </div>
       </section>
 
+      <section id="current-progress" className="preview-section preview-proof" aria-labelledby="current-progress-title">
+        <div className="preview-section-label"><span>CURRENT ENGINEERING CHECKPOINT</span><time dateTime="2026-10-19">OCTOBER 19, 2026</time></div>
+        <div className="preview-section-heading">
+          <h2 id="current-progress-title">Permission changed.<br /><em>Recovery had to account for it.</em></h2>
+          <div>
+            <p>One reconciled software candidate is now in working integration with its qualified source tree preserved. We tested shared-source revocation, competing work, lost responses, and restoration from older records against the same configuration.</p>
+            <p>Authorized controls completed. An already committed effect was reconciled without duplication. An uncertain outcome stayed held without permission to retry.</p>
+          </div>
+        </div>
+        <p className="preview-boundary-note">Recorded in a controlled PostgreSQL ledger with fictional data and a separately protected checkpoint that survives restoration. This is a bounded software result; production admission, external human review, and physical commitment qualification remain open.</p>
+        <div className="preview-evidence-links"><a href="/technology#current-integration">Inspect the result and scope ↗</a><a href="/registry#infra-integrated-software">Dated registry entry ↗</a></div>
+      </section>
+
       <section id="working-example" className="preview-section preview-recovery" aria-labelledby="working-example-title">
-        <div className="preview-section-label"><span>WORKING SOFTWARE / VOW</span><span>REFERENCE DEMONSTRATION · NOT A CUSTOMER DEPLOYMENT</span></div>
-        <div className="preview-section-heading"><h2 id="working-example-title">Interrupt the work.<br /><em>Inspect what survives.</em></h2><div><p>This interactive VOW reference demonstrates one implemented JCEE behavior: preserving execution evidence across interruption and recovery.</p><p className="preview-panel-note">Synthetic execution and demonstration data. This is not a customer case study, production deployment, or proof of customer ROI.</p></div></div>
+        <div className="preview-section-label"><span>VOW / RECOVERY ILLUSTRATION</span><span>EXAMPLE STATES · NOT LIVE EXECUTION</span></div>
+        <div className="preview-section-heading"><h2 id="working-example-title">Follow the interruption.<br /><em>Explore the recovery states.</em></h2><div><p>This interactive recovery illustration explains the states that a VOW workflow must distinguish. It uses example records and browser animation.</p><p className="preview-panel-note">This interaction does not run the VOW engine, persist a target effect, or produce a new test receipt. Recorded qualification evidence is described separately.</p></div></div>
         <VowDurabilityDemo />
         <a className="preview-text-link" href="/vow">Read the technical JCEE VOW overview <span aria-hidden="true">↗</span></a>
       </section>
@@ -175,7 +200,7 @@ export default function Home() {
         </div>
       </section>
       </div>
-        <div id="evidence-frontier" className="preview-evidence-row"><div><p className="preview-kicker">EVIDENCE / OPEN GATES</p><h3>Test status is not certification.</h3></div><div><p>JCEE-INFRA: P0 contract frozen; P1 and P2 bounded test passes; P3 partial and held. The payment consequence lane has not qualified. Two research proposals are not physically validated. Each claim retains its conditions, unresolved gates, and independent-review limits.</p><div className="preview-evidence-links"><a href="/research#evidence-ladder">Evidence ladder ↗</a><a href="/technology#infrastructure-build">Infrastructure gates ↗</a><a href="/research#physical-validation">Physical-test boundaries ↗</a></div></div></div>
+        <div id="evidence-frontier" className="preview-evidence-row"><div><p className="preview-kicker">EVIDENCE / OPEN GATES</p><h3>Test status is not certification.</h3></div><div><p>The October 19 integrated software result is recorded with its scope. P0 remains frozen; earlier P1 and P2 passes stay bounded; P3 is partial and held. The payment consequence lane and E003 physical commitment remain unqualified. Biological proposals are not physically validated; numerical models retain separate evidence boundaries.</p><div className="preview-evidence-links"><a href="/research#evidence-ladder">Evidence ladder ↗</a><a href="/technology#infrastructure-build">Infrastructure gates ↗</a><a href="/research#physical-validation">Physical-test boundaries ↗</a></div></div></div>
       </section>
 
       <section className="preview-section recent-progress preview-progress" aria-labelledby="progress-title">

@@ -20,9 +20,8 @@ const plain = (source: string) => source.replace(/\s+/g, " ");
 
 describe("buyer-readable public positioning with Assurance Playbook control", () => {
   it("leads with a plain-language accountable-operation promise", () => {
-    expect(home).toContain("Keep AI-assisted operations");
     expect(plain(home)).toContain(
-      "JCEE Labs helps teams improve consequential AI-assisted workflows with clear ownership, current permission, practical checks, and a record of what actually happened."
+      "JCEE Labs helps teams design, build, and test AI-assisted software."
     );
     expect(home).toContain('href="#distribution-demo"');
     expect(home).toContain('href="/partners/enterprise"');
@@ -51,13 +50,13 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
     );
   });
 
-  it("preserves implemented reference software without promoting it to customer evidence", () => {
+  it("distinguishes the browser illustration from recorded software qualification", () => {
     expect(home).toContain("VowDurabilityDemo");
     expect(plain(home)).toContain(
-      "interactive VOW reference demonstrates one implemented JCEE behavior"
+      "interactive recovery illustration explains the states"
     );
     expect(plain(home)).toContain(
-      "not a customer case study, production deployment, or proof of customer ROI"
+      "does not run the VOW engine, persist a target effect, or produce a new test receipt"
     );
     expect(plain(home)).toContain(
       "Customer savings and production performance have not yet been established"
@@ -67,10 +66,10 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
   it("makes the first commercial step tangible without overstating maturity", () => {
     for (const phrase of [
       "WORKFLOW ASSURANCE ASSESSMENT",
-      "Workflow boundary map",
-      "Evidence and authority map",
+      "Map of the workflow",
+      "Records and permissions",
       "Failure and recovery gaps",
-      "Next justified step",
+      "Written next step",
       "Commercial model",
       "DISCUSS ONE WORKFLOW",
     ]) {

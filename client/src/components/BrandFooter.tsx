@@ -25,6 +25,7 @@ export default function BrandFooter({
         <div>
           <span>COMPANY</span>
           <a href="/company">JCEE Labs</a>
+          <a href="/founder">Meet the founder</a>
           <a href="/charter">Charter</a>
           <a href="/charter/archive/v1.0">Charter v1.0 Archive</a>
         </div>
@@ -61,7 +62,7 @@ export default function BrandFooter({
       </div>
 
       <div className="brand-footer-meta">
-        <span>© {new Date().getFullYear()} HOWM HOLDINGS LLC</span>
+        <span>© {new Date().getFullYear()} JCEE Labs LLC</span>
         <span>JCEE LABS · PUBLIC SITE</span>
         <a href={backToTopHref}>BACK TO TOP ↑</a>
       </div>

@@ -6,8 +6,21 @@ export default function CompanyPage() {
       current="company"
       eyebrow="JCEE Labs / Dallas, Texas"
       title="About JCEE Labs: why we build for accountable operations"
-      description="JCEE Labs is based in Dallas, Texas, and founded by Jonathan Chadbourne. We develop methods and software for AI-assisted operations where permissions, evidence, and human responsibility matter."
+      description="JCEE Labs LLC is based in Dallas, Texas, and founded by Jonathan Matthew Chadbourne. We develop methods and software for AI-assisted operations where permissions, evidence, and human responsibility matter."
     >
+      <section className="editorial-section editorial-section-muted">
+        <p className="editorial-kicker">FOUNDER</p>
+        <h2>Jonathan Matthew Chadbourne</h2>
+        <p className="editorial-intro">
+          Jonathan is the founder of JCEE Labs and an independent researcher
+          based in Dallas, Texas. His background is in sales; his work at JCEE
+          connects application development with a practical question: how can
+          someone check what an AI-assisted system actually did?
+        </p>
+        <a className="editorial-text-link" href="/founder">
+          Meet Jonathan and read his story →
+        </a>
+      </section>
       <section className="editorial-section">
         <h2>Why we exist</h2>
         <p>
@@ -25,6 +38,24 @@ export default function CompanyPage() {
           We exist to make those questions easier to answer with evidence people
           can inspect.
         </p>
+      </section>
+      <section className="editorial-section editorial-section-muted">
+        <p className="editorial-kicker">CURRENT ENGINEERING FOCUS / OCTOBER 19, 2026</p>
+        <h2>Follow the evidence through the connected systems.</h2>
+        <p className="editorial-intro">
+          We have built substantial parts of the assurance architecture. Our
+          priority is to qualify one connected path that another reviewer can
+          reproduce: evidence, current authority, the target's actual effect,
+          recovery, and the resulting record.
+        </p>
+        <p>
+          A reconciled software candidate is now in working integration after
+          bounded shared-source revocation and protected-restoration tests.
+          Production admission and physical commitment still require their own
+          evidence. The long-term direction remains a reusable assurance core,
+          repeatable qualification, and business claims bounded by results.
+        </p>
+        <a className="editorial-text-link" href="/technology#current-integration">Current result and open gates →</a>
       </section>
       <section className="editorial-section">
         <p className="editorial-kicker">Our direction</p>
@@ -45,7 +76,7 @@ export default function CompanyPage() {
         aria-labelledby="founder-title"
       >
         <p className="editorial-kicker">
-          From the Founder · Jonathan Chadbourne
+          From the Founder · Jonathan Matthew Chadbourne
         </p>
         <h2 id="founder-title">The Work Nobody Sees</h2>
         <p className="editorial-intro">

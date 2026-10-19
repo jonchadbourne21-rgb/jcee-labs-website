@@ -27,8 +27,8 @@ for (const item of publications) {
   fs.writeFileSync(`client/public/publications/${item.slug}.txt`, text);
 }
 fs.writeFileSync(
-  "client/public/JCEE_Labs_Public_Registry_v1.3.md",
-  "# JCEE Labs Public Registry — Version 1.3\n\nDistribution, MISE, AP Gate, and JEV were reconciled against current portfolio records and preserved evidence on September 29, 2026. Other entries retain their own dated evidence boundaries. Historical milestone dates remain distinct from this review date. This publication is not a new experimental execution.\n\n" +
+  "client/public/JCEE_Labs_Public_Registry_v1.4.md",
+  "# JCEE Labs Public Registry — Version 1.4\n\nUpdated October 19, 2026 with the integrated software qualification, protected restoration, evidence-eligibility candidates, qualification-tooling repairs, and selected numerical and measurement-software records. Earlier entries retain their own review dates and limitations, including the September 29 Distribution, MISE, AP Gate, and JEV review. This is a sanitized first-party record, not a new execution of every program or independent certification. Private source and complete receipts are available only for scoped review. Version 1.3 remains a historical archive.\n\n" +
     entries
       .map(
         e =>
@@ -68,7 +68,7 @@ const routeMetadata: Record<
   "/technology": {
     title: "Technology — JCEE Labs",
     description:
-      "Explore JCEE VOW, QCS, and JCEE Assurance: execution, recovery, current authority, and portable evidence.",
+      "Review JCEE-INFRA's October 19 integrated software qualification, current authority, protected recovery, retained evidence, and open physical commitment gate.",
   },
   "/research": {
     title: "Research — JCEE Labs",
@@ -78,7 +78,7 @@ const routeMetadata: Record<
   "/research/fields": {
     title: "Research Fields — JCEE Labs",
     description:
-      "Explore JCEE Labs' current 25-field research portfolio across trustworthy AI, distributed systems, formal verification, quantum information, causal assurance, and applied computational intelligence.",
+      "Explore JCEE Labs' dated 25-field research portfolio and its current focus on qualifying a connected assurance path, with distinct mathematical, numerical, and physical evidence.",
   },
   "/resources": {
     title: "Resources — JCEE Labs",
@@ -93,7 +93,7 @@ const routeMetadata: Record<
   "/registry": {
     title: "Public Registry — JCEE Labs",
     description:
-      "Selected JCEE build milestones, development candidates, and open gates. Selected entries reconciled September 29, 2026; historical evidence dates preserved.",
+      "Selected JCEE results updated October 19, 2026: integrated software, protected restoration, numerical assurance, preserved milestones, and open gates.",
   },
 };
 Object.assign(routeMetadata, pageSeo);

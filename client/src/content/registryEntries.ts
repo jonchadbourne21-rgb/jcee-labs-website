@@ -1,3 +1,5 @@
+import { october2026Registry } from "./october2026Registry";
+
 export type RegistryEntry = {
   id: string;
   group: string;
@@ -14,6 +16,7 @@ export type RegistryEntry = {
 };
 
 export const entries: RegistryEntry[] = [
+  ...october2026Registry,
   {
     id: "distribution",
     name: "JCEE Distribution P0.1",

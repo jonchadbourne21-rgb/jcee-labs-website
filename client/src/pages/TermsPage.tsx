@@ -10,14 +10,14 @@ export default function TermsPage() {
         <div className="container max-w-3xl mx-auto">
           <div className="space-y-4 mb-12">
             <h1 className="text-4xl md:text-5xl font-display font-extrabold text-white">Terms of Service</h1>
-            <p className="text-muted-foreground text-sm font-mono">Last Updated: September 1, 2026</p>
+            <p className="text-muted-foreground text-sm font-mono">Last Updated: October 19, 2026</p>
           </div>
 
           <div className="prose prose-invert max-w-none space-y-8 text-[#E2E8F0]/80 leading-relaxed">
             <section id="page-content" tabIndex={-1} className="space-y-4">
               <h2 className="text-xl font-display font-bold text-white">1. Agreement to Terms</h2>
               <p>
-                By accessing or using the website jceelabs.com and any services provided by HOWM HOLDINGS LLC, doing business as JCEE Labs ("Company," "we," "our"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.
+                By accessing or using the website jceelabs.com and any services provided by JCEE Labs LLC ("Company," "we," "our"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.
               </p>
             </section>
 
@@ -51,7 +51,7 @@ export default function TermsPage() {
             <section className="space-y-4">
               <h2 className="text-xl font-display font-bold text-white">5. Intellectual Property</h2>
               <p>
-                All content, features, and functionality of our services — including but not limited to text, graphics, logos, software, and design — are owned by HOWM HOLDINGS LLC or used with permission and may be protected by applicable intellectual property laws. Publicly released research materials may also carry their own stated terms, licenses, or publication conditions.
+                All content, features, and functionality of our services — including but not limited to text, graphics, logos, software, and design — are owned by JCEE Labs LLC or used with permission and may be protected by applicable intellectual property laws. Publicly released research materials may also carry their own stated terms, licenses, or publication conditions.
               </p>
             </section>
 
@@ -72,7 +72,7 @@ export default function TermsPage() {
             <section className="space-y-4">
               <h2 className="text-xl font-display font-bold text-white">8. Limitation of Liability</h2>
               <p>
-                To the maximum extent permitted by law, HOWM HOLDINGS LLC shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of our services. Our total liability shall not exceed the amount you paid us in the twelve months preceding the claim.
+                To the maximum extent permitted by law, JCEE Labs LLC shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of our services. Our total liability shall not exceed the amount you paid us in the twelve months preceding the claim.
               </p>
             </section>
 
@@ -86,7 +86,7 @@ export default function TermsPage() {
             <section className="space-y-4">
               <h2 className="text-xl font-display font-bold text-white">10. Indemnification</h2>
               <p>
-                You agree to indemnify and hold harmless HOWM HOLDINGS LLC, its officers, directors, employees, and agents from claims, damages, losses, or expenses arising from your use of our services or violation of these terms, to the extent permitted by applicable law.
+                You agree to indemnify and hold harmless JCEE Labs LLC, its officers, directors, employees, and agents from claims, damages, losses, or expenses arising from your use of our services or violation of these terms, to the extent permitted by applicable law.
               </p>
             </section>
 
@@ -117,7 +117,7 @@ export default function TermsPage() {
                 For questions about these Terms of Service, please contact us at:
               </p>
               <div className="bg-white/[0.03] border border-white/10 rounded-xl p-6 space-y-2">
-                <p className="font-bold text-white">HOWM HOLDINGS LLC (d.b.a. JCEE Labs)</p>
+                <p className="font-bold text-white">JCEE Labs LLC</p>
                 <p>Dallas, Texas</p>
                 <p>Email: <a href="mailto:support@jceelabs.com" className="text-purple-400 hover:text-purple-300 transition-colors">support@jceelabs.com</a></p>
                 <p>Website: <a href="https://jceelabs.com" className="text-purple-400 hover:text-purple-300 transition-colors">jceelabs.com</a></p>

@@ -371,13 +371,38 @@ export default function AssurancePage() {
         </div>
       </section>
 
+      <section className="program-statement" aria-labelledby="assurance-integration-update">
+        <p className="charter-section-label">CONNECTED SOFTWARE EVIDENCE · OCTOBER 19, 2026</p>
+        <h2 id="assurance-integration-update">Keep a confirmed effect distinct from an unresolved outcome.</h2>
+        <div className="program-statement-copy">
+          <p>
+            The October 19 infrastructure candidate was merged into working
+            integration with its qualified tree preserved. In a controlled
+            PostgreSQL test ledger using fictional data, the tested authorized
+            controls completed while uncertain cases remained held. The record
+            distinguishes confirmed effects from unresolved outcomes; a
+            recorded request or missing reply does not establish an effect.
+          </p>
+          <p>
+            Restoration coverage assumes the separately protected checkpoint
+            survives the declared restore event. The result remains bounded
+            software qualification; physical commitment, production readiness,
+            and external human review remain open.
+          </p>
+        </div>
+        <div className="program-links">
+          <a href="/technology#current-integration">READ THE INTEGRATION UPDATE <span>→</span></a>
+          <a href="/registry#infra-integrated-software">INSPECT THE RECORDED BOUNDARY <span>→</span></a>
+        </div>
+      </section>
+
       <section className="program-boundaries" aria-labelledby="current-builds">
         <div className="section-index">
-          <span>CURRENT BUILD RECORDS</span>
+          <span>PRESERVED COMPONENT RECORDS</span>
           <span>REVIEWED SEPTEMBER 14, 2026</span>
         </div>
         <h2 id="current-builds">
-          The built components and their current limits.
+          Earlier component milestones and their limits.
         </h2>
         <BuildStatusList
           ids={[

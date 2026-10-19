@@ -33,6 +33,7 @@ const ResearchPage = lazy(() => import("./pages/ResearchPage"));
 const ResearchFieldsPage = lazy(() => import("./pages/ResearchFieldsPage"));
 const ResourcesPage = lazy(() => import("./pages/ResourcesPage"));
 const CompanyPage = lazy(() => import("./pages/CompanyPage"));
+const FounderPage = lazy(() => import("./pages/FounderPage"));
 const PublicationPage = lazy(() => import("./pages/PublicationPage"));
 const BB84PaperPage = lazy(() => import("./pages/BB84PaperPage"));
 
@@ -111,6 +112,9 @@ function Router() {
         <Route path="/blog/the-work-nobody-sees" component={PublicationPage} />
         <Route path="/blog/after-an-ai-says-done" component={PublicationPage} />
         <Route path="/blog/when-a-timeout-is-not-a-failure" component={PublicationPage} />
+        <Route path="/blog/when-tested-components-work-together" component={PublicationPage} />
+        <Route path="/blog/restoring-a-backup-without-restoring-permission" component={PublicationPage} />
+        <Route path="/blog/testing-the-evidence-pipeline" component={PublicationPage} />
         <Route
           path="/blog/a-research-result-needs-a-boundary"
           component={PublicationPage}
@@ -129,6 +133,7 @@ function Router() {
         <Route path="/research" component={ResearchPage} />
         <Route path="/resources" component={ResourcesPage} />
         <Route path="/company" component={CompanyPage} />
+        <Route path="/founder" component={FounderPage} />
         <Route
           path="/blog/start-with-the-workflow"
           component={PublicationPage}

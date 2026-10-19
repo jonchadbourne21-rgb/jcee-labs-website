@@ -300,7 +300,7 @@ export default function ResearchFieldsPage() {
       current="research"
       eyebrow="JCEE Labs / Research Portfolio"
       title="Research fields"
-      description="Current research portfolio and interdisciplinary scope across 25 fields, connected by evidence, authority, state, and consequence."
+      description="A dated research portfolio across 25 fields, connected by evidence, authority, state, and consequence. Individual results retain their own qualification boundaries."
     >
       <section className="editorial-section research-portfolio-intro" aria-labelledby="portfolio-summary-title">
         <p className="editorial-kicker">
@@ -308,7 +308,7 @@ export default function ResearchFieldsPage() {
         </p>
         <h2 id="portfolio-summary-title">25 fields. One unifying research question.</h2>
         <p className="editorial-intro">
-          The current portfolio spans trustworthy AI, distributed and resilient
+          The portfolio reference spans trustworthy AI, distributed and resilient
           computing, formal verification, quantum information, information
           theory, causal assurance, complex systems, human-AI interaction, and
           applied computational intelligence.
@@ -326,12 +326,18 @@ export default function ResearchFieldsPage() {
           connected by a common concern: making evidence, authority, state, and
           consequence explicit enough to test, verify, and audit.
         </p>
+        <p>
+          The October 2026 priority is to qualify one connected assurance path
+          before expanding the platform. This field map describes research
+          scope; it is not a list of 25 validated products or physical findings.
+        </p>
+        <a className="editorial-text-link" href="/research">Current research results and priorities →</a>
       </section>
 
       <section className="editorial-section editorial-section-muted" aria-labelledby="research-fields-title">
         <div className="editorial-section-heading">
           <div>
-            <p className="editorial-kicker">THE CURRENT PORTFOLIO</p>
+            <p className="editorial-kicker">THE DATED PORTFOLIO REFERENCE</p>
             <h2 id="research-fields-title">Research Portfolio</h2>
           </div>
           <a href="/research">Research publications →</a>

@@ -19,13 +19,17 @@
     "title": "About JCEE Labs: Accountable AI Research & Software",
     "description": "Meet JCEE Labs in Dallas, Texas. Learn why we develop methods and software for AI-assisted operations grounded in permission, evidence, and human control."
   },
+  "/founder": {
+    "title": "Meet Jonathan Matthew Chadbourne, Founder | JCEE Labs",
+    "description": "Meet Jonathan Matthew Chadbourne, independent researcher and founder of JCEE Labs in Dallas. Read about his background, current software work, and approach."
+  },
   "/registry": {
     "title": "JCEE Labs Public Registry: Build & Research Evidence",
-    "description": "Review JCEE Labs build and research milestones, evidence boundaries, and unresolved questions. Distinguish recorded results from broader development goals."
+    "description": "Review the October 19 JCEE Labs update: integrated software qualification, protected recovery, numerical assurance, preserved milestones, and open gates."
   },
   "/resources": {
     "title": "Accountable AI Articles & Research Guides | JCEE Labs",
-    "description": "Read JCEE Labs articles on accountable AI, execution evidence, permissions, and human control, with practical workflow examples and clear research limits."
+    "description": "Read JCEE Labs engineering notes on connected software, backup restoration, evidence testing, current permission, and recovery, with dated results and limits."
   },
   "/consultation": {
     "title": "Free 10–30 Minute Technical Consultation | JCEE Labs",

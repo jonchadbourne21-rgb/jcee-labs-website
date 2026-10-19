@@ -1,3 +1,5 @@
+import { october2026Updates } from "./october2026Updates";
+
 export type Publication = {
   slug: string;
   title: string;
@@ -15,6 +17,7 @@ export type Publication = {
 };
 
 export const publications: Publication[] = [
+  ...october2026Updates,
   {
     slug: "when-a-timeout-is-not-a-failure",
     title: "When a Timeout Is Not a Failure: Authority, Evidence, and Recovery in Consequential AI Execution",

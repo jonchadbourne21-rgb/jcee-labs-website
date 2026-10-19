@@ -10,14 +10,14 @@ export default function PrivacyPage() {
         <div className="container max-w-3xl mx-auto">
           <div className="space-y-4 mb-12">
             <h1 className="text-4xl md:text-5xl font-display font-extrabold text-white">Privacy Policy</h1>
-            <p className="text-muted-foreground text-sm font-mono">Last Updated: August 18, 2026</p>
+            <p className="text-muted-foreground text-sm font-mono">Last Updated: October 19, 2026</p>
           </div>
 
           <div className="prose prose-invert max-w-none space-y-8 text-[#E2E8F0]/80 leading-relaxed">
             <section id="page-content" tabIndex={-1} className="space-y-4">
               <h2 className="text-xl font-display font-bold text-white">1. Introduction</h2>
               <p>
-                HOWM HOLDINGS LLC, doing business as JCEE Labs ("we," "our," or "us"), respects your privacy. This Privacy Policy describes the information practices associated with the public JCEE Labs website at jceelabs.com.
+                JCEE Labs LLC ("we," "our," or "us") respects your privacy. This Privacy Policy describes the information practices associated with the public JCEE Labs website at jceelabs.com.
               </p>
             </section>
 
@@ -98,7 +98,7 @@ export default function PrivacyPage() {
                 For questions about this Privacy Policy or privacy-related requests, contact us at:
               </p>
               <div className="bg-white/[0.03] border border-white/10 rounded-xl p-6 space-y-2">
-                <p className="font-bold text-white">HOWM HOLDINGS LLC (d.b.a. JCEE Labs)</p>
+                <p className="font-bold text-white">JCEE Labs LLC</p>
                 <p>Dallas, Texas</p>
                 <p>Email: <a href="mailto:support@jceelabs.com" className="text-purple-400 hover:text-purple-300 transition-colors">support@jceelabs.com</a></p>
                 <p>Website: <a href="https://jceelabs.com" className="text-purple-400 hover:text-purple-300 transition-colors">jceelabs.com</a></p>

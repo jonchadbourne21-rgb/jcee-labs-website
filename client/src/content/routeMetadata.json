@@ -19,7 +19,7 @@
   },
   "/technology": {
     "title": "Technology — JCEE Labs",
-    "description": "Explore JCEE VOW, QCS, and JCEE Assurance: execution, recovery, current authority, and portable evidence."
+    "description": "Review JCEE-INFRA's October 19 integrated software qualification, current authority, protected recovery, retained evidence, and open physical commitment gate."
   },
   "/research": {
     "title": "Research — JCEE Labs",
@@ -27,11 +27,11 @@
   },
   "/research/fields": {
     "title": "Research Fields — JCEE Labs",
-    "description": "Explore JCEE Labs' current 25-field research portfolio across trustworthy AI, distributed systems, formal verification, quantum information, causal assurance, and applied computational intelligence."
+    "description": "Explore JCEE Labs' dated 25-field research portfolio and its current focus on qualifying a connected assurance path, with distinct mathematical, numerical, and physical evidence."
   },
   "/resources": {
     "title": "Accountable AI Articles & Research Guides | JCEE Labs",
-    "description": "Read JCEE Labs articles on accountable AI, execution evidence, permissions, and human control, with practical workflow examples and clear research limits."
+    "description": "Read JCEE Labs engineering notes on connected software, backup restoration, evidence testing, current permission, and recovery, with dated results and limits."
   },
   "/company": {
     "title": "About JCEE Labs: Accountable AI Research & Software",
@@ -39,7 +39,7 @@
   },
   "/registry": {
     "title": "JCEE Labs Public Registry: Build & Research Evidence",
-    "description": "Review JCEE Labs build and research milestones, evidence boundaries, and unresolved questions. Distinguish recorded results from broader development goals."
+    "description": "Review the October 19 JCEE Labs update: integrated software qualification, protected recovery, numerical assurance, preserved milestones, and open gates."
   },
   "/assurance": {
     "title": "AI Assurance Method: Permission & Evidence | JCEE Labs",
@@ -49,9 +49,31 @@
     "title": "JCEE VOW: Evidence-First Execution Runtime | JCEE Labs",
     "description": "Explore JCEE VOW, an evidence-first execution runtime. Review covered execution and recovery behavior, recorded milestones, and explicit evidence boundaries."
   },
+  "/founder": {
+    "title": "Meet Jonathan Matthew Chadbourne, Founder | JCEE Labs",
+    "description": "Meet Jonathan Matthew Chadbourne, independent researcher and founder of JCEE Labs in Dallas. Read about his background, current software work, and approach."
+  },
   "/consultation": {
     "title": "Free 10–30 Minute Technical Consultation | JCEE Labs",
     "description": "Free 10–30-minute consultation for AI architecture, custom applications, testing, verification, technical research, systems analysis, and engineering design."
+  },
+  "/blog/when-tested-components-work-together": {
+    "title": "When Tested Components Work Together — JCEE Labs",
+    "description": "JCEE-INFRA has advanced one reviewed software candidate through combined qualification and into its working integration branch. The useful result is visible in authorized actions, recovery, and the outcomes that stay unresolved.",
+    "type": "article",
+    "publishedTime": "2026-10-19T00:00:00Z"
+  },
+  "/blog/restoring-a-backup-without-restoring-permission": {
+    "title": "Restoring a Backup Without Restoring Permission — JCEE Labs",
+    "description": "A backup can contain yesterday’s permissions as well as yesterday’s data. JCEE’s protected-restoration qualification tests how a connected workflow responds when restored records disagree with the authority and effects it must preserve.",
+    "type": "article",
+    "publishedTime": "2026-10-19T00:00:00Z"
+  },
+  "/blog/testing-the-evidence-pipeline": {
+    "title": "Testing the Evidence Pipeline — JCEE Labs",
+    "description": "A passing report is only useful when the process producing it can withstand scrutiny. Recent JCEE work repaired a false-PASS path, traced a captured storage rollback, and strengthened the evidence handoff for the integrated software candidate.",
+    "type": "article",
+    "publishedTime": "2026-10-19T00:00:00Z"
   },
   "/blog/when-a-timeout-is-not-a-failure": {
     "title": "When a Timeout Is Not a Failure: Authority, Evidence, and Recovery in Consequential AI Execution — JCEE Labs",

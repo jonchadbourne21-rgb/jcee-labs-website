@@ -83,6 +83,79 @@ export default function TechnologyPage() {
       </section>
       <section
         className="editorial-section editorial-section-muted"
+        id="current-integration"
+        aria-labelledby="current-integration-title"
+      >
+        <p className="editorial-kicker">OCTOBER 19, 2026 / INTEGRATED SOFTWARE QUALIFICATION</p>
+        <h2 id="current-integration-title">One connected candidate, tested together.</h2>
+        <p className="editorial-intro">
+          JCEE-INFRA now has a reconciled software candidate in its working
+          integration branch. Current-use evidence checks, coordinated
+          revocation, target-owned action controls, recovery, and evidence
+          reconstruction were evaluated together. The integrated source tree
+          matches the exact candidate that passed the recorded qualification.
+        </p>
+        <div className="resource-grid" aria-label="Observed integrated software behavior">
+          <article className="resource-card">
+            <p className="editorial-kicker">AUTHORIZED CONTROLS</p>
+            <h3>Permitted work still completes.</h3>
+            <p>
+              The tested authorized actions completed. Recovery reconciled an
+              already committed effect after its response was lost, avoided a
+              duplicate, and allowed a subsequent authorized control.
+            </p>
+          </article>
+          <article className="resource-card">
+            <p className="editorial-kicker">REVOCATION AND RESTORATION</p>
+            <h3>Older records do not silently restore permission.</h3>
+            <p>
+              Shared-source revocation and restoration were challenged in one
+              configuration, with a separately protected checkpoint surviving
+              the declared restore event.
+            </p>
+          </article>
+          <article className="resource-card">
+            <p className="editorial-kicker">UNRESOLVED OUTCOMES</p>
+            <h3>A hold remains a hold.</h3>
+            <p>
+              The intentionally uncertain outcome stayed pending without
+              permission to retry. A saved PASS label could not substitute for
+              the raw observations required by the evidence review.
+            </p>
+          </article>
+        </div>
+        <div className="infrastructure-contract">
+          <strong>RECORDED RESULT / DECLARED SCOPE</strong>
+          <p>
+            57/57 preserved shared-source checks and 60/60 protected-restoration
+            successor checks passed. Six selected effects were reconstructed
+            from retained evidence. The suites overlap; their counts are not
+            added into a safety score.
+          </p>
+          <p>
+            Qualification covers one disposable PostgreSQL ledger with fictional
+            data, one enrolled source with restricted key scopes, trusted
+            installed services, and restoration while services are quiescent.
+            The protected checkpoint and its configuration must survive outside
+            the restored stores. Whole-host rollback and a compromised trusted
+            administrator are outside this result.
+          </p>
+        </div>
+        <p>
+          This is a first-party engineering result supported by retained hosted
+          execution and separate AI review. The source and full receipts remain
+          private and can be considered for scoped review. Independent human or
+          organizational review, production admission, native C09, useful
+          finite-expiry behavior, and physical A4 qualification remain open.
+        </p>
+        <div className="editorial-actions">
+          <a className="editorial-text-link" href="/registry#infra-integrated-software">Dated result and limits →</a>
+          <a className="editorial-text-link" href="/blog/when-tested-components-work-together">Why the combined test matters →</a>
+          <a className="editorial-text-link" href="/JCEE_INFRA_Software_Qualification_2026-10-19.md" download>Download the public qualification summary ↓</a>
+        </div>
+      </section>
+      <section
+        className="editorial-section editorial-section-muted"
         id="infrastructure-build"
         aria-labelledby="infrastructure-build-title"
       >
@@ -96,6 +169,11 @@ export default function TechnologyPage() {
           external consequence occurred, and whether the surviving evidence
           supports that conclusion. It connects existing authority sources,
           external systems of record, durable execution, and reviewable receipts.
+        </p>
+        <p>
+          The P0–P3 milestones below retain their original scope. The October 19
+          working integration is a separately identified software successor;
+          it does not close the heterogeneous-adapter or physical gates.
         </p>
         <div className="infrastructure-contract" aria-label="What the JCEE infrastructure is built to demonstrate">
           <strong>THE CORE ASSURANCE QUESTION</strong>
@@ -177,6 +255,25 @@ export default function TechnologyPage() {
             Discuss a bounded workflow assessment →
           </a>
         </div>
+      </section>
+
+      <section className="editorial-section" id="physical-commitment" aria-labelledby="physical-commitment-title">
+        <p className="editorial-kicker">E003 / PHYSICAL COMMITMENT STILL TO QUALIFY</p>
+        <h2 id="physical-commitment-title">The final effect needs its own evidence.</h2>
+        <p className="editorial-intro">
+          The open physical question is whether the actual target preserves
+          current authority through irreversible persistence under a qualified
+          timing and failure model. The software ledger qualification does not
+          establish that device-level boundary.
+        </p>
+        <p>
+          Independent witnesses and recovery reconstruction can help establish
+          what happened. They do not supply missing persistence semantics or a
+          measured upper bound from the authority check to the physical effect.
+          That requires the actual target, measured timing, and interruption,
+          revocation, expiry, and retry challenges alongside successful controls.
+        </p>
+        <a className="editorial-text-link" href="/registry#physical-commitment">Physical gate and evidence boundary →</a>
       </section>
 
       <section className="editorial-section editorial-section-muted">
