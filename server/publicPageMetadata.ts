@@ -74,6 +74,7 @@ export function applyPublicPageMetadata(html: string, requestPath: string) {
     "@type": "Organization",
     "@id": "https://jceelabs.com/#organization",
     name: "JCEE Labs",
+    legalName: "JCEE Labs LLC",
     url: "https://jceelabs.com/",
     logo: "https://jceelabs.com/brand/jcee-labs-mark.png",
     location: { "@type": "Place", name: "Dallas, Texas" },

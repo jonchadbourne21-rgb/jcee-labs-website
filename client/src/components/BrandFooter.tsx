@@ -62,7 +62,7 @@ export default function BrandFooter({
       </div>
 
       <div className="brand-footer-meta">
-        <span>© {new Date().getFullYear()} JCEE Labs</span>
+        <span>© {new Date().getFullYear()} JCEE Labs LLC</span>
         <span>JCEE LABS · PUBLIC SITE</span>
         <a href={backToTopHref}>BACK TO TOP ↑</a>
       </div>

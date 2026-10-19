@@ -6,7 +6,7 @@ export default function CompanyPage() {
       current="company"
       eyebrow="JCEE Labs / Dallas, Texas"
       title="About JCEE Labs: why we build for accountable operations"
-      description="JCEE Labs is based in Dallas, Texas, and founded by Jonathan Matthew Chadbourne. We develop methods and software for AI-assisted operations where permissions, evidence, and human responsibility matter."
+      description="JCEE Labs LLC is based in Dallas, Texas, and founded by Jonathan Matthew Chadbourne. We develop methods and software for AI-assisted operations where permissions, evidence, and human responsibility matter."
     >
       <section className="editorial-section editorial-section-muted">
         <p className="editorial-kicker">FOUNDER</p>
