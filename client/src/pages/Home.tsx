@@ -38,7 +38,7 @@ export default function Home() {
         </div>
         <aside className="preview-path" aria-labelledby="path-title">
           <div className="preview-panel-top"><span>THE PUBLIC INTEGRATION MODEL</span><span aria-hidden="true">01 — 06</span></div>
-          <h2 id="path-title">From a proposed action<br />to an inspectable record.</h2>
+          <h2 id="path-title">From a proposed action to an inspectable record.</h2>
           <p className="preview-panel-note">Illustrative control path · not live telemetry</p>
           <ol className="preview-path-list">
             {integrationSteps.map(([number, label]) => <li key={number}><span className="preview-path-number">{number}</span><strong>{label}</strong><span className="preview-path-check" aria-hidden="true">→</span></li>)}
