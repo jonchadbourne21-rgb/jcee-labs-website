@@ -19,114 +19,66 @@ const editorialCss = readFileSync(
 const plain = (source: string) => source.replace(/\s+/g, " ");
 
 describe("buyer-readable public positioning with Assurance Playbook control", () => {
-  it("leads with a plain-language accountable-operation promise", () => {
+  it("explains the service in plain language and offers a concrete next step", () => {
     expect(plain(home)).toContain(
-      "JCEE Labs helps teams design, build, and test AI-assisted software."
+      "We design, build, and test AI-assisted software"
     );
-    expect(home).toContain('href="#distribution-demo"');
+    expect(home).toContain('href="/consultation"');
     expect(home).toContain('href="/partners/enterprise"');
-    expect(home).toContain("JCEE ASSURANCE");
     expect(home).toContain("PUBLIC REGISTRY");
   });
 
-  it("shows Distribution as a bounded concrete demonstration rather than the company identity", () => {
+  it("keeps Distribution a bounded synthetic application", () => {
     expect(home).toContain('id="distribution-demo"');
-    expect(home).toContain("DISTRIBUTION REFERENCE IMPLEMENTATION");
-    expect(home).toContain("Use customer freight account");
-    expect(home).toContain("Freight account not recorded");
-    expect(home).toContain("Needs review");
+    expect(plain(home)).toContain("20 of 20 synthetic cases");
+    expect(plain(home)).toContain("zero external effects");
+    expect(plain(home)).toContain("the discrepancy itself grants no authority");
     expect(plain(home)).toContain(
-      "A person investigates. The discrepancy does not authorize a change."
-    );
-    expect(home).toContain("20 / 20");
-    expect(home).toContain("Expected synthetic classifications matched");
-    expect(home).toContain("0");
-    expect(home).toContain("External effects");
-    expect(plain(home)).toContain(
-      "The point is not the order screen. The point is the control pattern"
-    );
-    expect(plain(home)).toContain(
-      "shadow evaluation is the next commercial gate"
+      "Customer ROI, live integration, and production readiness remain unestablished"
     );
   });
 
-  it("distinguishes the browser illustration from recorded software qualification", () => {
-    expect(home).toContain("EvidenceThreadScene");
-    const scene = readFileSync(path.resolve(import.meta.dirname, "components", "EvidenceThreadScene.tsx"), "utf8");
-    expect(plain(scene)).toContain("Fictional data · Browser illustration");
-    expect(plain(scene)).toContain(
-      "does not run the VOW engine, persist a target effect, or produce a new test receipt"
-    );
+  it("distinguishes the browser illustration from qualification", () => {
+    expect(home).toContain("<EvidenceTrace />");
     expect(plain(home)).toContain(
-      "Customer savings and production performance have not yet been established"
+      "performs no external action, runs no VOW engine"
     );
+    expect(plain(home)).toContain("creates no qualification receipt");
+    expect(plain(home)).toContain("Customer savings, production performance");
   });
 
-  it("makes the first commercial step tangible without overstating maturity", () => {
+  it("scopes commercial work and keeps current authority explicit", () => {
+    expect(home).toContain("Workflow Assurance");
+    expect(home).toContain("Written boundary map");
+    expect(plain(home)).toContain("production changes");
+    expect(plain(home)).toContain(
+      "require their own written scope and authorization"
+    );
+    expect(plain(home)).toContain("current permissions");
+  });
+
+  it("takes the reader from the problem through services, customers, example, and evidence", () => {
+    const ids = [
+      "story",
+      "services",
+      "fit",
+      "working-example",
+      "evidence",
+      "consultation",
+    ];
+    const positions = ids.map(id => home.indexOf(`id="${id}"`));
+    for (const position of positions) expect(position).toBeGreaterThan(-1);
+    expect(positions).toEqual([...positions].sort((a, b) => a - b));
+  });
+
+  it("keeps ambitions and open deployment gates separate from tested results", () => {
     for (const phrase of [
-      "WORKFLOW ASSURANCE ASSESSMENT",
-      "Map of the workflow",
-      "Records and permissions",
-      "Failure and recovery gaps",
-      "Written next step",
-      "Commercial model",
-      "DISCUSS ONE WORKFLOW",
+      "Deployment admission",
+      "independent human review",
+      "payment consequence lane remains unqualified",
+      "in development",
     ]) {
-      expect(home).toContain(phrase);
-    }
-    expect(plain(home)).toContain(
-      "An assessment is not a certification, deployment, production-readiness promise, or grant of execution authority."
-    );
-    expect(home).toContain("No SaaS tier is implied.");
-  });
-
-  it("puts the buyer journey ahead of internal architecture", () => {
-    const hero = home.indexOf('className="hero hybrid-hero"');
-    const demo = home.indexOf('id="distribution-demo"');
-    const buyer = home.indexOf("<WhoThisIsFor />");
-    const assessment = home.indexOf('id="engage"');
-    const proof = home.indexOf('id="technology"');
-    const reference = home.indexOf('id="working-example"');
-    const method = home.indexOf('id="company"');
-    const platform = home.indexOf('id="operating-cloud"');
-    const progress = home.indexOf("recent-progress");
-
-    for (const index of [
-      hero,
-      demo,
-      buyer,
-      assessment,
-      proof,
-      reference,
-      method,
-      platform,
-      progress,
-    ]) {
-      expect(index).toBeGreaterThan(-1);
-    }
-
-    expect(hero).toBeLessThan(assessment);
-    expect(assessment).toBeLessThan(buyer);
-    expect(buyer).toBeLessThan(demo);
-    expect(demo).toBeLessThan(proof);
-    expect(hero).toBeLessThan(reference);
-    expect(reference).toBeLessThan(assessment);
-    expect(reference).toBeLessThan(method);
-    expect(method).toBeLessThan(platform);
-    expect(platform).toBeLessThan(progress);
-    expect(home).not.toContain("Make the evidence boundary visible.");
-    expect(home).not.toContain('aria-labelledby="workflow-cta"');
-  });
-
-  it("makes maturity and the public integration contract explicit", () => {
-    for (const phrase of [
-      "BUILT / TESTED",
-      "AVAILABLE TO SCOPE",
-      "NOT YET ESTABLISHED",
-      "Workflow Assurance Assessment",
-      "generic public SDK or API",
-    ]) {
-      expect(home).toContain(phrase);
+      expect(plain(home)).toContain(phrase);
     }
     for (const phrase of [
       "A proposal is not authority",
@@ -135,10 +87,8 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
       "public semantic contract",
       "system of record",
       "Each arrow is a binding",
-    ]) {
-      expect(home).toContain(phrase);
+    ])
       expect(technology).toContain(phrase);
-    }
     expect(inquiry).toContain("WORKFLOW ASSURANCE ASSESSMENT");
   });
 

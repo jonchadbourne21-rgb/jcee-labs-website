@@ -1,10 +1,10 @@
-import SiteNav from "@/components/SiteNav";
-import SiteFooter from "@/components/SiteFooter";
+import CoreHeader from "@/components/CoreHeader";
+import BrandFooter from "@/components/BrandFooter";
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#090514] via-[#0f0a1a] to-[#090514] flex flex-col">
-      <SiteNav />
+    <div id="top" className="legal-page min-h-screen flex flex-col">
+      <CoreHeader />
 
       <main className="flex-1 pt-32 pb-20 px-4">
         <div className="container max-w-3xl mx-auto">
@@ -127,7 +127,7 @@ export default function TermsPage() {
         </div>
       </main>
 
-      <SiteFooter />
+      <BrandFooter />
     </div>
   );
 }

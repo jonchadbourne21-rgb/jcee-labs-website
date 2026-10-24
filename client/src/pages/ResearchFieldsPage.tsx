@@ -302,23 +302,33 @@ export default function ResearchFieldsPage() {
       title="Research fields"
       description="A dated research portfolio across 25 fields, connected by evidence, authority, state, and consequence. Individual results retain their own qualification boundaries."
     >
-      <section className="editorial-section research-portfolio-intro" aria-labelledby="portfolio-summary-title">
+      <nav className="research-topic-nav" aria-label="Research navigation">
+        <a href="/research">← All research</a>
+      </nav>
+      <span id="portfolio-title" />
+      <section
+        className="editorial-section research-portfolio-intro"
+        aria-labelledby="portfolio-summary-title"
+      >
         <p className="editorial-kicker">
-          PORTFOLIO REFERENCE · PREPARED <time dateTime="2026-09-18">18 SEPTEMBER 2026</time>
+          PORTFOLIO REFERENCE · PREPARED{" "}
+          <time dateTime="2026-09-18">18 SEPTEMBER 2026</time>
         </p>
-        <h2 id="portfolio-summary-title">25 fields. One unifying research question.</h2>
+        <h2 id="portfolio-summary-title">
+          25 fields. One unifying research question.
+        </h2>
         <p className="editorial-intro">
-          The portfolio reference spans trustworthy AI, distributed and resilient
-          computing, formal verification, quantum information, information
-          theory, causal assurance, complex systems, human-AI interaction, and
-          applied computational intelligence.
+          The portfolio reference spans trustworthy AI, distributed and
+          resilient computing, formal verification, quantum information,
+          information theory, causal assurance, complex systems, human-AI
+          interaction, and applied computational intelligence.
         </p>
         <div className="research-question">
           <span>UNIFYING RESEARCH QUESTION</span>
           <blockquote>
-            How do you determine what a system actually knows, what that evidence
-            permits it to conclude, what authority it possesses, and what
-            consequences it may safely produce?
+            How do you determine what a system actually knows, what that
+            evidence permits it to conclude, what authority it possesses, and
+            what consequences it may safely produce?
           </blockquote>
         </div>
         <p>
@@ -331,10 +341,15 @@ export default function ResearchFieldsPage() {
           before expanding the platform. This field map describes research
           scope; it is not a list of 25 validated products or physical findings.
         </p>
-        <a className="editorial-text-link" href="/research">Current research results and priorities →</a>
+        <a className="editorial-text-link" href="/research">
+          Current research results and priorities →
+        </a>
       </section>
 
-      <section className="editorial-section editorial-section-muted" aria-labelledby="research-fields-title">
+      <section
+        className="editorial-section editorial-section-muted"
+        aria-labelledby="research-fields-title"
+      >
         <div className="editorial-section-heading">
           <div>
             <p className="editorial-kicker">THE DATED PORTFOLIO REFERENCE</p>
@@ -359,12 +374,15 @@ export default function ResearchFieldsPage() {
         </div>
       </section>
 
-      <section className="editorial-section editorial-section-dark research-identity" aria-labelledby="research-identity-title">
+      <section
+        className="editorial-section editorial-section-dark research-identity"
+        aria-labelledby="research-identity-title"
+      >
         <p className="editorial-kicker">INTERDISCIPLINARY RESEARCH IDENTITY</p>
-        <h2 id="research-identity-title">The work crosses substrates. The boundary stays recognizable.</h2>
-        <p>
-          At the highest level, JCEE Labs sits at the intersection of:
-        </p>
+        <h2 id="research-identity-title">
+          The work crosses substrates. The boundary stays recognizable.
+        </h2>
+        <p>At the highest level, JCEE Labs sits at the intersection of:</p>
         <div className="research-identity-grid">
           {interdisciplinaryDomains.map(domain => (
             <div key={domain}>{domain}</div>
@@ -373,9 +391,9 @@ export default function ResearchFieldsPage() {
         <div className="research-question research-question-dark">
           <span>THE CONNECTING THREAD</span>
           <blockquote>
-            How do you determine what a system actually knows, what that evidence
-            permits it to conclude, what authority it possesses, and what
-            consequences it may safely produce?
+            How do you determine what a system actually knows, what that
+            evidence permits it to conclude, what authority it possesses, and
+            what consequences it may safely produce?
           </blockquote>
         </div>
         <p>

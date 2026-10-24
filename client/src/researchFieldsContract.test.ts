@@ -3,11 +3,23 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 
 const sourceRoot = path.resolve(import.meta.dirname);
-const page = readFileSync(path.join(sourceRoot, "pages", "ResearchFieldsPage.tsx"), "utf8");
+const page = readFileSync(
+  path.join(sourceRoot, "pages", "ResearchFieldsPage.tsx"),
+  "utf8"
+);
 const app = readFileSync(path.join(sourceRoot, "App.tsx"), "utf8");
-const research = readFileSync(path.join(sourceRoot, "pages", "ResearchPage.tsx"), "utf8");
-const resources = readFileSync(path.join(sourceRoot, "pages", "ResourcesPage.tsx"), "utf8");
-const footer = readFileSync(path.join(sourceRoot, "components", "BrandFooter.tsx"), "utf8");
+const research = readFileSync(
+  path.join(sourceRoot, "pages", "ResearchPage.tsx"),
+  "utf8"
+);
+const resources = readFileSync(
+  path.join(sourceRoot, "pages", "ResourcesPage.tsx"),
+  "utf8"
+);
+const footer = readFileSync(
+  path.join(sourceRoot, "components", "BrandFooter.tsx"),
+  "utf8"
+);
 const plain = (source: string) => source.replace(/\s+/g, " ");
 
 const fieldTitles = [
@@ -59,12 +71,19 @@ describe("research portfolio public surface", () => {
       "Quantum information",
       "Distributed systems",
       "Epistemology",
-    ]) expect(page).toContain(domain);
+    ])
+      expect(page).toContain(domain);
   });
 
   it("places the portfolio under Research and links it from the reference surfaces", () => {
     expect(app).toContain('path="/research/fields"');
-    expect(research).toContain('href="/research/fields"');
+    expect(research).toContain("researchTopics.map");
+    expect(
+      readFileSync(
+        path.join(sourceRoot, "content", "researchTopics.ts"),
+        "utf8"
+      )
+    ).toContain('slug: "fields"');
     expect(resources).toContain('href="/research/fields"');
     expect(footer).toContain('href="/research/fields"');
   });

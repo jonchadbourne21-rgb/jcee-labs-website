@@ -1,5 +1,5 @@
 import { spawn } from "node:child_process";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import net from "node:net";
 import { rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -61,46 +61,9 @@ const profiles = {
   },
 };
 
-const publicRoutes = [
-  "/blog/what-is-an-evidence-boundary",
-  "/blog/after-an-ai-says-done",
-  "/blog/when-tested-components-work-together",
-  "/blog/restoring-a-backup-without-restoring-permission",
-  "/blog/testing-the-evidence-pipeline",
-  "/blog/a-research-result-needs-a-boundary",
-  "/research/bb84-communication",
-  "/blog/a-confident-model-still-needs-permission",
-  "/research/fields",
-  "/operating-cloud",
-  "/blog/the-work-nobody-sees",
-  "/research/crucible-composition-tax",
-  "/solutions/distribution",
-  "/technology",
-  "/research",
-  "/resources",
-  "/company",
-  "/founder",
-  "/blog/start-with-the-workflow",
-  "/blog/distribution-first-dry-run",
-  "/research/qcs-frozen-specification-reproduction",
-  "/research/crucible-semantic-kernel",
-  "/",
-  "/partners",
-  "/partners/enterprise",
-  "/partners/research",
-  "/vow",
-  "/qcs",
-  "/assurance",
-  "/registry",
-  "/research-evidence",
-  "/charter",
-  "/charter/archive/v1.0",
-  "/research/jrp-000",
-  "/privacy",
-  "/terms",
-  "/portfolio",
-  "/404",
-];
+const publicRoutes = JSON.parse(
+  readFileSync("client/src/content/publicRoutes.json", "utf8")
+);
 
 const profileEntries = requestedProfile
   ? [[requestedProfile, profiles[requestedProfile]]]

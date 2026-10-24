@@ -18,6 +18,10 @@ export default function BrandFooter({
         <p>
           We build for the distance between what software claims and what it can
           prove.
+          <br />
+          <a className="footer-founder" href="/founder">
+            Founded by Jonathan Matthew Chadbourne ↗
+          </a>
         </p>
       </div>
 
@@ -26,7 +30,9 @@ export default function BrandFooter({
           <span>COMPANY</span>
           <a href="/company">JCEE Labs</a>
           <a href="/founder">Meet the founder</a>
-          <a href="/charter">Charter</a>
+          <a href="/charter" id="charter">
+            Charter
+          </a>
           <a href="/charter/archive/v1.0">Charter v1.0 Archive</a>
         </div>
         <div>

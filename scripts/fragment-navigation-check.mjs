@@ -52,8 +52,8 @@ try {
     uploadThroughput: 5_000_000,
   });
   const targets = [
-    ["/research", "evidence-ladder"],
-    ["/research", "physical-validation"],
+    ["/research/evidence-standards", "evidence-ladder"],
+    ["/research/physical-experiments", "physical-validation"],
     ["/technology", "infrastructure-build"],
   ];
   let checked = 0;
@@ -140,24 +140,36 @@ try {
         await atTarget(route, id, `${name}/${reducedMotion} reload`);
       }
       await navigate(send, base, "/research#evidence-ladder");
-      await atTarget("/research", "evidence-ladder", `${name} direct link`);
+      await atTarget(
+        "/research/evidence-standards",
+        "evidence-ladder",
+        `${name} direct link`
+      );
       // Wouter navigation uses pushState, which does not emit hashchange.
       await evaluate(
         send,
-        "history.pushState(null, '', '#physical-validation')"
+        `history.pushState(null, '', '${prefix}/research/physical-experiments#physical-validation')`
       );
       await atTarget(
-        "/research",
+        "/research/physical-experiments",
         "physical-validation",
         `${name} same-page router link`
       );
       await evaluate(send, "history.back()");
-      await atTarget("/research", "evidence-ladder", `${name} Back`);
-      await evaluate(send, "history.forward()");
-      await atTarget("/research", "physical-validation", `${name} Forward`);
-      await evaluate(send, "location.hash = '#evidence-ladder'");
       await atTarget(
-        "/research",
+        "/research/evidence-standards",
+        "evidence-ladder",
+        `${name} Back`
+      );
+      await evaluate(send, "history.forward()");
+      await atTarget(
+        "/research/physical-experiments",
+        "physical-validation",
+        `${name} Forward`
+      );
+      await navigate(send, base, "/research#evidence-ladder");
+      await atTarget(
+        "/research/evidence-standards",
         "evidence-ladder",
         `${name} native hash link`
       );
