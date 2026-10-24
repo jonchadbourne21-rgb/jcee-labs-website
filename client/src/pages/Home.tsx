@@ -437,9 +437,9 @@ export default function Home() {
           <span className="et-bridge-index et-mono">03 / UP NEXT</span>
           <div className="et-bridge-copy">
             <span className="et-eyebrow">THE PEOPLE</span>
-            <p>Software serves people doing real work.</p>
+            <p>Built for the teams putting AI to work.</p>
             <small>
-              For the people running, building, and checking the work.
+              For product, operations, and engineering teams.
             </small>
           </div>
           <img
@@ -467,14 +467,12 @@ export default function Home() {
         </div>
         <div className="et-section-heading">
           <h2 id="fit-title">
-            <span id="who-this-is-for" aria-hidden="true"></span>For the teams
-            <br />
-            behind the outcome.
+            <span id="who-this-is-for" aria-hidden="true"></span>Who we build for.
           </h2>
           <div>
             <p className="et-lead">
-              Our intended customers are businesses building AI-assisted
-              products or running workflows across people and software.
+              We build for businesses developing AI-assisted products and teams
+              automating critical business operations.
             </p>
             <p>
               Industrial distribution is our first industry focus. The wider fit
