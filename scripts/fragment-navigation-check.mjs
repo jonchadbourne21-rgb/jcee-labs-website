@@ -139,7 +139,9 @@ try {
         await sleep(200);
         await atTarget(route, id, `${name}/${reducedMotion} reload`);
       }
-      await navigate(send, base, "/research#evidence-ladder");
+      // This URL intentionally redirects to a topic page. atTarget verifies the
+      // final path, client readiness, visibility, and stable section position.
+      await send("Page.navigate", { url: `${base}/research#evidence-ladder` });
       await atTarget(
         "/research/evidence-standards",
         "evidence-ladder",
@@ -167,7 +169,9 @@ try {
         "physical-validation",
         `${name} Forward`
       );
-      await navigate(send, base, "/research#evidence-ladder");
+      // This URL intentionally redirects to a topic page. atTarget verifies the
+      // final path, client readiness, visibility, and stable section position.
+      await send("Page.navigate", { url: `${base}/research#evidence-ladder` });
       await atTarget(
         "/research/evidence-standards",
         "evidence-ladder",
