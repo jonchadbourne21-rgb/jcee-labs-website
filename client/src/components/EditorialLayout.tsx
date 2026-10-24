@@ -59,9 +59,19 @@ export default function EditorialLayout({
       <CoreHeader current={current} />
       <div id="page-content" tabIndex={-1}>
         <header className="editorial-masthead">
-          <p className="editorial-kicker">{eyebrow}</p>
-          <h1>{title}</h1>
-          <p className="editorial-deck">{description}</p>
+          <div className="editorial-hero-copy">
+            <p className="editorial-kicker">{eyebrow}</p>
+            <h1>{title}</h1>
+            <p className="editorial-deck">{description}</p>
+          </div>
+          <img
+            className="editorial-hero-art"
+            src={`${import.meta.env.BASE_URL}landing/illustrations/${current === "research" || current === "resources" ? "evidence" : current === "company" ? "fit" : current === "solutions" ? "story" : "services"}-v2.webp`}
+            width="1536"
+            height="1024"
+            alt=""
+            decoding="async"
+          />
         </header>
         {children}
       </div>

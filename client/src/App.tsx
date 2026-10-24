@@ -29,6 +29,7 @@ const ResearchPartnersPage = lazy(() => import("./pages/ResearchPartnersPage"));
 const DistributionPage = lazy(() => import("./pages/DistributionPage"));
 const OperatingCloudPage = lazy(() => import("./pages/OperatingCloudPage"));
 const TechnologyPage = lazy(() => import("./pages/TechnologyPage"));
+const ResearchTopicPage = lazy(() => import("./pages/ResearchTopicPage"));
 const ResearchPage = lazy(() => import("./pages/ResearchPage"));
 const ResearchFieldsPage = lazy(() => import("./pages/ResearchFieldsPage"));
 const ResourcesPage = lazy(() => import("./pages/ResourcesPage"));
@@ -111,10 +112,22 @@ function Router() {
         />
         <Route path="/blog/the-work-nobody-sees" component={PublicationPage} />
         <Route path="/blog/after-an-ai-says-done" component={PublicationPage} />
-        <Route path="/blog/when-a-timeout-is-not-a-failure" component={PublicationPage} />
-        <Route path="/blog/when-tested-components-work-together" component={PublicationPage} />
-        <Route path="/blog/restoring-a-backup-without-restoring-permission" component={PublicationPage} />
-        <Route path="/blog/testing-the-evidence-pipeline" component={PublicationPage} />
+        <Route
+          path="/blog/when-a-timeout-is-not-a-failure"
+          component={PublicationPage}
+        />
+        <Route
+          path="/blog/when-tested-components-work-together"
+          component={PublicationPage}
+        />
+        <Route
+          path="/blog/restoring-a-backup-without-restoring-permission"
+          component={PublicationPage}
+        />
+        <Route
+          path="/blog/testing-the-evidence-pipeline"
+          component={PublicationPage}
+        />
         <Route
           path="/blog/a-research-result-needs-a-boundary"
           component={PublicationPage}
@@ -130,6 +143,21 @@ function Router() {
         />
         <Route path="/technology" component={TechnologyPage} />
         <Route path="/research/fields" component={ResearchFieldsPage} />
+        <Route path="/research/publications">
+          {() => <ResearchTopicPage topic="publications" />}
+        </Route>
+        <Route path="/research/programs">
+          {() => <ResearchTopicPage topic="programs" />}
+        </Route>
+        <Route path="/research/measurement">
+          {() => <ResearchTopicPage topic="measurement" />}
+        </Route>
+        <Route path="/research/physical-experiments">
+          {() => <ResearchTopicPage topic="physical-experiments" />}
+        </Route>
+        <Route path="/research/evidence-standards">
+          {() => <ResearchTopicPage topic="evidence-standards" />}
+        </Route>
         <Route path="/research" component={ResearchPage} />
         <Route path="/resources" component={ResourcesPage} />
         <Route path="/company" component={CompanyPage} />

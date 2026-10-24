@@ -91,7 +91,7 @@ describe("BB84 public preprint — R146 release boundary", () => {
 
   it("mounts the card on the existing Research publications surface", () => {
     const source = readFileSync(
-      resolve(process.cwd(), "client/src/pages/ResearchPage.tsx"),
+      resolve(process.cwd(), "client/src/components/ResearchSections.tsx"),
       "utf8"
     );
     expect(source).toContain(

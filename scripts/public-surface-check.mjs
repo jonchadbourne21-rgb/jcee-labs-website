@@ -277,19 +277,23 @@ try {
   const founderSchemaMatch = founderHtml.match(
     /<script id="public-schema" type="application\/ld\+json">([\s\S]*?)<\/script>/
   );
-  const founderSchema = founderSchemaMatch ? JSON.parse(founderSchemaMatch[1]) : null;
+  const founderSchema = founderSchemaMatch
+    ? JSON.parse(founderSchemaMatch[1])
+    : null;
   if (
     !founderResponse.ok ||
     founderSchema?.["@type"] !== "ProfilePage" ||
     founderSchema?.mainEntity?.name !== "Jonathan Matthew Chadbourne" ||
     founderSchema?.mainEntity?.url !== "https://jceelabs.com/founder"
   ) {
-    failures.push("founder identity is missing from the HTML received by sharing crawlers");
+    failures.push(
+      "founder identity is missing from the HTML received by sharing crawlers"
+    );
   }
 
   await navigate(page.send, baseUrl, "/");
   const homepageText = await readBody(page.send);
-  if (!homepageText.includes("JCEE ASSURANCE")) {
+  if (!homepageText.includes("JCEE Assurance")) {
     failures.push("homepage is missing the JCEE Assurance section");
   }
   if (!homepageText.includes("PUBLIC REGISTRY")) {
@@ -300,6 +304,50 @@ try {
   }
   if (homepageText.includes("MIRRORED")) {
     failures.push("homepage still exposes Mirrored");
+  }
+
+  // The homepage illustration is browser-local and must show all four bounded outcomes.
+  for (const [scenario, expected] of [
+    ["authorized", "Confirmed in the target record"],
+    ["revoked", "Held — no release attempted"],
+    ["lost", "Existing effect reconciled"],
+    ["conflict", "Unresolved — review required"],
+  ]) {
+    await evaluate(
+      page.send,
+      `document.querySelector('[data-scenario="${scenario}"]').click()`
+    );
+    for (let step = 0; step < 3; step++) {
+      await evaluate(
+        page.send,
+        "document.querySelector('#trace-next').click()"
+      );
+      await sleep(60);
+    }
+    const state = await evaluate(
+      page.send,
+      `({
+      outcome: document.querySelector('[data-stage="3"] strong')?.textContent,
+      count: document.querySelector('#trace-count')?.textContent,
+      focus: document.activeElement?.id,
+      pressed: document.querySelector('[data-scenario="${scenario}"]')?.getAttribute('aria-pressed')
+    })`
+    );
+    if (
+      state.outcome !== expected ||
+      state.count !== "STEP 4 OF 4" ||
+      state.pressed !== "true" ||
+      state.focus !== "trace-reset"
+    )
+      failures.push(`Homepage scenario ${scenario}: ${JSON.stringify(state)}`);
+    await evaluate(page.send, "document.querySelector('#trace-reset').click()");
+    await sleep(60);
+    const reset = await evaluate(
+      page.send,
+      "({count: document.querySelector('#trace-count')?.textContent, focus: document.activeElement?.id})"
+    );
+    if (reset.count !== "STEP 1 OF 4" || reset.focus !== "trace-next")
+      failures.push(`Homepage reset ${scenario}: ${JSON.stringify(reset)}`);
   }
 
   const footer = await evaluate(
@@ -349,7 +397,7 @@ try {
     }
     const cloudPanel = await evaluate(
       page.send,
-      "Boolean(document.querySelector('.operating-cloud-home'))"
+      "Boolean(document.querySelector('#operating-cloud'))"
     );
     if (!cloudPanel) failures.push("Latest Operating Cloud panel is missing");
     for (const name of [
@@ -402,6 +450,25 @@ try {
     }
   }
 
+  await navigate(page.send, baseUrl, "/research");
+  const researchTopics = await evaluate(
+    page.send,
+    "[...document.querySelectorAll('.research-topic-row')].map(a => a.getAttribute('href'))"
+  );
+  for (const topic of [
+    "publications",
+    "programs",
+    "measurement",
+    "physical-experiments",
+    "fields",
+    "evidence-standards",
+  ]) {
+    if (!researchTopics.includes(`${prefix}/research/${topic}`))
+      failures.push(
+        `Research topic navigation is missing its delivery prefix: ${topic}`
+      );
+  }
+
   await navigate(page.send, baseUrl, "/assurance");
   const assuranceArchitectureColors = await evaluate(
     page.send,
@@ -415,12 +482,12 @@ try {
     };
   })()`
   );
-  if (assuranceArchitectureColors.copy !== "rgba(9, 11, 16, 0.68)") {
+  if (assuranceArchitectureColors.copy !== "rgb(81, 86, 86)") {
     failures.push(
-      `Assurance architecture copy has unexpected low-contrast color: ${assuranceArchitectureColors.copy}`
+      `Assurance architecture copy does not use the shared paper-surface ink: ${assuranceArchitectureColors.copy}`
     );
   }
-  if (assuranceArchitectureColors.label !== "rgb(49, 92, 255)") {
+  if (assuranceArchitectureColors.label !== "rgb(25, 59, 103)") {
     failures.push(
       `Assurance architecture label has unexpected color: ${assuranceArchitectureColors.label}`
     );
@@ -458,6 +525,11 @@ try {
     ["/solutions/distribution", "JCEE Distribution: order review"],
     ["/technology", "Intelligence should leave receipts"],
     ["/research", "Results you can examine"],
+    ["/research/publications", "Reports & publications"],
+    ["/research/programs", "Research programs"],
+    ["/research/measurement", "Measurement & numerical assurance"],
+    ["/research/physical-experiments", "Physical experiments"],
+    ["/research/evidence-standards", "Evidence standards"],
     ["/research/fields", "25 fields. One unifying research question"],
     ["/resources", "Articles and guides to accountable AI-assisted operations"],
     ["/company", "About JCEE Labs: why we build for accountable operations"],
@@ -545,7 +617,9 @@ try {
     !filtered.text.includes("What Happens After an AI Says") ||
     !filtered.text.includes("When a Timeout Is Not a Failure") ||
     !filtered.text.includes("When Tested Components Work Together") ||
-    !filtered.text.includes("Restoring a Backup Without Restoring Permission") ||
+    !filtered.text.includes(
+      "Restoring a Backup Without Restoring Permission"
+    ) ||
     !filtered.text.includes("Testing the Evidence Pipeline")
   )
     failures.push("Resource filter did not show the engineering articles");

@@ -3,10 +3,11 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 
 const root = path.resolve(import.meta.dirname);
-const read = (relative: string) => readFileSync(path.join(root, relative), "utf8");
+const read = (relative: string) =>
+  readFileSync(path.join(root, relative), "utf8");
 
 const home = read("pages/Home.tsx");
-const research = read("pages/ResearchPage.tsx");
+const research = read("components/ResearchSections.tsx");
 const technology = read("pages/TechnologyPage.tsx");
 const ladder = read("components/EvidenceLadder.tsx");
 const css = read("editorial-update.css");
@@ -24,7 +25,9 @@ describe("October evidence and infrastructure claim boundaries", () => {
     expect(ladder).toContain("different kinds of evidence, not a single score");
     expect(research).toContain("<EvidenceLadder />");
     expect(home).toContain('id="evidence-frontier"');
-    expect(home).toContain('href="/research#evidence-ladder"');
+    expect(home).toContain(
+      'href="/research/evidence-standards#evidence-ladder"'
+    );
   });
 
   it("names both physical proposals and makes unrun status explicit", () => {
@@ -38,12 +41,19 @@ describe("October evidence and infrastructure claim boundaries", () => {
     expect(research).toContain("WHAT IT WOULD NOT PROVE");
     expect(research).toContain("a rescheduled feasibility discussion is not");
     expect(research).not.toContain("UT Southwestern");
-    expect(home).toContain('href="/research#physical-validation"');
+    expect(home).toContain(
+      'href="/research/physical-experiments#physical-validation"'
+    );
   });
 
   it("publishes frozen P0, bounded P1/P2, and held P3 without a blanket mandate claim", () => {
     expect(technology).toContain('id="infrastructure-build"');
-    for (const stage of ["P0 / UNIFIED CONTRACT", "P1 / GOLDEN EXECUTION PATH", "P2 / HOSTILE CONFORMANCE", "P3 / HETEROGENEOUS ADAPTERS"]) {
+    for (const stage of [
+      "P0 / UNIFIED CONTRACT",
+      "P1 / GOLDEN EXECUTION PATH",
+      "P2 / HOSTILE CONFORMANCE",
+      "P3 / HETEROGENEOUS ADAPTERS",
+    ]) {
       expect(technology).toContain(stage);
     }
     expect(technology).toContain("CONTRACT FROZEN");
@@ -62,9 +72,9 @@ describe("October evidence and infrastructure claim boundaries", () => {
     const platform = home.indexOf('id="operating-cloud"');
     const evidence = home.indexOf('id="evidence-frontier"');
     expect(offer).toBeLessThan(proof);
-    expect(proof).toBeLessThan(integration);
-    expect(platform).toBeLessThan(evidence);
-    expect(home).toContain("NOT YET ESTABLISHED");
+    expect(integration).toBeLessThan(proof);
+    expect(evidence).toBeLessThan(platform);
+    expect(home.replace(/\s+/g, " ")).toContain("have not been established");
     expect(css).toContain("@media (max-width: 700px)");
     expect(css).toContain(".physical-program-grid");
     expect(css).toContain(".infra-stage-grid");

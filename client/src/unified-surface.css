@@ -1,0 +1,778 @@
+/* Shared public design: one continuous warm-white surface, navy accents,
+   open editorial rows, and dimensional black headings. Admin UI is excluded. */
+:root {
+  --jcee-paper: #f6f6f2;
+  --jcee-ink: #080808;
+  --jcee-muted: #515656;
+  --jcee-line: #d5d7d2;
+  --jcee-blue: #2563eb;
+  --jcee-navy: #193b67;
+  --jcee-lift:
+    0.00474em 0.01303em 0.0132em rgb(0 0 0 / 0.14),
+    0.02634em 0.07238em 0.055em rgb(0 0 0 / 0.24),
+    0 0.099em 0.209em rgb(0 0 0 / 0.12);
+  --editorial-paper: var(--jcee-paper);
+  --editorial-ink: var(--jcee-ink);
+  --editorial-muted: var(--jcee-muted);
+  --editorial-blue: var(--jcee-navy);
+  --editorial-line: var(--jcee-line);
+}
+html {
+  scroll-padding-top: 110px;
+}
+body:has(.site-header) {
+  background: var(--jcee-paper);
+}
+:is(
+  .unified-home,
+  .editorial-page,
+  .program-page,
+  .paper-page,
+  .preview-consultation-page,
+  .legal-page
+) {
+  background: var(--jcee-paper) !important;
+  color: var(--jcee-ink);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --paper: var(--jcee-paper);
+  --ink: var(--jcee-ink);
+  --blue: var(--jcee-blue);
+}
+:is(
+    .editorial-page,
+    .program-page,
+    .paper-page,
+    .preview-consultation-page,
+    .legal-page
+  )
+  :is(h1, h2, h3) {
+  color: var(--jcee-ink) !important;
+  text-shadow: var(--jcee-lift);
+  font-family: inherit;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+:is(.editorial-page, .program-page, .paper-page, .preview-consultation-page)
+  :is(h1, h2, h3)
+  em {
+  color: inherit !important;
+  font-style: normal;
+  text-shadow: inherit;
+}
+:is(.editorial-page, .program-page, .paper-page, .preview-consultation-page)
+  :is(
+    .editorial-kicker,
+    .eyebrow,
+    .preview-kicker,
+    .charter-section-label,
+    .program-number,
+    .registry-kicker,
+    .partner-kicker
+  ) {
+  color: var(--jcee-navy) !important;
+}
+/* The same header on every public page; its reserved width prevents mobile crowding. */
+.site-header,
+.unified-home .site-header {
+  position: sticky !important;
+  top: 0 !important;
+  inset-inline: 0 !important;
+  z-index: 60;
+  width: 100%;
+  height: 82px !important;
+  min-height: 82px !important;
+  padding: 0 max(36px, calc((100% - 1280px) / 2)) !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 0 !important;
+  background: rgb(246 246 242 / 0.96) !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--jcee-line) !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(18px);
+  color: var(--jcee-ink) !important;
+}
+.site-header .wordmark,
+.site-header .desktop-nav a,
+.site-header .header-contact {
+  color: var(--jcee-ink) !important;
+  text-shadow: none;
+}
+.site-header .wordmark {
+  display: inline-flex;
+  gap: 12px;
+  align-items: center;
+  flex-shrink: 0;
+}
+.site-header .wordmark-mark {
+  width: 32px !important;
+  height: 36px !important;
+  object-fit: contain;
+}
+.site-header .wordmark span {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+}
+.site-header .desktop-nav {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+.site-header .desktop-nav a {
+  font-size: 12px !important;
+  font-weight: 500;
+}
+.site-header .header-actions {
+  display: flex;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 16px;
+}
+.site-header .header-contact {
+  border: 0 !important;
+  border-bottom: 1px solid var(--jcee-ink) !important;
+  border-radius: 0 !important;
+  background: none !important;
+  padding: 9px 0 !important;
+  font-size: 13px !important;
+  display: flex;
+  gap: 20px;
+  white-space: nowrap;
+}
+.site-header .mobile-menu {
+  display: none;
+}
+.site-header .mobile-menu-toggle {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  color: var(--jcee-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+}
+.site-header .mobile-nav {
+  position: absolute;
+  top: calc(100% - 1px);
+  left: 0;
+  right: 0;
+  width: auto;
+  background: var(--jcee-paper) !important;
+  border: 0;
+  border-bottom: 1px solid var(--jcee-line);
+  padding: 20px 24px 28px;
+  box-shadow: 0 16px 20px rgb(0 0 0 / 0.04);
+}
+.site-header .mobile-nav.is-closed {
+  display: none !important;
+}
+.site-header .mobile-nav.is-open {
+  display: grid !important;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+.site-header .mobile-nav a {
+  color: var(--jcee-ink) !important;
+  padding: 12px 0;
+  font-size: 16px;
+  min-height: 44px;
+}
+.site-header a:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.site-header .skip-link {
+  background: var(--jcee-ink);
+  color: white !important;
+}
+:is(
+    .unified-home,
+    .editorial-page,
+    .program-page,
+    .paper-page,
+    .preview-consultation-page,
+    .legal-page
+  )
+  :is(a, button, input, textarea, select):focus-visible {
+  outline: 3px solid var(--jcee-blue);
+  outline-offset: 5px;
+}
+/* Remove decorative panel surfaces; section order is carried by spacing and fine rules. */
+.editorial-page :is(.editorial-masthead, .editorial-section),
+.program-page > section,
+.paper-page > section,
+.preview-consultation-page > section {
+  background: transparent !important;
+  background-image: none !important;
+  color: var(--jcee-ink) !important;
+  box-shadow: none !important;
+  border-inline: 0 !important;
+  border-radius: 0 !important;
+}
+.program-page :is(.program-masthead, .partner-masthead)::before,
+.program-page :is(.program-masthead, .partner-masthead)::after,
+.preview-consultation-page::before {
+  display: none !important;
+}
+.editorial-page .editorial-masthead {
+  padding: 85px max(36px, calc((100% - 1280px) / 2)) 72px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(240px, 0.8fr);
+  align-items: center;
+  gap: 40px;
+}
+.editorial-page .editorial-masthead h1 {
+  font-size: clamp(44px, 5.2vw, 78px);
+  line-height: 1.08;
+  margin: 24px 0 30px;
+}
+.editorial-page .editorial-deck {
+  color: var(--jcee-muted);
+  font-size: 18px;
+}
+.editorial-hero-art {
+  width: 100%;
+  max-height: 340px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  mask-image: radial-gradient(ellipse at center, #000 48%, transparent 74%);
+}
+.editorial-page .editorial-section {
+  padding: 64px max(36px, calc((100% - 1280px) / 2));
+}
+.editorial-page .editorial-section h2 {
+  font-weight: 600;
+}
+.editorial-page .editorial-section :is(p, li, dd),
+.program-page > section :is(p, li, dd),
+.paper-page > section :is(p, li, dd),
+.preview-consultation-page > section :is(p, li, dd) {
+  color: var(--jcee-muted);
+}
+.editorial-page .editorial-section-dark :is(p, .editorial-kicker),
+.program-page
+  :is(
+    .program-deck,
+    .program-status-row,
+    .program-statement-copy,
+    .registry-entry-summary,
+    .partner-masthead-copy,
+    .partner-deck
+  ),
+.preview-consultation-page
+  :is(
+    .preview-deck,
+    .preview-call-facts,
+    .preview-panel-top,
+    .preview-form-help
+  ) {
+  color: var(--jcee-muted) !important;
+}
+.editorial-page
+  :is(
+    .resource-card,
+    .physical-program,
+    .evidence-ladder__item,
+    .build-status-list article,
+    .research-question,
+    .founder-identity,
+    .founder-work-link,
+    .research-field,
+    .research-field-card,
+    .bb84-public-preprint
+  ),
+.program-page
+  :is(
+    .registry-entry,
+    .registry-classification-grid article,
+    .program-boundary-list article,
+    .charter-law-grid article,
+    .charter-openness-grid article,
+    .partner-pathway,
+    .partner-pathway-card,
+    .build-status-list article
+  ),
+.preview-consultation-page
+  :is(
+    .preview-consult-form,
+    .preview-draft-review,
+    .preview-services-grid article,
+    .preview-direct-contact
+  ) {
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-top: 1px solid var(--jcee-line) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 28px 0 !important;
+}
+.editorial-page
+  :is(.resource-grid, .physical-program-grid, .build-status-list) {
+  gap: 32px 56px;
+}
+.editorial-page
+  :is(
+    .editorial-text-link,
+    .editorial-section-heading > a,
+    .resource-card > a,
+    .research-status-line
+  ),
+.program-page
+  :is(
+    .program-links a,
+    .registry-entry a,
+    .registry-entry dt,
+    .partner-pathway-link
+  ),
+.preview-consultation-page
+  :is(.preview-text-link, .preview-back-link, .preview-direct-contact a) {
+  color: var(--jcee-navy) !important;
+}
+.editorial-page .editorial-button,
+.preview-consultation-page .preview-button {
+  background: var(--jcee-ink) !important;
+  border-color: var(--jcee-ink) !important;
+  color: white !important;
+  box-shadow: none !important;
+  border-radius: 4px;
+}
+.preview-consultation-page :is(input, textarea, select),
+.program-page :is(input, textarea, select) {
+  color: var(--jcee-ink);
+  background: #fff;
+  border-color: #9da6b0;
+}
+.preview-consultation-page .preview-consult-form label {
+  color: var(--jcee-ink);
+}
+.preview-consultation-page .preview-draft-review pre {
+  background: #edf0f2;
+  color: var(--jcee-ink);
+}
+/* Focused research directory, with the detailed record on topic pages. */
+.editorial-page .research-directory {
+  padding-top: 0;
+}
+.research-topic-row {
+  display: grid;
+  grid-template-columns: 60px minmax(0, 1fr) 44px;
+  gap: 30px;
+  padding: 36px 0;
+  border-top: 1px solid var(--jcee-line);
+  color: var(--jcee-ink);
+}
+.research-topic-row:hover h2 {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+.research-topic-row h2 {
+  font-size: clamp(25px, 3vw, 40px) !important;
+  margin: 0 0 14px !important;
+}
+.research-topic-row p {
+  font-size: 16px;
+  margin: 0 0 15px;
+  max-width: 680px;
+}
+.research-topic-row small,
+.research-topic-index {
+  color: var(--jcee-navy);
+  font:
+    11px/1.7 ui-monospace,
+    monospace;
+  letter-spacing: 0.035em;
+}
+.research-topic-index {
+  padding-top: 8px;
+}
+.research-topic-arrow {
+  font-size: 26px;
+  text-align: right;
+}
+.research-topic-nav {
+  margin: 0 max(36px, calc((100% - 1280px) / 2));
+  padding: 24px 0;
+  display: flex;
+  gap: 12px 25px;
+  flex-wrap: wrap;
+  border-block: 1px solid var(--jcee-line);
+  font-size: 13px;
+  color: var(--jcee-navy);
+}
+.research-topic-nav a {
+  padding-block: 6px;
+}
+.research-topic-nav [aria-current="page"] {
+  color: var(--jcee-ink);
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+/* Footer continues the hero paper, with no outer box or dark band. */
+.brand-footer {
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-top: 1px solid var(--jcee-line) !important;
+  box-shadow: none !important;
+  padding: 55px max(36px, calc((100% - 1280px) / 2)) 28px !important;
+  margin: 0 !important;
+  width: 100%;
+}
+.brand-footer :is(a, p, strong, span, small, div, em) {
+  color: var(--jcee-ink) !important;
+}
+.brand-footer .brand-footer-wordmark {
+  color: var(--jcee-ink) !important;
+  text-shadow: var(--jcee-lift);
+  font-size: clamp(25px, 6.2vw, 92px) !important;
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  background: none;
+  -webkit-text-fill-color: var(--jcee-ink);
+}
+.brand-footer .brand-footer-wordmark em {
+  font-size: 0.45em;
+  font-style: normal;
+}
+.brand-footer .brand-footer-links a {
+  font-size: 13px;
+}
+.brand-footer :is(.brand-footer-links, .brand-footer-meta) {
+  border-color: var(--jcee-line);
+}
+.legal-page :is(p, li, .prose) {
+  color: var(--jcee-muted) !important;
+}
+.legal-page :is(a, strong) {
+  color: var(--jcee-navy) !important;
+}
+.legal-page main {
+  padding-top: 80px;
+}
+@media (max-width: 1000px) {
+  .site-header .desktop-nav,
+  .unified-home .site-header .desktop-nav {
+    display: none;
+  }
+  .site-header .mobile-menu {
+    display: block;
+  }
+  .editorial-page .editorial-masthead {
+    gap: 20px;
+    grid-template-columns: minmax(0, 1.4fr) minmax(180px, 0.8fr);
+  }
+}
+@media (max-width: 640px) {
+  html {
+    scroll-padding-top: 95px;
+  }
+  .site-header,
+  .unified-home .site-header {
+    height: 72px !important;
+    min-height: 72px !important;
+    padding-inline: 22px !important;
+    gap: 10px;
+  }
+  .site-header .wordmark {
+    gap: 8px;
+  }
+  .site-header .wordmark-mark {
+    width: 26px !important;
+    height: 30px !important;
+  }
+  .site-header .wordmark span {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+  }
+  .site-header .header-actions {
+    gap: 9px;
+  }
+  .site-header .header-contact {
+    font-size: 12px !important;
+    gap: 8px;
+  }
+  .editorial-page .editorial-masthead {
+    padding: 42px 22px 30px;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .editorial-page .editorial-masthead h1 {
+    font-size: clamp(36px, 9vw, 54px);
+  }
+  .editorial-page .editorial-deck {
+    font-size: 16px;
+  }
+  .editorial-hero-art {
+    max-height: 220px;
+    margin-top: 10px;
+  }
+  .editorial-page .editorial-section {
+    padding: 40px 22px;
+  }
+  .editorial-page
+    :is(.resource-grid, .physical-program-grid, .build-status-list) {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .research-topic-row {
+    grid-template-columns: 25px minmax(0, 1fr) 22px;
+    gap: 12px;
+    padding: 28px 0;
+  }
+  .research-topic-row p {
+    font-size: 14px;
+  }
+  .research-topic-nav {
+    margin-inline: 22px;
+    gap: 10px 20px;
+    font-size: 12px;
+  }
+  .brand-footer {
+    padding: 38px 22px 24px !important;
+  }
+  .brand-footer .brand-footer-links {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 22px;
+  }
+  .brand-footer .brand-footer-wordmark {
+    gap: 8px;
+    white-space: normal;
+    flex-wrap: wrap;
+  }
+  .brand-footer .brand-footer-lockup small {
+    max-width: 220px;
+    white-space: normal;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .unified-home *,
+  .editorial-hero-art {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+/* Scope homepage components away from the site's retained legacy hero classes. */
+.unified-home :is(h1, h2, h3) {
+  color: var(--jcee-ink) !important;
+}
+.site-header .header-actions .header-contact,
+.site-header .header-actions .header-contact span {
+  color: var(--jcee-ink) !important;
+}
+#root .site-header :is(a:not(.skip-link), button) {
+  color: var(--jcee-ink) !important;
+}
+#root
+  :is(
+    .editorial-page,
+    .program-page,
+    .paper-page,
+    .preview-consultation-page,
+    .legal-page
+  )
+  :is(h1, h2, h3) {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important;
+  font-weight: 600 !important;
+  text-shadow: var(--jcee-lift) !important;
+}
+#root .program-page .program-masthead {
+  min-height: 0 !important;
+  padding-block: 60px 68px;
+}
+#root .program-page .program-masthead h1 {
+  font-size: clamp(40px, 5.2vw, 78px) !important;
+  line-height: 1.1 !important;
+}
+#root :is(.program-page, .preview-consultation-page) :is(h1, h2, h3) em {
+  font-family: inherit !important;
+  font-weight: inherit !important;
+}
+/* Functional diagrams keep their internal state panels; the surrounding copy uses the paper palette. */
+#root
+  .program-page
+  :is(
+    .program-boundary-list,
+    .program-statement-copy,
+    .program-next,
+    .registry-disclosure,
+    .curlicue-copy,
+    .partner-inquiry-copy,
+    .partner-intro,
+    .partner-pathway,
+    .partner-pathway-card
+  )
+  :is(p, li, dd, span) {
+  color: var(--jcee-muted) !important;
+}
+#root .program-page :is(.qcs-gate, .durability-console) :is(h2, h3, p, li, dd) {
+  color: #e1e7ef !important;
+  text-shadow: none !important;
+}
+#root
+  .program-page
+  :is(
+    .program-deck,
+    .program-status-row,
+    .program-boundaries > .section-index
+  ) {
+  color: var(--jcee-muted) !important;
+}
+.brand-footer .footer-founder {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 12px;
+}
+#root
+  :is(.preview-consultation-page, .partner-page)
+  :is(input, textarea, select) {
+  background: #fff !important;
+  color: var(--jcee-ink) !important;
+  border-color: #9da6b0 !important;
+}
+#root
+  :is(.preview-consultation-page, .partner-page)
+  :is(label, label span, .preview-form-help) {
+  color: var(--jcee-muted) !important;
+}
+#root .partner-page .partner-form {
+  background: transparent !important;
+  border: 0 !important;
+  border-top: 1px solid var(--jcee-line) !important;
+  box-shadow: none !important;
+}
+#root
+  .partner-page
+  :is(.partner-form-route, .partner-form-row, .partner-form-submit) {
+  background: transparent !important;
+  border-color: var(--jcee-line) !important;
+  color: var(--jcee-muted) !important;
+}
+#root .partner-page .partner-form-submit button {
+  background: var(--jcee-ink) !important;
+  color: white !important;
+  border-radius: 4px;
+}
+#root .editorial-page article {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  border-top: 1px solid var(--jcee-line) !important;
+  border-radius: 0 !important;
+}
+#root .editorial-page :is(article, .research-question) :is(blockquote, p, dd) {
+  color: var(--jcee-muted) !important;
+}
+#root .program-page article {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  border-top: 1px solid var(--jcee-line) !important;
+  border-radius: 0 !important;
+}
+#root .program-page article :is(p, li, dd, span) {
+  color: var(--jcee-muted) !important;
+}
+#root
+  :is(.editorial-page, .program-page)
+  :is(
+    .cloud-stage,
+    .infrastructure-contract,
+    .research-question,
+    .partner-engagement-model
+  ) {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: var(--jcee-ink) !important;
+}
+#root
+  :is(.editorial-page, .program-page)
+  :is(.cloud-stage, .infrastructure-contract, .research-question)
+  :is(p, span, strong, blockquote) {
+  color: var(--jcee-muted) !important;
+}
+/* Retained page-specific rules must not reintroduce dark panels inside the paper surface. */
+#root .program-page > section,
+#root .paper-page > section,
+#root .editorial-page .order-example {
+  background: transparent !important;
+  background-image: none !important;
+  color: var(--jcee-ink) !important;
+  box-shadow: none !important;
+}
+#root .partner-page .partner-form label {
+  background: transparent !important;
+  border-color: var(--jcee-line) !important;
+}
+#root .program-page .charter-relationship p {
+  color: var(--jcee-muted) !important;
+}
+#root
+  .paper-page
+  :is(
+    .paper-shell,
+    .paper-document,
+    .paper-sidebar,
+    .paper-record,
+    .paper-markdown,
+    .paper-markdown blockquote,
+    .paper-next-record,
+    .paper-markdown th,
+    .paper-markdown td
+  ) {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-color: var(--jcee-line) !important;
+}
+#root
+  .paper-page
+  :is(
+    .paper-code,
+    .paper-deck,
+    .paper-version-row,
+    .paper-markdown,
+    .paper-record,
+    .paper-toc,
+    .paper-masthead blockquote
+  )
+  :is(p, li, dd, dt, span, strong, h4),
+#root
+  .paper-page
+  :is(
+    .paper-deck,
+    .paper-version-row,
+    .paper-masthead blockquote,
+    .paper-markdown th,
+    .paper-markdown td
+  ) {
+  color: var(--jcee-muted) !important;
+}
+#root .paper-page :is(.paper-file-links, .paper-toc, .paper-markdown) a {
+  color: var(--jcee-navy) !important;
+}
+#root .editorial-page .order-example :is(dt, p, span, strong) {
+  color: var(--jcee-muted) !important;
+}
+#root .assurance-architecture-grid article > div > p:first-child {
+  color: var(--jcee-navy) !important;
+}
+#root .paper-page .paper-file-links a:first-child {
+  background: var(--jcee-ink) !important;
+  color: white !important;
+}
+#root .paper-page .paper-next-record a {
+  color: var(--jcee-navy) !important;
+}

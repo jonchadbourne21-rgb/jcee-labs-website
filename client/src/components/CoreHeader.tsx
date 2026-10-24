@@ -36,7 +36,11 @@ export const getMobileMenuLabel = (menuOpen: boolean) =>
 export const getMobileMenuState = (menuOpen: boolean) =>
   menuOpen ? "is-open" : "is-closed";
 
-export default function CoreHeader({ current, contactLabel = "Let’s talk", contactHref = "/partners/enterprise" }: CoreHeaderProps) {
+export default function CoreHeader({
+  current,
+  contactLabel = "Free call",
+  contactHref = `${import.meta.env.BASE_URL}consultation`,
+}: CoreHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const mobileMenuToggleRef = useRef<HTMLButtonElement>(null);

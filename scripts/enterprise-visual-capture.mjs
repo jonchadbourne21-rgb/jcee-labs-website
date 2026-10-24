@@ -130,7 +130,9 @@ async function capture(send, baseUrl, spec) {
 
   await send("Page.navigate", { url: `${baseUrl}${spec.route}?visual-review=${Date.now()}` });
   await waitForApp(send);
-  const assetDimensions = await waitForImage(send, spec.assetUrl);
+  const assetDimensions = spec.assetUrl
+    ? await waitForImage(send, new URL(spec.assetUrl, baseUrl).href)
+    : null;
 
   const selectorLiteral = JSON.stringify(spec.selector);
   await send("Runtime.evaluate", {
@@ -140,7 +142,8 @@ async function capture(send, baseUrl, spec) {
       if (!el) throw new Error('Missing selector: ' + ${selectorLiteral});
       document.documentElement.style.scrollBehavior = 'auto';
       document.body.style.scrollBehavior = 'auto';
-      const top = el.getBoundingClientRect().top + window.scrollY - 72;
+      const headerHeight = document.querySelector('.site-header')?.getBoundingClientRect().height || 0;
+      const top = el.getBoundingClientRect().top + window.scrollY - headerHeight - 16;
       window.scrollTo(0, Math.max(0, top));
       return {scrollY: window.scrollY, targetTop: top};
     })()`,
@@ -165,6 +168,8 @@ async function capture(send, baseUrl, spec) {
         pseudoBackgroundImage: pseudo.backgroundImage,
         pseudoBackgroundSize: pseudo.backgroundSize,
         pseudoBackgroundPosition: pseudo.backgroundPosition,
+        pageBackground: getComputedStyle(document.querySelector('main')).backgroundColor,
+        imageSources: [...el.querySelectorAll('img')].map(image => image.currentSrc || image.src),
       };
     })()`,
   });
@@ -173,11 +178,17 @@ async function capture(send, baseUrl, spec) {
   if (value.scrollWidth > value.clientWidth + 1 || value.bodyScrollWidth > value.clientWidth + 1) {
     throw new Error(`${spec.name}: horizontal overflow ${value.scrollWidth}/${value.bodyScrollWidth}/${value.clientWidth}`);
   }
-  if (value.rect.width < Math.min(spec.width - 40, 300) || value.rect.height < 300) {
+  if (value.rect.width < Math.min(spec.width - 40, 300) || value.rect.height < (spec.minHeight ?? 300)) {
     throw new Error(`${spec.name}: target geometry is unexpectedly small ${JSON.stringify(value.rect)}`);
   }
-  if (value.rect.y > 110 || value.rect.y + value.rect.height < 200) {
+  if (value.rect.y > 110 || value.rect.y + value.rect.height < 180) {
     throw new Error(`${spec.name}: target did not scroll into the review viewport ${JSON.stringify(value.rect)}`);
+  }
+  if (value.pageBackground !== 'rgb(246, 246, 242)') {
+    throw new Error(`${spec.name}: shared paper surface is not active: ${value.pageBackground}`);
+  }
+  if (spec.assetUrl && !value.imageSources.includes(new URL(spec.assetUrl, baseUrl).href)) {
+    throw new Error(`${spec.name}: expected illustration is missing from the captured section`);
   }
 
   const screenshot = await send("Page.captureScreenshot", {
@@ -207,37 +218,30 @@ const browser = spawn(chromium, [
   "about:blank",
 ], { stdio: ["ignore", "pipe", "pipe"] });
 
-const operatingAsset = "https://d2ol7oe51mr4n9.cloudfront.net/user_3Ef0blYk8J0Q4PEe6OMhNJQ9UTw/8eb43ee0-7cad-47f8-8667-2f7c6df92076.webp";
-const assuranceAsset = "https://d2ol7oe51mr4n9.cloudfront.net/user_3Ef0blYk8J0Q4PEe6OMhNJQ9UTw/ecc115d0-76eb-4a5c-bf41-bddd5e579065.webp";
-
 try {
   const baseUrl = `http://127.0.0.1:${serverPort}`;
   await waitForUrl(baseUrl, "production server");
   const { send, close } = await connect(debugPort);
   const specs = [
-    { name: "Operating Cloud desktop", route: "/", selector: "#operating-cloud", width: 1440, height: 900, file: "operating-cloud-desktop.png", assetUrl: operatingAsset },
-    { name: "Assurance desktop", route: "/assurance", selector: ".assurance-program", width: 1440, height: 900, file: "assurance-desktop.png", assetUrl: assuranceAsset },
-    { name: "Operating Cloud iPhone", route: "/", selector: "#operating-cloud", width: 390, height: 844, mobile: true, file: "operating-cloud-iphone.png", assetUrl: operatingAsset },
-    { name: "Assurance iPhone", route: "/assurance", selector: ".assurance-program", width: 390, height: 844, mobile: true, file: "assurance-iphone.png", assetUrl: assuranceAsset },
-    { name: "Homepage founder desktop", route: "/", selector: ".hero.hybrid-hero", width: 1440, height: 900, file: "homepage-founder-desktop.png", assetUrl: "/brand/jcee-labs-mark.png" },
-    { name: "Homepage founder iPhone", route: "/", selector: ".hero.hybrid-hero", width: 390, height: 844, mobile: true, file: "homepage-founder-iphone.png", assetUrl: "/brand/jcee-labs-mark.png" },
-    { name: "Founder page desktop", route: "/founder", selector: ".editorial-masthead", width: 1440, height: 900, file: "founder-page-desktop.png", assetUrl: "/brand/jcee-labs-mark.png" },
-    { name: "Founder page iPhone", route: "/founder", selector: ".editorial-masthead", width: 390, height: 844, mobile: true, file: "founder-page-iphone.png", assetUrl: "/brand/jcee-labs-mark.png" },
-    { name: "Founder introduction desktop", route: "/founder", selector: ".founder-introduction", width: 1440, height: 900, file: "founder-introduction-desktop.png", assetUrl: "/brand/jcee-labs-mark.png" },
-    { name: "Founder introduction iPhone", route: "/founder", selector: ".founder-introduction", width: 390, height: 844, mobile: true, file: "founder-introduction-iphone.png", assetUrl: "/brand/jcee-labs-mark.png" },
+    // The platform direction is an open editorial row, not the former tall panorama panel.
+    { name: "Operating Cloud desktop", route: "/", selector: "#operating-cloud", width: 1440, height: 900, minHeight: 100, file: "operating-cloud-desktop.png" },
+    { name: "Assurance desktop", route: "/assurance", selector: ".assurance-program", width: 1440, height: 900, file: "assurance-desktop.png" },
+    { name: "Operating Cloud iPhone", route: "/", selector: "#operating-cloud", width: 390, height: 844, mobile: true, minHeight: 100, file: "operating-cloud-iphone.png" },
+    { name: "Assurance iPhone", route: "/assurance", selector: ".assurance-program", width: 390, height: 844, mobile: true, file: "assurance-iphone.png" },
+    { name: "Homepage hero desktop", route: "/", selector: ".et-hero", width: 1440, height: 900, file: "homepage-hero-desktop.png" },
+    { name: "Homepage hero iPhone", route: "/", selector: ".et-hero", width: 390, height: 844, mobile: true, file: "homepage-hero-iphone.png" },
+    { name: "Founder page desktop", route: "/founder", selector: ".editorial-masthead", width: 1440, height: 900, file: "founder-page-desktop.png", assetUrl: "/landing/illustrations/fit-v2.webp" },
+    { name: "Founder page iPhone", route: "/founder", selector: ".editorial-masthead", width: 390, height: 844, mobile: true, file: "founder-page-iphone.png", assetUrl: "/landing/illustrations/fit-v2.webp" },
+    { name: "Founder introduction desktop", route: "/founder", selector: ".founder-introduction", width: 1440, height: 900, file: "founder-introduction-desktop.png" },
+    { name: "Founder introduction iPhone", route: "/founder", selector: ".founder-introduction", width: 390, height: 844, mobile: true, file: "founder-introduction-iphone.png" },
+    { name: "Research directory desktop", route: "/research", selector: ".research-directory", width: 1440, height: 900, file: "research-directory-desktop.png" },
+    { name: "Research directory iPhone", route: "/research", selector: ".research-directory", width: 390, height: 844, mobile: true, file: "research-directory-iphone.png" },
+    { name: "Evidence transition desktop", route: "/", selector: "#transition-evidence", width: 1440, height: 900, file: "evidence-transition-desktop.png", assetUrl: "/landing/illustrations/evidence-v2.webp" },
+    { name: "Evidence transition iPhone", route: "/", selector: "#transition-evidence", width: 390, height: 844, mobile: true, file: "evidence-transition-iphone.png", assetUrl: "/landing/illustrations/evidence-v2.webp" },
   ];
   const results = [];
   for (const spec of specs) results.push(await capture(send, baseUrl, spec));
   close();
-
-  const operating = results.filter(item => item.name.startsWith("Operating Cloud"));
-  if (operating.some(item => !item.pseudoBackgroundImage.includes("8eb43ee0-7cad-47f8-8667-2f7c6df92076"))) {
-    throw new Error("Operating Cloud optimized panorama is not active in captured render");
-  }
-  const assurance = results.filter(item => item.name.startsWith("Assurance"));
-  if (assurance.some(item => !item.backgroundImage.includes("ecc115d0-76eb-4a5c-bf41-bddd5e579065"))) {
-    throw new Error("Assurance optimized hero is not active in captured render");
-  }
 
   await writeFile(path.join(outputDir, "layout-manifest.json"), JSON.stringify(results, null, 2));
   console.log(`Enterprise visual capture passed: ${results.map(item => item.name).join(", ")}`);
