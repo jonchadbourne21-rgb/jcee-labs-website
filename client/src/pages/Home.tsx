@@ -1,7 +1,8 @@
 import BrandFooter from "@/components/BrandFooter";
 import CoreHeader from "@/components/CoreHeader";
 import WhoThisIsFor from "@/components/WhoThisIsFor";
-import VowDurabilityDemo from "@/components/VowDurabilityDemo";
+import EvidenceThreadScene from "@/components/EvidenceThreadScene";
+import "@/evidence-thread.css";
 import { publications, publicationHref, publicationDate } from "@/content/publications";
 
 const integrationSteps = [
@@ -18,47 +19,40 @@ const assessmentDeliverables = [
   ["03", "Failure and recovery gaps", "What happens if the process stops, permission is withdrawn, or nobody can tell whether an action finished."],
   ["04", "Written next step", "A clear recommendation for a test, an evaluation alongside the existing workflow, or an agreed implementation scope, including any fit concerns."],
 ] as const;
-const workflowQuestions = [
-  "Read the request",
-  "Check current permission",
-  "Make the approved change",
-  "Handle an interruption",
-  "Check the system’s records",
-  "Keep the evidence for review",
-] as const;
 const latest = [...publications].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
 
 export default function Home() {
   return (
-    <main id="top" className="jcee-preview">
+    <main id="top" className="jcee-preview evidence-home">
       <CoreHeader contactLabel="Free call" contactHref="/consultation" />
       <section id="page-content" tabIndex={-1} className="hero hybrid-hero">
-        <div className="preview-hero-copy">
-          <p className="preview-kicker"><span className="preview-dot" /> AI WORKFLOW INFRASTRUCTURE + TECHNICAL SERVICES</p>
-          <h1>Engineering for<br /><em>accountable</em><br />AI workflows.</h1>
-          <p className="preview-deck">JCEE Labs helps teams design, build, and test AI-assisted software. We focus on clear permission, recovery when work is interrupted, and records that show what actually changed.</p>
-          <div className="preview-founder-byline">
-            <span>FOUNDER · DALLAS, TEXAS</span>
-            <a href="/founder">Jonathan Matthew Chadbourne <span aria-hidden="true">→</span></a>
-          </div>
-          <div className="preview-hero-actions">
-            <a className="preview-button" href="/consultation">Request a free consultation <span aria-hidden="true">↗</span></a>
-            <p className="preview-call-detail">Free first call · 10–30 minutes</p>
-            <a className="preview-text-link" href="#distribution-demo">See the tested example <span aria-hidden="true">↓</span></a>
-          </div>
-          <p className="preview-disclosure">Reference software and recorded research evidence are available now. Customer savings and production performance have not yet been established.</p>
+        <div className="et-hero-copy">
+          <p className="et-eyebrow"><span className="et-brand-dot" /> JCEE LABS / ACCOUNTABLE SOFTWARE</p>
+          <h1>When software acts,<br /><em>follow the evidence.</em></h1>
+          <p className="et-hero-deck">Clear permission. Recoverable work. A record of what actually changed.</p>
+          <p className="et-hero-description">JCEE Labs helps teams design, build, and test AI-assisted software.</p>
+          <div className="et-hero-actions"><a className="et-primary" href="#working-example">Explore the demonstration <span aria-hidden="true">↘</span></a><a className="et-link" href="/consultation">Discuss your workflow <span aria-hidden="true">↗</span></a></div>
+          <div className="et-hero-meta"><a href="/founder">Founded by Jonathan Matthew Chadbourne <span aria-hidden="true">↗</span></a><span>Dallas, Texas</span></div>
         </div>
-        <aside className="preview-path" aria-labelledby="path-title">
-          <div className="preview-panel-top"><span>HOW WE EXAMINE A WORKFLOW</span><span aria-hidden="true">01 — 06</span></div>
-          <h2 id="path-title">Did it have permission?<br />What actually changed?</h2>
-          <p className="preview-panel-note">Illustrative control path · not live telemetry</p>
-          <ol className="preview-path-list">
-            {workflowQuestions.map((label, index) => <li key={label}><span className="preview-path-number">{String(index + 1).padStart(2, "0")}</span><strong>{label}</strong><span className="preview-path-check" aria-hidden="true">→</span></li>)}
-          </ol>
-          <div className="preview-path-boundary"><span>BEFORE SOFTWARE ACTS</span><p>Confirm permission with the system responsible for the change. Afterward, check its records to establish what happened.</p></div>
-          <a className="preview-text-link" href="#technology">See how the parts connect <span aria-hidden="true">↘</span></a>
-        </aside>
+        <figure className="et-hero-art">
+          <svg viewBox="0 0 600 510" fill="none" aria-hidden="true">
+            <defs><linearGradient id="et-thread" x1="100" y1="400" x2="480" y2="90" gradientUnits="userSpaceOnUse"><stop stopColor="#1236BD"/><stop offset=".48" stopColor="#3568FF"/><stop offset="1" stopColor="#97B9FF"/></linearGradient><linearGradient id="et-boundary" x1="270" y1="70" x2="410" y2="410" gradientUnits="userSpaceOnUse"><stop stopColor="#E8ECF2"/><stop offset="1" stopColor="#F7F8FA"/></linearGradient><filter id="et-shadow"><feGaussianBlur stdDeviation="12"/></filter></defs>
+            <ellipse cx="310" cy="449" rx="170" ry="17" fill="#1C45A0" opacity=".09" filter="url(#et-shadow)"/>
+            <path d="M70 374L298 506M52 286L396 485M52 194L493 449M92 125L546 387M176 81L557 301M255 37L555 210M76 404L486 167M76 310L408 118M81 216L327 74M168 449L549 229M249 496L556 319" stroke="#E1E5EB" strokeWidth="1"/>
+            <path d="M269 80L414 164V381L269 297V80Z" fill="url(#et-boundary)" stroke="#CDD5E2"/>
+            <path d="M269 80L285 71L430 155L414 164L269 80Z" fill="#FFF" stroke="#DCE1E9"/><path d="M414 164L430 155V372L414 381V164Z" fill="#D9E0EB"/>
+            <path d="M54 339L143 288Q161 277 181 288L251 328Q273 341 296 328L345 300Q365 288 365 265V206Q365 184 385 172L455 132Q475 121 496 133L555 167" stroke="#E9EEFA" strokeWidth="29" strokeLinecap="round"/>
+            <path className="et-flow-line" d="M54 339L143 288Q161 277 181 288L251 328Q273 341 296 328L345 300Q365 288 365 265V206Q365 184 385 172L455 132Q475 121 496 133L555 167" stroke="url(#et-thread)" strokeWidth="14" strokeLinecap="round"/>
+            <path d="M274 165V251M286 172V258M298 179V265M310 186V272" stroke="#C7CFDD"/>
+            <circle cx="65" cy="333" r="12" fill="#F8FAFF" stroke="#315CFF" strokeWidth="4"/><circle cx="365" cy="233" r="10" fill="#F8FAFF" stroke="#315CFF" strokeWidth="4"/><circle cx="546" cy="162" r="12" fill="#315CFF"/><path d="M541 162L545 166L551 158" stroke="white" strokeWidth="2"/>
+            <g fill="#6A7484" fontFamily="ui-monospace, monospace" fontSize="11" letterSpacing="1.2"><text x="34" y="381">REQUEST</text><text x="314" y="418">AUTHORITY</text><text x="470" y="106">RECORD</text></g>
+            <path d="M325 390L342 380M89 359L107 348M489 118L504 126" stroke="#A8B3C4"/>
+          </svg>
+          <figcaption><span className="et-art-index">01 — ∞</span><span>Intelligence that leaves receipts.</span></figcaption>
+        </figure>
       </section>
+      <div className="et-intro-strip"><p>Designed for the moment an instruction becomes an action.</p><a href="#distribution-demo">See a recorded example <span aria-hidden="true">↓</span></a></div>
+      <section id="working-example" className="et-experience" aria-labelledby="working-example-title"><EvidenceThreadScene /></section>
       <div className="preview-principles"><span>EVIDENCE BEFORE CLAIM</span><span>PERMISSION BEFORE CONSEQUENCE</span><span>HUMAN ACCOUNTABILITY REMAINS</span></div>
 
       <section id="engage" className="preview-section preview-offer" aria-labelledby="engage-title">
@@ -71,7 +65,7 @@ export default function Home() {
           </div>
           <ol className="preview-deliverables">{assessmentDeliverables.map(([number, title, copy]) => <li key={number}><span>{number}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol>
         </div>
-        <p className="preview-boundary-note">An assessment is not a certification, deployment, production-readiness promise, or grant of execution authority. Production changes and implementation remain separately authorized.</p>
+        <p className="preview-boundary-note">Customer savings and production performance have not yet been established. An assessment is not a certification, deployment, production-readiness promise, or grant of execution authority. Production changes and implementation remain separately authorized.</p>
       </section>
       <div id="fit" className="preview-fit"><WhoThisIsFor /></div>
 
@@ -101,7 +95,7 @@ export default function Home() {
         <ol className="preview-integration-steps" aria-label="JCEE public integration binding path">{integrationSteps.map(([number, label, copy]) => <li key={number}><span>{number}</span><h3>{label}</h3><p>{copy}</p></li>)}</ol>
         <p className="preview-panel-note">Each arrow is a binding between evidence, authority, and external systems—not a library call.</p>
         <div className="preview-proof-status" aria-label="Current JCEE evidence and availability">
-          <article><p className="preview-kicker">BUILT / TESTED</p><h3>Connected software, tested together.</h3><p>The October 19 JCEE-INFRA candidate joins evidence, authority, target-owned action controls, and recovery in a qualified fictional-ledger setting. Earlier VOW, QCS, and Distribution results retain their own boundaries.</p><a className="preview-text-link" href="/technology#current-integration">October 19 integration result →</a><a className="preview-text-link" href="/qcs">QCS transition research →</a></article>
+          <article><p className="preview-kicker">BUILT / TESTED</p><h3>Connected software, tested together.</h3><p>The October 19 JCEE-INFRA candidate joins evidence, authority, target-owned action controls, and recovery in a qualified fictional-ledger setting. Earlier VOW, QCS, and Distribution results retain their own boundaries.</p><a className="preview-text-link" href="/technology#current-integration">October 19 integration result →</a><a className="preview-text-link" href="/qcs">QCS transition research →</a><a className="preview-text-link" href="/vow">VOW runtime overview →</a></article>
           <article><p className="preview-kicker">AVAILABLE TO SCOPE</p><h3>One Workflow Assurance Assessment.</h3><p>Map one consequential workflow, current evidence, authority, recovery gaps, and the next justified test or implementation step.</p><a className="preview-text-link" href="/partners/enterprise">Start a conversation →</a></article>
           <article><p className="preview-kicker">NOT YET ESTABLISHED</p><h3>Production claims we do not make.</h3><p>Customer ROI, production performance, generic public SDK or API availability, production certification, and autonomous operating authority have not been established.</p><a className="preview-text-link" href="/registry">PUBLIC REGISTRY →</a></article>
         </div>
@@ -118,13 +112,6 @@ export default function Home() {
         </div>
         <p className="preview-boundary-note">Recorded in a controlled PostgreSQL ledger with fictional data and a separately protected checkpoint that survives restoration. This is a bounded software result; production admission, external human review, and physical commitment qualification remain open.</p>
         <div className="preview-evidence-links"><a href="/technology#current-integration">Inspect the result and scope ↗</a><a href="/registry#infra-integrated-software">Dated registry entry ↗</a></div>
-      </section>
-
-      <section id="working-example" className="preview-section preview-recovery" aria-labelledby="working-example-title">
-        <div className="preview-section-label"><span>VOW / RECOVERY ILLUSTRATION</span><span>EXAMPLE STATES · NOT LIVE EXECUTION</span></div>
-        <div className="preview-section-heading"><h2 id="working-example-title">Follow the interruption.<br /><em>Explore the recovery states.</em></h2><div><p>This interactive recovery illustration explains the states that a VOW workflow must distinguish. It uses example records and browser animation.</p><p className="preview-panel-note">This interaction does not run the VOW engine, persist a target effect, or produce a new test receipt. Recorded qualification evidence is described separately.</p></div></div>
-        <VowDurabilityDemo />
-        <a className="preview-text-link" href="/vow">Read the technical JCEE VOW overview <span aria-hidden="true">↗</span></a>
       </section>
 
       <section className="preview-section preview-method" aria-label="Method and current evidence boundaries">

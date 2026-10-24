@@ -51,11 +51,10 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
   });
 
   it("distinguishes the browser illustration from recorded software qualification", () => {
-    expect(home).toContain("VowDurabilityDemo");
-    expect(plain(home)).toContain(
-      "interactive recovery illustration explains the states"
-    );
-    expect(plain(home)).toContain(
+    expect(home).toContain("EvidenceThreadScene");
+    const scene = readFileSync(path.resolve(import.meta.dirname, "components", "EvidenceThreadScene.tsx"), "utf8");
+    expect(plain(scene)).toContain("Fictional data · Browser illustration");
+    expect(plain(scene)).toContain(
       "does not run the VOW engine, persist a target effect, or produce a new test receipt"
     );
     expect(plain(home)).toContain(
@@ -110,7 +109,8 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
     expect(assessment).toBeLessThan(buyer);
     expect(buyer).toBeLessThan(demo);
     expect(demo).toBeLessThan(proof);
-    expect(proof).toBeLessThan(reference);
+    expect(hero).toBeLessThan(reference);
+    expect(reference).toBeLessThan(assessment);
     expect(reference).toBeLessThan(method);
     expect(method).toBeLessThan(platform);
     expect(platform).toBeLessThan(progress);
