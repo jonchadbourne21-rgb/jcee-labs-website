@@ -704,3 +704,75 @@ body:has(.site-header) {
   :is(p, span, strong, blockquote) {
   color: var(--jcee-muted) !important;
 }
+/* Retained page-specific rules must not reintroduce dark panels inside the paper surface. */
+#root .program-page > section,
+#root .paper-page > section,
+#root .editorial-page .order-example {
+  background: transparent !important;
+  background-image: none !important;
+  color: var(--jcee-ink) !important;
+  box-shadow: none !important;
+}
+#root .partner-page .partner-form label {
+  background: transparent !important;
+  border-color: var(--jcee-line) !important;
+}
+#root .program-page .charter-relationship p {
+  color: var(--jcee-muted) !important;
+}
+#root
+  .paper-page
+  :is(
+    .paper-shell,
+    .paper-document,
+    .paper-sidebar,
+    .paper-record,
+    .paper-markdown,
+    .paper-markdown blockquote,
+    .paper-next-record,
+    .paper-markdown th,
+    .paper-markdown td
+  ) {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-color: var(--jcee-line) !important;
+}
+#root
+  .paper-page
+  :is(
+    .paper-code,
+    .paper-deck,
+    .paper-version-row,
+    .paper-markdown,
+    .paper-record,
+    .paper-toc,
+    .paper-masthead blockquote
+  )
+  :is(p, li, dd, dt, span, strong, h4),
+#root
+  .paper-page
+  :is(
+    .paper-deck,
+    .paper-version-row,
+    .paper-masthead blockquote,
+    .paper-markdown th,
+    .paper-markdown td
+  ) {
+  color: var(--jcee-muted) !important;
+}
+#root .paper-page :is(.paper-file-links, .paper-toc, .paper-markdown) a {
+  color: var(--jcee-navy) !important;
+}
+#root .editorial-page .order-example :is(dt, p, span, strong) {
+  color: var(--jcee-muted) !important;
+}
+#root .assurance-architecture-grid article > div > p:first-child {
+  color: var(--jcee-navy) !important;
+}
+#root .paper-page .paper-file-links a:first-child {
+  background: var(--jcee-ink) !important;
+  color: white !important;
+}
+#root .paper-page .paper-next-record a {
+  color: var(--jcee-navy) !important;
+}

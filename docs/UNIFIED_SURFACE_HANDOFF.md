@@ -31,7 +31,9 @@ The existing release gate covers TypeScript, application tests, source/build
 receipt tests, production build, device-width layouts, public surfaces, and
 fragment navigation. The public-surface gate additionally exercises all four
 homepage outcomes and reset/focus behavior. Browser review checks the approved
-layout, three narrow widths, the mobile menu, and the four scenarios.
+layout, three narrow widths, the mobile menu, and the four scenarios. Representative company, technology, research,
+program, legal, and inquiry pages were also reviewed for surface/contrast
+consistency. See [the implemented homepage](design-review/homepage.jpg).
 
 ## Manus publication
 

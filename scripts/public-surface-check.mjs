@@ -450,6 +450,25 @@ try {
     }
   }
 
+  await navigate(page.send, baseUrl, "/research");
+  const researchTopics = await evaluate(
+    page.send,
+    "[...document.querySelectorAll('.research-topic-row')].map(a => a.getAttribute('href'))"
+  );
+  for (const topic of [
+    "publications",
+    "programs",
+    "measurement",
+    "physical-experiments",
+    "fields",
+    "evidence-standards",
+  ]) {
+    if (!researchTopics.includes(`${prefix}/research/${topic}`))
+      failures.push(
+        `Research topic navigation is missing its delivery prefix: ${topic}`
+      );
+  }
+
   await navigate(page.send, baseUrl, "/assurance");
   const assuranceArchitectureColors = await evaluate(
     page.send,
@@ -463,12 +482,12 @@ try {
     };
   })()`
   );
-  if (assuranceArchitectureColors.copy !== "rgba(9, 11, 16, 0.68)") {
+  if (assuranceArchitectureColors.copy !== "rgb(81, 86, 86)") {
     failures.push(
-      `Assurance architecture copy has unexpected low-contrast color: ${assuranceArchitectureColors.copy}`
+      `Assurance architecture copy does not use the shared paper-surface ink: ${assuranceArchitectureColors.copy}`
     );
   }
-  if (assuranceArchitectureColors.label !== "rgb(49, 92, 255)") {
+  if (assuranceArchitectureColors.label !== "rgb(25, 59, 103)") {
     failures.push(
       `Assurance architecture label has unexpected color: ${assuranceArchitectureColors.label}`
     );

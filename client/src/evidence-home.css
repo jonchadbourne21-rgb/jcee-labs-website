@@ -2082,3 +2082,7 @@
     padding-block: 34px;
   }
 }
+/* Keep the hero drawing within the shell on compact laptops and tablets. */
+@media (min-width: 641px) and (max-width: 1150px) {
+  .unified-home .et-hero-art svg { width: 100%; margin-left: 0; }
+}
