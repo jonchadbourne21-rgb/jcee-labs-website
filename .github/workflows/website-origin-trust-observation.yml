@@ -1,0 +1,35 @@
+name: Website origin and trust observation
+on:
+  push:
+    branches: [verification/website-origin-trust-20261025]
+permissions:
+  contents: read
+  pages: read
+  deployments: read
+jobs:
+  observe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.0.0
+        with:
+          node-version: '22.23.4'
+      - name: Observe public DNS, TLS, release receipts and Pages metadata
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 scripts/verification-origin-20261025.py
+      - name: Observe diagnostic Node trust with a known-good TLS control
+        run: node scripts/verification-trust-20261025.mjs
+      - name: Identify source trust override references
+        run: |
+          rg -n 'NODE_EXTRA_CA_CERTS|NODE_OPTIONS|NODE_TLS_REJECT_UNAUTHORIZED|SSL_CERT_FILE|SSL_CERT_DIR|rejectUnauthorized|https\.Agent|tls\.createSecureContext' client server shared scripts package.json .github/workflows --glob '!verification-*-20261025.*' --glob '!website-origin-trust-observation.yml' > verification-evidence/source-trust-references.txt || test "$?" -eq 1
+      - name: Preserve raw observations
+        if: always()
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: website-origin-trust-20261025
+          path: verification-evidence/
+          retention-days: 30
