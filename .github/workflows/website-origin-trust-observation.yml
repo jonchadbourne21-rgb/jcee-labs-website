@@ -25,7 +25,23 @@ jobs:
         run: node scripts/verification-trust-20261025.mjs
       - name: Identify source trust override references
         run: |
-          rg -n 'NODE_EXTRA_CA_CERTS|NODE_OPTIONS|NODE_TLS_REJECT_UNAUTHORIZED|SSL_CERT_FILE|SSL_CERT_DIR|rejectUnauthorized|https\.Agent|tls\.createSecureContext' client server shared scripts package.json .github/workflows --glob '!verification-*-20261025.*' --glob '!website-origin-trust-observation.yml' > verification-evidence/source-trust-references.txt || test "$?" -eq 1
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          pattern=re.compile(r'NODE_EXTRA_CA_CERTS|NODE_OPTIONS|NODE_TLS_REJECT_UNAUTHORIZED|SSL_CERT_FILE|SSL_CERT_DIR|rejectUnauthorized|https\.Agent|tls\.createSecureContext')
+          files=[Path('package.json')]
+          for root in ['client','server','shared','scripts','.github/workflows']:
+              files.extend(p for p in Path(root).rglob('*') if p.is_file())
+          matches=[]
+          for path in sorted(files):
+              if path.name.startswith('verification-') or path.name=='website-origin-trust-observation.yml': continue
+              try: lines=path.read_text().splitlines()
+              except (UnicodeDecodeError,OSError): continue
+              for number,line in enumerate(lines,1):
+                  if pattern.search(line): matches.append(f'{path}:{number}:{line}')
+          Path('verification-evidence/source-trust-references.txt').write_text('\n'.join(matches)+'\n')
+          print(f'Source trust override matches: {len(matches)}')
+          PY
       - name: Preserve raw observations
         if: always()
         uses: actions/upload-artifact@v7.0.1

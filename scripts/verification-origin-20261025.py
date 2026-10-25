@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Bounded, read-only public origin observations. No credentials are written."""
-import datetime, hashlib, json, os, re, socket, ssl, subprocess, urllib.error, urllib.request
+import datetime, hashlib, json, os, re, socket, ssl, subprocess, urllib.error, urllib.request, urllib.parse
 from pathlib import Path
 OUT=Path("verification-evidence");OUT.mkdir(exist_ok=True)
 result={"schema":"jcee.website-origin-observation/1.0","observed_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"intended_release":"a7260237836ebb27c00c58396020639358d01b39","probe_commit":os.environ.get("GITHUB_SHA"),"probe_run":os.environ.get("GITHUB_RUN_ID"),"vantage":"GitHub Actions Ubuntu 24.04 diagnostic runner; not a production application process"}
@@ -64,6 +64,26 @@ for i,url in enumerate(urls):
             name=f"response-{i:02d}.txt";(OUT/name).write_bytes(raw);entry["body_file"]=name
     except Exception as e: entry.update(error(e));entry["redirects"]=recorder.chain
     result["http"].append(entry)
+
+# Compare a bounded set of served public asset bytes with the served receipt.
+result["asset_receipt_checks"]=[]
+live=next((x.get("json_body") for x in result["http"] if x.get("requested_url")=="https://jceelabs.com/deployment.json"),None)
+if isinstance(live,dict):
+    candidates=[x for x in live.get("publicFiles",[]) if x.get("path")=="index.html"]
+    candidates += [x for x in live.get("publicFiles",[]) if x.get("path","").startswith("assets/index-") and x.get("path","").endswith((".js",".css"))][:4]
+    for artifact in candidates:
+        name=artifact["path"]
+        if ".." in Path(name).parts or name.startswith("/"): continue
+        entry={"path":name,"expected_sha256":artifact["sha256"],"expected_bytes":artifact["bytes"]}
+        try:
+            req=urllib.request.Request("https://jceelabs.com/"+urllib.parse.quote(name,safe="/"),headers={"User-Agent":"JCEE-Authorized-ReadOnly-Verification/1.0","Cache-Control":"no-cache"})
+            with urllib.request.urlopen(req,timeout=25) as response:
+                raw=response.read(5_000_001)
+                actual=hashlib.sha256(raw).hexdigest()
+                entry.update({"status":response.status,"actual_bytes":len(raw),"actual_sha256":actual,"matches":actual==artifact["sha256"] and len(raw)==artifact["bytes"]})
+        except Exception as e: entry.update(error(e))
+        result["asset_receipt_checks"].append(entry)
+
 result["system_store_observation"]={"ssl_defaults":ssl.get_default_verify_paths()._asdict()}
 p=subprocess.run(["dpkg-query","-W","ca-certificates","openssl"],text=True,capture_output=True)
 result["system_store_observation"]["packages"]=p.stdout
