@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://jceelabs.com/sitemap.xml

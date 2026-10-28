@@ -7,24 +7,6 @@ export default function BrandFooter({
 }: BrandFooterProps) {
   return (
     <footer className="brand-footer">
-      <div className="brand-footer-top">
-        <a className="brand-footer-lockup" href="/" aria-label="JCEE Labs home">
-          <img src="/brand/jcee-labs-mark.png" alt="" aria-hidden="true" />
-          <span>
-            <strong>JCEE LABS</strong>
-            <small>PRECISION RESEARCH + INTELLIGENCE · DALLAS, TEXAS</small>
-          </span>
-        </a>
-        <p>
-          We build for the distance between what software claims and what it can
-          prove.
-          <br />
-          <a className="footer-founder" href="/founder">
-            Founded by Jonathan Matthew Chadbourne ↗
-          </a>
-        </p>
-      </div>
-
       <div className="brand-footer-wordmark">
         Intelligence That Leaves Receipts
       </div>
@@ -65,9 +47,21 @@ export default function BrandFooter({
         </div>
       </div>
 
+      <div className="brand-footer-top brand-footer-bottom-identity">
+        <div>
+          <a className="brand-footer-lockup" href="/" aria-label="JCEE Labs home">
+            <img src="/brand/jcee-labs-mark.png" alt="" aria-hidden="true" />
+            <span>
+              <strong>JCEE LABS</strong>
+              <small>PRECISION RESEARCH + INTELLIGENCE · DALLAS, TEXAS</small>
+            </span>
+          </a>
+          <a className="footer-founder" href="/founder">Founded by Jonathan Matthew Chadbourne ↗</a>
+        </div>
+      </div>
+
       <div className="brand-footer-meta">
         <span>© {new Date().getFullYear()} JCEE Labs LLC</span>
-        <span>JCEE LABS · PUBLIC SITE</span>
         <a href={backToTopHref}>BACK TO TOP ↑</a>
       </div>
     </footer>
