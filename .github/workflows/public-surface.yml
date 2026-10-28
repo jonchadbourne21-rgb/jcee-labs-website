@@ -56,7 +56,8 @@ jobs:
       - name: Capture enterprise visual review surfaces
         env:
           CHROMIUM_BIN: chromium
-        run: node scripts/enterprise-visual-capture.mjs
+        run: |
+          node scripts/enterprise-visual-capture.mjs
           node scripts/footer-visual-capture.mjs
 
       - name: Upload enterprise visual review evidence

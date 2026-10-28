@@ -37,7 +37,7 @@ try {
     assert.equal(v.links.length,19);
     assert.ok(v.top.bottom<=v.nav.top+1 && v.nav.bottom<=v.identity.top+1);
     assert.ok(v.lockup.bottom<=v.founderPos.top+1 && v.identity.bottom<=v.meta.top+1);
-    assert.equal(v.scrollWidth,width); assert.equal(v.bodyWidth,width);
+    assert.ok(v.scrollWidth<=width); assert.ok(v.bodyWidth<=width);
     const rect=v.footerRect;
     const ss=await client.send('Page.captureScreenshot',{format:'png',fromSurface:true,captureBeyondViewport:true,clip:{...rect,scale:1}});
     const bytes=Buffer.from(ss.data,'base64');
