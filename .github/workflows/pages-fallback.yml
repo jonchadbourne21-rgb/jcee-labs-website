@@ -1,0 +1,109 @@
+# Uses the URL already configured in Settings > Pages. DNS is never changed here.
+name: JCEE Labs GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages-${{ github.event_name == 'pull_request' && github.ref || 'deployment' }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Static site (${{ matrix.mode }})
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - mode: project
+            url: https://jonchadbourne21-rgb.github.io/jcee-labs-website/
+            base: /jcee-labs-website
+          - mode: root
+            url: https://jceelabs.com/
+            base: ""
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: pnpm/action-setup@v6.1.0
+      - uses: actions/setup-node@v7.0.0
+        with:
+          node-version: '22.23.4'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Type-check and unit tests
+        run: |
+          pnpm check
+          pnpm test
+          pnpm test:receipt
+      - name: Install Chromium
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium-browser || sudo apt-get install -y chromium
+      - name: Build static artifact
+        env:
+          PAGES_BASE_URL: ${{ matrix.url }}
+          BUILD_SOURCE_COMMIT: ${{ github.sha }}
+        run: node scripts/build-pages.mjs
+      - name: Verify public pages on a static server
+        env:
+          PAGES_BASE_PATH: ${{ matrix.base }}
+        run: |
+          node scripts/public-surface-check.mjs
+          node scripts/fragment-navigation-check.mjs
+          pnpm release:verify "${{ github.sha }}"
+      - name: Preserve validated artifact
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: jcee-pages-${{ matrix.mode }}
+          path: dist/public
+          include-hidden-files: true
+          retention-days: 14
+
+  build:
+    if: github.event_name != 'pull_request'
+    needs: validate
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      pages: write
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: pnpm/action-setup@v6.1.0
+      - uses: actions/setup-node@v7.0.0
+        with:
+          node-version: '22.23.4'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Read configured GitHub Pages URL
+        id: pages
+        uses: actions/configure-pages@v6.0.0
+      - name: Build for configured URL
+        env:
+          PAGES_BASE_URL: ${{ steps.pages.outputs.base_url }}
+          BUILD_SOURCE_COMMIT: ${{ github.sha }}
+        run: node scripts/build-pages.mjs
+      - uses: actions/upload-pages-artifact@v5.0.0
+        with:
+          path: dist/public
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy validated site
+        id: deployment
+        uses: actions/deploy-pages@v5.0.1

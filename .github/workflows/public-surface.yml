@@ -1,0 +1,61 @@
+name: Public Surface
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  public-surface:
+    name: public-surface
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7.0.1
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6.1.0
+
+      - name: Set up Node
+        uses: actions/setup-node@v7.0.0
+        with:
+          node-version: '22.23.4'
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Chromium
+        run: sudo apt-get update && sudo apt-get install --yes chromium-browser || sudo apt-get install --yes chromium
+
+      - name: Run merge-blocking public-surface gate
+        env:
+          CHROMIUM_BIN: chromium
+          BUILD_SOURCE_COMMIT: ${{ github.sha }}
+        run: |
+          pnpm release:check
+          pnpm release:verify "$BUILD_SOURCE_COMMIT"
+
+      - name: Preserve source and build receipt
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: jcee-deployment-receipt
+          path: dist/public/deployment.json
+          if-no-files-found: error
+
+      - name: Capture enterprise visual review surfaces
+        env:
+          CHROMIUM_BIN: chromium
+        run: node scripts/enterprise-visual-capture.mjs
+
+      - name: Upload enterprise visual review evidence
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: jcee-enterprise-visual-review
+          path: artifacts/enterprise-visual-review
+          if-no-files-found: error

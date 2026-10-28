@@ -1,0 +1,135 @@
+import fs from "node:fs";
+import pageSeo from "../client/src/content/pageSeo.json";
+import {
+  publications,
+  publicationHref,
+} from "../client/src/content/publications";
+import { entries } from "../client/src/content/registryEntries";
+import { bb84PublicRelease as paper } from "../client/src/content/bb84Release";
+fs.mkdirSync("client/public/publications", { recursive: true });
+for (const item of publications) {
+  const text =
+    `# ${item.title}\n\n${item.kind} · ${item.author || "JCEE Labs"} · ${item.date} · Version 1.0\n\n${item.summary}\n\n` +
+    item.sections
+      .map(
+        s =>
+          `## ${s.title}\n\n${s.paragraphs.join("\n\n")}\n${s.bullets ? "\n" + s.bullets.map(b => `- ${b}`).join("\n") + "\n" : ""}`
+      )
+      .join("\n") +
+    (item.related
+      ? "\n## Continue reading\n\n" +
+        item.related
+          .map(link => `- [${link.label}](https://jceelabs.com${link.href})`)
+          .join("\n") +
+        "\n"
+      : "");
+  fs.writeFileSync(`client/public/publications/${item.slug}.md`, text);
+  fs.writeFileSync(`client/public/publications/${item.slug}.txt`, text);
+}
+fs.writeFileSync(
+  "client/public/JCEE_Labs_Public_Registry_v1.4.md",
+  "# JCEE Labs Public Registry — Version 1.4\n\nUpdated October 19, 2026 with the integrated software qualification, protected restoration, evidence-eligibility candidates, qualification-tooling repairs, and selected numerical and measurement-software records. Earlier entries retain their own review dates and limitations, including the September 29 Distribution, MISE, AP Gate, and JEV review. This is a sanitized first-party record, not a new execution of every program or independent certification. Private source and complete receipts are available only for scoped review. Version 1.3 remains a historical archive.\n\n" +
+    entries
+      .map(
+        e =>
+          `## ${e.name}\n\n${e.kind} · ${e.date}\n\n**Status:** ${e.statusLabel}\n\n${e.summary}\n\n**Recorded support:** ${e.supports}\n\n**Boundary:** ${e.boundary}\n\n${e.next ? `**Next gate:** ${e.next}\n\n` : ""}${e.href ? `[Public context](https://jceelabs.com${e.href})\n` : ""}`
+      )
+      .join("\n")
+);
+console.log(
+  `Exported ${publications.length} publications and ${entries.length} registry entries.`
+);
+
+const routeMetadata: Record<
+  string,
+  { title: string; description: string; type?: string; publishedTime?: string }
+> = {
+  [paper.landingUrl]: {
+    title: `${paper.title} — JCEE Labs`,
+    description: paper.summary,
+    type: "article",
+    publishedTime: paper.date,
+  },
+  "/": {
+    title: "JCEE Labs — Accountable AI-Assisted Operations",
+    description:
+      "JCEE Labs develops methods and software that connect AI-assisted operational actions to clear permissions, reviewable evidence, and human control.",
+  },
+  "/solutions/distribution": {
+    title: "JCEE Distribution — Order Integrity",
+    description:
+      "Compare purchase orders with sales orders, investigate exceptions, and measure operating improvement. Explore the JCEE Distribution prototype and its next gate.",
+  },
+  "/operating-cloud": {
+    title: "JCEE Operating Cloud — Platform Direction",
+    description:
+      "Explore JCEE’s platform direction for accountable AI-assisted operations, its current evidence, and the implementation gates still ahead.",
+  },
+  "/technology": {
+    title: "Technology — JCEE Labs",
+    description:
+      "Review JCEE-INFRA's October 19 integrated software qualification, current authority, protected recovery, retained evidence, and open physical commitment gate.",
+  },
+  "/research": {
+    title: "Research — JCEE Labs",
+    description:
+      "Read JCEE technical reports and research briefs with methods, recorded results, and explicit limitations.",
+  },
+  "/research/fields": {
+    title: "Research Fields — JCEE Labs",
+    description:
+      "Explore JCEE Labs' dated 25-field research portfolio and its current focus on qualifying a connected assurance path, with distinct mathematical, numerical, and physical evidence.",
+  },
+  "/resources": {
+    title: "Resources — JCEE Labs",
+    description:
+      "Company articles, engineering updates, research publications, and the current public build registry.",
+  },
+  "/company": {
+    title: "Company — JCEE Labs",
+    description:
+      "JCEE Labs develops methods and software for accountable AI-assisted operations. Read about the company, its principles, and its research.",
+  },
+  "/registry": {
+    title: "Public Registry — JCEE Labs",
+    description:
+      "Selected JCEE results updated October 19, 2026: integrated software, protected restoration, numerical assurance, preserved milestones, and open gates.",
+  },
+};
+Object.assign(routeMetadata, pageSeo);
+for (const p of publications)
+  routeMetadata[publicationHref(p)] = {
+    title: `${p.title} — JCEE Labs`,
+    description: p.summary,
+    type: "article",
+    publishedTime: `${p.date}T00:00:00Z`,
+  };
+fs.writeFileSync(
+  "client/src/content/routeMetadata.json",
+  JSON.stringify(routeMetadata, null, 2) + "\n"
+);
+
+// Inventory is shared by sitemap generation, prerendering, and production routing.
+const publicRoutes = [
+  ...new Set(
+    [
+      ...fs
+        .readFileSync("client/src/App.tsx", "utf8")
+        .matchAll(/<Route\s+path="([^"]+)"/g),
+    ].map(m => m[1])
+  ),
+].filter(p => !p.startsWith("/admin") && p !== "/404");
+fs.writeFileSync(
+  "client/src/content/publicRoutes.json",
+  JSON.stringify(publicRoutes, null, 2) + "\n"
+);
+fs.copyFileSync("robots.txt", "client/public/robots.txt");
+const sitemapRoutes = publicRoutes.filter(p => p !== "/research-evidence");
+fs.writeFileSync(
+  "client/public/sitemap.xml",
+  '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+    sitemapRoutes
+      .map(p => `  <url><loc>https://jceelabs.com${p}</loc></url>`)
+      .join("\n") +
+    "\n</urlset>\n"
+);

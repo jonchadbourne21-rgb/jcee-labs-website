@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1780150657875,
+      "tag": "0000_condemned_lily_hollister",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1780387694072,
+      "tag": "0001_mixed_infant_terrible",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1784078872783,
+      "tag": "0002_massive_maestro",
+      "breakpoints": true
+    }
+  ]
+}

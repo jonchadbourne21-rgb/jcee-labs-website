@@ -1,0 +1,172 @@
+.founder-page .founder-intro-grid {
+  display: grid;
+  grid-template-columns: minmax(230px, 300px) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(36px, 6vw, 88px);
+}
+
+.founder-page .founder-identity {
+  padding: 28px;
+  border-top: 3px solid var(--editorial-blue);
+  background: #e9edf4;
+}
+
+.founder-page .founder-monogram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 112px;
+  height: 112px;
+  margin-bottom: 28px;
+  border: 1px solid #bec9dd;
+  color: #193d9d;
+  font-size: 2.7rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+
+.founder-page .founder-identity dl {
+  display: grid;
+  gap: 22px;
+  margin: 0;
+}
+
+.founder-page .founder-identity dt {
+  margin-bottom: 5px;
+  color: #536076;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.founder-page .founder-identity dd {
+  margin: 0;
+  color: #1d2a41;
+  font-size: 1rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.founder-page .founder-copy {
+  min-width: 0;
+  max-width: 780px;
+}
+
+.founder-page .founder-copy > p {
+  margin: 16px 0;
+  color: #48566d;
+  font-size: 1.0625rem;
+  line-height: 1.8;
+}
+
+.founder-page .founder-copy > .editorial-kicker {
+  margin-top: 0;
+  color: var(--editorial-blue);
+}
+
+.founder-page .founder-work-list {
+  margin-top: 36px;
+  border-top: 1px solid #c5cfde;
+}
+
+.founder-page .founder-work-link {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) 24px;
+  align-items: start;
+  gap: 24px;
+  padding: 30px 0;
+  border-bottom: 1px solid #c5cfde;
+  color: var(--editorial-ink);
+  text-decoration: none;
+}
+
+.founder-page .founder-work-index {
+  padding-top: 5px;
+  color: #536076;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.8125rem;
+}
+
+.founder-page .founder-work-copy {
+  display: grid;
+  gap: 10px;
+  max-width: 780px;
+}
+
+.founder-page .founder-work-copy strong {
+  font-size: clamp(1.25rem, 2vw, 1.55rem);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+.founder-page .founder-work-copy > span {
+  color: #48566d;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.founder-page .founder-work-arrow {
+  color: var(--editorial-blue);
+  font-size: 1.5rem;
+  line-height: 1.35;
+}
+
+.founder-page .founder-work-link:hover strong {
+  color: var(--editorial-blue);
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.founder-page .founder-contact .founder-copy > p {
+  color: #c0cfe5;
+}
+
+.founder-page .founder-contact .editorial-button {
+  margin-top: 0;
+}
+
+@media (max-width: 760px) {
+  .founder-page .founder-intro-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .founder-page .founder-identity {
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 24px;
+    padding: 24px;
+  }
+
+  .founder-page .founder-monogram {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 0;
+    font-size: 1.85rem;
+  }
+
+  .founder-page .founder-identity dl {
+    gap: 16px;
+  }
+
+  .founder-page .founder-work-link {
+    grid-template-columns: 24px minmax(0, 1fr) 18px;
+    gap: 12px;
+    padding: 24px 0;
+  }
+
+  .founder-page .founder-work-arrow {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .founder-page .founder-identity {
+    grid-template-columns: 1fr;
+  }
+}

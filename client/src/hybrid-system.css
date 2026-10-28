@@ -1,0 +1,1110 @@
+/* JCEE Labs — Boundary × Evidence Archive
+   A restrained editorial system for the full public website. */
+
+:root {
+  --archive-ink: #090908;
+  --archive-soot: #11100e;
+  --archive-graphite: #1b1916;
+  --archive-panel: #201e1a;
+  --archive-bone: #e8e1d5;
+  --archive-paper: #f2ede4;
+  --archive-paper-deep: #d8cfc0;
+  --archive-muted: #9e978b;
+  --archive-rule: rgba(232, 225, 213, 0.16);
+  --archive-rule-dark: rgba(17, 16, 14, 0.18);
+  --archive-emerald: #51d77d;
+  --archive-emerald-deep: #267f4b;
+  --archive-brass: #8f7b5d;
+  --archive-ease: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+html.dark,
+html.dark body {
+  background: var(--archive-ink);
+  color: var(--archive-bone);
+}
+
+body {
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Global frame */
+.site-header {
+  background: rgba(9, 9, 8, 0.9) !important;
+  border-bottom: 1px solid rgba(232, 225, 213, 0.12) !important;
+  backdrop-filter: blur(18px) saturate(90%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(90%) !important;
+  height: 72px !important;
+  padding-inline: clamp(20px, 4vw, 64px) !important;
+}
+
+.wordmark {
+  color: var(--archive-paper) !important;
+  font-size: 12px !important;
+  letter-spacing: 0.17em !important;
+}
+
+.wordmark-mark {
+  height: 31px !important;
+  width: 29px !important;
+  filter: saturate(0.7) contrast(1.08);
+}
+
+.desktop-nav {
+  gap: clamp(16px, 2vw, 34px) !important;
+}
+
+.desktop-nav a,
+.header-contact {
+  color: rgba(242, 237, 228, 0.7) !important;
+  font-size: 9px !important;
+  letter-spacing: 0.14em !important;
+  transition: color 180ms var(--archive-ease) !important;
+}
+
+.desktop-nav a:hover,
+.desktop-nav a[aria-current="page"],
+.header-contact:hover {
+  color: var(--archive-paper) !important;
+}
+
+nav a::after {
+  background: var(--archive-emerald) !important;
+}
+
+.mobile-menu-toggle {
+  border: 1px solid rgba(232, 225, 213, 0.24) !important;
+  background: rgba(17, 16, 14, 0.78) !important;
+  color: var(--archive-paper) !important;
+}
+
+.mobile-nav {
+  background: rgba(17, 16, 14, 0.98) !important;
+  border: 1px solid rgba(232, 225, 213, 0.18) !important;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.5) !important;
+}
+
+.mobile-nav a:hover,
+.mobile-nav a:focus-visible,
+.mobile-nav a[aria-current="page"] {
+  background: rgba(81, 215, 125, 0.08) !important;
+  color: var(--archive-paper) !important;
+}
+
+/* Homepage — opening */
+.hybrid-home {
+  background: var(--archive-ink);
+  color: var(--archive-bone);
+}
+
+.hybrid-home .hybrid-hero {
+  align-items: stretch;
+  background:
+    linear-gradient(90deg, rgba(8, 8, 7, 0.3) 0%, rgba(8, 8, 7, 0.06) 48%, rgba(8, 8, 7, 0.02) 100%),
+    var(--archive-ink) url("https://jceelabs.com/manus-storage/01-hero-boundary_f53560ae.webp") no-repeat center / cover !important;
+  color: var(--archive-paper) !important;
+  display: grid !important;
+  gap: clamp(44px, 7vw, 120px) !important;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.54fr) !important;
+  min-height: calc(100svh - 72px) !important;
+  overflow: hidden;
+  padding: clamp(68px, 9vh, 112px) clamp(24px, 4vw, 64px) clamp(34px, 5vh, 68px) !important;
+  position: relative;
+}
+
+.hybrid-home .hybrid-hero::before {
+  background:
+    linear-gradient(90deg, rgba(9, 9, 8, 0.82) 0%, rgba(9, 9, 8, 0.5) 33%, rgba(9, 9, 8, 0.08) 66%, rgba(9, 9, 8, 0.08) 100%),
+    linear-gradient(180deg, rgba(9, 9, 8, 0.08) 60%, rgba(9, 9, 8, 0.58) 100%);
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+}
+
+.hybrid-home .hybrid-hero::after {
+  animation: none !important;
+  background: var(--archive-emerald) !important;
+  content: "";
+  height: 1px !important;
+  left: clamp(24px, 4vw, 64px) !important;
+  opacity: 0.72 !important;
+  position: absolute !important;
+  top: 22% !important;
+  width: clamp(44px, 5vw, 76px) !important;
+  z-index: 2 !important;
+}
+
+.hybrid-home .hybrid-hero > * {
+  position: relative;
+  z-index: 2;
+}
+
+.hybrid-home .hero-copy {
+  justify-content: flex-end !important;
+  min-height: 0 !important;
+  max-width: 880px;
+}
+
+.hybrid-home .eyebrow {
+  color: rgba(242, 237, 228, 0.65) !important;
+  font-family: "Space Mono", ui-monospace, monospace !important;
+  font-size: 9px !important;
+  letter-spacing: 0.16em !important;
+  margin-bottom: auto !important;
+}
+
+.hybrid-home .eyebrow span {
+  background: var(--archive-emerald) !important;
+  border-color: var(--archive-emerald) !important;
+  box-shadow: none !important;
+  height: 6px !important;
+  width: 6px !important;
+}
+
+.hybrid-home .hybrid-hero h1 {
+  color: var(--archive-paper) !important;
+  font-family: "Newsreader", Georgia, serif !important;
+  font-size: clamp(68px, 8.6vw, 142px) !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.065em !important;
+  line-height: 0.82 !important;
+  margin: clamp(100px, 17vh, 210px) 0 0 !important;
+  max-width: 980px !important;
+}
+
+.hybrid-home .hybrid-hero h1 em {
+  color: var(--archive-paper) !important;
+  font-family: "Newsreader", Georgia, serif !important;
+  font-style: italic !important;
+  font-weight: 350 !important;
+  letter-spacing: -0.055em !important;
+  text-shadow: none !important;
+}
+
+.hybrid-home .hero-deck {
+  color: rgba(242, 237, 228, 0.72) !important;
+  font-size: clamp(16px, 1.3vw, 20px) !important;
+  line-height: 1.62 !important;
+  margin-top: clamp(34px, 6vh, 78px) !important;
+  max-width: 590px !important;
+}
+
+.hybrid-home .hero-actions {
+  border-color: rgba(232, 225, 213, 0.22) !important;
+  margin-top: clamp(36px, 6vh, 72px) !important;
+}
+
+.hybrid-home .primary-link,
+.hybrid-home .availability {
+  color: var(--archive-paper) !important;
+}
+
+.hybrid-home .availability i {
+  background: var(--archive-emerald) !important;
+  box-shadow: none !important;
+}
+
+.hero-proof-index {
+  align-self: end;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  background: rgba(12, 11, 10, 0.56);
+  border: 1px solid rgba(232, 225, 213, 0.2);
+  max-width: 390px;
+  padding: clamp(22px, 2.4vw, 38px);
+}
+
+.hero-proof-index > span {
+  color: var(--archive-emerald);
+  font-family: "Space Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+}
+
+.hero-proof-index ol {
+  list-style: none;
+  margin: 46px 0 0;
+  padding: 0;
+}
+
+.hero-proof-index li {
+  border-top: 1px solid rgba(232, 225, 213, 0.16);
+  display: grid;
+  gap: 7px 16px;
+  grid-template-columns: 28px 1fr;
+  padding: 18px 0;
+}
+
+.hero-proof-index b {
+  color: var(--archive-muted);
+  font-family: "Space Mono", monospace;
+  font-size: 9px;
+  font-weight: 400;
+  grid-row: 1 / 3;
+}
+
+.hero-proof-index strong {
+  color: var(--archive-paper);
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 23px;
+  font-weight: 450;
+}
+
+.hero-proof-index small {
+  color: rgba(242, 237, 228, 0.54);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.hybrid-home .statement-band {
+  background: var(--archive-bone) !important;
+  border: 0 !important;
+  color: var(--archive-ink) !important;
+  gap: clamp(36px, 7vw, 120px) !important;
+  min-height: 64px !important;
+}
+
+.hybrid-home .statement-band span:nth-child(even) {
+  color: var(--archive-emerald-deep) !important;
+}
+
+/* Shared editorial chapter system */
+.hybrid-home .company-section,
+.hybrid-home .vow-section,
+.hybrid-home .qcs-section,
+.hybrid-home .assurance-section,
+.hybrid-home .registry-section,
+.hybrid-home .first-principle-section {
+  border-top: 0 !important;
+  overflow: hidden !important;
+  padding: clamp(84px, 10vw, 164px) clamp(24px, 5vw, 76px) !important;
+  position: relative;
+}
+
+.hybrid-home .company-section,
+.hybrid-home .qcs-section,
+.hybrid-home .registry-section,
+.hybrid-home .first-principle-section {
+  background: var(--archive-paper) !important;
+  color: var(--archive-ink) !important;
+}
+
+.hybrid-home .vow-section,
+.hybrid-home .assurance-section {
+  background: var(--archive-soot) !important;
+  color: var(--archive-bone) !important;
+}
+
+.hybrid-home .section-index,
+.hybrid-home .section-index.light {
+  border-color: currentColor !important;
+  color: inherit !important;
+  font-family: "Space Mono", monospace !important;
+  font-size: 9px !important;
+  letter-spacing: 0.13em !important;
+  opacity: 0.5 !important;
+}
+
+.hybrid-home .company-statement {
+  margin-top: clamp(76px, 10vw, 150px) !important;
+}
+
+.hybrid-home .company-statement > p,
+.hybrid-home .qcs-kicker,
+.hybrid-home .assurance-kicker,
+.hybrid-home .registry-kicker,
+.hybrid-home .first-principle-lead > p:first-child {
+  color: var(--archive-emerald-deep) !important;
+  font-family: "Space Mono", monospace !important;
+  font-size: 10px !important;
+  letter-spacing: 0.16em !important;
+}
+
+.hybrid-home .company-statement h2,
+.hybrid-home .vow-intro h2,
+.hybrid-home .qcs-layout h2,
+.hybrid-home .assurance-intro h2,
+.hybrid-home .registry-intro h2,
+.hybrid-home .first-principle-lead h2 {
+  font-family: "Newsreader", Georgia, serif !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.055em !important;
+  line-height: 0.98 !important;
+}
+
+.hybrid-home .company-statement h2 {
+  color: var(--archive-ink) !important;
+  font-size: clamp(52px, 7.5vw, 116px) !important;
+}
+
+.hybrid-home .company-statement h2 em {
+  color: var(--archive-ink) !important;
+  font-family: "Newsreader", Georgia, serif !important;
+  font-style: italic !important;
+  font-weight: 350 !important;
+}
+
+.hybrid-home .company-bottom {
+  border-top: 1px solid var(--archive-rule-dark) !important;
+  margin-top: clamp(64px, 9vw, 132px) !important;
+  padding-top: 30px !important;
+}
+
+.hybrid-home .company-bottom p {
+  color: rgba(17, 16, 14, 0.68) !important;
+  font-size: clamp(17px, 1.4vw, 21px) !important;
+  line-height: 1.65 !important;
+}
+
+.hybrid-home .company-bottom a,
+.hybrid-home .section-detail-link {
+  font-family: "Space Mono", monospace !important;
+  font-size: 10px !important;
+  letter-spacing: 0.1em !important;
+}
+
+.hybrid-home .breath {
+  display: none !important;
+}
+
+.chapter-visual {
+  border: 1px solid var(--archive-rule);
+  margin: clamp(58px, 8vw, 118px) 0 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.chapter-visual img {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.chapter-visual figcaption {
+  align-items: center;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(9, 9, 8, 0.78);
+  bottom: 0;
+  color: rgba(242, 237, 228, 0.66);
+  display: flex;
+  font-family: "Space Mono", monospace;
+  font-size: 9px;
+  gap: 16px;
+  left: 0;
+  letter-spacing: 0.06em;
+  padding: 15px 18px;
+  position: absolute;
+}
+
+.chapter-visual figcaption span {
+  color: var(--archive-emerald);
+  letter-spacing: 0.14em;
+}
+
+.chapter-visual-qcs,
+.chapter-visual-registry,
+.chapter-visual-charter {
+  border-color: var(--archive-rule-dark);
+}
+
+/* VOW: archive object + product proof */
+.hybrid-home .vow-intro {
+  margin-top: clamp(72px, 9vw, 132px) !important;
+}
+
+.hybrid-home .vow-intro h2 {
+  color: var(--archive-bone) !important;
+  font-size: clamp(50px, 6.5vw, 94px) !important;
+}
+
+.hybrid-home .vow-intro p,
+.hybrid-home .vow-intro .quiet {
+  color: rgba(232, 225, 213, 0.64) !important;
+}
+
+.vow-proof-stack {
+  align-items: start;
+  border-top: 1px solid var(--archive-rule);
+  display: grid;
+  gap: clamp(40px, 6vw, 100px);
+  grid-template-columns: minmax(240px, 0.55fr) minmax(0, 1.45fr);
+  margin-top: clamp(74px, 9vw, 128px);
+  padding-top: clamp(38px, 5vw, 72px);
+}
+
+.vow-proof-copy {
+  position: sticky;
+  top: 110px;
+}
+
+.vow-proof-copy > span {
+  color: var(--archive-emerald);
+  font-family: "Space Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+}
+
+.vow-proof-copy h3 {
+  color: var(--archive-bone);
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(34px, 4vw, 60px);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+  margin: 28px 0 0;
+}
+
+.vow-proof-copy p {
+  color: rgba(232, 225, 213, 0.56);
+  line-height: 1.7;
+  margin: 28px 0 0;
+}
+
+.vow-proof-stack .hex-inspector {
+  background: rgba(7, 10, 9, 0.92) !important;
+  border-color: rgba(81, 215, 125, 0.2) !important;
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.36) !important;
+  width: 100% !important;
+}
+
+.hybrid-home .guarantee-grid {
+  background: var(--archive-rule) !important;
+  border-color: var(--archive-rule) !important;
+  margin-top: clamp(74px, 9vw, 128px) !important;
+}
+
+.hybrid-home .guarantee-grid article {
+  background: var(--archive-soot) !important;
+}
+
+.hybrid-home .guarantee-grid h3 {
+  color: var(--archive-bone) !important;
+  font-family: "Newsreader", Georgia, serif !important;
+  font-size: clamp(25px, 2.5vw, 38px) !important;
+  font-weight: 400 !important;
+}
+
+.hybrid-home .guarantee-grid p {
+  color: rgba(232, 225, 213, 0.56) !important;
+}
+
+/* QCS: editorial field manual */
+.hybrid-home .qcs-layout {
+  margin-top: clamp(72px, 9vw, 132px) !important;
+}
+
+.hybrid-home .qcs-layout h2 {
+  color: var(--archive-ink) !important;
+  font-size: clamp(50px, 6.4vw, 94px) !important;
+}
+
+.hybrid-home .qcs-copy p {
+  color: rgba(17, 16, 14, 0.7) !important;
+}
+
+.hybrid-home .qcs-copy .quiet {
+  color: rgba(17, 16, 14, 0.5) !important;
+}
+
+.hybrid-home .qcs-status-grid {
+  border-color: var(--archive-rule-dark) !important;
+}
+
+.hybrid-home .qcs-status-grid div {
+  border-color: var(--archive-rule-dark) !important;
+}
+
+.hybrid-home .qcs-status-grid dt {
+  color: var(--archive-emerald-deep) !important;
+}
+
+/* Assurance: independent frames */
+.hybrid-home .assurance-section::before {
+  display: none !important;
+}
+
+.hybrid-home .assurance-intro {
+  margin-top: clamp(72px, 9vw, 132px) !important;
+}
+
+.hybrid-home .assurance-intro h2 {
+  color: var(--archive-bone) !important;
+  font-size: clamp(50px, 6.4vw, 94px) !important;
+}
+
+.hybrid-home .assurance-intro-copy p,
+.hybrid-home .assurance-intro-copy .quiet {
+  color: rgba(232, 225, 213, 0.6) !important;
+}
+
+.hybrid-home .assurance-flow {
+  border-color: var(--archive-rule) !important;
+}
+
+.hybrid-home .assurance-flow article {
+  border-color: var(--archive-rule) !important;
+}
+
+.hybrid-home .assurance-flow span,
+.hybrid-home .infrastructure-grid > article > span {
+  color: var(--archive-emerald) !important;
+}
+
+.hybrid-home .assurance-flow strong {
+  color: var(--archive-bone) !important;
+}
+
+.hybrid-home .assurance-flow p,
+.hybrid-home .infrastructure-grid p {
+  color: rgba(232, 225, 213, 0.58) !important;
+}
+
+.hybrid-home .infrastructure-grid {
+  background: var(--archive-rule) !important;
+  border-color: var(--archive-rule) !important;
+}
+
+.hybrid-home .infrastructure-grid article {
+  background: var(--archive-soot) !important;
+}
+
+.hybrid-home .infrastructure-grid h3 {
+  color: var(--archive-bone) !important;
+  font-family: "Newsreader", Georgia, serif !important;
+  font-weight: 400 !important;
+}
+
+/* Registry: archive ledger */
+.hybrid-home .registry-section {
+  background: var(--archive-paper) !important;
+  background-image: none !important;
+}
+
+.hybrid-home .registry-intro {
+  margin-top: clamp(72px, 9vw, 132px) !important;
+}
+
+.hybrid-home .registry-intro h2 {
+  color: var(--archive-ink) !important;
+  font-size: clamp(50px, 6.1vw, 90px) !important;
+}
+
+.hybrid-home .registry-intro > div:last-child p {
+  color: rgba(17, 16, 14, 0.66) !important;
+}
+
+.hybrid-home .registry-preview {
+  border-color: var(--archive-rule-dark) !important;
+}
+
+.hybrid-home .registry-preview article {
+  border-color: var(--archive-rule-dark) !important;
+  transition: background-color 180ms var(--archive-ease), padding 180ms var(--archive-ease);
+}
+
+.hybrid-home .registry-preview article:hover {
+  background: rgba(17, 16, 14, 0.035);
+  padding-inline: 18px;
+}
+
+.hybrid-home .registry-preview .registry-state,
+.hybrid-home .registry-sequence {
+  color: var(--archive-emerald-deep) !important;
+}
+
+.hybrid-home .registry-preview h3 {
+  color: var(--archive-ink) !important;
+  font-family: "Newsreader", Georgia, serif !important;
+  font-weight: 400 !important;
+}
+
+.hybrid-home .registry-preview p {
+  color: rgba(17, 16, 14, 0.62) !important;
+}
+
+/* Charter: the light threshold */
+.hybrid-home .first-principle-section {
+  background: var(--archive-bone) !important;
+  background-image: none !important;
+}
+
+.hybrid-home .first-principle-lead {
+  max-width: 1180px !important;
+}
+
+.hybrid-home .first-principle-lead h2 {
+  color: var(--archive-ink) !important;
+  font-size: clamp(54px, 7vw, 108px) !important;
+}
+
+.hybrid-home .first-principle-lead h2 em {
+  color: var(--archive-ink) !important;
+  font-style: italic !important;
+}
+
+.hybrid-home .first-principle-lead > p:last-child {
+  color: rgba(17, 16, 14, 0.66) !important;
+}
+
+.hybrid-home .first-principle-grid {
+  background: var(--archive-rule-dark) !important;
+  border-color: var(--archive-rule-dark) !important;
+}
+
+.hybrid-home .first-principle-grid article {
+  background: var(--archive-bone) !important;
+}
+
+.hybrid-home .first-principle-grid span {
+  color: var(--archive-emerald-deep) !important;
+}
+
+.hybrid-home .first-principle-grid h3 {
+  color: var(--archive-ink) !important;
+  font-family: "Newsreader", Georgia, serif !important;
+  font-weight: 400 !important;
+}
+
+.hybrid-home .first-principle-grid p {
+  color: rgba(17, 16, 14, 0.62) !important;
+}
+
+/* Program pages — same material world, distinct chapter artifacts */
+.program-page,
+.qcs-program-page,
+.assurance-program-page,
+.registry-page,
+.charter-v11-page {
+  background: var(--archive-ink) !important;
+  color: var(--archive-bone) !important;
+}
+
+.program-masthead {
+  background-color: var(--archive-ink) !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  min-height: calc(100svh - 72px) !important;
+  position: relative;
+}
+
+.program-masthead::before {
+  background: linear-gradient(90deg, rgba(9, 9, 8, 0.9) 0%, rgba(9, 9, 8, 0.64) 46%, rgba(9, 9, 8, 0.18) 100%) !important;
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.program-masthead > * {
+  position: relative;
+  z-index: 1;
+}
+
+.vow-program { background-image: url("https://jceelabs.com/manus-storage/02-vow-receipt_742d4ab7.webp") !important; }
+.qcs-program { background-image: url("https://jceelabs.com/manus-storage/03-qcs-gate_f2ce0552.webp") !important; }
+.assurance-program { background-image: url("https://jceelabs.com/manus-storage/04-assurance-layers_bdea77ce.webp") !important; }
+.registry-program { background-image: url("https://jceelabs.com/manus-storage/05-registry-drawers_0844a485.webp") !important; }
+.charter-v11-program { background-image: url("https://jceelabs.com/manus-storage/06-charter-threshold_9c5fe973.webp") !important; }
+
+.program-masthead .eyebrow,
+.program-status-row,
+.program-number,
+.charter-section-label {
+  color: rgba(232, 225, 213, 0.58) !important;
+  font-family: "Space Mono", monospace !important;
+  letter-spacing: 0.13em !important;
+}
+
+.program-masthead .eyebrow span {
+  background: var(--archive-emerald) !important;
+  border-color: var(--archive-emerald) !important;
+  box-shadow: none !important;
+}
+
+.program-status-row {
+  border-color: var(--archive-rule) !important;
+}
+
+.program-masthead h1,
+.program-statement h2,
+.assurance-architecture > h2,
+.registry-classifications > h2,
+.registry-records > h2,
+.charter-openness > h2 {
+  font-family: "Newsreader", Georgia, serif !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.05em !important;
+}
+
+.program-masthead h1 {
+  color: var(--archive-paper) !important;
+  max-width: 880px !important;
+  text-shadow: 0 2px 34px rgba(0, 0, 0, 0.28);
+}
+
+.program-deck {
+  color: rgba(242, 237, 228, 0.7) !important;
+  max-width: 650px !important;
+}
+
+.program-links a {
+  border-color: rgba(232, 225, 213, 0.3) !important;
+  color: var(--archive-paper) !important;
+}
+
+.program-links a:hover {
+  background: var(--archive-paper) !important;
+  color: var(--archive-ink) !important;
+}
+
+.program-statement,
+.program-boundaries,
+.assurance-architecture,
+.registry-classifications,
+.registry-records,
+.charter-openness,
+.charter-relationship,
+.registry-disclosure {
+  background: var(--archive-paper) !important;
+  color: var(--archive-ink) !important;
+}
+
+.program-statement-dark {
+  background: var(--archive-soot) !important;
+  color: var(--archive-bone) !important;
+}
+
+.program-statement:not(.program-statement-dark) h2,
+.program-statement:not(.program-statement-dark) p,
+.program-boundaries h2,
+.program-boundaries p,
+.assurance-architecture h2,
+.assurance-architecture h3,
+.registry-classifications h2,
+.registry-records h2,
+.charter-openness h2,
+.charter-relationship h2 {
+  color: var(--archive-ink) !important;
+}
+
+.program-statement:not(.program-statement-dark) .section-index,
+.program-boundaries .section-index,
+.assurance-architecture .section-index,
+.registry-classifications .section-index,
+.registry-records .section-index,
+.charter-openness .section-index {
+  border-color: var(--archive-rule-dark) !important;
+  color: rgba(17, 16, 14, 0.5) !important;
+}
+
+.program-boundary-list {
+  border-top: 1px solid var(--archive-rule-dark) !important;
+}
+
+.program-boundary-list article {
+  border-color: var(--archive-rule-dark) !important;
+}
+
+.program-boundary-list article > span {
+  color: var(--archive-emerald-deep) !important;
+}
+
+.program-boundary-list article > p {
+  color: rgba(17, 16, 14, 0.72) !important;
+}
+
+.assurance-architecture-grid article,
+.registry-entry,
+.registry-classification-grid article,
+.charter-openness-grid article,
+.charter-law-grid article {
+  border-color: var(--archive-rule-dark) !important;
+}
+
+.assurance-layer-number,
+.registry-entry-index,
+.registry-entry-topline,
+.registry-classification-grid span,
+.charter-openness-grid span {
+  color: var(--archive-emerald-deep) !important;
+}
+
+.registry-classification-grid {
+  background: var(--archive-rule-dark) !important;
+  border-color: var(--archive-rule-dark) !important;
+}
+
+.registry-classification-grid article {
+  background: var(--archive-soot) !important;
+}
+
+.registry-classification-grid span {
+  color: var(--archive-emerald) !important;
+}
+
+.registry-classification-grid p {
+  color: rgba(232, 225, 213, 0.62) !important;
+}
+
+.registry-grid,
+.registry-entry,
+.registry-entry dl,
+.registry-entry dl > div + div {
+  border-color: var(--archive-rule-dark) !important;
+}
+
+.registry-entry h3 {
+  color: var(--archive-ink) !important;
+  font-family: "Newsreader", Georgia, serif !important;
+  font-weight: 400 !important;
+}
+
+.registry-entry-topline {
+  color: rgba(17, 16, 14, 0.48) !important;
+}
+
+.registry-entry-summary {
+  color: var(--archive-ink) !important;
+}
+
+.registry-entry dt,
+.registry-entry a span {
+  color: var(--archive-emerald-deep) !important;
+}
+
+.registry-entry dd {
+  color: rgba(17, 16, 14, 0.64) !important;
+}
+
+.registry-entry a {
+  color: var(--archive-ink) !important;
+}
+
+.registry-disclosure {
+  background: var(--archive-soot) !important;
+  color: var(--archive-bone) !important;
+}
+
+.registry-disclosure h2 {
+  color: var(--archive-bone) !important;
+  font-family: "Newsreader", Georgia, serif !important;
+  font-weight: 400 !important;
+}
+
+.registry-disclosure > div:last-child p {
+  color: rgba(232, 225, 213, 0.62) !important;
+}
+
+.program-next {
+  background: var(--archive-soot) !important;
+  border-color: var(--archive-rule) !important;
+  color: var(--archive-bone) !important;
+}
+
+/* Footer */
+.brand-footer {
+  background: var(--archive-ink) !important;
+  border-top: 1px solid var(--archive-rule) !important;
+  color: var(--archive-bone) !important;
+}
+
+.brand-footer,
+.brand-footer a,
+.brand-footer span,
+.brand-footer p,
+.brand-footer strong,
+.brand-footer small,
+.brand-footer div {
+  color: var(--archive-bone) !important;
+}
+
+.brand-footer-wordmark,
+.brand-footer-wordmark span,
+.brand-footer-wordmark em {
+  color: var(--archive-bone) !important;
+  font-family: "Newsreader", Georgia, serif !important;
+  font-weight: 400 !important;
+}
+
+.brand-footer-links,
+.brand-footer-meta,
+.brand-footer-lockup small {
+  color: rgba(232, 225, 213, 0.52) !important;
+}
+
+/* Motion: quiet and material, never theatrical */
+@media (prefers-reduced-motion: no-preference) {
+  .chapter-visual img {
+    transition: transform 700ms var(--archive-ease), filter 700ms var(--archive-ease);
+  }
+
+  .chapter-visual:hover img {
+    filter: contrast(1.03);
+    transform: scale(1.012);
+  }
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .hybrid-home .hybrid-hero {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hero-proof-index {
+    justify-self: end;
+    width: min(100%, 440px);
+  }
+
+  .vow-proof-stack {
+    grid-template-columns: 1fr;
+  }
+
+  .vow-proof-copy {
+    max-width: 660px;
+    position: static;
+  }
+}
+
+@media (max-width: 700px) {
+  .site-header {
+    height: 66px !important;
+    padding-inline: 18px !important;
+  }
+
+  .wordmark-mark {
+    height: 30px !important;
+    width: 27px !important;
+  }
+
+  .hybrid-home .hybrid-hero {
+    background:
+      linear-gradient(180deg, rgba(9, 9, 8, 0.2) 0%, rgba(9, 9, 8, 0.78) 64%, var(--archive-ink) 100%),
+      var(--archive-ink) url("https://jceelabs.com/manus-storage/01-hero-boundary-mobile_8dd4b897.webp") no-repeat 66% top / auto 57% !important;
+    min-height: auto !important;
+    padding: 40px 20px 28px !important;
+  }
+
+  .hybrid-home .hybrid-hero::before {
+    background: linear-gradient(180deg, rgba(9, 9, 8, 0.12) 0%, rgba(9, 9, 8, 0.54) 40%, var(--archive-ink) 73%) !important;
+  }
+
+  .hybrid-home .hybrid-hero::after {
+    left: 20px !important;
+    top: 13% !important;
+    width: 48px !important;
+  }
+
+  .hybrid-home .hero-copy {
+    min-height: 720px !important;
+    justify-content: flex-end !important;
+  }
+
+  .hybrid-home .eyebrow {
+    margin-bottom: auto !important;
+    max-width: 260px;
+  }
+
+  .hybrid-home .hybrid-hero h1 {
+    font-size: clamp(58px, 17vw, 82px) !important;
+    line-height: 0.86 !important;
+    margin-top: 280px !important;
+  }
+
+  .hybrid-home .hero-deck {
+    font-size: 16px !important;
+    margin-top: 38px !important;
+  }
+
+  .hybrid-home .hero-actions {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+    gap: 22px !important;
+    margin-top: 42px !important;
+  }
+
+  .hero-proof-index {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--archive-soot);
+    max-width: none;
+    width: 100%;
+  }
+
+  .hybrid-home .statement-band {
+    justify-content: flex-start !important;
+  }
+
+  .hybrid-home .company-section,
+  .hybrid-home .vow-section,
+  .hybrid-home .qcs-section,
+  .hybrid-home .assurance-section,
+  .hybrid-home .registry-section,
+  .hybrid-home .first-principle-section {
+    padding: 76px 20px !important;
+  }
+
+  .chapter-visual {
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+
+  .chapter-visual img {
+    height: 56vw;
+    min-height: 235px;
+    object-fit: cover;
+  }
+
+  .chapter-visual figcaption {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+    max-width: calc(100% - 24px);
+  }
+
+  .chapter-visual-vow img { object-position: 30% center; }
+  .chapter-visual-qcs img { object-position: 36% center; }
+  .chapter-visual-assurance img { object-position: 65% center; }
+  .chapter-visual-registry img { object-position: 70% center; }
+  .chapter-visual-charter img { object-position: 54% center; }
+
+  .vow-proof-stack {
+    margin-top: 76px;
+  }
+
+  .vow-proof-stack .hex-inspector {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .hybrid-home .assurance-flow,
+  .hybrid-home .infrastructure-grid,
+  .hybrid-home .first-principle-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hybrid-home .assurance-flow article {
+    border-bottom: 1px solid var(--archive-rule) !important;
+    border-right: 0 !important;
+    min-height: auto !important;
+  }
+
+  .program-masthead {
+    background-position: 62% center !important;
+    min-height: calc(100svh - 66px) !important;
+  }
+
+  .program-masthead::before {
+    background: linear-gradient(180deg, rgba(9, 9, 8, 0.32) 0%, rgba(9, 9, 8, 0.88) 70%, var(--archive-ink) 100%) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chapter-visual img,
+  .registry-preview article {
+    transition: none !important;
+  }
+}
