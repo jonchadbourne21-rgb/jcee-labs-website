@@ -25,6 +25,10 @@ export default function BrandFooter({
         </p>
       </div>
 
+      <div className="brand-footer-wordmark">
+        Intelligence That Leaves Receipts
+      </div>
+
       <div className="brand-footer-links">
         <div>
           <span>COMPANY</span>
@@ -59,12 +63,6 @@ export default function BrandFooter({
           <a href="/privacy">Privacy</a>
           <a href="/terms">Terms</a>
         </div>
-      </div>
-
-      <div className="brand-footer-wordmark" aria-label="Evidence over claims">
-        <span>EVIDENCE</span>
-        <em>OVER</em>
-        <span>CLAIMS</span>
       </div>
 
       <div className="brand-footer-meta">
