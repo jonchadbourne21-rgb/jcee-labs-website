@@ -27,6 +27,11 @@ jobs:
           node-version: '22.23.4'
           cache: pnpm
 
+      - name: Qualify pinned Node bootstrap
+        run: |
+          sh scripts/test-manus-node.sh
+          JCEE_FORCE_NODE_BOOTSTRAP=1 sh scripts/manus-node.sh -- node --version
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
@@ -52,6 +57,7 @@ jobs:
         env:
           CHROMIUM_BIN: chromium
         run: node scripts/enterprise-visual-capture.mjs
+          node scripts/footer-visual-capture.mjs
 
       - name: Upload enterprise visual review evidence
         uses: actions/upload-artifact@v7.0.1
