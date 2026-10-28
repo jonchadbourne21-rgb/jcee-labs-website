@@ -432,16 +432,21 @@ body:has(.site-header) {
 }
 .brand-footer .brand-footer-wordmark {
   color: var(--jcee-ink) !important;
+  display: block;
   text-shadow: var(--jcee-lift);
-  font-size: clamp(25px, 6.2vw, 92px) !important;
+  font-size: clamp(32px, 6.2vw, 92px) !important;
   font-weight: 600;
   letter-spacing: -0.045em;
+  line-height: 1.05;
+  padding: clamp(32px, 6vw, 72px) 0;
+  text-wrap: balance;
+  white-space: normal;
   background: none;
   -webkit-text-fill-color: var(--jcee-ink);
 }
-.brand-footer .brand-footer-wordmark em {
-  font-size: 0.45em;
-  font-style: normal;
+.brand-footer .brand-footer-links {
+  border-bottom: 0;
+  margin-top: 0;
 }
 .brand-footer .brand-footer-links a {
   font-size: 13px;
@@ -542,11 +547,6 @@ body:has(.site-header) {
   .brand-footer .brand-footer-links {
     grid-template-columns: 1fr 1fr;
     gap: 28px 22px;
-  }
-  .brand-footer .brand-footer-wordmark {
-    gap: 8px;
-    white-space: normal;
-    flex-wrap: wrap;
   }
   .brand-footer .brand-footer-lockup small {
     max-width: 220px;
