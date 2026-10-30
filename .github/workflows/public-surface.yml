@@ -29,6 +29,7 @@ jobs:
 
       - name: Qualify pinned Node bootstrap
         run: |
+          node --test scripts/manus-build.test.mjs
           sh scripts/test-manus-node.sh
           JCEE_FORCE_NODE_BOOTSTRAP=1 sh scripts/manus-node.sh -- node --version
 

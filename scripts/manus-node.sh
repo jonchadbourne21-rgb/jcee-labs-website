@@ -39,7 +39,9 @@ archive="node-v$version-$platform.tar.gz"
 echo "JCEE node bootstrap: arch=$arch libc=$libc archive=$archive" >&2
 curl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' --max-time 180 "https://nodejs.org/dist/v$version/$archive" -o "$stage/$archive"
 printf '%s  %s\n' "$checksum" "$stage/$archive" | sha256sum -c -
-tar -xzf "$stage/$archive" -C "$stage"
+# Provider containers may run as root without permission to chown to archive UIDs.
+# Install as the current build user; archive ownership is not runtime identity.
+tar --no-same-owner -xzf "$stage/$archive" -C "$stage"
 binary="$stage/node-v$version-$platform/bin/node"
 [ -x "$binary" ] || { echo 'Extracted binary missing or not executable' >&2; exit 1; }
 if actual=$("$binary" --version 2>&1); then :; else
