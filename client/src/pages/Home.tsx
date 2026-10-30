@@ -182,6 +182,34 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="jcee-capability-panel et-section-shell" id="capabilities" aria-labelledby="capabilities-title">
+        <div className="jcee-capability-heading">
+          <p className="et-eyebrow">WHERE ENGINEERING MEETS EVIDENCE</p>
+          <h2 id="capabilities-title">Distinct work. One engineering standard.</h2>
+          <p>We invent and build advanced technologies. Assurance and verification are our first commercial focus—not the limits of the company.</p>
+        </div>
+        <div className="jcee-capability-grid">
+          <a href="/capabilities/infrastructure" className="jcee-capability-card">
+            <span className="jcee-capability-index">01 / INTELLIGENT SYSTEMS</span>
+            <h3>Infrastructure &amp; Runtime Systems</h3>
+            <p>Software for reliable actions, recovery, and integration across operational workflows.</p>
+            <span className="jcee-capability-arrow">Explore infrastructure ↗</span>
+          </a>
+          <a href="/capabilities/assurance" className="jcee-capability-card">
+            <span className="jcee-capability-index">02 / ASSURANCE &amp; EVIDENCE</span>
+            <h3>Software &amp; Consequence Assurance</h3>
+            <p>Inspectable authority, outcome reconciliation, and bounded technical verification.</p>
+            <span className="jcee-capability-arrow">Explore assurance ↗</span>
+          </a>
+          <a href="/capabilities/technology-validation" className="jcee-capability-card">
+            <span className="jcee-capability-index">03 / SCIENTIFIC &amp; ENGINEERING R&amp;D</span>
+            <h3>Technology Validation &amp; Engineering</h3>
+            <p>Scientific assessment, experimental verification, and R&amp;D implementation support.</p>
+            <span className="jcee-capability-arrow">Explore validation ↗</span>
+          </a>
+        </div>
+      </section>
+
       <div
         id="transition-story"
         className="et-chapter-bridge bridge-story"
