@@ -14,6 +14,7 @@ for (const failure of ['', 'pnpm', 'install', 'build']) test(`Manus build handof
     fs.mkdirSync(path.join(root, 'pinned'));
     fs.copyFileSync('scripts/manus-build.sh', path.join(root, 'scripts/manus-build.sh'));
     const put = (name, text) => fs.writeFileSync(path.join(root, name), text, {mode:0o755});
+    put('bin/corepack', '#!/bin/sh\n[ "$1" = pnpm@10.4.1 ] || exit 19\nshift\nexec pnpm "$@"\n');
     put('bin/node', '#!/bin/sh\necho v24.22.1\n');
     put('pinned/node', '#!/bin/sh\necho v22.23.4\n');
     put('scripts/manus-node.sh', '#!/bin/sh\nset -eu\n[ "$(node --version)" = v24.22.1 ]\nshift\nexport PATH="$PWD/pinned:$PATH"\nexec "$@"\n');

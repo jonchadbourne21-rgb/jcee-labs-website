@@ -7,8 +7,9 @@ if [ "${1:-}" != --pinned-runtime ]; then
 fi
 actual=$(node --version)
 [ "$actual" = v22.23.4 ] || { echo "JCEE runtime mismatch: $actual (expected v22.23.4)" >&2; exit 1; }
-actual_pnpm=$(pnpm --version)
+export COREPACK_ENABLE_DOWNLOAD_PROMPT=0
+actual_pnpm=$(corepack pnpm@10.4.1 --version)
 [ "$actual_pnpm" = 10.4.1 ] || { echo "JCEE pnpm mismatch: $actual_pnpm (expected 10.4.1)" >&2; exit 1; }
 echo "JCEE build runtime: node=$actual pnpm=$actual_pnpm" >&2
-pnpm install --frozen-lockfile
-pnpm build
+corepack pnpm@10.4.1 install --frozen-lockfile
+corepack pnpm@10.4.1 build
