@@ -32,4 +32,9 @@
 .jcee-capability-arrow{font-weight:700;font-size:.82rem;margin-top:auto}
 @media(max-width:900px){.jcee-capability-heading{grid-template-columns:1fr}.jcee-capability-heading .et-eyebrow,.jcee-capability-heading>p:last-child{grid-column:1;grid-row:auto}.jcee-capability-grid{grid-template-columns:1fr}.jcee-capability-card{padding:23px 15px}.jcee-capability-card:not(:last-child){border-right:0;border-bottom:1px solid var(--jcee-line)}}
 @media(max-width:520px){.jcee-home-refresh .et-hero-copy h1{font-size:clamp(2.65rem,10vw,4rem)}.jcee-home-refresh .et-bridge-art{max-width:100px;max-height:95px}.jcee-capability-panel{padding-block:38px}}
+/* Keep the published evidence-transition illustration large enough for visual review. */
+.jcee-home-refresh #transition-evidence{min-height:360px!important;padding-block:48px}
+.jcee-home-refresh #transition-evidence .et-bridge-inner{min-height:260px!important}
+.jcee-home-refresh #transition-evidence .et-bridge-art{max-width:370px;max-height:285px;opacity:.82}
+@media(max-width:520px){.jcee-home-refresh #transition-evidence{min-height:350px!important;padding-block:38px}.jcee-home-refresh #transition-evidence .et-bridge-inner{min-height:280px!important}.jcee-home-refresh #transition-evidence .et-bridge-art{max-width:150px;max-height:125px}}
 @media(prefers-reduced-motion:reduce){.jcee-capability-card{transition:none}}
