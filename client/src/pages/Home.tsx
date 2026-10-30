@@ -1,11 +1,12 @@
 import CoreHeader from "@/components/CoreHeader";
 import BrandFooter from "@/components/BrandFooter";
 import EvidenceTrace from "@/components/EvidenceTrace";
+import "./home-editorial-refresh.css";
 
 /** The approved evidence-thread design, rendered as native React for every delivery target. */
 export default function Home() {
   return (
-    <main id="top" className="unified-home">
+    <main id="top" className="unified-home jcee-home-refresh">
       <CoreHeader />
       <section
         className="et-hero et-section-shell"
@@ -15,20 +16,20 @@ export default function Home() {
       >
         <div className="et-hero-topline">
           <p className="et-eyebrow">
-            <span className="et-signal-dot"></span> AI ENGINEERING + WORKFLOW
-            ASSURANCE
+            <span className="et-signal-dot"></span> ADVANCED TECHNOLOGY &amp;
+            ENGINEERING
           </p>
           <span className="et-hero-location et-mono">DALLAS, TEXAS / JCEE LABS</span>
         </div>
         <div className="et-hero-layout">
           <div className="et-hero-copy">
             <h1 id="hero-title">
-              When software acts,
+              Build what comes next.
               <br />
-              <span>follow the evidence.</span>
+              <span>Prove what holds.</span>
             </h1>
             <p className="et-hero-deck">
-              We design, build, and test AI-assisted software for work that
+              JCEE Labs invents and engineers advanced technologies. We design, build, and test AI-assisted software for work that
               needs clear permission, reliable recovery, and an inspectable
               record.
             </p>
@@ -164,7 +165,7 @@ export default function Home() {
         </div>
         <div className="et-hero-bottom">
           <p>
-            For operations, product &amp; infrastructure teams.
+            For inventors, product teams, and organizations.
             <br />
             <strong>From first question to testable system.</strong>
           </p>
@@ -177,6 +178,34 @@ export default function Home() {
           </div>
           <a href="#story" aria-label="Discover how JCEE works">
             Scroll to follow the thread <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+      </section>
+
+      <section className="jcee-capability-panel et-section-shell" id="capabilities" aria-labelledby="capabilities-title">
+        <div className="jcee-capability-heading">
+          <p className="et-eyebrow">WHERE ENGINEERING MEETS EVIDENCE</p>
+          <h2 id="capabilities-title">Distinct work. One engineering standard.</h2>
+          <p>We invent and build advanced technologies. Assurance and verification are our first commercial focus—not the limits of the company.</p>
+        </div>
+        <div className="jcee-capability-grid">
+          <a href="/capabilities/infrastructure" className="jcee-capability-card">
+            <span className="jcee-capability-index">01 / INTELLIGENT SYSTEMS</span>
+            <h3>Infrastructure &amp; Runtime Systems</h3>
+            <p>Software for reliable actions, recovery, and integration across operational workflows.</p>
+            <span className="jcee-capability-arrow">Explore infrastructure ↗</span>
+          </a>
+          <a href="/capabilities/assurance" className="jcee-capability-card">
+            <span className="jcee-capability-index">02 / ASSURANCE &amp; EVIDENCE</span>
+            <h3>Software &amp; Consequence Assurance</h3>
+            <p>Inspectable authority, outcome reconciliation, and bounded technical verification.</p>
+            <span className="jcee-capability-arrow">Explore assurance ↗</span>
+          </a>
+          <a href="/capabilities/technology-validation" className="jcee-capability-card">
+            <span className="jcee-capability-index">03 / SCIENTIFIC &amp; ENGINEERING R&amp;D</span>
+            <h3>Technology Validation &amp; Engineering</h3>
+            <p>Scientific assessment, experimental verification, and R&amp;D implementation support.</p>
+            <span className="jcee-capability-arrow">Explore validation ↗</span>
           </a>
         </div>
       </section>

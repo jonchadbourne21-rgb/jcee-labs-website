@@ -4,6 +4,7 @@ import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
+import EditorialSite from "./pages/EditorialSite";
 import { lazy, Suspense, useEffect, useLayoutEffect } from "react";
 
 const AssurancePage = lazy(() => import("./pages/AssurancePage"));
@@ -104,6 +105,9 @@ function Router() {
       <RouteScrollManager />
       <Switch>
         <Route path="/" component={Home} />
+        <Route path="/capabilities/infrastructure">{() => <EditorialSite page="infrastructure" />}</Route>
+        <Route path="/capabilities/assurance">{() => <EditorialSite page="assurance" />}</Route>
+        <Route path="/capabilities/technology-validation">{() => <EditorialSite page="technology-validation" />}</Route>
         <Route path="/solutions/distribution" component={DistributionPage} />
         <Route path="/operating-cloud" component={OperatingCloudPage} />
         <Route

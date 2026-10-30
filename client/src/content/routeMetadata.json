@@ -6,8 +6,8 @@
     "publishedTime": "2026-10-01"
   },
   "/": {
-    "title": "Engineering for Accountable AI Workflows | JCEE Labs",
-    "description": "JCEE Labs provides architecture, custom application development, testing, verification, technical research, and engineering design for accountable AI workflows."
+    "title": "Advanced Technology, Engineering & Verification | JCEE Labs",
+    "description": "JCEE Labs invents and builds advanced technologies, with intelligent infrastructure, software assurance, scientific assessment, and experimental verification."
   },
   "/solutions/distribution": {
     "title": "JCEE Distribution: Order Review & Evidence | JCEE Labs",
@@ -76,6 +76,18 @@
   "/research/evidence-standards": {
     "title": "Research Evidence Standards & Claim Boundaries | JCEE Labs",
     "description": "Understand JCEE Labs evidence standards for mathematical, software, physical, and production claims. Explore the evidence ladder and public review limits."
+  },
+  "/capabilities/infrastructure": {
+    "title": "Intelligent Infrastructure & Runtime Systems | JCEE Labs",
+    "description": "Explore JCEE Labs' intelligent infrastructure and runtime systems for reliable execution, recovery, and inspectable outcomes in software workflows."
+  },
+  "/capabilities/assurance": {
+    "title": "Software Assurance & Evidence Engineering | JCEE Labs",
+    "description": "JCEE Labs provides technical assurance for software workflows, examining current authority, execution evidence, recovery, and bounded verification of results."
+  },
+  "/capabilities/technology-validation": {
+    "title": "Technology Validation, Research & Engineering | JCEE Labs",
+    "description": "Scientific assessment, experimental verification, and R&D engineering support for inventors, laboratories, and organizations developing emerging technologies."
   },
   "/blog/when-tested-components-work-together": {
     "title": "When Tested Components Work Together — JCEE Labs",
