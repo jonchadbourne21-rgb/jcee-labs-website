@@ -46,7 +46,7 @@ export default function VowPage() {
           <em>an evidence-first execution runtime</em>
         </h1>
         <p className="program-deck">
-          JCEE VOW is JCEE Labs&apos; evidence-first runtime for software that
+          JCEE VOW is JCEE WorldLab&apos; evidence-first runtime for software that
           must act, recover, and remain accountable when execution does not go
           as planned.
         </p>

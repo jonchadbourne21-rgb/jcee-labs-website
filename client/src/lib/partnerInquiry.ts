@@ -19,12 +19,12 @@ const routeConfig = {
   enterprise: {
     recipient: "support+enterprise@jceelabs.com",
     subject: "[ENTERPRISE INQUIRY]",
-    heading: "JCEE Labs enterprise partnership inquiry",
+    heading: "JCEE WorldLab enterprise partnership inquiry",
   },
   research: {
     recipient: "support+research@jceelabs.com",
     subject: "[RESEARCH INQUIRY]",
-    heading: "JCEE Labs research collaboration inquiry",
+    heading: "JCEE WorldLab research collaboration inquiry",
   },
 } satisfies Record<PartnerInquiryRoute, {
   recipient: string;

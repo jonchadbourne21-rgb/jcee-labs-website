@@ -21,7 +21,7 @@ const classifications = [
   ],
   [
     "ADOPTED STANDARD",
-    "A governance rule adopted by JCEE Labs. It is not an empirical result.",
+    "A governance rule adopted by JCEE WorldLab. It is not an empirical result.",
   ],
 ];
 
@@ -42,12 +42,12 @@ export default function PublicRegistry() {
         </p>
         <div className="program-number">JCEE PUBLIC REGISTRY</div>
         <h1>
-          JCEE Labs Public Registry:
+          JCEE WorldLab Public Registry:
           <br />
           <em>results, boundaries, and status</em>
         </h1>
         <p className="program-deck">
-          The public registry records what JCEE Labs can responsibly say about
+          The public registry records what JCEE WorldLab can responsibly say about
           selected systems, research programs, and governing standards.
         </p>
         <div className="program-status-row">

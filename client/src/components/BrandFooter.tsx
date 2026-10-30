@@ -14,7 +14,7 @@ export default function BrandFooter({
       <div className="brand-footer-links">
         <div>
           <span>COMPANY</span>
-          <a href="/company">JCEE Labs</a>
+          <a href="/company">JCEE WorldLab</a>
           <a href="/founder">Meet the founder</a>
           <a href="/charter" id="charter">
             Charter
@@ -38,7 +38,7 @@ export default function BrandFooter({
         </div>
         <div>
           <span>CONTACT</span>
-          <a href="/partners">Partner with JCEE Labs</a>
+          <a href="/partners">Partner with JCEE WorldLab</a>
           <a href="/partners/enterprise">Enterprise pathway</a>
           <a href="/partners/research">Research pathway</a>
           <a href="mailto:support@jceelabs.com">support@jceelabs.com ↗</a>
@@ -49,10 +49,10 @@ export default function BrandFooter({
 
       <div className="brand-footer-top brand-footer-bottom-identity">
         <div>
-          <a className="brand-footer-lockup" href="/" aria-label="JCEE Labs home">
+          <a className="brand-footer-lockup" href="/" aria-label="JCEE WorldLab home">
             <img src="/brand/jcee-labs-mark.png" alt="" aria-hidden="true" />
             <span>
-              <strong>JCEE LABS</strong>
+              <strong>JCEE WorldLab</strong>
               <small>PRECISION RESEARCH + INTELLIGENCE · DALLAS, TEXAS</small>
             </span>
           </a>

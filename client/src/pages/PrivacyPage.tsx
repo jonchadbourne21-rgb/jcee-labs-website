@@ -17,7 +17,7 @@ export default function PrivacyPage() {
             <section id="page-content" tabIndex={-1} className="space-y-4">
               <h2 className="text-xl font-display font-bold text-white">1. Introduction</h2>
               <p>
-                JCEE Labs LLC ("we," "our," or "us") respects your privacy. This Privacy Policy describes the information practices associated with the public JCEE Labs website at jceelabs.com.
+                JCEE Labs LLC ("we," "our," or "us") respects your privacy. This Privacy Policy describes the information practices associated with the public JCEE WorldLab website at jceelabs.com.
               </p>
             </section>
 
@@ -74,14 +74,14 @@ export default function PrivacyPage() {
             <section className="space-y-4">
               <h2 className="text-xl font-display font-bold text-white">8. Third-Party Services and Links</h2>
               <p>
-                The website may rely on third-party hosting, analytics, infrastructure, or linked services. Their handling of information is governed by their own terms and privacy practices where applicable. Links to third-party websites do not make JCEE Labs responsible for those websites' privacy practices.
+                The website may rely on third-party hosting, analytics, infrastructure, or linked services. Their handling of information is governed by their own terms and privacy practices where applicable. Links to third-party websites do not make JCEE WorldLab responsible for those websites' privacy practices.
               </p>
             </section>
 
             <section className="space-y-4">
               <h2 className="text-xl font-display font-bold text-white">9. Children's Privacy</h2>
               <p>
-                The public JCEE Labs website is not directed to children under 13, and we do not knowingly seek personal information from children under 13 through this site. If we learn that such information was collected through the site, we will take appropriate steps to address it.
+                The public JCEE WorldLab website is not directed to children under 13, and we do not knowingly seek personal information from children under 13 through this site. If we learn that such information was collected through the site, we will take appropriate steps to address it.
               </p>
             </section>
 

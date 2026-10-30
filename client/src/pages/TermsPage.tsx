@@ -24,7 +24,7 @@ export default function TermsPage() {
             <section className="space-y-4">
               <h2 className="text-xl font-display font-bold text-white">2. Description of Services</h2>
               <p>
-                JCEE Labs develops software and publishes technical research. The public website currently includes information about JCEE VOW, the QCS research program, JCEE Assurance, the JCEE Public Registry, the JCEE Labs Charter, and public research and evidence records. Product, research, and experiment status may change over time, and publication on this website does not by itself constitute a guarantee of production readiness, certification, or availability.
+                JCEE WorldLab develops software and publishes technical research. The public website currently includes information about JCEE VOW, the QCS research program, JCEE Assurance, the JCEE Public Registry, the JCEE Labs Charter, and public research and evidence records. Product, research, and experiment status may change over time, and publication on this website does not by itself constitute a guarantee of production readiness, certification, or availability.
               </p>
             </section>
 

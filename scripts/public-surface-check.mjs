@@ -240,7 +240,7 @@ try {
   if (
     !articleResponse.ok ||
     !articleHtml.includes(
-      "<title>A Confident Model Still Needs Permission — JCEE Labs</title>"
+      "<title>A Confident Model Still Needs Permission — JCEE WorldLab</title>"
     ) ||
     !articleHtml.includes('property="og:type" content="article"') ||
     !articleHtml.includes(
@@ -368,7 +368,7 @@ try {
     ["/terms", "Terms"],
     ["/registry", "Public Registry"],
     ["/assurance", "JCEE Assurance"],
-    ["/partners", "Partner with JCEE Labs"],
+    ["/partners", "Partner with JCEE WorldLab"],
     ["/partners/enterprise", "Enterprise pathway"],
     ["/partners/research", "Research pathway"],
   ];
@@ -532,7 +532,7 @@ try {
     ["/research/evidence-standards", "Evidence standards"],
     ["/research/fields", "25 fields. One unifying research question"],
     ["/resources", "Articles and guides to accountable AI-assisted operations"],
-    ["/company", "About JCEE Labs: why we build for accountable operations"],
+    ["/company", "About JCEE WorldLab: why we build for accountable operations"],
     ["/founder", "Jonathan Matthew Chadbourne"],
     ["/blog/start-with-the-workflow", "Start with the workflow"],
     ["/blog/distribution-first-dry-run", "the first order-integrity dry run"],

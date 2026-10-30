@@ -13,7 +13,7 @@ const researchFit = [
 export default function ResearchPartnersPage() {
   useEffect(() => {
     const previousTitle = document.title;
-    document.title = "Research Partnerships — JCEE Labs";
+    document.title = "Research Partnerships — JCEE WorldLab";
     return () => {
       document.title = previousTitle;
     };
@@ -47,7 +47,7 @@ export default function ResearchPartnersPage() {
 
       <section id="page-content" tabIndex={-1} className="program-masthead partner-masthead research-partner-masthead">
         <p className="eyebrow"><span /> RESEARCH PARTNERSHIPS · CLAIMS + REPRODUCTION</p>
-        <div className="program-number">JCEE LABS / PARTNERS / RESEARCH</div>
+        <div className="program-number">JCEE WorldLab / PARTNERS / RESEARCH</div>
         <h1>
           Put the claim where<br />
           <em>another team can test it.</em>

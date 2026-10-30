@@ -11,7 +11,7 @@ const sharedStandard = [
 export default function PartnersPage() {
   useEffect(() => {
     const previousTitle = document.title;
-    document.title = "Partner With JCEE Labs";
+    document.title = "Partner With JCEE WorldLab";
     return () => {
       document.title = previousTitle;
     };
@@ -22,8 +22,8 @@ export default function PartnersPage() {
       <CoreHeader current="partners" />
 
       <section id="page-content" tabIndex={-1} className="program-masthead partner-masthead">
-        <p className="eyebrow"><span /> JCEE LABS PARTNERSHIPS · TWO PATHWAYS</p>
-        <div className="program-number">JCEE LABS / PARTNERS</div>
+        <p className="eyebrow"><span /> JCEE WorldLab PARTNERSHIPS · TWO PATHWAYS</p>
+        <div className="program-number">JCEE WorldLab / PARTNERS</div>
         <h1>
           Choose the boundary<br />
           <em>you need to strengthen.</em>

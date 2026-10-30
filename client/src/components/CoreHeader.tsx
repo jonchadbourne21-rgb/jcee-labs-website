@@ -106,14 +106,14 @@ export default function CoreHeader({
       <a className="skip-link" href="#page-content">
         Skip to content
       </a>
-      <a className="wordmark" href="/" aria-label="JCEE Labs home">
+      <a className="wordmark" href="/" aria-label="JCEE WorldLab home">
         <img
           className="wordmark-mark"
           src="/brand/jcee-labs-mark.png"
           alt=""
           aria-hidden="true"
         />
-        <span>JCEE LABS</span>
+        <span>JCEE WorldLab</span>
       </a>
 
       <nav className="desktop-nav" aria-label="Main navigation">

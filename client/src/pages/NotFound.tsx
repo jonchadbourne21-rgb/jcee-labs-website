@@ -14,7 +14,7 @@ export default function NotFound() {
           This page may have moved, been retired, or never existed on the current public surface.
         </p>
         <div className="program-links">
-          <a href="/">RETURN TO JCEE LABS <span>→</span></a>
+          <a href="/">RETURN TO JCEE WorldLab <span>→</span></a>
           <a href="/research-evidence">VIEW THE EVIDENCE INDEX <span>→</span></a>
         </div>
       </section>

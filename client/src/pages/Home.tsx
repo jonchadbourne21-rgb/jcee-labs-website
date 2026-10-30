@@ -19,7 +19,7 @@ export default function Home() {
             <span className="et-signal-dot"></span> ADVANCED TECHNOLOGY &amp;
             ENGINEERING
           </p>
-          <span className="et-hero-location et-mono">DALLAS, TEXAS / JCEE LABS</span>
+          <span className="et-hero-location et-mono">DALLAS, TEXAS / JCEE WorldLab</span>
         </div>
         <div className="et-hero-layout">
           <div className="et-hero-copy">
@@ -29,7 +29,7 @@ export default function Home() {
               <span>Prove what holds.</span>
             </h1>
             <p className="et-hero-deck">
-              JCEE Labs invents and engineers advanced technologies. We design, build, and test AI-assisted software for work that
+              JCEE WorldLab invents and engineers advanced technologies. We design, build, and test AI-assisted software for work that
               needs clear permission, reliable recovery, and an inspectable
               record.
             </p>

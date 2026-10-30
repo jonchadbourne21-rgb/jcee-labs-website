@@ -45,15 +45,15 @@ const routeMetadata: Record<
   { title: string; description: string; type?: string; publishedTime?: string }
 > = {
   [paper.landingUrl]: {
-    title: `${paper.title} — JCEE Labs`,
+    title: `${paper.title} — JCEE WorldLab`,
     description: paper.summary,
     type: "article",
     publishedTime: paper.date,
   },
   "/": {
-    title: "JCEE Labs — Accountable AI-Assisted Operations",
+    title: "JCEE WorldLab — Accountable AI-Assisted Operations",
     description:
-      "JCEE Labs develops methods and software that connect AI-assisted operational actions to clear permissions, reviewable evidence, and human control.",
+      "JCEE WorldLab develops methods and software that connect AI-assisted operational actions to clear permissions, reviewable evidence, and human control.",
   },
   "/solutions/distribution": {
     title: "JCEE Distribution — Order Integrity",
@@ -66,32 +66,32 @@ const routeMetadata: Record<
       "Explore JCEE’s platform direction for accountable AI-assisted operations, its current evidence, and the implementation gates still ahead.",
   },
   "/technology": {
-    title: "Technology — JCEE Labs",
+    title: "Technology — JCEE WorldLab",
     description:
       "Review JCEE-INFRA's October 19 integrated software qualification, current authority, protected recovery, retained evidence, and open physical commitment gate.",
   },
   "/research": {
-    title: "Research — JCEE Labs",
+    title: "Research — JCEE WorldLab",
     description:
       "Read JCEE technical reports and research briefs with methods, recorded results, and explicit limitations.",
   },
   "/research/fields": {
-    title: "Research Fields — JCEE Labs",
+    title: "Research Fields — JCEE WorldLab",
     description:
-      "Explore JCEE Labs' dated 25-field research portfolio and its current focus on qualifying a connected assurance path, with distinct mathematical, numerical, and physical evidence.",
+      "Explore JCEE WorldLab's dated 25-field research portfolio and its current focus on qualifying a connected assurance path, with distinct mathematical, numerical, and physical evidence.",
   },
   "/resources": {
-    title: "Resources — JCEE Labs",
+    title: "Resources — JCEE WorldLab",
     description:
       "Company articles, engineering updates, research publications, and the current public build registry.",
   },
   "/company": {
-    title: "Company — JCEE Labs",
+    title: "Company — JCEE WorldLab",
     description:
-      "JCEE Labs develops methods and software for accountable AI-assisted operations. Read about the company, its principles, and its research.",
+      "JCEE WorldLab develops methods and software for accountable AI-assisted operations. Read about the company, its principles, and its research.",
   },
   "/registry": {
-    title: "Public Registry — JCEE Labs",
+    title: "Public Registry — JCEE WorldLab",
     description:
       "Selected JCEE results updated October 19, 2026: integrated software, protected restoration, numerical assurance, preserved milestones, and open gates.",
   },
@@ -99,7 +99,7 @@ const routeMetadata: Record<
 Object.assign(routeMetadata, pageSeo);
 for (const p of publications)
   routeMetadata[publicationHref(p)] = {
-    title: `${p.title} — JCEE Labs`,
+    title: `${p.title} — JCEE WorldLab`,
     description: p.summary,
     type: "article",
     publishedTime: `${p.date}T00:00:00Z`,
