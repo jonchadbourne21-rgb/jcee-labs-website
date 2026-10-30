@@ -1,7 +1,7 @@
 {
   "/": {
-    "title": "Advanced Technology & Engineering | JCEE Labs",
-    "description": "JCEE Labs invents and builds advanced technologies. Our commercial focus includes intelligent infrastructure, technical assurance, experimental verification, and evidence-based engineering."
+    "title": "Advanced Technology, Engineering & Verification | JCEE Labs",
+    "description": "JCEE Labs invents and builds advanced technologies, with intelligent infrastructure, software assurance, scientific assessment, and experimental verification."
   },
   "/assurance": {
     "title": "AI Assurance Method: Permission & Evidence | JCEE Labs",
@@ -57,14 +57,14 @@
   },
   "/capabilities/infrastructure": {
     "title": "Intelligent Infrastructure & Runtime Systems | JCEE Labs",
-    "description": "Explore JCEE Labs' work in intelligent infrastructure, execution and recovery software, and inspectable outcome records. Technical evidence and qualification limits remain explicit."
+    "description": "Explore JCEE Labs' intelligent infrastructure and runtime systems for reliable execution, recovery, and inspectable outcomes in software workflows."
   },
   "/capabilities/assurance": {
     "title": "Software Assurance & Evidence Engineering | JCEE Labs",
-    "description": "Explore JCEE Labs' technical assurance services: current authority, execution evidence, recovery, and bounded verification for software with real-world consequences."
+    "description": "JCEE Labs provides technical assurance for software workflows, examining current authority, execution evidence, recovery, and bounded verification of results."
   },
   "/capabilities/technology-validation": {
-    "title": "Technology Validation & Engineering | JCEE Labs",
+    "title": "Technology Validation, Research & Engineering | JCEE Labs",
     "description": "Scientific assessment, experimental verification, and R&D engineering support for inventors, laboratories, and organizations developing emerging technologies."
   }
 }
