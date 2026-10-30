@@ -30,7 +30,7 @@ const method = [
 export default function CareerPortfolio() {
   useEffect(() => {
     const previousTitle = document.title;
-    document.title = "Jonathan Chadbourne — Technical Portfolio | JCEE Labs";
+    document.title = "Jonathan Chadbourne — Technical Portfolio | JCEE WorldLab";
     return () => { document.title = previousTitle; };
   }, []);
 
@@ -43,7 +43,7 @@ export default function CareerPortfolio() {
         <div className="program-number">JONATHAN CHADBOURNE / FOUNDER & CHIEF ARCHITECT</div>
         <h1>I build systems that make consequential AI actions<br /><em>harder to get wrong — and easier to verify.</em></h1>
         <p className="program-deck">
-          My work at JCEE Labs sits at the intersection of applied AI, distributed systems,
+          My work at JCEE WorldLab sits at the intersection of applied AI, distributed systems,
           execution reliability, evidence, verification, and technical commercialization.
         </p>
         <div className="program-status-row">

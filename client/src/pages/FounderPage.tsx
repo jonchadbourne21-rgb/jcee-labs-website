@@ -26,9 +26,9 @@ export default function FounderPage() {
   return (
     <EditorialLayout
       current="company"
-      eyebrow="The founder / JCEE Labs"
+      eyebrow="The founder / JCEE WorldLab"
       title="Jonathan Matthew Chadbourne"
-      description="Independent researcher and solo founder of JCEE Labs in Dallas, Texas. I build software around a practical question: what would someone need to establish what actually happened?"
+      description="Independent researcher and solo founder of JCEE WorldLab in Dallas, Texas. I build software around a practical question: what would someone need to establish what actually happened?"
     >
       <div className="founder-page">
         <section
@@ -63,7 +63,7 @@ export default function FounderPage() {
                 the next person understand a decision.
               </p>
               <p>
-                I started JCEE Labs to pursue questions that kept leading back to
+                I started JCEE WorldLab to pursue questions that kept leading back to
                 evidence. A system can report success, and an AI can give a
                 convincing explanation. I want to know what supports that
                 account, what remains uncertain, and who is responsible for the
@@ -92,7 +92,7 @@ export default function FounderPage() {
               people relying on it.
             </p>
             <p>
-              JCEE Labs developed as those questions moved into research and
+              JCEE WorldLab developed as those questions moved into research and
               practical operations. The connection is still straightforward:
               preserve what supports a conclusion, make uncertainty visible,
               and keep human judgment involved when the evidence runs out.
@@ -197,7 +197,7 @@ export default function FounderPage() {
               is difficult to recover from, or a research result you want to
               examine. We can discuss the problem, the evidence that would make
               progress visible, and whether I can help. You can request a
-              consultation or reach me through the JCEE Labs email below.
+              consultation or reach me through the JCEE WorldLab email below.
             </p>
           </div>
           <div className="editorial-actions">

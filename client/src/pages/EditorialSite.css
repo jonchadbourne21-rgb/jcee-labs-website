@@ -18,7 +18,7 @@
 .jcee-editorial .logo{display:flex;align-items:center;gap:13px;white-space:nowrap}
 .jcee-editorial .logo-mark{width:43px;height:43px;display:block}
 .jcee-editorial .logo-name{font-size:17px;line-height:.97;letter-spacing:-.07em;font-weight:800}
-.jcee-editorial .logo-name span{display:block;font-size:10px;letter-spacing:.28em;margin-top:5px;font-weight:700}
+.jcee-editorial .logo-name span{display:block;font-size:12px;letter-spacing:.02em;margin-top:5px;font-weight:700}
 .jcee-editorial .nav-links{display:flex;align-items:center;gap:30px;margin-left:auto;font-size:12px;letter-spacing:.02em}
 .jcee-editorial .nav-links a{padding-block:9px;border-bottom:1px solid transparent;transition:border-color .15s}
 .jcee-editorial .nav-links a:hover{border-bottom-color:var(--ink)}

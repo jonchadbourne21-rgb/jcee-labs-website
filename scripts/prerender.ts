@@ -55,7 +55,7 @@ try {
       )
       .replace(
         /<title>[^<]*<\/title>/,
-        "<title>Page not found | JCEE Labs</title>"
+        "<title>Page not found | JCEE WorldLab</title>"
       )
   );
   console.log(

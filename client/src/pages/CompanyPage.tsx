@@ -4,15 +4,15 @@ export default function CompanyPage() {
   return (
     <EditorialLayout
       current="company"
-      eyebrow="JCEE Labs / Dallas, Texas"
-      title="About JCEE Labs: why we build for accountable operations"
-      description="JCEE Labs LLC is based in Dallas, Texas, and founded by Jonathan Matthew Chadbourne. We develop methods and software for AI-assisted operations where permissions, evidence, and human responsibility matter."
+      eyebrow="JCEE WorldLab / Dallas, Texas"
+      title="About JCEE WorldLab: why we build for accountable operations"
+      description="JCEE WorldLab is based in Dallas, Texas, and founded by Jonathan Matthew Chadbourne. We develop methods and software for AI-assisted operations where permissions, evidence, and human responsibility matter."
     >
       <section className="editorial-section editorial-section-muted">
         <p className="editorial-kicker">FOUNDER</p>
         <h2>Jonathan Matthew Chadbourne</h2>
         <p className="editorial-intro">
-          Jonathan is the founder of JCEE Labs and an independent researcher
+          Jonathan is the founder of JCEE WorldLab and an independent researcher
           based in Dallas, Texas. His background is in sales; his work at JCEE
           connects application development with a practical question: how can
           someone check what an AI-assisted system actually did?
@@ -80,7 +80,7 @@ export default function CompanyPage() {
         </p>
         <h2 id="founder-title">The Work Nobody Sees</h2>
         <p className="editorial-intro">
-          Why JCEE Labs starts with observation, evidence, and the workflows
+          Why JCEE WorldLab starts with observation, evidence, and the workflows
           between systems. The thinking that connects our research to the work
           of ordinary businesses.
         </p>
@@ -170,7 +170,7 @@ export default function CompanyPage() {
         </a>
       </section>
       <section className="editorial-section">
-        <h2>Work with JCEE Labs.</h2>
+        <h2>Work with JCEE WorldLab.</h2>
         <p>
           Companies can bring an operational problem. Researchers can bring a
           question, method, or reproduction proposal.

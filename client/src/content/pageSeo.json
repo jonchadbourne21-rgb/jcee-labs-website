@@ -1,70 +1,70 @@
 {
   "/": {
-    "title": "Advanced Technology, Engineering & Verification | JCEE Labs",
-    "description": "JCEE Labs invents and builds advanced technologies, with intelligent infrastructure, software assurance, scientific assessment, and experimental verification."
+    "title": "Advanced Technology, Engineering & Evidence | JCEE WorldLab",
+    "description": "JCEE WorldLab builds advanced technologies, with intelligent infrastructure, software assurance, scientific assessment, and experimental verification."
   },
   "/assurance": {
-    "title": "AI Assurance Method: Permission & Evidence | JCEE Labs",
+    "title": "AI Assurance Method: Permission & Evidence | JCEE WorldLab",
     "description": "Explore the JCEE Assurance Method: observe, judge, authorize, and record. Connect AI-assisted actions to current permission, evidence, and human control."
   },
   "/vow": {
-    "title": "JCEE VOW: Evidence-First Execution Runtime | JCEE Labs",
+    "title": "JCEE VOW: Evidence-First Execution Runtime | JCEE WorldLab",
     "description": "Explore JCEE VOW, an evidence-first execution runtime. Review covered execution and recovery behavior, recorded milestones, and explicit evidence boundaries."
   },
   "/solutions/distribution": {
-    "title": "JCEE Distribution: Order Review & Evidence | JCEE Labs",
+    "title": "JCEE Distribution: Order Review & Evidence | JCEE WorldLab",
     "description": "Explore JCEE Distribution's synthetic order-review workflow: compare instructions with observed records, surface discrepancies, and preserve human control."
   },
   "/company": {
-    "title": "About JCEE Labs: Accountable AI Research & Software",
-    "description": "Meet JCEE Labs in Dallas, Texas. Learn why we develop methods and software for AI-assisted operations grounded in permission, evidence, and human control."
+    "title": "About JCEE WorldLab: Accountable AI Research & Software",
+    "description": "Meet JCEE WorldLab in Dallas, Texas. Learn why we develop methods and software for AI-assisted operations grounded in permission, evidence, and human control."
   },
   "/founder": {
-    "title": "Meet Jonathan Matthew Chadbourne, Founder | JCEE Labs",
-    "description": "Meet Jonathan Matthew Chadbourne, independent researcher and founder of JCEE Labs in Dallas. Read about his background, current software work, and approach."
+    "title": "Meet Jonathan Matthew Chadbourne, Founder | JCEE WorldLab",
+    "description": "Meet Jonathan Matthew Chadbourne, independent researcher and founder of JCEE WorldLab in Dallas. Read about his background, current software work, and approach."
   },
   "/registry": {
-    "title": "JCEE Labs Public Registry: Build & Research Evidence",
-    "description": "Review the October 19 JCEE Labs update: integrated software qualification, protected recovery, numerical assurance, preserved milestones, and open gates."
+    "title": "JCEE WorldLab Public Registry: Build & Research Evidence",
+    "description": "Review the October 19 software update: integrated software qualification, protected recovery, numerical assurance, preserved milestones, and open gates."
   },
   "/resources": {
-    "title": "Accountable AI Articles & Research Guides | JCEE Labs",
-    "description": "Read JCEE Labs engineering notes on connected software, backup restoration, evidence testing, current permission, and recovery, with dated results and limits."
+    "title": "Accountable AI Articles & Research Guides | JCEE WorldLab",
+    "description": "Read JCEE WorldLab notes on connected software, backup restoration, evidence testing, current permission, and recovery, with dated results and limits."
   },
   "/consultation": {
-    "title": "Free 10–30 Minute Technical Consultation | JCEE Labs",
+    "title": "Free 10–30 Minute Technical Consultation | JCEE WorldLab",
     "description": "Free 10–30-minute consultation for AI architecture, custom applications, testing, verification, technical research, systems analysis, and engineering design."
   },
   "/research/publications": {
-    "title": "Research Reports & Publications: Evidence | JCEE Labs",
-    "description": "Read JCEE Labs research reports, public preprints, and technical notes. Examine the methods, recorded results, supporting evidence, and stated limits."
+    "title": "Research Reports & Publications: Evidence | JCEE WorldLab",
+    "description": "Read JCEE WorldLab research reports, public preprints, and technical notes. Examine the methods, recorded results, supporting evidence, and stated limits."
   },
   "/research/programs": {
-    "title": "Research Programs: Results & Current Gates | JCEE Labs",
-    "description": "Explore JCEE Labs research programs, current engineering priorities, recorded outcomes, and open qualifying gates, including negative results and limits."
+    "title": "Research Programs: Results & Current Gates | JCEE WorldLab",
+    "description": "Explore JCEE WorldLab research programs, current engineering priorities, recorded outcomes, and open qualifying gates, including negative results and limits."
   },
   "/research/measurement": {
-    "title": "Measurement & Numerical Assurance Research | JCEE Labs",
-    "description": "Review JCEE Labs numerical assurance, wave-model reproduction, and recovered analysis software. See the tested conditions, recorded results, and limits."
+    "title": "Measurement & Numerical Assurance Research | JCEE WorldLab",
+    "description": "Review JCEE WorldLab numerical assurance, wave-model reproduction, and recovered analysis software. See the tested conditions, recorded results, and limits."
   },
   "/research/physical-experiments": {
-    "title": "Physical Experiments: Plans & Evidence Gates | JCEE Labs",
-    "description": "Explore JCEE Labs proposed physical experiments, their frozen controls, planned observations, and open gates. Physical results remain to be established."
+    "title": "Physical Experiments: Plans & Evidence Gates | JCEE WorldLab",
+    "description": "Explore JCEE WorldLab proposed physical experiments, their frozen controls, planned observations, and open gates. Physical results remain to be established."
   },
   "/research/evidence-standards": {
-    "title": "Research Evidence Standards & Claim Boundaries | JCEE Labs",
-    "description": "Understand JCEE Labs evidence standards for mathematical, software, physical, and production claims. Explore the evidence ladder and public review limits."
+    "title": "Research Evidence Standards & Claim Limits | JCEE WorldLab",
+    "description": "Understand JCEE WorldLab evidence standards for mathematical, software, physical, and production claims. Explore the evidence ladder and public review limits."
   },
   "/capabilities/infrastructure": {
-    "title": "Intelligent Infrastructure & Runtime Systems | JCEE Labs",
-    "description": "Explore JCEE Labs' intelligent infrastructure and runtime systems for reliable execution, recovery, and inspectable outcomes in software workflows."
+    "title": "Intelligent Infrastructure & Runtime Systems | JCEE WorldLab",
+    "description": "Explore JCEE WorldLab's intelligent infrastructure and runtime systems for reliable execution, recovery, and inspectable outcomes in software workflows."
   },
   "/capabilities/assurance": {
-    "title": "Software Assurance & Evidence Engineering | JCEE Labs",
-    "description": "JCEE Labs provides technical assurance for software workflows, examining current authority, execution evidence, recovery, and bounded verification of results."
+    "title": "Software Assurance & Evidence Engineering | JCEE WorldLab",
+    "description": "JCEE WorldLab provides assurance for software workflows, examining current authority, execution evidence, recovery, and bounded verification of results."
   },
   "/capabilities/technology-validation": {
-    "title": "Technology Validation, Research & Engineering | JCEE Labs",
+    "title": "Technology Validation & Research Engineering | JCEE WorldLab",
     "description": "Scientific assessment, experimental verification, and R&D engineering support for inventors, laboratories, and organizations developing emerging technologies."
   }
 }

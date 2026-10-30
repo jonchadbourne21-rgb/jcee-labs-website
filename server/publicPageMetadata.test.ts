@@ -47,7 +47,7 @@ describe("metadata in the HTML received by sharing crawlers", () => {
       `${article}/?utm_source=share`
     );
     expect(html).toContain(
-      "<title>A Confident Model Still Needs Permission — JCEE Labs</title>"
+      "<title>A Confident Model Still Needs Permission — JCEE WorldLab</title>"
     );
     expect(html).toContain(
       `<meta property="og:url" content="https://jceelabs.com${article}"`
@@ -69,7 +69,7 @@ describe("metadata in the HTML received by sharing crawlers", () => {
       'property="article:published_time" content="2026-09-14T00:00:00Z"'
     );
     expect(applyPublicPageMetadata(template, "/research/fields")).toContain(
-      "<title>Research Fields — JCEE Labs</title>"
+      "<title>Research Fields — JCEE WorldLab</title>"
     );
   });
 

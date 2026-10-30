@@ -13,7 +13,7 @@ const rows = [
 
 export default function HexInspector() {
   return (
-    <aside className="hex-inspector" aria-label="Live JCEE Labs evidence hex inspector">
+    <aside className="hex-inspector" aria-label="Live JCEE WorldLab evidence hex inspector">
       <div className="hex-inspector-topbar">
         <div className="hex-window-status"><i /> LIVE MEMORY / EVIDENCE VIEW</div>
         <div className="hex-window-meta">READ ONLY · SHA-256</div>

@@ -20,7 +20,7 @@ const evidenceRows = [
 export default function QcsPage() {
   useEffect(() => {
     const previousTitle = document.title;
-    document.title = "QCS-2.0 Research — JCEE Labs";
+    document.title = "QCS-2.0 Research — JCEE WorldLab";
     return () => { document.title = previousTitle; };
   }, []);
 

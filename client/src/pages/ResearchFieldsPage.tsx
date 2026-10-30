@@ -298,7 +298,7 @@ export default function ResearchFieldsPage() {
   return (
     <EditorialLayout
       current="research"
-      eyebrow="JCEE Labs / Research Portfolio"
+      eyebrow="JCEE WorldLab / Research Portfolio"
       title="Research fields"
       description="A dated research portfolio across 25 fields, connected by evidence, authority, state, and consequence. Individual results retain their own qualification boundaries."
     >
@@ -332,7 +332,7 @@ export default function ResearchFieldsPage() {
           </blockquote>
         </div>
         <p>
-          JCEE Labs operates across multiple research domains, but the work is
+          JCEE WorldLab operates across multiple research domains, but the work is
           connected by a common concern: making evidence, authority, state, and
           consequence explicit enough to test, verify, and audit.
         </p>
@@ -382,7 +382,7 @@ export default function ResearchFieldsPage() {
         <h2 id="research-identity-title">
           The work crosses substrates. The boundary stays recognizable.
         </h2>
-        <p>At the highest level, JCEE Labs sits at the intersection of:</p>
+        <p>At the highest level, JCEE WorldLab sits at the intersection of:</p>
         <div className="research-identity-grid">
           {interdisciplinaryDomains.map(domain => (
             <div key={domain}>{domain}</div>
@@ -397,7 +397,7 @@ export default function ResearchFieldsPage() {
           </blockquote>
         </div>
         <p>
-          This question links JCEE Labs research in trustworthy AI, formal
+          This question links JCEE WorldLab research in trustworthy AI, formal
           verification, distributed execution, authority systems, causal
           assurance, quantum information, evidence provenance, resilient
           computing, and applied intelligence. The individual projects differ in

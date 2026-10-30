@@ -27,7 +27,7 @@ export default function EditorialLayout({
     const meta = (
       routeMetadata as Record<string, { title: string; description: string }>
     )[route];
-    document.title = meta?.title || `${title} — JCEE Labs`;
+    document.title = meta?.title || `${title} — JCEE WorldLab`;
     const seoDescription = meta?.description || description;
     document
       .querySelector('meta[name="description"]')

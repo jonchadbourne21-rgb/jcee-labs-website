@@ -73,7 +73,8 @@ export function applyPublicPageMetadata(html: string, requestPath: string) {
   const organization = {
     "@type": "Organization",
     "@id": "https://jceelabs.com/#organization",
-    name: "JCEE Labs",
+    name: "JCEE WorldLab",
+    alternateName: "JCEE Labs",
     legalName: "JCEE Labs LLC",
     url: "https://jceelabs.com/",
     logo: "https://jceelabs.com/brand/jcee-labs-mark.png",
@@ -94,7 +95,7 @@ export function applyPublicPageMetadata(html: string, requestPath: string) {
         url: canonical,
         author: publication.author
           ? { "@type": "Person", name: publication.author }
-          : organization,
+          : { "@type": "Organization", name: "JCEE Labs", "@id": organization["@id"] },
         publisher: organization,
       }
     : pathname === "/founder"

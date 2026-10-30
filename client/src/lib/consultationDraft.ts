@@ -18,7 +18,7 @@ export function buildConsultationDraft(fields: ConsultationFields) {
   const company = fields.organization.trim();
   const subject = `[FREE CONSULTATION REQUEST] ${company || fields.name.trim()}`;
   const body = [
-    "JCEE Labs — first consultation request",
+    "JCEE WorldLab — first consultation request",
     "Free first call: 10–30 minutes.",
     "",
     `Name: ${fields.name.trim()}`,

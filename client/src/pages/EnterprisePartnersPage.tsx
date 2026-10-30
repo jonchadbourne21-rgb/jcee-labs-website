@@ -13,7 +13,7 @@ const enterpriseFit = [
 export default function EnterprisePartnersPage() {
   useEffect(() => {
     const previousTitle = document.title;
-    document.title = "Discuss a Workflow — JCEE Labs";
+    document.title = "Discuss a Workflow — JCEE WorldLab";
     return () => { document.title = previousTitle; };
   }, []);
 
@@ -43,7 +43,7 @@ export default function EnterprisePartnersPage() {
       <CoreHeader current="partners" />
       <section id="page-content" tabIndex={-1} className="program-masthead partner-masthead enterprise-partner-masthead">
         <p className="eyebrow"><span /> WORK WITH JCEE · ONE WORKFLOW FIRST</p>
-        <div className="program-number">JCEE LABS / WORKFLOW INQUIRY</div>
+        <div className="program-number">JCEE WorldLab / WORKFLOW INQUIRY</div>
         <h1>Bring us the workflow<br /><em>your team cannot confidently close.</em></h1>
         <p className="program-deck">
           Start with the operational problem, not JCEE terminology. Tell us what the work is,

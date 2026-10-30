@@ -51,7 +51,7 @@ function ConsultationEntry() {
       <section id="page-content" tabIndex={-1} className="preview-section preview-consultation-entry" aria-labelledby="consult-title">
         <div className="preview-consult-copy">
           <div className="preview-consult-intro">
-          <a href="/" className="preview-back-link">← Back to JCEE Labs</a>
+          <a href="/" className="preview-back-link">← Back to JCEE WorldLab</a>
           <p className="preview-kicker">TECHNICAL SERVICES / START HERE</p>
           <h1 id="consult-title">A real problem.<br /><em>A clear first step.</em></h1>
           <p className="preview-deck">Start with a free 10–30-minute consultation. Tell us what you are trying to build, improve, or understand. We will discuss the problem and whether a scoped next step makes sense.</p>
@@ -96,7 +96,7 @@ function ConsultationEntry() {
       </section>
       <section className="preview-section preview-services" aria-labelledby="services-title">
         <div className="preview-section-label"><span>TECHNICAL SERVICES</span><span>AVAILABLE TO DISCUSS AND SCOPE</span></div>
-        <div className="preview-section-heading"><h2 id="services-title">From first question<br /><em>to auditable system.</em></h2><p>JCEE Labs provides end-to-end technical services through discovery, architecture, prototyping, implementation, evidence-backed testing, technical documentation, and research-driven problem solving.</p></div>
+        <div className="preview-section-heading"><h2 id="services-title">From first question<br /><em>to auditable system.</em></h2><p>JCEE WorldLab provides end-to-end technical services through discovery, architecture, prototyping, implementation, evidence-backed testing, technical documentation, and research-driven problem solving.</p></div>
         <div className="preview-services-grid">{serviceGroups.map(([number, title, copy]) => <article key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></article>)}</div>
         <p className="preview-boundary-note">The free first call is not an assessment report, certification, implementation, or grant of execution authority. Production changes and paid work remain separately scoped and authorized. Independent validation requires a scope that preserves review independence.</p>
       </section>
