@@ -135,20 +135,42 @@ async function capture(send, baseUrl, spec) {
     : null;
 
   const selectorLiteral = JSON.stringify(spec.selector);
-  await send("Runtime.evaluate", {
-    returnByValue: true,
-    expression: `(() => {
-      const el = document.querySelector(${selectorLiteral});
-      if (!el) throw new Error('Missing selector: ' + ${selectorLiteral});
-      document.documentElement.style.scrollBehavior = 'auto';
-      document.body.style.scrollBehavior = 'auto';
-      const headerHeight = document.querySelector('.site-header')?.getBoundingClientRect().height || 0;
-      const top = el.getBoundingClientRect().top + window.scrollY - headerHeight - 16;
-      window.scrollTo(0, Math.max(0, top));
-      return {scrollY: window.scrollY, targetTop: top};
-    })()`,
-  });
-  await wait(250);
+  // Browser layout and route hydration can settle after document.readyState is
+  // complete. Wait for the *actual* target viewport position, not a fixed delay.
+  // All later geometry, surface and asset assertions remain unchanged.
+  let positioned = false;
+  for (let attempt = 0; attempt < 20; attempt += 1) {
+    await send("Runtime.evaluate", {
+      returnByValue: true,
+      expression: `(() => {
+        const el = document.querySelector(${selectorLiteral});
+        if (!el) throw new Error('Missing selector: ' + ${selectorLiteral});
+        document.documentElement.style.scrollBehavior = 'auto';
+        document.body.style.scrollBehavior = 'auto';
+        const headerHeight = document.querySelector('.site-header')?.getBoundingClientRect().height || 0;
+        const top = el.getBoundingClientRect().top + window.scrollY - headerHeight - 16;
+        window.scrollTo({top: Math.max(0, top), behavior: 'instant'});
+      })()`,
+    });
+    await wait(125);
+    const current = await send("Runtime.evaluate", {
+      returnByValue: true,
+      expression: `(() => {
+        const el = document.querySelector(${selectorLiteral});
+        if (!el) return null;
+        const rect = el.getBoundingClientRect();
+        return {top: rect.top, bottom: rect.bottom};
+      })()`,
+    });
+    const rect = current.result.value;
+    if (rect && rect.top <= 110 && rect.bottom >= 180) {
+      positioned = true;
+      break;
+    }
+  }
+  if (!positioned) {
+    throw new Error(`${spec.name}: target did not settle into the review viewport`);
+  }
 
   const state = await send("Runtime.evaluate", {
     returnByValue: true,
