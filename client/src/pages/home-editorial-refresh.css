@@ -1,0 +1,35 @@
+/* JCEE editorial homepage refresh: scope to preserve working evidence controls. */
+/* Typography: Arial + Georgia only. */
+.jcee-home-refresh{--jcee-paper:#f3f1e9;--jcee-ink:#15302d;--jcee-muted:#52645d;--jcee-line:#c6cec5;--jcee-accent:#ad4934;background:var(--jcee-paper);color:var(--jcee-ink);font-family:Arial,sans-serif}
+.jcee-home-refresh p,.jcee-home-refresh small,.jcee-home-refresh span,.jcee-home-refresh a,.jcee-home-refresh li,.jcee-home-refresh button,.jcee-home-refresh .et-mono{font-family:Arial,sans-serif}
+.jcee-home-refresh h1,.jcee-home-refresh h2{font-family:Georgia,serif;letter-spacing:-.035em;font-weight:400}
+.jcee-home-refresh .et-hero{min-height:0;background:var(--jcee-paper);padding-top:clamp(55px,7vw,100px);padding-bottom:clamp(24px,4vw,56px)}
+.jcee-home-refresh .et-hero-topline,.jcee-home-refresh .et-hero-bottom{border-color:var(--jcee-line)}
+.jcee-home-refresh .et-hero-copy h1{color:var(--jcee-ink);font:400 clamp(3rem,6.4vw,6.8rem)/1.035 Georgia,serif;letter-spacing:-.055em}
+.jcee-home-refresh .et-hero-copy h1 span{color:var(--jcee-accent);font-style:italic}
+.jcee-home-refresh .et-hero-deck{color:#334a43;max-width:590px;font-size:clamp(1rem,1.4vw,1.23rem)}
+.jcee-home-refresh .et-hero-art{border:1px solid var(--jcee-line);background:#e9ebe4;box-shadow:none}
+.jcee-home-refresh .et-hero-art svg text{font-family:Arial,sans-serif}
+.jcee-home-refresh .et-button{background:#17332f;color:#faf9f5;border-color:#17332f;border-radius:2px}
+.jcee-home-refresh .et-button:hover{background:#294b43;border-color:#294b43}
+.jcee-home-refresh .et-bridge-art{max-width:210px;max-height:145px;object-fit:cover;opacity:.5}
+.jcee-home-refresh .et-chapter-bridge{min-height:0!important;padding-block:18px;border-bottom:1px solid var(--jcee-line)}
+.jcee-home-refresh .et-bridge-inner{min-height:0!important}
+.jcee-home-refresh :is(.et-story,.et-services,.et-fit,.et-example,.et-evidence,.et-consultation){background:var(--jcee-paper)}
+.jcee-home-refresh :is(a,button):focus-visible{outline:3px solid var(--jcee-accent);outline-offset:3px}
+.jcee-capability-panel{padding-block:clamp(50px,6vw,95px);border-block:1px solid var(--jcee-line)}
+.jcee-capability-heading{display:grid;grid-template-columns:minmax(160px,.65fr) minmax(0,1.4fr);gap:15px 5%;align-items:start}
+.jcee-capability-heading .et-eyebrow{grid-row:span 2;padding-top:12px}
+.jcee-capability-heading h2{font:400 clamp(2rem,4vw,4.25rem)/1.12 Georgia,serif;letter-spacing:-.04em;max-width:760px;margin:0}
+.jcee-capability-heading>p:last-child{grid-column:2;color:var(--jcee-muted);line-height:1.65;max-width:620px;margin:0}
+.jcee-capability-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-block:1px solid var(--jcee-line);margin-top:44px}
+.jcee-capability-card{padding:30px clamp(16px,2vw,37px);min-width:0;display:flex;flex-direction:column;gap:12px;text-decoration:none;color:var(--jcee-ink);transition:background-color .2s}
+.jcee-capability-card:not(:last-child){border-right:1px solid var(--jcee-line)}
+.jcee-capability-card:hover,.jcee-capability-card:focus-visible{background:#e2e7df}
+.jcee-capability-index{font-size:.68rem;letter-spacing:.13em;color:var(--jcee-accent);font-weight:700}
+.jcee-capability-card h3{font:400 clamp(1.5rem,2.1vw,2.45rem)/1.15 Georgia,serif;letter-spacing:-.04em;margin:10px 0 0}
+.jcee-capability-card p{font-size:.94rem;line-height:1.65;color:var(--jcee-muted);margin:0 0 20px}
+.jcee-capability-arrow{font-weight:700;font-size:.82rem;margin-top:auto}
+@media(max-width:900px){.jcee-capability-heading{grid-template-columns:1fr}.jcee-capability-heading .et-eyebrow,.jcee-capability-heading>p:last-child{grid-column:1;grid-row:auto}.jcee-capability-grid{grid-template-columns:1fr}.jcee-capability-card{padding:23px 15px}.jcee-capability-card:not(:last-child){border-right:0;border-bottom:1px solid var(--jcee-line)}}
+@media(max-width:520px){.jcee-home-refresh .et-hero-copy h1{font-size:clamp(2.65rem,10vw,4rem)}.jcee-home-refresh .et-bridge-art{max-width:100px;max-height:95px}.jcee-capability-panel{padding-block:38px}}
+@media(prefers-reduced-motion:reduce){.jcee-capability-card{transition:none}}
