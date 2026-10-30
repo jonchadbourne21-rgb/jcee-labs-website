@@ -1,6 +1,6 @@
 /* JCEE editorial homepage refresh: scope to preserve working evidence controls. */
 /* Typography: Arial + Georgia only. */
-.jcee-home-refresh{--jcee-paper:#f3f1e9;--jcee-ink:#15302d;--jcee-muted:#52645d;--jcee-line:#c6cec5;--jcee-accent:#ad4934;background:var(--jcee-paper);color:var(--jcee-ink);font-family:Arial,sans-serif}
+.jcee-home-refresh{--jcee-paper:#f6f6f2;--jcee-ink:#15302d;--jcee-muted:#52645d;--jcee-line:#c6cec5;--jcee-accent:#ad4934;background:var(--jcee-paper);color:var(--jcee-ink);font-family:Arial,sans-serif}
 .jcee-home-refresh p,.jcee-home-refresh small,.jcee-home-refresh span,.jcee-home-refresh a,.jcee-home-refresh li,.jcee-home-refresh button,.jcee-home-refresh .et-mono{font-family:Arial,sans-serif}
 .jcee-home-refresh h1,.jcee-home-refresh h2{font-family:Georgia,serif;letter-spacing:-.035em;font-weight:400}
 .jcee-home-refresh .et-hero{min-height:0;background:var(--jcee-paper);padding-top:clamp(55px,7vw,100px);padding-bottom:clamp(24px,4vw,56px)}
