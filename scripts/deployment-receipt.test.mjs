@@ -168,7 +168,7 @@ test("root untracked Docker metadata is recorded but mutations during build fail
   requireParity(before);
   assert.deepEqual(before.platformMetadata, [{path: ".dockerignore", sha256: sha256("node_modules\n")}]);
   fs.appendFileSync(file, "dist\n");
-  assert.throws(() => writeReceipt(before, {root: f.root}), /Source changed during/);
+  assert.throws(() => writeReceipt(before, {root: f.root, sourceOptions: {sourceRepo: f.root, commit: "HEAD"}, approvedCommit: f.commit}), /Source changed during/);
 });
 
 test("Docker metadata exception does not permit nested files or symlinks", t => {
