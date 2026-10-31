@@ -27,6 +27,7 @@ export const sourceExclusions = [
   ".env",
   ".env.*",
   ".project-config.json",
+  ".dockerignore (untracked root regular file only; fingerprinted)",
   "client/public/__manus__/version.json",
   "release-source.bundle",
   "release-source.json",
@@ -109,7 +110,19 @@ export function inspectSource({
   }
   const tracked = new Set(files.map(file => file.path));
   const extras = filesIn(root, "", excluded).filter(name => !tracked.has(name));
-  mismatches.push(...extras.map(name => `extra: ${name}`));
+  // Manus staging can add root Docker context metadata after source packaging.
+  // Only an untracked regular file at this exact path is permitted. Tracked
+  // versions still undergo the byte/mode comparison above; nested paths,
+  // directories and symlinks receive no exception. Keep its bytes fingerprinted
+  // so a change during the build still aborts receipt generation.
+  const platformFiles = extras.filter(name =>
+    name === ".dockerignore" && fs.lstatSync(path.join(root, name)).isFile()
+  );
+  mismatches.push(...extras.filter(name => !platformFiles.includes(name))
+    .map(name => `extra: ${name}`));
+  const platformMetadata = platformFiles.map(name => ({
+    path: name, sha256: sha256(fileBytes(path.join(root, name))),
+  }));
   const fingerprint = sha256(
     JSON.stringify({
       files,
@@ -119,7 +132,7 @@ export function inspectSource({
       ]),
     })
   );
-  return { source, tree, files, fingerprint, mismatches };
+  return { source, tree, files, fingerprint, mismatches, platformMetadata };
 }
 export function requireParity(snapshot) {
   if (snapshot.mismatches.length)
@@ -183,6 +196,7 @@ export function writeReceipt(
       trackedFiles: after.files.length,
       manifestSha256: sha256(JSON.stringify(after.files)),
       exclusions: sourceExclusions,
+      platformMetadata: after.platformMetadata,
       scope:
         "Git-tracked source bytes and modes checked before and after build. Runtime configuration, dependencies and hosting state are outside this source claim.",
     },

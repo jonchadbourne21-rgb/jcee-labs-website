@@ -159,3 +159,39 @@ test("a clean but unpinned checkout cannot claim an approved release", t => {
   assert.equal(receipt.sourceVerification.status, "UNPINNED_SOURCE");
   assert.throws(() => verifyReceipt(receipt, f.commit), /approved source/);
 });
+
+test("root untracked Docker metadata is recorded but mutations during build fail", t => {
+  const f = fixture(t);
+  const file = path.join(f.root, ".dockerignore");
+  fs.writeFileSync(file, "node_modules\n");
+  const before = f.snapshot();
+  requireParity(before);
+  assert.deepEqual(before.platformMetadata, [{path: ".dockerignore", sha256: sha256("node_modules\n")}]);
+  fs.appendFileSync(file, "dist\n");
+  assert.throws(() => writeReceipt(before, {root: f.root, sourceOptions: {sourceRepo: f.root, commit: "HEAD"}, approvedCommit: f.commit}), /Source changed during/);
+});
+
+test("Docker metadata exception does not permit nested files or symlinks", t => {
+  const f = fixture(t);
+  fs.mkdirSync(path.join(f.root, "nested"));
+  fs.writeFileSync(path.join(f.root, "nested/.dockerignore"), "anything");
+  assert.throws(() => requireParity(f.snapshot()), /extra: nested\/.dockerignore/);
+  fs.rmSync(path.join(f.root, "nested"), {recursive: true});
+  fs.symlinkSync("app.txt", path.join(f.root, ".dockerignore"));
+  assert.throws(() => requireParity(f.snapshot()), /extra: .dockerignore/);
+  fs.unlinkSync(path.join(f.root, ".dockerignore"));
+  fs.mkdirSync(path.join(f.root, ".dockerignore"));
+  fs.writeFileSync(path.join(f.root, ".dockerignore/extra.js"), "unexpected");
+  assert.throws(() => requireParity(f.snapshot()), /extra: .dockerignore\/extra.js/);
+});
+
+test("tracked Docker metadata must still match approved bytes", t => {
+  const f = fixture(t);
+  const file = path.join(f.root, ".dockerignore");
+  fs.writeFileSync(file, "approved");
+  execFileSync("git", ["-C", f.root, "add", ".dockerignore"]);
+  execFileSync("git", ["-C", f.root, "-c", "user.name=Test", "-c", "user.email=test@example.invalid", "commit", "-m", "track metadata"]);
+  requireParity(f.snapshot());
+  fs.writeFileSync(file, "changed");
+  assert.throws(() => requireParity(f.snapshot()), /changed: .dockerignore/);
+});
