@@ -23,3 +23,7 @@ Regression coverage exercises Node24 host-to-Node22 child PATH handoff, pnpm mis
 ## Reproduced extraction defect
 
 On the restricted root build filesystem, the real checksum-verified Node archive failed extraction with `Cannot change ownership to uid 1001, gid 1001: Invalid argument`, exit 2. GNU tar attempts archived ownership restoration when root. `--no-same-owner` retains the build user ownership and removes that unnecessary privileged operation. The real download/extraction/execution is rerun after the repair. This reproduces the failure stage; unavailable historical provider stderr prevents asserting that deployment 69459262 had the identical cause.
+
+## Root Docker staging metadata
+
+The October 31 deployment log reached Node 22.23.4 and pnpm 10.4.1, then failed source parity on `extra: .dockerignore`. An untracked regular root `.dockerignore` is now treated as Docker-context metadata, recorded by SHA-256 in the receipt and included in the before/after build fingerprint. This does not exempt tracked Docker metadata, nested paths, symlinks, or application files. Regenerate the authentic source bundle from the new merged commit before retrying; an older checkpoint retains the older verifier.

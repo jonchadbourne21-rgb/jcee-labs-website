@@ -32,6 +32,7 @@ function fixture(t) {
 test("a source package with no .git builds a fresh verified receipt offline", t => {
   const f = fixture(t);
   assert.equal(fs.existsSync(path.join(f.staged, ".git")), false);
+  fs.writeFileSync(path.join(f.staged, ".dockerignore"), "node_modules\ndist\n");
   let restored;
   const receipt = withReleaseSource({ root: f.staged }, (sourceOptions, approvedCommit) => {
     restored = sourceOptions.sourceRepo;
@@ -42,6 +43,7 @@ test("a source package with no .git builds a fresh verified receipt offline", t 
     return writeReceipt(before, { root: f.staged, sourceOptions, approvedCommit });
   });
   verifyReceipt(receipt, f.commit);
+  assert.equal(receipt.sourceVerification.platformMetadata[0].path, ".dockerignore");
   assert.equal(receipt.tree, f.metadata.tree);
   assert.equal(fs.existsSync(restored), false);
   assert.equal(receipt.sourceFiles.some(file => file.path.startsWith("release-source.")), false);
