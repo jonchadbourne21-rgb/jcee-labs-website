@@ -23,7 +23,7 @@ type CoreHeaderProps = {
 };
 
 export const publicNavigationLinks = [
-  { id: "solutions", label: "Solutions", href: "/solutions/distribution" },
+  { id: "solutions", label: "Infrastructure", href: "/#story" },
   { id: "technology", label: "Technology", href: "/technology" },
   { id: "research", label: "Research", href: "/research" },
   { id: "resources", label: "Resources", href: "/resources" },
@@ -38,7 +38,7 @@ export const getMobileMenuState = (menuOpen: boolean) =>
 
 export default function CoreHeader({
   current,
-  contactLabel = "Free call",
+  contactLabel = "Discuss your workflow",
   contactHref = `${import.meta.env.BASE_URL}consultation`,
 }: CoreHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -149,7 +149,9 @@ export default function CoreHeader({
         </div>
 
         <a className="header-contact" href={contactHref}>
-          {contactLabel} <span aria-hidden="true">↗</span>
+          <span className={contactLabel === "Discuss your workflow" ? "contact-label-full" : undefined}>{contactLabel}</span>
+          {contactLabel === "Discuss your workflow" && <span className="contact-label-short">Let’s talk</span>}
+          <span aria-hidden="true">↗</span>
         </a>
       </div>
     </header>

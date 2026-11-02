@@ -790,3 +790,14 @@ body:has(.site-header) {
 @media (max-width: 640px) {
   .brand-footer .brand-footer-bottom-identity { margin-top: 26px; padding-top: 24px; }
 }
+
+/* Keep the workflow inquiry readable alongside the wordmark on narrow phones. */
+.site-header .contact-label-short { display: none; }
+@media (max-width: 640px) {
+  .site-header .contact-label-full { display: none; }
+  .site-header .contact-label-short { display: inline; }
+}
+@media (max-width: 360px) {
+  .site-header .header-contact > span[aria-hidden="true"] { display: none; }
+  .site-header .wordmark span { letter-spacing: .06em; }
+}

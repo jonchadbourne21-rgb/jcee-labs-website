@@ -47,14 +47,14 @@ function ConsultationEntry() {
 
   return (
     <main id="top" className="jcee-preview preview-consultation-page">
-      <CoreHeader contactLabel="Free call" contactHref="/consultation" />
+      <CoreHeader contactLabel="Discuss your workflow" contactHref="/consultation" />
       <section id="page-content" tabIndex={-1} className="preview-section preview-consultation-entry" aria-labelledby="consult-title">
         <div className="preview-consult-copy">
           <div className="preview-consult-intro">
           <a href="/" className="preview-back-link">← Back to JCEE WorldLab</a>
           <p className="preview-kicker">TECHNICAL SERVICES / START HERE</p>
           <h1 id="consult-title">A real problem.<br /><em>A clear first step.</em></h1>
-          <p className="preview-deck">Start with a free 10–30-minute consultation. Tell us what you are trying to build, improve, or understand. We will discuss the problem and whether a scoped next step makes sense.</p>
+          <p className="preview-deck">Start with a free 10–30-minute consultation. Tell us which workflow you want to automate, which systems it touches, and what needs to work better. We will discuss the problem and whether a scoped next step makes sense.</p>
           <div className="preview-call-facts"><span>10–30 minutes</span><span>Free first call</span><span>No paid work before agreed scope</span></div>
           </div>
           <ol className="preview-call-process">
@@ -100,7 +100,7 @@ function ConsultationEntry() {
         <div className="preview-services-grid">{serviceGroups.map(([number, title, copy]) => <article key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></article>)}</div>
         <p className="preview-boundary-note">The free first call is not an assessment report, certification, implementation, or grant of execution authority. Production changes and paid work remain separately scoped and authorized. Independent validation requires a scope that preserves review independence.</p>
       </section>
-      <section className="preview-section preview-existing-inquiry" aria-labelledby="workflow-title"><div><p className="preview-kicker">ALREADY HAVE A WORKFLOW TO SCOPE?</p><h2 id="workflow-title">Keep the detailed inquiry available.</h2><p>The existing Workflow Assurance Assessment inquiry is unchanged. Its detailed questions and review-before-send email behavior remain available for a later scoping stage.</p></div><a className="preview-secondary-button" href="/partners/enterprise">Open detailed workflow inquiry ↗</a></section>
+      <section className="preview-section preview-existing-inquiry" aria-labelledby="workflow-title"><div><p className="preview-kicker">ALREADY HAVE A WORKFLOW TO SCOPE?</p><h2 id="workflow-title">Scope your workflow.</h2><p>Describe the systems, approval requirements, and outcomes that matter to your team. Review your inquiry before sending it.</p></div><a className="preview-secondary-button" href="/partners/enterprise">Open detailed workflow inquiry ↗</a></section>
       <BrandFooter backToTopHref="#top" />
     </main>
   );

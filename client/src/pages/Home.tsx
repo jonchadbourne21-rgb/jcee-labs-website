@@ -3,44 +3,40 @@ import BrandFooter from "@/components/BrandFooter";
 import EvidenceTrace from "@/components/EvidenceTrace";
 import "./home-editorial-refresh.css";
 
-/** The approved evidence-thread design, rendered as native React for every delivery target. */
 export default function Home() {
   return (
-    <main id="top" className="unified-home jcee-home-refresh">
+    <main id="top" className="unified-home customer-home">
       <CoreHeader />
       <section
-        className="et-hero et-section-shell"
         id="page-content"
         tabIndex={-1}
+        className="customer-shell customer-hero"
         aria-labelledby="hero-title"
       >
-        <div className="et-hero-topline">
-          <p className="et-eyebrow">
-            <span className="et-signal-dot"></span> ADVANCED TECHNOLOGY &amp;
-            ENGINEERING
-          </p>
-          <span className="et-hero-location et-mono">DALLAS, TEXAS / JCEE WorldLab</span>
-        </div>
-        <div className="et-hero-layout">
-          <div className="et-hero-copy">
+        <p className="customer-kicker">JCEE WORLDLAB · JCEE INFRASTRUCTURE</p>
+        <div className="customer-hero-grid">
+          <div>
             <h1 id="hero-title">
-              Build what comes next.
+              Put AI to work.
               <br />
-              <span>Prove what holds.</span>
+              Stay in control.
             </h1>
-            <p className="et-hero-deck">
-              JCEE WorldLab invents and engineers advanced technologies. We design, build, and test AI-assisted software for work that
-              needs clear permission, reliable recovery, and an inspectable
-              record.
+            <p className="customer-deck">
+              Bring AI into the workflows your business depends on. We help your
+              team connect systems, define what automation can do, and verify
+              the results.
             </p>
-            <div className="et-hero-actions">
-              <a className="et-button" href="/consultation">
+            <div className="customer-actions">
+              <a className="customer-button" href="/consultation">
                 Discuss your workflow <span aria-hidden="true">↗</span>
               </a>
-              <a className="et-text-link" href="#working-example">
-                Explore the example <span aria-hidden="true">↓</span>
+              <a className="customer-link" href="#story">
+                Explore JCEE Infrastructure ↓
               </a>
             </div>
+            <p className="customer-signature">
+              Intelligence That Leaves Receipts.
+            </p>
           </div>
           <figure className="et-hero-art">
             <svg viewBox="0 0 600 510" fill="none" aria-hidden="true">
@@ -163,709 +159,247 @@ export default function Home() {
             </figcaption>
           </figure>
         </div>
-        <div className="et-hero-bottom">
-          <p>
-            For inventors, product teams, and organizations.
-            <br />
-            <strong>From first question to testable system.</strong>
-          </p>
-          <div>
-            <span className="et-mono">DESIGN</span>
-            <i aria-hidden="true"></i>
-            <span className="et-mono">BUILD</span>
-            <i aria-hidden="true"></i>
-            <span className="et-mono">VERIFY</span>
-          </div>
-          <a href="#story" aria-label="Discover how JCEE works">
-            Scroll to follow the thread <span aria-hidden="true">↓</span>
-          </a>
-        </div>
       </section>
 
-      <section className="jcee-capability-panel et-section-shell" id="capabilities" aria-labelledby="capabilities-title">
-        <div className="jcee-capability-heading">
-          <p className="et-eyebrow">WHERE ENGINEERING MEETS EVIDENCE</p>
-          <h2 id="capabilities-title">Distinct work. One engineering standard.</h2>
-          <p>We invent and build advanced technologies. Assurance and verification are our first commercial focus—not the limits of the company.</p>
-        </div>
-        <div className="jcee-capability-grid">
-          <a href="/capabilities/infrastructure" className="jcee-capability-card">
-            <span className="jcee-capability-index">01 / INTELLIGENT SYSTEMS</span>
-            <h3>Infrastructure &amp; Runtime Systems</h3>
-            <p>Software for reliable actions, recovery, and integration across operational workflows.</p>
-            <span className="jcee-capability-arrow">Explore infrastructure ↗</span>
-          </a>
-          <a href="/capabilities/assurance" className="jcee-capability-card">
-            <span className="jcee-capability-index">02 / ASSURANCE &amp; EVIDENCE</span>
-            <h3>Software &amp; Consequence Assurance</h3>
-            <p>Inspectable authority, outcome reconciliation, and bounded technical verification.</p>
-            <span className="jcee-capability-arrow">Explore assurance ↗</span>
-          </a>
-          <a href="/capabilities/technology-validation" className="jcee-capability-card">
-            <span className="jcee-capability-index">03 / SCIENTIFIC &amp; ENGINEERING R&amp;D</span>
-            <h3>Technology Validation &amp; Engineering</h3>
-            <p>Scientific assessment, experimental verification, and R&amp;D implementation support.</p>
-            <span className="jcee-capability-arrow">Explore validation ↗</span>
-          </a>
-        </div>
-      </section>
-
-      <div
-        id="transition-story"
-        className="et-chapter-bridge bridge-story"
-        aria-label="Introducing: the question"
-      >
-        <div className="et-bridge-inner">
-          <span className="et-bridge-index et-mono">01 / UP NEXT</span>
-          <div className="et-bridge-copy">
-            <span className="et-eyebrow">THE QUESTION</span>
-            <p>An instruction becomes an action.</p>
-            <small>Can your team tell who approved the change?</small>
-          </div>
-          <img
-            className="et-bridge-art"
-            src="/landing/illustrations/story-v2.webp"
-            alt="A customer order passes an approval gate before shipment."
-            width="1536"
-            height="1024"
-            loading="lazy"
-            decoding="async"
-          />
-          <a href="#story" aria-label="Continue to the question">
-            ↓
-          </a>
-        </div>
-      </div>
       <section
-        className="et-story et-section-shell et-chapter"
         id="story"
+        className="customer-shell customer-section"
         aria-labelledby="story-title"
       >
-        <div className="et-section-label">
-          <span className="et-eyebrow">01 / THE PROBLEM WE WORK ON</span>
-          <span className="et-mono">A REQUEST IS ONLY THE BEGINNING</span>
-        </div>
-        <div className="et-section-heading">
-          <h2 id="story-title">
-            “Done” should come
-            <br />
-            with a record.
-          </h2>
+        <p className="customer-kicker">01 / FROM REQUEST TO RESULT</p>
+        <h2 id="story-title">
+          Your customer asked for a change.
+          <br />
+          Make sure the job gets done.
+        </h2>
+        <div className="customer-story-grid">
           <div>
-            <p className="et-lead">
-              An AI recommendation can become an approval, an order, or a change
-              in another system. The hard part is knowing whether the action was
-              permitted—and what actually happened.
+            <p className="customer-deck">
+              A subscription changes. A credit is approved. A support ticket
+              needs closing.
             </p>
             <p>
-              We connect the instruction, supporting evidence, current
-              authority, target-system result, and recovery record. People keep
-              responsibility. Uncertainty stays visible.
+              Your AI can coordinate the work. Your business still needs a clear
+              answer about what happened—especially when a system stops
+              responding halfway through.
+            </p>
+            <p>
+              JCEE WorldLab helps you engineer that workflow from request to
+              verified outcome.
             </p>
           </div>
+          <aside
+            className="customer-scenario"
+            aria-label="Illustrative interrupted workflow"
+          >
+            <p className="customer-kicker">AN EVERYDAY EXCEPTION</p>
+            <h3>The billing request timed out.</h3>
+            <p>
+              Did the credit happen? Has the subscription changed? Would another
+              attempt duplicate the work?
+            </p>
+            <div className="customer-scenario-result">
+              Check the outcome before deciding what happens next.
+            </div>
+            <small>
+              Illustrative scenario, not a customer result or a live payment
+              demonstration.
+            </small>
+          </aside>
         </div>
-        <ol className="et-method-steps" aria-label="The JCEE Assurance Method">
+        <ol className="customer-steps">
           <li>
-            <span className="et-step-index et-mono">01</span>
-            <h3>Observe</h3>
+            <span>01</span>
+            <h3>The request</h3>
+            <p>Capture the intended change and required approval.</p>
+          </li>
+          <li>
+            <span>02</span>
+            <h3>The work</h3>
             <p>
-              Preserve the source request and what the system actually measured.
+              Connect the workflow to your systems with defined permissions.
             </p>
           </li>
           <li>
-            <span className="et-step-index et-mono">02</span>
-            <h3>Judge</h3>
-            <p>
-              Compare the evidence with the claim. Expose conflicts and missing
-              information.
-            </p>
-          </li>
-          <li>
-            <span className="et-step-index et-mono">03</span>
-            <h3>Authorize</h3>
-            <p>
-              Check current permission at the action boundary owned by the
-              target system.
-            </p>
-          </li>
-          <li>
-            <span className="et-step-index et-mono">04</span>
-            <h3>Record</h3>
-            <p>
-              Reconcile the outcome. Retain what changed, what did not, and what
-              remains unknown.
-            </p>
+            <span>03</span>
+            <h3>The result</h3>
+            <p>Check the outcome and preserve a record your team can review.</p>
           </li>
         </ol>
-        <div className="et-section-foot">
-          <p>
-            Interruption belongs in the design. Recovery begins by checking the
-            outcome before another attempt.
-          </p>
-          <a className="et-text-link" href="/assurance">
-            Explore the assurance method <span aria-hidden="true">↗</span>
-          </a>
-        </div>
-      </section>
-
-      <div
-        id="transition-services"
-        className="et-chapter-bridge et-bridge-services"
-        aria-label="Introducing: the work"
-      >
-        <div className="et-bridge-inner">
-          <span className="et-bridge-index et-mono">02 / UP NEXT</span>
-          <div className="et-bridge-copy">
-            <span className="et-eyebrow">THE WORK</span>
-            <p>A clear plan for the work ahead.</p>
-            <small>Plan it. Build it. Test what it actually does.</small>
-          </div>
-          <img
-            className="et-bridge-art"
-            src="/landing/illustrations/services-v2.webp"
-            alt="A blueprint, modular system, and inspection lens represent planning, building, and testing."
-            width="1536"
-            height="1024"
-            loading="lazy"
-            decoding="async"
-          />
-          <a href="#services" aria-label="Continue to the work">
-            ↓
-          </a>
-        </div>
-      </div>
-      <section
-        className="et-services et-section-shell et-chapter"
-        id="services"
-        aria-labelledby="services-title"
-      >
-        <span id="engage" className="et-anchor-alias" aria-hidden="true"></span>
-        <div className="et-section-label">
-          <span className="et-eyebrow">02 / WHAT WE OFFER</span>
-          <span className="et-mono">DISCOVERY → ENGINEERING → EVIDENCE</span>
-        </div>
-        <div className="et-section-heading">
-          <h2 id="services-title">
-            <span id="engage-title" aria-hidden="true"></span>Bring the problem.
-            <br />
-            We scope the work.
-          </h2>
-          <p className="et-lead">
-            Technical services for teams building something new, improving an
-            existing process, or testing whether a system deserves more
-            responsibility.
-          </p>
-        </div>
-        <div className="service-list">
-          <article className="et-service-row">
-            <span className="et-mono et-service-number">01</span>
-            <h3>
-              Workflow Assurance
-              <br /> Assessment
-            </h3>
-            <div>
-              <p>
-                Map one consequential workflow, its handoffs, current
-                permissions, and recovery gaps.
-              </p>
-              <span className="et-service-output">
-                OUTPUT / Written boundary map, findings, and next justified
-                test.
-              </span>
-            </div>
-            <a
-              href="/partners/enterprise"
-              aria-label="Discuss a Workflow Assurance Assessment"
-            >
-              <span aria-hidden="true">↗</span>
-            </a>
-          </article>
-          <article className="et-service-row">
-            <span className="et-mono et-service-number">02</span>
-            <h3>
-              AI &amp; systems
-              <br /> architecture
-            </h3>
-            <div>
-              <p>
-                Shape the system around the real operating problem, from
-                AI-assisted decisions to the boundaries between existing tools.
-              </p>
-              <span className="et-service-output">
-                SCOPE / Discovery, systems analysis, architecture, engineering
-                design.
-              </span>
-            </div>
-            <a
-              href="/consultation"
-              aria-label="Discuss AI and systems architecture"
-            >
-              <span aria-hidden="true">↗</span>
-            </a>
-          </article>
-          <article className="et-service-row">
-            <span className="et-mono et-service-number">03</span>
-            <h3>
-              Application
-              <br /> engineering
-            </h3>
-            <div>
-              <p>
-                Develop custom applications and prototypes with a clear path
-                from user need to observable behavior.
-              </p>
-              <span className="et-service-output">
-                SCOPE / Web applications, custom software, iOS and mobile
-                development.
-              </span>
-            </div>
-            <a
-              href="/consultation"
-              aria-label="Discuss application engineering"
-            >
-              <span aria-hidden="true">↗</span>
-            </a>
-          </article>
-          <article className="et-service-row">
-            <span className="et-mono et-service-number">04</span>
-            <h3>
-              Testing &amp; technical
-              <br /> research
-            </h3>
-            <div>
-              <p>
-                Challenge a claim, reproduce a result, and document the evidence
-                another reviewer needs to inspect it.
-              </p>
-              <span className="et-service-output">
-                SCOPE / Verification, research, documentation; independent
-                review scoped separately.
-              </span>
-            </div>
-            <a
-              href="/consultation"
-              aria-label="Discuss testing and technical research"
-            >
-              <span aria-hidden="true">↗</span>
-            </a>
-          </article>
-        </div>
-        <p className="et-section-note">
-          Every engagement starts with agreed deliverables, access, exclusions,
-          timing, and terms. Implementation and production changes require their
-          own written scope and authorization.
+        <p className="customer-note">
+          Integrations and supported controls are scoped and tested against your
+          systems.
         </p>
       </section>
 
-      <div
-        id="transition-fit"
-        className="et-chapter-bridge et-bridge-fit"
-        aria-label="Introducing: the people"
-      >
-        <div className="et-bridge-inner">
-          <span className="et-bridge-index et-mono">03 / UP NEXT</span>
-          <div className="et-bridge-copy">
-            <span className="et-eyebrow">THE PEOPLE</span>
-            <p>Software serves people doing real work.</p>
-            <small>
-              For the people running, building, and checking the work.
-            </small>
-          </div>
-          <img
-            className="et-bridge-art"
-            src="/landing/illustrations/fit-v2.webp"
-            alt="Concept illustration of operations, engineering, and review professionals collaborating."
-            width="1536"
-            height="1024"
-            loading="lazy"
-            decoding="async"
-          />
-          <a href="#fit" aria-label="Continue to the people">
-            ↓
-          </a>
-        </div>
-      </div>
       <section
-        className="et-audience et-section-shell et-chapter"
         id="fit"
+        className="customer-shell customer-section"
         aria-labelledby="fit-title"
       >
-        <div className="et-section-label">
-          <span className="et-eyebrow">03 / WHO WE SERVE</span>
-          <span className="et-mono">REAL WORK. ACCOUNTABLE PEOPLE.</span>
-        </div>
-        <div className="et-section-heading">
-          <h2 id="fit-title">
-            <span id="who-this-is-for" aria-hidden="true"></span>For the teams
-            <br />
-            behind the outcome.
-          </h2>
-          <div>
-            <p className="et-lead">
-              Our intended customers are businesses building AI-assisted
-              products or running workflows across people and software.
-            </p>
+        <p className="customer-kicker">02 / BUILT AROUND YOUR WORK</p>
+        <h2 id="fit-title">
+          Automate more of the work
+          <br />
+          your team handles every day.
+        </h2>
+        <div className="customer-cards">
+          <article>
+            <span>01 / CUSTOMER OPERATIONS</span>
+            <h3>Keep requests moving.</h3>
             <p>
-              Industrial distribution is our first industry focus. The wider fit
-              is defined by the problem: changing permissions, uncertain
-              completion, and records that need to stand up to review.
+              Account updates, service requests, and approved changes across
+              support and business systems.
             </p>
-          </div>
+          </article>
+          <article>
+            <span>02 / SOFTWARE OPERATIONS</span>
+            <h3>Make changes accountable.</h3>
+            <p>
+              Engineering workflows that need clear permissions, execution
+              records, and recovery procedures.
+            </p>
+          </article>
+          <article>
+            <span>03 / BUSINESS OPERATIONS</span>
+            <h3>Connect the process.</h3>
+            <p>
+              Internal requests and approval processes that cross multiple
+              applications.
+            </p>
+          </article>
         </div>
-        <dl className="et-audience-list">
-          <div>
-            <dt>Operations &amp; distribution</dt>
-            <dd>
-              Orders, approvals, back-office handoffs, and exceptions that still
-              need repeated manual checking.
-            </dd>
-          </div>
-          <div>
-            <dt>Product &amp; engineering</dt>
-            <dd>
-              Founders and technical teams turning an AI-assisted idea into a
-              defined, testable application.
-            </dd>
-          </div>
-          <div>
-            <dt>Platform, security &amp; risk</dt>
-            <dd>
-              Teams examining retries, partial completion, changing authority,
-              and the evidence left across systems.
-            </dd>
-          </div>
-          <div>
-            <dt>Research collaborators</dt>
-            <dd>
-              Partners with a technical claim, a reproduction question, or an
-              experiment that needs a clear evidence boundary.
-            </dd>
-          </div>
-        </dl>
-        <div className="et-section-foot">
-          <p>
-            Start with one workflow, one accountable owner, and one outcome we
-            can inspect.
-          </p>
-          <a className="et-text-link" href="/partners">
-            Explore working together <span aria-hidden="true">↗</span>
-          </a>
-        </div>
+        <p className="customer-note">
+          Example engagement areas. Each workflow begins with an assessment of
+          the existing systems and requirements.
+        </p>
       </section>
 
-      <div
-        id="transition-working-example"
-        className="et-chapter-bridge et-bridge-working-example"
-        aria-label="Introducing: the challenge"
-      >
-        <div className="et-bridge-inner">
-          <span className="et-bridge-index et-mono">04 / UP NEXT</span>
-          <div className="et-bridge-copy">
-            <span className="et-eyebrow">THE CHALLENGE</span>
-            <p>What happens when the situation changes?</p>
-            <small>
-              Try an order approval, a cancellation, or a missing response.
-            </small>
-          </div>
-          <img
-            className="et-bridge-art"
-            src="/landing/illustrations/working-example-v2.webp"
-            alt="An order reaches two routes: an approved path and a held path."
-            width="1536"
-            height="1024"
-            loading="lazy"
-            decoding="async"
-          />
-          <a href="#working-example" aria-label="Continue to the challenge">
-            ↓
-          </a>
-        </div>
-      </div>
       <section
-        className="et-example et-chapter"
-        id="working-example"
-        aria-labelledby="example-title"
+        id="services"
+        className="customer-shell customer-section"
+        aria-labelledby="services-title"
       >
-        <div className="et-section-shell">
-          <div className="et-section-label">
-            <span className="et-eyebrow">04 / FOLLOW THE EVIDENCE</span>
-            <span className="et-mono">FICTIONAL DATA · BROWSER ILLUSTRATION</span>
-          </div>
-          <div className="et-section-heading">
-            <h2 id="example-title">
-              <span id="working-example-title" aria-hidden="true"></span>One
-              request.
-              <br />
-              Four possible outcomes.
-            </h2>
-            <p className="et-lead">
-              An operations team asks its software to release order SO-1042.
-              Change the conditions and inspect the records that matter.
-            </p>
-          </div>
-          <EvidenceTrace />
-          <div className="et-example-boundary">
+        <span id="engage" />
+        <p className="customer-kicker">03 / A PRACTICAL FIRST ENGAGEMENT</p>
+        <h2 id="services-title">
+          Start with one workflow
+          <br />
+          worth improving.
+        </h2>
+        <p className="customer-deck">
+          Bring us a process that is slow, difficult to automate, or expensive
+          to investigate when something goes wrong.
+        </p>
+        <div className="customer-offer">
+          <div>
+            <h3>Workflow Assurance</h3>
             <p>
-              This interactive example models the control pattern. It performs
-              no external action, runs no VOW engine, and creates no
-              qualification receipt.
+              We assess your existing systems, identify the controls the
+              workflow needs, and scope the engineering and testing required to
+              move it forward.
             </p>
-            <a className="et-text-link" href="/technology#current-integration">
-              Inspect the recorded software result{" "}
-              <span aria-hidden="true">↗</span>
+            <a className="customer-link" href="/partners/enterprise">
+              Explore the assessment ↗
             </a>
           </div>
-          <noscript>
-            <p>
-              The interactive scenarios require JavaScript. The recorded
-              qualification and its limits are available through the link above.
-            </p>
-          </noscript>
+          <ul>
+            <li>Written boundary map and integration requirements</li>
+            <li>
+              Tests for interruptions, current permissions, and uncertain
+              outcomes
+            </li>
+            <li>A reviewable target-system result and recovery record</li>
+            <li>A clear recommendation and delivery plan</li>
+          </ul>
         </div>
+        <p className="customer-note">
+          Paid work and production changes require their own written scope and
+          authorization.
+        </p>
       </section>
 
-      <div
-        id="transition-evidence"
-        className="et-chapter-bridge et-bridge-evidence"
-        aria-label="Introducing: the record"
-      >
-        <div className="et-bridge-inner">
-          <span className="et-bridge-index et-mono">05 / UP NEXT</span>
-          <div className="et-bridge-copy">
-            <span className="et-eyebrow">THE RECORD</span>
-            <p>Show what happened. Keep the receipt.</p>
-            <small>
-              See the recorded results and what still needs testing.
-            </small>
-          </div>
-          <img
-            className="et-bridge-art"
-            src="/landing/illustrations/evidence-v2.webp"
-            alt="Layered records and a receipt represent an inspectable history of work."
-            width="1536"
-            height="1024"
-            loading="lazy"
-            decoding="async"
-          />
-          <a href="#evidence" aria-label="Continue to the record">
-            ↓
-          </a>
-        </div>
-      </div>
       <section
-        className="et-evidence et-section-shell et-chapter"
         id="evidence"
+        className="customer-shell customer-section"
         aria-labelledby="evidence-title"
       >
-        <span
-          id="current-progress"
-          className="et-anchor-alias"
-          aria-hidden="true"
-        ></span>
-        <span
-          id="evidence-frontier"
-          className="et-anchor-alias"
-          aria-hidden="true"
-        ></span>
-        <div className="et-section-label">
-          <span className="et-eyebrow">
-            05 / OUR CLAIMS, WITH THEIR BOUNDARIES
-          </span>
-          <a className="et-mono" href="/registry">
-            PUBLIC REGISTRY <span aria-hidden="true">↗</span>
+        <span id="evidence-frontier" />
+        <span id="current-progress" />
+        <span id="technology" />
+        <p className="customer-kicker">04 / ENGINEERING YOU CAN EXAMINE</p>
+        <h2 id="evidence-title">See the work behind the promise.</h2>
+        <p className="customer-deck">
+          Explore our recorded software results, execution and recovery
+          mechanisms, and the boundaries of each test.
+        </p>
+        <p>
+          JCEE Infrastructure is in development. Recorded tests use defined
+          configurations and fictional data. Production readiness, customer
+          savings, and payment safety have not been established by those
+          results.
+        </p>
+        <div className="customer-actions">
+          <a className="customer-button" href="/technology#current-integration">
+            Explore our engineering evidence ↗
+          </a>
+          <a className="customer-link" href="/registry">
+            PUBLIC REGISTRY ↗
           </a>
         </div>
-        <div className="et-section-heading">
-          <h2 id="evidence-title">
-            <span id="current-progress-title" aria-hidden="true"></span>The
-            claim follows
-            <br />
-            the evidence.
-          </h2>
-          <p className="et-lead">
-            Implemented software, synthetic tests, and platform ambitions carry
-            different claims. Here is what the published record supports.
-          </p>
-        </div>
-        <div className="et-evidence-record" id="technology">
-          <div className="et-record-label">
-            <span className="et-status-dot" aria-hidden="true"></span>
-            <span className="et-eyebrow">RECORDED SOFTWARE RESULT</span>
-            <time className="et-mono" dateTime="2026-10-19">
-              OCT 19, 2026
-            </time>
-          </div>
-          <div className="et-record-content">
-            <h3>
-              <span id="technology-title" aria-hidden="true"></span>Connected
-              software.
-              <br />
-              Bounded qualification.
-            </h3>
-            <div>
-              <p>
-                The JCEE-INFRA candidate connects evidence, current authority,
-                target-owned action controls, and recovery. In the tested
-                PostgreSQL ledger with fictional data, authorized controls
-                completed; a committed effect was reconciled without
-                duplication; an uncertain outcome remained held.
-              </p>
-              <p className="et-evidence-limit">
-                Scope: one qualified configuration, trusted installed services,
-                and a separately protected checkpoint. Deployment admission,
-                independent human review, physical A4/E003 commitment, native
-                C09, and P3 completion remain open. The payment consequence lane
-                remains unqualified.
-              </p>
-              <div className="et-inline-links">
-                <a className="et-text-link" href="/technology#current-integration">
-                  Read the qualification <span aria-hidden="true">↗</span>
-                </a>
-                <a
-                  className="et-text-link"
-                  href="/JCEE_INFRA_Software_Qualification_2026-10-19.md"
-                >
-                  Source summary <span aria-hidden="true">↗</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="et-evidence-record" id="distribution-demo">
-          <div className="et-record-label">
-            <span className="et-status-dot et-gray" aria-hidden="true"></span>
-            <span className="et-eyebrow">SYNTHETIC REFERENCE WORKFLOW</span>
-            <time className="et-mono" dateTime="2026-09-14">
-              SEP 14, 2026
-            </time>
-          </div>
-          <div className="et-record-content">
-            <h3>
-              <span id="distribution-demo-title" aria-hidden="true"></span>JCEE
-              Distribution.
-              <br />
-              One concrete application.
-            </h3>
-            <div>
-              <p>
-                A purchase order is compared with the entered sales order. A
-                mismatch is surfaced for a person to investigate; the
-                discrepancy itself grants no authority to change the order.
-              </p>
-              <p className="et-evidence-limit">
-                The recorded dry run matched expected classifications in 20 of
-                20 synthetic cases across four result categories, with zero
-                external effects. Customer ROI, live integration, and production
-                readiness remain unestablished.
-              </p>
-              <a className="et-text-link" href="/blog/distribution-first-dry-run">
-                Read the dry-run record <span aria-hidden="true">↗</span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div className="et-claim-boundary">
-          <span className="et-eyebrow">THE CURRENT BOUNDARY</span>
-          <p>
-            These results support the tested mechanics within their stated
-            conditions. Customer savings, production performance, independent
-            certification, and autonomous operating authority have not been
-            established.
-          </p>
-          <a
-            className="et-text-link"
-            href="/research/evidence-standards#evidence-ladder"
-          >
-            See the evidence ladder <span aria-hidden="true">↗</span>
-          </a>
-        </div>
-        <div className="et-direction-row" id="operating-cloud">
-          <span className="et-eyebrow">PLATFORM DIRECTION</span>
-          <p>
-            <strong id="operating-cloud-title">JCEE Operating Cloud</strong> is
-            the longer-term direction for a reusable assurance and execution
-            architecture. It remains in development; broader workflow ownership
-            must be demonstrated.
-          </p>
-          <a className="et-text-link" href="/operating-cloud">
-            Explore the direction <span aria-hidden="true">↗</span>
-          </a>
-        </div>
-        <div className="et-technology-links">
-          <span className="et-mono" id="progress-title">
-            EXPLORE THE MECHANISMS
-          </span>
+        <div className="customer-evidence-links">
           <a href="/technology#infrastructure-build">
             Infrastructure overview ↗
+          </a>
+          <a href="/vow">VOW / execution &amp; recovery ↗</a>
+          <a href="/qcs">QCS / authority research ↗</a>
+          <a href="/assurance">JCEE Assurance ↗</a>
+          <a href="/research/evidence-standards#evidence-ladder">
+            Evidence standards ↗
           </a>
           <a href="/research/physical-experiments#physical-validation">
             Physical research ↗
           </a>
-          <a href="/vow">VOW / execution &amp; recovery ↗</a>
-          <a href="/qcs">QCS / authority research ↗</a>
-          <a href="/resources">Research &amp; engineering notes ↗</a>
         </div>
+        <details className="customer-demo" id="working-example">
+          <summary>Explore an illustrative request-to-record workflow</summary>
+          <p>
+            This browser illustration performs no external action, runs no VOW
+            engine, and creates no qualification receipt. It uses fictional
+            order data to explain the control pattern.
+          </p>
+          <EvidenceTrace />
+        </details>
       </section>
 
-      <div
-        id="transition-consultation"
-        className="et-chapter-bridge et-bridge-consultation"
-        aria-label="Introducing: the next question"
-      >
-        <div className="et-bridge-inner">
-          <span className="et-bridge-index et-mono">06 / UP NEXT</span>
-          <div className="et-bridge-copy">
-            <span className="et-eyebrow">THE NEXT QUESTION</span>
-            <p>Tell us what your team is trying to do.</p>
-            <small>Start with a conversation and one useful next step.</small>
-          </div>
-          <img
-            className="et-bridge-art"
-            src="/landing/illustrations/consultation-v2.webp"
-            alt="A laptop, shared workflow board, and conversation symbols introduce planning together."
-            width="1536"
-            height="1024"
-            loading="lazy"
-            decoding="async"
-          />
-          <a href="#consultation" aria-label="Continue to the next question">
-            ↓
-          </a>
-        </div>
-      </div>
       <section
-        className="et-consultation et-section-shell et-chapter"
         id="consultation"
+        className="customer-shell customer-section customer-close"
         aria-labelledby="consultation-title"
       >
         <div>
-          <p className="et-eyebrow">06 / START SMALL. MAKE IT TESTABLE.</p>
-          <h2 id="consultation-title">
-            Your workflow.
-            <br />
-            Our next question.
-          </h2>
-          <p className="et-lead">
-            What must your team be able to verify before this software gets more
-            responsibility?
+          <p className="customer-kicker">
+            05 / LET’S MAKE THE NEXT STEP USEFUL
           </p>
+          <h2 id="consultation-title">
+            What do you want
+            <br />
+            to automate?
+          </h2>
           <p>
-            Bring a non-confidential summary. We’ll discuss the problem and
-            define a useful first step.
+            Tell us about the workflow, the systems involved, and what needs to
+            work better. Start with a non-confidential summary.
           </p>
         </div>
-        <div className="et-consultation-action">
-          <a className="et-button" href="/consultation">
-            Request a free consultation <span aria-hidden="true">↗</span>
+        <div>
+          <a className="customer-button" href="/consultation">
+            Tell us about your workflow ↗
           </a>
-          <span className="et-mono">10–30 MINUTES / FREE FIRST CALL</span>
-          <p>Paid work begins after an agreed written scope.</p>
-          <a className="et-text-link" href="/partners/enterprise">
-            Already have a workflow to scope? <span aria-hidden="true">↗</span>
-          </a>
+          <p className="customer-note">
+            A free first conversation. Paid work follows an agreed scope.
+          </p>
         </div>
       </section>
-
       <div id="company">
         <BrandFooter backToTopHref="#top" />
       </div>
