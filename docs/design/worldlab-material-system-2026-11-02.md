@@ -31,3 +31,9 @@ After the long-title, research quotation and Registry refinements, 24 additional
 Preview custody: Library libfile_faa653202e108191b0ba661c1d035d45; Drive 1HOKS4pe0BlhKeRmHIA6InzTynO0PTbPV in the private website-redesign folder.
 
 Draft PR65 only. No merge, production publish, DNS change or credential change.
+
+## Approved site-wide rollout
+
+The approved direction now also covers Infrastructure, VOW, QCS, Assurance, the partner gateway and both partnership paths, legacy capability pages, consultation and draft review, legal pages, the research paper and archive templates. Product/partner introductions reuse a shared responsive masthead component with the coordinated artwork; record and legal pages retain their reading-oriented layouts. Headings, secondary labels, form fields, document spacing, status rows and primary actions use the shared material palette. The BB84 PDF is expandable, with direct open/download links always available.
+
+The existing CI visual capture now expects the approved porcelain surface and Company artwork. A new WorldLab surface check visits all 47 registered public routes at 390, 768 and 1440 pixels, checks overflow, page structure, decoded images, typography and artwork overlap, and saves screenshots plus a manifest for review. Existing release, receipt, interaction and fragment gates remain intact. This rollout remains in PR65; no merge or production publication is part of this implementation step.

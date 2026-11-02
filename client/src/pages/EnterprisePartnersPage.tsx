@@ -1,3 +1,4 @@
+import WorldLabMasthead from "@/components/WorldLabMasthead";
 import { FormEvent, useEffect } from "react";
 import BrandFooter from "@/components/BrandFooter";
 import "./home-editorial-refresh.css";
@@ -42,7 +43,7 @@ export default function EnterprisePartnersPage() {
   return (
     <main className="program-page partner-page partner-path-page enterprise-partner-page" id="top">
       <CoreHeader current="partners" />
-      <section id="page-content" tabIndex={-1} className="program-masthead partner-masthead enterprise-partner-masthead">
+      <WorldLabMasthead className="partner-masthead enterprise-partner-masthead" artwork="company">
         <p className="eyebrow"><span /> WORK WITH JCEE · ONE WORKFLOW FIRST</p>
         <div className="program-number">JCEE WorldLab / WORKFLOW INQUIRY</div>
         <h1>Bring us the workflow<br /><em>your team cannot confidently close.</em></h1>
@@ -53,7 +54,7 @@ export default function EnterprisePartnersPage() {
           with clear permissions, tested recovery, and a result your team can inspect.
         </p>
         <div className="program-status-row"><span>FIRST STEP · WORKFLOW ASSURANCE ASSESSMENT</span><span>NO PAID WORK BEFORE AGREED SCOPE</span></div>
-      </section>
+      </WorldLabMasthead>
 
       <section className="partner-fit enterprise-fit" aria-labelledby="enterprise-fit-title">
         <div className="section-index"><span>01 / GOOD FIT</span><span>WORKFLOW · HANDOFF · RECOVERY · EVIDENCE</span></div>

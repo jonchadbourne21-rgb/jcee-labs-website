@@ -6,7 +6,7 @@ export default function PrivacyPage() {
     <div id="top" className="legal-page min-h-screen flex flex-col">
       <CoreHeader />
 
-      <main className="flex-1 pt-32 pb-20 px-4">
+      <main id="page-content" tabIndex={-1} className="flex-1 pt-32 pb-20 px-4">
         <div className="container max-w-3xl mx-auto">
           <div className="space-y-4 mb-12">
             <h1 className="text-4xl md:text-5xl font-display font-extrabold text-white">Privacy Policy</h1>

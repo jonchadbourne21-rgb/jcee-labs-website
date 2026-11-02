@@ -1,3 +1,4 @@
+import WorldLabMasthead from "@/components/WorldLabMasthead";
 import { useEffect } from "react";
 import BrandFooter from "@/components/BrandFooter";
 import CoreHeader from "@/components/CoreHeader";
@@ -21,7 +22,7 @@ export default function PartnersPage() {
     <main className="program-page partner-page partner-gateway" id="top">
       <CoreHeader current="partners" />
 
-      <section id="page-content" tabIndex={-1} className="program-masthead partner-masthead">
+      <WorldLabMasthead className="partner-masthead" artwork="company">
         <p className="eyebrow"><span /> JCEE WorldLab PARTNERSHIPS · TWO PATHWAYS</p>
         <div className="program-number">JCEE WorldLab / PARTNERS</div>
         <h1>
@@ -36,7 +37,7 @@ export default function PartnersPage() {
           <span>01 · ENTERPRISE / OPERATIONAL SYSTEMS</span>
           <span>02 · RESEARCH / CLAIMS + REPRODUCTION</span>
         </div>
-      </section>
+      </WorldLabMasthead>
 
       <section className="partner-pathways" aria-labelledby="partner-pathways-title">
         <div className="section-index">

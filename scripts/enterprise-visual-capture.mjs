@@ -206,7 +206,7 @@ async function capture(send, baseUrl, spec) {
   if (value.rect.y > 110 || value.rect.y + value.rect.height < 180) {
     throw new Error(`${spec.name}: target did not scroll into the review viewport ${JSON.stringify(value.rect)}`);
   }
-  if (value.pageBackground !== 'rgb(246, 246, 242)') {
+  if (value.pageBackground !== 'rgb(250, 249, 246)') {
     throw new Error(`${spec.name}: shared paper surface is not active: ${value.pageBackground}`);
   }
   if (spec.assetUrl && !value.imageSources.includes(new URL(spec.assetUrl, baseUrl).href)) {
@@ -252,8 +252,8 @@ try {
     { name: "Assurance iPhone", route: "/assurance", selector: ".assurance-program", width: 390, height: 844, mobile: true, file: "assurance-iphone.png" },
     { name: "Homepage hero desktop", route: "/", selector: ".customer-hero", width: 1440, height: 900, file: "homepage-hero-desktop.png" },
     { name: "Homepage hero iPhone", route: "/", selector: ".customer-hero", width: 390, height: 844, mobile: true, file: "homepage-hero-iphone.png" },
-    { name: "Founder page desktop", route: "/founder", selector: ".editorial-masthead", width: 1440, height: 900, file: "founder-page-desktop.png", assetUrl: "/landing/illustrations/fit-v2.webp" },
-    { name: "Founder page iPhone", route: "/founder", selector: ".editorial-masthead", width: 390, height: 844, mobile: true, file: "founder-page-iphone.png", assetUrl: "/landing/illustrations/fit-v2.webp" },
+    { name: "Founder page desktop", route: "/founder", selector: ".editorial-masthead", width: 1440, height: 900, file: "founder-page-desktop.png", assetUrl: "/visuals/worldlab-company-v1.webp" },
+    { name: "Founder page iPhone", route: "/founder", selector: ".editorial-masthead", width: 390, height: 844, mobile: true, file: "founder-page-iphone.png", assetUrl: "/visuals/worldlab-company-v1.webp" },
     { name: "Founder introduction desktop", route: "/founder", selector: ".founder-introduction", width: 1440, height: 900, file: "founder-introduction-desktop.png" },
     { name: "Founder introduction iPhone", route: "/founder", selector: ".founder-introduction", width: 390, height: 844, mobile: true, file: "founder-introduction-iphone.png" },
     { name: "Research directory desktop", route: "/research", selector: ".research-directory", width: 1440, height: 900, file: "research-directory-desktop.png" },

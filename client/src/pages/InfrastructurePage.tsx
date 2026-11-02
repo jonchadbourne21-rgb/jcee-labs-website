@@ -11,8 +11,9 @@ export default function InfrastructurePage() {
       <section
         id="page-content"
         tabIndex={-1}
-        className="customer-shell customer-hero"
+        className="customer-shell customer-hero worldlab-service-masthead"
       >
+        <div className="worldlab-masthead-copy">
         <p className="customer-kicker">
           JCEE INFRASTRUCTURE / WORKFLOW ASSURANCE
         </p>
@@ -37,6 +38,8 @@ export default function InfrastructurePage() {
           Start with a workflow that is costly to investigate after a timeout,
           failed handoff, or uncertain change.
         </p>
+        </div>
+        <img className="worldlab-masthead-art" src={`${import.meta.env.BASE_URL}visuals/worldlab-technology-v1.webp`} width={1536} height={1024} alt="" decoding="async" />
       </section>
       <section
         className="customer-shell customer-section"

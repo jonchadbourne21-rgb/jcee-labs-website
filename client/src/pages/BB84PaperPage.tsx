@@ -88,6 +88,8 @@ export default function BB84PaperPage() {
                 Open PDF in a new tab ↗
               </a>
             </p>
+            <details className="publication-pdf-preview">
+              <summary>Preview the PDF on this page</summary>
             <object
               data={pdf}
               type="application/pdf"
@@ -104,6 +106,7 @@ export default function BB84PaperPage() {
                 <a href={pdf}>Read or download the paper here.</a>
               </p>
             </object>
+            </details>
           </section>
           <section id="release">
             <h2>A stable, identifiable release</h2>
