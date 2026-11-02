@@ -50,3 +50,7 @@
  #root .editorial-page .editorial-section { padding-block:36px; }
 }
 @media(max-width:360px) { #root .site-header .wordmark { font-size:14px !important; gap:5px; } }
+/* Existing illustrations share the hero's quieter metallic treatment. */
+#root .editorial-page .editorial-hero-art { filter:grayscale(.88) sepia(.08); }
+#root .editorial-page .editorial-link-list a { color:#1e302d !important; border-color:#c9d0c8 !important; }
+#root .editorial-page .editorial-link-list a span { color:#56645e !important; }
