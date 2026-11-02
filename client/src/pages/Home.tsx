@@ -13,7 +13,7 @@ export default function Home() {
         className="customer-shell customer-hero"
         aria-labelledby="hero-title"
       >
-        <p className="customer-kicker">JCEE INFRASTRUCTURE · CUSTOMER-LED</p>
+        <p className="customer-kicker">JCEE WORLDLAB · JCEE INFRASTRUCTURE</p>
         <div className="customer-hero-grid">
           <div>
             <h1 id="hero-title">
