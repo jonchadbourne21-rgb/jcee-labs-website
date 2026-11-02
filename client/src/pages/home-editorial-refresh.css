@@ -637,3 +637,52 @@
 @media (max-width:700px) {
   #root .customer-home:not(.customer-service) .customer-hero h1 { font-size:clamp(42px,9.2vw,64px); }
 }
+
+/* The homepage navigation shares the hero canvas, then gains a quiet scroll surface. */
+#root .customer-home .integrated-header {
+  height:82px !important; margin-bottom:-82px !important; position:sticky; top:0; z-index:80;
+  padding-inline:clamp(22px,5vw,72px) !important;
+  background:linear-gradient(180deg,#f6f6f2eb 0%,#f6f6f2a6 48%,#f6f6f200 100%) !important;
+  border:0 !important; box-shadow:none !important;
+  backdrop-filter:none !important; -webkit-backdrop-filter:none !important;
+  transition:background 180ms ease,box-shadow 180ms ease;
+}
+#root .customer-home .integrated-header.is-scrolled {
+  background:rgba(246,246,242,.94) !important;
+  backdrop-filter:blur(16px) !important; -webkit-backdrop-filter:blur(16px) !important;
+  box-shadow:0 5px 24px #1e302d08 !important;
+}
+#root .customer-home .integrated-header + .customer-hero { padding-top:172px; min-height:max(902px,100svh); }
+#root .customer-home .integrated-header .wordmark { font-size:20px !important; letter-spacing:.035em !important; color:#1e302d !important; }
+#root .customer-home .integrated-header .header-contact { border:0 !important; padding:12px 0 !important; font-size:15px !important; color:#1e302d !important; }
+#root .customer-home .integrated-header .desktop-nav { align-items:center; gap:28px !important; }
+#root .customer-home .integrated-header .desktop-nav a,
+#root .customer-home .header-company-menu summary { color:#1e302d !important; font:400 14px/1.4 var(--commercial-font) !important; letter-spacing:0 !important; }
+.header-company-menu { position:relative; }
+.header-company-menu summary { cursor:pointer; list-style:none; padding:12px 8px; }
+.header-company-menu summary::-webkit-details-marker { display:none; }
+.header-company-menu summary span { margin-left:5px; }
+.header-company-links { position:absolute; right:0; top:100%; min-width:220px; padding:10px; background:#f6f6f2; border:1px solid #c9d0c8; border-radius:8px; box-shadow:0 12px 32px #1e302d12; }
+#root .customer-home .header-company-links a { display:block; padding:12px !important; }
+#root .customer-home .header-company-links a:hover { background:#edf0e9; }
+#root .customer-home .header-company-menu summary:focus-visible { outline:2px solid #aa4e37; outline-offset:3px; }
+@media(min-width:901px) and (max-width:1100px) {
+  #root .customer-home .integrated-header { gap:16px; }
+  #root .customer-home .integrated-header .desktop-nav { gap:12px !important; }
+  #root .customer-home .integrated-header .wordmark { font-size:17px !important; }
+}
+@media(max-width:700px) {
+  #root .customer-home .integrated-header { height:72px !important; margin-bottom:-72px !important; gap:12px; padding-inline:16px !important; }
+  #root .customer-home .integrated-header + .customer-hero { padding-top:116px; min-height:0; }
+  #root .customer-home .integrated-header .wordmark { font-size:16px !important; letter-spacing:.015em !important; gap:8px; }
+  #root .customer-home .integrated-header .header-contact { font-size:13px !important; }
+}
+@media(max-width:360px) {
+  #root .customer-home .integrated-header .wordmark { font-size:14px !important; gap:5px; }
+  #root .customer-home .integrated-header .header-actions { gap:4px; }
+}
+@media(prefers-reduced-motion:reduce) { #root .customer-home .integrated-header { transition:none; } }
+
+#root .customer-home .integrated-header .wordmark span { font-size:inherit; letter-spacing:inherit; }
+#root .customer-home .integrated-header .wordmark { text-decoration:none; }
+#root .customer-home .integrated-header .wordmark span { text-decoration:none; border:0; }

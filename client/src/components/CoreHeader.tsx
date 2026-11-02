@@ -18,6 +18,7 @@ export type CoreHeaderCurrent =
 
 type CoreHeaderProps = {
   current?: CoreHeaderCurrent;
+  integrated?: boolean;
   contactLabel?: string;
   contactHref?: string;
 };
@@ -38,6 +39,7 @@ export const getMobileMenuState = (menuOpen: boolean) =>
 
 export default function CoreHeader({
   current,
+  integrated = false,
   contactLabel = "Discuss your workflow",
   contactHref = `${import.meta.env.BASE_URL}consultation`,
 }: CoreHeaderProps) {
@@ -45,6 +47,32 @@ export default function CoreHeader({
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const mobileMenuToggleRef = useRef<HTMLButtonElement>(null);
   const firstMobileLinkRef = useRef<HTMLAnchorElement>(null);
+
+  const [scrolled, setScrolled] = useState(false);
+  const companyMenuRef = useRef<HTMLDetailsElement>(null);
+
+  useEffect(() => {
+    if (!integrated) return;
+    const update = () => setScrolled(window.scrollY > 24);
+    const close = (event: PointerEvent) => {
+      if (!companyMenuRef.current?.contains(event.target as Node)) companyMenuRef.current?.removeAttribute("open");
+    };
+    const escape = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && companyMenuRef.current?.open) {
+        companyMenuRef.current.removeAttribute("open");
+        companyMenuRef.current.querySelector("summary")?.focus();
+      }
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    document.addEventListener("pointerdown", close);
+    document.addEventListener("keydown", escape);
+    return () => {
+      window.removeEventListener("scroll", update);
+      document.removeEventListener("pointerdown", close);
+      document.removeEventListener("keydown", escape);
+    };
+  }, [integrated]);
 
   const mobileMenuLabel = getMobileMenuLabel(menuOpen);
 
@@ -79,7 +107,7 @@ export default function CoreHeader({
   }, [menuOpen]);
 
   const renderLinks = (mobile = false) =>
-    publicNavigationLinks.map((link, index) => (
+    publicNavigationLinks.filter(link => !integrated || mobile || (link.id !== "resources" && link.id !== "company")).map((link, index) => (
       <a
         key={link.id}
         href={link.href}
@@ -102,7 +130,7 @@ export default function CoreHeader({
     ));
 
   return (
-    <header className="site-header">
+    <header className={`site-header${integrated ? " integrated-header" : ""}${scrolled ? " is-scrolled" : ""}`}>
       <a className="skip-link" href="#page-content">
         Skip to content
       </a>
@@ -118,6 +146,13 @@ export default function CoreHeader({
 
       <nav className="desktop-nav" aria-label="Main navigation">
         {renderLinks()}
+        {integrated && <details className="header-company-menu" ref={companyMenuRef}>
+          <summary>Company <span aria-hidden="true">⌄</span></summary>
+          <div className="header-company-links">
+            <a href="/company">About JCEE WorldLab</a>
+            <a href="/resources">Resources</a>
+          </div>
+        </details>}
       </nav>
 
       <div className="header-actions">

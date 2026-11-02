@@ -6,7 +6,7 @@ import "./home-editorial-refresh.css";
 export default function Home() {
   return (
     <main id="top" className="unified-home customer-home">
-      <CoreHeader />
+      <CoreHeader integrated contactLabel="Let’s talk" />
       <section
         id="page-content"
         tabIndex={-1}
