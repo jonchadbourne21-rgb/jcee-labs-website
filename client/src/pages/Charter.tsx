@@ -33,9 +33,10 @@ export default function Charter() {
   return (
     <main className="charter-page" id="top">
       <CoreHeader />
+      <p className="charter-archive-notice">Historical charter, version 1.0. <a href="/charter">Read the current charter ↗</a></p>
 
       <section id="page-content" tabIndex={-1} className="charter-masthead">
-        <p className="eyebrow"><span /> PUBLIC STANDARD · VERSION 1.0</p>
+        <p className="eyebrow"><span /> ARCHIVED PUBLIC STANDARD · VERSION 1.0</p>
         <h1 className="charter-title">The JCEE Labs<br /><em>Charter</em></h1>
         <p className="charter-position">
           This is not a blog post. It is the public standard JCEE Labs agrees
@@ -43,7 +44,7 @@ export default function Charter() {
         </p>
         <div className="charter-version-row">
           <span>VERSION 1.0 — AUGUST 4, 2026</span>
-          <span>STATUS · CURRENT</span>
+          <span>STATUS · ARCHIVED</span>
         </div>
       </section>
 
