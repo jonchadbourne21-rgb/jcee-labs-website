@@ -308,9 +308,9 @@ try {
 
   const commercial = await evaluate(page.send, `({
     title: document.querySelector('h1')?.textContent,
-    distributionLink: !!document.querySelector('.site-header a[href="/solutions/distribution"]'),
+    distributionLink: !!document.querySelector('.site-header a[href="${prefix}/solutions/distribution"]'),
     story: !!document.querySelector('#story'),
-    inquiry: !!document.querySelector('a.customer-button[href="/consultation"]')
+    inquiry: !!document.querySelector('a.customer-button[href="${prefix}/consultation"]')
   })`);
   if (!commercial.title?.includes("Put AI to work.") || commercial.distributionLink || !commercial.story || !commercial.inquiry)
     failures.push("Customer-led homepage contract failed: " + JSON.stringify(commercial));
