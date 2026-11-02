@@ -273,6 +273,234 @@
 }
 
 /* Resolve retained global headline dimensions and keep the optical lift restrained. */
-#root .customer-home { --lift: 0 .012em .016em #0002, 0 .045em .055em #0002, 0 .09em .16em #0001; --jcee-lift: var(--lift); }
-#root .customer-home h1 { max-width: none; width: auto; font-size:clamp(40px,4.8vw,66px); letter-spacing:-.025em; text-wrap:initial; }
-#root .customer-home :is(h1,h2,h3) { text-shadow:var(--lift); }
+#root .customer-home {
+  --lift:
+    0 0.012em 0.016em #0002, 0 0.045em 0.055em #0002, 0 0.09em 0.16em #0001;
+  --jcee-lift: var(--lift);
+}
+#root .customer-home h1 {
+  max-width: none;
+  width: auto;
+  font-size: clamp(40px, 4.8vw, 66px);
+  letter-spacing: -0.025em;
+  text-wrap: initial;
+}
+#root .customer-home :is(h1, h2, h3) {
+  text-shadow: var(--lift);
+}
+
+/* Shared commercial surfaces: restrained depth, graphite, and readable detail. */
+#root .customer-home :is(p, small, a, span, li, dt, dd, summary) {
+  text-shadow: none;
+}
+#root .customer-home .customer-hero {
+  background-image: radial-gradient(
+    ellipse at 85% 35%,
+    #dde3e566,
+    transparent 55%
+  );
+}
+#root .customer-home .et-hero-art {
+  background: linear-gradient(145deg, #ffffff, #e8ecec);
+  box-shadow:
+    0 2px 2px #00000004,
+    0 24px 60px -40px #16242b55;
+  border-color: #d8dfe0;
+  border-radius: 18px;
+}
+#root .customer-home .et-et-flow-line {
+  filter: drop-shadow(0 3px 3px #1d303c33);
+}
+#root .customer-home .customer-cards {
+  gap: 24px;
+}
+#root .customer-home .customer-cards article {
+  border: 1px solid #dadddb;
+  border-radius: 12px;
+  padding: 28px;
+  background: linear-gradient(140deg, #fff, #f0f2ef);
+  min-width: 0;
+}
+#root .customer-home .customer-card-detail {
+  font-size: 14px;
+  padding-top: 16px;
+  border-top: 1px solid #dadddb;
+}
+.customer-record {
+  margin-top: 40px;
+  padding: clamp(20px, 3vw, 36px);
+  border: 1px solid #cdd6da;
+  border-radius: 14px;
+  background: #edf1f2;
+  box-shadow: 0 18px 40px -30px #1a2d3b55;
+}
+.customer-record-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  font:
+    11px/1.6 ui-monospace,
+    monospace;
+  letter-spacing: 0.06em;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #cdd6da;
+}
+.customer-record dl {
+  margin: 0;
+}
+.customer-record dl > div {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid #cdd6da;
+}
+.customer-record dt {
+  font:
+    11px/1.6 ui-monospace,
+    monospace;
+  color: #43515b;
+}
+.customer-record dd {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+#root .customer-home .customer-record > p {
+  font-size: 12px;
+  margin-bottom: 0;
+}
+.customer-proof {
+  margin-top: 36px;
+}
+#root .customer-home .customer-proof h3 {
+  font-size: 22px;
+}
+#root .customer-home .customer-proof p {
+  font-size: 15px;
+}
+.customer-faq details {
+  border-top: 1px solid #d5d7d2;
+  padding: 20px 0;
+}
+.customer-faq summary {
+  cursor: pointer;
+  padding: 6px 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+.customer-faq details p {
+  margin-top: 20px;
+}
+#root .customer-service h1 {
+  font-size: clamp(40px, 5vw, 72px);
+}
+#root .customer-service .customer-hero {
+  padding-top: clamp(64px, 8vw, 112px);
+}
+#root .customer-service .customer-hero .customer-deck {
+  max-width: 58ch;
+}
+
+#root .customer-inquiry {
+  --pv-text: #080808;
+  --pv-muted: #454545;
+  --pv-link: #080808;
+  --pv-line: #d5d7d2;
+  --pv-surface: #eceee9;
+  --pv-panel: #fff;
+  --pv-blue: #080808;
+  background: #f6f6f2;
+  color: #080808;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+#root .customer-inquiry :is(h1, h2, h3, em) {
+  color: #080808;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+#root .customer-inquiry :is(h1, h2, h3) {
+  text-shadow:
+    0 0.012em 0.016em #0002,
+    0 0.045em 0.055em #0002,
+    0 0.09em 0.16em #0001;
+}
+#root .customer-inquiry :is(p, small, span, label, li, pre, a) {
+  color: #454545;
+  text-shadow: none;
+}
+#root .customer-inquiry :is(input, select, textarea) {
+  background: #fff;
+  color: #080808;
+  border: 1px solid #a5ada9;
+  border-radius: 5px;
+}
+#root .customer-inquiry :is(input, select, textarea)::placeholder {
+  color: #656b69;
+}
+#root .customer-inquiry .preview-consult-intro h1 {
+  font-size: clamp(40px, 4.6vw, 64px);
+  line-height: 1.1;
+  max-width: none;
+}
+#root .customer-inquiry :is(.preview-consult-form, .preview-draft-review) {
+  background: #fff;
+  border: 1px solid #d5d7d2;
+  border-radius: 14px;
+  box-shadow: 0 20px 45px -35px #0005;
+}
+#root .customer-inquiry .preview-direct-contact {
+  background: #eceee9;
+  border-color: #d5d7d2;
+}
+#root .customer-inquiry .preview-button {
+  background: #080808;
+  color: #fff;
+  border-color: #080808;
+  border-radius: 6px;
+}
+#root .customer-inquiry .preview-button span {
+  color: inherit;
+}
+#root .customer-inquiry .preview-secondary-button {
+  color: #080808;
+  border-color: #a5ada9;
+  border-radius: 6px;
+  background: transparent;
+}
+#root .customer-inquiry .preview-draft-review pre {
+  background: #f6f6f2;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+#root .customer-inquiry :is(a, button, input, select, textarea):focus-visible {
+  outline: 3px solid #344e60;
+  outline-offset: 4px;
+}
+#root .customer-inquiry .preview-existing-inquiry {
+  background: transparent;
+}
+#root .customer-inquiry .preview-services-grid article {
+  background: #fff;
+  border: 1px solid #d5d7d2;
+  border-radius: 10px;
+  padding: 24px;
+}
+
+@media (max-width: 620px) {
+  .customer-record dl > div {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  #root .customer-home .customer-cards article {
+    padding: 24px;
+  }
+}
+
+#root .customer-inquiry .brand-footer {
+  background: #f6f6f2;
+}

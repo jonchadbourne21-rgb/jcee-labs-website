@@ -245,21 +245,25 @@ try {
   await waitForUrl(baseUrl, "production server");
   const { send, close } = await connect(debugPort);
   const specs = [
-    // The platform direction is an open editorial row, not the former tall panorama panel.
-    { name: "Operating Cloud desktop", route: "/", selector: "#operating-cloud", width: 1440, height: 900, minHeight: 100, file: "operating-cloud-desktop.png" },
+    // Capture the approved customer journey and retain the engineering review surfaces.
+    { name: "Customer story desktop", route: "/", selector: "#story", width: 1440, height: 900, minHeight: 100, file: "customer-story-desktop.png" },
     { name: "Assurance desktop", route: "/assurance", selector: ".assurance-program", width: 1440, height: 900, file: "assurance-desktop.png" },
-    { name: "Operating Cloud iPhone", route: "/", selector: "#operating-cloud", width: 390, height: 844, mobile: true, minHeight: 100, file: "operating-cloud-iphone.png" },
+    { name: "Customer story iPhone", route: "/", selector: "#story", width: 390, height: 844, mobile: true, minHeight: 100, file: "customer-story-iphone.png" },
     { name: "Assurance iPhone", route: "/assurance", selector: ".assurance-program", width: 390, height: 844, mobile: true, file: "assurance-iphone.png" },
-    { name: "Homepage hero desktop", route: "/", selector: ".et-hero", width: 1440, height: 900, file: "homepage-hero-desktop.png" },
-    { name: "Homepage hero iPhone", route: "/", selector: ".et-hero", width: 390, height: 844, mobile: true, file: "homepage-hero-iphone.png" },
+    { name: "Homepage hero desktop", route: "/", selector: ".customer-hero", width: 1440, height: 900, file: "homepage-hero-desktop.png" },
+    { name: "Homepage hero iPhone", route: "/", selector: ".customer-hero", width: 390, height: 844, mobile: true, file: "homepage-hero-iphone.png" },
     { name: "Founder page desktop", route: "/founder", selector: ".editorial-masthead", width: 1440, height: 900, file: "founder-page-desktop.png", assetUrl: "/landing/illustrations/fit-v2.webp" },
     { name: "Founder page iPhone", route: "/founder", selector: ".editorial-masthead", width: 390, height: 844, mobile: true, file: "founder-page-iphone.png", assetUrl: "/landing/illustrations/fit-v2.webp" },
     { name: "Founder introduction desktop", route: "/founder", selector: ".founder-introduction", width: 1440, height: 900, file: "founder-introduction-desktop.png" },
     { name: "Founder introduction iPhone", route: "/founder", selector: ".founder-introduction", width: 390, height: 844, mobile: true, file: "founder-introduction-iphone.png" },
     { name: "Research directory desktop", route: "/research", selector: ".research-directory", width: 1440, height: 900, file: "research-directory-desktop.png" },
     { name: "Research directory iPhone", route: "/research", selector: ".research-directory", width: 390, height: 844, mobile: true, file: "research-directory-iphone.png" },
-    { name: "Evidence transition desktop", route: "/", selector: "#transition-evidence", width: 1440, height: 900, file: "evidence-transition-desktop.png", assetUrl: "/landing/illustrations/evidence-v2.webp" },
-    { name: "Evidence transition iPhone", route: "/", selector: "#transition-evidence", width: 390, height: 844, mobile: true, file: "evidence-transition-iphone.png", assetUrl: "/landing/illustrations/evidence-v2.webp" },
+    { name: "Evidence transition desktop", route: "/", selector: "#evidence", width: 1440, height: 900, file: "evidence-transition-desktop.png" },
+    { name: "Evidence transition iPhone", route: "/", selector: "#evidence", width: 390, height: 844, mobile: true, file: "evidence-transition-iphone.png" },
+    { name: "Infrastructure service desktop", route: "/capabilities/infrastructure", selector: ".customer-hero", width: 1440, height: 900, file: "infrastructure-desktop.png" },
+    { name: "Infrastructure service iPhone", route: "/capabilities/infrastructure", selector: ".customer-hero", width: 390, height: 844, mobile: true, file: "infrastructure-iphone.png" },
+    { name: "Workflow inquiry desktop", route: "/consultation", selector: ".preview-consultation-entry", width: 1440, height: 900, file: "workflow-inquiry-desktop.png" },
+    { name: "Workflow inquiry iPhone", route: "/consultation", selector: ".preview-consultation-entry", width: 390, height: 844, mobile: true, file: "workflow-inquiry-iphone.png" },
   ];
   const results = [];
   for (const spec of specs) results.push(await capture(send, baseUrl, spec));

@@ -23,7 +23,7 @@ type CoreHeaderProps = {
 };
 
 export const publicNavigationLinks = [
-  { id: "solutions", label: "Infrastructure", href: "/#story" },
+  { id: "solutions", label: "Infrastructure", href: "/capabilities/infrastructure" },
   { id: "technology", label: "Technology", href: "/technology" },
   { id: "research", label: "Research", href: "/research" },
   { id: "resources", label: "Resources", href: "/resources" },

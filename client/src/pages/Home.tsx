@@ -30,8 +30,8 @@ export default function Home() {
               <a className="customer-button" href="/consultation">
                 Discuss your workflow <span aria-hidden="true">↗</span>
               </a>
-              <a className="customer-link" href="#story">
-                Explore JCEE Infrastructure ↓
+              <a className="customer-link" href="/capabilities/infrastructure">
+                Explore JCEE Infrastructure ↗
               </a>
             </div>
             <p className="customer-signature">
@@ -49,9 +49,9 @@ export default function Home() {
                   y2="90"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop stopColor="#1236BD"></stop>
-                  <stop offset=".48" stopColor="#3568FF"></stop>
-                  <stop offset="1" stopColor="#97B9FF"></stop>
+                  <stop stopColor="#15191D"></stop>
+                  <stop offset=".48" stopColor="#536675"></stop>
+                  <stop offset="1" stopColor="#B6C4CE"></stop>
                 </linearGradient>
                 <linearGradient
                   id="et-boundary"
@@ -115,7 +115,7 @@ export default function Home() {
                 cy="333"
                 r="12"
                 fill="#F8FAFF"
-                stroke="#315CFF"
+                stroke="#344E60"
                 strokeWidth="4"
               ></circle>
               <circle
@@ -123,10 +123,10 @@ export default function Home() {
                 cy="233"
                 r="10"
                 fill="#F8FAFF"
-                stroke="#315CFF"
+                stroke="#344E60"
                 strokeWidth="4"
               ></circle>
-              <circle cx="546" cy="162" r="12" fill="#315CFF"></circle>
+              <circle cx="546" cy="162" r="12" fill="#344E60"></circle>
               <path
                 d="M541 162L545 166L551 158"
                 stroke="white"
@@ -226,6 +226,35 @@ export default function Home() {
             <p>Check the outcome and preserve a record your team can review.</p>
           </li>
         </ol>
+        <div
+          className="customer-record"
+          aria-label="Illustrative workflow review record"
+        >
+          <div className="customer-record-heading">
+            <span>WORKFLOW / ACCOUNT CHANGE</span>
+            <span>ILLUSTRATIVE RECORD</span>
+          </div>
+          <dl>
+            <div>
+              <dt>01 / REQUEST</dt>
+              <dd>Change the subscription and apply an approved credit.</dd>
+            </div>
+            <div>
+              <dt>02 / OBSERVATION</dt>
+              <dd>The billing response timed out. The outcome is unknown.</dd>
+            </div>
+            <div>
+              <dt>03 / NEXT DECISION</dt>
+              <dd>
+                Inspect the billing record before approving another attempt.
+              </dd>
+            </div>
+          </dl>
+          <p>
+            A designed example of the questions to resolve—not a live system or
+            customer receipt.
+          </p>
+        </div>
         <p className="customer-note">
           Integrations and supported controls are scoped and tested against your
           systems.
@@ -251,6 +280,9 @@ export default function Home() {
               Account updates, service requests, and approved changes across
               support and business systems.
             </p>
+            <p className="customer-card-detail">
+              Start with: an account change that crosses support and billing.
+            </p>
           </article>
           <article>
             <span>02 / SOFTWARE OPERATIONS</span>
@@ -259,6 +291,10 @@ export default function Home() {
               Engineering workflows that need clear permissions, execution
               records, and recovery procedures.
             </p>
+            <p className="customer-card-detail">
+              Start with: a deployment that needs an approval and a confirmed
+              result.
+            </p>
           </article>
           <article>
             <span>03 / BUSINESS OPERATIONS</span>
@@ -266,6 +302,9 @@ export default function Home() {
             <p>
               Internal requests and approval processes that cross multiple
               applications.
+            </p>
+            <p className="customer-card-detail">
+              Start with: an internal request passed between teams and tools.
             </p>
           </article>
         </div>
@@ -299,17 +338,20 @@ export default function Home() {
               workflow needs, and scope the engineering and testing required to
               move it forward.
             </p>
-            <a className="customer-link" href="/partners/enterprise">
+            <a
+              className="customer-link"
+              href="/capabilities/infrastructure#deliverables"
+            >
               Explore the assessment ↗
             </a>
           </div>
           <ul>
             <li>Written boundary map and integration requirements</li>
             <li>
-              Tests for interruptions, current permissions, and uncertain
+              A test plan for interruptions, changed permissions, and uncertain
               outcomes
             </li>
-            <li>A reviewable target-system result and recovery record</li>
+            <li>Written findings and acceptance criteria for the next step</li>
             <li>A clear recommendation and delivery plan</li>
           </ul>
         </div>
@@ -346,6 +388,44 @@ export default function Home() {
           <a className="customer-link" href="/registry">
             PUBLIC REGISTRY ↗
           </a>
+        </div>
+        <div className="customer-cards customer-proof">
+          <article>
+            <span>RECORDED SOFTWARE BEHAVIOR</span>
+            <h3>Recovery after a lost response.</h3>
+            <p>
+              Read the October 19 qualification: an existing effect was
+              reconciled in the declared test setting.
+            </p>
+            <a
+              className="customer-link"
+              href="/registry#infra-integrated-software"
+            >
+              Result and limits ↗
+            </a>
+          </article>
+          <article>
+            <span>EXPLAINED STEP BY STEP</span>
+            <h3>Follow a request to its record.</h3>
+            <p>
+              Explore the browser illustration below, including held and
+              uncertain outcomes.
+            </p>
+            <a className="customer-link" href="#working-example">
+              Explore the illustration ↓
+            </a>
+          </article>
+          <article>
+            <span>START WITH YOUR SYSTEMS</span>
+            <h3>Define what a useful test proves.</h3>
+            <p>
+              The assessment turns your workflow into a map, findings, and a
+              scoped next step.
+            </p>
+            <a className="customer-link" href="/capabilities/infrastructure">
+              See the engagement ↗
+            </a>
+          </article>
         </div>
         <div className="customer-evidence-links">
           <a href="/technology#infrastructure-build">

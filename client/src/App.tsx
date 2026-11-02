@@ -29,6 +29,7 @@ const ResearchPartnersPage = lazy(() => import("./pages/ResearchPartnersPage"));
 
 const DistributionPage = lazy(() => import("./pages/DistributionPage"));
 const OperatingCloudPage = lazy(() => import("./pages/OperatingCloudPage"));
+const InfrastructurePage = lazy(() => import("./pages/InfrastructurePage"));
 const TechnologyPage = lazy(() => import("./pages/TechnologyPage"));
 const ResearchTopicPage = lazy(() => import("./pages/ResearchTopicPage"));
 const ResearchPage = lazy(() => import("./pages/ResearchPage"));
@@ -105,7 +106,7 @@ function Router() {
       <RouteScrollManager />
       <Switch>
         <Route path="/" component={Home} />
-        <Route path="/capabilities/infrastructure">{() => <EditorialSite page="infrastructure" />}</Route>
+        <Route path="/capabilities/infrastructure" component={InfrastructurePage} />
         <Route path="/capabilities/assurance">{() => <EditorialSite page="assurance" />}</Route>
         <Route path="/capabilities/technology-validation">{() => <EditorialSite page="technology-validation" />}</Route>
         <Route path="/solutions/distribution" component={DistributionPage} />

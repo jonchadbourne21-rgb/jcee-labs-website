@@ -404,11 +404,7 @@ try {
           `Static public route returned ${response.status}: ${route}`
         );
     }
-    const cloudPanel = await evaluate(
-      page.send,
-      "Boolean(document.querySelector('#operating-cloud'))"
-    );
-    if (!cloudPanel) failures.push("Latest Operating Cloud panel is missing");
+    // The approved commercial homepage contract is checked above in both server modes.
     for (const name of [
       "01-signature-hero-exposed.webp",
       "01-signature-hero-exposed-mobile.webp",
@@ -533,6 +529,7 @@ try {
     [articleRoute, "A Confident Model Still Needs Permission"],
     ["/solutions/distribution", "JCEE Distribution: order review"],
     ["/technology", "Intelligence should leave receipts"],
+    ["/capabilities/infrastructure", "One workflow."],
     ["/research", "Results you can examine"],
     ["/research/publications", "Reports & publications"],
     ["/research/programs", "Research programs"],

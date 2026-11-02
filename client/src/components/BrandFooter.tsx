@@ -23,7 +23,7 @@ export default function BrandFooter({
         </div>
         <div>
           <span>TECHNOLOGY</span>
-          <a href="/technology#infrastructure-build">JCEE Infrastructure</a>
+          <a href="/capabilities/infrastructure">JCEE Infrastructure</a>
           <a href="/vow">JCEE VOW</a>
           <a href="/qcs">QCS</a>
           <a href="/assurance">JCEE Assurance</a>

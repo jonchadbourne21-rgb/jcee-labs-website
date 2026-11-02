@@ -23,7 +23,7 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
     expect(plain(home)).toContain("Put AI to work.");
     expect(plain(home)).toContain("Stay in control.");
     expect(home).toContain('href="/consultation"');
-    expect(home).toContain('href="/partners/enterprise"');
+    expect(home).toContain('href="/capabilities/infrastructure#deliverables"');
     expect(home).not.toContain("JCEE Distribution");
   });
   it("distinguishes the illustration from qualified customer results", () => {
