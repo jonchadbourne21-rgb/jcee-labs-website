@@ -627,3 +627,13 @@
 #root .customer-home .hero-trust-links small { color:var(--customer-muted); }
 #root .customer-home .customer-cards article { background:linear-gradient(140deg,#fafbf7,#edf0e9); border-color:var(--customer-line); }
 #root :is(.customer-home,.customer-inquiry) .brand-footer-links > div > span { color:var(--customer-accent); }
+
+/* Annotated hero refinement: larger headline and right-hand primary action. */
+@media (min-width:1101px) {
+  #root .customer-home:not(.customer-service) .customer-hero-grid > div { max-width:660px; }
+  #root .customer-home:not(.customer-service) .customer-hero h1 { font-size:clamp(60px,5.3vw,80px); }
+  #root .customer-home:not(.customer-service) .customer-deck { max-width:590px; }
+}
+@media (max-width:700px) {
+  #root .customer-home:not(.customer-service) .customer-hero h1 { font-size:clamp(42px,9.2vw,64px); }
+}

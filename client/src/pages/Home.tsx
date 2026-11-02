@@ -13,7 +13,7 @@ export default function Home() {
         className="customer-shell customer-hero"
         aria-labelledby="hero-title"
       >
-        <p className="customer-kicker">JCEE WORLDLAB · JCEE INFRASTRUCTURE</p>
+        <p className="customer-kicker">JCEE INFRASTRUCTURE</p>
         <div className="customer-hero-grid">
           <div>
             <h1 id="hero-title">
@@ -27,11 +27,11 @@ export default function Home() {
               result, and recover when a workflow is interrupted.
             </p>
             <div className="customer-actions">
-              <a className="customer-button" href="/consultation">
-                Discuss your workflow <span aria-hidden="true">↗</span>
-              </a>
               <a className="customer-link" href="/capabilities/infrastructure">
                 Explore JCEE Infrastructure ↗
+              </a>
+              <a className="customer-button" href="/consultation">
+                Discuss your workflow <span aria-hidden="true">↗</span>
               </a>
             </div>
             <div className="hero-trust" aria-label="Explore the engineering foundation">
