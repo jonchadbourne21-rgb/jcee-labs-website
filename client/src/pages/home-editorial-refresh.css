@@ -686,22 +686,3 @@
 #root .customer-home .integrated-header .wordmark span { font-size:inherit; letter-spacing:inherit; }
 #root .customer-home .integrated-header .wordmark { text-decoration:none; }
 #root .customer-home .integrated-header .wordmark span { text-decoration:none; border:0; }
-
-/* Keep the header inquiry legible over the hero artwork. */
-#root .customer-home .integrated-header .header-contact {
-  background:#f6f6f2 !important;
-  color:#1e302d !important;
-  font-weight:650 !important;
-  padding:10px 14px !important;
-  border:1px solid #c9d0c8 !important;
-  border-radius:6px !important;
-  box-shadow:0 2px 8px #1e302d0d;
-  text-shadow:0 1px 1px #1e302d12;
-}
-#root .customer-home .integrated-header .header-contact:hover {
-  background:#edf0e9 !important;
-  border-color:#56645e !important;
-}
-@media(max-width:700px) {
-  #root .customer-home .integrated-header .header-contact { padding:9px 8px !important; }
-}
