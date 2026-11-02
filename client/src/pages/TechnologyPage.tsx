@@ -278,24 +278,30 @@ export default function TechnologyPage() {
 
       <section className="editorial-section editorial-section-muted">
         <p className="editorial-kicker">Applied development</p>
-        <h2>From components to useful workflows.</h2>
-        <a className="editorial-text-link" href="/operating-cloud">
-          JCEE Operating Cloud: platform direction →
-        </a>
+        <h2>From engineering evidence to your workflow.</h2>
         <p className="editorial-intro">
-          JCEE Distribution applies the company’s operating-improvement
-          direction to purchase-order integrity. AP Gate explores controlled
-          payment execution and independently reviewable evidence. Component
-          milestones remain separate from production integration claims.
+          Start with the business process you want to improve. A Workflow
+          Assurance assessment maps your systems, permissions, recovery
+          requirements, and the evidence needed for a useful next decision.
         </p>
         <div className="editorial-actions">
-          <a className="editorial-button" href="/solutions/distribution">
-            Explore Distribution →
+          <a className="editorial-button" href="/capabilities/infrastructure">
+            Explore JCEE Infrastructure →
           </a>
-          <a className="editorial-text-link" href="/registry#ap-gate">
-            AP Gate status →
+          <a className="editorial-text-link" href="/consultation">
+            Discuss your workflow →
           </a>
         </div>
+        <details>
+          <summary>Earlier applied workflow studies</summary>
+          <p>Distribution's synthetic order-review study and AP Gate's payment
+          research retain their original scope and limits. They are not current
+          production service claims.</p>
+          <div className="editorial-actions">
+            <a className="editorial-text-link" href="/solutions/distribution">Order-review study →</a>
+            <a className="editorial-text-link" href="/registry#ap-gate">AP Gate status →</a>
+          </div>
+        </details>
       </section>
       <section className="editorial-section">
         <h2>Execution tooling in development.</h2>
