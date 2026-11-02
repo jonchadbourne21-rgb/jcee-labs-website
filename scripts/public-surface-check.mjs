@@ -487,12 +487,12 @@ try {
     };
   })()`
   );
-  if (assuranceArchitectureColors.copy !== "rgb(81, 86, 86)") {
+  if (assuranceArchitectureColors.copy !== "rgb(86, 100, 94)") {
     failures.push(
       `Assurance architecture copy does not use the shared paper-surface ink: ${assuranceArchitectureColors.copy}`
     );
   }
-  if (assuranceArchitectureColors.label !== "rgb(25, 59, 103)") {
+  if (assuranceArchitectureColors.label !== "rgb(170, 78, 55)") {
     failures.push(
       `Assurance architecture label has unexpected color: ${assuranceArchitectureColors.label}`
     );

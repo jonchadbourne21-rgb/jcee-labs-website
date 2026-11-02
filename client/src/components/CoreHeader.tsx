@@ -40,7 +40,7 @@ export const getMobileMenuState = (menuOpen: boolean) =>
 export default function CoreHeader({
   current,
   integrated = false,
-  contactLabel = "Discuss your workflow",
+  contactLabel = "Let’s talk",
   contactHref = `${import.meta.env.BASE_URL}consultation`,
 }: CoreHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -52,7 +52,6 @@ export default function CoreHeader({
   const companyMenuRef = useRef<HTMLDetailsElement>(null);
 
   useEffect(() => {
-    if (!integrated) return;
     const update = () => setScrolled(window.scrollY > 24);
     const close = (event: PointerEvent) => {
       if (!companyMenuRef.current?.contains(event.target as Node)) companyMenuRef.current?.removeAttribute("open");
@@ -107,7 +106,7 @@ export default function CoreHeader({
   }, [menuOpen]);
 
   const renderLinks = (mobile = false) =>
-    publicNavigationLinks.filter(link => !integrated || mobile || (link.id !== "resources" && link.id !== "company")).map((link, index) => (
+    publicNavigationLinks.filter(link => mobile || (link.id !== "resources" && link.id !== "company")).map((link, index) => (
       <a
         key={link.id}
         href={link.href}
@@ -146,7 +145,7 @@ export default function CoreHeader({
 
       <nav className="desktop-nav" aria-label="Main navigation">
         {renderLinks()}
-        {integrated && <details className="header-company-menu" ref={companyMenuRef}>
+        {<details className="header-company-menu" ref={companyMenuRef}>
           <summary>Company <span aria-hidden="true">⌄</span></summary>
           <div className="header-company-links">
             <a href="/company">About JCEE WorldLab</a>
