@@ -21,8 +21,9 @@ export default function InfrastructurePage() {
           <br />A clear way forward.
         </h1>
         <p className="customer-deck">
-          Connect the systems, permissions, and records your team needs to put
-          AI to work. Start with a focused assessment of one business process.
+          Workflow Assurance is a focused assessment for IT, business-systems,
+          and engineering teams. We help you understand one automated workflow,
+          resolve gaps in its evidence, and scope the next improvement.
         </p>
         <div className="customer-actions">
           <a className="customer-button" href="/consultation">
@@ -33,8 +34,8 @@ export default function InfrastructurePage() {
           </a>
         </div>
         <p className="customer-note">
-          For operations and engineering teams evaluating a specific automation
-          or integration problem.
+          Start with a workflow that is costly to investigate after a timeout,
+          failed handoff, or uncertain change.
         </p>
       </section>
       <section
@@ -54,8 +55,8 @@ export default function InfrastructurePage() {
             <span>01 / MAP</span>
             <h3>Your workflow, connected.</h3>
             <p>
-              Systems, owners, approval points, and the records that establish
-              what happened.
+              Systems, owners, approval points, existing native controls, and the
+              records needed to establish what happened.
             </p>
           </article>
           <article>

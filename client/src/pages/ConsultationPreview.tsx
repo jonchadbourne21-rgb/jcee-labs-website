@@ -55,7 +55,7 @@ function ConsultationEntry() {
           <a href="/" className="preview-back-link">← Back to JCEE WorldLab</a>
           <p className="preview-kicker">JCEE INFRASTRUCTURE / START A CONVERSATION</p>
           <h1 id="consult-title">A real problem.<br /><em>A clear first step.</em></h1>
-          <p className="preview-deck">Start with a free 10–30-minute consultation. Tell us which workflow you want to automate, which systems it touches, and what needs to work better. We will discuss the problem and whether a scoped next step makes sense.</p>
+          <p className="preview-deck">Start with a free 10–30-minute consultation. For IT, business-systems, and engineering teams: tell us which automated workflow is difficult to investigate, which systems it touches, and what needs to work better. We will discuss the problem and whether a scoped next step makes sense.</p>
           <div className="preview-call-facts"><span>10–30 minutes</span><span>Free first call</span><span>No paid work before agreed scope</span></div>
           </div>
           <ol className="preview-call-process">

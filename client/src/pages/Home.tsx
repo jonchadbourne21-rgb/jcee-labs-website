@@ -57,16 +57,16 @@ export default function Home() {
       >
         <p className="customer-kicker">01 / FROM REQUEST TO RESULT</p>
         <h2 id="story-title">
-          Your customer asked for a change.
+          An approved request. An uncertain result.
           <br />
-          Make sure the job gets done.
+          Know what happened next.
         </h2>
         <div className="customer-story-grid">
           <div>
             <p className="customer-deck">
-              A customer’s account needs updating. A supplier needs onboarding.
-              An approved change needs applying. Your team needs the work
-              completed—and a clear record of the result.
+              For IT, business-systems, and engineering teams: when an automated
+              change crosses several tools, finding out what happened should
+              not require hours of investigation.
             </p>
             <p>
               Your AI can coordinate the work. Your business still needs a clear
@@ -83,17 +83,18 @@ export default function Home() {
             aria-label="Illustrative interrupted workflow"
           >
             <p className="customer-kicker">AN EVERYDAY EXCEPTION</p>
-            <h3>The billing request timed out.</h3>
+            <h3>The access request timed out.</h3>
             <p>
-              Did the credit happen? Has the subscription changed? Would another
-              attempt duplicate the work?
+              An employee’s application access was approved. The automation timed
+              out. Was the intended group membership added—and is the approval
+              still valid?
             </p>
             <div className="customer-scenario-result">
               Check the outcome before deciding what happens next.
             </div>
             <small>
-              Illustrative scenario, not a customer result or a live payment
-              demonstration.
+              Illustrative scenario, not a customer result or a claim of a
+              deployed identity-system integration.
             </small>
           </aside>
         </div>
@@ -121,22 +122,23 @@ export default function Home() {
           aria-label="Illustrative workflow review record"
         >
           <div className="customer-record-heading">
-            <span>WORKFLOW / ACCOUNT CHANGE</span>
+            <span>WORKFLOW / EMPLOYEE ACCESS</span>
             <span>ILLUSTRATIVE RECORD</span>
           </div>
           <dl>
             <div>
               <dt>01 / REQUEST</dt>
-              <dd>Change the subscription and apply an approved credit.</dd>
+              <dd>Add the approved employee to the specified application-access group.</dd>
             </div>
             <div>
               <dt>02 / OBSERVATION</dt>
-              <dd>The billing response timed out. The outcome is unknown.</dd>
+              <dd>The automation timed out. The target membership is not yet confirmed.</dd>
             </div>
             <div>
               <dt>03 / NEXT DECISION</dt>
               <dd>
-                Inspect the billing record before approving another attempt.
+                Read the target membership and action history; reconcile the approval
+                before deciding whether another attempt is appropriate.
               </dd>
             </div>
           </dl>
@@ -158,20 +160,20 @@ export default function Home() {
       >
         <p className="customer-kicker">02 / BUILT AROUND YOUR WORK</p>
         <h2 id="fit-title">
-          Automate more of the work
+          For the teams responsible
           <br />
-          your team handles every day.
+          for getting work done.
         </h2>
         <div className="customer-cards">
           <article>
-            <span>01 / CUSTOMER OPERATIONS</span>
-            <h3>Keep requests moving.</h3>
+            <span>01 / IT & BUSINESS SYSTEMS</span>
+            <h3>Resolve uncertain changes.</h3>
             <p>
-              Account updates, service requests, and approved changes across
-              support and business systems.
+              Employee access, internal service requests, and approved changes
+              across your service desk and business applications.
             </p>
             <p className="customer-card-detail">
-              Start with: an account change that crosses support and billing.
+              Start with: an approved access change whose outcome is unclear.
             </p>
           </article>
           <article>
@@ -217,16 +219,16 @@ export default function Home() {
           worth improving.
         </h2>
         <p className="customer-deck">
-          Bring us a process that is slow, difficult to automate, or expensive
-          to investigate when something goes wrong.
+          Bring us one workflow that is expensive to investigate when a
+          change fails, times out, or leaves an uncertain result.
         </p>
         <div className="customer-offer">
           <div>
-            <h3>Workflow Assurance</h3>
+            <h3>Workflow Assurance assessment</h3>
             <p>
-              We assess your existing systems, identify the controls the
-              workflow needs, and scope the engineering and testing required to
-              move it forward.
+              A focused services engagement for one workflow. We review your
+              existing tools and controls, identify what remains unresolved,
+              and deliver written findings and a practical next-step plan.
             </p>
             <a
               className="customer-link"
@@ -352,9 +354,9 @@ export default function Home() {
             05 / LET’S MAKE THE NEXT STEP USEFUL
           </p>
           <h2 id="consultation-title">
-            What do you want
+            Which workflow needs
             <br />
-            to automate?
+            a clearer outcome?
           </h2>
           <p>
             Tell us about the workflow, the systems involved, and what needs to
