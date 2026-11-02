@@ -3,6 +3,8 @@
  * Preserve existing routes, public evidence limits and inquiry surfaces.
  */
 import { useEffect, useRef } from "react";
+import CoreHeader from "@/components/CoreHeader";
+import BrandFooter from "@/components/BrandFooter";
 import "./EditorialSite.css";
 
 export type EditorialPage = "home" | "infrastructure" | "assurance" | "technology-validation";
@@ -184,5 +186,15 @@ export default function EditorialSite({page}: {page: EditorialPage}) {
       document.removeEventListener("keydown", handleKeys);
     };
   }, [page]);
-  return <div className="jcee-editorial" ref={ref} dangerouslySetInnerHTML={{ __html: PAGES[page] }} />;
+  const content = PAGES[page]
+    .replace(/<header class="site-header">[\s\S]*?<\/header>/, "")
+    .replace(/<footer[\s\S]*?<\/footer>/, "")
+    .replace('id="main"', 'id="page-content" tabindex="-1"')
+    .replaceAll('/#capabilities', '/capabilities/infrastructure')
+    .replaceAll('/#work', '/#evidence');
+  return <div className="jcee-editorial" ref={ref}>
+    <CoreHeader current="solutions" />
+    <div dangerouslySetInnerHTML={{ __html: content }} />
+    <BrandFooter />
+  </div>;
 }

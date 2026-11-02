@@ -54,3 +54,31 @@
 #root .editorial-page .editorial-hero-art { filter:grayscale(.88) sepia(.08); }
 #root .editorial-page .editorial-link-list a { color:#1e302d !important; border-color:#c9d0c8 !important; }
 #root .editorial-page .editorial-link-list a span { color:#56645e !important; }
+
+/* Full-page and subcategory cleanup: shared prose, records and controls. */
+#root :is(.editorial-page,.program-page,.paper-page,.charter-page) {
+  --muted:#56645e; --line:#c9d0c8; --white:#1e302d;
+}
+#root :is(.editorial-page,.program-page) :is(.publication-toc a,.publication-body footer a,.build-status-list a,.editorial-text-link,.research-status-line,.registry-entry-index,.partner-pathway-code,.binding-strip li > span,.research-field-heading > span,.physical-program dt,.infra-stage__status,.founder-monogram,.section-index,.eyebrow > span) { color:#aa4e37 !important; }
+#root .editorial-page :is(.founder-identity dt,.founder-work-index,.evidence-ladder__note,.publication-body,.publication-toc nav a) { color:#56645e !important; }
+#root .editorial-page .resource-filters button { color:#1e302d; border-color:#c9d0c8; border-radius:6px; }
+#root .editorial-page .resource-filters button[aria-pressed="true"] { background:#1e302d; color:#f6f6f2; border-color:#1e302d; }
+#root :is(.editorial-page,.program-page) .status-label { background:#edf0e9; color:#1e302d; border-color:#c9d0c8; }
+#root :is(.editorial-page,.program-page) :is(table,th,td,blockquote,.publication-toc,.research-topic-nav,.physical-program dl > div,.binding-strip li) { border-color:#c9d0c8 !important; }
+#root .customer-home .customer-demo :is(.et-mono,.et-eyebrow,.et-trace-index) { color:#aa4e37 !important; }
+/* Read-only archived wording is preserved, presented in the current site shell. */
+#root .charter-page,
+#root .charter-page :is(.charter-masthead,.charter-shell,.charter-document,.charter-signoff,.charter-toc) { background:#f6f6f2 !important; color:#1e302d !important; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
+#root .charter-page :is(h1,h2,h3,em,strong) { color:#1e302d !important; font-family:inherit !important; text-shadow:var(--jcee-lift); font-style:normal; }
+#root .charter-page :is(p,li,dd) { color:#56645e !important; }
+#root .charter-page :is(a,dt,.eyebrow,.charter-section-label) { color:#aa4e37 !important; }
+#root .charter-page .charter-title { font-size:clamp(40px,5vw,76px); }
+/* Functional illustrations retain their controls and explicit state words. */
+#root .program-page :is(.qcs-gate,.durability-console) { background:#edf0e9 !important; border-color:#c9d0c8 !important; color:#1e302d !important; border-radius:10px; }
+#root .program-page :is(.qcs-gate,.durability-console) :is(h2,h3,p,li,dd,span,div,i,strong) { color:#1e302d !important; text-shadow:none !important; border-color:#c9d0c8 !important; }
+#root .program-page :is(.qcs-gate__state,.qcs-gate__decision,.qcs-gate__state span,.machine-row,.durability-sidecar) { background:#f6f6f2 !important; }
+#root .program-page :is(.qcs-gate,.durability-console) button { background:#f6f6f2 !important; color:#1e302d !important; border-color:#56645e !important; }
+#root .program-page :is(.qcs-gate,.durability-console) button:focus-visible { outline:3px solid #aa4e37; outline-offset:3px; }
+#root .jcee-editorial { --ink:#1e302d; --muted:#56645e; --accent:#aa4e37; --line:#c9d0c8; }
+#root .jcee-editorial :is(h1,h2,h3) { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; color:#1e302d; text-shadow:var(--jcee-lift); }
+#root .jcee-editorial .site-header { display:flex; }
