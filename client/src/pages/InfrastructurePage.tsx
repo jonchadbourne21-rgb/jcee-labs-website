@@ -1,8 +1,10 @@
+import usePageSeo from "@/components/usePageSeo";
 import CoreHeader from "@/components/CoreHeader";
 import BrandFooter from "@/components/BrandFooter";
 import "./home-editorial-refresh.css";
 
 export default function InfrastructurePage() {
+  usePageSeo("/capabilities/infrastructure");
   return (
     <main id="top" className="customer-home customer-service">
       <CoreHeader current="solutions" />

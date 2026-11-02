@@ -504,3 +504,31 @@
 #root .customer-inquiry .brand-footer {
   background: #f6f6f2;
 }
+
+/* Hero v3: a cinematic brand sculpture with an independent readable copy layer. */
+#root .customer-home .customer-hero { position:relative; isolation:isolate; overflow:hidden; max-width:1600px; min-height:820px; padding-top:90px; background:#f6f6f2; }
+#root .customer-home .customer-hero-grid { display:block; }
+#root .customer-home .customer-hero-grid > div { position:relative; z-index:2; max-width:590px; padding-top:100px; }
+#root .customer-home .customer-hero .customer-kicker { position:relative; z-index:2; }
+#root .customer-home .customer-hero h1 { font-size:clamp(44px,4.7vw,70px); letter-spacing:-.035em; }
+#root .customer-home .customer-hero .customer-deck { max-width:45ch; }
+.customer-hero-sculpture { position:absolute; z-index:0; inset:0 -140px 0 20%; margin:0; }
+.customer-hero-sculpture::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,#f6f6f2 0%,#f6f6f2ed 15%,#f6f6f290 29%,transparent 48%); }
+.customer-hero-sculpture img { width:100%; height:100%; object-fit:cover; object-position:62% center; }
+.customer-hero-sculpture figcaption { position:absolute; z-index:1; right:180px; bottom:30px; font:10px/1.6 ui-monospace,monospace; letter-spacing:.08em; color:#39454a; }
+.customer-hero-sculpture figcaption span { display:block; text-align:right; font:10px/1.8 inherit; letter-spacing:0; }
+@media(max-width:1100px) and (min-width:701px) {
+ #root .customer-home .customer-hero-grid > div { max-width:480px; }
+ .customer-hero-sculpture { left:15%; right:-250px; }
+ .customer-hero-sculpture::after { background:linear-gradient(90deg,#f6f6f2 0%,#f6f6f2ed 25%,transparent 65%); }
+}
+@media(max-width:700px) {
+ #root .customer-home .customer-hero { min-height:0; padding-top:44px; padding-bottom:0; }
+ #root .customer-home .customer-hero-grid > div { padding-top:18px; max-width:none; }
+ #root .customer-home .customer-hero h1 { font-size:clamp(40px,8.5vw,58px); }
+ .customer-hero-sculpture { position:relative; inset:auto; margin:28px -22px 0; height:350px; }
+ .customer-hero-sculpture::after { background:linear-gradient(180deg,#f6f6f2,transparent 20%); }
+ .customer-hero-sculpture img { object-position:72% center; }
+ .customer-hero-sculpture figcaption { right:22px; bottom:16px; }
+}
+#root .customer-service .customer-hero { min-height:0; }
