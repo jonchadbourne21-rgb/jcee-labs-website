@@ -594,3 +594,36 @@
  #root .customer-home .site-header .desktop-nav a { padding-inline:4px; }
 }
 @media(max-width:700px) { .hero-trust-links { gap:14px 22px; } }
+
+/* Approved WorldLab palette: forest ink, warm ivory, and restrained rust. */
+#root :is(.customer-home,.customer-inquiry) {
+  --customer-ink:#1e302d;
+  --customer-accent:#aa4e37;
+  --customer-muted:#56645e;
+  --customer-line:#c9d0c8;
+  color:var(--customer-ink);
+  background:#f6f6f2;
+}
+#root .customer-home :is(h1,h2,h3),
+#root .customer-inquiry :is(h1,h2,h3,em) { color:var(--customer-ink) !important; }
+#root .customer-home :is(p,small),
+#root .customer-inquiry :is(p,small,label,li) { color:var(--customer-muted); }
+#root .customer-home :is(.customer-kicker,.customer-cards article > span,.customer-steps li > span),
+#root .customer-home .hero-trust > p,
+#root .customer-inquiry :is(.preview-kicker,.preview-section-label) { color:var(--customer-accent); }
+#root .customer-home .hero-footer-signature,
+#root .customer-home :is(.customer-link,.hero-trust-links a,.hero-trust-links strong,.trust-symbol),
+#root :is(.customer-home,.customer-inquiry) .site-header :is(a,button),
+#root :is(.customer-home,.customer-inquiry) .brand-footer :is(a,strong,.brand-footer-wordmark) { color:var(--customer-ink); }
+#root .customer-home .customer-button,
+#root .customer-inquiry .preview-button { background:var(--customer-ink); border-color:var(--customer-ink); color:#f6f6f2 !important; }
+#root .customer-home .customer-button:hover,
+#root .customer-inquiry .preview-button:hover { background:#314b43; border-color:#314b43; }
+#root .customer-home .customer-section,
+#root .customer-home .hero-trust { border-color:var(--customer-line); }
+#root .customer-home .customer-scenario { border-left-color:var(--customer-accent); background:#eceedf; }
+#root .customer-home .customer-record { background:#edf0e9; border-color:var(--customer-line); }
+#root .customer-home .customer-record :is(dt,.customer-record-heading) { color:var(--customer-ink); }
+#root .customer-home .hero-trust-links small { color:var(--customer-muted); }
+#root .customer-home .customer-cards article { background:linear-gradient(140deg,#fafbf7,#edf0e9); border-color:var(--customer-line); }
+#root :is(.customer-home,.customer-inquiry) .brand-footer-links > div > span { color:var(--customer-accent); }
