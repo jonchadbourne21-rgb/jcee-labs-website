@@ -39,8 +39,8 @@ export default function Home() {
             </p>
           </div>
           <figure className="customer-hero-sculpture">
-            <img src="/visuals/jcee-authority-hero-v3.webp" width="1344" height="752" fetchPriority="high" alt="Concept artwork: light passes through a glass core in a titanium frame and continues as an ordered trail." />
-            <figcaption>INTELLIGENCE → AUTHORITY → RECORD <span>Concept artwork</span></figcaption>
+            <img src="/visuals/jcee-authority-hero-v3.webp" width="1344" height="752" fetchPriority="high" alt="Light passes through a glass core in a titanium frame and continues as an ordered trail." />
+            <figcaption>Intelligence That<br />Leaves Receipts</figcaption>
           </figure>
         </div>
       </section>

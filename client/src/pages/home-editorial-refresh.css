@@ -532,3 +532,29 @@
  .customer-hero-sculpture figcaption { right:22px; bottom:16px; }
 }
 #root .customer-service .customer-hero { min-height:0; }
+
+/* Edge-free hero with the company signature as dimensional live type. */
+#root .customer-home:not(.customer-service) > .customer-hero {
+  max-width:none;
+  min-height:max(820px, calc(100svh - 82px));
+}
+#root .customer-home > #story { border-top:0; }
+.customer-hero-sculpture img {
+  mask-image:linear-gradient(to bottom,#000 0%,#000 calc(100% - 220px),transparent 100%);
+}
+#root .customer-home .customer-hero-sculpture figcaption {
+  right:180px; bottom:64px; max-width:420px;
+  color:#080808; font-family:inherit; font-size:clamp(26px,2.8vw,42px);
+  font-weight:600; line-height:1.08; letter-spacing:-.025em;
+  text-align:right;
+  text-shadow:0 .012em .016em #0002,0 .045em .055em #0002,0 .09em .16em #0001;
+}
+@media(max-width:1100px) and (min-width:701px) {
+  #root .customer-home .customer-hero-sculpture figcaption { right:280px; bottom:50px; }
+}
+@media(max-width:700px) {
+  #root .customer-home:not(.customer-service) > .customer-hero { min-height:0; }
+  .customer-hero-sculpture { height:440px; }
+  .customer-hero-sculpture img { mask-image:linear-gradient(to bottom,transparent,#000 14%,#000 60%,transparent 100%); }
+  #root .customer-home .customer-hero-sculpture figcaption { right:24px; bottom:38px; font-size:clamp(27px,7vw,36px); }
+}
