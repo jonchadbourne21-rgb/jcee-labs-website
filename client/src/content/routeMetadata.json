@@ -6,8 +6,8 @@
     "publishedTime": "2026-10-01"
   },
   "/": {
-    "title": "Advanced Technology, Engineering & Evidence | JCEE WorldLab",
-    "description": "JCEE WorldLab builds advanced technologies, with intelligent infrastructure, software assurance, scientific assessment, and experimental verification."
+    "title": "JCEE Infrastructure: Put AI to Work | JCEE WorldLab",
+    "description": "Connect AI to your business workflows with defined permissions, tested recovery, and results you can verify. Discuss your workflow with JCEE WorldLab."
   },
   "/solutions/distribution": {
     "title": "JCEE Distribution: Order Review & Evidence | JCEE WorldLab",
@@ -78,8 +78,8 @@
     "description": "Understand JCEE WorldLab evidence standards for mathematical, software, physical, and production claims. Explore the evidence ladder and public review limits."
   },
   "/capabilities/infrastructure": {
-    "title": "Intelligent Infrastructure & Runtime Systems | JCEE WorldLab",
-    "description": "Explore JCEE WorldLab's intelligent infrastructure and runtime systems for reliable execution, recovery, and inspectable outcomes in software workflows."
+    "title": "JCEE Infrastructure: Workflow Assurance | JCEE WorldLab",
+    "description": "Start with one workflow. Map your systems, permissions, and recovery requirements with a scoped Workflow Assurance assessment from JCEE WorldLab."
   },
   "/capabilities/assurance": {
     "title": "Software Assurance & Evidence Engineering | JCEE WorldLab",

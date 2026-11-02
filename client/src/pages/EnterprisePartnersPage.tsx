@@ -1,5 +1,6 @@
 import { FormEvent, useEffect } from "react";
 import BrandFooter from "@/components/BrandFooter";
+import "./home-editorial-refresh.css";
 import CoreHeader from "@/components/CoreHeader";
 import { buildPartnerInquiryMailto } from "@/lib/partnerInquiry";
 
@@ -46,10 +47,10 @@ export default function EnterprisePartnersPage() {
         <div className="program-number">JCEE WorldLab / WORKFLOW INQUIRY</div>
         <h1>Bring us the workflow<br /><em>your team cannot confidently close.</em></h1>
         <p className="program-deck">
-          Start with the operational problem, not JCEE terminology. Tell us what the work is,
+          Tell us what the work is,
           where it gets stuck or becomes uncertain, which systems are involved, and what your
           team needs to know at the end. Make consequential software answerable in operation
-          without asking the buyer to learn our internal vocabulary first.
+          with clear permissions, tested recovery, and a result your team can inspect.
         </p>
         <div className="program-status-row"><span>FIRST STEP · WORKFLOW ASSURANCE ASSESSMENT</span><span>NO PAID WORK BEFORE AGREED SCOPE</span></div>
       </section>
@@ -97,7 +98,7 @@ export default function EnterprisePartnersPage() {
             <div className="partner-form-row"><label><span>NAME *</span><input name="name" autoComplete="name" required /></label><label><span>WORK EMAIL *</span><input name="email" type="email" autoComplete="email" required /></label></div>
             <div className="partner-form-row"><label><span>COMPANY *</span><input name="organization" autoComplete="organization" required /></label><label><span>ROLE *</span><input name="role" autoComplete="organization-title" required /></label></div>
             <div className="partner-form-row">
-              <label><span>WORKFLOW AREA *</span><select name="domain" defaultValue="" required><option value="" disabled>Select an area</option><option>Distribution or back-office operations</option><option>AI and agent systems</option><option>Payments or financial operations</option><option>Cloud, data, or infrastructure</option><option>Regulated operations</option><option>Enterprise workflow automation</option><option>Other operational workflow</option></select></label>
+              <label><span>WORKFLOW AREA *</span><select name="domain" defaultValue="" required><option value="" disabled>Select an area</option><option>Customer or back-office operations</option><option>AI and agent systems</option><option>Payments or financial operations</option><option>Cloud, data, or infrastructure</option><option>Regulated operations</option><option>Enterprise workflow automation</option><option>Other operational workflow</option></select></label>
               <label><span>TIMELINE</span><input name="timeline" placeholder="e.g. evaluating this quarter" /></label>
             </div>
             <label><span>WORKFLOW AND WHERE IT GETS STUCK *</span><textarea name="system" rows={6} required placeholder="What starts the work? Who owns it? Which systems are involved? Where does it stall, repeat, or become unclear?" /></label>

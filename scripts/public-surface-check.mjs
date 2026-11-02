@@ -306,6 +306,15 @@ try {
     failures.push("homepage still exposes Mirrored");
   }
 
+  const commercial = await evaluate(page.send, `({
+    title: document.querySelector('h1')?.textContent,
+    distributionLink: !!document.querySelector('.site-header a[href="${prefix}/solutions/distribution"]'),
+    story: !!document.querySelector('#story'),
+    inquiry: !!document.querySelector('a.customer-button[href="${prefix}/consultation"]')
+  })`);
+  if (!commercial.title?.includes("Put AI to work.") || commercial.distributionLink || !commercial.story || !commercial.inquiry)
+    failures.push("Customer-led homepage contract failed: " + JSON.stringify(commercial));
+  await evaluate(page.send, "document.querySelector('#working-example').open = true");
   // The homepage illustration is browser-local and must show all four bounded outcomes.
   for (const [scenario, expected] of [
     ["authorized", "Confirmed in the target record"],
@@ -395,11 +404,7 @@ try {
           `Static public route returned ${response.status}: ${route}`
         );
     }
-    const cloudPanel = await evaluate(
-      page.send,
-      "Boolean(document.querySelector('#operating-cloud'))"
-    );
-    if (!cloudPanel) failures.push("Latest Operating Cloud panel is missing");
+    // The approved commercial homepage contract is checked above in both server modes.
     for (const name of [
       "01-signature-hero-exposed.webp",
       "01-signature-hero-exposed-mobile.webp",
@@ -524,6 +529,7 @@ try {
     [articleRoute, "A Confident Model Still Needs Permission"],
     ["/solutions/distribution", "JCEE Distribution: order review"],
     ["/technology", "Intelligence should leave receipts"],
+    ["/capabilities/infrastructure", "One workflow."],
     ["/research", "Results you can examine"],
     ["/research/publications", "Reports & publications"],
     ["/research/programs", "Research programs"],

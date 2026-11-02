@@ -19,77 +19,39 @@ const editorialCss = readFileSync(
 const plain = (source: string) => source.replace(/\s+/g, " ");
 
 describe("buyer-readable public positioning with Assurance Playbook control", () => {
-  it("explains the service in plain language and offers a concrete next step", () => {
-    expect(plain(home)).toContain(
-      "We design, build, and test AI-assisted software"
-    );
+  it("leads with the customer workflow and a concrete inquiry", () => {
+    expect(plain(home)).toContain("Put AI to work.");
+    expect(plain(home)).toContain("Stay in control.");
     expect(home).toContain('href="/consultation"');
-    expect(home).toContain('href="/partners/enterprise"');
-    expect(home).toContain("PUBLIC REGISTRY");
+    expect(home).toContain('href="/capabilities/infrastructure#deliverables"');
+    expect(home).not.toContain("JCEE Distribution");
   });
-
-  it("keeps Distribution a bounded synthetic application", () => {
-    expect(home).toContain('id="distribution-demo"');
-    expect(plain(home)).toContain("20 of 20 synthetic cases");
-    expect(plain(home)).toContain("zero external effects");
-    expect(plain(home)).toContain("the discrepancy itself grants no authority");
-    expect(plain(home)).toContain(
-      "Customer ROI, live integration, and production readiness remain unestablished"
-    );
-  });
-
-  it("distinguishes the browser illustration from qualification", () => {
+  it("distinguishes the illustration from qualified customer results", () => {
     expect(home).toContain("<EvidenceTrace />");
     expect(plain(home)).toContain(
       "performs no external action, runs no VOW engine"
     );
     expect(plain(home)).toContain("creates no qualification receipt");
-    expect(plain(home)).toContain("Customer savings, production performance");
+    expect(plain(home)).toContain(
+      "not a customer result or a claim of a deployed identity-system integration"
+    );
+    expect(plain(home)).toContain(
+      "Production readiness, customer savings, and payment safety have not been established"
+    );
   });
-
-  it("scopes commercial work and keeps current authority explicit", () => {
-    expect(home).toContain("Workflow Assurance");
-    expect(home).toContain("Written boundary map");
-    expect(plain(home)).toContain("production changes");
+  it("keeps implementation scoped and public evidence reachable", () => {
     expect(plain(home)).toContain(
       "require their own written scope and authorization"
     );
-    expect(plain(home)).toContain("current permissions");
+    expect(home).toContain('href="/technology#current-integration"');
+    expect(home).toContain('href="/registry"');
+    expect(home).toContain("Written boundary map");
   });
-
-  it("takes the reader from the problem through services, customers, example, and evidence", () => {
-    const ids = [
-      "story",
-      "services",
-      "fit",
-      "working-example",
-      "evidence",
-      "consultation",
-    ];
+  it("presents the problem, customer uses, offer, evidence and inquiry in order", () => {
+    const ids = ["story", "fit", "services", "evidence", "consultation"];
     const positions = ids.map(id => home.indexOf(`id="${id}"`));
     for (const position of positions) expect(position).toBeGreaterThan(-1);
     expect(positions).toEqual([...positions].sort((a, b) => a - b));
-  });
-
-  it("keeps ambitions and open deployment gates separate from tested results", () => {
-    for (const phrase of [
-      "Deployment admission",
-      "independent human review",
-      "payment consequence lane remains unqualified",
-      "in development",
-    ]) {
-      expect(plain(home)).toContain(phrase);
-    }
-    for (const phrase of [
-      "A proposal is not authority",
-      "Entitlement is not execution",
-      "Missing evidence stays unknown",
-      "public semantic contract",
-      "system of record",
-      "Each arrow is a binding",
-    ])
-      expect(technology).toContain(phrase);
-    expect(inquiry).toContain("WORKFLOW ASSURANCE ASSESSMENT");
   });
 
   it("keeps the Who This Is For surface readable without changing its background or type system", () => {

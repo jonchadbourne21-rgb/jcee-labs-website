@@ -19,13 +19,11 @@ const protectedProgramPages = [
 ];
 
 describe("homepage enterprise contract", () => {
-  it("keeps Operating Cloud customer-facing and bounded", () => {
-    expect(homeSource).toContain('id="operating-cloud"');
-    expect(homeSource).toContain("JCEE Operating Cloud");
-    expect(homeSource).toContain("Reconcile");
-    expect(homeSource).toContain("PLATFORM DIRECTION");
-    expect(homeSource.replace(/\s+/g, " ")).toContain("JCEE Distribution");
-    expect(homeSource.replace(/\s+/g, " ")).toContain("in development");
+  it("leads with Infrastructure while keeping availability bounded", () => {
+    expect(homeSource).toContain("JCEE INFRASTRUCTURE");
+    expect(homeSource).toContain("JCEE Infrastructure is in development");
+    expect(homeSource).not.toContain("JCEE Distribution");
+    expect(homeSource).toContain("Workflow Assurance");
   });
 
   it("keeps interactive explanations available on the program pages", () => {

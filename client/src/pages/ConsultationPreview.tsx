@@ -1,6 +1,7 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import CoreHeader from "@/components/CoreHeader";
 import BrandFooter from "@/components/BrandFooter";
+import "./home-editorial-refresh.css";
 import { buildConsultationDraft, consultationServices } from "@/lib/consultationDraft";
 
 const serviceGroups = [
@@ -46,15 +47,15 @@ function ConsultationEntry() {
   };
 
   return (
-    <main id="top" className="jcee-preview preview-consultation-page">
-      <CoreHeader contactLabel="Free call" contactHref="/consultation" />
+    <main id="top" className="jcee-preview preview-consultation-page customer-inquiry">
+      <CoreHeader contactLabel="Discuss your workflow" contactHref="/consultation" />
       <section id="page-content" tabIndex={-1} className="preview-section preview-consultation-entry" aria-labelledby="consult-title">
         <div className="preview-consult-copy">
           <div className="preview-consult-intro">
           <a href="/" className="preview-back-link">← Back to JCEE WorldLab</a>
-          <p className="preview-kicker">TECHNICAL SERVICES / START HERE</p>
+          <p className="preview-kicker">JCEE INFRASTRUCTURE / START A CONVERSATION</p>
           <h1 id="consult-title">A real problem.<br /><em>A clear first step.</em></h1>
-          <p className="preview-deck">Start with a free 10–30-minute consultation. Tell us what you are trying to build, improve, or understand. We will discuss the problem and whether a scoped next step makes sense.</p>
+          <p className="preview-deck">Start with a free 10–30-minute consultation. For IT, business-systems, and engineering teams: tell us which automated workflow is difficult to investigate, which systems it touches, and what needs to work better. We will discuss the problem and whether a scoped next step makes sense.</p>
           <div className="preview-call-facts"><span>10–30 minutes</span><span>Free first call</span><span>No paid work before agreed scope</span></div>
           </div>
           <ol className="preview-call-process">
@@ -62,7 +63,7 @@ function ConsultationEntry() {
             <li><span>02</span><div><h3>Review and send your request.</h3><p>Prepare an email draft below. Sending it requests a conversation; it does not confirm an appointment.</p></div></li>
             <li><span>03</span><div><h3>Agree the next step.</h3><p>If there is a fit, any assessment or implementation gets its own written scope, terms, and authorization.</p></div></li>
           </ol>
-          <div className="preview-direct-contact"><p className="preview-kicker">PREFER EMAIL?</p><a href="mailto:support+enterprise@jceelabs.com">support+enterprise@jceelabs.com ↗</a><p>No scheduling service or automated submission is connected.</p></div>
+          <div className="preview-direct-contact"><p className="preview-kicker">PREFER EMAIL?</p><a href="mailto:support+enterprise@jceelabs.com">support+enterprise@jceelabs.com ↗</a><p>Prefer a simple email? Tell us about the workflow and we can arrange a conversation.</p></div>
         </div>
         <div className="preview-form-column">
           <form className="preview-consult-form" onSubmit={prepareDraft} aria-labelledby="request-title">
@@ -75,7 +76,7 @@ function ConsultationEntry() {
             </div>
             <label htmlFor="consult-company">Company <span>(optional)</span><input id="consult-company" name="organization" autoComplete="organization" maxLength={150} /></label>
             <label htmlFor="consult-service">Service interest <span>(optional)</span><select id="consult-service" name="service" defaultValue=""><option value="">Not sure yet — let’s discuss</option>{consultationServices.map(service => <option key={service}>{service}</option>)}</select></label>
-            <label htmlFor="consult-summary">What are you trying to build or resolve? <span>(required)</span><textarea id="consult-summary" name="summary" rows={4} maxLength={2000} required aria-describedby="consult-summary-help" placeholder="A workflow, an application, a technical question, or a system that needs clearer evidence." /></label>
+            <label htmlFor="consult-summary">What are you trying to build or resolve? <span>(required)</span><textarea id="consult-summary" name="summary" rows={4} maxLength={2000} required aria-describedby="consult-summary-help" placeholder="For example: an account change crosses our support and billing systems. Timeouts leave the team checking the result manually." /></label>
             <p id="consult-summary-help" className="preview-form-help">Use a non-confidential summary. Do not include credentials, personal customer records, payment details, private source code, or sensitive incident evidence. Agree a secure exchange separately.</p>
             <button className="preview-button" type="submit">Prepare email draft <span aria-hidden="true">→</span></button>
             <p className="preview-form-help">Nothing is submitted to a server, saved, sent, or booked by this form. You review the draft and send it yourself.</p>
@@ -100,7 +101,7 @@ function ConsultationEntry() {
         <div className="preview-services-grid">{serviceGroups.map(([number, title, copy]) => <article key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></article>)}</div>
         <p className="preview-boundary-note">The free first call is not an assessment report, certification, implementation, or grant of execution authority. Production changes and paid work remain separately scoped and authorized. Independent validation requires a scope that preserves review independence.</p>
       </section>
-      <section className="preview-section preview-existing-inquiry" aria-labelledby="workflow-title"><div><p className="preview-kicker">ALREADY HAVE A WORKFLOW TO SCOPE?</p><h2 id="workflow-title">Keep the detailed inquiry available.</h2><p>The existing Workflow Assurance Assessment inquiry is unchanged. Its detailed questions and review-before-send email behavior remain available for a later scoping stage.</p></div><a className="preview-secondary-button" href="/partners/enterprise">Open detailed workflow inquiry ↗</a></section>
+      <section className="preview-section preview-existing-inquiry" aria-labelledby="workflow-title"><div><p className="preview-kicker">ALREADY HAVE A WORKFLOW TO SCOPE?</p><h2 id="workflow-title">Scope your workflow.</h2><p>Describe the systems, approval requirements, and outcomes that matter to your team. Review your inquiry before sending it.</p></div><a className="preview-secondary-button" href="/capabilities/infrastructure">Explore Workflow Assurance ↗</a></section>
       <BrandFooter backToTopHref="#top" />
     </main>
   );

@@ -40,42 +40,18 @@ describe("free consultation preview", () => {
     expect(result.body).toContain("Service interest: Not selected");
     expect(result.subject).not.toContain("confirmed");
   });
-  it("keeps the homepage claims bounded and inquiry routes available", () => {
+  it("keeps the customer story linked to an accurately described email inquiry", () => {
     const home = readFileSync(
       path.join(import.meta.dirname, "pages/Home.tsx"),
       "utf8"
-    ).replace(/\s+/g, " ");
-    for (const label of [
-      "current authority",
-      "target-system result",
-      "recovery record",
-      "Customer ROI",
-      "fictional data",
-      "remain open",
-    ])
-      expect(home).toContain(label);
-    for (const id of [
-      "engage",
-      "fit",
-      "distribution-demo",
-      "technology",
-      "working-example",
-      "operating-cloud",
-      "evidence-frontier",
-      "company",
-    ])
-      expect(home).toContain(`id="${id}"`);
-  });
-  it("retains the synthetic Distribution result and dated record", () => {
-    const home = readFileSync(
-      path.join(import.meta.dirname, "pages/Home.tsx"),
-      "utf8"
-    ).replace(/\s+/g, " ");
-    expect(home).toContain(
-      "20 of 20 synthetic cases across four result categories"
     );
-    expect(home).toContain("zero external effects");
-    expect(home).toContain('dateTime="2026-09-14"');
-    expect(home).toContain('href="/blog/distribution-first-dry-run"');
+    const inquiry = readFileSync(
+      path.join(import.meta.dirname, "pages/ConsultationPreview.tsx"),
+      "utf8"
+    );
+    expect(home).toContain('href="/consultation"');
+    expect(inquiry).toContain("Prepare email draft");
+    expect(inquiry).toContain("Nothing is submitted");
+    expect(inquiry).toContain("does not confirm an appointment");
   });
 });

@@ -23,7 +23,7 @@ export default function BrandFooter({
         </div>
         <div>
           <span>TECHNOLOGY</span>
-          <a href="/solutions/distribution">JCEE Distribution</a>
+          <a href="/capabilities/infrastructure">JCEE Infrastructure</a>
           <a href="/vow">JCEE VOW</a>
           <a href="/qcs">QCS</a>
           <a href="/assurance">JCEE Assurance</a>
@@ -49,14 +49,20 @@ export default function BrandFooter({
 
       <div className="brand-footer-top brand-footer-bottom-identity">
         <div>
-          <a className="brand-footer-lockup" href="/" aria-label="JCEE WorldLab home">
+          <a
+            className="brand-footer-lockup"
+            href="/"
+            aria-label="JCEE WorldLab home"
+          >
             <img src="/brand/jcee-labs-mark.png" alt="" aria-hidden="true" />
             <span>
               <strong>JCEE WorldLab</strong>
               <small>PRECISION RESEARCH + INTELLIGENCE · DALLAS, TEXAS</small>
             </span>
           </a>
-          <a className="footer-founder" href="/founder">Founded by Jonathan Matthew Chadbourne ↗</a>
+          <a className="footer-founder" href="/founder">
+            Founded by Jonathan Matthew Chadbourne ↗
+          </a>
         </div>
       </div>
 
