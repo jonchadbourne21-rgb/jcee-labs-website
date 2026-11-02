@@ -169,7 +169,7 @@ export default function CompanyPage() {
           Review published milestones and their boundaries →
         </a>
       </section>
-      <section className="editorial-section">
+      <section className="editorial-section editorial-section-dark">
         <h2>Work with JCEE WorldLab.</h2>
         <p>
           Companies can bring an operational problem. Researchers can bring a

@@ -492,7 +492,7 @@ try {
       `Assurance architecture copy does not use the shared paper-surface ink: ${assuranceArchitectureColors.copy}`
     );
   }
-  if (assuranceArchitectureColors.label !== "rgb(170, 78, 55)") {
+  if (assuranceArchitectureColors.label !== "rgb(135, 92, 50)") {
     failures.push(
       `Assurance architecture label has unexpected color: ${assuranceArchitectureColors.label}`
     );
@@ -538,7 +538,7 @@ try {
     ["/research/evidence-standards", "Evidence standards"],
     ["/research/fields", "25 fields. One unifying research question"],
     ["/resources", "Articles and guides to accountable AI-assisted operations"],
-    ["/company", "About JCEE WorldLab: why we build for accountable operations"],
+    ["/company", "Built for accountable operations."],
     ["/founder", "Jonathan Matthew Chadbourne"],
     ["/blog/start-with-the-workflow", "Start with the workflow"],
     ["/blog/distribution-first-dry-run", "the first order-integrity dry run"],
