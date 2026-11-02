@@ -13,7 +13,7 @@ export default function Home() {
         className="customer-shell customer-hero"
         aria-labelledby="hero-title"
       >
-        <p className="customer-kicker">JCEE WORLDLAB · JCEE INFRASTRUCTURE</p>
+        <p className="customer-kicker">JCEE INFRASTRUCTURE · CUSTOMER-LED</p>
         <div className="customer-hero-grid">
           <div>
             <h1 id="hero-title">
@@ -22,9 +22,9 @@ export default function Home() {
               Stay in control.
             </h1>
             <p className="customer-deck">
-              Bring AI into the workflows your business depends on. We help your
-              team connect systems, define what automation can do, and verify
-              the results.
+              Turn customer requests, approvals, and system changes into completed
+              work. We help you automate across your existing tools, verify the
+              result, and recover when a workflow is interrupted.
             </p>
             <div className="customer-actions">
               <a className="customer-button" href="/consultation">
@@ -34,15 +34,20 @@ export default function Home() {
                 Explore JCEE Infrastructure ↗
               </a>
             </div>
-            <p className="customer-signature">
-              Intelligence That Leaves Receipts.
-            </p>
+            <div className="hero-trust" aria-label="Explore the engineering foundation">
+              <p>EXPLORE THE ENGINEERING</p>
+              <div className="hero-trust-links">
+                <a href="/technology#current-integration"><span className="trust-symbol" aria-hidden="true">▱</span><span><strong>PostgreSQL</strong><small>Recorded reference tests</small></span></a>
+                <a href="/vow"><span className="trust-symbol" aria-hidden="true">↻</span><span><strong>JCEE VOW</strong><small>Execution &amp; recovery</small></span></a>
+                <a href="/registry"><span className="trust-symbol" aria-hidden="true">≡</span><span><strong>Evidence</strong><small>Results &amp; boundaries</small></span></a>
+              </div>
+            </div>
           </div>
           <figure className="customer-hero-sculpture">
             <img src="/visuals/jcee-authority-hero-v3.webp" width="1344" height="752" fetchPriority="high" alt="Light passes through a glass core in a titanium frame and continues as an ordered trail." />
-            <figcaption>Intelligence That<br />Leaves Receipts</figcaption>
           </figure>
         </div>
+        <p className="hero-footer-signature">Intelligence That Leaves Receipts</p>
       </section>
 
       <section
@@ -59,8 +64,9 @@ export default function Home() {
         <div className="customer-story-grid">
           <div>
             <p className="customer-deck">
-              A subscription changes. A credit is approved. A support ticket
-              needs closing.
+              A customer’s account needs updating. A supplier needs onboarding.
+              An approved change needs applying. Your team needs the work
+              completed—and a clear record of the result.
             </p>
             <p>
               Your AI can coordinate the work. Your business still needs a clear

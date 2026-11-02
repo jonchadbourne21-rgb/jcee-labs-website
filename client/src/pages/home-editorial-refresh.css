@@ -558,3 +558,39 @@
   .customer-hero-sculpture img { mask-image:linear-gradient(to bottom,transparent,#000 14%,#000 60%,transparent 100%); }
   #root .customer-home .customer-hero-sculpture figcaption { right:24px; bottom:38px; font-size:clamp(27px,7vw,36px); }
 }
+
+/* Preview v5: the signature spans the entire hero footer. */
+#root .customer-home .hero-footer-signature {
+  position:absolute; z-index:3; left:clamp(22px,5vw,72px); right:clamp(22px,5vw,72px); bottom:32px;
+  margin:0; max-width:none; text-align:center;
+  font-family:inherit; color:#080808; font-size:clamp(28px,5.1vw,88px);
+  font-weight:600; line-height:1.1; letter-spacing:-.035em;
+  text-shadow:0 .012em .016em #0002,0 .045em .055em #0002,0 .09em .16em #0001;
+}
+@media(max-width:700px) {
+  #root .customer-home .hero-footer-signature { position:relative; inset:auto; padding:0 0 32px; font-size:clamp(28px,8vw,48px); }
+  .customer-hero-sculpture { height:380px; }
+}
+@media(min-width:701px) {
+  #root .customer-home .hero-footer-signature { font-size:clamp(28px,4.5vw,80px); white-space:nowrap; }
+}
+
+/* Comparison v6: technical clarity and a quieter engineering trust row. */
+#root .customer-home { --commercial-font:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
+#root .customer-home :is(#hero-title,.hero-footer-signature) { font-family:var(--commercial-font); font-weight:600; }
+#root .customer-home .site-header .desktop-nav { gap:24px; }
+#root .customer-home .site-header .desktop-nav a { padding:12px 8px; }
+#root .customer-home .hero-trust { margin-top:32px; padding-top:20px; border-top:1px solid #0002; max-width:590px; }
+#root .customer-home .hero-trust > p { font-size:10px; letter-spacing:.12em; line-height:1.5; color:#555; margin:0 0 16px; }
+.hero-trust-links { display:flex; flex-wrap:wrap; gap:22px; }
+#root .customer-home .hero-trust-links a { display:flex; align-items:center; gap:8px; text-decoration:none; min-height:44px; color:#222; }
+#root .customer-home .hero-trust-links a:hover strong { text-decoration:underline; text-underline-offset:4px; }
+#root .customer-home .hero-trust-links strong { font-size:14px; font-weight:600; line-height:1.4; display:block; }
+#root .customer-home .hero-trust-links small { font-size:10px; line-height:1.6; color:#555; margin:3px 0 0; }
+#root .customer-home .trust-symbol { font:28px/1 ui-monospace,monospace; color:#3c4a51; }
+@media(min-width:1101px) { #root .customer-home .customer-hero-grid > div { padding-top:70px; } }
+@media(min-width:901px) and (max-width:1250px) {
+ #root .customer-home .site-header .desktop-nav { gap:8px; }
+ #root .customer-home .site-header .desktop-nav a { padding-inline:4px; }
+}
+@media(max-width:700px) { .hero-trust-links { gap:14px 22px; } }
