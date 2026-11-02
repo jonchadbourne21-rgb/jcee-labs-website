@@ -90,7 +90,7 @@
 
 /* Material-led identity: warm paper, evergreen, titanium and restrained bronze.
    Keep actual code/math monospace; all interface and editorial copy share one sans. */
-#root :is(.customer-home,.customer-service,.editorial-page,.program-page,.paper-page,.legal-page,.preview-consultation-page,.charter-page,.jcee-editorial) :is(h1,h2,h3,h4,h5,h6,p,li,dd,dt,small,a,button,label,input,textarea,select,summary,figcaption,blockquote,th,td,span):not(pre *,code *,math *,svg *) {
+#root :is(.customer-home,.customer-service,.editorial-page,.program-page,.paper-page,.legal-page,.preview-consultation-page,.charter-page,.jcee-editorial) :is(h1,h2,h3,h4,h5,h6,p,li,dd,dt,small,a,button,label,input,textarea,select,summary,figcaption,blockquote,th,td,span,em,strong):not(pre *,code *,math *,svg *) {
   font-family:var(--worldlab-font) !important;
 }
 #root :is(.editorial-page,.program-page,.paper-page,.legal-page,.charter-page,.jcee-editorial) :is(h2,h3,h4,h5,h6) {
@@ -269,3 +269,11 @@
 #root .jcee-editorial .detail-hero { display:grid; align-items:center; }
 #root .jcee-editorial .detail-copy h1 { margin:22px 0 28px; max-width:20ch; }
 #root .jcee-editorial .detail-intro { font-size:18px; line-height:1.7; color:var(--jcee-muted); max-width:48ch; margin-bottom:28px; }
+
+#root :is(.paper-page,.charter-page,.jcee-editorial) h1 em { font-family:inherit !important; font-weight:inherit !important; }
+#root .paper-page .paper-masthead { min-height:0; }
+#root .paper-page .paper-code { margin-top:24px; }
+#root .paper-page .paper-masthead h1 { margin:22px 0 28px; }
+#root .paper-page .paper-deck { margin:0; }
+#root .paper-page .paper-masthead blockquote { margin:36px 0; padding-left:24px; max-width:38ch; font-size:clamp(24px,2.6vw,34px); line-height:1.4; border-left-width:3px; }
+#root .paper-page .paper-version-row { max-width:900px; }

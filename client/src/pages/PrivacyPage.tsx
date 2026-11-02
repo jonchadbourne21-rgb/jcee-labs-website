@@ -14,7 +14,7 @@ export default function PrivacyPage() {
           </div>
 
           <div className="prose prose-invert max-w-none space-y-8 text-[#E2E8F0]/80 leading-relaxed">
-            <section id="page-content" tabIndex={-1} className="space-y-4">
+            <section className="space-y-4">
               <h2 className="text-xl font-display font-bold text-white">1. Introduction</h2>
               <p>
                 JCEE Labs LLC ("we," "our," or "us") respects your privacy. This Privacy Policy describes the information practices associated with the public JCEE WorldLab website at jceelabs.com.

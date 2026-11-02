@@ -29,7 +29,7 @@ try {
           const visible = e => e.getBoundingClientRect().width > 0 && e.getBoundingClientRect().height > 0;
           const headings = [...document.querySelectorAll('h1')].filter(visible);
           const expectedFont = getComputedStyle(document.querySelector('.site-header .wordmark')).fontFamily;
-          const fontMismatches = [...document.querySelectorAll('#root h1,#root h2,#root h3,#root p,#root li,#root label,#root button,#root input,#root textarea,#root select')]
+          const fontMismatches = [...document.querySelectorAll('#root h1,#root h2,#root h3,#root p,#root li,#root label,#root button,#root input,#root textarea,#root select,#root em,#root strong')]
             .filter(e => visible(e) && !e.closest('pre,code,svg,math,.katex') && getComputedStyle(e).fontFamily !== expectedFont)
             .map(e => ({tag:e.tagName,text:e.textContent.slice(0,60),font:getComputedStyle(e).fontFamily}));
           return {
