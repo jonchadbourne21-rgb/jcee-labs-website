@@ -34,18 +34,18 @@ export default function Home() {
                 Discuss your workflow <span aria-hidden="true">↗</span>
               </a>
             </div>
-            <div className="hero-trust" aria-label="Explore the engineering foundation">
-              <p>EXPLORE THE ENGINEERING</p>
-              <div className="hero-trust-links">
-                <a href="/technology#current-integration"><span className="trust-symbol" aria-hidden="true">▱</span><span><strong>PostgreSQL</strong><small>Recorded reference tests</small></span></a>
-                <a href="/vow"><span className="trust-symbol" aria-hidden="true">↻</span><span><strong>JCEE VOW</strong><small>Execution &amp; recovery</small></span></a>
-                <a href="/registry"><span className="trust-symbol" aria-hidden="true">≡</span><span><strong>Evidence</strong><small>Results &amp; boundaries</small></span></a>
-              </div>
-            </div>
           </div>
           <figure className="customer-hero-sculpture">
             <img src="/visuals/jcee-authority-hero-v3.webp" width="1344" height="752" fetchPriority="high" alt="Light passes through a glass core in a titanium frame and continues as an ordered trail." />
           </figure>
+          <nav className="hero-trust" aria-label="Explore the engineering foundation">
+            <p>EXPLORE THE ENGINEERING</p>
+            <div className="hero-trust-links">
+              <a href="/technology#current-integration"><span className="trust-symbol" aria-hidden="true">▱</span><span><strong>PostgreSQL</strong><small>Recorded reference tests</small></span></a>
+              <a href="/vow"><span className="trust-symbol" aria-hidden="true">↻</span><span><strong>JCEE VOW</strong><small>Execution &amp; recovery</small></span></a>
+              <a href="/registry"><span className="trust-symbol" aria-hidden="true">≡</span><span><strong>Evidence</strong><small>Results &amp; boundaries</small></span></a>
+            </div>
+          </nav>
         </div>
         <p className="hero-footer-signature">Intelligence That Leaves Receipts</p>
       </section>

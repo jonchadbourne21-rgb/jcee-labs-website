@@ -37,6 +37,12 @@ try {
             headings:headings.length,header:document.querySelectorAll('.site-header').length,footer:document.querySelectorAll('.brand-footer').length,
             brokenImages:[...document.images].filter(i => !i.complete || !i.naturalWidth).map(i => i.getAttribute('src')),
             fontMismatches,
+            mobileHero: location.pathname === '/' && innerWidth <= 700 ? (() => {
+              const rect = s => document.querySelector(s).getBoundingClientRect();
+              const art=rect('.customer-hero-sculpture'), trust=rect('.hero-trust');
+              const primary=rect('.customer-actions .customer-button'), secondary=rect('.customer-actions .customer-link');
+              return {artTop:art.top,artBottom:art.bottom,trustTop:trust.top,primaryBottom:primary.bottom,secondaryTop:secondary.top,secondaryBottom:secondary.bottom};
+            })() : null,
             artOverlap:[...document.querySelectorAll('.worldlab-masthead-art,.editorial-hero-art')].some(i => {
               const copy=i.previousElementSibling;
               if (!copy || !copy.matches('.worldlab-masthead-copy,.editorial-hero-copy')) return false;
@@ -53,6 +59,12 @@ try {
       if (value.headings !== 1 || value.header !== 1 || value.footer !== 1) issues.push("missing/duplicated page structure");
       if (value.brokenImages.length) issues.push("broken images");
       if (value.fontMismatches.length) issues.push("inconsistent typography");
+      if (value.mobileHero) {
+        const h=value.mobileHero;
+        if (h.trustTop < h.artBottom - 1) issues.push("engineering links precede/overlap artwork");
+        if (h.primaryBottom > h.secondaryTop + 1) issues.push("primary mobile action is not first");
+        if (h.artTop < h.secondaryBottom || h.artTop > 680) issues.push("mobile artwork crowded or delayed");
+      }
       if (value.artOverlap) issues.push("artwork overlaps introduction");
       if (issues.length) failures.push({route,width,issues,...value});
       // Viewport captures for human review accompany the structural checks.
