@@ -705,6 +705,7 @@
 
 /* Mobile reading order: introduction, actions, artwork, engineering links. */
 #root .customer-home .customer-hero-grid > .hero-trust {
+  display:block;
   position:relative;
   z-index:2;
 }
@@ -736,4 +737,7 @@
   }
   #root .customer-home .hero-trust-links { gap:8px 22px; }
   #root .customer-home .hero-footer-signature { margin-top:32px; }
+}
+@media(max-width:360px) {
+  #root .customer-home:not(.customer-service) .customer-hero h1 { font-size:36px; }
 }
