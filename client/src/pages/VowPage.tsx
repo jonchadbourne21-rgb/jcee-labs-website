@@ -1,3 +1,4 @@
+import WorldLabMasthead from "@/components/WorldLabMasthead";
 import usePageSeo from "@/components/usePageSeo";
 import BuildStatusList from "@/components/BuildStatusList";
 import VowDurabilityDemo from "@/components/VowDurabilityDemo";
@@ -31,11 +32,7 @@ export default function VowPage() {
     <main className="program-page" id="top">
       <CoreHeader current="vow" />
 
-      <section
-        id="page-content"
-        tabIndex={-1}
-        className="program-masthead vow-program"
-      >
+      <WorldLabMasthead className="vow-program" artwork="technology">
         <p className="eyebrow">
           <span /> PUBLIC OVERVIEW · ACTIVE
         </p>
@@ -54,7 +51,7 @@ export default function VowPage() {
           <span>HISTORICAL RELEASE · VOW 1.1</span>
           <span>PRIVATE CANDIDATE · 1.1.1.dev3 · RELEASE ON HOLD</span>
         </div>
-      </section>
+      </WorldLabMasthead>
 
       <section className="program-statement">
         <p className="charter-section-label">THE POSITION</p>

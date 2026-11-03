@@ -6,7 +6,7 @@ export default function TermsPage() {
     <div id="top" className="legal-page min-h-screen flex flex-col">
       <CoreHeader />
 
-      <main className="flex-1 pt-32 pb-20 px-4">
+      <main id="page-content" tabIndex={-1} className="flex-1 pt-32 pb-20 px-4">
         <div className="container max-w-3xl mx-auto">
           <div className="space-y-4 mb-12">
             <h1 className="text-4xl md:text-5xl font-display font-extrabold text-white">Terms of Service</h1>
@@ -14,7 +14,7 @@ export default function TermsPage() {
           </div>
 
           <div className="prose prose-invert max-w-none space-y-8 text-[#E2E8F0]/80 leading-relaxed">
-            <section id="page-content" tabIndex={-1} className="space-y-4">
+            <section className="space-y-4">
               <h2 className="text-xl font-display font-bold text-white">1. Agreement to Terms</h2>
               <p>
                 By accessing or using the website jceelabs.com and any services provided by JCEE Labs LLC ("Company," "we," "our"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.

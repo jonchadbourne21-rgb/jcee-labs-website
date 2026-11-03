@@ -5,7 +5,7 @@ export default function CompanyPage() {
     <EditorialLayout
       current="company"
       eyebrow="JCEE WorldLab / Dallas, Texas"
-      title="About JCEE WorldLab: why we build for accountable operations"
+      title="Built for accountable operations."
       description="JCEE WorldLab is based in Dallas, Texas, and founded by Jonathan Matthew Chadbourne. We develop methods and software for AI-assisted operations where permissions, evidence, and human responsibility matter."
     >
       <section className="editorial-section editorial-section-muted">
@@ -169,7 +169,7 @@ export default function CompanyPage() {
           Review published milestones and their boundaries →
         </a>
       </section>
-      <section className="editorial-section">
+      <section className="editorial-section editorial-section-dark">
         <h2>Work with JCEE WorldLab.</h2>
         <p>
           Companies can bring an operational problem. Researchers can bring a

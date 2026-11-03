@@ -1,3 +1,4 @@
+import WorldLabMasthead from "@/components/WorldLabMasthead";
 import { useEffect } from "react";
 import BrandFooter from "@/components/BrandFooter";
 import CoreHeader from "@/components/CoreHeader";
@@ -28,7 +29,7 @@ export default function QcsPage() {
     <main className="program-page qcs-program-page" id="top">
       <CoreHeader current="qcs" />
 
-      <section id="page-content" tabIndex={-1} className="program-masthead qcs-program">
+      <WorldLabMasthead className="qcs-program" artwork="research">
         <p className="eyebrow"><span /> RESEARCH PROGRAM · VERIFIED MILESTONE</p>
         <div className="program-number">QCS / RESEARCH PROGRAM</div>
         <h1>What evidence justifies<br /><em>the next action?</em></h1>
@@ -41,7 +42,7 @@ export default function QcsPage() {
           <span>CORE · QCS-2.0 FROZEN</span>
           <span>REPRODUCTION GATE · PASS</span>
         </div>
-      </section>
+      </WorldLabMasthead>
 
       <section className="program-statement program-statement-dark">
         <p className="charter-section-label">THE RESEARCH QUESTION</p>

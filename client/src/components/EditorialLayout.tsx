@@ -55,10 +55,10 @@ export default function EditorialLayout({
       ?.setAttribute("content", canonical);
   }, [title, description, location]);
   return (
-    <main className="editorial-page" id="top">
+    <main className="editorial-page" data-worldlab-section={current} id="top">
       <CoreHeader current={current} />
       <div id="page-content" tabIndex={-1}>
-        <header className="editorial-masthead">
+        <header className="editorial-masthead" data-long-title={title.length > 80 || undefined}>
           <div className="editorial-hero-copy">
             <p className="editorial-kicker">{eyebrow}</p>
             <h1>{title}</h1>
@@ -66,7 +66,7 @@ export default function EditorialLayout({
           </div>
           <img
             className="editorial-hero-art"
-            src={`${import.meta.env.BASE_URL}landing/illustrations/${current === "research" || current === "resources" ? "evidence" : current === "company" ? "fit" : current === "solutions" ? "story" : "services"}-v2.webp`}
+            src={`${import.meta.env.BASE_URL}visuals/worldlab-${current === "research" || current === "resources" ? "research" : current === "company" ? "company" : "technology"}-v1.webp`}
             width="1536"
             height="1024"
             alt=""

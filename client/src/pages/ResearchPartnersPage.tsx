@@ -1,3 +1,4 @@
+import WorldLabMasthead from "@/components/WorldLabMasthead";
 import { FormEvent, useEffect } from "react";
 import BrandFooter from "@/components/BrandFooter";
 import CoreHeader from "@/components/CoreHeader";
@@ -45,7 +46,7 @@ export default function ResearchPartnersPage() {
     <main className="program-page partner-page partner-path-page research-partner-page" id="top">
       <CoreHeader current="partners" />
 
-      <section id="page-content" tabIndex={-1} className="program-masthead partner-masthead research-partner-masthead">
+      <WorldLabMasthead className="partner-masthead research-partner-masthead" artwork="research">
         <p className="eyebrow"><span /> RESEARCH PARTNERSHIPS · CLAIMS + REPRODUCTION</p>
         <div className="program-number">JCEE WorldLab / PARTNERS / RESEARCH</div>
         <h1>
@@ -60,7 +61,7 @@ export default function ResearchPartnersPage() {
           <span>PATH · REPLICATION / METHODS / PUBLICATION</span>
           <span>ROUTING · RESEARCH REVIEW</span>
         </div>
-      </section>
+      </WorldLabMasthead>
 
       <section className="partner-fit research-fit" aria-labelledby="research-fit-title">
         <div className="section-index">

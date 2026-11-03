@@ -1,3 +1,4 @@
+import WorldLabMasthead from "@/components/WorldLabMasthead";
 import usePageSeo from "@/components/usePageSeo";
 import BuildStatusList from "@/components/BuildStatusList";
 import { useEffect } from "react";
@@ -161,11 +162,7 @@ export default function AssurancePage() {
   return (
     <main className="program-page assurance-program-page" id="top">
       <CoreHeader current="assurance" />
-      <section
-        id="page-content"
-        tabIndex={-1}
-        className="program-masthead assurance-program"
-      >
+      <WorldLabMasthead className="assurance-program" artwork="technology">
         <p className="eyebrow">
           <span /> METHOD · EVIDENCE · BOUNDED CONSEQUENCE
         </p>
@@ -194,7 +191,7 @@ export default function AssurancePage() {
             DISCUSS AN ASSESSMENT <span>→</span>
           </a>
         </div>
-      </section>
+      </WorldLabMasthead>
 
       <section
         className="program-statement"
