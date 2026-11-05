@@ -150,3 +150,5 @@
 #root#root#root .worldlab-home :is(.et-scenario-picker button,.et-trace-steps button):hover { background:#20291e!important; }
 #root#root#root .worldlab-home .et-trace-actions .et-button { background:var(--wl-green)!important; color:#182311!important; border-color:var(--wl-green)!important; }
 #root#root#root .worldlab-home .et-trace-actions .et-button span { color:inherit!important; }
+#root#root#root .worldlab-home .brand-footer-meta,
+#root#root#root .worldlab-home .brand-footer-meta span { color:var(--wl-muted)!important; }
