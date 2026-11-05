@@ -1,5 +1,6 @@
 import CoreHeader from "@/components/CoreHeader";
 import BrandFooter from "@/components/BrandFooter";
+import ScenarioTerminal from "@/components/ScenarioTerminal";
 import EvidenceTrace from "@/components/EvidenceTrace";
 import "./home-editorial-refresh.css";
 
@@ -49,6 +50,8 @@ export default function Home() {
         </div>
         <p className="hero-footer-signature">Intelligence That Leaves Receipts</p>
       </section>
+
+      <ScenarioTerminal />
 
       <section
         id="story"
