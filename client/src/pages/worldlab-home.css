@@ -141,3 +141,12 @@
  #root#root#root .worldlab-home .site-header .header-contact {display:none;}
  #root#root#root .worldlab-home .site-header .wordmark {font-size:22px!important;}
 }
+/* Retained request-to-record controls must remain legible on the dark surface. */
+#root#root#root .worldlab-home :is(.et-scenario-picker button,.et-trace-steps button,.et-trace-steps strong,.et-reset-button) { color:var(--wl-ink)!important; }
+#root#root#root .worldlab-home :is(.et-trace-top,.et-trace-detail .et-eyebrow,.et-trace-index,.et-scenario-picker .et-mono,.et-stage-mark) { color:var(--wl-green)!important; }
+#root#root#root .worldlab-home :is(.et-scenario-picker,.et-trace-top,.et-trace-steps li) { border-color:var(--wl-line)!important; }
+#root#root#root .worldlab-home .et-trace-steps .et-is-active { border-color:var(--wl-green)!important; }
+#root#root#root .worldlab-home .et-scenario-picker button[aria-pressed="true"]::after { background:var(--wl-green); }
+#root#root#root .worldlab-home :is(.et-scenario-picker button,.et-trace-steps button):hover { background:#20291e!important; }
+#root#root#root .worldlab-home .et-trace-actions .et-button { background:var(--wl-green)!important; color:#182311!important; border-color:var(--wl-green)!important; }
+#root#root#root .worldlab-home .et-trace-actions .et-button span { color:inherit!important; }
