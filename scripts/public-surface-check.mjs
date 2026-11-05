@@ -622,7 +622,7 @@ try {
     `({ count:document.querySelectorAll('.resource-card').length, text:[...document.querySelectorAll('.resource-card')].map(card => card.textContent).join(' ') })`
   );
   if (
-    filtered.count !== 7 ||
+    filtered.count !== 10 ||
     !filtered.text.includes("order-integrity") ||
     !filtered.text.includes("What Is an Evidence Boundary") ||
     !filtered.text.includes("What Happens After an AI Says") ||
@@ -631,13 +631,16 @@ try {
     !filtered.text.includes(
       "Restoring a Backup Without Restoring Permission"
     ) ||
-    !filtered.text.includes("Testing the Evidence Pipeline")
+    !filtered.text.includes("Testing the Evidence Pipeline") ||
+    !filtered.text.includes("Recovering Work Without Losing the Permission Boundary") ||
+    !filtered.text.includes("Receipts That Can Be Checked") ||
+    !filtered.text.includes("What Native Comparisons Teach Us")
   )
     failures.push("Resource filter did not show the engineering articles");
 
   for (const [label, count] of [
     ["From the Founder", 1],
-    ["Research", 4],
+    ["Research", 5],
   ]) {
     await evaluate(
       page.send,
@@ -656,6 +659,8 @@ try {
       !cards.text.includes("Perfect Recovery and One-Message Bounds")
     )
       failures.push("Research filter is missing the BB84 paper");
+    if (label === "Research" && !cards.text.includes("IBM Results, Models and Next Tests"))
+      failures.push("Research filter is missing the November hardware/model update");
   }
   await navigate(page.send, baseUrl, "/terms");
   const termsText = await readBody(page.send);

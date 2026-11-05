@@ -16,7 +16,15 @@ const evidenceClasses = [
       "Examples: VOW and QCS bounded milestones; Distribution's 20/20 expected synthetic classifications with zero external effects.",
   },
   {
-    label: "03 / PHYSICAL VALIDATION PENDING",
+    label: "03 / HARDWARE OBSERVATIONS",
+    title: "What was measured in a specific device.",
+    evidence:
+      "Recorded IBM qubit measurements support bounded statements about the executed circuits and observed outcomes. Provider records do not establish independent pulse-level attestation or universal hardware behavior.",
+    example:
+      "Examples: retained BB84 measurements and separately verified quantum analogue records. Offline model audits and simulated follow-ups are distinct from new hardware results.",
+  },
+  {
+    label: "04 / PHYSICAL VALIDATION PENDING",
     title: "What is proposed, but not observed in nature.",
     evidence:
       "A preregistered design, feasibility screen, or statistical simulation is not a physical outcome. The biological and living-cell quantum proposals below remain untested physically.",
@@ -24,7 +32,7 @@ const evidenceClasses = [
       "Current physical-test candidates: JCEE-MMC-P0.1 and JCEE-QBIO-P0.1.",
   },
   {
-    label: "04 / FIELD EVIDENCE NOT ESTABLISHED",
+    label: "05 / FIELD EVIDENCE NOT ESTABLISHED",
     title: "What still needs real-world qualification.",
     evidence:
       "Production reliability, customer outcomes, external transfer, and regulatory fitness require their own operational evidence and review. They are not inherited from proofs or synthetic tests.",
