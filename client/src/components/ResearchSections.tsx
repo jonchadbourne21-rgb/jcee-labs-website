@@ -14,23 +14,20 @@ export function ResearchPriority() {
       className="editorial-section"
       aria-labelledby="current-research-priority"
     >
-      <p className="editorial-kicker">CURRENT PRIORITY / OCTOBER 19, 2026</p>
-      <h2 id="current-research-priority">
-        Qualify one connected assurance path.
-      </h2>
+      <p className="editorial-kicker">CURRENT PRIORITY / REVIEWED NOVEMBER 4, 2026</p>
+      <h2 id="current-research-priority">Qualify one connected assurance path.</h2>
       <p className="editorial-intro">
-        The immediate engineering priority is to connect the components and
-        establish which guarantees survive when evidence changes, permission is
-        revoked, replies disappear, and recovery resumes. The latest software
-        candidate has passed its bounded combined qualification and entered
-        working integration with the reviewed source tree preserved.
+        Native recovery, private installed clients and hosted evidence now have
+        additional recorded component results. The 20-case composite integration
+        candidate is executable and frozen for independent review. Full G0 has
+        not been admitted or run.
       </p>
       <p>
-        The retained result covers a controlled fictional ledger and a declared
-        protected-checkpoint restore model. Independent human review, production
-        admission, and E003 physical commitment remain separate gates. The
-        broader research portfolio below is a dated map of the questions we
-        study, not a claim that every field is actively qualified.
+        Final runtime bindings and independent acceptance remain required.
+        Production admission, physical commitment and enforcement against
+        compromised trusted credentials remain separate open requirements.
+        The portfolio below distinguishes software tests, mathematical results,
+        hardware observations, simulations and proposals.
       </p>
       <div className="editorial-actions">
         <a
@@ -187,14 +184,15 @@ export function PhysicalExperiments() {
       id="physical-validation"
       aria-labelledby="physical-validation-title"
     >
-      <p className="editorial-kicker">PHYSICAL RESEARCH / NOT YET RUN</p>
+      <p className="editorial-kicker">PHYSICAL RESEARCH / DISTINCT PROGRAM STATUS</p>
       <h2 id="physical-validation-title">
-        Two experiments. Two observations still to earn.
+        Physical observations and programs still to qualify.
       </h2>
       <p className="editorial-intro">
-        These are testable research hypotheses, not physical findings. Their
-        scientific implications are conditional on meeting their respective
-        frozen controls and decision thresholds.
+        The two biological studies below are testable research hypotheses,
+        not physical findings. They remain separate from recorded qubit-based
+        IBM observations and from newer bench and materials proposals. Each
+        program must meet its own controls and decision thresholds.
       </p>
       <div className="physical-program-grid">
         <article className="physical-program">

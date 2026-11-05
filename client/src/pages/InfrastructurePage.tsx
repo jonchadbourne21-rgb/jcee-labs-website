@@ -144,8 +144,8 @@ export default function InfrastructurePage() {
             <span>INTEGRATED SOFTWARE</span>
             <h3>What was tested?</h3>
             <p>
-              Read the dated software qualification, its configuration, and its
-              limits.
+              Read the November progress in recovery, installed interfaces and
+              hosted evidence, with each result attached to its limits.
             </p>
             <a className="customer-link" href="/technology#current-integration">
               Read the engineering evidence ↗

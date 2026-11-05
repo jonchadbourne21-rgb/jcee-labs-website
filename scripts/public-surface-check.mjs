@@ -261,12 +261,12 @@ try {
     failures.push("new article canonical or Open Graph URL is incorrect");
   }
   const registryDownload = await fetch(
-    `${baseUrl}/JCEE_Labs_Public_Registry_v1.4.md`
+    `${baseUrl}/JCEE_WorldLab_Public_Registry_v1.5.md`
   );
   if (
     !registryDownload.ok ||
     !(await registryDownload.text()).startsWith(
-      "# JCEE Labs Public Registry — Version 1.4"
+      "# JCEE WorldLab Public Registry — Version 1.5"
     )
   ) {
     failures.push("current registry Markdown download is missing");
@@ -580,6 +580,11 @@ try {
     "JCEE_INFRA_Software_Qualification_2026-10-19.md",
     "JCEE_Labs_Public_Registry_v1.3.md",
     "JCEE_Labs_Public_Registry_v1.4.md",
+    "JCEE_WorldLab_Public_Registry_v1.5.md",
+    "publications/recovery-with-current-permission.md",
+    "publications/receipts-that-can-be-checked.md",
+    "publications/what-native-comparisons-teach-us.md",
+    "publications/ibm-measurements-and-models.md",
     "publications/after-an-ai-says-done.txt",
     "publications/a-research-result-needs-a-boundary.md",
     "publications/a-research-result-needs-a-boundary.txt",

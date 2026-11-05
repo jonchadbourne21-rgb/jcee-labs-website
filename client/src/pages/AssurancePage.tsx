@@ -369,27 +369,25 @@ export default function AssurancePage() {
       </section>
 
       <section className="program-statement" aria-labelledby="assurance-integration-update">
-        <p className="charter-section-label">CONNECTED SOFTWARE EVIDENCE · OCTOBER 19, 2026</p>
+        <p className="charter-section-label">CONNECTED SOFTWARE EVIDENCE · THROUGH NOVEMBER 4, 2026</p>
         <h2 id="assurance-integration-update">Keep a confirmed effect distinct from an unresolved outcome.</h2>
         <div className="program-statement-copy">
           <p>
-            The October 19 infrastructure candidate was merged into working
-            integration with its qualified tree preserved. In a controlled
-            PostgreSQL test ledger using fictional data, the tested authorized
-            controls completed while uncertain cases remained held. The record
-            distinguishes confirmed effects from unresolved outcomes; a
-            recorded request or missing reply does not establish an effect.
+            Native recovery and installed client qualification have advanced
+            beyond the October baseline. Hosted work now includes real
+            authentication, restart persistence and inspectable evidence.
+            Completed actions remain preserved in their original records.
           </p>
           <p>
-            Restoration coverage assumes the separately protected checkpoint
-            survives the declared restore event. The result remains bounded
-            software qualification; physical commitment, production readiness,
-            and external human review remain open.
+            These are bounded software results under declared trust assumptions.
+            Full G0 is not admitted and has not run; its 20-case candidate is
+            frozen for independent review. Physical commitment and production
+            readiness remain open, and release remains on hold.
           </p>
         </div>
         <div className="program-links">
           <a href="/technology#current-integration">READ THE INTEGRATION UPDATE <span>→</span></a>
-          <a href="/registry#infra-integrated-software">INSPECT THE RECORDED BOUNDARY <span>→</span></a>
+          <a href="/registry#portable-evidence-november">INSPECT THE RECORDED BOUNDARY <span>→</span></a>
         </div>
       </section>
 

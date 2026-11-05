@@ -97,26 +97,25 @@ export default function VowPage() {
       </section>
 
       <section className="program-statement" aria-labelledby="vow-integration-update">
-        <p className="charter-section-label">SOFTWARE INTEGRATION · OCTOBER 19, 2026</p>
+        <p className="charter-section-label">SOFTWARE INTEGRATION · THROUGH NOVEMBER 4, 2026</p>
         <h2 id="vow-integration-update">A connected recovery path, with a defined test boundary.</h2>
         <div className="program-statement-copy">
           <p>
-            The October 19 infrastructure candidate was merged into a working
-            integration branch with the qualified tree preserved. Its controlled
-            PostgreSQL test ledger uses fictional data. The tested authorized
-            controls completed, while uncertain outcomes remained held and
-            distinct from confirmed effects.
+            Native recovery and installed client qualification have advanced
+            beyond the October baseline. Hosted work now includes real
+            authentication, restart persistence and inspectable evidence.
+            Completed actions remain preserved in their original records.
           </p>
           <p>
-            Protected-restoration coverage depends on a separately protected
-            checkpoint surviving the declared restore event. This is bounded
-            software evidence. Physical commitment, production qualification,
-            and external human review remain open.
+            These are bounded software results under declared trust assumptions.
+            Full G0 is not admitted and has not run; its 20-case candidate is
+            frozen for independent review. Physical commitment and production
+            readiness remain open, and release remains on hold.
           </p>
         </div>
         <div className="program-links">
           <a href="/technology#current-integration">READ THE INTEGRATION UPDATE <span>→</span></a>
-          <a href="/registry#infra-integrated-software">INSPECT THE RECORDED BOUNDARY <span>→</span></a>
+          <a href="/registry#portable-evidence-november">INSPECT THE RECORDED BOUNDARY <span>→</span></a>
         </div>
       </section>
 

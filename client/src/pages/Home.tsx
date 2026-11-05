@@ -286,12 +286,12 @@ export default function Home() {
             <span>RECORDED SOFTWARE BEHAVIOR</span>
             <h3>Recovery after a lost response.</h3>
             <p>
-              Read the October 19 qualification: an existing effect was
-              reconciled in the declared test setting.
+              Follow the November update: native recovery tests, installed
+              interfaces and hosted evidence, with the full integration gate open.
             </p>
             <a
               className="customer-link"
-              href="/registry#infra-integrated-software"
+              href="/registry#native-recovery-november"
             >
               Result and limits ↗
             </a>

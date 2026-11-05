@@ -1,3 +1,4 @@
+import { november2026Registry } from "./november2026Registry";
 import { october2026Registry } from "./october2026Registry";
 
 export type RegistryEntry = {
@@ -16,6 +17,7 @@ export type RegistryEntry = {
 };
 
 export const entries: RegistryEntry[] = [
+  ...november2026Registry,
   ...october2026Registry,
   {
     id: "distribution",

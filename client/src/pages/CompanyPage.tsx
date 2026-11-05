@@ -40,7 +40,7 @@ export default function CompanyPage() {
         </p>
       </section>
       <section className="editorial-section editorial-section-muted">
-        <p className="editorial-kicker">CURRENT ENGINEERING FOCUS / OCTOBER 19, 2026</p>
+        <p className="editorial-kicker">CURRENT ENGINEERING FOCUS / THROUGH NOVEMBER 4, 2026</p>
         <h2>Follow the evidence through the connected systems.</h2>
         <p className="editorial-intro">
           We have built substantial parts of the assurance architecture. Our
@@ -49,10 +49,10 @@ export default function CompanyPage() {
           recovery, and the resulting record.
         </p>
         <p>
-          A reconciled software candidate is now in working integration after
-          bounded shared-source revocation and protected-restoration tests.
-          Production admission and physical commitment still require their own
-          evidence. The long-term direction remains a reusable assurance core,
+          Native recovery, installed interfaces and hosted evidence now have
+          additional component results. The composite candidate is frozen for
+          independent review; full G0 remains unrun. Production admission and
+          physical commitment still require their own evidence. The long-term direction remains a reusable assurance core,
           repeatable qualification, and business claims bounded by results.
         </p>
         <a className="editorial-text-link" href="/technology#current-integration">Current result and open gates →</a>

@@ -66,19 +66,22 @@ export default function PublicRegistry() {
             source-control change cannot be mistaken for a released product.
           </p>
           <p>
-            The October 19, 2026 update adds the integrated software result,
-            protected restoration, current-use evidence work, qualification
-            repairs, and selected measurement-software records. Earlier entries
-            retain their own review dates and evidence boundaries, including
-            the September 29 Distribution, MISE, AP Gate, and JEV review. This
-            is a selected public record, not a new execution of every program.
+            This update covers work through November 4, 2026: native recovery,
+            installed interfaces, hosted evidence, formal research, quantum
+            observations, simulations and planned physical programs. Earlier
+            entries retain their dates and limits. Full G0 remains unrun and
+            release remains on hold. Public summaries exclude private methods,
+            unpublished derivations and confidential third-party material.
           </p>
           <div className="program-links">
             <a href="/technology#current-integration">
-              OCTOBER 19 INTEGRATED SOFTWARE RESULT <span>→</span>
+              CURRENT SOFTWARE RESULTS AND OPEN GATES <span>→</span>
+            </a>
+            <a href="/JCEE_WorldLab_Public_Registry_v1.5.md" download>
+              DOWNLOAD CURRENT REGISTRY · VERSION 1.5 <span>↓</span>
             </a>
             <a href="/JCEE_Labs_Public_Registry_v1.4.md" download>
-              DOWNLOAD CURRENT REGISTRY · VERSION 1.4 <span>↓</span>
+              ARCHIVE · REGISTRY VERSION 1.4 <span>↓</span>
             </a>
             <a href="/JCEE_Labs_Public_Registry_v1.3.md" download>
               ARCHIVE · REGISTRY VERSION 1.3 <span>↓</span>
@@ -121,7 +124,7 @@ export default function PublicRegistry() {
       >
         <div className="section-index">
           <span>SELECTED PUBLIC RECORDS</span>
-          <span>SELECTED ENTRIES ADDED · OCTOBER 19, 2026</span>
+          <span>EVIDENCE REVIEWED THROUGH NOVEMBER 4, 2026</span>
         </div>
         <h2 id="registry-records-title">Current public entries.</h2>
         <nav className="registry-jump-links" aria-label="Build categories">
