@@ -28,7 +28,7 @@ Canonical reconciliation: separately read GitHub registry-control/state.json and
 
 After the long-title, research quotation and Registry refinements, 24 additional route/viewport checks on 12 affected pages passed with no layout, image, runtime, font or fragment issues. The full earlier crawl and the targeted final check are separate observations, not one enlarged route count.
 
-Preview custody: Library libfile_faa653202e108191b0ba661c1d035d45; Drive 1HOKS4pe0BlhKeRmHIA6InzTynO0PTbPV in the private website-redesign folder.
+Preview custody is recorded in the private project record.
 
 Draft PR65 only. No merge, production publish, DNS change or credential change.
 
