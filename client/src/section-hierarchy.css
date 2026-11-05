@@ -14,7 +14,7 @@
   .editorial-section-dark, .publication-toc, .research-topic-nav),
 #root .program-page :is(.partner-engagement-model, .registry-classifications,
   .program-next, .program-statement-dark),
-#root .paper-sidebar,
+#root .paper-page .paper-sidebar.paper-sidebar,
 #root .charter-page .charter-toc,
 #root .preview-consultation-page :is(.preview-consult-form, .preview-draft-review),
 #root .jcee-editorial .cta,
