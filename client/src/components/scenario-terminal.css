@@ -20,3 +20,5 @@
 #root .scenario-controls button:disabled { background:#293532; color:#bcc5c1; border-color:#61706c; cursor:default; }
 #root .scenario-experience button:focus-visible { outline:3px solid #d2b893; outline-offset:4px; }
 @media(max-width:700px) { .scenario-grid { grid-template-columns:1fr; } .scenario-console { padding:18px; } }
+
+#root#root .scenario-console p { font-family:var(--worldlab-font) !important; }
