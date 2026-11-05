@@ -1,16 +1,25 @@
-# JCEE Labs Website
+# JCEE WorldLab Website
 
-React/Vite website for JCEE Labs, with a separately built application server.
+This repository is the authoritative application source for the JCEE WorldLab
+public website. Preserve reviewed commits and publish an explicitly approved
+full commit SHA through the existing Manus project.
+
+The primary publication route is this repository → Manus → jceelabs.com.
+See [Publication route](docs/PUBLICATION_ROUTE.md) for observed source identity,
+backup roles, verification boundaries and changes that require approval.
 
 Install with the pinned pnpm version and `pnpm install --frozen-lockfile`.
-Run `pnpm release:check` before publishing.
+Run `pnpm release:check` and the existing source/output verification gates.
+Use [the Manus build handoff](docs/MANUS_BUILD_HANDOFF.md) for the pinned runtime,
+authentic release-source bundle and `dist/public` output.
 
-GitHub Pages publishes the public static site from `main` using
-`.github/workflows/pages-fallback.yml`. It reads the custom-domain setting,
-validates root and project layouts, and builds with `scripts/build-pages.mjs`.
-Pages does not run the application's server, database, or administrative APIs.
+GitHub Pages is a static backup. Its workflow currently deploys on pushes to
+main and reads Settings > Pages; a successful run does not establish which host
+serves the primary domain. Pages does not run the application server, database
+or administrative APIs. Its existing apex-domain configuration needs separate
+review before this intended backup role is fully reflected in provider settings.
 
-See [the domain recovery record](docs/pages-domain-recovery.md) for the verified
-deployment and remaining DNS cutover, and [the release checklist](RELEASE_CHECKLIST.md)
-for required checks. A merge or successful Pages deployment alone does not
-prove that `jceelabs.com` serves the new source.
+Merging even a documentation-only change triggers the current Pages workflow.
+Review Manus synchronization behavior before merging. A source merge is not a
+publication receipt. Preserve the existing release gates in
+[the release checklist](RELEASE_CHECKLIST.md).
