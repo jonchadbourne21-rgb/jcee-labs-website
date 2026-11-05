@@ -78,7 +78,7 @@ export const november2026Updates: Publication[] = [
   },
   {
     slug: "ibm-measurements-and-models",
-    title: "IBM Measurements, Prediction Models and the Next Question",
+    title: "IBM Results, Models and Next Tests",
     kind: "Research brief", date: "2026-11-05", author: "JCEE WorldLab",
     summary: "A November update separating recorded quantum hardware observations, retrospective model analysis, mathematical results and a simulated follow-up.",
     sections: [

@@ -1,4 +1,4 @@
-# IBM Measurements, Prediction Models and the Next Question
+# IBM Results, Models and Next Tests
 
 Research brief · JCEE WorldLab · 2026-11-05 · Version 1.0
 
