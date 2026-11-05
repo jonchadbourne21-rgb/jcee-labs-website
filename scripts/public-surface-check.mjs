@@ -261,12 +261,12 @@ try {
     failures.push("new article canonical or Open Graph URL is incorrect");
   }
   const registryDownload = await fetch(
-    `${baseUrl}/JCEE_Labs_Public_Registry_v1.4.md`
+    `${baseUrl}/JCEE_WorldLab_Public_Registry_v1.5.md`
   );
   if (
     !registryDownload.ok ||
     !(await registryDownload.text()).startsWith(
-      "# JCEE Labs Public Registry — Version 1.4"
+      "# JCEE WorldLab Public Registry — Version 1.5"
     )
   ) {
     failures.push("current registry Markdown download is missing");
@@ -580,6 +580,11 @@ try {
     "JCEE_INFRA_Software_Qualification_2026-10-19.md",
     "JCEE_Labs_Public_Registry_v1.3.md",
     "JCEE_Labs_Public_Registry_v1.4.md",
+    "JCEE_WorldLab_Public_Registry_v1.5.md",
+    "publications/recovery-with-current-permission.md",
+    "publications/receipts-that-can-be-checked.md",
+    "publications/what-native-comparisons-teach-us.md",
+    "publications/ibm-measurements-and-models.md",
     "publications/after-an-ai-says-done.txt",
     "publications/a-research-result-needs-a-boundary.md",
     "publications/a-research-result-needs-a-boundary.txt",
@@ -617,7 +622,7 @@ try {
     `({ count:document.querySelectorAll('.resource-card').length, text:[...document.querySelectorAll('.resource-card')].map(card => card.textContent).join(' ') })`
   );
   if (
-    filtered.count !== 7 ||
+    filtered.count !== 10 ||
     !filtered.text.includes("order-integrity") ||
     !filtered.text.includes("What Is an Evidence Boundary") ||
     !filtered.text.includes("What Happens After an AI Says") ||
@@ -626,13 +631,16 @@ try {
     !filtered.text.includes(
       "Restoring a Backup Without Restoring Permission"
     ) ||
-    !filtered.text.includes("Testing the Evidence Pipeline")
+    !filtered.text.includes("Testing the Evidence Pipeline") ||
+    !filtered.text.includes("Recovering Work Without Losing the Permission Boundary") ||
+    !filtered.text.includes("Receipts That Can Be Checked") ||
+    !filtered.text.includes("What Native Comparisons Teach Us")
   )
     failures.push("Resource filter did not show the engineering articles");
 
   for (const [label, count] of [
     ["From the Founder", 1],
-    ["Research", 4],
+    ["Research", 5],
   ]) {
     await evaluate(
       page.send,
@@ -651,6 +659,8 @@ try {
       !cards.text.includes("Perfect Recovery and One-Message Bounds")
     )
       failures.push("Research filter is missing the BB84 paper");
+    if (label === "Research" && !cards.text.includes("IBM Results, Models and Next Tests"))
+      failures.push("Research filter is missing the November hardware/model update");
   }
   await navigate(page.send, baseUrl, "/terms");
   const termsText = await readBody(page.send);

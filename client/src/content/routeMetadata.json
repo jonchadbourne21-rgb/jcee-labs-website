@@ -19,7 +19,7 @@
   },
   "/technology": {
     "title": "Technology — JCEE WorldLab",
-    "description": "Review JCEE-INFRA's October 19 integrated software qualification, current authority, protected recovery, retained evidence, and open physical commitment gate."
+    "description": "Review JCEE WorldLab's native recovery, installed interfaces, hosted evidence and formal research, with the full integration and physical qualification gates still open."
   },
   "/research": {
     "title": "Research — JCEE WorldLab",
@@ -39,7 +39,7 @@
   },
   "/registry": {
     "title": "JCEE WorldLab Public Registry: Build & Research Evidence",
-    "description": "Review the October 19 software update: integrated software qualification, protected recovery, numerical assurance, preserved milestones, and open gates."
+    "description": "Review results through November 4, 2026: native recovery, installed interfaces, hosted evidence, quantum observations, models and remaining open gates."
   },
   "/assurance": {
     "title": "AI Assurance Method: Permission & Evidence | JCEE WorldLab",
@@ -67,11 +67,11 @@
   },
   "/research/measurement": {
     "title": "Measurement & Numerical Assurance Research | JCEE WorldLab",
-    "description": "Review JCEE WorldLab numerical assurance, wave-model reproduction, and recovered analysis software. See the tested conditions, recorded results, and limits."
+    "description": "Explore quantum hardware observations, mathematical and numerical research, model audits and simulations, with dated results and explicit limits."
   },
   "/research/physical-experiments": {
     "title": "Physical Experiments: Plans & Evidence Gates | JCEE WorldLab",
-    "description": "Explore JCEE WorldLab proposed physical experiments, their frozen controls, planned observations, and open gates. Physical results remain to be established."
+    "description": "Separate recorded qubit hardware observations from ARTLE, physical commitment and living-material proposals whose physical qualification remains open."
   },
   "/research/evidence-standards": {
     "title": "Research Evidence Standards & Claim Limits | JCEE WorldLab",
@@ -88,6 +88,30 @@
   "/capabilities/technology-validation": {
     "title": "Technology Validation & Research Engineering | JCEE WorldLab",
     "description": "Scientific assessment, experimental verification, and R&D engineering support for inventors, laboratories, and organizations developing emerging technologies."
+  },
+  "/blog/recovery-with-current-permission": {
+    "title": "Recovering Work Without Losing the Permission Boundary — JCEE WorldLab",
+    "description": "Our November engineering update adds native interruption tests, installed client qualification and hosted evidence while keeping the full integration gate open.",
+    "type": "article",
+    "publishedTime": "2026-11-05T00:00:00Z"
+  },
+  "/blog/receipts-that-can-be-checked": {
+    "title": "Receipts That Can Be Checked — JCEE WorldLab",
+    "description": "Evidence export and reconstruction have advanced. A readable receipt still needs a supported conclusion and a clear trust boundary.",
+    "type": "article",
+    "publishedTime": "2026-11-05T00:00:00Z"
+  },
+  "/blog/what-native-comparisons-teach-us": {
+    "title": "What Native Comparisons Teach Us — JCEE WorldLab",
+    "description": "A competent conventional baseline can match the result. Our research record preserves those ties and tests narrower questions about useful integration.",
+    "type": "article",
+    "publishedTime": "2026-11-05T00:00:00Z"
+  },
+  "/research/ibm-measurements-and-models": {
+    "title": "IBM Results, Models and Next Tests — JCEE WorldLab",
+    "description": "A November update separating recorded quantum hardware observations, retrospective model analysis, mathematical results and a simulated follow-up.",
+    "type": "article",
+    "publishedTime": "2026-11-05T00:00:00Z"
   },
   "/blog/when-tested-components-work-together": {
     "title": "When Tested Components Work Together — JCEE WorldLab",

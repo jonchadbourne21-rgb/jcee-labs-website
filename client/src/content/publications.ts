@@ -1,3 +1,4 @@
+import { november2026Updates } from "./november2026Updates";
 import { october2026Updates } from "./october2026Updates";
 
 export type Publication = {
@@ -17,6 +18,7 @@ export type Publication = {
 };
 
 export const publications: Publication[] = [
+  ...november2026Updates,
   ...october2026Updates,
   {
     slug: "when-a-timeout-is-not-a-failure",

@@ -27,8 +27,8 @@ for (const item of publications) {
   fs.writeFileSync(`client/public/publications/${item.slug}.txt`, text);
 }
 fs.writeFileSync(
-  "client/public/JCEE_Labs_Public_Registry_v1.4.md",
-  "# JCEE Labs Public Registry — Version 1.4\n\nUpdated October 19, 2026 with the integrated software qualification, protected restoration, evidence-eligibility candidates, qualification-tooling repairs, and selected numerical and measurement-software records. Earlier entries retain their own review dates and limitations, including the September 29 Distribution, MISE, AP Gate, and JEV review. This is a sanitized first-party record, not a new execution of every program or independent certification. Private source and complete receipts are available only for scoped review. Version 1.3 remains a historical archive.\n\n" +
+  "client/public/JCEE_WorldLab_Public_Registry_v1.5.md",
+  "# JCEE WorldLab Public Registry — Version 1.5\n\nPrepared November 5, 2026. Evidence reviewed through November 4, 2026 (America/Chicago). This successor adds selected software, quantum, modeling and program updates. Dates below identify each result or review; preparation of this file is not proof of live website publication. Earlier entries remain dated historical records. Versions 1.0–1.4 are preserved unchanged.\n\nThis is a selected first-party public record, not a new execution of every program, independent certification or a production release. Public summaries describe capabilities, recorded observations, scope and limitations. Private implementation, unpublished derivations, exact experimental protocols and third-party confidential material are excluded. Detailed disclosure requires a separate appropriate agreement.\n\nFull G0 is not admitted and has not run. Independent review and final runtime bindings remain required. P3 remains partial, physical A4 remains open, and production release remains on hold.\n\n" +
     entries
       .map(
         e =>
@@ -68,7 +68,7 @@ const routeMetadata: Record<
   "/technology": {
     title: "Technology — JCEE WorldLab",
     description:
-      "Review JCEE-INFRA's October 19 integrated software qualification, current authority, protected recovery, retained evidence, and open physical commitment gate.",
+      "Review JCEE WorldLab's native recovery, installed interfaces, hosted evidence and formal research, with the full integration and physical qualification gates still open.",
   },
   "/research": {
     title: "Research — JCEE WorldLab",
@@ -93,7 +93,7 @@ const routeMetadata: Record<
   "/registry": {
     title: "Public Registry — JCEE WorldLab",
     description:
-      "Selected JCEE results updated October 19, 2026: integrated software, protected restoration, numerical assurance, preserved milestones, and open gates.",
+      "Selected results through November 4, 2026: software qualification, quantum observations, modeling, planned programs and explicit limits.",
   },
 };
 Object.assign(routeMetadata, pageSeo);

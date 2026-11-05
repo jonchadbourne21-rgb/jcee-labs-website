@@ -106,6 +106,10 @@ function Router() {
       <RouteScrollManager />
       <Switch>
         <Route path="/" component={Home} />
+        <Route path="/blog/recovery-with-current-permission" component={PublicationPage} />
+        <Route path="/blog/receipts-that-can-be-checked" component={PublicationPage} />
+        <Route path="/blog/what-native-comparisons-teach-us" component={PublicationPage} />
+        <Route path="/research/ibm-measurements-and-models" component={PublicationPage} />
         <Route path="/capabilities/infrastructure" component={InfrastructurePage} />
         <Route path="/capabilities/assurance">{() => <EditorialSite page="assurance" />}</Route>
         <Route path="/capabilities/technology-validation">{() => <EditorialSite page="technology-validation" />}</Route>

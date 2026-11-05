@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://jceelabs.com/</loc></url>
+  <url><loc>https://jceelabs.com/blog/recovery-with-current-permission</loc></url>
+  <url><loc>https://jceelabs.com/blog/receipts-that-can-be-checked</loc></url>
+  <url><loc>https://jceelabs.com/blog/what-native-comparisons-teach-us</loc></url>
+  <url><loc>https://jceelabs.com/research/ibm-measurements-and-models</loc></url>
   <url><loc>https://jceelabs.com/capabilities/infrastructure</loc></url>
   <url><loc>https://jceelabs.com/capabilities/assurance</loc></url>
   <url><loc>https://jceelabs.com/capabilities/technology-validation</loc></url>

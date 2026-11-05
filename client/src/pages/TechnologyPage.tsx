@@ -1,3 +1,4 @@
+import NovemberProgress from "@/components/NovemberProgress";
 import BuildStatusList from "@/components/BuildStatusList";
 import EditorialLayout from "@/components/EditorialLayout";
 export default function TechnologyPage() {
@@ -71,8 +72,8 @@ export default function TechnologyPage() {
           </article>
           <article className="resource-card">
             <p className="editorial-kicker">NOT OFFERED AS PUBLIC PRODUCT</p>
-            <h3>No generic SDK or blanket authority layer.</h3>
-            <p>A public package, universal API, production certification, or autonomous authority claim is not currently offered.</p>
+            <h3>Private interfaces; scoped integration.</h3>
+            <p>Private SDK, CLI and service distributions have bounded component results. Public package availability and production admission remain separate decisions.</p>
           </article>
         </div>
         <p className="editorial-intro">
@@ -81,15 +82,38 @@ export default function TechnologyPage() {
           adapter mechanics, or bypass analysis; those remain private.
         </p>
       </section>
+      <section className="editorial-section editorial-section-muted" id="current-integration" aria-labelledby="current-integration-title">
+        <p className="editorial-kicker">CURRENT ENGINEERING / THROUGH NOVEMBER 4, 2026</p>
+        <h2 id="current-integration-title">Installed interfaces. Hosted evidence. A defined next gate.</h2>
+        <p className="editorial-intro">
+          Native recovery and private client interfaces have advanced beyond the
+          October baseline. Hosted work adds real authentication, restart
+          persistence and evidence reconstruction. Each result belongs to its
+          tested configuration; full G0 has not been admitted or run.
+        </p>
+        <div className="resource-grid">
+          <article className="resource-card"><p className="editorial-kicker">RECOVERY</p><h3>Distinguish an effect from an unanswered request.</h3><p>Eight selected native database interruption scenarios extend the recovery record under declared service and credential assumptions.</p></article>
+          <article className="resource-card"><p className="editorial-kicker">INSTALLED INTERFACES</p><h3>Check the interfaces people use.</h3><p>110 installed-interface checks passed across private Python, TypeScript, CLI and service components. This is component qualification, not a public package launch.</p></article>
+          <article className="resource-card"><p className="editorial-kicker">REVIEWABLE EVIDENCE</p><h3>Examine the conclusion and its support.</h3><p>Hosted views, portable evidence and reconstruction have retained results. Nine selected bundles validated and 27 altered inputs were rejected.</p></article>
+        </div>
+        <p>The 20-case composite candidate is executable and frozen for review, not execution. Independent acceptance and final runtime bindings remain required. P3 remains partial; physical A4, trusted-credential compromise and production qualification remain open. Release remains on hold.</p>
+        <div className="editorial-actions">
+          <a className="editorial-text-link" href="/registry#installed-interfaces-november">Dated results and limits →</a>
+          <a className="editorial-text-link" href="/blog/recovery-with-current-permission">Recovery progress →</a>
+          <a className="editorial-text-link" href="/blog/receipts-that-can-be-checked">Evidence progress →</a>
+          <a className="editorial-text-link" href="#october-2026-integration">Preserved October baseline →</a>
+        </div>
+      </section>
+      <NovemberProgress id="formal-foundation" title="Formal obligations and fair comparisons." ids={["formal-foundation-november", "native-comparisons-november", "observer-november"]} />
       <section
         className="editorial-section editorial-section-muted"
-        id="current-integration"
-        aria-labelledby="current-integration-title"
+        id="october-2026-integration"
+        aria-labelledby="october-2026-integration-title"
       >
-        <p className="editorial-kicker">OCTOBER 19, 2026 / INTEGRATED SOFTWARE QUALIFICATION</p>
-        <h2 id="current-integration-title">One connected candidate, tested together.</h2>
+        <p className="editorial-kicker">HISTORICAL BASELINE / OCTOBER 19, 2026</p>
+        <h2 id="october-2026-integration-title">One connected candidate, tested together.</h2>
         <p className="editorial-intro">
-          JCEE-INFRA now has a reconciled software candidate in its working
+          The October 19 record established a reconciled software candidate in its working
           integration branch. Current-use evidence checks, coordinated
           revocation, target-owned action controls, recovery, and evidence
           reconstruction were evaluated together. The integrated source tree

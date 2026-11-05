@@ -23,8 +23,8 @@ export const researchTopics = [
     slug: "physical-experiments",
     title: "Physical experiments",
     description:
-      "Explore planned experiments and the observations still to earn.",
-    detail: "Proposed studies · controls · physical work pending",
+      "Separate recorded hardware observations from proposed physical experiments.",
+    detail: "Hardware observations · embodied worlds · proposed studies",
   },
   {
     slug: "fields",

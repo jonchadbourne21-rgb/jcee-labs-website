@@ -1,3 +1,4 @@
+import NovemberProgress from "@/components/NovemberProgress";
 import EditorialLayout from "@/components/EditorialLayout";
 import { researchTopics } from "@/content/researchTopics";
 import {
@@ -15,11 +16,21 @@ const content = {
   programs: (
     <>
       <ResearchPriority />
+      <NovemberProgress id="november-programs" title="What advanced across the portfolio." ids={[
+        "installed-interfaces-november", "portable-evidence-november", "formal-foundation-november",
+        "operational-self-use-november", "retrieval-lens-november", "native-comparisons-november",
+        "security-crypto-november", "closed-results-november", "memory-evidence-extensions-november",
+      ]} />
       <ResearchPrograms />
     </>
   ),
-  measurement: <MeasurementResearch />,
-  "physical-experiments": <PhysicalExperiments />,
+  measurement: <><NovemberProgress id="november-measurement" title="Measurements, models and their limits." ids={[
+    "bb84-math-november", "bb84-hardware-november", "quantum-followup-simulation",
+    "quantum-record-verification", "c1-numerical-november", "memory-material-models-november", "portfolio-simulation-november",
+  ]} /><MeasurementResearch /></>,
+  "physical-experiments": <><NovemberProgress id="november-physical" title="From observed qubits to proposed physical systems." ids={[
+    "bb84-hardware-november", "artle-november", "physical-materials-november",
+  ]} /><PhysicalExperiments /></>,
   "evidence-standards": <ResearchEvidence />,
 };
 export type ResearchTopicSlug = keyof typeof content;
