@@ -9,7 +9,7 @@
 #root .scenario-selectors button span { color:#faf9f6; font-size:14px; line-height:1.55; }
 #root .scenario-selectors button .scenario-number { color:#d2b893; font-size:11px; letter-spacing:.08em; }
 .scenario-console { min-width:0; padding:24px; background:#0d1514; border:1px solid #61706c; border-radius:8px; }
-#root .scenario-console :is(p,span,li) { font-family:ui-monospace,SFMono-Regular,Consolas,monospace !important; color:#faf9f6 !important; font-size:13px; line-height:1.65; }
+#root#root .scenario-console :is(p,span,li) { font-family:ui-monospace,SFMono-Regular,Consolas,monospace !important; color:#faf9f6 !important; font-size:13px; line-height:1.65; }
 .scenario-console-top { display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; border-bottom:1px solid #61706c; padding-bottom:14px; }
 #root .scenario-console .scenario-demo-label { color:#d2b893 !important; }
 .scenario-log { padding:0; list-style:none; min-height:250px; overflow-wrap:anywhere; }
