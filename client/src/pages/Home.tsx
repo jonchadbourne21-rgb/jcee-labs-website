@@ -2,11 +2,12 @@ import CoreHeader from "@/components/CoreHeader";
 import BrandFooter from "@/components/BrandFooter";
 import ScenarioTerminal from "@/components/ScenarioTerminal";
 import EvidenceTrace from "@/components/EvidenceTrace";
+import EvidenceCore from "@/components/EvidenceCore";
 import "./home-editorial-refresh.css";
 
 export default function Home() {
   return (
-    <main id="top" className="unified-home customer-home">
+    <main id="top" className="unified-home customer-home worldlab-home">
       <CoreHeader integrated contactLabel="Let’s talk" />
       <section
         id="page-content"
@@ -14,31 +15,31 @@ export default function Home() {
         className="customer-shell customer-hero"
         aria-labelledby="hero-title"
       >
-        <p className="customer-kicker">JCEE INFRASTRUCTURE</p>
+        <p className="customer-kicker wl-hero-kicker"><i aria-hidden="true" /> JCEE INFRASTRUCTURE / BUILT FOR CONSEQUENCE</p>
         <div className="customer-hero-grid">
-          <div>
+          <div className="wl-hero-copy">
             <h1 id="hero-title">
-              Put AI to work.
+              Intelligence
               <br />
-              Stay in control.
+              that leaves
+              <br />
+              <span className="wl-receipt-word">receipts<span className="wl-period">.</span></span>
             </h1>
             <p className="customer-deck">
-              Turn customer requests, approvals, and system changes into completed
-              work. We help you automate across your existing tools, verify the
-              result, and recover when a workflow is interrupted.
+              Assurance and execution infrastructure between machine
+              intelligence and real-world consequence. Connect the work to
+              current permission, a verifiable result, and a record you can trust.
             </p>
             <div className="customer-actions">
               <a className="customer-link" href="/capabilities/infrastructure">
-                Explore JCEE Infrastructure ↗
+                Explore the infrastructure ↗
               </a>
               <a className="customer-button" href="/consultation">
                 Discuss your workflow <span aria-hidden="true">↗</span>
               </a>
             </div>
           </div>
-          <figure className="customer-hero-sculpture">
-            <img src="/visuals/jcee-authority-hero-v3.webp" width="1344" height="752" fetchPriority="high" alt="Light passes through a glass core in a titanium frame and continues as an ordered trail." />
-          </figure>
+          <EvidenceCore />
           <nav className="hero-trust" aria-label="Explore the engineering foundation">
             <p>EXPLORE THE ENGINEERING</p>
             <div className="hero-trust-links">
@@ -48,7 +49,7 @@ export default function Home() {
             </div>
           </nav>
         </div>
-        <p className="hero-footer-signature">Intelligence That Leaves Receipts</p>
+        <div className="wl-hero-baseline"><span>FROM INTELLIGENCE TO CONSEQUENCE</span><a href="#scenario-heading">EXPLORE THE WORK <span aria-hidden="true">↓</span></a></div>
       </section>
 
       <ScenarioTerminal />
