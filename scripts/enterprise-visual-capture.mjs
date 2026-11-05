@@ -206,8 +206,9 @@ async function capture(send, baseUrl, spec) {
   if (value.rect.y > 110 || value.rect.y + value.rect.height < 180) {
     throw new Error(`${spec.name}: target did not scroll into the review viewport ${JSON.stringify(value.rect)}`);
   }
-  if (value.pageBackground !== 'rgb(250, 249, 246)') {
-    throw new Error(`${spec.name}: shared paper surface is not active: ${value.pageBackground}`);
+  const expectedBackground = spec.route === '/' ? 'rgb(8, 10, 9)' : 'rgb(250, 249, 246)';
+  if (value.pageBackground !== expectedBackground) {
+    throw new Error(`${spec.name}: expected ${expectedBackground}, received ${value.pageBackground}`);
   }
   if (spec.assetUrl && !value.imageSources.includes(new URL(spec.assetUrl, baseUrl).href)) {
     throw new Error(`${spec.name}: expected illustration is missing from the captured section`);
