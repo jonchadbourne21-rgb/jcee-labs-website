@@ -1,10 +1,10 @@
-/* One reference background: the founder-supplied footer screenshot (#EEEFEA).
-   Color groups content; headings remain black. Interactive state colors are separate. */
+/* One reference background: the founder-supplied Reproduction and Review screenshot (#212F2D).
+   Dark panels use light text; headings on light areas remain black. Interactive state colors are separate. */
 :root {
-  --worldlab-section-background: #eeefea;
+  --worldlab-section-background: #212f2d;
   --worldlab-section-ink: #171717;
-  --worldlab-section-line: #c9d0c8;
-  --worldlab-surface: var(--worldlab-section-background);
+  --worldlab-section-line: #61706c;
+  --worldlab-surface: #eeefea;
 }
 
 /* Public organizing panels share the exact same flat background. */
@@ -17,8 +17,7 @@
 #root .paper-page .paper-sidebar.paper-sidebar,
 #root .charter-page .charter-toc,
 #root .preview-consultation-page :is(.preview-consult-form, .preview-draft-review),
-#root .jcee-editorial .cta,
-#root .brand-footer {
+#root .jcee-editorial .cta {
   background: var(--worldlab-section-background) !important;
   border-color: var(--worldlab-section-line) !important;
 }
@@ -47,25 +46,15 @@
   color: var(--worldlab-section-ink) !important;
 }
 
-/* Former dark sections now use the same light panel and dark readable copy. */
-#root :is(.customer-home, .customer-service) .customer-close :is(p, small, a, span),
-#root .editorial-page .editorial-section-dark :is(p, li, a, span, strong),
-#root .program-page .program-statement-dark :is(p, li, a, span, strong),
-#root .editorial-page .editorial-section-dark :is(.research-question,
-  .research-question *, .research-identity-grid > div, .editorial-text-link) {
-  color: var(--worldlab-section-ink) !important;
+/* Match the reference panel: warm white reading text and restrained gold labels.
+   Keep model state colors and light form controls within their own surfaces. */
+#root#root :is(.customer-scenario, .customer-record, .customer-cards > article, .customer-offer, .customer-close, .editorial-section-muted, .editorial-section-dark, .publication-toc, .research-topic-nav, .partner-engagement-model, .registry-classifications, .program-next, .program-statement-dark, .paper-sidebar, .charter-toc, .preview-consult-form, .preview-draft-review, .jcee-editorial .cta) { color: #faf9f6 !important; }
+#root#root :is(.customer-scenario, .customer-record, .customer-cards > article, .customer-offer, .customer-close, .editorial-section-muted, .editorial-section-dark, .publication-toc, .research-topic-nav, .partner-engagement-model, .registry-classifications, .program-next, .program-statement-dark, .paper-sidebar, .charter-toc, .preview-consult-form, .preview-draft-review, .jcee-editorial .cta) :is(h1,h2,h3,h4,h5,p,a,span,small,strong,em,li,dt,dd,label,legend,summary,td,th):not(.qcs-gate *, .durability-console *, .evidence-trace *, svg *, pre *, code *, button *, select *, option) {
+  color: #faf9f6 !important;
   border-color: var(--worldlab-section-line) !important;
 }
-#root :is(.customer-home, .customer-service) .customer-close .customer-button,
-#root .editorial-page .editorial-section-dark .editorial-button {
-  background: var(--worldlab-section-ink) !important;
-  border-color: var(--worldlab-section-ink) !important;
-  color: #faf9f6 !important;
-}
-#root :is(.customer-home, .customer-service) .customer-close .customer-button span {
-  color: #faf9f6 !important;
-}
-#root :is(.customer-close, .editorial-section-dark, .program-statement-dark) :is(a, button):focus-visible {
-  outline: 3px solid var(--worldlab-section-ink);
-  outline-offset: 5px;
-}
+#root#root#root :is(.customer-scenario, .customer-record, .customer-cards > article, .customer-offer, .customer-close, .editorial-section-muted, .editorial-section-dark, .publication-toc, .research-topic-nav, .partner-engagement-model, .registry-classifications, .program-next, .program-statement-dark, .paper-sidebar, .charter-toc, .preview-consult-form, .preview-draft-review, .jcee-editorial .cta) :is(.customer-kicker,.editorial-kicker,.charter-section-label,.partner-kicker,.registry-kicker,.preview-kicker,.preview-section-label,.eyebrow,.customer-scenario-label) { color: #d2b893 !important; }
+#root#root :is(.customer-scenario, .customer-record, .customer-cards > article, .customer-offer, .customer-close, .editorial-section-muted, .editorial-section-dark, .publication-toc, .research-topic-nav, .partner-engagement-model, .registry-classifications, .program-next, .program-statement-dark, .paper-sidebar, .charter-toc, .preview-consult-form, .preview-draft-review, .jcee-editorial .cta) :is(.customer-button,.editorial-button,.btn-primary,.btn-secondary,button[type="submit"]) { background: #faf9f6 !important; color: #212f2d !important; border-color: #faf9f6 !important; }
+#root#root :is(.customer-scenario, .customer-record, .customer-cards > article, .customer-offer, .customer-close, .editorial-section-muted, .editorial-section-dark, .publication-toc, .research-topic-nav, .partner-engagement-model, .registry-classifications, .program-next, .program-statement-dark, .paper-sidebar, .charter-toc, .preview-consult-form, .preview-draft-review, .jcee-editorial .cta) :is(.customer-button,.editorial-button,.btn-primary,.btn-secondary,button[type="submit"]) * { color: #212f2d !important; }
+#root#root :is(.customer-scenario, .customer-record, .customer-cards > article, .customer-offer, .customer-close, .editorial-section-muted, .editorial-section-dark, .publication-toc, .research-topic-nav, .partner-engagement-model, .registry-classifications, .program-next, .program-statement-dark, .paper-sidebar, .charter-toc, .preview-consult-form, .preview-draft-review, .jcee-editorial .cta) :is(input,textarea,select) { background: #faf9f6 !important; color: #212f2d !important; }
+#root#root :is(.customer-scenario, .customer-record, .customer-cards > article, .customer-offer, .customer-close, .editorial-section-muted, .editorial-section-dark, .publication-toc, .research-topic-nav, .partner-engagement-model, .registry-classifications, .program-next, .program-statement-dark, .paper-sidebar, .charter-toc, .preview-consult-form, .preview-draft-review, .jcee-editorial .cta) :is(a,button,input,textarea,select):focus-visible { outline: 3px solid #d2b893; outline-offset: 4px; }
