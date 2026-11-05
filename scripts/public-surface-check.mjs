@@ -312,7 +312,7 @@ try {
     story: !!document.querySelector('#story'),
     inquiry: !!document.querySelector('a.customer-button[href="${prefix}/consultation"]')
   })`);
-  if (!commercial.title?.includes("Put AI to work.") || commercial.distributionLink || !commercial.story || !commercial.inquiry)
+  if (!/Intelligence\s*that leaves\s*receipts\./.test(commercial.title ?? "") || commercial.distributionLink || !commercial.story || !commercial.inquiry)
     failures.push("Customer-led homepage contract failed: " + JSON.stringify(commercial));
   await evaluate(page.send, "document.querySelector('#working-example').open = true");
   // The homepage illustration is browser-local and must show all four bounded outcomes.

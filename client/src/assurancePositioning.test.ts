@@ -20,8 +20,10 @@ const plain = (source: string) => source.replace(/\s+/g, " ");
 
 describe("buyer-readable public positioning with Assurance Playbook control", () => {
   it("leads with the customer workflow and a concrete inquiry", () => {
-    expect(plain(home)).toContain("Put AI to work.");
-    expect(plain(home)).toContain("Stay in control.");
+    expect(plain(home)).toContain("Intelligence");
+    expect(plain(home)).toContain("that leaves");
+    expect(home).toContain("wl-receipt-word");
+    expect(home).toContain("<EvidenceCore />");
     expect(home).toContain('href="/consultation"');
     expect(home).toContain('href="/capabilities/infrastructure#deliverables"');
     expect(home).not.toContain("JCEE Distribution");

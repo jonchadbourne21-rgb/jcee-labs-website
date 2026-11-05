@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+/* The approved 3D homepage is scoped; every other route keeps its existing theme.
+   Specificity matches the retained global surface rules, including !important. */
+#root#root#root .worldlab-home { --wl-bg:#080a09; --wl-ink:#f0f1ec; --wl-muted:#9ba59d; --wl-green:#b5f896; --wl-line:#28302a; --worldlab-font:'DM Sans',Arial,sans-serif; --wl-display:'Space Grotesk',Arial,sans-serif; --customer-ink:var(--wl-ink); --customer-muted:var(--wl-muted); --customer-line:var(--wl-line); color-scheme:dark; background:var(--wl-bg)!important; color:var(--wl-ink); font-family:var(--worldlab-font); }
+#root#root#root .worldlab-home :is(p,li,label,button,input,textarea,select,em,strong) { font-family:var(--worldlab-font)!important; }
+#root#root#root .worldlab-home :is(h1,h2,h3,h4,h5,h6), #root#root#root .worldlab-home :is(h1,h2,h3) :is(span,em,strong) { font-family:var(--wl-display)!important; font-weight:500!important; color:var(--wl-ink)!important; letter-spacing:-.045em!important; text-shadow:none!important; }
+#root#root#root .worldlab-home :is(p,small,li,dt,dd) { color:var(--wl-muted)!important; }
+#root#root#root .worldlab-home a { color:var(--wl-ink); }
+#root#root#root .worldlab-home a:hover { color:var(--wl-green)!important; }
+#root#root#root .worldlab-home :is(a,button,canvas,summary):focus-visible { outline:2px solid var(--wl-green)!important; outline-offset:5px; }
+#root#root#root .worldlab-home .customer-shell { max-width:1440px; padding-inline:56px; }
+#root#root#root .worldlab-home .site-header { background:#080a09f5!important; color:var(--wl-ink); border-color:var(--wl-line)!important; box-shadow:none; backdrop-filter:blur(16px); }
+#root#root#root .worldlab-home .site-header :is(a,button,summary,span) { color:var(--wl-ink)!important; }
+#root#root#root .worldlab-home .site-header .wordmark { font-family:var(--worldlab-font)!important; font-size:23px; letter-spacing:-1px; }
+#root#root#root .worldlab-home .wordmark-mark { display:none; }
+#root#root#root .worldlab-home .wordmark::before { content:'✳'; color:var(--wl-green); font-size:36px; font-weight:400; margin-right:8px; }
+#root#root#root .worldlab-home .site-header .desktop-nav { gap:20px; }
+#root#root#root .worldlab-home .site-header .desktop-nav a { font-size:12px; }
+#root#root#root .worldlab-home .site-header :is(.header-contact) { background:transparent!important; border:1px solid #465044!important; }
+#root#root#root .worldlab-home :is(.header-company-links,.mobile-nav) { background:#101610!important; border-color:var(--wl-line)!important; }
+#root#root#root .worldlab-home > .customer-hero { max-width:1440px; min-height:0; padding-top:62px; padding-bottom:0; overflow:visible; background:var(--wl-bg); }
+#root#root#root .worldlab-home > .customer-hero::before { display:none; }
+#root#root#root .worldlab-home .wl-hero-kicker { display:flex; align-items:center; gap:10px; margin-bottom:27px; font-size:9px!important; letter-spacing:1.5px; color:var(--wl-muted)!important; }
+#root#root#root .worldlab-home .wl-hero-kicker i { width:5px;height:5px;flex-shrink:0;border-radius:50%;background:var(--wl-green); }
+#root#root#root .worldlab-home .customer-hero-grid { display:grid; grid-template-columns:1.06fr 1fr; column-gap:0; row-gap:0; align-items:start; }
+#root#root#root .worldlab-home .customer-hero-grid > .wl-hero-copy { padding-top:0; max-width:none; position:relative; z-index:2; }
+#root#root#root .worldlab-home .customer-hero h1 { font-size:clamp(66px,6.65vw,102px); line-height:1.035; margin:0; max-width:none; text-wrap:initial; letter-spacing:-.058em!important; }
+#root#root#root .worldlab-home .customer-hero h1 .wl-receipt-word { color:#a2aba4!important; text-shadow:0 3px #303a33,0 6px 9px #000!important; letter-spacing:inherit!important; }
+#root#root#root .worldlab-home .customer-hero h1 .wl-period { color:var(--wl-green)!important; text-shadow:none!important; }
+#root#root#root .worldlab-home .customer-hero .customer-deck { font-size:15px; line-height:1.85; max-width:44ch; margin:28px 0; }
+#root#root#root .worldlab-home .customer-actions { display:flex; align-items:center; flex-wrap:wrap; gap:23px; margin-top:26px; }
+#root#root#root .worldlab-home .customer-button { background:var(--wl-green)!important; border:1px solid var(--wl-green)!important; color:#182311!important; padding:16px 20px; font-size:12px; border-radius:3px; box-shadow:none; text-decoration:none; min-height:50px; }
+#root#root#root .worldlab-home .customer-button span { color:inherit!important; }
+#root#root#root .worldlab-home .customer-button:hover { background:#ccffb7!important; color:#182311!important; text-decoration:none; }
+#root#root#root .worldlab-home .customer-link { color:var(--wl-ink)!important; font-size:12px; }
+#root#root#root .worldlab-home .customer-hero .customer-button { order:-1; }
+#root#root#root .worldlab-home .hero-trust { grid-column:1/-1; max-width:none; width:100%; padding:24px 0; margin-top:12px; border-color:var(--wl-line); display:flex; align-items:center; justify-content:space-between; gap:25px; }
+#root#root#root .worldlab-home .hero-trust > p { margin:0; font-size:8px; letter-spacing:1.4px; color:var(--wl-muted)!important; }
+#root#root#root .worldlab-home .hero-trust-links { gap:38px; }
+#root#root#root .worldlab-home .hero-trust-links strong { font-size:13px; font-weight:500; color:var(--wl-ink)!important; }
+#root#root#root .worldlab-home .hero-trust-links small { color:var(--wl-muted)!important; font-size:10px; }
+#root#root#root .worldlab-home .trust-symbol { color:var(--wl-green)!important; }
+#root#root#root .worldlab-home .wl-hero-baseline { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:18px 0 26px; border-top:1px solid var(--wl-line); font-size:8px; letter-spacing:1.3px; color:var(--wl-muted); }
+#root#root#root .worldlab-home .wl-hero-baseline a { display:flex; gap:25px; align-items:center; font-size:8px; }
+#root#root#root .worldlab-home .wl-hero-baseline a span { color:var(--wl-green); font-size:22px; }
+#root#root#root .worldlab-home .wl-sculpture { position:relative; inset:auto; height:530px; min-width:0; margin:-45px -12px 0 -28px; isolation:isolate; }
+#root#root#root .worldlab-home .wl-sculpture::after { display:none; }
+#root#root#root .worldlab-home .wl-scene-grid { position:absolute;inset:0; background-image:linear-gradient(#9cbca607 1px,transparent 1px),linear-gradient(90deg,#9cbca607 1px,transparent 1px);background-size:70px 70px;mask-image:radial-gradient(ellipse,#0007,transparent 66%);z-index:-1; }
+#root#root#root .worldlab-home .wl-scene-caption { position:absolute; left:12%;right:3%;top:20px;bottom:auto; max-width:none; display:flex; justify-content:space-between; font-family:var(--worldlab-font); font-size:8px;line-height:1.4;letter-spacing:1.5px;color:#909e90;text-shadow:none; }
+#root#root#root .worldlab-home .wl-scene-caption span { font-size:inherit; color:inherit; }
+#root#root#root .worldlab-home .wl-core { width:100%;height:100%;position:absolute;left:0;top:0;cursor:grab;touch-action:pan-y;display:block; }
+#root#root#root .worldlab-home .wl-core:active { cursor:grabbing; }
+#root#root#root .worldlab-home .wl-floating-label { position:absolute;font-size:8px;letter-spacing:1.3px;color:#a0a99f;display:flex;align-items:center;gap:10px;pointer-events:none; }
+#root#root#root .worldlab-home .wl-floating-label i { width:5px;height:5px;border:1px solid var(--wl-green);border-radius:50%;box-shadow:0 0 12px #b5f840; }
+#root#root#root .worldlab-home .wl-label-one { top:28%;right:1%; }
+#root#root#root .worldlab-home .wl-label-two { bottom:25%;left:8%; }
+#root#root#root .worldlab-home .wl-scene-bottom { position:absolute;bottom:16px;left:12%;right:3%;display:flex;align-items:center;justify-content:space-between;color:#91a08e;font-size:8px;letter-spacing:1.2px; }
+#root#root#root .worldlab-home .wl-scene-bottom div { display:flex;gap:7px; }
+#root#root#root .worldlab-home .wl-scene-bottom button { height:40px;width:40px;border-radius:50%;border:1px solid #465044;background:transparent;font-size:17px;color:#c4d0c0;cursor:pointer; }
+#root#root#root .worldlab-home .wl-scene-bottom button:hover { background:#20291e; }
+#root#root#root .worldlab-home .wl-fallback-art { position:absolute;inset:95px 20px;perspective:600px;pointer-events:none; }
+#root#root#root .worldlab-home .wl-fallback-art i { position:absolute;border:18px solid #89968b;border-radius:50%;inset:10%;box-shadow:inset 0 0 9px #fff,0 0 18px #000;transform:rotateY(55deg) rotateZ(-30deg); }
+#root#root#root .worldlab-home .wl-fallback-art i:nth-child(2) { transform:rotateY(-55deg) rotateZ(30deg); }
+#root#root#root .worldlab-home .wl-fallback-art i:nth-child(3) { transform:rotateX(60deg);border-color:var(--wl-green); }
+#root#root#root .worldlab-home .is-interactive .wl-fallback-art { display:none; }
+#root#root#root .worldlab-home .customer-section { padding-block:80px; border-color:var(--wl-line); }
+#root#root#root .worldlab-home h2 { font-size:clamp(32px,3.3vw,48px); line-height:1.17; margin-bottom:32px; }
+#root#root#root .worldlab-home h3 { font-size:24px;line-height:1.25; }
+#root#root#root .worldlab-home p { font-size:15px; line-height:1.85; }
+#root#root#root .worldlab-home .customer-deck { font-size:18px; }
+#root#root#root .worldlab-home :is(.customer-kicker,.customer-cards article>span,.customer-steps li>span) { color:var(--wl-green)!important; font-size:9px; letter-spacing:1.5px; }
+#root#root#root .worldlab-home :is(.customer-scenario,.customer-record,.customer-cards>article,.customer-offer) { background:#101610!important; border:1px solid var(--wl-line)!important; border-radius:6px; box-shadow:none; }
+#root#root#root .worldlab-home .customer-offer { padding:32px; }
+#root#root#root .worldlab-home :is(.customer-scenario,.customer-record,.customer-cards>article,.customer-offer) :is(p,small,li,dt,dd) { color:var(--wl-muted)!important; }
+#root#root#root .worldlab-home :is(.customer-record dl>div,.customer-record-heading,.customer-steps li,.customer-card-detail,.customer-scenario-result,.customer-demo) { border-color:var(--wl-line)!important; }
+#root#root#root .worldlab-home .customer-scenario-result { color:var(--wl-ink); }
+#root#root#root .worldlab-home .customer-close { background:var(--wl-bg)!important; border-color:var(--wl-line)!important; padding-block:95px; }
+#root#root#root .worldlab-home .customer-evidence-links a { color:#c4d0c0!important; }
+#root#root#root .worldlab-home .customer-demo { background:#101610; }
+#root#root#root .worldlab-home .evidence-trace { --pv-text:#f0f1ec; }
+#root#root#root .worldlab-home .scenario-grid { gap:48px; grid-template-columns:1fr 1.15fr; }
+#root#root#root .worldlab-home .scenario-selectors { gap:0; }
+#root#root#root .worldlab-home .scenario-selectors button { background:transparent; border:0; border-bottom:1px solid var(--wl-line); border-radius:0; padding:25px 20px; color:var(--wl-ink); }
+#root#root#root .worldlab-home .scenario-selectors button[aria-pressed="true"] { box-shadow:inset 2px 0 var(--wl-green); background:#101610; }
+#root#root#root .worldlab-home .scenario-selectors button strong { font-size:18px; font-weight:500; color:var(--wl-ink); }
+#root#root#root .worldlab-home .scenario-selectors button span { color:var(--wl-muted); font-size:12px; }
+#root#root#root .worldlab-home .scenario-selectors button .scenario-number { color:var(--wl-green); font-size:10px; }
+#root#root#root .worldlab-home .scenario-console { background:linear-gradient(130deg,#141914,#0b0f0c);border-color:#343e32; }
+#root#root#root .worldlab-home .scenario-console :is(p,span,li) { font-family:var(--worldlab-font)!important; color:#c5d0bf!important; font-size:12px; }
+#root#root#root .worldlab-home .scenario-console :is(.scenario-demo-label,.scenario-playback-status) { color:var(--wl-green)!important; }
+#root#root#root .worldlab-home .scenario-controls button { background:var(--wl-green);color:#182311;border-color:#485e3d;font-size:12px; }
+#root#root#root .worldlab-home .scenario-controls button:disabled { background:#20291e;color:#9ba59d;border-color:#343e32; }
+#root#root#root .worldlab-home :is(.scenario-console-top,.scenario-playback-status) { border-color:#343e32; }
+#root#root#root .worldlab-home .scenario-disclosure { font-size:12px; max-width:85ch; }
+#root#root#root .worldlab-home .brand-footer { background:var(--wl-bg)!important; border-color:var(--wl-line); }
+#root#root#root .worldlab-home .brand-footer .brand-footer-wordmark { font-family:var(--wl-display)!important;color:var(--wl-ink)!important;font-size:clamp(25px,3.2vw,46px);font-weight:400!important; }
+#root#root#root .worldlab-home .brand-footer :is(a,strong,p,small) { color:var(--wl-muted)!important; }
+#root#root#root .worldlab-home .brand-footer .brand-footer-links>div>span { color:var(--wl-green)!important; }
+@media(min-width:1550px) { #root#root#root .worldlab-home .wl-sculpture { height:600px; } }
+@media(max-width:1100px) and (min-width:701px) { #root#root#root .worldlab-home .customer-shell { padding-inline:32px; } #root#root#root .worldlab-home .customer-hero h1 { font-size:72px; } #root#root#root .worldlab-home .wl-sculpture { height:510px;margin-left:-60px; } #root#root#root .worldlab-home .customer-hero .customer-actions { gap:16px; } #root#root#root .worldlab-home .hero-trust-links { gap:20px; } }
+@media(max-width:900px) { #root#root#root .worldlab-home .customer-hero-grid { grid-template-columns:1fr; } #root#root#root .worldlab-home .wl-sculpture { height:510px; margin:20px 0 0; } #root#root#root .worldlab-home .customer-hero .customer-deck { max-width:50ch; } #root#root#root .worldlab-home .hero-trust { flex-wrap:wrap; } }
+@media(max-width:700px) {
+ #root#root#root .worldlab-home .customer-shell { padding-inline:22px; }
+ #root#root#root .worldlab-home > .customer-hero { padding-top:36px; }
+ #root#root#root .worldlab-home .wl-hero-kicker { font-size:7px!important; letter-spacing:1.1px; margin-bottom:25px; gap:7px; }
+ #root#root#root .worldlab-home .customer-hero h1 { font-size:clamp(54px,14vw,84px);letter-spacing:-.058em!important;line-height:1.045; }
+ #root#root#root .worldlab-home .customer-hero .customer-deck { font-size:13px; line-height:1.8; margin:24px 0; }
+ #root#root#root .worldlab-home .customer-hero .customer-actions { align-items:flex-start;flex-direction:column;gap:18px;margin-top:22px; }
+ #root#root#root .worldlab-home .customer-hero .customer-button { order:-1;min-height:48px;padding:14px 18px; }
+ #root#root#root .worldlab-home .customer-link { font-size:11px; }
+ #root#root#root .worldlab-home .wl-sculpture { height:420px; margin:20px -10px 0; }
+ #root#root#root .worldlab-home .wl-scene-caption { left:5%;right:5%;font-size:7px;top:16px; }
+ #root#root#root .worldlab-home .wl-scene-bottom { left:5%;right:5%;bottom:10px; }
+ #root#root#root .worldlab-home .wl-floating-label { font-size:7px; }
+ #root#root#root .worldlab-home .wl-label-one { right:4%;top:26%; } #root#root#root .worldlab-home .wl-label-two { left:3%;bottom:25%; }
+ #root#root#root .worldlab-home .hero-trust { margin:0; padding-block:24px; gap:15px; }
+ #root#root#root .worldlab-home .hero-trust-links { gap:18px 24px; }
+ #root#root#root .worldlab-home .hero-trust-links strong { font-size:12px; } #root#root#root .worldlab-home .hero-trust-links small { font-size:9px; }
+ #root#root#root .worldlab-home .wl-hero-baseline { font-size:6px;letter-spacing:.6px; } #root#root#root .worldlab-home .wl-hero-baseline a { font-size:6px;gap:10px; }
+ #root#root#root .worldlab-home .customer-section { padding-block:52px; } #root#root#root .worldlab-home h2 { font-size:32px; } #root#root#root .worldlab-home h3 { font-size:23px; }
+ #root#root#root .worldlab-home .scenario-grid { grid-template-columns:1fr;gap:25px; } #root#root#root .worldlab-home .scenario-selectors button { padding:21px 16px; }
+ #root#root#root .worldlab-home .customer-offer { padding:24px; } #root#root#root .worldlab-home .customer-close { padding-block:64px; }
+}
+@media(max-width:370px) { #root#root#root .worldlab-home .customer-shell { padding-inline:16px; } #root#root#root .worldlab-home .wl-hero-kicker {font-size:6px!important;letter-spacing:.9px;} #root#root#root .worldlab-home .wl-sculpture {height:360px;} #root#root#root .worldlab-home h2{font-size:29px;} }
+@media(prefers-reduced-motion:reduce) { #root#root#root .worldlab-home *,#root#root#root .worldlab-home *::before,#root#root#root .worldlab-home *::after { animation:none!important;transition:none!important;scroll-behavior:auto!important; } }
+/* Keep the header in normal flow so the hero starts below navigation. */
+#root#root#root .worldlab-home .site-header { margin-bottom:0!important; height:94px!important; min-height:94px!important; border-bottom:1px solid var(--wl-line)!important; padding-inline:max(56px,calc((100% - 1328px)/2))!important; }
+#root#root#root .worldlab-home .site-header .wordmark { font-size:23px!important;letter-spacing:-1px!important; }
+#root#root#root .worldlab-home .site-header .desktop-nav { gap:20px!important; }
+#root#root#root .worldlab-home .site-header :is(.desktop-nav a,.header-company-menu summary) { font:400 12px/1.4 var(--worldlab-font)!important; }
+#root#root#root .worldlab-home .site-header .header-contact { padding:11px 17px!important;font-size:12px!important; }
+#root#root#root .worldlab-home .header-company-links a:hover { background:#20291e!important; }
+#root#root#root .worldlab-home .hero-trust { display:flex; }
+@media(max-width:1100px) and (min-width:901px) {
+ #root#root#root .worldlab-home .site-header {padding-inline:32px!important;gap:16px;}
+ #root#root#root .worldlab-home .site-header .wordmark {font-size:20px!important;}
+ #root#root#root .worldlab-home .site-header .desktop-nav {gap:10px!important;}
+}
+@media(max-width:900px) {
+ #root#root#root .worldlab-home .site-header { height:80px!important;min-height:80px!important;padding-inline:22px!important; }
+ #root#root#root .worldlab-home .site-header .header-contact {display:none;}
+ #root#root#root .worldlab-home .site-header .wordmark {font-size:22px!important;}
+}
+/* Retained request-to-record controls must remain legible on the dark surface. */
+#root#root#root .worldlab-home :is(.et-scenario-picker button,.et-trace-steps button,.et-trace-steps strong,.et-reset-button) { color:var(--wl-ink)!important; }
+#root#root#root .worldlab-home :is(.et-trace-top,.et-trace-detail .et-eyebrow,.et-trace-index,.et-scenario-picker .et-mono,.et-stage-mark) { color:var(--wl-green)!important; }
+#root#root#root .worldlab-home :is(.et-scenario-picker,.et-trace-top,.et-trace-steps li) { border-color:var(--wl-line)!important; }
+#root#root#root .worldlab-home .et-trace-steps .et-is-active { border-color:var(--wl-green)!important; }
+#root#root#root .worldlab-home .et-scenario-picker button[aria-pressed="true"]::after { background:var(--wl-green); }
+#root#root#root .worldlab-home :is(.et-scenario-picker button,.et-trace-steps button):hover { background:#20291e!important; }
+#root#root#root .worldlab-home .et-trace-actions .et-button { background:var(--wl-green)!important; color:#182311!important; border-color:var(--wl-green)!important; }
+#root#root#root .worldlab-home .et-trace-actions .et-button span { color:inherit!important; }
+#root#root#root .worldlab-home .brand-footer-meta,
+#root#root#root .worldlab-home .brand-footer-meta span { color:var(--wl-muted)!important; }

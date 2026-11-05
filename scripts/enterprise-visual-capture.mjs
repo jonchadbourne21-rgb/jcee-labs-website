@@ -138,6 +138,7 @@ async function capture(send, baseUrl, spec) {
   // Browser layout and route hydration can settle after document.readyState is
   // complete. Wait for the *actual* target viewport position, not a fixed delay.
   // All later geometry, surface and asset assertions remain unchanged.
+  // The approved homepage header is taller; allow two pixels for scroll rounding.
   let positioned = false;
   for (let attempt = 0; attempt < 20; attempt += 1) {
     await send("Runtime.evaluate", {
@@ -159,11 +160,11 @@ async function capture(send, baseUrl, spec) {
         const el = document.querySelector(${selectorLiteral});
         if (!el) return null;
         const rect = el.getBoundingClientRect();
-        return {top: rect.top, bottom: rect.bottom};
+        return {top: rect.top, bottom: rect.bottom, headerHeight: document.querySelector('.site-header')?.getBoundingClientRect().height || 0};
       })()`,
     });
     const rect = current.result.value;
-    if (rect && rect.top <= 110 && rect.bottom >= 180) {
+    if (rect && rect.top <= rect.headerHeight + 18 && rect.bottom >= 180) {
       positioned = true;
       break;
     }
@@ -182,6 +183,7 @@ async function capture(send, baseUrl, spec) {
       return {
         viewport: [innerWidth, innerHeight],
         scrollY: window.scrollY,
+        headerHeight: document.querySelector('.site-header')?.getBoundingClientRect().height || 0,
         clientWidth: document.documentElement.clientWidth,
         scrollWidth: document.documentElement.scrollWidth,
         bodyScrollWidth: document.body.scrollWidth,
@@ -203,11 +205,12 @@ async function capture(send, baseUrl, spec) {
   if (value.rect.width < Math.min(spec.width - 40, 300) || value.rect.height < (spec.minHeight ?? 300)) {
     throw new Error(`${spec.name}: target geometry is unexpectedly small ${JSON.stringify(value.rect)}`);
   }
-  if (value.rect.y > 110 || value.rect.y + value.rect.height < 180) {
+  if (value.rect.y > value.headerHeight + 18 || value.rect.y + value.rect.height < 180) {
     throw new Error(`${spec.name}: target did not scroll into the review viewport ${JSON.stringify(value.rect)}`);
   }
-  if (value.pageBackground !== 'rgb(250, 249, 246)') {
-    throw new Error(`${spec.name}: shared paper surface is not active: ${value.pageBackground}`);
+  const expectedBackground = spec.route === '/' ? 'rgb(8, 10, 9)' : 'rgb(250, 249, 246)';
+  if (value.pageBackground !== expectedBackground) {
+    throw new Error(`${spec.name}: expected ${expectedBackground}, received ${value.pageBackground}`);
   }
   if (spec.assetUrl && !value.imageSources.includes(new URL(spec.assetUrl, baseUrl).href)) {
     throw new Error(`${spec.name}: expected illustration is missing from the captured section`);
