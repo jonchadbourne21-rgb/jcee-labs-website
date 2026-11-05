@@ -26,7 +26,7 @@
    Do not recolor diagrams, code, or the interactive evidence/state models. */
 #root :is(.customer-home, .customer-service, .editorial-page, .program-page,
   .paper-page, .charter-page, .legal-page, .preview-consultation-page, .jcee-editorial)
-  :is(h1, h2, h3, h4):not(.qcs-gate *, .durability-console *, .evidence-trace *, svg *, pre *, code *),
+  :is(h1, h2, h3, h4, h5, h6):not(.qcs-gate *, .durability-console *, .evidence-trace *, svg *, pre *, code *),
 #root .brand-footer .brand-footer-wordmark {
   color: var(--worldlab-section-ink) !important;
 }
@@ -49,7 +49,7 @@
 /* Match the reference panel: warm white reading text and restrained gold labels.
    Keep model state colors and light form controls within their own surfaces. */
 #root#root :is(.customer-scenario, .customer-record, .customer-cards > article, .customer-offer, .customer-close, .editorial-section-muted, .editorial-section-dark, .publication-toc, .research-topic-nav, .partner-engagement-model, .registry-classifications, .program-next, .program-statement-dark, .paper-sidebar, .charter-toc, .preview-consult-form, .preview-draft-review, .jcee-editorial .cta) { color: #faf9f6 !important; }
-#root#root :is(.customer-scenario, .customer-record, .customer-cards > article, .customer-offer, .customer-close, .editorial-section-muted, .editorial-section-dark, .publication-toc, .research-topic-nav, .partner-engagement-model, .registry-classifications, .program-next, .program-statement-dark, .paper-sidebar, .charter-toc, .preview-consult-form, .preview-draft-review, .jcee-editorial .cta) :is(h1,h2,h3,h4,h5,p,a,span,small,strong,em,li,dt,dd,label,legend,summary,td,th):not(.qcs-gate *, .durability-console *, .evidence-trace *, svg *, pre *, code *, button *, select *, option) {
+#root#root :is(.customer-scenario, .customer-record, .customer-cards > article, .customer-offer, .customer-close, .editorial-section-muted, .editorial-section-dark, .publication-toc, .research-topic-nav, .partner-engagement-model, .registry-classifications, .program-next, .program-statement-dark, .paper-sidebar, .charter-toc, .preview-consult-form, .preview-draft-review, .jcee-editorial .cta) :is(h1,h2,h3,h4,h5,h6,p,a,span,small,strong,em,li,dt,dd,label,legend,summary,td,th):not(.qcs-gate *, .durability-console *, .evidence-trace *, svg *, pre *, code *, button *, select *, option) {
   color: #faf9f6 !important;
   border-color: var(--worldlab-section-line) !important;
 }
@@ -61,3 +61,63 @@
 
 /* Illustration caption is prose, not an interactive state indicator. */
 #root#root .program-next .durability-mode { color: #faf9f6 !important; }
+
+/* One crisp heading treatment across every public template and breakpoint.
+   Surface colors above remain black on paper and warm white on dark green. */
+#root#root :is(.customer-home,.customer-service,.editorial-page,.program-page,
+  .paper-page,.charter-page,.legal-page,.preview-consultation-page,.jcee-editorial) {
+  --lift: none;
+  --jcee-lift: none;
+}
+#root#root :is(h1,h2,h3,h4,h5,h6,.hero-footer-signature,.brand-footer-wordmark):not(.qcs-gate *, .durability-console *, .evidence-trace *, svg *, pre *, code *),
+#root#root :is(h1,h2,h3,h4,h5,h6) :is(span,em,strong):not(svg *,pre *,code *) {
+  font-family: var(--worldlab-font) !important;
+  font-weight: 600 !important;
+  font-style: normal !important;
+  letter-spacing: -.025em !important;
+  text-shadow: none !important;
+  filter: none !important;
+  -webkit-text-stroke: 0 !important;
+  -webkit-text-fill-color: currentColor !important;
+  opacity: 1;
+}
+#root#root :is(h1,h2,h3,h4,h5,h6) :is(span,em,strong):not(svg *,pre *,code *) {
+  color: inherit !important;
+}
+#root#root :is(.customer-deck,.editorial-deck,.program-deck,.paper-deck) {
+  font-family: var(--worldlab-font) !important;
+  font-weight: 400 !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+/* Static binary waves: decorative, non-interactive, and outside the reading area. */
+#root :is(.customer-home,.customer-service) > .customer-hero {
+  position: relative;
+  isolation: isolate;
+}
+#root :is(.customer-home,.customer-service) > .customer-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: url("/visuals/binary-waves.svg") right center / auto 100% no-repeat;
+  opacity: .55;
+  mask-image: linear-gradient(90deg, transparent 36%, #000 72%);
+}
+@media(max-width:700px) {
+  #root :is(.customer-home,.customer-service) > .customer-hero::before {
+    background-position: right bottom;
+    background-size: auto 560px;
+    opacity: .4;
+    mask-image: linear-gradient(180deg, transparent 45%, #000 80%);
+  }
+}
+@media print {
+  #root :is(.customer-home,.customer-service) > .customer-hero::before { display:none; }
+}
+
+#root#root .customer-home .hero-footer-signature { color: #171717 !important; }
+
+#root .customer-service .worldlab-masthead-copy { position:relative; z-index:2; }
