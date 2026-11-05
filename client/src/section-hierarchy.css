@@ -1,11 +1,35 @@
-/* Evergreen organizes public content; state colors inside interactive models
-   and private admin screens retain their own meaning. */
+/* One reference background: the founder-supplied footer screenshot (#EEEFEA).
+   Color groups content; headings remain black. Interactive state colors are separate. */
 :root {
-  --worldlab-green: #1e302d;
-  --worldlab-green-label: #315e50;
-  --worldlab-green-surface: #e8eee9;
-  --worldlab-green-line: #a8bcb0;
-  --worldlab-green-on-dark: #c0dacb;
+  --worldlab-section-background: #eeefea;
+  --worldlab-section-ink: #171717;
+  --worldlab-section-line: #c9d0c8;
+  --worldlab-surface: var(--worldlab-section-background);
+}
+
+/* Public organizing panels share the exact same flat background. */
+#root :is(.customer-home, .customer-service) :is(.customer-scenario,
+  .customer-record, .customer-cards > article, .customer-offer, .customer-close),
+#root :is(.editorial-page, .program-page) :is(.editorial-section-muted,
+  .editorial-section-dark, .publication-toc, .research-topic-nav),
+#root .program-page :is(.partner-engagement-model, .registry-classifications,
+  .program-next, .program-statement-dark),
+#root .paper-page .paper-sidebar,
+#root .charter-page .charter-toc,
+#root .preview-consultation-page :is(.preview-consult-form, .preview-draft-review),
+#root .jcee-editorial .cta,
+#root .brand-footer {
+  background: var(--worldlab-section-background) !important;
+  border-color: var(--worldlab-section-line) !important;
+}
+
+/* Black editorial headings, including the previously green directory headings.
+   Do not recolor diagrams, code, or the interactive evidence/state models. */
+#root :is(.customer-home, .customer-service, .editorial-page, .program-page,
+  .paper-page, .charter-page, .legal-page, .preview-consultation-page, .jcee-editorial)
+  :is(h1, h2, h3, h4):not(.qcs-gate *, .durability-console *, .evidence-trace *, svg *, pre *, code *),
+#root .brand-footer .brand-footer-wordmark {
+  color: var(--worldlab-section-ink) !important;
 }
 
 #root :is(.customer-home, .customer-service, .editorial-page, .program-page,
@@ -14,94 +38,34 @@
   .partner-kicker, .registry-kicker, .preview-kicker, .preview-section-label,
   .section-index, .program-number, .paper-code, .charter-code,
   .research-topic-index, .research-topic-arrow, .partner-pathway-code,
-  .founder-work-index, .publication-toc > h2, .paper-sidebar > h2,
-  .charter-toc > h2) {
-  color: var(--worldlab-green-label) !important;
-}
-
-/* Reading hierarchy stays light; green rules mark real section boundaries. */
-#root :is(.editorial-page, .program-page, .paper-page, .charter-page,
-  .legal-page, .preview-consultation-page, .jcee-editorial, .customer-home,
-  .customer-service) :is(.editorial-section, .customer-section,
-  .program-statement, .program-next, .registry-section, .detail-section) {
-  border-top-color: var(--worldlab-green-line) !important;
-}
-#root :is(.editorial-page, .program-page) .editorial-section-muted,
-#root .program-page :is(.partner-engagement-model, .registry-classifications, .program-next),
-#root .editorial-page :is(.publication-toc, .research-topic-nav),
-#root .paper-page .paper-sidebar,
-#root .charter-page .charter-toc,
-#root .preview-consultation-page :is(.preview-consult-form, .preview-draft-review),
-#root .jcee-editorial .cta {
-  background: var(--worldlab-green-surface) !important;
-  border-color: var(--worldlab-green-line) !important;
-}
-#root :is(.editorial-page, .program-page, .paper-page, .charter-page,
-  .legal-page, .preview-consultation-page, .jcee-editorial) h2,
-#root :is(.customer-home, .customer-service) .customer-section h2 {
-  color: var(--worldlab-green-label) !important;
-}
-#root .legal-page section > h2,
-#root .paper-page .paper-markdown h2,
-#root .editorial-page .publication-body h2,
-#root .charter-page .charter-document h2 {
-  border-bottom: 1px solid var(--worldlab-green-line);
-  padding-bottom: .5em;
-}
-
-/* Explicit navigation labels and selected controls, never PASS/HOLD badges. */
+  .founder-work-index),
 #root .brand-footer .brand-footer-links > div > span,
 #root .customer-home .hero-trust > p,
 #root .customer-home .customer-cards > article > span,
 #root .customer-home .customer-steps > li > span,
 #root .preview-consultation-page .preview-panel-top {
-  color: var(--worldlab-green-label) !important;
-}
-#root .editorial-page .resource-filters button[aria-pressed="true"] {
-  background: var(--worldlab-green) !important;
-  border-color: var(--worldlab-green) !important;
-  color: #faf9f6 !important;
-}
-#root :is(.editorial-page, .program-page) :is(.research-topic-nav, .registry-jump-links) a {
-  color: var(--worldlab-green-label) !important;
-  text-underline-offset: .3em;
+  color: var(--worldlab-section-ink) !important;
 }
 
-/* Deep evergreen is reserved for invitations and the program's central thesis.
-   These named sections contain prose/actions, not evidence-state simulators. */
-#root :is(.customer-home, .customer-service) .customer-close,
-#root .editorial-page .editorial-section-dark,
-#root .program-page .program-statement-dark {
-  background: var(--worldlab-green) !important;
-  border-color: var(--worldlab-green) !important;
-}
-#root :is(.customer-home, .customer-service) .customer-close :is(h2, h3, p, small, a, span),
-#root .editorial-page .editorial-section-dark :is(h2, h3, p, li, a, span, strong),
-#root .program-page .program-statement-dark :is(h2, h3, p, li, a, span, strong) {
-  color: #faf9f6 !important;
-}
-#root :is(.customer-home, .customer-service) .customer-close .customer-kicker,
-#root .editorial-page .editorial-section-dark .editorial-kicker,
-#root .program-page .program-statement-dark .charter-section-label {
-  color: var(--worldlab-green-on-dark) !important;
+/* Former dark sections now use the same light panel and dark readable copy. */
+#root :is(.customer-home, .customer-service) .customer-close :is(p, small, a, span),
+#root .editorial-page .editorial-section-dark :is(p, li, a, span, strong),
+#root .program-page .program-statement-dark :is(p, li, a, span, strong),
+#root .editorial-page .editorial-section-dark :is(.research-question,
+  .research-question *, .research-identity-grid > div, .editorial-text-link) {
+  color: var(--worldlab-section-ink) !important;
+  border-color: var(--worldlab-section-line) !important;
 }
 #root :is(.customer-home, .customer-service) .customer-close .customer-button,
 #root .editorial-page .editorial-section-dark .editorial-button {
-  background: #faf9f6 !important;
-  border-color: #faf9f6 !important;
-  color: var(--worldlab-green) !important;
+  background: var(--worldlab-section-ink) !important;
+  border-color: var(--worldlab-section-ink) !important;
+  color: #faf9f6 !important;
 }
 #root :is(.customer-home, .customer-service) .customer-close .customer-button span {
-  color: var(--worldlab-green) !important;
+  color: #faf9f6 !important;
 }
 #root :is(.customer-close, .editorial-section-dark, .program-statement-dark) :is(a, button):focus-visible {
-  outline: 3px solid var(--worldlab-green-on-dark);
+  outline: 3px solid var(--worldlab-section-ink);
   outline-offset: 5px;
-}
-@media print {
-  #root :is(.customer-home, .customer-service) .customer-close,
-  #root .editorial-page .editorial-section-dark,
-  #root .program-page .program-statement-dark {
-    print-color-adjust: exact;
-  }
 }
