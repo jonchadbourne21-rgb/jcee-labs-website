@@ -1,4 +1,5 @@
-/** Original procedural 3D artwork. No telemetry or execution data is used. */
+/** Rust-generated JCEE WorldLab geometry. Decorative; no telemetry or execution data. */
+import mesh from "../generated/worldlab-mesh.json";
 type Vector = [number, number, number];
 type Face = { points: Vector[]; normal: Vector; ring: number; seam: boolean };
 export type EvidenceCoreController = {
@@ -14,40 +15,16 @@ export function createEvidenceCore(canvas: HTMLCanvasElement): EvidenceCoreContr
   const ctx = context;
   const events = new AbortController();
   const { signal } = events;
-  let yaw = -.4, pitch = -.25, auto = 0, paused = true, visible = false;
+  let yaw = -.18, pitch = -.18, auto = 0, paused = true, visible = false;
   let dragging = false, lastX = 0, lastY = 0, frame: number | null = null;
   let last = 0, width = 0, height = 0, disposed = false;
-  const rotate = ([a, b, c]: Vector, x: number, y: number, z: number): Vector => {
-    let co = Math.cos(x), si = Math.sin(x);
-    [b, c] = [b * co - c * si, b * si + c * co];
-    co = Math.cos(y); si = Math.sin(y);
-    [a, c] = [a * co + c * si, -a * si + c * co];
-    co = Math.cos(z); si = Math.sin(z);
-    return [a * co - b * si, a * si + b * co, c];
-  };
-  const faces: Face[] = [];
-  const configurations: Vector[] = [[.36, 0, .62], [1.38, 0, -.79], [.94, 0, 1.43]];
-  // Fixed mesh bounds keep work and memory independent of viewport dimensions.
-  for (let ring = 0; ring < 3; ring++) {
-    const angles = configurations[ring], segments = 128, tube = 36;
-    const vertex = (u: number, v: number) => rotate([
-      (1.36 + .205 * Math.cos(v)) * Math.cos(u),
-      .205 * Math.sin(v),
-      (1.36 + .205 * Math.cos(v)) * Math.sin(u),
-    ], ...angles);
-    for (let i = 0; i < segments; i++) for (let j = 0; j < tube; j++) {
-      const u = i * Math.PI * 2 / segments, v = j * Math.PI * 2 / tube;
-      const du = Math.PI * 2 / segments, dv = Math.PI * 2 / tube;
-      const points = [vertex(u, v), vertex(u + du, v), vertex(u + du, v + dv), vertex(u, v + dv)];
-      const normal = rotate([Math.cos(u + du / 2) * Math.cos(v + dv / 2), Math.sin(v + dv / 2), Math.sin(u + du / 2) * Math.cos(v + dv / 2)], ...angles);
-      faces.push({ points, normal, ring, seam: j === 17 });
-    }
-  }
-  for (let i = 0; i < 36; i++) for (let j = 0; j < 18; j++) {
-    const vertex = (u: number, v: number): Vector => [.38 * Math.cos(u) * Math.sin(v), .38 * Math.cos(v), .38 * Math.sin(u) * Math.sin(v)];
-    const u = i * Math.PI * 2 / 36, v = j * Math.PI / 18, du = Math.PI * 2 / 36, dv = Math.PI / 18;
-    faces.push({ points: [vertex(u, v), vertex(u + du, v), vertex(u + du, v + dv), vertex(u, v + dv)], normal: vertex(u + du / 2, v + dv / 2).map(x => x / .38) as Vector, ring: 3, seam: j % 4 === 0 });
-  }
+  // Positions, topology and materials come from the checked Rust output.
+  const faces: Face[] = mesh.faces.map(([a, b, c, d, material]) => {
+    const vertices = [a, b, c, d].map(index => mesh.vertices[index]);
+    const sum = [0, 1, 2].map(axis => vertices.reduce((total, v) => total + v[axis + 3], 0));
+    const length = Math.hypot(...sum);
+    return { points: vertices.map(v => v.slice(0, 3) as Vector), normal: sum.map(n => n / length) as Vector, ring: material, seam: false };
+  });
   function draw() {
     if (disposed || !width || !height) return;
     ctx.clearRect(0, 0, width, height);
@@ -59,7 +36,7 @@ export function createEvidenceCore(canvas: HTMLCanvasElement): EvidenceCoreContr
     const shadow = ctx.createRadialGradient(0, 0, 0, 0, 0, scale * 1.4);
     shadow.addColorStop(0, "rgba(0,0,0,.7)"); shadow.addColorStop(1, "rgba(0,0,0,0)");
     ctx.fillStyle = shadow; ctx.fillRect(-scale * 2, -scale * 2, scale * 4, scale * 4); ctx.restore();
-    const rx = pitch + Math.sin(auto * .7) * .07, ry = yaw + auto;
+    const rx = pitch + Math.sin(auto * .7) * .10, ry = yaw + Math.sin(auto) * .42;
     const cxr = Math.cos(rx), sxr = Math.sin(rx), cyr = Math.cos(ry), syr = Math.sin(ry);
     const transform = (v: Vector): Vector => {
       const y = v[1] * cxr - v[2] * sxr, z = v[1] * sxr + v[2] * cxr;
@@ -76,10 +53,11 @@ export function createEvidenceCore(canvas: HTMLCanvasElement): EvidenceCoreContr
       const reflection: Vector = [2 * n[0] * n[2], 2 * n[1] * n[2], 2 * n[2] * n[2] - 1];
       const dot = (a: Vector, b: Vector) => Math.max(0, a[0] * b[0] + a[1] * b[1] + a[2] * b[2]);
       const top = Math.pow(dot(reflection, [-.42, .72, .55]), 12), strip = Math.pow(dot(reflection, [.58, .2, .79]), 34), edge = Math.pow(dot(reflection, [.85, .1, -.52]), 15);
-      const brightness = .11 + .17 * dot(n, [-.35, .7, .62]) + 1.5 * top + 1.1 * strip;
-      const occlusion = face.ring === 3 ? .72 : 1;
+      const brightness = .26 + .27 * dot(n, [-.35, .7, .62]) + 1.5 * top + 1.1 * strip;
+      const occlusion = 1;
       let r = (brightness * .96 + edge * .4) * occlusion, g = (brightness * 1.04 + edge * .64) * occlusion, b = (brightness * .98 + edge * .25) * occlusion;
-      if (face.ring === 2) { r *= .91; g *= 1.02; b *= .87; }
+      if (face.ring === 2) { r *= .55; g *= .90; b *= .74; }
+      if (face.ring === 4) { r = .60 + brightness * .3; g = .86 + brightness * .3; b = .40 + brightness * .2; }
       if (face.seam) { r *= .55; g *= .6; b *= .5; }
       const tone = (x: number) => Math.round(Math.min(255, Math.max(0, x * 220)));
       output.push({ points, depth, color: `rgb(${tone(r)},${tone(g)},${tone(b)})` });
@@ -137,7 +115,7 @@ export function createEvidenceCore(canvas: HTMLCanvasElement): EvidenceCoreContr
   resize();
   return {
     setPaused(value) { paused = value; schedule(); },
-    reset() { yaw = -.4; pitch = -.25; auto = 0; draw(); },
+    reset() { yaw = -.18; pitch = -.18; auto = 0; draw(); },
     dispose() {
       disposed = true; events.abort(); sizing.disconnect(); visibility.disconnect();
       if (frame !== null) cancelAnimationFrame(frame);

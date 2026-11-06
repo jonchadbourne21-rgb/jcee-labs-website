@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
-/* The approved 3D homepage is scoped; every other route keeps its existing theme.
+/* Homepage composition; the shared Rust-generated theme extends its identity site-wide.
    Specificity matches the retained global surface rules, including !important. */
 #root#root#root .worldlab-home { --wl-bg:#080a09; --wl-ink:#f0f1ec; --wl-muted:#9ba59d; --wl-green:#b5f896; --wl-line:#28302a; --worldlab-font:'DM Sans',Arial,sans-serif; --wl-display:'Space Grotesk',Arial,sans-serif; --customer-ink:var(--wl-ink); --customer-muted:var(--wl-muted); --customer-line:var(--wl-line); color-scheme:dark; background:var(--wl-bg)!important; color:var(--wl-ink); font-family:var(--worldlab-font); }
 #root#root#root .worldlab-home :is(p,li,label,button,input,textarea,select,em,strong) { font-family:var(--worldlab-font)!important; }
@@ -152,3 +152,5 @@
 #root#root#root .worldlab-home .et-trace-actions .et-button span { color:inherit!important; }
 #root#root#root .worldlab-home .brand-footer-meta,
 #root#root#root .worldlab-home .brand-footer-meta span { color:var(--wl-muted)!important; }
+
+#root#root#root .worldlab-home img.wl-fallback-art { inset:0; width:100%; height:100%; object-fit:contain; }

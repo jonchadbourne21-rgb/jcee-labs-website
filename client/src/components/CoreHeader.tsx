@@ -81,9 +81,9 @@ export default function CoreHeader({
     return () => desktop.removeEventListener("change", closeOnDesktop);
   }, []);
 
-  const closeMobileMenu = () => {
+  const closeMobileMenu = (restoreFocus = false) => {
     setMenuOpen(false);
-    mobileMenuToggleRef.current?.focus();
+    if (restoreFocus) mobileMenuToggleRef.current?.focus();
   };
 
   useEffect(() => {
@@ -97,7 +97,7 @@ export default function CoreHeader({
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        closeMobileMenu();
+        closeMobileMenu(true);
       }
     };
 
@@ -128,7 +128,7 @@ export default function CoreHeader({
         }
         tabIndex={mobile && !menuOpen ? -1 : undefined}
         ref={mobile && index === 0 ? firstMobileLinkRef : undefined}
-        onClick={mobile ? closeMobileMenu : undefined}
+        onClick={mobile ? () => closeMobileMenu() : undefined}
       >
         {link.label}
       </a>
@@ -156,8 +156,11 @@ export default function CoreHeader({
       </nav>
 
       <div className="header-actions">
+        {/* Touch browsers can blur to the document before activating a link.
+            A null destination must not dismiss the menu. A known destination
+            outside it still closes the disclosure for keyboard users. */}
         <div className="mobile-menu" ref={mobileMenuRef} onBlur={event => {
-          if (!event.currentTarget.contains(event.relatedTarget)) setMenuOpen(false);
+          if (event.relatedTarget && !event.currentTarget.contains(event.relatedTarget)) setMenuOpen(false);
         }}>
           <button
             ref={mobileMenuToggleRef}

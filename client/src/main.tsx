@@ -75,7 +75,7 @@ import "./consultation-preview.css";
 import "./evidence-home.css";
 import "./unified-surface.css";
 
-import "./worldlab-cohesion.css";
 import "./section-hierarchy.css";
+import "./worldlab-cohesion.css";
 
 import "./pages/worldlab-home.css";
