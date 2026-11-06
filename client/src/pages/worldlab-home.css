@@ -13,7 +13,7 @@
 #root#root#root .worldlab-home .site-header :is(a,button,summary,span) { color:var(--wl-ink)!important; }
 #root#root#root .worldlab-home .site-header .wordmark { font-family:var(--worldlab-font)!important; font-size:23px; letter-spacing:-1px; }
 #root#root#root .worldlab-home .wordmark-mark { display:none; }
-#root#root#root .worldlab-home .wordmark::before { content:'✳'; color:var(--wl-green); font-size:36px; font-weight:400; margin-right:8px; }
+
 #root#root#root .worldlab-home .site-header .desktop-nav { gap:20px; }
 #root#root#root .worldlab-home .site-header .desktop-nav a { font-size:12px; }
 #root#root#root .worldlab-home .site-header :is(.header-contact) { background:transparent!important; border:1px solid #465044!important; }

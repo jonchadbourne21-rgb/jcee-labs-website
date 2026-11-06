@@ -74,6 +74,12 @@ export default function CoreHeader({
   }, [integrated]);
 
   const mobileMenuLabel = getMobileMenuLabel(menuOpen);
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 1101px)");
+    const closeOnDesktop = () => { if (desktop.matches) setMenuOpen(false); };
+    desktop.addEventListener("change", closeOnDesktop);
+    return () => desktop.removeEventListener("change", closeOnDesktop);
+  }, []);
 
   const closeMobileMenu = () => {
     setMenuOpen(false);
@@ -134,13 +140,8 @@ export default function CoreHeader({
         Skip to content
       </a>
       <a className="wordmark" href="/" aria-label="JCEE WorldLab home">
-        <img
-          className="wordmark-mark"
-          src="/brand/jcee-labs-mark.png"
-          alt=""
-          aria-hidden="true"
-        />
-        <span>JCEE WorldLab</span>
+        <img className="brand-logo-image brand-logo-on-light" src={`${import.meta.env.BASE_URL}brand/jcee-worldlab-compact-light.svg`} width="1547" height="236" alt="" aria-hidden="true" />
+        <img className="brand-logo-image brand-logo-on-dark" src={`${import.meta.env.BASE_URL}brand/jcee-worldlab-compact-dark.svg`} width="1547" height="236" alt="" aria-hidden="true" />
       </a>
 
       <nav className="desktop-nav" aria-label="Main navigation">
@@ -155,7 +156,9 @@ export default function CoreHeader({
       </nav>
 
       <div className="header-actions">
-        <div className="mobile-menu" ref={mobileMenuRef}>
+        <div className="mobile-menu" ref={mobileMenuRef} onBlur={event => {
+          if (!event.currentTarget.contains(event.relatedTarget)) setMenuOpen(false);
+        }}>
           <button
             ref={mobileMenuToggleRef}
             className="mobile-menu-toggle"
