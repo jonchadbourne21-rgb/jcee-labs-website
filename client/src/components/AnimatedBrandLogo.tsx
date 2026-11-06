@@ -9,7 +9,7 @@ export default function AnimatedBrandLogo() {
   const [paused, setPaused] = useState(false);
   const [reduced, setReduced] = useState(true);
   const artwork = useMemo(() => [horizontal, stacked].map((svg, index) =>
-    svg.replaceAll("motion", `logo-${id}-${index}`).replaceAll("<animateTransform", '<animateTransform begin="indefinite"')
+    ({ __html: svg.replaceAll("motion", `logo-${id}-${index}`).replaceAll("<animateTransform", '<animateTransform begin="indefinite"') })
   ), [id]);
 
   useEffect(() => {
@@ -56,8 +56,8 @@ export default function AnimatedBrandLogo() {
 
   return <div className="animated-brand" ref={root}>
     <a href="/" aria-label="JCEE WorldLab home" className="animated-brand-link">
-      <span className="animated-brand-horizontal" aria-hidden="true" dangerouslySetInnerHTML={{ __html: artwork[0] }} />
-      <span className="animated-brand-stacked" aria-hidden="true" dangerouslySetInnerHTML={{ __html: artwork[1] }} />
+      <span className="animated-brand-horizontal" aria-hidden="true" dangerouslySetInnerHTML={artwork[0]} />
+      <span className="animated-brand-stacked" aria-hidden="true" dangerouslySetInnerHTML={artwork[1]} />
     </a>
     {!reduced && <button type="button" className="brand-motion-toggle" aria-pressed={paused} onClick={() => setPaused(value => !value)}>
       {paused ? "Play logo animation" : "Pause logo animation"}
