@@ -66,19 +66,27 @@ export default function PublicRegistry() {
             source-control change cannot be mistaken for a released product.
           </p>
           <p>
-            This update covers work through November 4, 2026: native recovery,
-            installed interfaces, hosted evidence, formal research, quantum
+            The portfolio review covers work through November 4, 2026: native
+            recovery, installed interfaces, hosted evidence, formal research, quantum
             observations, simulations and planned physical programs. Earlier
             entries retain their dates and limits. Full G0 remains unrun and
             release remains on hold. Public summaries exclude private methods,
             unpublished derivations and confidential third-party material.
           </p>
+          <p>
+            A November 6, 2026 correction records successful scoped CI for
+            Autography P0.7. Its scientific result and archive exclusion remain
+            bounded as stated in the entry.
+          </p>
           <div className="program-links">
             <a href="/technology#current-integration">
               CURRENT SOFTWARE RESULTS AND OPEN GATES <span>→</span>
             </a>
+            <a href="/JCEE_WorldLab_Public_Registry_v1.6.md" download>
+              DOWNLOAD CURRENT REGISTRY · VERSION 1.6 <span>↓</span>
+            </a>
             <a href="/JCEE_WorldLab_Public_Registry_v1.5.md" download>
-              DOWNLOAD CURRENT REGISTRY · VERSION 1.5 <span>↓</span>
+              ARCHIVE · REGISTRY VERSION 1.5 <span>↓</span>
             </a>
             <a href="/JCEE_Labs_Public_Registry_v1.4.md" download>
               ARCHIVE · REGISTRY VERSION 1.4 <span>↓</span>
@@ -124,7 +132,7 @@ export default function PublicRegistry() {
       >
         <div className="section-index">
           <span>SELECTED PUBLIC RECORDS</span>
-          <span>EVIDENCE REVIEWED THROUGH NOVEMBER 4, 2026</span>
+          <span>PORTFOLIO REVIEW NOV 4 · AUTOGRAPHY CI CORRECTION NOV 6, 2026</span>
         </div>
         <h2 id="registry-records-title">Current public entries.</h2>
         <nav className="registry-jump-links" aria-label="Build categories">

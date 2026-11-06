@@ -261,12 +261,12 @@ try {
     failures.push("new article canonical or Open Graph URL is incorrect");
   }
   const registryDownload = await fetch(
-    `${baseUrl}/JCEE_WorldLab_Public_Registry_v1.5.md`
+    `${baseUrl}/JCEE_WorldLab_Public_Registry_v1.6.md`
   );
   if (
     !registryDownload.ok ||
     !(await registryDownload.text()).startsWith(
-      "# JCEE WorldLab Public Registry — Version 1.5"
+      "# JCEE WorldLab Public Registry — Version 1.6"
     )
   ) {
     failures.push("current registry Markdown download is missing");
@@ -598,6 +598,7 @@ try {
     "JCEE_Labs_Public_Registry_v1.3.md",
     "JCEE_Labs_Public_Registry_v1.4.md",
     "JCEE_WorldLab_Public_Registry_v1.5.md",
+    "JCEE_WorldLab_Public_Registry_v1.6.md",
     "publications/recovery-with-current-permission.md",
     "publications/receipts-that-can-be-checked.md",
     "publications/what-native-comparisons-teach-us.md",

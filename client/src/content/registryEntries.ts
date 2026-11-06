@@ -347,13 +347,13 @@ export const entries: RegistryEntry[] = [
     group: "Research",
     kind: "SOFTWARE TOPOLOGY RESEARCH",
     status: "experimental",
-    statusLabel: "BOUNDED RESULT PRESERVED · CI BLOCKED",
-    date: "REVIEWED SEPTEMBER 14, 2026",
+    statusLabel: "BOUNDED RESULT PRESERVED · SCOPED CI PASSED",
+    date: "REVIEWED NOVEMBER 6, 2026",
     summary: "Cross-domain software topology discovery research.",
     supports:
-      "The frozen result is KNOWN / PASS_BOUNDED with zero novel primitives. The preserved source archive is authoritative for that result.",
+      "The frozen result remains KNOWN / PASS_BOUNDED with zero novel primitives. P0.7-scoped CI passed on the merged source, checking the extractor, selected frozen outputs, and terminal-result limits.",
     boundary:
-      "The historical repository archive is malformed; no green P0.7 CI or P0.8 result is claimed.",
+      "The malformed historical P0.1–P0.6 repository archive remains excluded from P0.7 verification. No completed P0.8 scientific result is claimed.",
     href: "/research",
   },
   {
