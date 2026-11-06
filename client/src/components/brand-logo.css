@@ -1,0 +1,18 @@
+#root#root#root .site-header .wordmark { flex-shrink:0; gap:0; }
+#root#root#root .site-header .brand-logo-image { width:220px; height:auto; max-width:none; object-fit:contain; }
+#root#root#root .site-header .brand-logo-on-dark { display:none; }
+#root#root#root .worldlab-home .site-header .brand-logo-on-light { display:none; }
+#root#root#root .worldlab-home .site-header .brand-logo-on-dark { display:block; }
+#root#root#root .brand-footer-bottom-identity { display:block; }
+#root#root#root .animated-brand { width:min(100%,680px); padding:20px; margin-bottom:18px; background:#1f2734; border-radius:12px; }
+#root#root#root .animated-brand-link { display:block; }
+#root#root#root .animated-brand svg { display:block; width:100%; height:auto; }
+#root#root#root .animated-brand-stacked { display:none; }
+#root#root#root .brand-motion-toggle { display:block; min-height:44px; margin:8px auto 0; padding:8px 14px; color:#eef2f5; background:transparent; border:1px solid #647080; border-radius:6px; font:inherit; font-size:12px; cursor:pointer; }
+#root#root#root .animated-brand a:focus-visible, #root#root#root .brand-motion-toggle:focus-visible { outline:2px solid #b8d593; outline-offset:4px; }
+@media(max-width:640px) {
+ #root#root#root .site-header .brand-logo-image { width:clamp(150px,48vw,220px); }
+ #root#root#root .animated-brand-horizontal { display:none; }
+ #root#root#root .animated-brand-stacked { display:block; }
+ #root#root#root .animated-brand { max-width:340px; }
+}

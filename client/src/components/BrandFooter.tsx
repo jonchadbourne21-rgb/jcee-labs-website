@@ -1,3 +1,4 @@
+import AnimatedBrandLogo from "./AnimatedBrandLogo";
 type BrandFooterProps = {
   backToTopHref?: string;
 };
@@ -49,17 +50,7 @@ export default function BrandFooter({
 
       <div className="brand-footer-top brand-footer-bottom-identity">
         <div>
-          <a
-            className="brand-footer-lockup"
-            href="/"
-            aria-label="JCEE WorldLab home"
-          >
-            <img src="/brand/jcee-labs-mark.png" alt="" aria-hidden="true" />
-            <span>
-              <strong>JCEE WorldLab</strong>
-              <small>PRECISION RESEARCH + INTELLIGENCE · DALLAS, TEXAS</small>
-            </span>
-          </a>
+          <AnimatedBrandLogo />
           <a className="footer-founder" href="/founder">
             Founded by Jonathan Matthew Chadbourne ↗
           </a>

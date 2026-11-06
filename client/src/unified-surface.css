@@ -146,6 +146,7 @@ body:has(.site-header) {
 }
 .site-header .mobile-menu {
   display: none;
+  position: static;
 }
 .site-header .mobile-menu-toggle {
   width: 44px;
@@ -160,7 +161,11 @@ body:has(.site-header) {
 }
 .site-header .mobile-nav {
   position: absolute;
-  top: calc(100% - 1px);
+  min-width: 0;
+  max-height: calc(100dvh - 100% - 12px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  top: 100%;
   left: 0;
   right: 0;
   width: auto;
