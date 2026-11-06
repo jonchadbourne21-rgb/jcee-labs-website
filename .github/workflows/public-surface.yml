@@ -36,6 +36,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Verify Rust visual sources and generated assets
+        run: pnpm visuals:check
+
       - name: Select available browser
         run: sh scripts/ci-browser.sh
 

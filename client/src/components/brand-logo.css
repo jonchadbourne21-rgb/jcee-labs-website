@@ -1,7 +1,7 @@
 #root#root#root .site-header .wordmark { flex-shrink:0; gap:0; }
 #root#root#root .site-header .brand-logo-image { width:220px; height:auto; max-width:none; object-fit:contain; }
-#root#root#root .site-header .brand-logo-on-dark { display:none; }
-#root#root#root .worldlab-home .site-header .brand-logo-on-light { display:none; }
+#root#root#root .site-header .brand-logo-on-dark { display:block; }
+#root#root#root .site-header .brand-logo-on-light { display:none; }
 #root#root#root .worldlab-home .site-header .brand-logo-on-dark { display:block; }
 #root#root#root .brand-footer-bottom-identity { display:block; }
 #root#root#root .animated-brand { width:min(100%,680px); padding:20px; margin-bottom:18px; background:#1f2734; border-radius:12px; }

@@ -30,9 +30,15 @@ try {
           const headings = [...document.querySelectorAll('h1')].filter(visible);
           const expectedFont = getComputedStyle(document.querySelector('.site-header .wordmark')).fontFamily;
           const fontMismatches = [...document.querySelectorAll('#root h1,#root h2,#root h3,#root p,#root li,#root label,#root button,#root input,#root textarea,#root select,#root em,#root strong')]
-            .filter(e => visible(e) && !e.closest('pre,code,svg,math,.katex') && getComputedStyle(e).fontFamily !== (e.closest('.worldlab-home') && e.closest('h1,h2,h3') ? getComputedStyle(document.querySelector('.worldlab-home h1')).fontFamily : expectedFont))
+            .filter(e => visible(e) && !e.closest('pre,code,svg,math,.katex') && getComputedStyle(e).fontFamily !== (e.closest('h1,h2,h3') ? getComputedStyle(document.querySelector('h1')).fontFamily : expectedFont))
             .map(e => ({tag:e.tagName,text:e.textContent.slice(0,60),font:getComputedStyle(e).fontFamily}));
           return {
+            theme: {
+              surface: getComputedStyle(document.querySelector('.site-header').parentElement).backgroundColor,
+              header: getComputedStyle(document.querySelector('.site-header')).backgroundColor,
+              displayFont: getComputedStyle(document.querySelector('h1')).fontFamily,
+              bodyFont: expectedFont,
+            },
             width:innerWidth,scrollWidth:document.documentElement.scrollWidth,bodyWidth:document.body.scrollWidth,
             headings:headings.length,header:document.querySelectorAll('.site-header').length,footer:document.querySelectorAll('.brand-footer').length,
             brokenImages:[...document.images].filter(i => !i.complete || !i.naturalWidth).map(i => i.getAttribute('src')),
@@ -59,6 +65,8 @@ try {
       if (value.headings !== 1 || value.header !== 1 || value.footer !== 1) issues.push("missing/duplicated page structure");
       if (value.brokenImages.length) issues.push("broken images");
       if (value.fontMismatches.length) issues.push("inconsistent typography");
+      if (value.theme.surface !== "rgb(8, 10, 9)") issues.push("public surface is not graphite");
+      if (!value.theme.displayFont.includes("Space Grotesk") || !value.theme.bodyFont.includes("DM Sans")) issues.push("homepage type system missing");
       if (value.mobileHero) {
         const h=value.mobileHero;
         if (h.trustTop < h.artBottom - 1) issues.push("engineering links precede/overlap artwork");
