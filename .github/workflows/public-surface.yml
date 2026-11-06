@@ -58,6 +58,8 @@ jobs:
 
       - name: Capture enterprise visual review surfaces
         run: |
+          mkdir -p artifacts/enterprise-visual-review/navigation
+          cp node_modules/.cache/worldlab-navigation/result.json artifacts/enterprise-visual-review/navigation/result.json
           node scripts/enterprise-visual-capture.mjs
           node scripts/footer-visual-capture.mjs
           node scripts/worldlab-surface-check.mjs

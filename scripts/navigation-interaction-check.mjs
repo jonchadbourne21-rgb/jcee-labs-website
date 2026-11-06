@@ -44,6 +44,9 @@ try {
    cases.push({width,href,input:'touch with null-related-target blur',pass:true});
   }
   await navigate(send,base,'/company');await activate('.mobile-menu-toggle',true);
+  await evaluate(send,"document.querySelector('.header-contact').focus()");
+  assert(await evaluate(send,"document.activeElement.matches('.header-contact')&&document.querySelector('.mobile-menu-toggle').getAttribute('aria-expanded')==='false'"),'Keyboard focus outside closes the disclosure without stealing focus');
+  await activate('.mobile-menu-toggle',true);
   await send('Input.dispatchKeyEvent',{type:'keyDown',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});
   assert(await evaluate(send,"document.activeElement.matches('.mobile-menu-toggle')&&document.activeElement.getAttribute('aria-expanded')==='false'"));
   await activate('.mobile-menu-toggle',true);await activate('.header-contact',true);await arrived('/consultation');
@@ -63,6 +66,7 @@ try {
  await send('Input.dispatchKeyEvent',{type:'keyDown',key:'Enter',code:'Enter',windowsVirtualKeyCode:13});await arrived('/technology');
  cases.push({width:1440,href:'/technology',input:'keyboard Enter',pass:true});
  assert.deepEqual(client.runtimeErrors,[]);assert.deepEqual(client.networkFailures,[]);
- await mkdir('artifacts/navigation',{recursive:true});await writeFile('artifacts/navigation/result.json',JSON.stringify({cases,logoHome:true,desktopContact:true,escapeFocusRestored:true,runtimeErrors:client.runtimeErrors,networkFailures:client.networkFailures},null,2));
+ const output=path.resolve('node_modules/.cache/worldlab-navigation');
+ await mkdir(output,{recursive:true});await writeFile(path.join(output,'result.json'),JSON.stringify({cases,logoHome:true,desktopContact:true,escapeFocusRestored:true,keyboardFocusOutsideCloses:true,runtimeErrors:client.runtimeErrors,networkFailures:client.networkFailures},null,2));
  console.log(`Navigation PASS: ${cases.length} route activations plus home, contact and Escape focus checks.`);
 } finally {client?.close();await stop(browser.child);await stop(server.child);await removeProfileDirectory(profile);}

@@ -157,9 +157,11 @@ export default function CoreHeader({
 
       <div className="header-actions">
         {/* Touch browsers can blur to the document before activating a link.
-            Keep the menu mounted through that sequence; dismiss on click,
-            outside pointerdown, Escape, or a desktop breakpoint instead. */}
-        <div className="mobile-menu" ref={mobileMenuRef}>
+            A null destination must not dismiss the menu. A known destination
+            outside it still closes the disclosure for keyboard users. */}
+        <div className="mobile-menu" ref={mobileMenuRef} onBlur={event => {
+          if (event.relatedTarget && !event.currentTarget.contains(event.relatedTarget)) setMenuOpen(false);
+        }}>
           <button
             ref={mobileMenuToggleRef}
             className="mobile-menu-toggle"

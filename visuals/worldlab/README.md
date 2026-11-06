@@ -27,6 +27,6 @@ The camera starts facing the J. Slow, bounded motion preserves the silhouette. D
 
 ## Verification
 
-`pnpm release:check` includes real touch/mouse/keyboard navigation. The regression sequence blurs the focused link to the document during touch activation, which must not dismiss the menu before the link activates. Escape returns focus to the toggle; outside taps preserve the clicked control's behavior.
+`pnpm release:check` includes real touch/mouse/keyboard navigation. The regression sequence blurs the focused link to the document during touch activation, which must not dismiss the menu before the link activates. Escape returns focus to the toggle; outside taps preserve the clicked control's behavior. A known keyboard focus destination outside the menu closes it without stealing focus.
 
 `node scripts/worldlab-surface-check.mjs` covers all registered public routes at three widths. Admin screens are outside the public theme. Existing publication text, research boundaries, and service form behavior remain authoritative.
