@@ -480,22 +480,39 @@ try {
     `(() => {
     const copy = document.querySelector('.assurance-architecture-grid article > div > p:last-child');
     const label = document.querySelector('.assurance-architecture-grid article > div > p:first-child');
+    const contrast = element => {
+      if (!element) return 0;
+      const rgb = value => value.match(/[\\d.]+/g).slice(0, 3).map(Number);
+      const luminance = channels => channels.map(value => value / 255)
+        .map(value => value <= .04045 ? value / 12.92 : ((value + .055) / 1.055) ** 2.4)
+        .reduce((sum, value, index) => sum + value * [.2126, .7152, .0722][index], 0);
+      let parent = element;
+      while (parent && getComputedStyle(parent).backgroundColor === 'rgba(0, 0, 0, 0)') parent = parent.parentElement;
+      const foreground = luminance(rgb(getComputedStyle(element).color));
+      const background = luminance(rgb(parent ? getComputedStyle(parent).backgroundColor : 'rgb(8, 10, 9)'));
+      return (Math.max(foreground, background) + .05) / (Math.min(foreground, background) + .05);
+    };
     return {
       copy: copy ? getComputedStyle(copy).color : null,
       label: label ? getComputedStyle(label).color : null,
+      copyContrast: contrast(copy),
+      labelContrast: contrast(label),
       labelTransition: label ? getComputedStyle(label).transitionProperty : null,
     };
   })()`
   );
-  if (assuranceArchitectureColors.copy !== "rgb(86, 100, 94)") {
+  if (assuranceArchitectureColors.copy !== "rgb(163, 175, 166)") {
     failures.push(
-      `Assurance architecture copy does not use the shared paper-surface ink: ${assuranceArchitectureColors.copy}`
+      `Assurance architecture copy does not use the shared graphite-theme ink: ${assuranceArchitectureColors.copy}`
     );
   }
-  if (assuranceArchitectureColors.label !== "rgb(135, 92, 50)") {
+  if (assuranceArchitectureColors.label !== "rgb(181, 248, 150)") {
     failures.push(
       `Assurance architecture label has unexpected color: ${assuranceArchitectureColors.label}`
     );
+  }
+  if (assuranceArchitectureColors.copyContrast < 4.5 || assuranceArchitectureColors.labelContrast < 4.5) {
+    failures.push(`Assurance architecture text needs at least 4.5:1 contrast: ${JSON.stringify(assuranceArchitectureColors)}`);
   }
   if (
     !assuranceArchitectureColors.labelTransition?.includes("color") ||
