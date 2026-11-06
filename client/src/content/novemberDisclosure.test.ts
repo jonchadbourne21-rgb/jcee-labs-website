@@ -11,6 +11,9 @@ describe("November public disclosure boundary", () => {
     const archived = readFileSync("client/public/JCEE_Labs_Public_Registry_v1.4.md");
     expect(createHash("sha256").update(archived).digest("hex")).toBe("9198aa31f399be01ca951d53e577bae11e3299232abd75c73232f2aa8f9e2161");
     expect(readFileSync("scripts/export-publications.ts", "utf8")).not.toContain('"client/public/JCEE_Labs_Public_Registry_v1.4.md"');
+    const previous = readFileSync("client/public/JCEE_WorldLab_Public_Registry_v1.5.md");
+    expect(createHash("sha256").update(previous).digest("hex")).toBe("443f99af83e25fbd3ae784e5ef6dd2b5a04e6e6acd8e8577d73ab715b9df0db0");
+    expect(readFileSync("scripts/export-publications.ts", "utf8")).not.toContain('"client/public/JCEE_WorldLab_Public_Registry_v1.5.md"');
   });
 
   it("keeps private locators and executable details out of new public content", () => {
@@ -45,7 +48,7 @@ describe("November public disclosure boundary", () => {
         if (link.href.startsWith("/registry#")) expect(ids).toContain(link.href.split("#")[1]);
       }
     }
-    const download = readFileSync("client/public/JCEE_WorldLab_Public_Registry_v1.5.md", "utf8");
+    const download = readFileSync("client/public/JCEE_WorldLab_Public_Registry_v1.6.md", "utf8");
     for (const entry of november2026Registry) {
       expect(download).toContain(entry.summary);
       expect(download).toContain(entry.boundary);
