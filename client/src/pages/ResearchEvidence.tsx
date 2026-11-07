@@ -55,7 +55,7 @@ export default function ResearchEvidence() {
         </p>
         <div className="charter-version-row">
           <span>VERSION 1.2 — AUGUST 18, 2026</span>
-          <span>STATUS · CURRENT</span>
+          <span>STATUS · HISTORICAL INDEX</span>
         </div>
       </section>
 
@@ -85,7 +85,7 @@ export default function ResearchEvidence() {
 
           <section id="classifications">
             <h2><span>I.</span> Evidence Classifications</h2>
-            <p>Every JCEE Labs research program and technical claim is assigned a public status.</p>
+            <p>This August 2026 index preserves its original research-process stages. The current <a href="/registry">public registry</a> uses only four claim labels: DEFINED, TESTED — BOUNDED, REPRODUCED — BOUNDED, and HOLD / NOT QUALIFIED. Research lifecycle terms and governance adoption are not additional proof levels.</p>
             <div className="evidence-classifications">
               {classifications.map(([title, copy]) => (
                 <article key={title}>
@@ -105,7 +105,7 @@ export default function ResearchEvidence() {
                   <p className="charter-section-label">EVIDENCE-FIRST EXECUTION RUNTIME</p>
                   <h3>VOW</h3>
                 </div>
-                <span className="evidence-status verified">VERIFIED MILESTONE · ACTIVE HARDENING</span>
+                <span className="evidence-status verified">TESTED — BOUNDED</span>
               </div>
               <p>VOW is a runtime designed for consequential software and AI-directed actions where interruption, retry, incomplete information, and external effects can create uncertainty.</p>
               <p>Its purpose is to make execution inspectable, resumable, and accountable through durable evidence.</p>
@@ -140,7 +140,7 @@ export default function ResearchEvidence() {
                   <p className="charter-section-label">WORKFLOW-FREE TRANSITION LEGALITY CALCULUS</p>
                   <h3>QCS</h3>
                 </div>
-                <span className="evidence-status verified">VERIFIED MILESTONE · QCS-2.0 CORE FROZEN</span>
+                <span className="evidence-status verified">REPRODUCED — BOUNDED</span>
               </div>
               <p>QCS is a separate JCEE Labs research program for determining whether the currently proven authoritative state justifies a proposed causal transition.</p>
               <p>The frozen QCS-2.0 normative specification passed its planned reproduction gate across PostgreSQL transactional authority and a genuinely remote network-effect authority without changing the frozen calculus.</p>
@@ -175,7 +175,7 @@ export default function ResearchEvidence() {
                   <p className="charter-section-label">QCS-2.0 FROZEN-SPECIFICATION REPRODUCTION</p>
                   <h3>Independent Runtime Reproduction</h3>
                 </div>
-                <span className="evidence-status verified">VERIFIED MILESTONE · GATE PASSED</span>
+                <span className="evidence-status verified">REPRODUCED — BOUNDED</span>
               </div>
               <p>This work tested whether the frozen QCS-2.0 authority, legality, evidence, recovery, and commit semantics could survive a new implementation and materially different real execution substrates without rewriting the calculus.</p>
               <p>The planned reproduction gate passed for the tested scope. The QCS-2.0 core is now frozen pending evidence that a new substrate or formally identified counterexample requires revision.</p>
@@ -187,7 +187,7 @@ export default function ResearchEvidence() {
                   <p className="charter-section-label">FOUNDATIONAL RESEARCH</p>
                   <h3>Procedural Execution Science</h3>
                 </div>
-                <span className="evidence-status experimental">EXPERIMENTAL</span>
+                <span className="evidence-status experimental">HOLD / NOT QUALIFIED</span>
               </div>
               <p>This program investigates whether reusable structural rules can improve execution across different tasks and failure mechanisms.</p>
               <p>The work studies a small set of procedural roles:</p>
@@ -207,7 +207,7 @@ export default function ResearchEvidence() {
                   <p className="charter-section-label">EDGE EXECUTION RESEARCH</p>
                   <h3>AEEL</h3>
                 </div>
-                <span className="evidence-status experimental">EXPERIMENTAL PROTOTYPE</span>
+                <span className="evidence-status experimental">DEFINED</span>
               </div>
               <p>AEEL is a separate research program focused on evidence-producing AI execution for local, offline, and resource-constrained devices.</p>
               <p>Its intended environment includes edge computers, embedded systems, and air-gapped deployments where cloud-dependent assumptions may not hold.</p>
