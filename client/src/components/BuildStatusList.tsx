@@ -1,3 +1,4 @@
+import { getPublicClaimLabel } from "@/content/publicClaimLevels";
 import { entries } from "@/content/registryEntries";
 
 export default function BuildStatusList({ ids }: { ids: string[] }) {
@@ -9,7 +10,7 @@ export default function BuildStatusList({ ids }: { ids: string[] }) {
         const registryHref = `${import.meta.env.BASE_URL}registry#${id}`;
         return (
           <article key={id}>
-            <p className="editorial-kicker">{entry.statusLabel}</p>
+            <p className="editorial-kicker">{getPublicClaimLabel(entry.id)}</p>
             <h3>
               <a href={registryHref}>{entry.name}</a>
             </h3>

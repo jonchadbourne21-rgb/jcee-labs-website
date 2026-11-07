@@ -804,5 +804,7 @@ body:has(.site-header) {
 }
 @media (max-width: 360px) {
   .site-header .header-contact > span[aria-hidden="true"] { display: none; }
+  /* Mobile vector replaces the earlier text arrow: hide this decorative SVG on 320px phones. */
+  .site-header .header-contact > svg[aria-hidden="true"] { display: none; }
   .site-header .wordmark span { letter-spacing: .06em; }
 }

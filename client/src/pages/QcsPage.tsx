@@ -30,7 +30,7 @@ export default function QcsPage() {
       <CoreHeader current="qcs" />
 
       <WorldLabMasthead className="qcs-program" artwork="research">
-        <p className="eyebrow"><span /> RESEARCH PROGRAM · VERIFIED MILESTONE</p>
+        <p className="eyebrow"><span /> RESEARCH PROGRAM · REPRODUCED — BOUNDED</p>
         <div className="program-number">QCS / RESEARCH PROGRAM</div>
         <h1>What evidence justifies<br /><em>the next action?</em></h1>
         <p className="program-deck">
@@ -40,7 +40,7 @@ export default function QcsPage() {
         </p>
         <div className="program-status-row">
           <span>CORE · QCS-2.0 FROZEN</span>
-          <span>REPRODUCTION GATE · PASS</span>
+          <span>REPRODUCED — BOUNDED</span>
         </div>
       </WorldLabMasthead>
 
@@ -66,7 +66,7 @@ export default function QcsPage() {
       <section className="program-boundaries" aria-labelledby="qcs-status">
         <div className="section-index">
           <span>PUBLIC STATUS</span>
-          <span>VERIFIED MILESTONE · BOUNDED SCOPE</span>
+          <span>REPRODUCED — BOUNDED</span>
         </div>
         <h2 id="qcs-status">Where the work stands.</h2>
         <div className="program-boundary-list">

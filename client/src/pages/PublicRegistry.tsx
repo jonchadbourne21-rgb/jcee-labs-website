@@ -5,23 +5,24 @@ import CoreHeader from "@/components/CoreHeader";
 import CurlicueField from "@/components/CurlicueField";
 
 import { entries, registryGroups, groupId } from "@/content/registryEntries";
+import { getPublicClaimLabel } from "@/content/publicClaimLevels";
 
 const classifications = [
   [
-    "VERIFIED MILESTONE",
-    "A specific bounded claim survived its named gate and the supporting evidence was preserved.",
+    "DEFINED",
+    "A contract, governance standard, design, or model exists. Definition alone is not evidence of a real-world effect.",
   ],
   [
-    "EXPERIMENTAL",
-    "Results exist, but reproduction, transfer, adversarial review, or external verification remains incomplete.",
+    "TESTED — BOUNDED",
+    "A named test, formal check, or observation has a recorded result within explicit assumptions; the result may be positive or negative.",
   ],
   [
-    "DEFINED SPECIFICATION",
-    "A stable public specification or contract exists; implementation and transfer claims remain separately bounded.",
+    "REPRODUCED — BOUNDED",
+    "A named result was reproduced under the specified method or environments. Cross-host or same-team checks do not imply independent certification.",
   ],
   [
-    "ADOPTED STANDARD",
-    "A governance rule adopted by JCEE WorldLab. It is not an empirical result.",
+    "HOLD / NOT QUALIFIED",
+    "The intended gate has not run, failed, or still lacks required evidence. Earlier partial tests remain documented without upgrading the claim.",
   ],
 ];
 
@@ -47,8 +48,8 @@ export default function PublicRegistry() {
           <em>results, boundaries, and status</em>
         </h1>
         <p className="program-deck">
-          The public registry records what JCEE WorldLab can responsibly say about
-          selected systems, research programs, and governing standards.
+          The public registry uses four evidence labels, with the exact test
+          boundary and next gate recorded for each system, research program, and standard.
         </p>
         <div className="program-status-row">
           <span>PUBLIC PROJECTION · SANITIZED</span>
@@ -58,11 +59,11 @@ export default function PublicRegistry() {
 
       <section className="program-statement registry-position">
         <p className="charter-section-label">PUBLIC CLAIM CONTROL</p>
-        <h2>The registry shows status, evidence boundary, and limitation.</h2>
+        <h2>Four labels. Every claim has a boundary.</h2>
         <div className="program-statement-copy">
           <p>
-            Each entry names a recorded milestone, its scope, and its
-            limitations. Newer candidate work is listed separately so a
+            The category is only a summary. Each entry names its actual result, scope, and
+            limitations. Governance adoption is a separate decision, not scientific validation. Newer work is listed separately so a
             source-control change cannot be mistaken for a released product.
           </p>
           <p>
@@ -171,7 +172,7 @@ export default function PublicRegistry() {
                       <span
                         className={`registry-status registry-status-${entry.status}`}
                       >
-                        {entry.statusLabel}
+                        {getPublicClaimLabel(entry.id)}
                       </span>
                       <p className="registry-entry-summary">{entry.summary}</p>
                       <dl>

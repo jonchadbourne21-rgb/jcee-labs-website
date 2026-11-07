@@ -1,0 +1,26 @@
+/* Shared mobile typography/spacing polish; no change to the approved brand.
+ * Keep a compact first-screen value statement while preserving readable tap targets.
+ * Applies to both the default green and opt-in blue evaluation variants. */
+@media (max-width: 700px) {
+  #root#root#root .customer-service .worldlab-service-masthead {
+    padding-top: 32px !important;
+    gap: 26px;
+  }
+  #root#root#root .customer-service .worldlab-service-masthead h1 {
+    margin: 16px 0 22px;
+    font-size: clamp(38px, 9.5vw, 54px) !important;
+    line-height: 1.08 !important;
+  }
+  #root#root#root .customer-service .worldlab-service-masthead .customer-deck {
+    font-size: clamp(16px, 4.1vw, 18px);
+    line-height: 1.6;
+    max-width: 42ch;
+  }
+  #root#root#root .customer-service .worldlab-service-masthead .customer-actions {
+    gap: 16px;
+    margin-top: 22px;
+  }
+  #root#root#root .customer-service .worldlab-service-masthead .customer-note {
+    line-height: 1.6;
+  }
+}
