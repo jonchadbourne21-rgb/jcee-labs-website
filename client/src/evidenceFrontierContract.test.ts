@@ -56,9 +56,14 @@ describe("October evidence and infrastructure claim boundaries", () => {
     ]) {
       expect(technology).toContain(stage);
     }
-    expect(technology).toContain("CONTRACT FROZEN");
-    expect(technology.match(/BOUNDED PASS/g)?.length).toBe(2);
-    expect(technology).toContain("PARTIAL / GOVERNANCE HOLD");
+    // Public badges now use the site-wide four-level taxonomy.
+    // Preserve the original P0/P1/P2/P3 scope and explicit P3 hold.
+    expect(technology).toContain('className="infra-stage__status">DEFINED</span>');
+    expect(technology.match(/>TESTED — BOUNDED<\/span>/g)?.length).toBe(2);
+    expect(technology).toContain('className="infra-stage__status infra-stage__status--hold">HOLD / NOT QUALIFIED</span>');
+    expect(technology).toContain("A frozen contract is not proof of full system integration.");
+    expect(technology).toContain("not customer production qualification.");
+    expect(technology).toContain("do not establish universal safety or independent certification.");
     expect(technology).toContain("No provider");
     expect(technology).toContain("blanket mandate compliance");
     expect(technology).toContain("assessed separately for each deployment");
