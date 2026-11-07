@@ -1,0 +1,9 @@
+JCEE WorldLab — PR #79 publication witness
+
+This static marker identifies a distinct website release candidate prepared after PR #78.
+It is not a certification, authorization record, or evidence that a deployment succeeded.
+
+Primary-domain release verification requires a matching /deployment.json source/tree
+and an exact public-file comparison against the retained release build.
+
+Intelligence That Leaves Receipts.
