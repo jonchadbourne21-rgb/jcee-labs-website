@@ -59,7 +59,7 @@ export default function BrandFooter({
 
       <div className="brand-footer-meta">
         <span>© {new Date().getFullYear()} JCEE Labs LLC</span>
-        <a href={backToTopHref}>BACK TO TOP ↑</a>
+        <a href={backToTopHref} aria-label="Back to the top of the home page">BACK TO TOP ↑</a>
       </div>
     </footer>
   );
