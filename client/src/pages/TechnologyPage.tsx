@@ -210,7 +210,7 @@ export default function TechnologyPage() {
         <div className="infra-stage-grid" aria-label="JCEE infrastructure P0 through P3 evidence status">
           <article className="infra-stage">
             <p className="editorial-kicker">P0 / UNIFIED CONTRACT</p>
-            <span className="infra-stage__status">CONTRACT FROZEN</span>
+            <span className="infra-stage__status">DEFINED</span>
             <h3>JAIR v0.1</h3>
             <p>
               Establish a common semantic boundary across authority,
@@ -223,7 +223,7 @@ export default function TechnologyPage() {
           </article>
           <article className="infra-stage">
             <p className="editorial-kicker">P1 / GOLDEN EXECUTION PATH</p>
-            <span className="infra-stage__status">BOUNDED PASS</span>
+            <span className="infra-stage__status">TESTED — BOUNDED</span>
             <h3>One reconstructable path</h3>
             <p>
               Reproduce a scoped authorization-to-effect-to-evidence path,
@@ -236,7 +236,7 @@ export default function TechnologyPage() {
           </article>
           <article className="infra-stage">
             <p className="editorial-kicker">P2 / HOSTILE CONFORMANCE</p>
-            <span className="infra-stage__status">BOUNDED PASS</span>
+            <span className="infra-stage__status">TESTED — BOUNDED</span>
             <h3>Test disagreement and interruption</h3>
             <p>
               Challenge the semantics with stale or revoked authority,
@@ -249,7 +249,7 @@ export default function TechnologyPage() {
           </article>
           <article className="infra-stage">
             <p className="editorial-kicker">P3 / HETEROGENEOUS ADAPTERS</p>
-            <span className="infra-stage__status infra-stage__status--hold">PARTIAL / GOVERNANCE HOLD</span>
+            <span className="infra-stage__status infra-stage__status--hold">HOLD / NOT QUALIFIED</span>
             <h3>Transfer across external boundaries</h3>
             <p>
               Qualify the same contract across materially different target
