@@ -1,4 +1,4 @@
-import { Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 export type CoreHeaderCurrent =
@@ -191,7 +191,7 @@ export default function CoreHeader({
         <a className="header-contact" href={contactHref}>
           <span className={contactLabel === "Discuss your workflow" ? "contact-label-full" : undefined}>{contactLabel}</span>
           {contactLabel === "Discuss your workflow" && <span className="contact-label-short">Let’s talk</span>}
-          <span aria-hidden="true">↗</span>
+          <ArrowUpRight aria-hidden="true" size={17} strokeWidth={1.8} />
         </a>
       </div>
     </header>
