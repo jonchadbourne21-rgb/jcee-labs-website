@@ -1,12 +1,17 @@
+import { ArrowUpRight } from "lucide-react";
 import usePageSeo from "@/components/usePageSeo";
 import CoreHeader from "@/components/CoreHeader";
 import BrandFooter from "@/components/BrandFooter";
 import "./home-editorial-refresh.css";
+import "./worldlab-blue-preview.css";
 
 export default function InfrastructurePage() {
   usePageSeo("/capabilities/infrastructure");
+  // Review-only visual variant: the approved green palette is the default.
+  const bluePreview = typeof window !== "undefined" &&
+    new URLSearchParams(window.location.search).get("palette") === "blue";
   return (
-    <main id="top" className="customer-home customer-service">
+    <main id="top" className={`customer-home customer-service${bluePreview ? " worldlab-blue-preview" : ""}`}>
       <CoreHeader current="solutions" />
       <section
         id="page-content"
@@ -23,12 +28,12 @@ export default function InfrastructurePage() {
         </h1>
         <p className="customer-deck">
           Workflow Assurance is a focused assessment for IT, business-systems,
-          and engineering teams. We help you understand one automated workflow,
-          resolve gaps in its evidence, and scope the next improvement.
+          and engineering teams. We help you map one automated workflow, identify where its evidence
+          falls short, and define a practical next step.
         </p>
         <div className="customer-actions">
           <a className="customer-button" href="/consultation">
-            Discuss your workflow ↗
+            Discuss your workflow <ArrowUpRight aria-hidden="true" size={18} strokeWidth={1.8} />
           </a>
           <a className="customer-link" href="#deliverables">
             See what you receive ↓
@@ -56,7 +61,7 @@ export default function InfrastructurePage() {
         <div className="customer-cards customer-deliverables">
           <article>
             <span>01 / MAP</span>
-            <h3>Your workflow, connected.</h3>
+            <h3>Your workflow, mapped.</h3>
             <p>
               Systems, owners, approval points, existing native controls, and the
               records needed to establish what happened.
@@ -220,7 +225,7 @@ export default function InfrastructurePage() {
         </div>
         <div>
           <a className="customer-button" href="/consultation">
-            Discuss your workflow ↗
+            Discuss your workflow <ArrowUpRight aria-hidden="true" size={18} strokeWidth={1.8} />
           </a>
           <p className="customer-note">
             Already have a detailed brief?{" "}
