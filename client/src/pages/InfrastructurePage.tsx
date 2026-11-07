@@ -3,6 +3,7 @@ import usePageSeo from "@/components/usePageSeo";
 import CoreHeader from "@/components/CoreHeader";
 import BrandFooter from "@/components/BrandFooter";
 import "./home-editorial-refresh.css";
+import "./worldlab-service-polish.css";
 import "./worldlab-blue-preview.css";
 
 export default function InfrastructurePage() {
@@ -27,9 +28,9 @@ export default function InfrastructurePage() {
           <br />A clear way forward.
         </h1>
         <p className="customer-deck">
-          Workflow Assurance is a focused assessment for IT, business-systems,
-          and engineering teams. We help you map one automated workflow, identify where its evidence
-          falls short, and define a practical next step.
+          We review one automated workflow—how it is authorized, where it can
+          fail, and what the evidence actually shows—then give your team a
+          written plan for the next step.
         </p>
         <div className="customer-actions">
           <a className="customer-button" href="/consultation">
