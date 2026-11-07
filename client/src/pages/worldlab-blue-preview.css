@@ -1,0 +1,28 @@
+/* Review-only blue comparison for the WorldLab infrastructure page.
+   The approved green production default is untouched; ?palette=blue opts in.
+   This is a visual palette test, not a change to any technical status color. */
+#root#root#root .customer-service.worldlab-blue-preview {
+  --wl-green: #6ab8ff;
+  --worldlab-bronze: #6ab8ff;
+  --jcee-blue: #6ab8ff;
+  --jcee-navy: #6ab8ff;
+  --wl-line: #2a3a49;
+  --worldlab-surface: #0d1724;
+}
+#root#root#root#root .customer-service.worldlab-blue-preview .customer-button {
+  background: #6ab8ff !important;
+  border-color: #6ab8ff !important;
+  color: #071827 !important;
+}
+#root#root#root#root .customer-service.worldlab-blue-preview .customer-button:hover {
+  background: #9cd3ff !important;
+  border-color: #9cd3ff !important;
+  color: #071827 !important;
+}
+#root#root#root#root .customer-service.worldlab-blue-preview .customer-button svg {
+  color: inherit;
+  flex-shrink: 0;
+}
+#root#root#root .customer-service.worldlab-blue-preview .customer-kicker {
+  color: #6ab8ff !important;
+}
