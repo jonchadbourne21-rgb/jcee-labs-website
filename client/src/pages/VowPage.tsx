@@ -43,13 +43,13 @@ export default function VowPage() {
           <em>an evidence-first execution runtime</em>
         </h1>
         <p className="program-deck">
-          JCEE VOW is JCEE WorldLab&apos; evidence-first runtime for software that
+          JCEE VOW is JCEE WorldLab&apos;s evidence-first runtime for software that
           must act, recover, and remain accountable when execution does not go
           as planned.
         </p>
         <div className="program-status-row">
-          <span>HISTORICAL RELEASE · VOW 1.1</span>
-          <span>PRIVATE CANDIDATE · 1.1.1.dev3 · RELEASE ON HOLD</span>
+          <span>TESTED — BOUNDED · VOW 1.1</span>
+          <span>HOLD / NOT QUALIFIED · DEV3 RELEASE</span>
         </div>
       </WorldLabMasthead>
 
