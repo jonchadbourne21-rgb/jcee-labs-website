@@ -324,6 +324,7 @@ try {
     const primary = panel?.querySelector('a.wl-product-primary');
     const offers = [...(panel?.querySelectorAll('.wl-product-offer') ?? [])];
     const receipt = panel?.querySelector('.wl-receipt');
+    const binaryWave = panel?.querySelector('.wl-binary-wave');
     const flow = hero && panel && scenario
       ? !!(hero.compareDocumentPosition(panel) & Node.DOCUMENT_POSITION_FOLLOWING)
         && !!(panel.compareDocumentPosition(scenario) & Node.DOCUMENT_POSITION_FOLLOWING)
@@ -338,6 +339,12 @@ try {
       offers: offers.map(item => item.querySelector('h3')?.textContent),
       offerHeadingColors: offers.map(item => getComputedStyle(item.querySelector('h3')).color),
       receiptBackground: receipt ? getComputedStyle(receipt).backgroundColor : null,
+      receiptPerspective: receipt ? getComputedStyle(receipt).transform : null,
+      binaryWaveCount: binaryWave?.querySelectorAll('textPath').length ?? 0,
+      binaryWavePointerEvents: binaryWave ? getComputedStyle(binaryWave).pointerEvents : null,
+      legacyOrbitalCount: panel?.querySelectorAll('.wl-product-orbit, .wl-product-node').length ?? -1,
+      founderCopy: panel?.textContent?.includes('One engagement you can scope today. One platform for controlled AI execution.')
+        && !panel?.textContent?.includes("One platform we're building."),
       receiptTitle: receipt?.querySelector('h3')?.textContent,
       receiptState: receipt?.querySelector('.wl-receipt-state')?.textContent?.replace(/\\s+/g, ' ').trim(),
       receiptExample: receipt?.getAttribute('data-demo') === 'illustrative'
@@ -357,6 +364,10 @@ try {
     !productOverview.offers?.includes("JCEE Infrastructure") ||
     !productOverview.offerHeadingColors?.every(color => color === "rgb(240, 245, 251)") ||
     !productOverview.receiptTitle?.includes("AI action receipt") ||
+    productOverview.binaryWaveCount !== 5 ||
+    productOverview.binaryWavePointerEvents !== "none" ||
+    productOverview.legacyOrbitalCount !== 0 ||
+    !productOverview.founderCopy ||
     !productOverview.receiptState?.includes("HELD FOR REVIEW") ||
     !productOverview.receiptExample ||
     !productOverview.scopeDisclosure
