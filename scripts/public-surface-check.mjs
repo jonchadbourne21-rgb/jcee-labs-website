@@ -384,6 +384,33 @@ try {
     !productOverview.scopeDisclosure
   ) failures.push("Homepage product section failed: " + JSON.stringify(productOverview));
 
+  // Verify that the August 18-style glyph field actually changes pixels at runtime.
+  // A reduced-motion browser should render a stable still instead.
+  await evaluate(page.send, "document.querySelector('#product-overview').scrollIntoView({block:'center'})");
+  await sleep(260);
+  const waveSignature = async () => evaluate(page.send, `(() => {
+    const canvas = document.querySelector('canvas.wl-full-hex-field');
+    if (!canvas || canvas.width < 100 || canvas.height < 200) return null;
+    const ctx = canvas.getContext('2d');
+    const rgba = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    let checksum = 2166136261, active = 0;
+    for (let i = 0; i < rgba.length; i += 32) {
+      const alpha = rgba[i + 3] ?? 0;
+      active += alpha > 0 ? 1 : 0;
+      checksum = Math.imul(checksum ^ alpha, 16777619) >>> 0;
+    }
+    return { checksum, active };
+  })()`);
+  const waveStart = await waveSignature();
+  await sleep(580);
+  const waveEnd = await waveSignature();
+  const reducedMotion = await evaluate(page.send, "matchMedia('(prefers-reduced-motion: reduce)').matches");
+  if (!waveStart || !waveEnd || waveStart.active < 30 ||
+    (!reducedMotion && waveStart.checksum === waveEnd.checksum) ||
+    (reducedMotion && waveStart.checksum !== waveEnd.checksum)) {
+    failures.push("Animated hex-wave field playback/reduced-motion contract failed: " + JSON.stringify({ waveStart, waveEnd, reducedMotion }));
+  }
+
   await evaluate(page.send, "document.querySelector('#working-example').open = true");
   // The homepage illustration is browser-local and must show all four bounded outcomes.
   for (const [scenario, expected] of [
