@@ -5,6 +5,7 @@ import { describe, expect, it } from "vitest";
 const root = path.resolve(import.meta.dirname);
 const surfaceCheck = readFileSync(path.join(root, "../../scripts/worldlab-surface-check.mjs"), "utf8");
 const home = readFileSync(path.join(root, "pages/Home.tsx"), "utf8");
+const deferredOrbit = readFileSync(path.join(root, "components/DeferredEvidenceCore.tsx"), "utf8");
 const section = readFileSync(path.join(root, "components/ProductOverview.tsx"), "utf8");
 const css = readFileSync(path.join(root, "components/worldlab-product-overview.css"), "utf8");
 const waves = readFileSync(path.join(root, "components/HexWaveField.tsx"), "utf8");
@@ -24,6 +25,8 @@ describe("homepage binary-first landing", () => {
     const originalHero = home.slice(home.indexOf('id="orbital-study"'), home.indexOf("<ScenarioTerminal />"));
     expect(originalHero).not.toContain('className="customer-actions"');
     expect(originalHero).not.toContain('EXPLORE THE WORK');
+    expect(deferredOrbit).toContain('loading="lazy"');
+    expect(surfaceCheck).toContain("i.loading = 'eager'");
     expect(surfaceCheck).toContain("#product-overview .wl-product-primary");
     expect(surfaceCheck).toContain("#orbital-study .customer-hero-sculpture");
     expect(surfaceCheck).toContain("orbital artwork precedes binary landing");

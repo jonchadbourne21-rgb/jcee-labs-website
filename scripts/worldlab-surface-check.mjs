@@ -25,7 +25,13 @@ try {
         awaitPromise: true, returnByValue: true,
         expression: `(async () => {
           await document.fonts.ready;
-          await Promise.all([...document.images].map(i => i.decode().catch(() => {})));
+          // The deployed page keeps its offscreen previews lazy. In this exhaustive
+          // visual test only, request their decoding so a deferred image cannot
+          // indefinitely suspend the 51-route x 3-width acceptance sweep.
+          await Promise.all([...document.images].map(async i => {
+            if (i.loading === 'lazy') i.loading = 'eager';
+            await i.decode().catch(() => {});
+          }));
           const visible = e => e.getBoundingClientRect().width > 0 && e.getBoundingClientRect().height > 0;
           const headings = [...document.querySelectorAll('h1')].filter(visible);
           const expectedFont = getComputedStyle(document.querySelector('.site-header .wordmark')).fontFamily;
