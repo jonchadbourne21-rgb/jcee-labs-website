@@ -61,7 +61,7 @@ export default function OrbitGraphWebGL({ paused }: { paused: boolean }) {
           vec2 uv = gl_PointCoord * 2.0 - 1.0;
           float r = length(uv);
           if (r > 1.0) discard;
-          float core = smoothstep(0.28, 0.04, r);
+          float core = 1.0 - smoothstep(0.04, 0.28, r);
           float halo = (1.0 - smoothstep(0.34, 1.0, r)) * 0.30;
           fragColor = vec4(0.42, 0.73, 1.0, (core + halo) * v_energy);
         } else {
