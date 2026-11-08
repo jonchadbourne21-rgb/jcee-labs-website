@@ -154,7 +154,8 @@
 #root .wl-scroll-story-chain span { font:650 9px ui-monospace,monospace; color:#91b4d0; }
 #root .wl-scroll-story-limit { color:#7898b5!important; font:600 9px/1.5 ui-monospace,monospace!important; margin:24px 0 0; }
 #root .scenario-kicker-supplement { color:#95bad7!important; font:700 11px/1.5 ui-monospace,monospace!important; letter-spacing:.07em; margin:28px 0; }
-.wl-data-drawer { position:fixed; inset:0 0 0 auto; margin:0; border:0; border-left:1px solid #49677e; background:#0a1421; color:#eaf4ff; width:min(620px,100vw); height:100dvh; max-height:none; padding:0; box-shadow:-24px 0 70px #0009; }
+.wl-data-drawer { position:fixed; inset:0 0 0 auto; margin:0; border:0; border-left:1px solid #49677e; background:#0a1421ee; backdrop-filter:blur(18px); color:#eaf4ff; width:min(620px,100vw); height:100dvh; max-height:none; padding:0; box-shadow:-24px 0 70px #0009; animation:wl-drawer-arrive .18s ease-out; }
+@keyframes wl-drawer-arrive { from { transform:translateX(18px); opacity:.7; } to { transform:none; opacity:1; } }
 .wl-data-drawer::backdrop { background:#020710ab; backdrop-filter:blur(6px); }
 .wl-data-drawer-body { padding:clamp(20px,4vw,44px); height:100%; overflow:auto; }
 .wl-data-drawer-head { display:flex; justify-content:space-between; align-items:center; gap:14px; color:#8bbfed; font:700 10px ui-monospace,monospace; }
@@ -186,5 +187,6 @@
 }
 @media(prefers-reduced-motion:reduce) {
   #root .wl-scroll-story-step,#root .wl-scroll-story-progress i {transition:none!important;}
+  .wl-data-drawer {animation:none!important;}
   #root#root#root .worldlab-home .wl-bento-tile::before {display:none;}
 }
