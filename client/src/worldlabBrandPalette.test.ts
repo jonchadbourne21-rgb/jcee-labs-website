@@ -8,6 +8,8 @@ const template = source("visuals/worldlab/src/theme.css.in");
 const generated = source("client/src/worldlab-cohesion.css");
 const homepage = source("client/src/pages/worldlab-home.css");
 const service = source("client/src/pages/InfrastructurePage.tsx");
+const sculpture = source("client/src/lib/evidenceCore.ts");
+const sculptureComponent = source("client/src/components/EvidenceCore.tsx");
 
 describe("WorldLab production orbital-blue identity", () => {
   it("keeps Rust-owned theme inputs and generated CSS byte-identical", () => {
@@ -52,4 +54,12 @@ describe("WorldLab production orbital-blue identity", () => {
     expect((Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05)).toBeGreaterThan(7);
     expect(homepage).toContain("color:#071827");
   });
+  it("renders the homepage sculpture with blue nodes and matching fallback", () => {
+    expect(sculpture).toContain("rgba(80,150,230,.085)");
+    expect(sculpture).toContain("g = .58 + brightness * .22; b = .92");
+    expect(sculpture).not.toContain("rgba(96,145,61,.085)");
+    expect(sculptureComponent).toContain("three orbital frames and blue nodes");
+    expect(homepage).toContain("filter:hue-rotate(115deg) saturate(1.08)");
+  });
+
 });
