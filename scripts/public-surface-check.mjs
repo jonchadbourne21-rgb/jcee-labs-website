@@ -314,16 +314,16 @@ try {
   })`);
   if (!/Intelligence\s*that leaves\s*receipts\./.test(commercial.title ?? "") || commercial.distributionLink || !commercial.story || !commercial.inquiry)
     failures.push("Customer-led homepage contract failed: " + JSON.stringify(commercial));
-  // The second homepage section is a customer-facing product presentation;
-  // it must remain legible and actionable without altering the original dark hero.
+  // The product second act must share the orbital-blue canvas and show
+  // plainly illustrative authority/effect/evidence receipt content.
   const productOverview = await evaluate(page.send, `(() => {
     const hero = document.querySelector('.customer-hero');
     const panel = document.querySelector('#product-overview');
     const heading = document.querySelector('#product-overview-title');
     const scenario = document.querySelector('#scenario-heading');
-    const image = panel?.querySelector('img');
     const primary = panel?.querySelector('a.wl-product-primary');
     const offers = [...(panel?.querySelectorAll('.wl-product-offer') ?? [])];
+    const receipt = panel?.querySelector('.wl-receipt');
     const flow = hero && panel && scenario
       ? !!(hero.compareDocumentPosition(panel) & Node.DOCUMENT_POSITION_FOLLOWING)
         && !!(panel.compareDocumentPosition(scenario) & Node.DOCUMENT_POSITION_FOLLOWING)
@@ -337,23 +337,28 @@ try {
       primaryHref: primary?.getAttribute('href'),
       offers: offers.map(item => item.querySelector('h3')?.textContent),
       offerHeadingColors: offers.map(item => getComputedStyle(item.querySelector('h3')).color),
-      image: image?.getAttribute('src'),
-      imageAlt: image?.getAttribute('alt'),
+      receiptBackground: receipt ? getComputedStyle(receipt).backgroundColor : null,
+      receiptTitle: receipt?.querySelector('h3')?.textContent,
+      receiptState: receipt?.querySelector('.wl-receipt-state')?.textContent?.replace(/\\s+/g, ' ').trim(),
+      receiptExample: receipt?.getAttribute('data-demo') === 'illustrative'
+        && receipt.textContent?.includes('NOT A LIVE RECEIPT'),
       scopeDisclosure: !!panel?.textContent?.includes('recorded tests do not establish general production')
+        && !!panel?.textContent?.includes('not an executed customer workflow')
     };
   })()`);
   if (
     !productOverview.flow ||
-    !/Put AI to work\.\s*Stay in control\./.test(productOverview.heading ?? "") ||
-    productOverview.panelBackground !== "rgb(247, 247, 243)" ||
-    productOverview.headingColor !== "rgb(11, 16, 24)" ||
-    productOverview.primaryBackground !== "rgb(13, 23, 36)" ||
+    !/Put AI to work\\.\\s*Stay in control\\./.test(productOverview.heading ?? "") ||
+    productOverview.panelBackground !== "rgb(8, 11, 18)" ||
+    productOverview.headingColor !== "rgb(240, 245, 251)" ||
+    productOverview.primaryBackground !== "rgb(106, 184, 255)" ||
     !productOverview.primaryHref?.endsWith("/consultation") ||
     !productOverview.offers?.includes("Workflow Assurance assessment") ||
     !productOverview.offers?.includes("JCEE Infrastructure") ||
-    !productOverview.offerHeadingColors?.every(color => color === "rgb(16, 27, 41)") ||
-    !productOverview.image?.endsWith("/visuals/jcee-authority-hero-v3.webp") ||
-    !productOverview.imageAlt ||
+    !productOverview.offerHeadingColors?.every(color => color === "rgb(240, 245, 251)") ||
+    !productOverview.receiptTitle?.includes("AI action receipt") ||
+    !productOverview.receiptState?.includes("HELD FOR REVIEW") ||
+    !productOverview.receiptExample ||
     !productOverview.scopeDisclosure
   ) failures.push("Homepage product section failed: " + JSON.stringify(productOverview));
 

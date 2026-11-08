@@ -2,9 +2,8 @@ import { ArrowUpRight } from "lucide-react";
 import "./worldlab-product-overview.css";
 
 /**
- * Commercial second act of the homepage. The existing orbital-blue hero is
- * unchanged; this light editorial surface reuses the earlier customer-first
- * presentation while clearly separating current services from developing software.
+ * Buyer-facing second act. Matches the orbital-blue canvas and uses a
+ * plainly illustrative receipt, not a recorded action or customer result.
  */
 export default function ProductOverview() {
   return (
@@ -41,16 +40,51 @@ export default function ProductOverview() {
               </a>
             </div>
           </div>
-          <figure className="wl-product-visual">
-            <img
-              src={`${import.meta.env.BASE_URL}visuals/jcee-authority-hero-v3.webp`}
-              width={1344}
-              height={752}
-              loading="lazy"
-              decoding="async"
-              alt="A glass core inside a titanium frame with light tracing through it."
-            />
-            <figcaption>DESIGN STUDY / THE CONSEQUENCE BOUNDARY</figcaption>
+
+          <figure className="wl-product-visual" aria-label="Illustrative AI action receipt interface, not a record of a real customer action">
+            <div className="wl-product-orbit wl-product-orbit-one" aria-hidden="true" />
+            <div className="wl-product-orbit wl-product-orbit-two" aria-hidden="true" />
+            <div className="wl-product-node wl-product-node-one" aria-hidden="true" />
+            <div className="wl-product-node wl-product-node-two" aria-hidden="true" />
+            <div className="wl-receipt" data-demo="illustrative">
+              <div className="wl-receipt-top">
+                <span className="wl-receipt-mark" aria-hidden="true"><i /><i /></span>
+                <span>JCEE WORLDLAB / INTERFACE STUDY</span>
+                <span>FIG. 002</span>
+              </div>
+              <div className="wl-receipt-heading">
+                <p className="wl-receipt-overline">CONSEQUENTIAL ACTION / CONTROL RECORD</p>
+                <h3 className="wl-receipt-title">AI action receipt<span className="wl-receipt-period">.</span></h3>
+              </div>
+              <div className="wl-receipt-state">
+                <span className="wl-receipt-led" aria-hidden="true" />
+                <strong>HELD FOR REVIEW</strong>
+                <span className="wl-receipt-no-effect">NO CHANGE EXECUTED</span>
+              </div>
+              <dl className="wl-receipt-entries">
+                <div>
+                  <dt>01 / REQUEST</dt>
+                  <dd>Restart production service</dd>
+                </div>
+                <div>
+                  <dt>02 / CURRENT AUTHORITY</dt>
+                  <dd>Paused pending review</dd>
+                </div>
+                <div>
+                  <dt>03 / OBSERVED EFFECT</dt>
+                  <dd>No change executed</dd>
+                </div>
+                <div>
+                  <dt>04 / EVIDENCE</dt>
+                  <dd>Decision and outcome recorded</dd>
+                </div>
+              </dl>
+              <div className="wl-receipt-bottom">
+                <div className="wl-receipt-fingerprint" aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /></div>
+                <span>EXAMPLE INTERFACE<br /><strong>NOT A LIVE RECEIPT</strong></span>
+              </div>
+            </div>
+            <figcaption>CONCEPT / AUTHORITY → EFFECT → EVIDENCE</figcaption>
           </figure>
         </div>
 
@@ -90,7 +124,8 @@ export default function ProductOverview() {
           <p className="wl-product-limit">
             Assessments are individually scoped. JCEE Infrastructure remains
             in development; recorded tests do not establish general production
-            readiness or customer outcomes.
+            readiness or customer outcomes. The action receipt above is an
+            illustrative design, not an executed customer workflow.
           </p>
         </div>
       </div>

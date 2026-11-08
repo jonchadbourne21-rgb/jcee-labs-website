@@ -249,8 +249,8 @@ try {
   const { send, close } = await connect(debugPort);
   const specs = [
     // Capture the approved customer journey and retain the engineering review surfaces.
-    { name: "Product showcase desktop", route: "/", selector: "#product-overview", width: 1440, height: 900, minHeight: 300, file: "product-showcase-desktop.png", assetUrl: "/visuals/jcee-authority-hero-v3.webp" },
-    { name: "Product showcase iPhone", route: "/", selector: "#product-overview", width: 390, height: 844, mobile: true, minHeight: 300, file: "product-showcase-iphone.png", assetUrl: "/visuals/jcee-authority-hero-v3.webp" },
+    { name: "Product showcase desktop", route: "/", selector: "#product-overview", width: 1440, height: 900, minHeight: 300, file: "product-showcase-desktop.png" },
+    { name: "Product showcase iPhone", route: "/", selector: "#product-overview", width: 390, height: 844, mobile: true, minHeight: 300, file: "product-showcase-iphone.png" },
     { name: "Customer story desktop", route: "/", selector: "#story", width: 1440, height: 900, minHeight: 100, file: "customer-story-desktop.png" },
     { name: "Assurance desktop", route: "/assurance", selector: ".assurance-program", width: 1440, height: 900, file: "assurance-desktop.png" },
     { name: "Customer story iPhone", route: "/", selector: "#story", width: 390, height: 844, mobile: true, minHeight: 100, file: "customer-story-iphone.png" },
