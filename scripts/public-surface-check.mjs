@@ -314,7 +314,7 @@ try {
     story: !!document.querySelector('#story'),
     inquiry: !!document.querySelector('a.customer-button[href="${prefix}/consultation"]')
   })`);
-  if (!/Intelligence\s*that leaves\s*receipts\./.test(commercial.title ?? "") || commercial.distributionLink || !commercial.story || !commercial.inquiry)
+  if (!/Put AI to work\.\s*Stay in control\./.test(commercial.title ?? "") || commercial.distributionLink || !commercial.story || !commercial.inquiry)
     failures.push("Customer-led homepage contract failed: " + JSON.stringify(commercial));
   // The product second act must share the orbital-blue canvas and show
   // plainly illustrative authority/effect/evidence receipt content.
@@ -328,11 +328,15 @@ try {
     const receipt = panel?.querySelector('.wl-receipt');
     const waveCanvas = panel?.querySelector('canvas.wl-full-hex-field');
     const flow = hero && panel && scenario
-      ? !!(hero.compareDocumentPosition(panel) & Node.DOCUMENT_POSITION_FOLLOWING)
-        && !!(panel.compareDocumentPosition(scenario) & Node.DOCUMENT_POSITION_FOLLOWING)
+      ? !!(panel.compareDocumentPosition(hero) & Node.DOCUMENT_POSITION_FOLLOWING)
+        && !!(hero.compareDocumentPosition(scenario) & Node.DOCUMENT_POSITION_FOLLOWING)
       : false;
     return {
       flow,
+      isLandingHeading: document.querySelector(".worldlab-home h1") === heading,
+      skipTargetInProduct: panel?.contains(document.querySelector("#page-content")),
+      orbitalHeadingIsH2: hero?.querySelector("#hero-title")?.tagName === "H2",
+      redundantOrbitalActions: hero?.querySelectorAll(".customer-actions a").length ?? -1,
       heading: heading?.textContent?.replace(/\\s+/g, ' ').trim(),
       panelBackground: panel ? getComputedStyle(panel).backgroundColor : null,
       headingColor: heading ? getComputedStyle(heading).color : null,
@@ -365,6 +369,10 @@ try {
   })()`);
   if (
     !productOverview.flow ||
+    !productOverview.isLandingHeading ||
+    !productOverview.skipTargetInProduct ||
+    !productOverview.orbitalHeadingIsH2 ||
+    productOverview.redundantOrbitalActions !== 0 ||
     !/Put AI to work\.\s*Stay in control\./.test(productOverview.heading ?? "") ||
     productOverview.panelBackground !== "rgb(8, 11, 18)" ||
     productOverview.headingColor !== "rgb(240, 245, 251)" ||
@@ -423,6 +431,17 @@ try {
     (reducedMotion && waveStart.checksum !== waveEnd.checksum)) {
     failures.push("Animated hex-wave field playback/reduced-motion contract failed: " + JSON.stringify({ waveStart, waveEnd, reducedMotion, waveMeta }));
   }
+
+  // The orbital graph is deferred below the homepage landing section.
+  // Scroll into range before checking its browser controls and demo state.
+  await evaluate(page.send, "document.querySelector('.wl-orbit-mount')?.scrollIntoView({block:'center'})");
+  let orbitReady = false;
+  for (let attempt = 0; attempt < 40; attempt += 1) {
+    orbitReady = await evaluate(page.send, "document.querySelectorAll('.wl-orbit-node-controls button').length === 3");
+    if (orbitReady) break;
+    await sleep(150);
+  }
+  if (!orbitReady) failures.push("Deferred orbital scene did not initialize after scroll");
 
   // Interactive upgrade browser contract: no simulated status is production telemetry.
   const interactive = await evaluate(page.send, `(() => {

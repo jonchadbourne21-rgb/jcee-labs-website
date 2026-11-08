@@ -24,9 +24,9 @@
 #root#root#root .worldlab-home .wl-hero-kicker i { width:5px;height:5px;flex-shrink:0;border-radius:50%;background:var(--wl-green); }
 #root#root#root .worldlab-home .customer-hero-grid { display:grid; grid-template-columns:1.06fr 1fr; column-gap:0; row-gap:0; align-items:start; }
 #root#root#root .worldlab-home .customer-hero-grid > .wl-hero-copy { padding-top:0; max-width:none; position:relative; z-index:2; }
-#root#root#root .worldlab-home .customer-hero h1 { font-size:clamp(66px,6.65vw,102px); line-height:1.035; margin:0; max-width:none; text-wrap:initial; letter-spacing:-.058em!important; }
-#root#root#root .worldlab-home .customer-hero h1 .wl-receipt-word { color:#a5b5c6!important; text-shadow:0 3px #27364b,0 6px 9px #000!important; letter-spacing:inherit!important; }
-#root#root#root .worldlab-home .customer-hero h1 .wl-period { color:var(--wl-green)!important; text-shadow:none!important; }
+#root#root#root .worldlab-home .customer-hero h2#hero-title { font-size:clamp(66px,6.65vw,102px); line-height:1.035; margin:0; max-width:none; text-wrap:initial; letter-spacing:-.058em!important; }
+#root#root#root .worldlab-home .customer-hero h2#hero-title .wl-receipt-word { color:#a5b5c6!important; text-shadow:0 3px #27364b,0 6px 9px #000!important; letter-spacing:inherit!important; }
+#root#root#root .worldlab-home .customer-hero h2#hero-title .wl-period { color:var(--wl-green)!important; text-shadow:none!important; }
 #root#root#root .worldlab-home .customer-hero .customer-deck { font-size:15px; line-height:1.85; max-width:44ch; margin:28px 0; }
 #root#root#root .worldlab-home .customer-actions { display:flex; align-items:center; flex-wrap:wrap; gap:23px; margin-top:26px; }
 #root#root#root .worldlab-home .customer-button { background:var(--wl-green)!important; border:1px solid var(--wl-green)!important; color:#071827!important; padding:16px 20px; font-size:12px; border-radius:3px; box-shadow:none; text-decoration:none; min-height:50px; }
@@ -97,13 +97,13 @@
 #root#root#root .worldlab-home .brand-footer :is(a,strong,p,small) { color:var(--wl-muted)!important; }
 #root#root#root .worldlab-home .brand-footer .brand-footer-links>div>span { color:var(--wl-green)!important; }
 @media(min-width:1550px) { #root#root#root .worldlab-home .wl-sculpture { height:600px; } }
-@media(max-width:1100px) and (min-width:701px) { #root#root#root .worldlab-home .customer-shell { padding-inline:32px; } #root#root#root .worldlab-home .customer-hero h1 { font-size:72px; } #root#root#root .worldlab-home .wl-sculpture { height:510px;margin-left:-60px; } #root#root#root .worldlab-home .customer-hero .customer-actions { gap:16px; } #root#root#root .worldlab-home .hero-trust-links { gap:20px; } }
+@media(max-width:1100px) and (min-width:701px) { #root#root#root .worldlab-home .customer-shell { padding-inline:32px; } #root#root#root .worldlab-home .customer-hero h2#hero-title { font-size:72px; } #root#root#root .worldlab-home .wl-sculpture { height:510px;margin-left:-60px; } #root#root#root .worldlab-home .customer-hero .customer-actions { gap:16px; } #root#root#root .worldlab-home .hero-trust-links { gap:20px; } }
 @media(max-width:900px) { #root#root#root .worldlab-home .customer-hero-grid { grid-template-columns:1fr; } #root#root#root .worldlab-home .wl-sculpture { height:510px; margin:20px 0 0; } #root#root#root .worldlab-home .customer-hero .customer-deck { max-width:50ch; } #root#root#root .worldlab-home .hero-trust { flex-wrap:wrap; } }
 @media(max-width:700px) {
  #root#root#root .worldlab-home .customer-shell { padding-inline:22px; }
  #root#root#root .worldlab-home > .customer-hero { padding-top:36px; }
  #root#root#root .worldlab-home .wl-hero-kicker { font-size:7px!important; letter-spacing:1.1px; margin-bottom:25px; gap:7px; }
- #root#root#root .worldlab-home .customer-hero h1 { font-size:clamp(54px,14vw,84px);letter-spacing:-.058em!important;line-height:1.045; }
+ #root#root#root .worldlab-home .customer-hero h2#hero-title { font-size:clamp(54px,14vw,84px);letter-spacing:-.058em!important;line-height:1.045; }
  #root#root#root .worldlab-home .customer-hero .customer-deck { font-size:13px; line-height:1.8; margin:24px 0; }
  #root#root#root .worldlab-home .customer-hero .customer-actions { align-items:flex-start;flex-direction:column;gap:18px;margin-top:22px; }
  #root#root#root .worldlab-home .customer-hero .customer-button { order:-1;min-height:48px;padding:14px 18px; }
@@ -154,3 +154,23 @@
 #root#root#root .worldlab-home .brand-footer-meta span { color:var(--wl-muted)!important; }
 
 #root#root#root .worldlab-home img.wl-fallback-art { inset:0; width:100%; height:100%; object-fit:contain; filter:hue-rotate(115deg) saturate(1.08); }
+
+/* Orbital sculpture is secondary: a still image remains while its interactive
+   Canvas / WebGL modules are deferred until this section nears the viewport. */
+#root#root#root .worldlab-home .wl-orbit-mount { position:relative; min-width:0; }
+#root#root#root .worldlab-home .customer-hero h2#hero-title {
+  font-size:clamp(66px,6.65vw,102px)!important;
+  line-height:1.035!important;
+  margin:0;
+  letter-spacing:-.058em!important;
+  text-wrap:initial;
+}
+@media(max-width:1100px) and (min-width:701px) {
+  #root#root#root .worldlab-home .customer-hero h2#hero-title { font-size:72px!important; }
+}
+@media(max-width:700px) {
+  #root#root#root .worldlab-home .customer-hero h2#hero-title { font-size:clamp(54px,14vw,84px)!important; }
+}
+@media(max-width:370px) {
+  #root#root#root .worldlab-home .customer-hero h2#hero-title { font-size:36px!important; }
+}

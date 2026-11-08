@@ -10,13 +10,19 @@ const waves = readFileSync(path.join(root, "components/HexWaveField.tsx"), "utf8
 const rustSource = readFileSync(path.join(root, "../../visuals/worldlab/src/main.rs"), "utf8");
 const rustPacket = JSON.parse(readFileSync(path.join(root, "generated/worldlab-hex-wave.json"), "utf8"));
 
-describe("homepage product second act", () => {
-  it("preserves the approved orbital hero and places the commercial section before the demo", () => {
-    expect(home).toContain("<EvidenceCore />");
+describe("homepage binary-first landing", () => {
+  it("puts the binary landing first and keeps the orbital sculpture deferred and secondary", () => {
+    expect(home).toContain("<DeferredEvidenceCore />");
     expect(home).toContain("wl-receipt-word");
     expect(home).toContain('<ProductOverview />');
-    expect(home.indexOf("<ProductOverview />")).toBeGreaterThan(home.indexOf('id="page-content"'));
-    expect(home.indexOf("<ProductOverview />")).toBeLessThan(home.indexOf("<ScenarioTerminal />"));
+    expect(home.indexOf("<ProductOverview />")).toBeLessThan(home.indexOf('id="orbital-study"'));
+    expect(home.indexOf('id="orbital-study"')).toBeLessThan(home.indexOf("<ScenarioTerminal />"));
+    expect(section).toContain('<h1 id="product-overview-title">');
+    expect(section).toContain('id="page-content" tabIndex={-1}');
+    expect(home).toContain('<h2 id="hero-title">');
+    const originalHero = home.slice(home.indexOf('id="orbital-study"'), home.indexOf("<ScenarioTerminal />"));
+    expect(originalHero).not.toContain('className="customer-actions"');
+    expect(originalHero).not.toContain('EXPLORE THE WORK');
   });
 
   it("restores the customer-led wording with real conversion paths", () => {
