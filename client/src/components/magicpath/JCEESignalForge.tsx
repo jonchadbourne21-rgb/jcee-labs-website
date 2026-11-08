@@ -7,7 +7,7 @@ const phases = [{
   title: 'Every action\nstarts with\na signal.',
   detail: 'One instruction. One authorized action. Follow what happens when the response disappears.',
   state: 'READY TO TRANSMIT',
-  color: '#9bdcd5'
+  color: '#6ab8ff'
 }, {
   name: 'Silence',
   label: '02 / THE UNKNOWN',
@@ -21,14 +21,14 @@ const phases = [{
   title: 'Look before\nyou act\nagain.',
   detail: 'Inspect the target state. Check current permission. In this fictional example, the action is already complete.',
   state: 'EFFECT OBSERVED',
-  color: '#a0e0d3'
+  color: '#95cbff'
 }, {
   name: 'Proof',
   label: '04 / THE RECORD',
   title: 'Make the\ninvisible\ninspectable.',
   detail: 'The example records what was requested, what was checked, and what was observed. No repeat dispatch.',
   state: 'TRACE COMPLETE',
-  color: '#9bdcd5'
+  color: '#6ab8ff'
 }];
 const credits = [['MagicPath', 'The experience', 'This responsive React / TypeScript prototype, its animated canvas sculpture, and its interactive narrative.'], ['vidIQ', 'The narrative spark', 'The suggested hook “When your AI agent goes ghost.” was creative input, not a measured audience result.'], ['Higgsfield', 'Artwork preflight', 'An image concept was explored, but no Higgsfield image or video was generated or used here.'], ['Rust', 'Separate engineering layer', 'Signal Forge is React and Canvas 2D. Rust-backed website visual assets are a separate implementation.']];
 function Mark({
@@ -89,7 +89,7 @@ function OrbitalField({
         scale = Math.min(width * .37, height * .43);
       const warm = phase === 1;
       const ambient = ctx.createRadialGradient(cx, cy, 0, cx, cy, scale * 1.6);
-      ambient.addColorStop(0, warm ? 'rgba(121,79,32,.16)' : 'rgba(34,100,99,.16)');
+      ambient.addColorStop(0, warm ? 'rgba(121,79,32,.16)' : 'rgba(36,100,170,.18)');
       ambient.addColorStop(1, 'rgba(4,8,10,0)');
       ctx.fillStyle = ambient;
       ctx.fillRect(0, 0, width, height);
@@ -124,7 +124,7 @@ function OrbitalField({
           const p = project(x, y, z);
           i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
         }
-        ctx.strokeStyle = warm ? `rgba(213,159,80,${.15 + j * .014})` : `rgba(116,183,179,${.10 + j * .016})`;
+        ctx.strokeStyle = warm ? `rgba(213,159,80,${.15 + j * .014})` : `rgba(100,166,232,${.10 + j * .016})`;
         ctx.lineWidth = j % 4 === 0 ? 1.0 : .55;
         ctx.stroke();
       }
@@ -137,7 +137,7 @@ function OrbitalField({
           const p = project(r * Math.cos(a), r * Math.sin(a), .235 * Math.sin(b));
           i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
         }
-        ctx.strokeStyle = warm ? 'rgba(166,127,72,.20)' : 'rgba(93,147,150,.17)';
+        ctx.strokeStyle = warm ? 'rgba(166,127,72,.20)' : 'rgba(68,127,196,.20)';
         ctx.lineWidth = .6;
         ctx.stroke();
       }
@@ -149,7 +149,7 @@ function OrbitalField({
           const p = project(r * Math.cos(a), r * Math.sin(a) * .45, Math.sin(a) * r * .65 + (j - 1) * .14);
           i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
         }
-        ctx.strokeStyle = j === 1 ? 'rgba(170,216,204,.48)' : 'rgba(118,153,153,.15)';
+        ctx.strokeStyle = j === 1 ? 'rgba(106,184,255,.52)' : 'rgba(77,133,207,.18)';
         ctx.lineWidth = j === 1 ? .9 : .6;
         ctx.stroke();
       }
@@ -157,18 +157,18 @@ function OrbitalField({
         const a = i * 2.39996 + t * (i % 2 ? 1 : -1) * .14,
           r = .53 + i % 8 * .12;
         const p = project(Math.cos(a) * r, Math.sin(a) * r, Math.sin(i * 3.7) * .53);
-        ctx.fillStyle = warm ? 'rgba(247,201,129,.7)' : 'rgba(183,227,217,.65)';
+        ctx.fillStyle = warm ? 'rgba(247,201,129,.7)' : 'rgba(176,218,255,.72)';
         ctx.beginPath();
         ctx.arc(p.x, p.y, i % 11 === 0 ? 1.7 : .7, 0, Math.PI * 2);
         ctx.fill();
       }
       const core = ctx.createRadialGradient(cx, cy, 0, cx, cy, scale * .43);
-      core.addColorStop(0, warm ? 'rgba(254,207,132,.38)' : 'rgba(166,225,206,.28)');
-      core.addColorStop(.22, warm ? 'rgba(207,150,72,.10)' : 'rgba(87,166,154,.10)');
+      core.addColorStop(0, warm ? 'rgba(254,207,132,.38)' : 'rgba(106,184,255,.29)');
+      core.addColorStop(.22, warm ? 'rgba(207,150,72,.10)' : 'rgba(69,134,209,.12)');
       core.addColorStop(1, 'transparent');
       ctx.fillStyle = core;
       ctx.fillRect(cx - scale, cy - scale, scale * 2, scale * 2);
-      ctx.fillStyle = warm ? '#e6b877' : '#b9e8db';
+      ctx.fillStyle = warm ? '#e6b877' : '#6ab8ff';
       ctx.beginPath();
       ctx.arc(cx, cy, 2.2, 0, Math.PI * 2);
       ctx.fill();
@@ -180,7 +180,7 @@ function OrbitalField({
       observer.disconnect();
     };
   }, [phase, motion]);
-  return <canvas ref={canvas} className="sf-canvas" role="img" aria-label="Procedurally rendered orbital sculpture, shifting from cool green to amber when the outcome is uncertain" onPointerMove={e => {
+  return <canvas ref={canvas} className="sf-canvas" role="img" aria-label="Procedurally rendered orbital sculpture, shifting from orbital blue to amber when the outcome is uncertain" onPointerMove={e => {
     const r = e.currentTarget.getBoundingClientRect();
     pointer.current = {
       x: (e.clientX - r.left) / r.width - .5,
