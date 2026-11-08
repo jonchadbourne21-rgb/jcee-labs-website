@@ -39,6 +39,8 @@ const CompanyPage = lazy(() => import("./pages/CompanyPage"));
 const FounderPage = lazy(() => import("./pages/FounderPage"));
 const PublicationPage = lazy(() => import("./pages/PublicationPage"));
 const BB84PaperPage = lazy(() => import("./pages/BB84PaperPage"));
+const SignalForgePage = lazy(() => import("./pages/SignalForgePage"));
+const EvidenceEnginePage = lazy(() => import("./pages/EvidenceEnginePage"));
 
 function RouteShimmer() {
   return (
@@ -151,6 +153,8 @@ function Router() {
           component={PublicationPage}
         />
         <Route path="/technology" component={TechnologyPage} />
+        <Route path="/experiences/signal-forge" component={SignalForgePage} />
+        <Route path="/experiences/evidence-engine" component={EvidenceEnginePage} />
         <Route path="/research/fields" component={ResearchFieldsPage} />
         <Route path="/research/publications">
           {() => <ResearchTopicPage topic="publications" />}

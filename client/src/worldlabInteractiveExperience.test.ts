@@ -7,6 +7,7 @@ const read = (name: string) => readFileSync(path.join(root, name), "utf8");
 const home = read("pages/Home.tsx");
 const orbit = read("components/OrbitGraphWebGL.tsx");
 const core = read("components/EvidenceCore.tsx");
+const deferred = read("components/DeferredEvidenceCore.tsx");
 const simulator = read("components/ReceiptSimulator.tsx");
 const bento = read("components/TechnicalBento.tsx");
 const scroll = read("components/WorkflowScrollytelling.tsx");
@@ -23,6 +24,9 @@ const graph = JSON.parse(read("generated/worldlab-orbit-graph.json"));
 describe("JCEE WorldLab pre-publication interactive visual candidate", () => {
   it("connects the recovered Rust world scene to bounded WebGL2 graph states", () => {
     expect(core).toContain("<OrbitGraphWebGL paused={paused} />");
+    expect(home).toContain("<DeferredEvidenceCore />");
+    expect(deferred).toContain('lazy(() => import("./EvidenceCore"))');
+    expect(deferred).toContain("IntersectionObserver");
     expect(core).toContain("createEvidenceCore");
     expect(orbit).toContain('getContext("webgl2"');
     expect(orbit).toContain('graph from "../generated/worldlab-orbit-graph.json"');
@@ -61,7 +65,7 @@ describe("JCEE WorldLab pre-publication interactive visual candidate", () => {
 
   it("keeps nav labels accessible and avoids scramble motion under reduced motion", () => {
     expect(header).toContain("<ScrambleLabel");
-    expect(core).toContain('text="FIG. 001 / WORLDLAB ORBIT"');
+    expect(core).toContain('text="FIG. 002 / WORLDLAB ORBIT"');
     expect(scramble).toContain("aria-label={text}");
     expect(scramble).toContain("prefers-reduced-motion: reduce");
     expect(scramble).toContain("window.clearInterval");

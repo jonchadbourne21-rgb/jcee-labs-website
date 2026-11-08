@@ -3,7 +3,7 @@ import HexWaveField from "./HexWaveField";
 import "./worldlab-product-overview.css";
 
 /**
- * Buyer-facing second act. Matches the orbital-blue canvas and uses a
+ * Buyer-facing homepage lead. Matches the orbital-blue canvas and uses a
  * plainly illustrative receipt, not a recorded action or customer result.
  */
 export default function ProductOverview() {
@@ -16,18 +16,18 @@ export default function ProductOverview() {
       <div className="wl-hex-background" aria-hidden="true">
         <HexWaveField variant="worldlab" className="wl-full-hex-field" />
       </div>
-      <div className="customer-shell wl-product-overview-inner">
+      <div id="page-content" tabIndex={-1} className="customer-shell wl-product-overview-inner">
         <div className="wl-product-stage">
           <div className="wl-product-stage-copy">
             <p className="wl-product-eyebrow">
               <span aria-hidden="true" className="wl-product-dot" />
-              02 / THE PRODUCT &amp; THE WORK
+              01 / THE PRODUCT &amp; THE WORK
             </p>
-            <h2 id="product-overview-title">
+            <h1 id="product-overview-title">
               Put AI to work.
               <br />
               Stay in control.
-            </h2>
+            </h1>
             <p className="wl-product-lead">
               Bring AI into the workflows your business depends on. We help
               your team connect systems, define what automation can do, and
@@ -50,7 +50,7 @@ export default function ProductOverview() {
               <div className="wl-receipt-top">
                 <span className="wl-receipt-mark" aria-hidden="true"><i /><i /></span>
                 <span>JCEE WORLDLAB / INTERFACE STUDY</span>
-                <span>FIG. 002</span>
+                <span>FIG. 001</span>
               </div>
               <div className="wl-receipt-heading">
                 <p className="wl-receipt-overline">CONSEQUENTIAL ACTION / CONTROL RECORD</p>

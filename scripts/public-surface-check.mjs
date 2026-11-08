@@ -314,7 +314,7 @@ try {
     story: !!document.querySelector('#story'),
     inquiry: !!document.querySelector('a.customer-button[href="${prefix}/consultation"]')
   })`);
-  if (!/Intelligence\s*that leaves\s*receipts\./.test(commercial.title ?? "") || commercial.distributionLink || !commercial.story || !commercial.inquiry)
+  if (!/Put AI to work\.\s*Stay in control\./.test(commercial.title ?? "") || commercial.distributionLink || !commercial.story || !commercial.inquiry)
     failures.push("Customer-led homepage contract failed: " + JSON.stringify(commercial));
   // The product second act must share the orbital-blue canvas and show
   // plainly illustrative authority/effect/evidence receipt content.
@@ -328,11 +328,15 @@ try {
     const receipt = panel?.querySelector('.wl-receipt');
     const waveCanvas = panel?.querySelector('canvas.wl-full-hex-field');
     const flow = hero && panel && scenario
-      ? !!(hero.compareDocumentPosition(panel) & Node.DOCUMENT_POSITION_FOLLOWING)
-        && !!(panel.compareDocumentPosition(scenario) & Node.DOCUMENT_POSITION_FOLLOWING)
+      ? !!(panel.compareDocumentPosition(hero) & Node.DOCUMENT_POSITION_FOLLOWING)
+        && !!(hero.compareDocumentPosition(scenario) & Node.DOCUMENT_POSITION_FOLLOWING)
       : false;
     return {
       flow,
+      isLandingHeading: document.querySelector(".worldlab-home h1") === heading,
+      skipTargetInProduct: panel?.contains(document.querySelector("#page-content")),
+      orbitalHeadingIsH2: hero?.querySelector("#hero-title")?.tagName === "H2",
+      redundantOrbitalActions: hero?.querySelectorAll(".customer-actions a").length ?? -1,
       heading: heading?.textContent?.replace(/\\s+/g, ' ').trim(),
       panelBackground: panel ? getComputedStyle(panel).backgroundColor : null,
       headingColor: heading ? getComputedStyle(heading).color : null,
@@ -365,6 +369,10 @@ try {
   })()`);
   if (
     !productOverview.flow ||
+    !productOverview.isLandingHeading ||
+    !productOverview.skipTargetInProduct ||
+    !productOverview.orbitalHeadingIsH2 ||
+    productOverview.redundantOrbitalActions !== 0 ||
     !/Put AI to work\.\s*Stay in control\./.test(productOverview.heading ?? "") ||
     productOverview.panelBackground !== "rgb(8, 11, 18)" ||
     productOverview.headingColor !== "rgb(240, 245, 251)" ||
@@ -423,6 +431,17 @@ try {
     (reducedMotion && waveStart.checksum !== waveEnd.checksum)) {
     failures.push("Animated hex-wave field playback/reduced-motion contract failed: " + JSON.stringify({ waveStart, waveEnd, reducedMotion, waveMeta }));
   }
+
+  // The orbital graph is deferred below the homepage landing section.
+  // Scroll into range before checking its browser controls and demo state.
+  await evaluate(page.send, "document.querySelector('.wl-orbit-mount')?.scrollIntoView({block:'center'})");
+  let orbitReady = false;
+  for (let attempt = 0; attempt < 40; attempt += 1) {
+    orbitReady = await evaluate(page.send, "document.querySelectorAll('.wl-orbit-node-controls button').length === 3");
+    if (orbitReady) break;
+    await sleep(150);
+  }
+  if (!orbitReady) failures.push("Deferred orbital scene did not initialize after scroll");
 
   // Interactive upgrade browser contract: no simulated status is production telemetry.
   const interactive = await evaluate(page.send, `(() => {
@@ -611,6 +630,85 @@ try {
       );
     }
   }
+
+
+  // The two MagicPath components are separate browser-only public exhibits.
+  // Exercise interaction, not merely their source signatures or rendered HTML.
+  await navigate(page.send, baseUrl, "/experiences/signal-forge");
+  const forgeReady = await evaluate(page.send, `({
+    sceneButtons: document.querySelectorAll('.sf-sequence button').length,
+    title: document.querySelector('#sf-title')?.textContent,
+    boundary: document.querySelector('.experience-gateway')?.textContent,
+    canvas: !!document.querySelector('.sf-canvas')
+  })`);
+  if (forgeReady.sceneButtons !== 4 || !forgeReady.title?.includes("Every action") ||
+      !forgeReady.boundary?.includes("Fictional data") || !forgeReady.canvas) {
+    failures.push("Signal Forge initial browser interface invalid: " + JSON.stringify(forgeReady));
+  }
+  await evaluate(page.send, "document.querySelector('.sf-hero-actions .sf-primary')?.click()");
+  let timedOut = false;
+  for (let step = 0; step < 55; step += 1) {
+    timedOut = await evaluate(page.send, "document.querySelector('#sf-title')?.textContent?.includes('No response.')");
+    if (timedOut) break;
+    await sleep(100);
+  }
+  if (!timedOut) failures.push("Signal Forge timed-out scene did not appear");
+  await evaluate(page.send, "document.querySelector('.sf-choice.safe')?.click()");
+  let observed = false;
+  for (let step = 0; step < 50; step += 1) {
+    observed = await evaluate(page.send, "document.querySelector('.sf-outcome strong')?.textContent?.includes('No repeat dispatch')");
+    if (observed) break;
+    await sleep(100);
+  }
+  if (!observed) failures.push("Signal Forge safe state inspection did not resolve to no repeat dispatch");
+  await evaluate(page.send, "document.querySelector('.sf-choice.risk')?.click()");
+  const blindRetry = await evaluate(page.send,
+    "document.querySelector('.sf-outcome strong')?.textContent?.includes('blind retry risks a duplicate')");
+  if (!blindRetry) failures.push("Signal Forge unsafe illustrative branch missing");
+
+  await navigate(page.send, baseUrl, "/experiences/evidence-engine");
+  const evidenceReady = await evaluate(page.send, `({
+    heading: document.querySelector('h1')?.textContent,
+    records: document.querySelectorAll('.je-record-row').length,
+    initialStatus: document.querySelector('.je-record-row.selected .je-status')?.textContent,
+    boundary: document.querySelector('.experience-gateway')?.textContent
+  })`);
+  if (evidenceReady.heading !== "Know what happened." || evidenceReady.records !== 4 ||
+      !evidenceReady.initialStatus?.includes("Uncertain") || !evidenceReady.boundary?.includes("Fictional records")) {
+    failures.push("Evidence Engine initial browser interface invalid: " + JSON.stringify(evidenceReady));
+  }
+  const evidenceSidebar = await evaluate(page.send, `(() => {
+    const nav = document.querySelector('.je-sidebar nav[aria-label="Workspace navigation"]');
+    const sidebar = document.querySelector('.je-sidebar');
+    const items = [...(nav?.querySelectorAll('.je-nav-item') || [])].map(x => x.getBoundingClientRect());
+    const area = sidebar?.getBoundingClientRect();
+    return {
+      rows: items.length,
+      direction: nav ? getComputedStyle(nav).flexDirection : '',
+      stacked: items.every((r,i) => i === 0 || r.top >= items[i-1].bottom - 1),
+      bounded: !!area && items.every(r => r.left >= area.left - 1 && r.right <= area.right + 1)
+    };
+  })()`);
+  if (evidenceSidebar.rows !== 3 || evidenceSidebar.direction !== "column" ||
+      !evidenceSidebar.stacked || !evidenceSidebar.bounded) {
+    failures.push("Evidence Engine workspace navigation is not vertically stacked in the sidebar: " + JSON.stringify(evidenceSidebar));
+  }
+  await evaluate(page.send, "document.querySelector('.je-feature-copy .je-button-primary')?.click()");
+  let reconciled = false;
+  for (let step = 0; step < 40; step += 1) {
+    reconciled = await evaluate(page.send, `(() => {
+      const status = document.querySelector('.je-record-row.selected .je-status')?.textContent;
+      const note = document.querySelector('.je-announcement')?.textContent;
+      return !!status?.includes("Observed") && !!note?.includes("No retry was sent");
+    })()`);
+    if (reconciled) break;
+    await sleep(100);
+  }
+  if (!reconciled) failures.push("Evidence Engine browser-local reconciliation did not update observed status");
+  await evaluate(page.send, "document.querySelectorAll('.je-filters button')[1]?.click()");
+  const reviewRows = await evaluate(page.send, "document.querySelectorAll('.je-record-row').length");
+  if (reviewRows !== 1) failures.push("Evidence Engine review filter does not reflect reconciled records");
+  console.log("MagicPath exhibits exercised: Signal Forge four scenes, inspection/retry branch; Evidence Engine local reconciliation and filtering.");
 
   await navigate(page.send, baseUrl, "/research");
   const researchTopics = await evaluate(

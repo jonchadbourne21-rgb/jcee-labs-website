@@ -5,44 +5,37 @@ import ProductOverview from "@/components/ProductOverview";
 import ReceiptSimulator from "@/components/ReceiptSimulator";
 import TechnicalBento from "@/components/TechnicalBento";
 import EvidenceTrace from "@/components/EvidenceTrace";
-import EvidenceCore from "@/components/EvidenceCore";
+import DeferredEvidenceCore from "@/components/DeferredEvidenceCore";
 import "./home-editorial-refresh.css";
 
 export default function Home() {
   return (
     <main id="top" className="unified-home customer-home worldlab-home">
       <CoreHeader integrated contactLabel="Let’s talk" />
+      <ProductOverview />
       <section
-        id="page-content"
+        id="orbital-study"
         tabIndex={-1}
         className="customer-shell customer-hero"
         aria-labelledby="hero-title"
       >
-        <p className="customer-kicker wl-hero-kicker"><i aria-hidden="true" /> JCEE INFRASTRUCTURE / BUILT FOR CONSEQUENCE</p>
+        <p className="customer-kicker wl-hero-kicker"><i aria-hidden="true" /> 02 / ENGINEERING & ASSURANCE</p>
         <div className="customer-hero-grid">
           <div className="wl-hero-copy">
-            <h1 id="hero-title">
+            <h2 id="hero-title">
               Intelligence
               <br />
               that leaves
               <br />
               <span className="wl-receipt-word">receipts<span className="wl-period">.</span></span>
-            </h1>
+            </h2>
             <p className="customer-deck">
               Assurance and execution infrastructure between machine
               intelligence and real-world consequence. Connect the work to
               current permission, a verifiable result, and a record you can trust.
             </p>
-            <div className="customer-actions">
-              <a className="customer-link" href="/capabilities/infrastructure">
-                Explore the infrastructure ↗
-              </a>
-              <a className="customer-button" href="/consultation">
-                Discuss your workflow <span aria-hidden="true">↗</span>
-              </a>
-            </div>
           </div>
-          <EvidenceCore />
+          <DeferredEvidenceCore />
           <nav className="hero-trust" aria-label="Explore the engineering foundation">
             <p>EXPLORE THE ENGINEERING</p>
             <div className="hero-trust-links">
@@ -53,10 +46,8 @@ export default function Home() {
           </nav>
         </div>
         <ReceiptSimulator />
-        <div className="wl-hero-baseline"><span>FROM INTELLIGENCE TO CONSEQUENCE</span><a href="#scenario-heading">EXPLORE THE WORK <span aria-hidden="true">↓</span></a></div>
+        <div className="wl-hero-baseline"><span>THE ENGINEERING BEHIND CONTROL</span></div>
       </section>
-
-      <ProductOverview />
 
       <ScenarioTerminal />
 
@@ -301,6 +292,8 @@ export default function Home() {
           <a href="/vow">VOW / execution &amp; recovery ↗</a>
           <a href="/qcs">QCS / authority research ↗</a>
           <a href="/assurance">JCEE Assurance ↗</a>
+          <a href="/experiences/signal-forge">Signal Forge · Try the scenario ↗</a>
+          <a href="/experiences/evidence-engine">Evidence Engine · Explore the interface ↗</a>
           <a href="/research/evidence-standards#evidence-ladder">
             Evidence standards ↗
           </a>

@@ -34,7 +34,11 @@ try {
     assert.equal(v.founderHref,'/founder');
     assert.equal(v.logo,true);
     assert.ok(!/PUBLIC SITE|We build for the distance|EVIDENCE OVER CLAIMS/i.test(v.text));
-    assert.equal(v.links.length,19);
+    // Exactly two new reviewed experience destinations were added to the
+    // original 19-link footer. Preserve the count AND the exact identities.
+    assert.equal(v.links.length,21);
+    assert.equal(v.links.filter(href => href === '/experiences/signal-forge').length,1);
+    assert.equal(v.links.filter(href => href === '/experiences/evidence-engine').length,1);
     assert.ok(v.top.bottom<=v.nav.top+1 && v.nav.bottom<=v.identity.top+1);
     assert.ok(v.lockup.bottom<=v.founderPos.top+1 && v.identity.bottom<=v.meta.top+1);
     assert.ok(v.scrollWidth<=width); assert.ok(v.bodyWidth<=width);
