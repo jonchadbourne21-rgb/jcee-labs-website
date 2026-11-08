@@ -18,6 +18,8 @@ There are no Rust dependencies. The checked-in outputs are:
 - `client/src/generated/worldlab-mesh.json` — indexed vertices, normals, quads, and material IDs.
 - `client/public/brand/worldlab-sculpture.svg` — the same geometry projected as a static fallback.
 - `client/src/worldlab-cohesion.css` — generated palette and shared public page styling.
+- `client/src/generated/worldlab-hex-wave.json` — Rust-sampled oscillation table powering the restored August 18 changing-glyph background.
+- `client/src/generated/worldlab-orbit-graph.json` — three labeled workflow-state points and edges, supplied to a WebGL2 overlay.
 - `client/src/generated/worldlab-hex-wave.json` — bounded, 256-sample periodic sine table plus blue palette, glyph alphabet and waveform counts. The native TypeScript Canvas renderer interpolates these Rust-generated samples and changes hexadecimal glyphs over time; Rust is an offline asset compiler, not a site runtime.
 
 Edit `src/main.rs` for geometry and palette values, or `src/theme.css.in` for shared layout and styles. Commit regenerated assets with their sources. `--check` fails if an output differs; CI also checks finite coordinates, normalized normals, valid indices, material coverage, and a fixed face budget. Rust build files stay under `node_modules/.cache/worldlab-rust` so production source verification stays strict.
@@ -28,7 +30,7 @@ The full-width commercial homepage section reuses the original August 18, 2026 `
 
 ## Browser behavior
 
-The camera starts facing the J. Slow, bounded motion preserves the silhouette. Drag or arrow keys rotate the model; Reset restores the initial camera. Pause, reduced-motion preferences, offscreen suspension, tab visibility, density limits, and cleanup are preserved. The SVG is available if a drawing context cannot be created. The production site consumes checked-in assets, so the existing publisher does not need Rust installed.
+The camera starts facing the J. Slow, bounded motion preserves the silhouette. Drag or arrow keys rotate the model; Reset restores the initial camera. Pause, reduced-motion preferences, offscreen suspension, tab visibility, density limits, and cleanup are preserved. The SVG is available if a drawing context cannot be created. The production site consumes checked-in assets, so the existing publisher does not need Rust installed. The orbit graph uses native browser WebGL2 where supported; the existing Rust-mesh Canvas renderer remains a fallback. Graph state, wave glyphs, and simulated audit examples are illustrative, never live records, authority checks or production telemetry.
 
 ## Verification
 
