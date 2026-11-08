@@ -2,6 +2,8 @@ import CoreHeader from "@/components/CoreHeader";
 import BrandFooter from "@/components/BrandFooter";
 import ScenarioTerminal from "@/components/ScenarioTerminal";
 import ProductOverview from "@/components/ProductOverview";
+import ReceiptSimulator from "@/components/ReceiptSimulator";
+import TechnicalBento from "@/components/TechnicalBento";
 import EvidenceTrace from "@/components/EvidenceTrace";
 import EvidenceCore from "@/components/EvidenceCore";
 import "./home-editorial-refresh.css";
@@ -50,6 +52,7 @@ export default function Home() {
             </div>
           </nav>
         </div>
+        <ReceiptSimulator />
         <div className="wl-hero-baseline"><span>FROM INTELLIGENCE TO CONSEQUENCE</span><a href="#scenario-heading">EXPLORE THE WORK <span aria-hidden="true">↓</span></a></div>
       </section>
 
@@ -171,42 +174,7 @@ export default function Home() {
           <br />
           for getting work done.
         </h2>
-        <div className="customer-cards">
-          <article>
-            <span>01 / IT & BUSINESS SYSTEMS</span>
-            <h3>Resolve uncertain changes.</h3>
-            <p>
-              Employee access, internal service requests, and approved changes
-              across your service desk and business applications.
-            </p>
-            <p className="customer-card-detail">
-              Start with: an approved access change whose outcome is unclear.
-            </p>
-          </article>
-          <article>
-            <span>02 / SOFTWARE OPERATIONS</span>
-            <h3>Make changes accountable.</h3>
-            <p>
-              Engineering workflows that need clear permissions, execution
-              records, and recovery procedures.
-            </p>
-            <p className="customer-card-detail">
-              Start with: a deployment that needs an approval and a confirmed
-              result.
-            </p>
-          </article>
-          <article>
-            <span>03 / BUSINESS OPERATIONS</span>
-            <h3>Connect the process.</h3>
-            <p>
-              Internal requests and approval processes that cross multiple
-              applications.
-            </p>
-            <p className="customer-card-detail">
-              Start with: an internal request passed between teams and tools.
-            </p>
-          </article>
-        </div>
+        <TechnicalBento />
         <p className="customer-note">
           Example engagement areas. Each workflow begins with an assessment of
           the existing systems and requirements.
