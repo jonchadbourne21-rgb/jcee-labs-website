@@ -336,6 +336,7 @@ try {
       primaryBackground: primary ? getComputedStyle(primary).backgroundColor : null,
       primaryHref: primary?.getAttribute('href'),
       offers: offers.map(item => item.querySelector('h3')?.textContent),
+      offerHeadingColors: offers.map(item => getComputedStyle(item.querySelector('h3')).color),
       image: image?.getAttribute('src'),
       imageAlt: image?.getAttribute('alt'),
       scopeDisclosure: !!panel?.textContent?.includes('recorded tests do not establish general production')
@@ -350,6 +351,7 @@ try {
     !productOverview.primaryHref?.endsWith("/consultation") ||
     !productOverview.offers?.includes("Workflow Assurance assessment") ||
     !productOverview.offers?.includes("JCEE Infrastructure") ||
+    !productOverview.offerHeadingColors?.every(color => color === "rgb(16, 27, 41)") ||
     !productOverview.image?.endsWith("/visuals/jcee-authority-hero-v3.webp") ||
     !productOverview.imageAlt ||
     !productOverview.scopeDisclosure
