@@ -19,14 +19,15 @@
 .worldlab-experience-page .experience-gateway nav{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
 .worldlab-experience-page .site-header .wordmark,
 .worldlab-experience-page .brand-footer{font-family:var(--worldlab-font)}
-.worldlab-experience-page :is(.je-app,.sf-app) :is(h1,h2,h3){
+/* The site-wide #root#root heading rule intentionally uses high specificity.
+ * Match that contract with an even more specific exhibit-only display-family
+ * rule, rather than changing typography across all public pages. */
+#root#root#root .worldlab-experience-page :is(.je-app,.sf-app) :is(h1,h2,h3),
+#root#root#root .worldlab-experience-page :is(.je-app,.sf-app) :is(h1,h2,h3) :is(span,em,strong){
   font-family:var(--wl-display)!important
 }
 .worldlab-experience-page :is(.je-app,.sf-app) :is(p,li,label,button,input,textarea,select,em,strong){
   font-family:var(--worldlab-font)!important
-}
-.worldlab-experience-page :is(.je-app,.sf-app) :is(h1,h2,h3) :is(span,em,strong){
-  font-family:var(--wl-display)!important
 }
 .worldlab-experience-page :is(.je-app,.sf-app) :is(button,a,input):focus-visible,
 .worldlab-experience-page .experience-gateway a:focus-visible{

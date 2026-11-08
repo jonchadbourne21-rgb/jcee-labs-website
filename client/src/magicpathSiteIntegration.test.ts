@@ -44,6 +44,7 @@ describe("MagicPath concepts are isolated, bounded public experiences", () => {
       expect(s).not.toContain("JCEE’s live website is unchanged.");
       expect(s).not.toContain("JCEE’s live website has not been changed.");
     }
+    expect(read("pages/worldlab-experiences.css")).toContain("#root#root#root .worldlab-experience-page :is(.je-app,.sf-app) :is(h1,h2,h3)");
     expect(forgePage).toContain("No live agent actions");
     expect(enginePage).toContain("No live system access");
     expect(forge).toContain("Fictional data");
