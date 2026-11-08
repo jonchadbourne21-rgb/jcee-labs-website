@@ -489,7 +489,7 @@ try {
       let parent = element;
       while (parent && getComputedStyle(parent).backgroundColor === 'rgba(0, 0, 0, 0)') parent = parent.parentElement;
       const foreground = luminance(rgb(getComputedStyle(element).color));
-      const background = luminance(rgb(parent ? getComputedStyle(parent).backgroundColor : 'rgb(8, 10, 9)'));
+      const background = luminance(rgb(parent ? getComputedStyle(parent).backgroundColor : 'rgb(8, 11, 18)'));
       return (Math.max(foreground, background) + .05) / (Math.min(foreground, background) + .05);
     };
     return {
@@ -501,12 +501,12 @@ try {
     };
   })()`
   );
-  if (assuranceArchitectureColors.copy !== "rgb(163, 175, 166)") {
+  if (assuranceArchitectureColors.copy !== "rgb(168, 183, 200)") {
     failures.push(
-      `Assurance architecture copy does not use the shared graphite-theme ink: ${assuranceArchitectureColors.copy}`
+      `Assurance architecture copy does not use the shared orbital-blue theme muted ink: ${assuranceArchitectureColors.copy}`
     );
   }
-  if (assuranceArchitectureColors.label !== "rgb(181, 248, 150)") {
+  if (assuranceArchitectureColors.label !== "rgb(106, 184, 255)") {
     failures.push(
       `Assurance architecture label has unexpected color: ${assuranceArchitectureColors.label}`
     );
