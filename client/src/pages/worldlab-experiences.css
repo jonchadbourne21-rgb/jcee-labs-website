@@ -31,6 +31,11 @@
 #root#root#root .worldlab-experience-page :is(.je-app,.sf-app) :is(h1,h2,h3) :is(span,em,strong){
   font-family:var(--wl-display)!important
 }
+/* The shared website cascade makes H1 descendants white by default.
+ * Restore blue only for Signal Forge's deliberate highlighted phrase. */
+#root#root#root#root .worldlab-experience-page .sf-app .sf-hero h1 em{
+  color:var(--wl-accent,#6ab8ff)!important;
+}
 .worldlab-experience-page :is(.je-app,.sf-app) :is(p,li,label,button,input,textarea,select,em,strong){
   font-family:var(--worldlab-font)!important
 }

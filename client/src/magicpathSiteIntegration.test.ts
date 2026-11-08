@@ -53,6 +53,8 @@ describe("MagicPath concepts are isolated, bounded public experiences", () => {
     expect(forgeCss).toContain("--sf-bg:var(--wl-bg,#080b12)");
     expect(forgeCss).toContain("--sf-accent:var(--wl-accent,#6ab8ff)");
     expect(forgeCss).toContain("background:var(--sf-accent)");
+    expect(read("pages/worldlab-experiences.css")).toContain(".sf-app .sf-hero h1 em");
+    expect(read("pages/worldlab-experiences.css")).toContain("color:var(--wl-accent,#6ab8ff)!important");
     expect(forge).toContain("rgba(100,166,232,");
     expect(forge).toContain("shifting from orbital blue to amber");
     expect(forge).toContain("color: '#efb869'");
