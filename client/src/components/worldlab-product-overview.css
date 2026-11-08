@@ -145,7 +145,8 @@
 #root#root#root .worldlab-home .wl-full-hex-field {
   position: absolute;
   inset: 0;
-  display: block;
+  display: block !important;
+  visibility: visible !important;
   width: 100%;
   height: 100%;
   z-index: 0;
