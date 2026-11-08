@@ -4,7 +4,7 @@ import "./worldlab-product-overview.css";
 /**
  * Commercial second act of the homepage. The existing orbital-blue hero is
  * unchanged; this light editorial surface reuses the earlier customer-first
- * presentation without implying that JCEE Infrastructure is production-ready.
+ * presentation while clearly separating current services from developing software.
  */
 export default function ProductOverview() {
   return (
