@@ -43,6 +43,23 @@ describe("homepage product second act", () => {
     expect(css).not.toContain("background: #f7f7f3");
   });
 
+  it("supports the founder's refined perspective and binary wave background", () => {
+    expect(section).toContain("One engagement you can scope today. One platform for controlled AI execution.");
+    expect(section).not.toContain("One platform we're building.");
+    expect(section).toContain('className="wl-binary-wave"');
+    expect((section.match(/<textPath /g) ?? [])).toHaveLength(5);
+    expect(section).not.toContain("wl-product-orbit");
+    expect(section).not.toContain("wl-product-node");
+    expect(css).toContain(".wl-binary-strings text");
+    expect(css).toContain("animation: wl-binary-drift 24s");
+    expect(css).toContain("rotateY(-4.5deg) rotateX(1deg) rotateZ(.75deg)");
+    expect(css).toContain("rotateY(-3deg) rotateX(.75deg) rotateZ(.6deg)");
+    expect(css).toContain("rotateZ(-.4deg)");
+    expect(css).not.toContain(".wl-product-orbit");
+    expect(css).not.toContain(".wl-product-node");
+    expect(css).toContain("prefers-reduced-motion");
+  });
+
   it("shows an explicitly fictional AI action receipt, not a fabricated evidence claim", () => {
     expect(section).toContain('data-demo="illustrative"');
     expect(section).toContain("AI action receipt");
