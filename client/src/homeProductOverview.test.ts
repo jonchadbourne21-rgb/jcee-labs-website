@@ -51,6 +51,9 @@ describe("homepage product second act", () => {
     expect(section).not.toContain("One platform we're building.");
     expect(section).toContain('import HexWaveField from "./HexWaveField"');
     expect(section).toContain('<HexWaveField variant="worldlab" className="wl-full-hex-field" />');
+    expect(section).toContain('className="wl-hex-background"');
+    expect(css).toContain(".wl-hex-background");
+    expect(waves).toContain("(canvas.parentElement ?? canvas).getBoundingClientRect()");
     expect(section).not.toContain("wl-binary-wave");
     expect(section).not.toContain("textPath");
     expect(section).not.toContain("wl-product-orbit");
