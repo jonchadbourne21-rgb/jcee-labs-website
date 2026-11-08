@@ -196,5 +196,13 @@
     "description": "The broad operational-burden claim did not survive the tested comparison. A narrower integration-surface result remains.",
     "type": "article",
     "publishedTime": "2026-09-14T00:00:00Z"
+  },
+  "/experiences/signal-forge": {
+    "title": "Signal Forge — Interactive Consequence Story | JCEE WorldLab",
+    "description": "A browser-only fictional workflow illustrating why a timeout is not permission to retry an AI agent action. No real systems or production receipts."
+  },
+  "/experiences/evidence-engine": {
+    "title": "Evidence Engine — Interactive Interface Study | JCEE WorldLab",
+    "description": "A fictional JCEE WorldLab evidence-review workspace with local sample records, review queue, and record inspector. No real agent execution or telemetry."
   }
 }

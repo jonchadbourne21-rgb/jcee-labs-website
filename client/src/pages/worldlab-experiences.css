@@ -1,0 +1,39 @@
+/* Site integration for separate MagicPath fictional experience pages. */
+.worldlab-experience-page{
+  --worldlab-font:'DM Sans',Arial,sans-serif;
+  --wl-display:'Space Grotesk',Arial,sans-serif;
+  background:#080b12;color:#f0f5fb;min-height:100vh;
+  color-scheme:dark;font-family:var(--worldlab-font);
+}
+.worldlab-experience-page .experience-gateway{
+  display:flex;gap:16px;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;padding:16px max(24px,calc((100% - 1260px)/2));
+  background:#0b1420;border-bottom:1px solid #26394b;
+  font-family:var(--worldlab-font);color:#acc3d7;
+}
+.worldlab-experience-page .experience-gateway p{margin:0;font-family:var(--worldlab-font);font-size:12px;line-height:1.5}
+.worldlab-experience-page .experience-gateway a{
+  text-decoration:underline;text-decoration-color:#518bc0;text-underline-offset:4px;
+  color:#a2d3fb;font-family:var(--worldlab-font);font-size:12px;
+}
+.worldlab-experience-page .experience-gateway nav{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.worldlab-experience-page .site-header .wordmark,
+.worldlab-experience-page .brand-footer{font-family:var(--worldlab-font)}
+.worldlab-experience-page :is(.je-app,.sf-app) :is(h1,h2,h3){
+  font-family:var(--wl-display)!important
+}
+.worldlab-experience-page :is(.je-app,.sf-app) :is(p,li,label,button,input,textarea,select,em,strong){
+  font-family:var(--worldlab-font)!important
+}
+.worldlab-experience-page :is(.je-app,.sf-app) :is(h1,h2,h3) :is(span,em,strong){
+  font-family:var(--wl-display)!important
+}
+.worldlab-experience-page :is(.je-app,.sf-app) :is(button,a,input):focus-visible,
+.worldlab-experience-page .experience-gateway a:focus-visible{
+  outline:2px solid #6ab8ff;outline-offset:4px
+}
+@media(max-width:700px){
+  .worldlab-experience-page .experience-gateway{padding:13px 20px;gap:9px}
+  .worldlab-experience-page .experience-gateway p{font-size:11px}
+  .worldlab-experience-page .experience-gateway nav{gap:14px}
+}

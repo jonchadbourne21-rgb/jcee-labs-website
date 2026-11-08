@@ -292,6 +292,8 @@ export default function Home() {
           <a href="/vow">VOW / execution &amp; recovery ↗</a>
           <a href="/qcs">QCS / authority research ↗</a>
           <a href="/assurance">JCEE Assurance ↗</a>
+          <a href="/experiences/signal-forge">Signal Forge · Try the scenario ↗</a>
+          <a href="/experiences/evidence-engine">Evidence Engine · Explore the interface ↗</a>
           <a href="/research/evidence-standards#evidence-ladder">
             Evidence standards ↗
           </a>

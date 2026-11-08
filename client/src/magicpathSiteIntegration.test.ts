@@ -1,0 +1,50 @@
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+import { describe, expect, it } from "vitest";
+
+const read = (name: string) => readFileSync(resolve(import.meta.dirname, name), "utf8");
+const routes = JSON.parse(read("content/publicRoutes.json")) as string[];
+const metadata = JSON.parse(read("content/routeMetadata.json")) as Record<string, {title:string;description:string}>;
+const app = read("App.tsx"), home = read("pages/Home.tsx"), footer = read("components/BrandFooter.tsx");
+const forge = read("components/magicpath/JCEESignalForge.tsx");
+const engine = read("components/magicpath/JCEEWorldLabEvidenceEngine.tsx");
+const forgePage = read("pages/SignalForgePage.tsx"), enginePage = read("pages/EvidenceEnginePage.tsx");
+
+describe("MagicPath concepts are isolated, bounded public experiences", () => {
+  it("registers lazy routes and metadata without eager-loading the homepage", () => {
+    for (const route of ["/experiences/signal-forge","/experiences/evidence-engine"]) {
+      expect(routes.filter(x => x === route)).toHaveLength(1);
+      expect(metadata[route].title).toContain("JCEE WorldLab");
+      expect(home).toContain(`href="${route}"`);
+      expect(footer).toContain(`href="${route}"`);
+    }
+    expect(app).toContain('lazy(() => import("./pages/SignalForgePage"))');
+    expect(app).toContain('lazy(() => import("./pages/EvidenceEnginePage"))');
+    expect(app).toContain('<Route path="/experiences/signal-forge" component={SignalForgePage} />');
+    expect(app).toContain('<Route path="/experiences/evidence-engine" component={EvidenceEnginePage} />');
+    expect(home).not.toContain("<JCEESignalForge");
+    expect(home).not.toContain("<JCEEWorldLabEvidenceEngine");
+  });
+  it("preserves correct website chrome and primary H1 within each prototype", () => {
+    for (const s of [forgePage,enginePage]) {
+      expect(s).toContain("<CoreHeader");
+      expect(s).toContain('id="page-content" tabIndex={-1}');
+      expect(s).toContain("<BrandFooter");
+      expect(s).toContain("usePageSeo");
+    }
+    expect(forge).toContain('id="sf-title"');
+    expect(engine).toContain("Know what happened.");
+  });
+  it("retains local-only semantics without connected backend or false publication language", () => {
+    for (const s of [forge,engine]) {
+      expect(s).toMatch(/production_evidence:\s*false/);
+      expect(s).not.toMatch(/\bfetch\s*\(|\bWebSocket\s*\(/);
+      expect(s).not.toContain("JCEE’s live website is unchanged.");
+      expect(s).not.toContain("JCEE’s live website has not been changed.");
+    }
+    expect(forgePage).toContain("No live agent actions");
+    expect(enginePage).toContain("No live system access");
+    expect(forge).toContain("Fictional data");
+    expect(engine).toContain("browser-local");
+  });
+});
