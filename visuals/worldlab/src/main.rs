@@ -223,12 +223,12 @@ fn build() -> Mesh {
 fn theme() -> String {
     let mut s = include_str!("theme.css.in").to_string();
     for (token, value) in [
-        ("BG", "#080a09"),
-        ("INK", "#f0f1ec"),
-        ("MUTED", "#a3afa6"),
-        ("LINE", "#303c33"),
-        ("ACCENT", "#b5f896"),
-        ("SURFACE", "#101610"),
+        ("BG", "#080b12"),
+        ("INK", "#f0f5fb"),
+        ("MUTED", "#a8b7c8"),
+        ("LINE", "#2a3a49"),
+        ("ACCENT", "#6ab8ff"),
+        ("SURFACE", "#0d1724"),
     ] {
         s = s.replace(&format!("{{{{{token}}}}}"), value);
     }
@@ -290,6 +290,6 @@ mod tests {
     fn identical_builds_and_resolved_theme() {
         assert_eq!(build().json(), build().json());
         assert!(!theme().contains("{{"));
-        assert!(theme().contains("#b5f896"));
+        assert!(theme().contains("#6ab8ff"));
     }
 }
