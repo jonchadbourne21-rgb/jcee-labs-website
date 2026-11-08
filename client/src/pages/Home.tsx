@@ -1,6 +1,7 @@
 import CoreHeader from "@/components/CoreHeader";
 import BrandFooter from "@/components/BrandFooter";
 import ScenarioTerminal from "@/components/ScenarioTerminal";
+import ProductOverview from "@/components/ProductOverview";
 import EvidenceTrace from "@/components/EvidenceTrace";
 import EvidenceCore from "@/components/EvidenceCore";
 import "./home-editorial-refresh.css";
@@ -52,6 +53,8 @@ export default function Home() {
         <div className="wl-hero-baseline"><span>FROM INTELLIGENCE TO CONSEQUENCE</span><a href="#scenario-heading">EXPLORE THE WORK <span aria-hidden="true">↓</span></a></div>
       </section>
 
+      <ProductOverview />
+
       <ScenarioTerminal />
 
       <section
@@ -59,7 +62,7 @@ export default function Home() {
         className="customer-shell customer-section"
         aria-labelledby="story-title"
       >
-        <p className="customer-kicker">01 / FROM REQUEST TO RESULT</p>
+        <p className="customer-kicker">03 / FROM REQUEST TO RESULT</p>
         <h2 id="story-title">
           An approved request. An uncertain result.
           <br />
@@ -162,7 +165,7 @@ export default function Home() {
         className="customer-shell customer-section"
         aria-labelledby="fit-title"
       >
-        <p className="customer-kicker">02 / BUILT AROUND YOUR WORK</p>
+        <p className="customer-kicker">04 / BUILT AROUND YOUR WORK</p>
         <h2 id="fit-title">
           For the teams responsible
           <br />
@@ -216,7 +219,7 @@ export default function Home() {
         aria-labelledby="services-title"
       >
         <span id="engage" />
-        <p className="customer-kicker">03 / A PRACTICAL FIRST ENGAGEMENT</p>
+        <p className="customer-kicker">05 / A PRACTICAL FIRST ENGAGEMENT</p>
         <h2 id="services-title">
           Start with one workflow
           <br />
@@ -265,7 +268,7 @@ export default function Home() {
         <span id="evidence-frontier" />
         <span id="current-progress" />
         <span id="technology" />
-        <p className="customer-kicker">04 / ENGINEERING YOU CAN EXAMINE</p>
+        <p className="customer-kicker">06 / ENGINEERING YOU CAN EXAMINE</p>
         <h2 id="evidence-title">See the work behind the promise.</h2>
         <p className="customer-deck">
           Explore our recorded software results, execution and recovery
@@ -355,7 +358,7 @@ export default function Home() {
       >
         <div>
           <p className="customer-kicker">
-            05 / LET’S MAKE THE NEXT STEP USEFUL
+            07 / LET’S MAKE THE NEXT STEP USEFUL
           </p>
           <h2 id="consultation-title">
             Which workflow needs
