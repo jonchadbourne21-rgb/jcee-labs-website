@@ -343,7 +343,7 @@ try {
   })()`);
   if (
     !productOverview.flow ||
-    !/Put AI to work\\.\\s*Stay in control\\./.test(productOverview.heading ?? "") ||
+    !/Put AI to work\.\s*Stay in control\./.test(productOverview.heading ?? "") ||
     productOverview.panelBackground !== "rgb(247, 247, 243)" ||
     productOverview.headingColor !== "rgb(11, 16, 24)" ||
     productOverview.primaryBackground !== "rgb(13, 23, 36)" ||
