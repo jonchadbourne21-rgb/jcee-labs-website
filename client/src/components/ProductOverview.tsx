@@ -1,4 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
+import HexWaveField from "./HexWaveField";
 import "./worldlab-product-overview.css";
 
 /**
@@ -12,6 +13,7 @@ export default function ProductOverview() {
       className="wl-product-overview"
       aria-labelledby="product-overview-title"
     >
+      <HexWaveField variant="worldlab" className="wl-full-hex-field" />
       <div className="customer-shell wl-product-overview-inner">
         <div className="wl-product-stage">
           <div className="wl-product-stage-copy">
@@ -42,28 +44,6 @@ export default function ProductOverview() {
           </div>
 
           <figure className="wl-product-visual" aria-label="Illustrative AI action receipt interface, not a record of a real customer action">
-            <svg
-              className="wl-binary-wave"
-              viewBox="0 0 720 460"
-              preserveAspectRatio="xMidYMid meet"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <defs>
-                <path id="wl-binary-path-a" d="M -50 112 C 165 4 300 217 770 89" />
-                <path id="wl-binary-path-b" d="M -60 175 C 150 51 365 292 770 150" />
-                <path id="wl-binary-path-c" d="M -55 248 C 160 120 355 380 770 234" />
-                <path id="wl-binary-path-d" d="M -45 334 C 150 196 394 456 770 310" />
-                <path id="wl-binary-path-e" d="M -50 412 C 172 282 382 520 770 390" />
-              </defs>
-              <g className="wl-binary-strings">
-                <text><textPath href="#wl-binary-path-a">01001101 10110010 00101101 11001010 01100110 10100101 00111001 01101010</textPath></text>
-                <text><textPath href="#wl-binary-path-b">10110100 01101001 11000101 00110110 10010101 01100110 11001001 00101101</textPath></text>
-                <text><textPath href="#wl-binary-path-c">00101110 10011010 01010110 11100100 01101101 10010110 01011001 10100110</textPath></text>
-                <text><textPath href="#wl-binary-path-d">11010010 00110101 10101100 01001011 10011010 01100101 00101110 10110010</textPath></text>
-                <text><textPath href="#wl-binary-path-e">01100101 10010110 01011011 00101101 11001001 00110110 10101100 01101001</textPath></text>
-              </g>
-            </svg>
             <div className="wl-receipt" data-demo="illustrative">
               <div className="wl-receipt-top">
                 <span className="wl-receipt-mark" aria-hidden="true"><i /><i /></span>
