@@ -51,6 +51,8 @@ describe("MagicPath concepts are isolated, bounded public experiences", () => {
     expect(engine).toContain("browser-local");
     expect(browser).toContain("Signal Forge timed-out scene did not appear");
     expect(browser).toContain("Evidence Engine browser-local reconciliation did not update observed status");
+    expect(browser).toContain("Evidence Engine workspace navigation is not vertically stacked in the sidebar");
+    expect(read("pages/worldlab-experiences.css")).toContain('.je-sidebar nav[aria-label="Workspace navigation"]');
     expect(footerVisual).toContain("assert.equal(v.links.length,21)");
     expect(footerVisual).toContain("href === '/experiences/signal-forge'");
     expect(footerVisual).toContain("href === '/experiences/evidence-engine'");

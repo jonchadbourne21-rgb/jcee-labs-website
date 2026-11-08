@@ -19,6 +19,11 @@
 .worldlab-experience-page .experience-gateway nav{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
 .worldlab-experience-page .site-header .wordmark,
 .worldlab-experience-page .brand-footer{font-family:var(--worldlab-font)}
+/* A global website nav rule uses flex-row; preserve MagicPath's original
+ * vertically stacked Evidence Engine sidebar within its own scope. */
+#root#root#root .worldlab-experience-page .je-app .je-sidebar nav[aria-label="Workspace navigation"]{
+  display:flex;flex-direction:column;align-items:stretch;gap:0;width:100%
+}
 /* The site-wide #root#root heading rule intentionally uses high specificity.
  * Match that contract with an even more specific exhibit-only display-family
  * rule, rather than changing typography across all public pages. */

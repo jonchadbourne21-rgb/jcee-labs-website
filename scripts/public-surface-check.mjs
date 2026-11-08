@@ -677,6 +677,22 @@ try {
       !evidenceReady.initialStatus?.includes("Uncertain") || !evidenceReady.boundary?.includes("Fictional records")) {
     failures.push("Evidence Engine initial browser interface invalid: " + JSON.stringify(evidenceReady));
   }
+  const evidenceSidebar = await evaluate(page.send, `(() => {
+    const nav = document.querySelector('.je-sidebar nav[aria-label="Workspace navigation"]');
+    const sidebar = document.querySelector('.je-sidebar');
+    const items = [...(nav?.querySelectorAll('.je-nav-item') || [])].map(x => x.getBoundingClientRect());
+    const area = sidebar?.getBoundingClientRect();
+    return {
+      rows: items.length,
+      direction: nav ? getComputedStyle(nav).flexDirection : '',
+      stacked: items.every((r,i) => i === 0 || r.top >= items[i-1].bottom - 1),
+      bounded: !!area && items.every(r => r.left >= area.left - 1 && r.right <= area.right + 1)
+    };
+  })()`);
+  if (evidenceSidebar.rows !== 3 || evidenceSidebar.direction !== "column" ||
+      !evidenceSidebar.stacked || !evidenceSidebar.bounded) {
+    failures.push("Evidence Engine workspace navigation is not vertically stacked in the sidebar: " + JSON.stringify(evidenceSidebar));
+  }
   await evaluate(page.send, "document.querySelector('.je-feature-copy .je-button-primary')?.click()");
   let reconciled = false;
   for (let step = 0; step < 40; step += 1) {
