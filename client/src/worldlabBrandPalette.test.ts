@@ -12,9 +12,9 @@ const service = source("client/src/pages/InfrastructurePage.tsx");
 describe("WorldLab production orbital-blue identity", () => {
   it("keeps Rust-owned theme inputs and generated CSS byte-identical", () => {
     const tokens = Object.fromEntries(
-      [...rust.matchAll(/\\("([A-Z]+)", "(#[a-f0-9]+)"\\)/g)].map(match => [match[1], match[2]])
+      [...rust.matchAll(/\("([A-Z]+)", "(#[a-f0-9]+)"\)/g)].map(match => [match[1], match[2]])
     ) as Record<string, string>;
-    const resolved = template.replace(/\\{\\{([A-Z]+)\\}\\}/g, (_, key: string) => {
+    const resolved = template.replace(/\{\{([A-Z]+)\}\}/g, (_, key: string) => {
       expect(tokens[key], `missing theme token ${key}`).toBeDefined();
       return tokens[key];
     });
