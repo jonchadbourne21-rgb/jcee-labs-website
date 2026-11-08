@@ -4,15 +4,11 @@ import CoreHeader from "@/components/CoreHeader";
 import BrandFooter from "@/components/BrandFooter";
 import "./home-editorial-refresh.css";
 import "./worldlab-service-polish.css";
-import "./worldlab-blue-preview.css";
 
 export default function InfrastructurePage() {
   usePageSeo("/capabilities/infrastructure");
-  // Review-only visual variant: the approved green palette is the default.
-  const bluePreview = typeof window !== "undefined" &&
-    new URLSearchParams(window.location.search).get("palette") === "blue";
   return (
-    <main id="top" className={`customer-home customer-service${bluePreview ? " worldlab-blue-preview" : ""}`}>
+    <main id="top" className="customer-home customer-service">
       <CoreHeader current="solutions" />
       <section
         id="page-content"
