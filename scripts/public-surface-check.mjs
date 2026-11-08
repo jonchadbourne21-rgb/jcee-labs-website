@@ -324,7 +324,7 @@ try {
     const primary = panel?.querySelector('a.wl-product-primary');
     const offers = [...(panel?.querySelectorAll('.wl-product-offer') ?? [])];
     const receipt = panel?.querySelector('.wl-receipt');
-    const binaryWave = panel?.querySelector('.wl-binary-wave');
+    const waveCanvas = panel?.querySelector('canvas.wl-full-hex-field');
     const flow = hero && panel && scenario
       ? !!(hero.compareDocumentPosition(panel) & Node.DOCUMENT_POSITION_FOLLOWING)
         && !!(panel.compareDocumentPosition(scenario) & Node.DOCUMENT_POSITION_FOLLOWING)
@@ -340,8 +340,15 @@ try {
       offerHeadingColors: offers.map(item => getComputedStyle(item.querySelector('h3')).color),
       receiptBackground: receipt ? getComputedStyle(receipt).backgroundColor : null,
       receiptPerspective: receipt ? getComputedStyle(receipt).transform : null,
-      binaryWaveCount: binaryWave?.querySelectorAll('textPath').length ?? 0,
-      binaryWavePointerEvents: binaryWave ? getComputedStyle(binaryWave).pointerEvents : null,
+      waveCanvasWidth: waveCanvas?.width ?? 0,
+      waveCanvasHeight: waveCanvas?.height ?? 0,
+      waveCanvasCover: waveCanvas && panel
+        ? Math.abs(waveCanvas.getBoundingClientRect().width - panel.getBoundingClientRect().width) < 2
+          && Math.abs(waveCanvas.getBoundingClientRect().height - panel.getBoundingClientRect().height) < 2
+        : false,
+      waveCanvasPointerEvents: waveCanvas ? getComputedStyle(waveCanvas).pointerEvents : null,
+      waveCanvasOpacity: waveCanvas ? Number(getComputedStyle(waveCanvas).opacity) : 0,
+      staticBinaryCount: panel?.querySelectorAll('.wl-binary-wave, .wl-binary-strings').length ?? -1,
       legacyOrbitalCount: panel?.querySelectorAll('.wl-product-orbit, .wl-product-node').length ?? -1,
       founderCopy: panel?.textContent?.includes('One engagement you can scope today. One platform for controlled AI execution.')
         && !panel?.textContent?.includes("One platform we're building."),
@@ -364,8 +371,12 @@ try {
     !productOverview.offers?.includes("JCEE Infrastructure") ||
     !productOverview.offerHeadingColors?.every(color => color === "rgb(240, 245, 251)") ||
     !productOverview.receiptTitle?.includes("AI action receipt") ||
-    productOverview.binaryWaveCount !== 5 ||
-    productOverview.binaryWavePointerEvents !== "none" ||
+    productOverview.waveCanvasWidth < 100 ||
+    productOverview.waveCanvasHeight < 200 ||
+    !productOverview.waveCanvasCover ||
+    productOverview.waveCanvasPointerEvents !== "none" ||
+    productOverview.waveCanvasOpacity < 0.75 ||
+    productOverview.staticBinaryCount !== 0 ||
     productOverview.legacyOrbitalCount !== 0 ||
     !productOverview.founderCopy ||
     !productOverview.receiptState?.includes("HELD FOR REVIEW") ||
