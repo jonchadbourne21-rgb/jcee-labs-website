@@ -1,3 +1,5 @@
+/* The global generated WorldLab theme uses four #root IDs for heading ink;
+   these light-panel headings need matching ID weight plus scoped classes. */
 /*
  * Homepage section 02: return the earlier high-contrast customer presentation
  * below the approved orbital-blue hero. Keep the new hero, site-wide identity,
@@ -52,7 +54,7 @@
   background: #327fb4;
 }
 
-#root#root#root .worldlab-home .wl-product-stage h2 {
+#root#root#root#root .worldlab-home .wl-product-stage h2 {
   color: #0b1018 !important;
   font-family: var(--wl-display) !important;
   font-size: clamp(48px, 5.8vw, 82px) !important;
@@ -195,7 +197,7 @@
   border-color: #bfd4e6 !important;
 }
 
-#root#root#root .worldlab-home .wl-product-offer h3 {
+#root#root#root#root .worldlab-home .wl-product-offer h3 {
   color: #101b29 !important;
   font-size: clamp(23px, 2.5vw, 31px) !important;
   font-weight: 600 !important;
