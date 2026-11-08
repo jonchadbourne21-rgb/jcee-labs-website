@@ -1,13 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import graph from "../generated/worldlab-orbit-graph.json";
 
 /** Decorative, browser-local graph. The J sculpture beneath uses Rust-compiled mesh assets.
  * This graph never reads permissions, receipts, or production telemetry.
  */
-const NODES = [
-  { label: "AUTHORITY", x: -.61, y: .32 },
-  { label: "EXECUTION", x: .62, y: .17 },
-  { label: "EVIDENCE", x: -.04, y: -.65 },
-] as const;
+const NODES = graph.nodes;
 
 type ShaderKind = "vertex" | "fragment";
 function compile(gl: WebGL2RenderingContext, kind: ShaderKind, source: string) {
@@ -29,8 +26,9 @@ export default function OrbitGraphWebGL({ paused }: { paused: boolean }) {
   const [renderer, setRenderer] = useState<"webgl2" | "fallback">("fallback");
   const selectedRef = useRef(selected);
   const pausedRef = useRef(paused);
-  useEffect(() => { selectedRef.current = selected; }, [selected]);
-  useEffect(() => { pausedRef.current = paused; }, [paused]);
+  const requestFrameRef = useRef<(() => void) | null>(null);
+  useEffect(() => { selectedRef.current = selected; requestFrameRef.current?.(); }, [selected]);
+  useEffect(() => { pausedRef.current = paused; requestFrameRef.current?.(); }, [paused]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -85,7 +83,7 @@ export default function OrbitGraphWebGL({ paused }: { paused: boolean }) {
     const sizeLoc = gpu.getUniformLocation(program, "u_point_size");
     const nodeLoc = gpu.getUniformLocation(program, "u_nodes");
     const positions = NODES.flatMap(node => [node.x, node.y]);
-    const edges = [0, 1, 1, 2, 2, 0].flatMap(index => [NODES[index].x, NODES[index].y]);
+    const edges = graph.edges.flatMap(pair => pair.flatMap(index => [NODES[index].x, NODES[index].y]));
     let frame = 0;
     let offscreen = false;
     let yawOffset = 0;
@@ -126,6 +124,7 @@ export default function OrbitGraphWebGL({ paused }: { paused: boolean }) {
       if (!document.hidden && !offscreen && !motion.matches && !pausedRef.current) frame = requestAnimationFrame(paint);
     };
     const requestPaint = () => { if (!frame) frame = requestAnimationFrame(paint); };
+    requestFrameRef.current = requestPaint;
     const onPointerDown = (event: PointerEvent) => {
       if ((event.target as HTMLElement).closest("button")) return;
       dragging = true; pointerX = event.clientX;
@@ -154,6 +153,7 @@ export default function OrbitGraphWebGL({ paused }: { paused: boolean }) {
     resize(); setRenderer("webgl2"); requestPaint();
     return () => {
       cancelAnimationFrame(frame);
+      requestFrameRef.current = null;
       sizing.disconnect(); observer.disconnect();
       motion.removeEventListener("change", onMotion);
       document.removeEventListener("visibilitychange", onVisibility);
