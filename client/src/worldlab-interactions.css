@@ -182,8 +182,9 @@
   #root#root#root .worldlab-home .wl-bento-hero,#root#root#root .worldlab-home .wl-bento-wide {grid-column:auto;grid-row:auto;min-height:270px;}
   #root .wl-scroll-story-grid {grid-template-columns:1fr;gap:0;}
   #root .wl-scroll-story-step {min-height:35vh;}
-  #root .wl-scroll-story-visual {grid-row:1;}
-  #root .wl-scroll-story-console {position:relative;top:0;margin:24px 0 0;}
+  #root .wl-scroll-story-visual {grid-row:1; position:sticky; top:74px; z-index:3; align-self:start; padding-block:10px; background:#080b12;}
+  #root .wl-scroll-story-steps {grid-row:2;}
+  #root .wl-scroll-story-console {position:relative;top:0;margin:0;}
 }
 @media(prefers-reduced-motion:reduce) {
   #root .wl-scroll-story-step,#root .wl-scroll-story-progress i {transition:none!important;}
