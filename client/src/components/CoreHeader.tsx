@@ -1,4 +1,6 @@
 import { ArrowUpRight, Menu, X } from "lucide-react";
+import ScrambleLabel from "./ScrambleLabel";
+import "@/worldlab-interactions.css";
 import { useEffect, useRef, useState } from "react";
 
 export type CoreHeaderCurrent =
@@ -130,7 +132,7 @@ export default function CoreHeader({
         ref={mobile && index === 0 ? firstMobileLinkRef : undefined}
         onClick={mobile ? () => closeMobileMenu() : undefined}
       >
-        {link.label}
+        <ScrambleLabel text={link.label} />
       </a>
     ));
 
@@ -147,7 +149,7 @@ export default function CoreHeader({
       <nav className="desktop-nav" aria-label="Main navigation">
         {renderLinks()}
         {<details className="header-company-menu" ref={companyMenuRef}>
-          <summary>Company <span aria-hidden="true">⌄</span></summary>
+          <summary><ScrambleLabel text="Company" /> <span aria-hidden="true">⌄</span></summary>
           <div className="header-company-links">
             <a href="/company">About JCEE WorldLab</a>
             <a href="/resources">Resources</a>
