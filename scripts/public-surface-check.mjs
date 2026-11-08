@@ -348,7 +348,7 @@ try {
   })()`);
   if (
     !productOverview.flow ||
-    !/Put AI to work\\.\\s*Stay in control\\./.test(productOverview.heading ?? "") ||
+    !/Put AI to work\.\s*Stay in control\./.test(productOverview.heading ?? "") ||
     productOverview.panelBackground !== "rgb(8, 11, 18)" ||
     productOverview.headingColor !== "rgb(240, 245, 251)" ||
     productOverview.primaryBackground !== "rgb(106, 184, 255)" ||
