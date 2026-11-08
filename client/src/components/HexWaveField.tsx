@@ -43,7 +43,8 @@ export default function HexWaveField({ variant = "classic", className = "" }: He
     let disposed = false;
 
     const resize = () => {
-      const rect = canvas.getBoundingClientRect();
+      // Measure the stable wrapper, not the canvas intrinsic bitmap (which can start at 1x1).
+      const rect = (canvas.parentElement ?? canvas).getBoundingClientRect();
       width = Math.max(1, rect.width);
       height = Math.max(1, rect.height);
       dpr = Math.min(window.devicePixelRatio || 1, 1.5);
@@ -149,6 +150,7 @@ export default function HexWaveField({ variant = "classic", className = "" }: He
     const handleResize = () => { resize(); refresh(); };
     const observer = new IntersectionObserver(entries => {
       visible = entries[0]?.isIntersecting ?? true;
+      if (visible) resize();
       refresh();
     });
     const sizeObserver = new ResizeObserver(handleResize);
