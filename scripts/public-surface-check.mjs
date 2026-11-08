@@ -631,6 +631,69 @@ try {
     }
   }
 
+
+  // The two MagicPath components are separate browser-only public exhibits.
+  // Exercise interaction, not merely their source signatures or rendered HTML.
+  await navigate(page.send, baseUrl, "/experiences/signal-forge");
+  const forgeReady = await evaluate(page.send, `({
+    sceneButtons: document.querySelectorAll('.sf-sequence button').length,
+    title: document.querySelector('#sf-title')?.textContent,
+    boundary: document.querySelector('.experience-gateway')?.textContent,
+    canvas: !!document.querySelector('.sf-canvas')
+  })`);
+  if (forgeReady.sceneButtons !== 4 || !forgeReady.title?.includes("Every action") ||
+      !forgeReady.boundary?.includes("Fictional data") || !forgeReady.canvas) {
+    failures.push("Signal Forge initial browser interface invalid: " + JSON.stringify(forgeReady));
+  }
+  await evaluate(page.send, "document.querySelector('.sf-hero-actions .sf-primary')?.click()");
+  let timedOut = false;
+  for (let step = 0; step < 55; step += 1) {
+    timedOut = await evaluate(page.send, "document.querySelector('#sf-title')?.textContent?.includes('No response.')");
+    if (timedOut) break;
+    await sleep(100);
+  }
+  if (!timedOut) failures.push("Signal Forge timed-out scene did not appear");
+  await evaluate(page.send, "document.querySelector('.sf-choice.safe')?.click()");
+  let observed = false;
+  for (let step = 0; step < 50; step += 1) {
+    observed = await evaluate(page.send, "document.querySelector('.sf-outcome strong')?.textContent?.includes('No repeat dispatch')");
+    if (observed) break;
+    await sleep(100);
+  }
+  if (!observed) failures.push("Signal Forge safe state inspection did not resolve to no repeat dispatch");
+  await evaluate(page.send, "document.querySelector('.sf-choice.risk')?.click()");
+  const blindRetry = await evaluate(page.send,
+    "document.querySelector('.sf-outcome strong')?.textContent?.includes('blind retry risks a duplicate')");
+  if (!blindRetry) failures.push("Signal Forge unsafe illustrative branch missing");
+
+  await navigate(page.send, baseUrl, "/experiences/evidence-engine");
+  const evidenceReady = await evaluate(page.send, `({
+    heading: document.querySelector('h1')?.textContent,
+    records: document.querySelectorAll('.je-record-row').length,
+    initialStatus: document.querySelector('.je-record-row.selected .je-status')?.textContent,
+    boundary: document.querySelector('.experience-gateway')?.textContent
+  })`);
+  if (evidenceReady.heading !== "Know what happened." || evidenceReady.records !== 4 ||
+      !evidenceReady.initialStatus?.includes("Uncertain") || !evidenceReady.boundary?.includes("Fictional records")) {
+    failures.push("Evidence Engine initial browser interface invalid: " + JSON.stringify(evidenceReady));
+  }
+  await evaluate(page.send, "document.querySelector('.je-feature-copy .je-button-primary')?.click()");
+  let reconciled = false;
+  for (let step = 0; step < 40; step += 1) {
+    reconciled = await evaluate(page.send, `(() => {
+      const status = document.querySelector('.je-record-row.selected .je-status')?.textContent;
+      const note = document.querySelector('.je-announcement')?.textContent;
+      return !!status?.includes("Observed") && !!note?.includes("No retry was sent");
+    })()`);
+    if (reconciled) break;
+    await sleep(100);
+  }
+  if (!reconciled) failures.push("Evidence Engine browser-local reconciliation did not update observed status");
+  await evaluate(page.send, "document.querySelectorAll('.je-filters button')[1]?.click()");
+  const reviewRows = await evaluate(page.send, "document.querySelectorAll('.je-record-row').length");
+  if (reviewRows !== 1) failures.push("Evidence Engine review filter does not reflect reconciled records");
+  console.log("MagicPath exhibits exercised: Signal Forge four scenes, inspection/retry branch; Evidence Engine local reconciliation and filtering.");
+
   await navigate(page.send, baseUrl, "/research");
   const researchTopics = await evaluate(
     page.send,

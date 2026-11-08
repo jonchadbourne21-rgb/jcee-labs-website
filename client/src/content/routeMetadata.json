@@ -94,7 +94,7 @@
     "description": "A browser-only fictional workflow illustrating why a timeout is not permission to retry an AI agent action. No real systems or production receipts."
   },
   "/experiences/evidence-engine": {
-    "title": "Evidence Engine — Interactive Interface Study | JCEE WorldLab",
+    "title": "Evidence Engine — Interface Study | JCEE WorldLab",
     "description": "A fictional JCEE WorldLab evidence-review workspace with local sample records, review queue, and record inspector. No real agent execution or telemetry."
   },
   "/blog/recovery-with-current-permission": {
