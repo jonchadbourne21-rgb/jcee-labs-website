@@ -215,7 +215,7 @@
 #root#root#root .worldlab-home .wl-receipt-heading { padding: 26px 0 21px; }
 #root#root#root .worldlab-home .wl-receipt-overline {
   color: #86B9E7 !important;
-  font: 600 9px/1.6 ui-monospace, SFMono-Regular, monospace !important;
+  font: 600 9px/1.6 var(--worldlab-font) !important;
   letter-spacing: .15em;
   margin: 0 0 8px;
 }
