@@ -1,0 +1,284 @@
+/*
+ * Homepage section 02: return the earlier high-contrast customer presentation
+ * below the approved orbital-blue hero. Keep the new hero, site-wide identity,
+ * header, and all engineering/evidence surfaces unchanged.
+ */
+#root#root#root .worldlab-home .wl-product-overview {
+  color-scheme: light;
+  background: #f7f7f3 !important;
+  color: #111827 !important;
+  border-top: 1px solid #dce3ea;
+  border-bottom: 1px solid #dce3ea;
+  overflow: hidden;
+}
+
+#root#root#root .worldlab-home .wl-product-overview-inner {
+  max-width: 1440px;
+}
+
+#root#root#root .worldlab-home .wl-product-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.94fr);
+  position: relative;
+  isolation: isolate;
+  min-height: 565px;
+  padding-block: 92px 74px;
+}
+
+#root#root#root .worldlab-home .wl-product-stage-copy {
+  position: relative;
+  z-index: 2;
+  align-self: center;
+  max-width: 690px;
+}
+
+#root#root#root .worldlab-home .wl-product-eyebrow,
+#root#root#root .worldlab-home .wl-product-market-heading p:first-child,
+#root#root#root .worldlab-home .wl-product-offer-type {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font: 700 10px/1.6 var(--worldlab-font) !important;
+  letter-spacing: 0.14em;
+  color: #315e83 !important;
+}
+
+#root#root#root .worldlab-home .wl-product-dot {
+  width: 6px;
+  height: 6px;
+  flex: none;
+  border-radius: 100%;
+  background: #327fb4;
+}
+
+#root#root#root .worldlab-home .wl-product-stage h2 {
+  color: #0b1018 !important;
+  font-family: var(--wl-display) !important;
+  font-size: clamp(48px, 5.8vw, 82px) !important;
+  font-weight: 650 !important;
+  line-height: 1.04 !important;
+  letter-spacing: -0.06em !important;
+  margin: 34px 0 24px;
+  max-width: 12.4ch;
+  text-wrap: balance;
+}
+
+#root#root#root .worldlab-home .wl-product-lead {
+  color: #394754 !important;
+  font-size: clamp(16px, 1.5vw, 19px) !important;
+  line-height: 1.65 !important;
+  max-width: 48ch;
+  margin: 0;
+}
+
+#root#root#root .worldlab-home .wl-product-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 28px;
+  margin-top: 32px;
+}
+
+#root#root#root .worldlab-home .wl-product-primary,
+#root#root#root .worldlab-home .wl-product-secondary {
+  min-height: 49px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font: 650 12px/1.4 var(--worldlab-font) !important;
+  text-decoration: none;
+}
+
+#root#root#root .worldlab-home .wl-product-primary {
+  background: #0d1724;
+  border: 1px solid #0d1724;
+  border-radius: 3px;
+  color: #f7f7f3 !important;
+  padding: 13px 18px;
+}
+
+#root#root#root .worldlab-home .wl-product-primary:hover {
+  background: #18334e;
+  border-color: #18334e;
+  color: #fff !important;
+}
+
+#root#root#root .worldlab-home .wl-product-secondary {
+  color: #14283d !important;
+  border-bottom: 1px solid #aab7c5;
+  padding: 10px 0;
+}
+
+#root#root#root .worldlab-home .wl-product-secondary:hover {
+  color: #155d94 !important;
+  border-color: #155d94;
+}
+
+#root#root#root .worldlab-home .wl-product-visual {
+  position: absolute;
+  inset: 0 -68px 0 35%;
+  margin: 0;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
+#root#root#root .worldlab-home .wl-product-visual img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: 72% center;
+}
+
+#root#root#root .worldlab-home .wl-product-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, #f7f7f3 0%, #f7f7f3f2 12%, #f7f7f3ad 32%, transparent 67%),
+    linear-gradient(0deg, #f7f7f3 0%, transparent 18%);
+}
+
+#root#root#root .worldlab-home .wl-product-visual figcaption {
+  position: absolute;
+  z-index: 2;
+  right: 7%;
+  bottom: 20px;
+  color: #4a5b69 !important;
+  font: 600 9px/1.5 var(--worldlab-font) !important;
+  letter-spacing: 0.11em;
+}
+
+#root#root#root .worldlab-home .wl-product-market {
+  padding-block: 28px 72px;
+  border-top: 1px solid #d4dce3;
+}
+
+#root#root#root .worldlab-home .wl-product-market-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 6px 24px;
+  margin-bottom: 26px;
+}
+
+#root#root#root .worldlab-home .wl-product-market-heading p:last-child {
+  margin: 0;
+  color: #526374 !important;
+  font-size: 13px !important;
+  line-height: 1.5;
+}
+
+#root#root#root .worldlab-home .wl-product-offers {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+#root#root#root .worldlab-home .wl-product-offer {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: clamp(24px, 3vw, 36px);
+  background: #ffffff !important;
+  border: 1px solid #d6dee6 !important;
+  border-radius: 4px;
+  box-shadow: 0 8px 32px #233b5110;
+}
+
+#root#root#root .worldlab-home .wl-product-offer-platform {
+  background: #edf5fc !important;
+  border-color: #bfd4e6 !important;
+}
+
+#root#root#root .worldlab-home .wl-product-offer h3 {
+  color: #101b29 !important;
+  font-size: clamp(23px, 2.5vw, 31px) !important;
+  font-weight: 600 !important;
+  line-height: 1.2;
+  margin: 22px 0 13px;
+}
+
+#root#root#root .worldlab-home .wl-product-offer > p:not(.wl-product-offer-type) {
+  color: #4a5a69 !important;
+  font-size: 15px !important;
+  line-height: 1.7 !important;
+  margin: 0 0 28px;
+  max-width: 54ch;
+}
+
+#root#root#root .worldlab-home .wl-product-offer > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  align-self: flex-start;
+  margin-top: auto;
+  min-height: 44px;
+  color: #175e91 !important;
+  font: 700 12px/1.4 var(--worldlab-font) !important;
+  text-decoration: none;
+  border-bottom: 1px solid #9bbbd3;
+}
+
+#root#root#root .worldlab-home .wl-product-offer > a:hover {
+  color: #0d3759 !important;
+  border-color: #0d3759;
+}
+
+#root#root#root .worldlab-home .wl-product-limit {
+  color: #526374 !important;
+  font-size: 12px !important;
+  line-height: 1.65 !important;
+  max-width: 98ch;
+  margin: 18px 0 0;
+}
+
+@media (max-width: 1000px) {
+  #root#root#root .worldlab-home .wl-product-stage { min-height: 530px; }
+  #root#root#root .worldlab-home .wl-product-visual { inset: 0 -56px 0 30%; }
+  #root#root#root .worldlab-home .wl-product-stage h2 { font-size: clamp(48px, 6vw, 68px) !important; }
+}
+
+@media (max-width: 780px) {
+  #root#root#root .worldlab-home .wl-product-overview-inner { padding-inline: 22px; }
+  #root#root#root .worldlab-home .wl-product-stage {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding-block: 62px 0;
+  }
+  #root#root#root .worldlab-home .wl-product-stage-copy { max-width: none; }
+  #root#root#root .worldlab-home .wl-product-stage h2 {
+    font-size: clamp(44px, 10vw, 64px) !important;
+    margin: 22px 0;
+  }
+  #root#root#root .worldlab-home .wl-product-lead { font-size: 15px !important; }
+  #root#root#root .worldlab-home .wl-product-actions { margin-top: 25px; }
+  #root#root#root .worldlab-home .wl-product-visual {
+    position: relative;
+    inset: auto;
+    margin: 22px -22px 0;
+    width: calc(100% + 44px);
+    height: clamp(210px, 54vw, 355px);
+  }
+  #root#root#root .worldlab-home .wl-product-visual::after {
+    background: linear-gradient(0deg, #f7f7f3 0%, transparent 19%);
+  }
+  #root#root#root .worldlab-home .wl-product-visual figcaption { right: 22px; bottom: 13px; font-size: 8px !important; }
+  #root#root#root .worldlab-home .wl-product-market { padding-block: 28px 52px; }
+  #root#root#root .worldlab-home .wl-product-offers { grid-template-columns: 1fr; gap: 14px; }
+}
+
+@media (max-width: 390px) {
+  #root#root#root .worldlab-home .wl-product-stage h2 { font-size: 41px !important; }
+  #root#root#root .worldlab-home .wl-product-actions { align-items: stretch; flex-direction: column; }
+  #root#root#root .worldlab-home .wl-product-secondary { justify-content: flex-start; align-self: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #root#root#root .worldlab-home .wl-product-overview * { animation: none !important; transition: none !important; }
+}
