@@ -10,6 +10,7 @@ const forge = read("components/magicpath/JCEESignalForge.tsx");
 const engine = read("components/magicpath/JCEEWorldLabEvidenceEngine.tsx");
 const forgePage = read("pages/SignalForgePage.tsx"), enginePage = read("pages/EvidenceEnginePage.tsx");
 const browser = read("../../scripts/public-surface-check.mjs");
+const footerVisual = read("../../scripts/footer-visual-capture.mjs");
 
 describe("MagicPath concepts are isolated, bounded public experiences", () => {
   it("registers lazy routes and metadata without eager-loading the homepage", () => {
@@ -49,5 +50,8 @@ describe("MagicPath concepts are isolated, bounded public experiences", () => {
     expect(engine).toContain("browser-local");
     expect(browser).toContain("Signal Forge timed-out scene did not appear");
     expect(browser).toContain("Evidence Engine browser-local reconciliation did not update observed status");
+    expect(footerVisual).toContain("assert.equal(v.links.length,21)");
+    expect(footerVisual).toContain("href === '/experiences/signal-forge'");
+    expect(footerVisual).toContain("href === '/experiences/evidence-engine'");
   });
 });
