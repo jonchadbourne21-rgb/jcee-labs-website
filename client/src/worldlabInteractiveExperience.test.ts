@@ -42,7 +42,7 @@ describe("JCEE WorldLab pre-publication interactive visual candidate", () => {
     expect(simulator).toContain('crypto.subtle.digest("SHA-256"');
     expect(simulator).toContain("mock_api_result: \"TIMEOUT_NO_ACK\"");
     expect(simulator).toContain("observed_external_effect: \"UNKNOWN\"");
-    expect(simulator).toContain("LOCAL_HASH");
+    expect(simulator).toContain("LOCAL HASH MISMATCH");
     expect(simulator).toContain("LOCAL_DEMO_ONLY_NOT_A_REAL_RECEIPT");
     expect(simulator).toContain("NO SYSTEM ACCESS");
     expect(simulator).not.toMatch(/fetch\s*\(|axios\s*\(/);
@@ -82,7 +82,7 @@ describe("JCEE WorldLab pre-publication interactive visual candidate", () => {
     expect(scenario).toContain("<WorkflowScrollytelling />");
     expect(scenario).toContain('aria-controls="scenario-terminal"');
     expect(scroll).toContain("IntersectionObserver");
-    expect(scroll).toContain("HOLD_RETRY");
+    expect(scroll).toContain("HOLD: outcome unresolved");
   });
 
   it("is responsive and respects nonproduction and reduced-motion boundaries", () => {
