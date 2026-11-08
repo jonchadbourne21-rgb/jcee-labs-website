@@ -18,8 +18,13 @@ There are no Rust dependencies. The checked-in outputs are:
 - `client/src/generated/worldlab-mesh.json` — indexed vertices, normals, quads, and material IDs.
 - `client/public/brand/worldlab-sculpture.svg` — the same geometry projected as a static fallback.
 - `client/src/worldlab-cohesion.css` — generated palette and shared public page styling.
+- `client/src/generated/worldlab-hex-wave.json` — bounded, 256-sample periodic sine table plus blue palette, glyph alphabet and waveform counts. The native TypeScript Canvas renderer interpolates these Rust-generated samples and changes hexadecimal glyphs over time; Rust is an offline asset compiler, not a site runtime.
 
 Edit `src/main.rs` for geometry and palette values, or `src/theme.css.in` for shared layout and styles. Commit regenerated assets with their sources. `--check` fails if an output differs; CI also checks finite coordinates, normalized normals, valid indices, material coverage, and a fixed face budget. Rust build files stay under `node_modules/.cache/worldlab-rust` so production source verification stays strict.
+
+## Recovered animated wave field
+
+The full-width commercial homepage section reuses the original August 18, 2026 `HexWaveField.tsx` renderer (`fd95d556` historical source). The `worldlab` variant restores waves of changing hexadecimal letters and numerals across the **whole section background**, rather than static binary strings behind the receipt. The `classic` variant retains the original palette and behavior. Responsive canvas sizing, bounded 30fps draw cadence, intersection/visibility suspension, and a single reduced-motion still are handled in the browser; the installed Rust toolchain is needed only to regenerate and check the committed lookup table. This does not change the first hero sculpture or present fabricated action telemetry.
 
 ## Browser behavior
 
