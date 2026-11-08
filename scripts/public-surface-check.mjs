@@ -314,6 +314,47 @@ try {
   })`);
   if (!/Intelligence\s*that leaves\s*receipts\./.test(commercial.title ?? "") || commercial.distributionLink || !commercial.story || !commercial.inquiry)
     failures.push("Customer-led homepage contract failed: " + JSON.stringify(commercial));
+  // The second homepage section is a customer-facing product presentation;
+  // it must remain legible and actionable without altering the original dark hero.
+  const productOverview = await evaluate(page.send, `(() => {
+    const hero = document.querySelector('.customer-hero');
+    const panel = document.querySelector('#product-overview');
+    const heading = document.querySelector('#product-overview-title');
+    const scenario = document.querySelector('#scenario-heading');
+    const image = panel?.querySelector('img');
+    const primary = panel?.querySelector('a.wl-product-primary');
+    const offers = [...(panel?.querySelectorAll('.wl-product-offer') ?? [])];
+    const flow = hero && panel && scenario
+      ? !!(hero.compareDocumentPosition(panel) & Node.DOCUMENT_POSITION_FOLLOWING)
+        && !!(panel.compareDocumentPosition(scenario) & Node.DOCUMENT_POSITION_FOLLOWING)
+      : false;
+    return {
+      flow,
+      heading: heading?.textContent?.replace(/\\s+/g, ' ').trim(),
+      panelBackground: panel ? getComputedStyle(panel).backgroundColor : null,
+      headingColor: heading ? getComputedStyle(heading).color : null,
+      primaryBackground: primary ? getComputedStyle(primary).backgroundColor : null,
+      primaryHref: primary?.getAttribute('href'),
+      offers: offers.map(item => item.querySelector('h3')?.textContent),
+      image: image?.getAttribute('src'),
+      imageAlt: image?.getAttribute('alt'),
+      scopeDisclosure: !!panel?.textContent?.includes('recorded tests do not establish general production')
+    };
+  })()`);
+  if (
+    !productOverview.flow ||
+    !/Put AI to work\\.\\s*Stay in control\\./.test(productOverview.heading ?? "") ||
+    productOverview.panelBackground !== "rgb(247, 247, 243)" ||
+    productOverview.headingColor !== "rgb(11, 16, 24)" ||
+    productOverview.primaryBackground !== "rgb(13, 23, 36)" ||
+    !productOverview.primaryHref?.endsWith("/consultation") ||
+    !productOverview.offers?.includes("Workflow Assurance assessment") ||
+    !productOverview.offers?.includes("JCEE Infrastructure") ||
+    !productOverview.image?.endsWith("/visuals/jcee-authority-hero-v3.webp") ||
+    !productOverview.imageAlt ||
+    !productOverview.scopeDisclosure
+  ) failures.push("Homepage product section failed: " + JSON.stringify(productOverview));
+
   await evaluate(page.send, "document.querySelector('#working-example').open = true");
   // The homepage illustration is browser-local and must show all four bounded outcomes.
   for (const [scenario, expected] of [
