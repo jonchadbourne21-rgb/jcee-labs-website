@@ -65,7 +65,7 @@ try {
       if (value.headings !== 1 || value.header !== 1 || value.footer !== 1) issues.push("missing/duplicated page structure");
       if (value.brokenImages.length) issues.push("broken images");
       if (value.fontMismatches.length) issues.push("inconsistent typography");
-      if (value.theme.surface !== "rgb(8, 10, 9)") issues.push("public surface is not graphite");
+      if (value.theme.surface !== "rgb(8, 11, 18)") issues.push("public surface does not match orbital-blue dark background");
       if (!value.theme.displayFont.includes("Space Grotesk") || !value.theme.bodyFont.includes("DM Sans")) issues.push("homepage type system missing");
       if (value.mobileHero) {
         const h=value.mobileHero;

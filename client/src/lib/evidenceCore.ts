@@ -30,7 +30,7 @@ export function createEvidenceCore(canvas: HTMLCanvasElement): EvidenceCoreContr
     ctx.clearRect(0, 0, width, height);
     const scale = Math.min(width, height) * .29, cx = width * .5, cy = height * .49;
     const glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, scale * 2);
-    glow.addColorStop(0, "rgba(96,145,61,.085)"); glow.addColorStop(1, "rgba(8,10,9,0)");
+    glow.addColorStop(0, "rgba(80,150,230,.085)"); glow.addColorStop(1, "rgba(8,11,18,0)");
     ctx.fillStyle = glow; ctx.fillRect(0, 0, width, height);
     ctx.save(); ctx.translate(cx, cy + scale * 1.65); ctx.scale(1, .16);
     const shadow = ctx.createRadialGradient(0, 0, 0, 0, 0, scale * 1.4);
@@ -56,8 +56,8 @@ export function createEvidenceCore(canvas: HTMLCanvasElement): EvidenceCoreContr
       const brightness = .26 + .27 * dot(n, [-.35, .7, .62]) + 1.5 * top + 1.1 * strip;
       const occlusion = 1;
       let r = (brightness * .96 + edge * .4) * occlusion, g = (brightness * 1.04 + edge * .64) * occlusion, b = (brightness * .98 + edge * .25) * occlusion;
-      if (face.ring === 2) { r *= .55; g *= .90; b *= .74; }
-      if (face.ring === 4) { r = .60 + brightness * .3; g = .86 + brightness * .3; b = .40 + brightness * .2; }
+      if (face.ring === 2) { r *= .53; g *= .74; b *= 1.03; }
+      if (face.ring === 4) { r = .32 + brightness * .18; g = .58 + brightness * .22; b = .92 + brightness * .20; }
       if (face.seam) { r *= .55; g *= .6; b *= .5; }
       const tone = (x: number) => Math.round(Math.min(255, Math.max(0, x * 220)));
       output.push({ points, depth, color: `rgb(${tone(r)},${tone(g)},${tone(b)})` });

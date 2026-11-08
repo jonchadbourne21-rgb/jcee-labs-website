@@ -24,7 +24,7 @@ export default function EvidenceCore() {
     <figure className={`wl-sculpture customer-hero-sculpture${available ? " is-interactive" : ""}`} aria-label="Interactive 3D illustration">
       <div className="wl-scene-grid" aria-hidden="true" />
       <figcaption className="wl-scene-caption"><span>FIG. 001 / WORLDLAB ORBIT</span><span aria-hidden="true">+</span></figcaption>
-      <canvas ref={canvas} className="wl-core" tabIndex={available ? 0 : -1} role="img" aria-label="A titanium J within three orbital frames and green nodes. Drag or use arrow keys to rotate this decorative 3D illustration." />
+      <canvas ref={canvas} className="wl-core" tabIndex={available ? 0 : -1} role="img" aria-label="A titanium J within three orbital frames and blue nodes. Drag or use arrow keys to rotate this decorative 3D illustration." />
       <img className="wl-fallback-art" src={`${import.meta.env.BASE_URL}brand/worldlab-sculpture.svg`} alt="" aria-hidden="true" />
       <div className="wl-floating-label wl-label-one" aria-hidden="true"><i /><span>CURRENT AUTHORITY</span></div>
       <div className="wl-floating-label wl-label-two" aria-hidden="true"><span>PRESERVED EVIDENCE</span><i /></div>

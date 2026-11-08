@@ -1,6 +1,5 @@
-/* Shared mobile typography/spacing polish; no change to the approved brand.
- * Keep a compact first-screen value statement while preserving readable tap targets.
- * Applies to both the default green and opt-in blue evaluation variants. */
+/* Shared mobile typography/spacing polish for the production WorldLab palette.
+ * Keep a compact first-screen value statement while preserving readable tap targets. */
 @media (max-width: 700px) {
   #root#root#root .customer-service .worldlab-service-masthead {
     padding-top: 32px !important;

@@ -208,7 +208,7 @@ async function capture(send, baseUrl, spec) {
   if (value.rect.y > value.headerHeight + 18 || value.rect.y + value.rect.height < 180) {
     throw new Error(`${spec.name}: target did not scroll into the review viewport ${JSON.stringify(value.rect)}`);
   }
-  const expectedBackground = 'rgb(8, 10, 9)';
+  const expectedBackground = 'rgb(8, 11, 18)';
   if (value.pageBackground !== expectedBackground) {
     throw new Error(`${spec.name}: expected ${expectedBackground}, received ${value.pageBackground}`);
   }
