@@ -350,6 +350,7 @@ try {
         : false,
       waveCanvasPointerEvents: waveCanvas ? getComputedStyle(waveCanvas).pointerEvents : null,
       waveCanvasOpacity: waveCanvas ? Number(getComputedStyle(waveCanvas).opacity) : 0,
+      waveCanvasDisplay: waveCanvas ? getComputedStyle(waveCanvas).display : null,
       staticBinaryCount: panel?.querySelectorAll('.wl-binary-wave, .wl-binary-strings').length ?? -1,
       legacyOrbitalCount: panel?.querySelectorAll('.wl-product-orbit, .wl-product-node').length ?? -1,
       founderCopy: panel?.textContent?.includes('One engagement you can scope today. One platform for controlled AI execution.')
@@ -378,6 +379,7 @@ try {
     !productOverview.waveCanvasCover ||
     productOverview.waveCanvasPointerEvents !== "none" ||
     productOverview.waveCanvasOpacity < 0.75 ||
+    productOverview.waveCanvasDisplay !== "block" ||
     productOverview.staticBinaryCount !== 0 ||
     productOverview.legacyOrbitalCount !== 0 ||
     !productOverview.founderCopy ||
