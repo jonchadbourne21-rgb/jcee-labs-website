@@ -253,6 +253,18 @@ fn hex_wave() -> String {
     s.push_str("]}\n");
     s
 }
+/// Immutable browser display topology; not authority or production telemetry.
+fn orbit_graph() -> String {
+    let nodes = [("AUTHORITY", -0.61_f64, 0.32_f64), ("EXECUTION", 0.62, 0.17), ("EVIDENCE", -0.04, -0.65)];
+    let mut out = String::from("{\"generator\":\"worldlab-visuals/1\",\"kind\":\"orbit-graph\",\"nodes\":[");
+    for (index, (label, x, y)) in nodes.iter().enumerate() {
+        assert!(x.is_finite() && y.is_finite() && x.abs() < 1.0 && y.abs() < 1.0);
+        if index > 0 { out.push(','); }
+        write!(out, "{{\"label\":\"{}\",\"x\":{:.2},\"y\":{:.2}}}", label, x, y).unwrap();
+    }
+    out.push_str("],\"edges\":[[0,1],[1,2],[2,0]]}\n");
+    out
+}
 fn main() {
     let check = std::env::args().any(|a| a == "--check");
     let root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
@@ -262,6 +274,7 @@ fn main() {
         ("client/public/brand/worldlab-sculpture.svg", mesh.poster()),
         ("client/src/worldlab-cohesion.css", theme()),
         ("client/src/generated/worldlab-hex-wave.json", hex_wave()),
+        ("client/src/generated/worldlab-orbit-graph.json", orbit_graph()),
     ] {
         let path = root.join(file);
         if check {
@@ -311,6 +324,16 @@ mod tests {
         assert!(!theme().contains("{{"));
         assert!(theme().contains("#6ab8ff"));
         assert_eq!(hex_wave(), hex_wave());
+    }
+    #[test]
+    fn fixed_illustrative_orbit_topology() {
+        let packet = orbit_graph();
+        assert!(packet.contains("\"kind\":\"orbit-graph\""));
+        assert!(packet.contains("\"AUTHORITY\""));
+        assert!(packet.contains("\"EXECUTION\""));
+        assert!(packet.contains("\"EVIDENCE\""));
+        assert_eq!(packet.matches("\"label\"").count(), 3);
+        assert_eq!(orbit_graph(), packet);
     }
     #[test]
     fn finite_bounded_hex_wave_and_fixed_glyph_alphabet() {
