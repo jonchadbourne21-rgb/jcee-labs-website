@@ -7,6 +7,7 @@ const homeSource = readFileSync(
   path.join(sourceRoot, "pages", "Home.tsx"),
   "utf8"
 );
+const productSource = readFileSync(path.join(sourceRoot, "components", "ProductOverview.tsx"), "utf8");
 const homeCss = readFileSync(
   path.join(sourceRoot, "homepage-enterprise.css"),
   "utf8"
@@ -19,8 +20,12 @@ const protectedProgramPages = [
 ];
 
 describe("homepage enterprise contract", () => {
-  it("leads with Infrastructure while keeping availability bounded", () => {
-    expect(homeSource).toContain("JCEE INFRASTRUCTURE");
+  it("leads with controlled AI work and keeps Infrastructure availability bounded", () => {
+    expect(homeSource).toContain("<ProductOverview />");
+    expect(homeSource.indexOf("<ProductOverview />")).toBeLessThan(homeSource.indexOf('id="orbital-study"'));
+    expect(productSource).toContain("Put AI to work.");
+    expect(productSource).toContain("JCEE Infrastructure");
+    expect(productSource).toContain("SOFTWARE IN DEVELOPMENT");
     expect(homeSource).toContain("JCEE Infrastructure is in development");
     expect(homeSource).not.toContain("JCEE Distribution");
     expect(homeSource).toContain("Workflow Assurance");
