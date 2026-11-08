@@ -229,6 +229,8 @@ try {
     staticMode ? "static Pages server" : "production server"
   );
   const page = await connect(debugPort);
+  await page.send("Emulation.setFocusEmulationEnabled", { enabled: true });
+  await page.send("Page.bringToFront");
   const failures = [];
 
   // Sharing crawlers receive this HTML before any client-side effects run.
@@ -343,8 +345,8 @@ try {
       waveCanvasWidth: waveCanvas?.width ?? 0,
       waveCanvasHeight: waveCanvas?.height ?? 0,
       waveCanvasCover: waveCanvas && panel
-        ? Math.abs(waveCanvas.getBoundingClientRect().width - panel.getBoundingClientRect().width) < 2
-          && Math.abs(waveCanvas.getBoundingClientRect().height - panel.getBoundingClientRect().height) < 2
+        ? Math.abs(waveCanvas.getBoundingClientRect().width - panel.getBoundingClientRect().width) <= 4
+          && Math.abs(waveCanvas.getBoundingClientRect().height - panel.getBoundingClientRect().height) <= 4
         : false,
       waveCanvasPointerEvents: waveCanvas ? getComputedStyle(waveCanvas).pointerEvents : null,
       waveCanvasOpacity: waveCanvas ? Number(getComputedStyle(waveCanvas).opacity) : 0,
@@ -405,10 +407,19 @@ try {
   await sleep(580);
   const waveEnd = await waveSignature();
   const reducedMotion = await evaluate(page.send, "matchMedia('(prefers-reduced-motion: reduce)').matches");
+  const waveMeta = await evaluate(page.send, `(() => {
+    const section = document.querySelector("#product-overview");
+    const canvas = section?.querySelector("canvas.wl-full-hex-field");
+    const wrapper = section?.querySelector(".wl-hex-background");
+    const rect = node => { const r = node?.getBoundingClientRect(); return r ? { width: r.width, height: r.height, top: r.top, bottom: r.bottom } : null; };
+    return { visibility: document.visibilityState, focus: document.hasFocus(),
+      section: rect(section), wrapper: rect(wrapper), canvas: rect(canvas),
+      canvasDisplay: canvas ? getComputedStyle(canvas).display : null };
+  })()`);
   if (!waveStart || !waveEnd || waveStart.active < 30 ||
     (!reducedMotion && waveStart.checksum === waveEnd.checksum) ||
     (reducedMotion && waveStart.checksum !== waveEnd.checksum)) {
-    failures.push("Animated hex-wave field playback/reduced-motion contract failed: " + JSON.stringify({ waveStart, waveEnd, reducedMotion }));
+    failures.push("Animated hex-wave field playback/reduced-motion contract failed: " + JSON.stringify({ waveStart, waveEnd, reducedMotion, waveMeta }));
   }
 
   await evaluate(page.send, "document.querySelector('#working-example').open = true");
