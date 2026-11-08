@@ -125,6 +125,7 @@ export default function OrbitGraphWebGL({ paused }: { paused: boolean }) {
     };
     const requestPaint = () => { if (!frame) frame = requestAnimationFrame(paint); };
     requestFrameRef.current = requestPaint;
+    const target = area.closest("figure") ?? area;
     const onPointerDown = (event: PointerEvent) => {
       if ((event.target as HTMLElement).closest("button")) return;
       dragging = true; pointerX = event.clientX;
@@ -135,10 +136,10 @@ export default function OrbitGraphWebGL({ paused }: { paused: boolean }) {
       pointerX = event.clientX; requestPaint();
     };
     const onPointerUp = () => { dragging = false; };
-    area.addEventListener("pointerdown", onPointerDown);
-    area.addEventListener("pointermove", onPointerMove);
-    area.addEventListener("pointerup", onPointerUp);
-    area.addEventListener("pointercancel", onPointerUp);
+    target.addEventListener("pointerdown", onPointerDown);
+    target.addEventListener("pointermove", onPointerMove);
+    target.addEventListener("pointerup", onPointerUp);
+    target.addEventListener("pointercancel", onPointerUp);
     const observer = new IntersectionObserver(entries => {
       offscreen = !(entries[0]?.isIntersecting ?? false);
       if (!offscreen) requestPaint();
@@ -157,10 +158,10 @@ export default function OrbitGraphWebGL({ paused }: { paused: boolean }) {
       sizing.disconnect(); observer.disconnect();
       motion.removeEventListener("change", onMotion);
       document.removeEventListener("visibilitychange", onVisibility);
-      area.removeEventListener("pointerdown", onPointerDown);
-      area.removeEventListener("pointermove", onPointerMove);
-      area.removeEventListener("pointerup", onPointerUp);
-      area.removeEventListener("pointercancel", onPointerUp);
+      target.removeEventListener("pointerdown", onPointerDown);
+      target.removeEventListener("pointermove", onPointerMove);
+      target.removeEventListener("pointerup", onPointerUp);
+      target.removeEventListener("pointercancel", onPointerUp);
       gpu.deleteBuffer(buffer); gpu.deleteProgram(program);
     };
   }, []);
@@ -173,7 +174,9 @@ export default function OrbitGraphWebGL({ paused }: { paused: boolean }) {
             type="button"
             key={node.label}
             aria-pressed={selected === index}
-            onClick={() => select(index)}
+            onMouseEnter={() => { selectedRef.current = index; select(index); requestFrameRef.current?.(); }}
+            onFocus={() => { selectedRef.current = index; select(index); requestFrameRef.current?.(); }}
+            onClick={() => { selectedRef.current = index; select(index); requestFrameRef.current?.(); }}
             title={`Inspect ${node.label.toLowerCase()} node`}
           >{node.label}</button>
         ))}
