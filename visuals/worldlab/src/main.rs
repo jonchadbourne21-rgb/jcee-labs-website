@@ -318,7 +318,7 @@ mod tests {
         assert!(packet.contains("\"kind\":\"hex-wave\""));
         assert!(packet.contains("\"glyphs\":\"01ACEF2479\""));
         assert!(packet.contains("\"desktopWaves\":9"));
-        assert_eq!(packet.matches(',').count(), 260);
+        assert_eq!(packet.matches(',').count(), 262);
         for i in 0..256 {
             let phase = 2.0 * PI * i as f64 / 256.0;
             let sampled = phase.sin();
