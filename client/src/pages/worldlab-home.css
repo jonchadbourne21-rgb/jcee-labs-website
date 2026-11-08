@@ -153,4 +153,4 @@
 #root#root#root .worldlab-home .brand-footer-meta,
 #root#root#root .worldlab-home .brand-footer-meta span { color:var(--wl-muted)!important; }
 
-#root#root#root .worldlab-home img.wl-fallback-art { inset:0; width:100%; height:100%; object-fit:contain; }
+#root#root#root .worldlab-home img.wl-fallback-art { inset:0; width:100%; height:100%; object-fit:contain; filter:hue-rotate(115deg) saturate(1.08); }
