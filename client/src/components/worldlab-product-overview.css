@@ -8,6 +8,8 @@
   --wl-receipt-ink: #F0F5FB;
   --wl-receipt-muted: #A8B7C8;
   color-scheme: dark;
+  position: relative;
+  isolation: isolate;
   background-color: #080B12 !important;
   background-image: radial-gradient(ellipse at 74% 28%, #122b442e 0%, transparent 45%);
   color: #F0F5FB !important;
@@ -128,33 +130,23 @@
   background: radial-gradient(ellipse at center, #17446b88 0%, #0b1c313d 42%, transparent 74%);
   filter: blur(22px);
 }
-/* Five curved binary streams replace paired nodes and orbital paths.
-   Native SVG text stays sharp without a new WASM/canvas build dependency. */
-#root#root#root .worldlab-home .wl-binary-wave {
+/* The full-section animated background reuses the actual August 18 glyph renderer.
+   Rust compiles its wave samples into a checked-in JSON asset; Canvas handles motion.
+   The canvas sits under both the customer copy and the illustrative receipt. */
+#root#root#root .worldlab-home .wl-full-hex-field {
   position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
   z-index: 0;
-  width: min(120%, 760px);
-  max-width: none;
-  height: auto;
-  overflow: visible;
+  opacity: .92;
   pointer-events: none;
-  opacity: .68;
-  filter: drop-shadow(0 0 11px #6AB8FF18);
-  animation: wl-binary-drift 24s ease-in-out infinite alternate;
+  animation: none;
 }
-#root#root#root .worldlab-home .wl-binary-strings text {
-  fill: #91C8F4;
-  font: 500 12px/1 ui-monospace, SFMono-Regular, monospace;
-  letter-spacing: 2.6px;
-  opacity: .30;
-}
-#root#root#root .worldlab-home .wl-binary-strings text:nth-child(even) {
-  fill: #BED8ED;
-  opacity: .23;
-}
-@keyframes wl-binary-drift {
-  from { transform: translate3d(-5px, 2px, 0); }
-  to { transform: translate3d(5px, -2px, 0); }
+#root#root#root .worldlab-home .wl-product-overview-inner {
+  position: relative;
+  z-index: 1;
 }
 #root#root#root .worldlab-home .wl-receipt {
   position: relative;
@@ -413,7 +405,7 @@
     padding: 23px;
     transform: rotateZ(-.4deg);
   }
-  #root#root#root .worldlab-home .wl-binary-wave { width: 126%; opacity: .52; }
+  #root#root#root .worldlab-home .wl-full-hex-field { opacity: .8; }
   #root#root#root .worldlab-home .wl-product-visual figcaption { bottom: 2px; right: 3%; }
   #root#root#root .worldlab-home .wl-product-market { padding-block: 28px 52px; }
   #root#root#root .worldlab-home .wl-product-offers { grid-template-columns: 1fr; gap: 14px; }
