@@ -235,6 +235,36 @@ fn theme() -> String {
     assert!(!s.contains("{{"), "Unexpanded theme token");
     s
 }
+/// Recover the August 18 glyph-wave behavior as an offline-generated numeric model.
+/// The browser interpolates this Rust-authored sinusoid table while it advances
+/// time and changes hexadecimal glyphs. No Rust/WASM runtime is needed on Manus.
+fn hex_wave() -> String {
+    const SAMPLES: usize = 256;
+    let mut s = String::from(
+        "{\"generator\":\"worldlab-visuals/1\",\"kind\":\"hex-wave\",\"glyphs\":\"01ACEF2479\",\"desktopWaves\":9,\"mobileWaves\":6,\"colors\":[\"106,184,255\",\"163,207,245\"],\"sinLut\":[",
+    );
+    for i in 0..SAMPLES {
+        if i > 0 {
+            s.push(',');
+        }
+        let theta = 2.0 * PI * i as f64 / SAMPLES as f64;
+        write!(s, "{:.6}", theta.sin()).unwrap();
+    }
+    s.push_str("]}\n");
+    s
+}
+/// Immutable browser display topology; not authority or production telemetry.
+fn orbit_graph() -> String {
+    let nodes = [("AUTHORITY", -0.61_f64, 0.32_f64), ("EXECUTION", 0.62, 0.17), ("EVIDENCE", -0.04, -0.65)];
+    let mut out = String::from("{\"generator\":\"worldlab-visuals/1\",\"kind\":\"orbit-graph\",\"nodes\":[");
+    for (index, (label, x, y)) in nodes.iter().enumerate() {
+        assert!(x.is_finite() && y.is_finite() && x.abs() < 1.0 && y.abs() < 1.0);
+        if index > 0 { out.push(','); }
+        write!(out, "{{\"label\":\"{}\",\"x\":{:.2},\"y\":{:.2}}}", label, x, y).unwrap();
+    }
+    out.push_str("],\"edges\":[[0,1],[1,2],[2,0]]}\n");
+    out
+}
 fn main() {
     let check = std::env::args().any(|a| a == "--check");
     let root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
@@ -243,6 +273,8 @@ fn main() {
         ("client/src/generated/worldlab-mesh.json", mesh.json()),
         ("client/public/brand/worldlab-sculpture.svg", mesh.poster()),
         ("client/src/worldlab-cohesion.css", theme()),
+        ("client/src/generated/worldlab-hex-wave.json", hex_wave()),
+        ("client/src/generated/worldlab-orbit-graph.json", orbit_graph()),
     ] {
         let path = root.join(file);
         if check {
@@ -291,5 +323,29 @@ mod tests {
         assert_eq!(build().json(), build().json());
         assert!(!theme().contains("{{"));
         assert!(theme().contains("#6ab8ff"));
+        assert_eq!(hex_wave(), hex_wave());
+    }
+    #[test]
+    fn fixed_illustrative_orbit_topology() {
+        let packet = orbit_graph();
+        assert!(packet.contains("\"kind\":\"orbit-graph\""));
+        assert!(packet.contains("\"AUTHORITY\""));
+        assert!(packet.contains("\"EXECUTION\""));
+        assert!(packet.contains("\"EVIDENCE\""));
+        assert_eq!(packet.matches("\"label\"").count(), 3);
+        assert_eq!(orbit_graph(), packet);
+    }
+    #[test]
+    fn finite_bounded_hex_wave_and_fixed_glyph_alphabet() {
+        let packet = hex_wave();
+        assert!(packet.contains("\"kind\":\"hex-wave\""));
+        assert!(packet.contains("\"glyphs\":\"01ACEF2479\""));
+        assert!(packet.contains("\"desktopWaves\":9"));
+        assert_eq!(packet.matches(',').count(), 266);
+        for i in 0..256 {
+            let phase = 2.0 * PI * i as f64 / 256.0;
+            let sampled = phase.sin();
+            assert!(sampled.is_finite() && sampled.abs() <= 1.0);
+        }
     }
 }

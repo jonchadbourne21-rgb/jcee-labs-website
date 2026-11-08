@@ -249,6 +249,12 @@ try {
   const { send, close } = await connect(debugPort);
   const specs = [
     // Capture the approved customer journey and retain the engineering review surfaces.
+    { name: "Product showcase desktop", route: "/", selector: "#product-overview", width: 1440, height: 900, minHeight: 300, file: "product-showcase-desktop.png" },
+    { name: "Product showcase iPhone", route: "/", selector: "#product-overview", width: 390, height: 844, mobile: true, minHeight: 300, file: "product-showcase-iphone.png" },
+    { name: "Interactive lab desktop", route: "/", selector: ".wl-receipt-lab", width: 1440, height: 900, minHeight: 200, file: "receipt-lab-desktop.png" },
+    { name: "Interactive lab iPhone", route: "/", selector: ".wl-receipt-lab", width: 390, height: 844, mobile: true, minHeight: 200, file: "receipt-lab-iphone.png" },
+    { name: "Technical bento desktop", route: "/", selector: ".wl-technical-bento", width: 1440, height: 900, minHeight: 200, file: "technical-bento-desktop.png" },
+    { name: "Technical bento iPhone", route: "/", selector: ".wl-technical-bento", width: 390, height: 844, mobile: true, minHeight: 200, file: "technical-bento-iphone.png" },
     { name: "Customer story desktop", route: "/", selector: "#story", width: 1440, height: 900, minHeight: 100, file: "customer-story-desktop.png" },
     { name: "Assurance desktop", route: "/assurance", selector: ".assurance-program", width: 1440, height: 900, file: "assurance-desktop.png" },
     { name: "Customer story iPhone", route: "/", selector: "#story", width: 390, height: 844, mobile: true, minHeight: 100, file: "customer-story-iphone.png" },

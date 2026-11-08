@@ -229,6 +229,8 @@ try {
     staticMode ? "static Pages server" : "production server"
   );
   const page = await connect(debugPort);
+  await page.send("Emulation.setFocusEmulationEnabled", { enabled: true });
+  await page.send("Page.bringToFront");
   const failures = [];
 
   // Sharing crawlers receive this HTML before any client-side effects run.
@@ -314,6 +316,161 @@ try {
   })`);
   if (!/Intelligence\s*that leaves\s*receipts\./.test(commercial.title ?? "") || commercial.distributionLink || !commercial.story || !commercial.inquiry)
     failures.push("Customer-led homepage contract failed: " + JSON.stringify(commercial));
+  // The product second act must share the orbital-blue canvas and show
+  // plainly illustrative authority/effect/evidence receipt content.
+  const productOverview = await evaluate(page.send, `(() => {
+    const hero = document.querySelector('.customer-hero');
+    const panel = document.querySelector('#product-overview');
+    const heading = document.querySelector('#product-overview-title');
+    const scenario = document.querySelector('#scenario-heading');
+    const primary = panel?.querySelector('a.wl-product-primary');
+    const offers = [...(panel?.querySelectorAll('.wl-product-offer') ?? [])];
+    const receipt = panel?.querySelector('.wl-receipt');
+    const waveCanvas = panel?.querySelector('canvas.wl-full-hex-field');
+    const flow = hero && panel && scenario
+      ? !!(hero.compareDocumentPosition(panel) & Node.DOCUMENT_POSITION_FOLLOWING)
+        && !!(panel.compareDocumentPosition(scenario) & Node.DOCUMENT_POSITION_FOLLOWING)
+      : false;
+    return {
+      flow,
+      heading: heading?.textContent?.replace(/\\s+/g, ' ').trim(),
+      panelBackground: panel ? getComputedStyle(panel).backgroundColor : null,
+      headingColor: heading ? getComputedStyle(heading).color : null,
+      primaryBackground: primary ? getComputedStyle(primary).backgroundColor : null,
+      primaryHref: primary?.getAttribute('href'),
+      offers: offers.map(item => item.querySelector('h3')?.textContent),
+      offerHeadingColors: offers.map(item => getComputedStyle(item.querySelector('h3')).color),
+      receiptBackground: receipt ? getComputedStyle(receipt).backgroundColor : null,
+      receiptPerspective: receipt ? getComputedStyle(receipt).transform : null,
+      waveCanvasWidth: waveCanvas?.width ?? 0,
+      waveCanvasHeight: waveCanvas?.height ?? 0,
+      waveCanvasCover: waveCanvas && panel
+        ? Math.abs(waveCanvas.getBoundingClientRect().width - panel.getBoundingClientRect().width) <= 4
+          && Math.abs(waveCanvas.getBoundingClientRect().height - panel.getBoundingClientRect().height) <= 4
+        : false,
+      waveCanvasPointerEvents: waveCanvas ? getComputedStyle(waveCanvas).pointerEvents : null,
+      waveCanvasOpacity: waveCanvas ? Number(getComputedStyle(waveCanvas).opacity) : 0,
+      waveCanvasDisplay: waveCanvas ? getComputedStyle(waveCanvas).display : null,
+      staticBinaryCount: panel?.querySelectorAll('.wl-binary-wave, .wl-binary-strings').length ?? -1,
+      legacyOrbitalCount: panel?.querySelectorAll('.wl-product-orbit, .wl-product-node').length ?? -1,
+      founderCopy: panel?.textContent?.includes('One engagement you can scope today. One platform for controlled AI execution.')
+        && !panel?.textContent?.includes("One platform we're building."),
+      receiptTitle: receipt?.querySelector('h3')?.textContent,
+      receiptState: receipt?.querySelector('.wl-receipt-state')?.textContent?.replace(/\\s+/g, ' ').trim(),
+      receiptExample: receipt?.getAttribute('data-demo') === 'illustrative'
+        && receipt.textContent?.includes('NOT A LIVE RECEIPT'),
+      scopeDisclosure: !!panel?.textContent?.includes('recorded tests do not establish general production')
+        && !!panel?.textContent?.includes('not an executed customer workflow')
+    };
+  })()`);
+  if (
+    !productOverview.flow ||
+    !/Put AI to work\.\s*Stay in control\./.test(productOverview.heading ?? "") ||
+    productOverview.panelBackground !== "rgb(8, 11, 18)" ||
+    productOverview.headingColor !== "rgb(240, 245, 251)" ||
+    productOverview.primaryBackground !== "rgb(106, 184, 255)" ||
+    !productOverview.primaryHref?.endsWith("/consultation") ||
+    !productOverview.offers?.includes("Workflow Assurance assessment") ||
+    !productOverview.offers?.includes("JCEE Infrastructure") ||
+    !productOverview.offerHeadingColors?.every(color => color === "rgb(240, 245, 251)") ||
+    !productOverview.receiptTitle?.includes("AI action receipt") ||
+    productOverview.waveCanvasWidth < 100 ||
+    productOverview.waveCanvasHeight < 200 ||
+    !productOverview.waveCanvasCover ||
+    productOverview.waveCanvasPointerEvents !== "none" ||
+    productOverview.waveCanvasOpacity < 0.75 ||
+    productOverview.waveCanvasDisplay !== "block" ||
+    productOverview.staticBinaryCount !== 0 ||
+    productOverview.legacyOrbitalCount !== 0 ||
+    !productOverview.founderCopy ||
+    !productOverview.receiptState?.includes("HELD FOR REVIEW") ||
+    !productOverview.receiptExample ||
+    !productOverview.scopeDisclosure
+  ) failures.push("Homepage product section failed: " + JSON.stringify(productOverview));
+
+  // Verify that the August 18-style glyph field actually changes pixels at runtime.
+  // A reduced-motion browser should render a stable still instead.
+  await evaluate(page.send, "document.querySelector('#product-overview').scrollIntoView({block:'center'})");
+  await sleep(260);
+  const waveSignature = async () => evaluate(page.send, `(() => {
+    const canvas = document.querySelector('canvas.wl-full-hex-field');
+    if (!canvas || canvas.width < 100 || canvas.height < 200) return null;
+    const ctx = canvas.getContext('2d');
+    const rgba = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    let checksum = 2166136261, active = 0;
+    for (let i = 0; i < rgba.length; i += 32) {
+      const alpha = rgba[i + 3] ?? 0;
+      active += alpha > 0 ? 1 : 0;
+      checksum = Math.imul(checksum ^ alpha, 16777619) >>> 0;
+    }
+    return { checksum, active };
+  })()`);
+  const waveStart = await waveSignature();
+  await sleep(580);
+  const waveEnd = await waveSignature();
+  const reducedMotion = await evaluate(page.send, "matchMedia('(prefers-reduced-motion: reduce)').matches");
+  const waveMeta = await evaluate(page.send, `(() => {
+    const section = document.querySelector("#product-overview");
+    const canvas = section?.querySelector("canvas.wl-full-hex-field");
+    const wrapper = section?.querySelector(".wl-hex-background");
+    const rect = node => { const r = node?.getBoundingClientRect(); return r ? { width: r.width, height: r.height, top: r.top, bottom: r.bottom } : null; };
+    return { visibility: document.visibilityState, focus: document.hasFocus(),
+      section: rect(section), wrapper: rect(wrapper), canvas: rect(canvas),
+      canvasDisplay: canvas ? getComputedStyle(canvas).display : null };
+  })()`);
+  if (!waveStart || !waveEnd || waveStart.active < 30 ||
+    (!reducedMotion && waveStart.checksum === waveEnd.checksum) ||
+    (reducedMotion && waveStart.checksum !== waveEnd.checksum)) {
+    failures.push("Animated hex-wave field playback/reduced-motion contract failed: " + JSON.stringify({ waveStart, waveEnd, reducedMotion, waveMeta }));
+  }
+
+  // Interactive upgrade browser contract: no simulated status is production telemetry.
+  const interactive = await evaluate(page.send, `(() => {
+    const graph = document.querySelector('.wl-orbit-webgl');
+    const lab = document.querySelector('.wl-receipt-lab');
+    const bento = [...document.querySelectorAll('#fit .wl-bento-tile')];
+    const story = document.querySelector('.wl-scroll-story');
+    return {
+      orbitNodes: graph?.querySelectorAll('.wl-orbit-node-controls button').length,
+      renderer: graph?.getAttribute('data-orbit-renderer'),
+      lab: !!lab?.querySelector('[data-demo]') || lab?.getAttribute('data-demo') === 'browser-only',
+      labTrigger: !!lab?.querySelector('.wl-receipt-lab-controls button'),
+      bento: bento.length,
+      allBentoDisclosure: bento.length === 3 && bento.every(tile => tile.textContent.includes('NOT LIVE SYSTEM STATUS')),
+      scrollStages: story?.querySelectorAll('.wl-scroll-story-step').length,
+      scrollDisclaimer: story?.textContent?.includes('NO LIVE RECEIPT'),
+      accessibleNav: !!document.querySelector('.desktop-nav [role="text"][aria-label="Infrastructure"]')
+    };
+  })()`);
+  if (
+    interactive.orbitNodes !== 3 ||
+    !["webgl2", "fallback"].includes(interactive.renderer) ||
+    !interactive.lab ||
+    !interactive.labTrigger ||
+    interactive.bento !== 3 ||
+    !interactive.allBentoDisclosure ||
+    interactive.scrollStages !== 4 ||
+    !interactive.scrollDisclaimer ||
+    !interactive.accessibleNav
+  ) failures.push("Interactive homepage upgrade contract failed: " + JSON.stringify(interactive));
+
+  await evaluate(page.send, "document.querySelector('.wl-receipt-lab-controls button:first-child')?.click()");
+  let mockReceipt = null;
+  for (let attempt = 0; attempt < 12; attempt += 1) {
+    mockReceipt = await evaluate(page.send, `(() => {
+      const lab = document.querySelector('.wl-receipt-lab');
+      const text = lab?.querySelector('pre code')?.textContent || '';
+      const hash = lab?.querySelector('.wl-receipt-lab-hash code')?.textContent || '';
+      return { text, hash, status: lab?.querySelector('.wl-receipt-lab-status')?.textContent };
+    })()`);
+    if (mockReceipt.hash?.length === 64) break;
+    await sleep(90);
+  }
+  if (!mockReceipt?.text?.includes('TIMEOUT_NO_ACK') ||
+      !mockReceipt.text.includes('LOCAL_DEMO_ONLY_NOT_A_REAL_RECEIPT') ||
+      !/^[0-9a-f]{64}$/.test(mockReceipt.hash || ''))
+    failures.push("Mock receipt browser SHA-256 contract failed: " + JSON.stringify(mockReceipt));
+
   await evaluate(page.send, "document.querySelector('#working-example').open = true");
   // The homepage illustration is browser-local and must show all four bounded outcomes.
   for (const [scenario, expected] of [

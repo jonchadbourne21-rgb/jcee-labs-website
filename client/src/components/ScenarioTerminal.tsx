@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./scenario-terminal.css";
+import WorkflowScrollytelling from "./WorkflowScrollytelling";
 
 const scenarios = [
   { title: "The timeout illusion", description: "A missing response does not tell you whether the change happened.", lines: [
@@ -60,6 +61,8 @@ export default function ScenarioTerminal() {
     <p className="customer-kicker">EXPLORE AN INTERRUPTED WORKFLOW</p>
     <h2 id="scenario-heading">Before you try again,<br />know what happened.</h2>
     <p className="scenario-disclosure">Interactive illustration with fictional data. No external systems are connected, no VOW engine runs, and no qualification receipt is created. Playback timing tells the story; it does not measure execution.</p>
+    <WorkflowScrollytelling />
+    <p className="scenario-kicker-supplement">OPTIONAL STEP-BY-STEP PLAYBACK / EXPLORE THE SAME FAILURE MODES</p>
     <div className="scenario-grid">
       <div className="scenario-selectors" role="group" aria-label="Choose a workflow illustration">
         {scenarios.map((item, index) => <button key={item.title} type="button" aria-pressed={selected === index} aria-controls="scenario-terminal" onClick={() => { setPlaying(false); setSelected(index); setShown(0); }}>

@@ -1,3 +1,5 @@
+import { useState } from "react";
+import PublicDataDrawer from "./PublicDataDrawer";
 import BB84PublicPreprint from "@/components/BB84PublicPreprint";
 import BuildStatusList from "@/components/BuildStatusList";
 import EvidenceLadder from "@/components/EvidenceLadder";
@@ -154,6 +156,7 @@ export function ResearchPortfolio() {
 }
 
 export function ResearchEvidence() {
+  const [inspect, setInspect] = useState(false);
   return (
     <section
       className="editorial-section"
@@ -170,6 +173,27 @@ export function ResearchEvidence() {
         does not promote one into another without a new qualifying gate.
       </p>
       <EvidenceLadder />
+      <button className="wl-record-drawer-trigger" type="button" onClick={() => setInspect(true)}>
+        Inspect research boundary as public JSON ↗
+      </button>
+      <PublicDataDrawer
+        title="Research evidence boundary"
+        record={inspect ? {
+          record_kind: "public_explainer",
+          question: "What can a recorded result support?",
+          distinct_claims: [
+            "Mathematical derivation under stated assumptions",
+            "Bounded software or synthetic-system result",
+            "Physical observation under recorded conditions",
+            "Deployment-specific production qualification",
+          ],
+          standing: "These are distinct evidentiary categories, not interchangeable results.",
+          release_boundary: "Full G0 admission and customer production claims remain separately gated.",
+          original_evidence_sha256: null,
+          note: "A local digest of these public JSON fields is not an original evidence receipt.",
+        } : null}
+        onClose={() => setInspect(false)}
+      />
       <a className="editorial-text-link" href="/registry">
         Read selected recorded milestones and boundaries →
       </a>

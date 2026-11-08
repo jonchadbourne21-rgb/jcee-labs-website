@@ -1,0 +1,1 @@
+{"generator":"worldlab-visuals/1","kind":"orbit-graph","nodes":[{"label":"AUTHORITY","x":-0.61,"y":0.32},{"label":"EXECUTION","x":0.62,"y":0.17},{"label":"EVIDENCE","x":-0.04,"y":-0.65}],"edges":[[0,1],[1,2],[2,0]]}

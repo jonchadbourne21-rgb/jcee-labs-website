@@ -1,6 +1,9 @@
 import CoreHeader from "@/components/CoreHeader";
 import BrandFooter from "@/components/BrandFooter";
 import ScenarioTerminal from "@/components/ScenarioTerminal";
+import ProductOverview from "@/components/ProductOverview";
+import ReceiptSimulator from "@/components/ReceiptSimulator";
+import TechnicalBento from "@/components/TechnicalBento";
 import EvidenceTrace from "@/components/EvidenceTrace";
 import EvidenceCore from "@/components/EvidenceCore";
 import "./home-editorial-refresh.css";
@@ -49,8 +52,11 @@ export default function Home() {
             </div>
           </nav>
         </div>
+        <ReceiptSimulator />
         <div className="wl-hero-baseline"><span>FROM INTELLIGENCE TO CONSEQUENCE</span><a href="#scenario-heading">EXPLORE THE WORK <span aria-hidden="true">↓</span></a></div>
       </section>
+
+      <ProductOverview />
 
       <ScenarioTerminal />
 
@@ -59,7 +65,7 @@ export default function Home() {
         className="customer-shell customer-section"
         aria-labelledby="story-title"
       >
-        <p className="customer-kicker">01 / FROM REQUEST TO RESULT</p>
+        <p className="customer-kicker">03 / FROM REQUEST TO RESULT</p>
         <h2 id="story-title">
           An approved request. An uncertain result.
           <br />
@@ -162,48 +168,13 @@ export default function Home() {
         className="customer-shell customer-section"
         aria-labelledby="fit-title"
       >
-        <p className="customer-kicker">02 / BUILT AROUND YOUR WORK</p>
+        <p className="customer-kicker">04 / BUILT AROUND YOUR WORK</p>
         <h2 id="fit-title">
           For the teams responsible
           <br />
           for getting work done.
         </h2>
-        <div className="customer-cards">
-          <article>
-            <span>01 / IT & BUSINESS SYSTEMS</span>
-            <h3>Resolve uncertain changes.</h3>
-            <p>
-              Employee access, internal service requests, and approved changes
-              across your service desk and business applications.
-            </p>
-            <p className="customer-card-detail">
-              Start with: an approved access change whose outcome is unclear.
-            </p>
-          </article>
-          <article>
-            <span>02 / SOFTWARE OPERATIONS</span>
-            <h3>Make changes accountable.</h3>
-            <p>
-              Engineering workflows that need clear permissions, execution
-              records, and recovery procedures.
-            </p>
-            <p className="customer-card-detail">
-              Start with: a deployment that needs an approval and a confirmed
-              result.
-            </p>
-          </article>
-          <article>
-            <span>03 / BUSINESS OPERATIONS</span>
-            <h3>Connect the process.</h3>
-            <p>
-              Internal requests and approval processes that cross multiple
-              applications.
-            </p>
-            <p className="customer-card-detail">
-              Start with: an internal request passed between teams and tools.
-            </p>
-          </article>
-        </div>
+        <TechnicalBento />
         <p className="customer-note">
           Example engagement areas. Each workflow begins with an assessment of
           the existing systems and requirements.
@@ -216,7 +187,7 @@ export default function Home() {
         aria-labelledby="services-title"
       >
         <span id="engage" />
-        <p className="customer-kicker">03 / A PRACTICAL FIRST ENGAGEMENT</p>
+        <p className="customer-kicker">05 / A PRACTICAL FIRST ENGAGEMENT</p>
         <h2 id="services-title">
           Start with one workflow
           <br />
@@ -265,7 +236,7 @@ export default function Home() {
         <span id="evidence-frontier" />
         <span id="current-progress" />
         <span id="technology" />
-        <p className="customer-kicker">04 / ENGINEERING YOU CAN EXAMINE</p>
+        <p className="customer-kicker">06 / ENGINEERING YOU CAN EXAMINE</p>
         <h2 id="evidence-title">See the work behind the promise.</h2>
         <p className="customer-deck">
           Explore our recorded software results, execution and recovery
@@ -355,7 +326,7 @@ export default function Home() {
       >
         <div>
           <p className="customer-kicker">
-            05 / LET’S MAKE THE NEXT STEP USEFUL
+            07 / LET’S MAKE THE NEXT STEP USEFUL
           </p>
           <h2 id="consultation-title">
             Which workflow needs
