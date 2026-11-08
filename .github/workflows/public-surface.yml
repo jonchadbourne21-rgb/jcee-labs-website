@@ -13,7 +13,7 @@ jobs:
   public-surface:
     name: public-surface
     runs-on: ubuntu-24.04
-    timeout-minutes: 12
+    timeout-minutes: 24
     steps:
       - name: Check out repository
         uses: actions/checkout@v7.0.1

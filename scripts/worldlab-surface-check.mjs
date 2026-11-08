@@ -44,10 +44,22 @@ try {
             brokenImages:[...document.images].filter(i => !i.complete || !i.naturalWidth).map(i => i.getAttribute('src')),
             fontMismatches,
             mobileHero: location.pathname === '/' && innerWidth <= 700 ? (() => {
-              const rect = s => document.querySelector(s).getBoundingClientRect();
-              const art=rect('.customer-hero-sculpture'), trust=rect('.hero-trust');
-              const primary=rect('.customer-actions .customer-button'), secondary=rect('.customer-actions .customer-link');
-              return {artTop:art.top,artBottom:art.bottom,trustTop:trust.top,primaryBottom:primary.bottom,secondaryTop:secondary.top,secondaryBottom:secondary.bottom};
+              const rect = s => document.querySelector(s)?.getBoundingClientRect();
+              const art=rect('#orbital-study .customer-hero-sculpture');
+              const trust=rect('#orbital-study .hero-trust');
+              const primary=rect('#product-overview .wl-product-primary');
+              const secondary=rect('#product-overview .wl-product-secondary');
+              const product=rect('#product-overview');
+              const orbit=rect('#orbital-study');
+              const nodes = [art, trust, primary, secondary, product, orbit];
+              if (nodes.some(v => !v)) return {missingLayoutNode:true};
+              return {
+                artTop:art.top,artBottom:art.bottom,trustTop:trust.top,
+                primaryTop:primary.top,primaryBottom:primary.bottom,
+                secondaryTop:secondary.top,secondaryBottom:secondary.bottom,
+                productBottom:product.bottom,orbitTop:orbit.top,
+                orbitalActions:document.querySelectorAll('#orbital-study .customer-actions').length
+              };
             })() : null,
             artOverlap:[...document.querySelectorAll('.worldlab-masthead-art,.editorial-hero-art')].some(i => {
               const copy=i.previousElementSibling;
@@ -69,9 +81,16 @@ try {
       if (!value.theme.displayFont.includes("Space Grotesk") || !value.theme.bodyFont.includes("DM Sans")) issues.push("homepage type system missing");
       if (value.mobileHero) {
         const h=value.mobileHero;
-        if (h.trustTop < h.artBottom - 1) issues.push("engineering links precede/overlap artwork");
-        if (h.primaryBottom > h.secondaryTop + 1) issues.push("primary mobile action is not first");
-        if (h.artTop < h.secondaryBottom || h.artTop > 680) issues.push("mobile artwork crowded or delayed");
+        if (h.missingLayoutNode) {
+          issues.push("missing binary-first or orbital mobile layout element");
+        } else {
+          if (h.trustTop < h.artBottom - 1) issues.push("engineering links precede/overlap orbital artwork");
+          if (h.primaryBottom > h.secondaryTop + 1) issues.push("primary mobile action is not first");
+          if (h.orbitTop < h.productBottom - 1 || h.artTop < h.productBottom - 1) issues.push("orbital artwork precedes binary landing");
+          if (h.secondaryBottom > h.productBottom + 1) issues.push("landing actions exceed landing section");
+          if (h.artTop - h.orbitTop > 950) issues.push("secondary orbital artwork delayed within its section");
+          if (h.orbitalActions !== 0) issues.push("duplicated calls to action in secondary orbital section");
+        }
       }
       if (value.artOverlap) issues.push("artwork overlaps introduction");
       if (issues.length) failures.push({route,width,issues,...value});
