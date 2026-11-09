@@ -36,6 +36,7 @@ describe("Signal Forge gated read-only agent candidate", () => {
     expect(model).toHaveBeenCalledTimes(1);
     const params = model.mock.calls[0][0];
     expect(params.maxTokens).toBe(256);
+    expect(params.timeoutMs).toBe(12_000);
     expect(params.toolChoice).toBe("none");
     expect(params.tools).toEqual([]);
     expect(params.messages).toHaveLength(2);
@@ -94,6 +95,49 @@ describe("Signal Forge gated read-only agent candidate", () => {
     await running;
     expect(slow).toHaveBeenCalledTimes(1);
   });
+  it("refuses partial responses, non-assistant output, missing provider identity and excessive length", async () => {
+    const cases: Array<{ name: string; mutate: (r: InvokeResult) => InvokeResult }> = [
+      { name: "incomplete", mutate: r => ({ ...r, choices: [{ ...r.choices[0], finish_reason: "length" }] }) },
+      { name: "tool finish", mutate: r => ({ ...r, choices: [{ ...r.choices[0], finish_reason: "tool_calls" }] }) },
+      { name: "tool role", mutate: r => ({ ...r, choices: [{ ...r.choices[0], message: { ...r.choices[0].message, role: "tool" } }] }) },
+      { name: "blank provider", mutate: r => ({ ...r, model: "  " }) },
+      { name: "oversize", mutate: r => ({ ...r, choices: [{ ...r.choices[0], message: { ...r.choices[0].message, content: "x".repeat(301) } }] }) },
+      { name: "empty", mutate: r => ({ ...r, choices: [{ ...r.choices[0], message: { ...r.choices[0].message, content: "  " } }] }) },
+      { name: "no choice", mutate: r => ({ ...r, choices: [] }) },
+    ];
+    for (const test of cases) {
+      const gate = new SignalForgeReadOnlyGate(() => 1_000);
+      const provider = vi.fn(async (_: InvokeParams) => test.mutate(response()));
+      await expect(gate.analyze(input, provider), test.name).rejects.toMatchObject({ reason: "MODEL_INVALID" });
+      expect(provider).toHaveBeenCalledTimes(1);
+    }
+  });
+  it("releases the in-flight lock after provider error but counts the attempted request", async () => {
+    const gate = new SignalForgeReadOnlyGate(() => 1_000);
+    const model = vi.fn()
+      .mockRejectedValueOnce(new Error("synthetic-provider-error"))
+      .mockResolvedValue(response());
+    await expect(gate.analyze(input, model)).rejects.toThrow("synthetic-provider-error");
+    const second = await gate.analyze(input, model);
+    expect(second.policy_verdict).toBe("HOLD_AND_RECONCILE");
+    await gate.analyze(input, model);
+    await expect(gate.analyze(input, model)).rejects.toMatchObject({ reason: "RATE_LIMIT" });
+    expect(model).toHaveBeenCalledTimes(3);
+  });
+  it("fails closed at the 512-active-actor quota-map limit and prunes expired keys", async () => {
+    let time = 1_000;
+    const gate = new SignalForgeReadOnlyGate(() => time);
+    const provider = vi.fn(async (_: InvokeParams) => response());
+    for (let i = 0; i < 512; i++) {
+      await gate.analyze({ ...input, actor_id: "admin-" + i }, provider);
+    }
+    await expect(gate.analyze({ ...input, actor_id: "new-actor" }, provider))
+      .rejects.toMatchObject({ reason: "RATE_LIMIT" });
+    expect(provider).toHaveBeenCalledTimes(512);
+    time += 60_001;
+    await gate.analyze({ ...input, actor_id: "new-actor" }, provider);
+    expect(provider).toHaveBeenCalledTimes(513);
+  });
   it("wires admin-only tRPC, an off-by-default feature flag and a bounded provider budget", () => {
     const route = readFileSync(resolve(process.cwd(), "server/signalForgeAgentRouter.ts"), "utf8");
     const site = readFileSync(resolve(process.cwd(), "client/src/components/magicpath/JCEESignalForge.tsx"), "utf8");
@@ -103,6 +147,7 @@ describe("Signal Forge gated read-only agent candidate", () => {
     expect(route).toContain('process.env.SIGNAL_FORGE_READ_ONLY_AGENT_ENABLED === "true"');
     expect(llm).toContain("requestedMaxTokens ?? 32768");
     expect(llm).toContain("payload.max_tokens = requestedMaxTokens ?? 32768");
+    expect(llm).toContain("AbortSignal.timeout(timeoutMs)");
     expect(site).not.toContain("signalForgeAgent");
   });
 });

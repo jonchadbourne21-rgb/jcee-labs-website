@@ -115,10 +115,14 @@ export class SignalForgeReadOnlyGate {
         ? { window_start: now, count: 1 }
         : { window_start: old.window_start, count: old.count + 1 };
     if (next.count > 3) throw new SignalForgeGateError("RATE_LIMIT");
-    // Prune old actor entries instead of permitting unlimited resident keys.
-    if (this.rate.size > 512) {
-      for (const [actor, bucket] of Array.from(this.rate.entries()))
-        if (now - bucket.window_start >= 60_000) this.rate.delete(actor);
+    // Bound process-local tracking even when every actor is new. Prune expired
+    // buckets first; if all 512 are current, fail closed before provider use.
+    if (!old && this.rate.size >= 512) {
+      for (const [actor, bucket] of Array.from(this.rate.entries())) {
+        if (now < bucket.window_start || now - bucket.window_start >= 60_000)
+          this.rate.delete(actor);
+      }
+      if (this.rate.size >= 512) throw new SignalForgeGateError("RATE_LIMIT");
     }
     this.rate.set(input.actor_id, next);
     this.active = true;
@@ -153,12 +157,22 @@ export class SignalForgeReadOnlyGate {
         tools: [],
         toolChoice: "none",
         maxTokens: 256,
+        timeoutMs: 12_000,
       });
-      const message = result.choices?.[0]?.message;
-      if (message?.tool_calls?.length || typeof message?.content !== "string")
-        throw new SignalForgeGateError("MODEL_INVALID");
+      const choice = result.choices?.[0];
+      const message = choice?.message;
+      // Reject partial, tool-using, malformed and non-assistant outputs. The
+      // model is never the authority source for the fixed server verdict.
+      if (
+        choice?.finish_reason !== "stop" ||
+        message?.role !== "assistant" ||
+        message?.tool_calls?.length ||
+        typeof message?.content !== "string" ||
+        typeof result.model !== "string" ||
+        !result.model.trim()
+      ) throw new SignalForgeGateError("MODEL_INVALID");
       const explanation = message.content.replace(/\s+/g, " ").trim();
-      if (explanation.length < 5 || explanation.length > 600)
+      if (explanation.length < 5 || explanation.length > 300)
         throw new SignalForgeGateError("MODEL_INVALID");
       return {
         fixture_id: input.fixture_id,

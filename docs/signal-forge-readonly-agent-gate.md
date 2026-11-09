@@ -65,3 +65,26 @@ for the **visual update** must pin merge commit
 `ffc4fdd865ed5e7e5f34373c16c8af469e5ac5fe`; do not enable this feature,
 copy secrets into Vite/public files, or silently connect an agent. Static
 hosting does not execute tRPC server methods.
+
+## Pre-provider security-review successor — 2026-11-09
+
+The original 116-test CI result is preserved unchanged at
+`b4291620c415c41f858fe2c0b09dbefdeec16dd3`.
+This successor performs additional **mock-only** qualification; it is not
+a real model inference, authenticated hosted test, or production release.
+
+Added source-level safeguards: fail closed for truncated or tool-finishing
+provider responses, wrong response role, absent provider identity and output
+over the originally specified 300-character limit; an abortable 12-second
+request timeout (per-call option), explicit maximum of 512 tracked active
+actors per process and cleanup when the lock is released.
+
+Added actual tRPC caller-based tests for anonymous, non-admin and
+disabled-admin requests; strict fixture-ID and forbidden-parameter rejection;
+fixed session identity forwarded to the gate; and provider-error redaction.
+No paid provider calls are made. A timeout is an HTTP cancellation boundary,
+not proof that an upstream model incurred no charges.
+
+The process-local quota, session authentication, result model quality,
+provider billing ceiling, public abuse resistance and independently witnessed
+runtime effects remain unqualified for a multi-replica hosted/public deployment.

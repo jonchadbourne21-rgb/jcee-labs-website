@@ -62,6 +62,8 @@ export type InvokeParams = {
   tool_choice?: ToolChoice;
   maxTokens?: number;
   max_tokens?: number;
+  /** Abort the HTTP request after this many milliseconds, when supplied. */
+  timeoutMs?: number;
   outputSchema?: OutputSchema;
   output_schema?: OutputSchema;
   responseFormat?: ResponseFormat;
@@ -305,6 +307,11 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
     throw new Error("maxTokens must be an integer between 1 and 32768");
   }
   payload.max_tokens = requestedMaxTokens ?? 32768;
+  const timeoutMs = params.timeoutMs;
+  if (timeoutMs !== undefined &&
+      (!Number.isInteger(timeoutMs) || timeoutMs < 1000 || timeoutMs > 30_000)) {
+    throw new Error("timeoutMs must be an integer between 1000 and 30000");
+  }
   payload.thinking = {
     "budget_tokens": 128
   }
@@ -327,6 +334,7 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
       authorization: `Bearer ${ENV.forgeApiKey}`,
     },
     body: JSON.stringify(payload),
+    ...(timeoutMs === undefined ? {} : { signal: AbortSignal.timeout(timeoutMs) }),
   });
 
   if (!response.ok) {
