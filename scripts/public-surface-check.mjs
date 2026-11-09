@@ -645,6 +645,29 @@ try {
       !forgeReady.boundary?.includes("Fictional data") || !forgeReady.canvas) {
     failures.push("Signal Forge initial browser interface invalid: " + JSON.stringify(forgeReady));
   }
+  // The website lead and Signal Forge use the same blue action identity.
+  const forgePalette = await evaluate(page.send, `(() => {
+    const app = document.querySelector('.sf-app');
+    const button = document.querySelector('.sf-primary');
+    const accent = document.querySelector('.sf-hero h1 em');
+    if (!app || !button || !accent) return null;
+    const computed = element => getComputedStyle(element);
+    return {
+      background: computed(app).backgroundColor,
+      accent: computed(app).getPropertyValue('--sf-accent').trim(),
+      button: computed(button).backgroundColor,
+      buttonText: computed(button).color,
+      headlineAccent: computed(accent).color
+    };
+  })()`);
+  if (!forgePalette ||
+      forgePalette.background !== "rgb(8, 11, 18)" ||
+      forgePalette.accent.toLowerCase() !== "#6ab8ff" ||
+      forgePalette.button !== "rgb(106, 184, 255)" ||
+      forgePalette.buttonText !== "rgb(7, 24, 39)" ||
+      forgePalette.headlineAccent !== "rgb(106, 184, 255)") {
+    failures.push("Signal Forge is not using WorldLab orbital-blue brand colors: " + JSON.stringify(forgePalette));
+  }
   await evaluate(page.send, "document.querySelector('.sf-hero-actions .sf-primary')?.click()");
   let timedOut = false;
   for (let step = 0; step < 55; step += 1) {
