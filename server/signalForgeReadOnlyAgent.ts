@@ -117,7 +117,7 @@ export class SignalForgeReadOnlyGate {
     if (next.count > 3) throw new SignalForgeGateError("RATE_LIMIT");
     // Prune old actor entries instead of permitting unlimited resident keys.
     if (this.rate.size > 512) {
-      for (const [actor, bucket] of this.rate)
+      for (const [actor, bucket] of Array.from(this.rate.entries()))
         if (now - bucket.window_start >= 60_000) this.rate.delete(actor);
     }
     this.rate.set(input.actor_id, next);
