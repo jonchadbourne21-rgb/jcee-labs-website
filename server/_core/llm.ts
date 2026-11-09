@@ -296,7 +296,15 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
     payload.tool_choice = normalizedToolChoice;
   }
 
-  payload.max_tokens = 32768
+  // Optional hard request ceiling for the read-only internal agent. Keep the
+  // legacy behavior unchanged for existing callers that do not specify one.
+  const requestedMaxTokens = params.maxTokens ?? params.max_tokens;
+  if (requestedMaxTokens !== undefined &&
+      (!Number.isInteger(requestedMaxTokens) ||
+       requestedMaxTokens < 1 || requestedMaxTokens > 32768)) {
+    throw new Error("maxTokens must be an integer between 1 and 32768");
+  }
+  payload.max_tokens = requestedMaxTokens ?? 32768;
   payload.thinking = {
     "budget_tokens": 128
   }
