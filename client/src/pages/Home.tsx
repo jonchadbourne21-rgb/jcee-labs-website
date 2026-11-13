@@ -1,6 +1,5 @@
 import CoreHeader from "@/components/CoreHeader";
 import BrandFooter from "@/components/BrandFooter";
-import ScenarioTerminal from "@/components/ScenarioTerminal";
 import ProductOverview from "@/components/ProductOverview";
 import TechnicalBento from "@/components/TechnicalBento";
 import EvidenceTrace from "@/components/EvidenceTrace";
@@ -46,8 +45,6 @@ export default function Home() {
         </div>
         <div className="wl-hero-baseline"><span>THE ENGINEERING BEHIND CONTROL</span></div>
       </section>
-
-      <ScenarioTerminal />
 
       <section
         id="story"

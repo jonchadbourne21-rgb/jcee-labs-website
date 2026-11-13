@@ -322,14 +322,14 @@ try {
     const hero = document.querySelector('.customer-hero');
     const panel = document.querySelector('#product-overview');
     const heading = document.querySelector('#product-overview-title');
-    const scenario = document.querySelector('#scenario-heading');
+    const story = document.querySelector('#story');
     const primary = panel?.querySelector('a.wl-product-primary');
     const offers = [...(panel?.querySelectorAll('.wl-product-offer') ?? [])];
     const receipt = panel?.querySelector('.wl-receipt');
     const waveCanvas = panel?.querySelector('canvas.wl-full-hex-field');
-    const flow = hero && panel && scenario
+    const flow = hero && panel && story
       ? !!(panel.compareDocumentPosition(hero) & Node.DOCUMENT_POSITION_FOLLOWING)
-        && !!(hero.compareDocumentPosition(scenario) & Node.DOCUMENT_POSITION_FOLLOWING)
+        && !!(hero.compareDocumentPosition(story) & Node.DOCUMENT_POSITION_FOLLOWING)
       : false;
     return {
       flow,
@@ -456,8 +456,7 @@ try {
       labTrigger: !!lab?.querySelector('.wl-receipt-lab-controls button'),
       bento: bento.length,
       allBentoDisclosure: bento.length === 3 && bento.every(tile => tile.textContent.includes('NOT LIVE SYSTEM STATUS')),
-      scrollStages: story?.querySelectorAll('.wl-scroll-story-step').length,
-      scrollDisclaimer: story?.textContent?.includes('NO LIVE RECEIPT'),
+      scrollStory: !!story,
       accessibleNav: [...document.querySelectorAll('.desktop-nav a')].some(a => a.textContent.trim() === 'Infrastructure')
     };
   })()`);
@@ -468,8 +467,7 @@ try {
     interactive.labTrigger ||
     interactive.bento !== 3 ||
     !interactive.allBentoDisclosure ||
-    interactive.scrollStages !== 4 ||
-    !interactive.scrollDisclaimer ||
+    interactive.scrollStory ||
     !interactive.accessibleNav
   ) failures.push("Interactive homepage upgrade contract failed: " + JSON.stringify(interactive));
 

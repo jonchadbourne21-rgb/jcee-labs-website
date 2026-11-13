@@ -9,8 +9,6 @@ const orbit = read("components/OrbitGraphWebGL.tsx");
 const core = read("components/EvidenceCore.tsx");
 const deferred = read("components/DeferredEvidenceCore.tsx");
 const bento = read("components/TechnicalBento.tsx");
-const scroll = read("components/WorkflowScrollytelling.tsx");
-const scenario = read("components/ScenarioTerminal.tsx");
 const registry = read("pages/PublicRegistry.tsx");
 const research = read("components/ResearchSections.tsx");
 const scramble = read("components/ScrambleLabel.tsx");
@@ -69,17 +67,9 @@ describe("JCEE WorldLab pre-publication interactive visual candidate", () => {
     expect(registry).toContain("KNOWN BOUNDARY");
   });
 
-  it("uses scroll visibility for a recovery narrative while retaining manual playback", () => {
-    expect(scenario).toContain("<WorkflowScrollytelling />");
-    expect(scenario).toContain('aria-controls="scenario-terminal"');
-    expect(scroll).toContain("IntersectionObserver");
-    expect(scroll).toContain("HOLD: outcome unresolved");
-  });
-
   it("is responsive and respects nonproduction and reduced-motion boundaries", () => {
     expect(css).toContain("@media(max-width:720px)");
     expect(css).toContain("@media(prefers-reduced-motion:reduce)");
-    expect(scroll).toContain("NO LIVE RECEIPT");
     expect(core).toContain("A titanium J");
   });
 });
