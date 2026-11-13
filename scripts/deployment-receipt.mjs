@@ -228,9 +228,10 @@ export function writeReceipt(
       sha256: sha256(fs.readFileSync(path.join(root, "dist/index.js"))),
     };
   fs.writeFileSync(
-    path.join(publicRoot, "deployment.json"),
+    path.join(root, "dist/deployment-private.json"),
     JSON.stringify(receipt, null, 2) + "\n"
   );
+  fs.writeFileSync(path.join(publicRoot, "deployment.json"), JSON.stringify(publicReceipt(receipt), null, 2) + "\n");
   console.log(
     `Deployment receipt: ${receipt.sourceVerification.status}; ${receipt.source}; ${files.length} public files`
   );
@@ -283,4 +284,15 @@ export function verifyReceipt(receipt, expectedCommit) {
       throw new Error("Invalid public file entry");
     paths.add(file.path);
   }
+}
+
+/** Public build identity; detailed source/output custody stays outside the web root. */
+export function publicReceipt(receipt) {
+  return {
+    schemaVersion: 2,
+    source: receipt.source,
+    tree: receipt.tree,
+    publicManifestSha256: receipt.publicManifestSha256,
+    publicRoutes: receipt.publicRoutes,
+  };
 }

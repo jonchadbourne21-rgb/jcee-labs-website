@@ -14,3 +14,14 @@ test('rejects private key material without reporting its value', () => {
 test('allows public publication links and ordinary provenance', () => {
   assert.deepEqual(disclosureTypes('https://drive.google.com/file/d/public-publication/view\nPreview custody is recorded privately.'), []);
 });
+
+test('detects common credential forms without returning values', () => {
+  const samples = [
+    ['ghp_' + 'a'.repeat(36), 'github-token'],
+    ['AKIA' + 'A'.repeat(16), 'aws-access-key'],
+    ['sk-' + 'a'.repeat(40), 'api-secret'],
+    ['postgresql:' + '//fixture:password@localhost/db', 'database-credential-url'],
+    ['eyJ' + 'a'.repeat(20) + '.eyJ' + 'b'.repeat(20) + '.' + 'c'.repeat(24), 'jwt-literal'],
+  ];
+  for (const [value, kind] of samples) assert.deepEqual(disclosureTypes(value), [kind]);
+});

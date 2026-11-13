@@ -106,6 +106,7 @@ function cleanHtml(source) {
       .replaceAll(`${prefix}${prefix}/`, `${prefix}/`);
   for (const [from, name] of media)
     source = source.replaceAll(from, `${publicUrl}visuals/${name}`);
+  if (prefix) source = source.replaceAll('content="0;url=/registry"', `content="0;url=${prefix}/registry"`);
   return source;
 }
 const indexPath = path.join(root, "index.html");
@@ -154,6 +155,7 @@ for (const route of routes) {
   const directory = path.join(root, route.slice(1));
   fs.mkdirSync(directory, { recursive: true });
   const meta = routeMetadata[route];
+  const canonicalRoute = route === "/research-evidence" ? "/registry" : route;
   const escapeHtml = value =>
     value
       .replaceAll("&", "&amp;")
@@ -183,11 +185,11 @@ for (const route of routes) {
       )
       .replace(
         /(<meta\s+property="og:url"\s+content=")[^"]*/,
-        `$1${publicUrl.replace(/\/$/, "")}${route}`
+        `$1${publicUrl.replace(/\/$/, "")}${canonicalRoute}`
       )
       .replace(
         /(<link\s+rel="canonical"\s+href=")[^"]*/,
-        `$1${publicUrl.replace(/\/$/, "")}${route}`
+        `$1${publicUrl.replace(/\/$/, "")}${canonicalRoute}`
       )
       .replace(
         /(<meta\s+property="og:type"\s+content=")[^"]*/,

@@ -452,20 +452,20 @@ try {
     return {
       orbitNodes: graph?.querySelectorAll('.wl-orbit-node-controls button').length,
       renderer: graph?.getAttribute('data-orbit-renderer'),
-      lab: !!lab?.querySelector('[data-demo]') || lab?.getAttribute('data-demo') === 'browser-only',
+      lab: !!lab,
       labTrigger: !!lab?.querySelector('.wl-receipt-lab-controls button'),
       bento: bento.length,
       allBentoDisclosure: bento.length === 3 && bento.every(tile => tile.textContent.includes('NOT LIVE SYSTEM STATUS')),
       scrollStages: story?.querySelectorAll('.wl-scroll-story-step').length,
       scrollDisclaimer: story?.textContent?.includes('NO LIVE RECEIPT'),
-      accessibleNav: !!document.querySelector('.desktop-nav [role="text"][aria-label="Infrastructure"]')
+      accessibleNav: [...document.querySelectorAll('.desktop-nav a')].some(a => a.textContent.trim() === 'Infrastructure')
     };
   })()`);
   if (
     interactive.orbitNodes !== 3 ||
     !["webgl2", "fallback"].includes(interactive.renderer) ||
-    !interactive.lab ||
-    !interactive.labTrigger ||
+    interactive.lab ||
+    interactive.labTrigger ||
     interactive.bento !== 3 ||
     !interactive.allBentoDisclosure ||
     interactive.scrollStages !== 4 ||
@@ -473,23 +473,11 @@ try {
     !interactive.accessibleNav
   ) failures.push("Interactive homepage upgrade contract failed: " + JSON.stringify(interactive));
 
-  await evaluate(page.send, "document.querySelector('.wl-receipt-lab-controls button:first-child')?.click()");
-  let mockReceipt = null;
-  for (let attempt = 0; attempt < 12; attempt += 1) {
-    mockReceipt = await evaluate(page.send, `(() => {
-      const lab = document.querySelector('.wl-receipt-lab');
-      const text = lab?.querySelector('pre code')?.textContent || '';
-      const hash = lab?.querySelector('.wl-receipt-lab-hash code')?.textContent || '';
-      return { text, hash, status: lab?.querySelector('.wl-receipt-lab-status')?.textContent };
-    })()`);
-    if (mockReceipt.hash?.length === 64) break;
-    await sleep(90);
-  }
-  if (!mockReceipt?.text?.includes('TIMEOUT_NO_ACK') ||
-      !mockReceipt.text.includes('LOCAL_DEMO_ONLY_NOT_A_REAL_RECEIPT') ||
-      !/^[0-9a-f]{64}$/.test(mockReceipt.hash || ''))
-    failures.push("Mock receipt browser SHA-256 contract failed: " + JSON.stringify(mockReceipt));
-
+  const navBefore = await evaluate(page.send, "document.querySelector('.desktop-nav a')?.textContent");
+  await evaluate(page.send, "document.querySelector('.desktop-nav a')?.dispatchEvent(new MouseEvent('mouseover', {bubbles:true}))");
+  await sleep(120);
+  const navAfter = await evaluate(page.send, "document.querySelector('.desktop-nav a')?.textContent");
+  if (navBefore !== navAfter) failures.push("Navigation words changed during hover");
   await evaluate(page.send, "document.querySelector('#working-example').open = true");
   // The homepage illustration is browser-local and must show all four bounded outcomes.
   for (const [scenario, expected] of [

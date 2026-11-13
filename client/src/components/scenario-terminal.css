@@ -22,3 +22,6 @@
 @media(max-width:700px) { .scenario-grid { grid-template-columns:1fr; } .scenario-console { padding:18px; } }
 
 #root#root .scenario-console p { font-family:var(--worldlab-font) !important; }
+
+.scenario-playback > summary { cursor:pointer; padding:1rem 0; color:var(--wl-text,#f0f5fb); }
+.scenario-playback[open] > summary { margin-bottom:1rem; }

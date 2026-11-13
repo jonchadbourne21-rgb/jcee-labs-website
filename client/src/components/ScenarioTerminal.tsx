@@ -62,7 +62,7 @@ export default function ScenarioTerminal() {
     <h2 id="scenario-heading">Before you try again,<br />know what happened.</h2>
     <p className="scenario-disclosure">Interactive illustration with fictional data. No external systems are connected, no VOW engine runs, and no qualification receipt is created. Playback timing tells the story; it does not measure execution.</p>
     <WorkflowScrollytelling />
-    <p className="scenario-kicker-supplement">OPTIONAL STEP-BY-STEP PLAYBACK / EXPLORE THE SAME FAILURE MODES</p>
+    <details className="scenario-playback"><summary>Explore the scenarios step by step</summary>
     <div className="scenario-grid">
       <div className="scenario-selectors" role="group" aria-label="Choose a workflow illustration">
         {scenarios.map((item, index) => <button key={item.title} type="button" aria-pressed={selected === index} aria-controls="scenario-terminal" onClick={() => { setPlaying(false); setSelected(index); setShown(0); }}>
@@ -86,5 +86,6 @@ export default function ScenarioTerminal() {
         {reducedMotion && <p className="scenario-motion-note">Reduced motion is on. Use Next step to explore at your pace.</p>}
       </div>
     </div>
+    </details>
   </section>;
 }

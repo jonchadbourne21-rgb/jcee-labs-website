@@ -21,7 +21,7 @@ export function applyPublicPageMetadata(html: string, requestPath: string) {
   const pathname = requestPath.split(/[?#]/)[0].replace(/\/+$/, "") || "/";
   const meta = metadata[pathname];
   if (!meta) return html;
-  const canonical = `https://jceelabs.com${pathname}`;
+  const canonical = `https://jceelabs.com${pathname === "/research-evidence" ? "/registry" : pathname}`;
   let result = html
     .replace(
       /<script id="public-schema" type="application\/ld\+json">[\s\S]*?<\/script>/g,

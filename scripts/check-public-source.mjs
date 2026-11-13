@@ -9,6 +9,11 @@ export function disclosureTypes(text) {
   if (/\blibfile_[a-f0-9]{24,}\b/i.test(text)) found.push('private-library-locator');
   if (/Preview custody:[^\n]*\bDrive\b/i.test(text)) found.push('private-preview-custody');
   if (/-----BEGIN (?:RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----/.test(text)) found.push('private-key');
+  if (/\b(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,})/.test(text)) found.push('github-token');
+  if (/\bAKIA[A-Z0-9]{16}\b/.test(text)) found.push('aws-access-key');
+  if (/\bsk-(?:proj-)?[A-Za-z0-9_-]{35,}/.test(text)) found.push('api-secret');
+  if (/(?:postgres(?:ql)?|mysql):\/\/[^\s:]+:[^\s@]+@/.test(text)) found.push('database-credential-url');
+  if (/eyJ[A-Za-z0-9_-]{15,}\.eyJ[A-Za-z0-9_-]{15,}\.[A-Za-z0-9_-]{15,}/.test(text)) found.push('jwt-literal');
   return found;
 }
 

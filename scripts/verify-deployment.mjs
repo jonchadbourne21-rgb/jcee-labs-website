@@ -7,13 +7,17 @@ import {
   sha256,
   verifyReceipt,
   outputManifest,
+  publicReceipt,
 } from "./deployment-receipt.mjs";
 const expected = process.env.BUILD_SOURCE_COMMIT || process.argv[2];
 const base = process.argv[3];
 const local = JSON.parse(
-  fs.readFileSync("dist/public/deployment.json", "utf8")
+  fs.readFileSync("dist/deployment-private.json", "utf8")
 );
 verifyReceipt(local, expected);
+const publicBuild = JSON.parse(fs.readFileSync("dist/public/deployment.json", "utf8"));
+if (JSON.stringify(publicBuild) !== JSON.stringify(publicReceipt(local)))
+  throw new Error("Public projection differs from private receipt");
 const source = inspectSource({ commit: expected });
 requireParity(source);
 if (
@@ -62,8 +66,7 @@ if (base) {
     return Buffer.from(await response.arrayBuffer());
   };
   const live = JSON.parse((await get("deployment.json")).toString());
-  verifyReceipt(live, expected);
-  if (JSON.stringify(live) !== JSON.stringify(local))
+  if (JSON.stringify(live) !== JSON.stringify(publicReceipt(local)))
     throw new Error(
       "Published receipt is not the locally verified build receipt"
     );

@@ -2,7 +2,6 @@ import CoreHeader from "@/components/CoreHeader";
 import BrandFooter from "@/components/BrandFooter";
 import ScenarioTerminal from "@/components/ScenarioTerminal";
 import ProductOverview from "@/components/ProductOverview";
-import ReceiptSimulator from "@/components/ReceiptSimulator";
 import TechnicalBento from "@/components/TechnicalBento";
 import EvidenceTrace from "@/components/EvidenceTrace";
 import DeferredEvidenceCore from "@/components/DeferredEvidenceCore";
@@ -45,7 +44,6 @@ export default function Home() {
             </div>
           </nav>
         </div>
-        <ReceiptSimulator />
         <div className="wl-hero-baseline"><span>THE ENGINEERING BEHIND CONTROL</span></div>
       </section>
 
@@ -79,25 +77,6 @@ export default function Home() {
               verified outcome.
             </p>
           </div>
-          <aside
-            className="customer-scenario"
-            aria-label="Illustrative interrupted workflow"
-          >
-            <p className="customer-kicker">AN EVERYDAY EXCEPTION</p>
-            <h3>The access request timed out.</h3>
-            <p>
-              An employee’s application access was approved. The automation timed
-              out. Was the intended group membership added—and is the approval
-              still valid?
-            </p>
-            <div className="customer-scenario-result">
-              Check the outcome before deciding what happens next.
-            </div>
-            <small>
-              Illustrative scenario, not a customer result or a claim of a
-              deployed identity-system integration.
-            </small>
-          </aside>
         </div>
         <ol className="customer-steps">
           <li>
@@ -118,36 +97,6 @@ export default function Home() {
             <p>Check the outcome and preserve a record your team can review.</p>
           </li>
         </ol>
-        <div
-          className="customer-record"
-          aria-label="Illustrative workflow review record"
-        >
-          <div className="customer-record-heading">
-            <span>WORKFLOW / EMPLOYEE ACCESS</span>
-            <span>ILLUSTRATIVE RECORD</span>
-          </div>
-          <dl>
-            <div>
-              <dt>01 / REQUEST</dt>
-              <dd>Add the approved employee to the specified application-access group.</dd>
-            </div>
-            <div>
-              <dt>02 / OBSERVATION</dt>
-              <dd>The automation timed out. The target membership is not yet confirmed.</dd>
-            </div>
-            <div>
-              <dt>03 / NEXT DECISION</dt>
-              <dd>
-                Read the target membership and action history; reconcile the approval
-                before deciding whether another attempt is appropriate.
-              </dd>
-            </div>
-          </dl>
-          <p>
-            A designed example of the questions to resolve—not a live system or
-            customer receipt.
-          </p>
-        </div>
         <p className="customer-note">
           Integrations and supported controls are scoped and tested against your
           systems.

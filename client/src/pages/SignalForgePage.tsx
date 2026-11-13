@@ -13,7 +13,7 @@ export default function SignalForgePage() {
       <CoreHeader current="technology" />
       <div id="page-content" tabIndex={-1}>
         <div className="experience-gateway">
-          <p>INTERACTIVE CONCEPT / 01 · Fictional data, browser-only. No live agent actions or verified production receipts.</p>
+          <p>SIGNAL FORGE · Explore an interrupted action. Fictional data. No live agent actions.</p>
           <nav aria-label="Explore JCEE interface studies">
             <a href="/experiences/evidence-engine">Explore Evidence Engine ↗</a>
             <a href="/technology">Engineering evidence ↗</a>

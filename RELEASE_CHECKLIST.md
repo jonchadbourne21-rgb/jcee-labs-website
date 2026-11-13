@@ -51,7 +51,7 @@ The headless checks use Chromium. In environments where `chromium` is not on the
 Copyright (c) 2026 Jonathan Chadbourne.
 
 The normal Manus production build and the Pages fallback both write
-`dist/public/deployment.json`. This records the Git commit and tree, SHA-256
+`dist/deployment-private.json` outside the web root. This records the Git commit and tree, SHA-256
 hashes of every tracked source file and every public build file, and the
 server bundle hash for Manus. Source bytes and executable/symlink modes are
 checked before and after building. The receipt excludes itself from output
@@ -111,3 +111,7 @@ reduced motion. It covers cold homepage clicks, direct/reloaded deep links,
 same-page router and native hash changes, and Back/Forward. The former source-text
 assertion is replaced by these behavior checks. Real iPhone Safari and Android
 confirmation remains required before public announcement, as described above.
+
+The public `dist/public/deployment.json` is a minimal build identity projection. Preserve the full private receipt with private release custody; do not upload it to public CI artifacts. `release:verify` validates both projections and every public output.
+
+Marketing APIs are disabled by default. Enabling `ENABLE_WEBSITE_LEGACY_API=true` is a separately reviewed deployment change, requiring strong session signing configuration and access/usage qualification.
