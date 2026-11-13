@@ -18,11 +18,11 @@ describe("homepage binary-first landing", () => {
     expect(home).toContain("wl-receipt-word");
     expect(home).toContain('<ProductOverview />');
     expect(home.indexOf("<ProductOverview />")).toBeLessThan(home.indexOf('id="orbital-study"'));
-    expect(home.indexOf('id="orbital-study"')).toBeLessThan(home.indexOf("<ScenarioTerminal />"));
+    expect(home.indexOf('id="orbital-study"')).toBeLessThan(home.indexOf('id="story"'));
     expect(section).toContain('<h1 id="product-overview-title">');
     expect(section).toContain('id="page-content" tabIndex={-1}');
     expect(home).toContain('<h2 id="hero-title">');
-    const originalHero = home.slice(home.indexOf('id="orbital-study"'), home.indexOf("<ScenarioTerminal />"));
+    const originalHero = home.slice(home.indexOf('id="orbital-study"'), home.indexOf('id="story"'));
     expect(originalHero).not.toContain('className="customer-actions"');
     expect(originalHero).not.toContain('EXPLORE THE WORK');
     expect(deferredOrbit).toContain('loading="lazy"');
