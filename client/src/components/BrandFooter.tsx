@@ -20,7 +20,7 @@ export default function BrandFooter({
           <a href="/charter" id="charter">
             Charter
           </a>
-          <a href="/charter/archive/v1.0">Charter v1.0 Archive</a>
+          <a href="/charter/archive/v1.0/">Charter v1.0 Archive</a>
         </div>
         <div>
           <span>TECHNOLOGY</span>

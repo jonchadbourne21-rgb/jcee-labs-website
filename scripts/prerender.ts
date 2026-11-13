@@ -39,7 +39,10 @@ try {
     );
     const directory = path.join(root, route.slice(1));
     fs.mkdirSync(directory, { recursive: true });
-    fs.writeFileSync(path.join(directory, "index.html"), html);
+    const output = route === "/research-evidence"
+      ? html.replace("</head>", '<meta http-equiv="refresh" content="0;url=/registry" /></head>')
+      : html;
+    fs.writeFileSync(path.join(directory, "index.html"), output);
   }
   const notFound = await render("/404");
   fs.writeFileSync(

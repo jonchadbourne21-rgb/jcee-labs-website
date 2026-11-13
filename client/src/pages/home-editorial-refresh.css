@@ -741,3 +741,5 @@
 @media(max-width:360px) {
   #root .customer-home:not(.customer-service) .customer-hero h1 { font-size:36px; }
 }
+
+.customer-story-grid { grid-template-columns: minmax(0, 1fr); max-width: 52rem; }

@@ -13,7 +13,7 @@ export default function EvidenceEnginePage() {
       <CoreHeader current="technology" />
       <div id="page-content" tabIndex={-1}>
         <div className="experience-gateway">
-          <p>INTERACTIVE CONCEPT / 02 · Fictional records, browser-only. No live system access or qualified evidence.</p>
+          <p>EVIDENCE ENGINE · Review the outcome. Fictional records. No live system access.</p>
           <nav aria-label="Explore JCEE interface studies">
             <a href="/experiences/signal-forge">Explore Signal Forge ↗</a>
             <a href="/technology">Engineering evidence ↗</a>

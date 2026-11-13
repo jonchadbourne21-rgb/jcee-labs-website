@@ -1,6 +1,5 @@
 import usePageSeo from "@/components/usePageSeo";
-import { useEffect, useState } from "react";
-import PublicDataDrawer from "@/components/PublicDataDrawer";
+import { useEffect } from "react";
 import BrandFooter from "@/components/BrandFooter";
 import CoreHeader from "@/components/CoreHeader";
 import CurlicueField from "@/components/CurlicueField";
@@ -29,7 +28,6 @@ const classifications = [
 
 export default function PublicRegistry() {
   usePageSeo("/registry");
-  const [selectedRecord, setSelectedRecord] = useState<(typeof entries)[number] | null>(null);
 
   return (
     <main className="program-page registry-page" id="top">
@@ -193,9 +191,6 @@ export default function PublicRegistry() {
                           </div>
                         )}
                       </dl>
-                      <button className="wl-record-drawer-trigger" type="button" onClick={() => setSelectedRecord(entry)}>
-                        Inspect public JSON record ↗
-                      </button>
                       {entry.href ? (
                         <a href={entry.href}>
                           VIEW PUBLIC CONTEXT <span>→</span>
@@ -265,19 +260,6 @@ export default function PublicRegistry() {
           </div>
         </div>
       </section>
-
-      <PublicDataDrawer
-        title={selectedRecord?.name ?? "Public registry record"}
-        record={selectedRecord ? {
-          id: selectedRecord.id, date: selectedRecord.date,
-          name: selectedRecord.name, kind: selectedRecord.kind,
-          public_status: getPublicClaimLabel(selectedRecord.id),
-          summary: selectedRecord.summary, supports: selectedRecord.supports,
-          boundary: selectedRecord.boundary, next_gate: selectedRecord.next ?? null,
-          provenance: "JCEE public registry website projection",
-        } : null}
-        onClose={() => setSelectedRecord(null)}
-      />
       <BrandFooter backToTopHref="#top" />
     </main>
   );

@@ -156,6 +156,7 @@ class SDKServer {
 
   private getSessionSecret() {
     const secret = ENV.cookieSecret;
+    if (secret.length < 32) throw new Error("Session signing is not configured");
     return new TextEncoder().encode(secret);
   }
 
@@ -214,7 +215,7 @@ class SDKServer {
 
       if (
         !isNonEmptyString(openId) ||
-        !isNonEmptyString(appId) ||
+        !isNonEmptyString(appId) || appId !== ENV.appId ||
         !isNonEmptyString(name)
       ) {
         console.warn("[Auth] Session payload missing required fields");

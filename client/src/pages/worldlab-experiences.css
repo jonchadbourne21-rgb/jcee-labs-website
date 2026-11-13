@@ -48,3 +48,8 @@
   .worldlab-experience-page .experience-gateway p{font-size:11px}
   .worldlab-experience-page .experience-gateway nav{gap:14px}
 }
+
+/* Readable summaries replace raw JSON and export controls. */
+.je-record-summary { display:grid; gap:1.25rem; margin:0; }
+.je-record-summary dt { color:var(--wl-muted,#a8b7c8); font-size:.75rem; margin-bottom:.4rem; }
+.je-record-summary dd { margin:0; line-height:1.6; overflow-wrap:anywhere; }

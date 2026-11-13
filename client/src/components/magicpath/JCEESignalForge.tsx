@@ -23,14 +23,13 @@ const phases = [{
   state: 'EFFECT OBSERVED',
   color: '#95cbff'
 }, {
-  name: 'Proof',
+  name: 'Record',
   label: '04 / THE RECORD',
   title: 'Make the\ninvisible\ninspectable.',
   detail: 'The example records what was requested, what was checked, and what was observed. No repeat dispatch.',
   state: 'TRACE COMPLETE',
   color: '#6ab8ff'
 }];
-const credits = [['MagicPath', 'The experience', 'This responsive React / TypeScript prototype, its animated canvas sculpture, and its interactive narrative.'], ['vidIQ', 'The narrative spark', 'The suggested hook “When your AI agent goes ghost.” was creative input, not a measured audience result.'], ['Higgsfield', 'Artwork preflight', 'An image concept was explored, but no Higgsfield image or video was generated or used here.'], ['Rust', 'Separate engineering layer', 'Signal Forge is React and Canvas 2D. Rust-backed website visual assets are a separate implementation.']];
 function Mark({
   small = false
 }: {
@@ -197,7 +196,7 @@ export const JCEESignalForge = () => {
   useEffect(() => { setMotion(!window.matchMedia('(prefers-reduced-motion: reduce)').matches); }, []);
   const [playing, setPlaying] = useState(false);
   const [branch, setBranch] = useState(false);
-  const [modal, setModal] = useState<'trace' | 'stack' | null>(null);
+  const [modal, setModal] = useState<'trace' | null>(null);
   const [notice, setNotice] = useState('');
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const dialog = useRef<HTMLElement>(null);
@@ -272,34 +271,10 @@ export const JCEESignalForge = () => {
     setPhase(1);
     setNotice('Unsafe branch simulated: a blind retry could duplicate an action. No actual action was sent.');
   }
-  function download() {
-    const record = {
-      prototype: true,
-      production_evidence: false,
-      source: 'Fictional browser-local simulation',
-      record_id: 'DEMO-SF-0042',
-      intent: 'Add example member to example workspace',
-      initial_response: 'timeout',
-      current_authority: 'example permission still matches',
-      target_state: 'example membership already present',
-      decision: 'do not repeat dispatch',
-      cryptographically_verified: false
-    };
-    const b = new Blob([JSON.stringify(record, null, 2)], {
-        type: 'application/json'
-      }),
-      u = URL.createObjectURL(b),
-      a = document.createElement('a');
-    a.href = u;
-    a.download = 'jcee-signal-forge-fictional-trace.json';
-    a.click();
-    URL.revokeObjectURL(u);
-    setNotice('Downloaded a fictional example trace. It is not a verified receipt.');
-  }
-  return <div className="sf-app" style={{
+  return <div className="sf-app" data-demo="browser-only" style={{
     '--sf-accent': current.color
   } as React.CSSProperties}>
-    <header className="sf-header"><a href="#experience" className="sf-brand" aria-label="JCEE WorldLab home"><Mark /><span>JCEE <b>WORLDLAB</b></span></a><nav aria-label="Concept navigation"><a href="#experience" className="sf-nav-active">Experience</a><button onClick={() => setModal('trace')}>The trace</button><button onClick={() => setModal('stack')}>Creative stack <span className="sf-external-icon"><Arrow /></span></button></nav><div className="sf-header-meta"><span className="sf-dot" /> INTERFACE EXPERIMENT <b>002</b></div></header>
+
     <main>
       <section className="sf-hero" id="experience" aria-labelledby="sf-title">
         <div className="sf-hero-grid" aria-hidden="true" />
@@ -308,12 +283,12 @@ export const JCEESignalForge = () => {
         <div className="sf-hero-bottom"><span>SCROLL TO EXPLORE <Arrow down /></span><span>DESIGNED TO BE QUESTIONED.</span><span className="sf-motion-status">MOTION {motion ? 'ON' : 'OFF'} <i /></span></div>
       </section>
       <section className="sf-sequence" aria-label="Explore the four scenes">{phases.map((p, i) => <button key={p.name} onClick={() => selectPhase(i as Phase)} className={phase === i ? 'active' : ''} aria-pressed={phase === i}><span className="sf-step-number">0{i + 1}</span><span className="sf-step-text"><strong>{p.name}</strong><small>{['A request enters the system', 'The response disappears', 'Check before repeating', 'Keep an inspectable record'][i]}</small></span><span className="sf-step-indicator">{phase === i ? '●' : <Arrow />}</span></button>)}</section>
-      <section className="sf-decision" ref={statusRef} aria-labelledby="sf-decision-title"><div className="sf-decision-intro"><p className="sf-eyebrow">THE HUMAN IN THE LOOP</p><h2 id="sf-decision-title">One silence.<br /><span>Two very different moves.</span></h2><p>“When your AI agent goes ghost.”<br /><small>A narrative spark from vidIQ. An interactive question from JCEE.</small></p></div><div className="sf-decision-body"><div className={`sf-outcome ${branch ? 'warning' : ''}`}><span className="sf-dot" /><strong>{branch ? 'A blind retry risks a duplicate.' : phase === 3 ? 'Observed. Recorded. No repeat dispatch.' : phase === 2 ? 'Checking state and authority…' : 'A timeout tells you about the response. Not the effect.'}</strong><p>{branch ? 'This is an illustrative risk, not an observed production event. Reset the branch by inspecting the fictional target.' : phase === 3 ? 'The fictional membership already exists. The example keeps the trace instead of repeating the action.' : 'Explore both choices below. Everything stays in your browser.'}</p></div><div className="sf-choice-row"><button className="sf-choice safe" onClick={inspect} disabled={playing}><span className="sf-choice-icon">◎</span><span><strong>Inspect the state</strong><small>Observe first. Decide second.</small></span><Arrow /></button><button className="sf-choice risk" onClick={retry} disabled={playing}><span className="sf-choice-icon">↻</span><span><strong>Try a blind retry</strong><small>Explore the unsafe branch.</small></span><Arrow /></button></div><div className="sf-trace-link"><span>{phase === 3 ? 'TRACE / DEMO-SF-0042' : 'BROWSER-LOCAL SIMULATION'}</span><button onClick={() => setModal('trace')}>Inspect the example trace <Arrow /></button></div></div></section>
-      <footer className="sf-footer"><div><Mark small /><span>JCEE WORLDLAB <b>/</b> SIGNAL FORGE</span></div><p>A concept, not a production claim.</p><button onClick={() => setModal('stack')}>Built with intention <Arrow /></button></footer>
+      <section className="sf-decision" ref={statusRef} aria-labelledby="sf-decision-title"><div className="sf-decision-intro"><p className="sf-eyebrow">THE HUMAN IN THE LOOP</p><h2 id="sf-decision-title">One silence.<br /><span>Two very different moves.</span></h2><p>A missing response leaves two possibilities: the action failed, or the confirmation was lost.</p></div><div className="sf-decision-body"><div className={`sf-outcome ${branch ? 'warning' : ''}`}><span className="sf-dot" /><strong>{branch ? 'A blind retry risks a duplicate.' : phase === 3 ? 'Observed. Recorded. No repeat dispatch.' : phase === 2 ? 'Checking state and authority…' : 'A timeout tells you about the response. Not the effect.'}</strong><p>{branch ? 'This is an illustrative risk, not an observed production event. Reset the branch by inspecting the fictional target.' : phase === 3 ? 'The fictional membership already exists. The example keeps the trace instead of repeating the action.' : 'Explore both choices below. Everything stays in your browser.'}</p></div><div className="sf-choice-row"><button className="sf-choice safe" onClick={inspect} disabled={playing}><span className="sf-choice-icon">◎</span><span><strong>Inspect the state</strong><small>Observe first. Decide second.</small></span><Arrow /></button><button className="sf-choice risk" onClick={retry} disabled={playing}><span className="sf-choice-icon">↻</span><span><strong>Try a blind retry</strong><small>Explore the unsafe branch.</small></span><Arrow /></button></div><div className="sf-trace-link"><span>{phase === 3 ? 'TRACE / DEMO-SF-0042' : 'BROWSER-LOCAL SIMULATION'}</span><button onClick={() => setModal('trace')}>Inspect the example trace <Arrow /></button></div></div></section>
+
       <div className="sf-announcement" aria-live="polite">{notice}</div>
     </main>
     {modal && <div className="sf-backdrop" onMouseDown={e => {
       if (e.target === e.currentTarget) setModal(null);
-    }}><section ref={dialog} className="sf-dialog" role="dialog" aria-modal="true" aria-labelledby="sf-dialog-title"><div className="sf-dialog-top"><span className="sf-eyebrow">{modal === 'stack' ? 'CREATIVE PROVENANCE' : 'FICTIONAL EXAMPLE / DEMO-SF-0042'}</span><button onClick={() => setModal(null)} aria-label="Close dialog">×</button></div><h2 id="sf-dialog-title">{modal === 'stack' ? 'The craft behind the concept.' : 'A trace you can question.'}</h2>{modal === 'stack' ? <><p className="sf-dialog-lead">A transparent account of what was used, what was attempted, and what this prototype does.</p><div className="sf-stack-list">{credits.map(([name, label, body]) => <div key={name}><strong>{name}</strong><section><span>{label}</span><p>{body}</p></section></div>)}</div></> : <><p className="sf-dialog-lead">A completed illustrative trace, independent of the scene you are viewing. It is not a durable or cryptographically verified receipt.</p><ol className="sf-receipt"><li><span>01</span><div><strong>Intent captured</strong><p>Add an example member to an example workspace.</p></div></li><li><span>02</span><div><strong>Response timed out</strong><p>The effect is unknown. A timeout alone does not authorize a retry.</p></div></li><li><span>03</span><div><strong>Authority and state checked</strong><p>Example permission still matches. The fictional membership is already present.</p></div></li><li><span>04</span><div><strong>No repeat dispatch</strong><p>Record the observation and its limits. No real system was contacted.</p></div></li></ol><button className="sf-primary" onClick={download}>Download example JSON <Arrow /></button></>}<div className="sf-dialog-boundary">Fictional data. No live telemetry, Rust runtime, VOW connection, or production qualification. This browser-only concept does not connect to production systems.</div></section></div>}
+    }}><section ref={dialog} className="sf-dialog" role="dialog" aria-modal="true" aria-labelledby="sf-dialog-title"><div className="sf-dialog-top"><span className="sf-eyebrow">FICTIONAL EXAMPLE / DEMO-SF-0042</span><button onClick={() => setModal(null)} aria-label="Close dialog">×</button></div><h2 id="sf-dialog-title">A trace you can question.</h2><><p className="sf-dialog-lead">A completed illustrative trace, independent of the scene you are viewing. It is not a durable or cryptographically verified receipt.</p><ol className="sf-receipt"><li><span>01</span><div><strong>Intent captured</strong><p>Add an example member to an example workspace.</p></div></li><li><span>02</span><div><strong>Response timed out</strong><p>The effect is unknown. A timeout alone does not authorize a retry.</p></div></li><li><span>03</span><div><strong>Authority and state checked</strong><p>Example permission still matches. The fictional membership is already present.</p></div></li><li><span>04</span><div><strong>No repeat dispatch</strong><p>Record the observation and its limits. No real system was contacted.</p></div></li></ol></><div className="sf-dialog-boundary">Fictional data. This browser-only example does not contact external systems or create a verified receipt.</div></section></div>}
   </div>;
 };

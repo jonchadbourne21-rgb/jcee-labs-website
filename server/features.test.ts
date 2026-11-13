@@ -103,7 +103,7 @@ describe("mirrored.reflect", () => {
       choices: [{ message: { content: "That sounds really meaningful. What does that feeling tell you?" } }],
     } as any);
 
-    const caller = appRouter.createCaller(buildCtx());
+    const caller = appRouter.createCaller(buildCtx({ id: 1, openId: "admin", role: "admin" } as TrpcContext["user"]));
     const result = await caller.mirrored.reflect({ message: "I feel stuck in my career." });
 
     expect(typeof result.reply).toBe("string");
@@ -115,19 +115,19 @@ describe("mirrored.reflect", () => {
       choices: [{ message: { content: [{ type: "text", text: "some content" }] } }],
     } as any);
 
-    const caller = appRouter.createCaller(buildCtx());
+    const caller = appRouter.createCaller(buildCtx({ id: 1, openId: "admin", role: "admin" } as TrpcContext["user"]));
     const result = await caller.mirrored.reflect({ message: "I feel lost." });
 
     expect(result.reply).toBe("I'm here with you. Tell me more.");
   });
 
   it("rejects empty messages", async () => {
-    const caller = appRouter.createCaller(buildCtx());
+    const caller = appRouter.createCaller(buildCtx({ id: 1, openId: "admin", role: "admin" } as TrpcContext["user"]));
     await expect(caller.mirrored.reflect({ message: "" })).rejects.toThrow();
   });
 
   it("rejects messages over 1000 characters", async () => {
-    const caller = appRouter.createCaller(buildCtx());
+    const caller = appRouter.createCaller(buildCtx({ id: 1, openId: "admin", role: "admin" } as TrpcContext["user"]));
     await expect(caller.mirrored.reflect({ message: "a".repeat(1001) })).rejects.toThrow();
   });
 
@@ -136,7 +136,7 @@ describe("mirrored.reflect", () => {
       choices: [{ message: { content: "I see a pattern here." } }],
     } as any);
 
-    const caller = appRouter.createCaller(buildCtx());
+    const caller = appRouter.createCaller(buildCtx({ id: 1, openId: "admin", role: "admin" } as TrpcContext["user"]));
     await caller.mirrored.reflect({
       message: "Still feeling the same way.",
       history: [

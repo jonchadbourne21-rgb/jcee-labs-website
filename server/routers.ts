@@ -4,7 +4,7 @@ import { z } from "zod";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { invokeLLM } from "./_core/llm";
 import { notifyOwner } from "./_core/notification";
-import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
+import { adminProcedure, protectedProcedure, publicProcedure, router } from "./_core/trpc";
 import { getAllLeads, insertLead, insertBusinessInquiry, getAllBusinessInquiries, getAllMaterials, insertMaterial, updateMaterial, deleteMaterial, getAllLaborRates, insertLaborRate, updateLaborRate, deleteLaborRate } from "./db";
 import { getPricing, getAvailableTrades } from "./pricingApi";
 import { syncLeadToLoops, syncInquiryToLoops } from "./emailMarketing";
@@ -91,12 +91,12 @@ export const appRouter = router({
 
   // BidIndustrial pricing API
   bidIndustrial: router({
-    getPricing: publicProcedure
+    getPricing: adminProcedure
       .input(z.object({ trade: z.string(), region: z.string().optional() }))
       .query(async ({ input }) => {
         return getPricing(input.trade, input.region);
       }),
-    getTrades: publicProcedure.query(() => {
+    getTrades: adminProcedure.query(() => {
       return getAvailableTrades();
     }),
 
@@ -189,12 +189,12 @@ export const appRouter = router({
       }),
   }),
 
-  // Mirrored AI reflection chat — public (no login required to try the demo)
+  // Legacy reflection feature: admin-only, behind the default-off API boundary.
   mirrored: router({
-    reflect: publicProcedure
+    reflect: adminProcedure
       .input(z.object({
         message: z.string().min(1).max(1000),
-        history: z.array(z.object({ role: z.enum(["user", "assistant"]), content: z.string() })).optional(),
+        history: z.array(z.object({ role: z.enum(["user", "assistant"]), content: z.string().max(2000) })).max(12).optional(),
       }))
       .mutation(async ({ input }) => {
         const systemPrompt = `You are Mirror, the AI reflection engine inside the Mirrored app by Jcee Labs. 

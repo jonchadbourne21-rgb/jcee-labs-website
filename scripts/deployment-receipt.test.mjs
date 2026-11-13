@@ -195,3 +195,19 @@ test("tracked Docker metadata must still match approved bytes", t => {
   fs.writeFileSync(file, "changed");
   assert.throws(() => requireParity(f.snapshot()), /changed: .dockerignore/);
 });
+
+test("public projection omits source inventory and server details while private receipt remains verifiable", t => {
+  const f = fixture(t);
+  const receipt = writeReceipt(f.snapshot(), {
+    root: f.root, approvedCommit: f.commit,
+    sourceOptions: { sourceRepo: f.root, commit: "HEAD" },
+  });
+  const publicView = JSON.parse(fs.readFileSync(path.join(f.root, "dist/public/deployment.json")));
+  const privateView = JSON.parse(fs.readFileSync(path.join(f.root, "dist/deployment-private.json")));
+  verifyReceipt(privateView, f.commit);
+  assert.equal(publicView.schemaVersion, 2);
+  assert.equal(publicView.source, f.commit);
+  assert.equal(publicView.publicManifestSha256, receipt.publicManifestSha256);
+  for (const field of ["sourceFiles", "server", "sourceVerification", "build", "hostingMetadataFiles", "publicFiles"])
+    assert.equal(field in publicView, false);
+});

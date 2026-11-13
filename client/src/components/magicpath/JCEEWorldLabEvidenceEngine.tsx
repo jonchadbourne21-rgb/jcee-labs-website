@@ -152,6 +152,7 @@ export const JCEEWorldLabEvidenceEngine = () => {
     setFilter('All records');
     setSearch('');
     setView('Overview');
+    setDetailTab('Trace');
   }
   function reconcile() {
     setRunning(true);
@@ -167,27 +168,9 @@ export const JCEEWorldLabEvidenceEngine = () => {
       setNotice('Example reconciled: membership is already present. No retry was sent.');
     }, 900);
   }
-  function downloadRecord() {
-    const blob = new Blob([JSON.stringify({
-      prototype: true,
-      source: 'Fictional browser-local example',
-      production_evidence: false,
-      ...selected
-    }, null, 2)], {
-      type: 'application/json'
-    });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${selected.id}-illustrative-record.json`;
-    a.click();
-    URL.revokeObjectURL(url);
-    setNotice('Fictional example record downloaded. This is not a qualification receipt.');
-  }
-  return <div className="je-app">
+  return <div className="je-app" data-demo="browser-only">
     <aside className={`je-sidebar ${menuOpen ? 'je-sidebar-open' : ''}`}>
-      <a href="https://jceelabs.com/" target="_blank" rel="noreferrer" className="je-brand" aria-label="JCEE WorldLab website"><Orbit mini /><span>JCEE <b>WORLDLAB</b></span></a>
-      <div className="je-workspace"><span className="je-workspace-mark">W</span><div><strong>WorldLab workspace</strong><small>Design sandbox</small></div><span className="je-workspace-dots">···</span></div>
+      <div className="je-workspace"><span className="je-workspace-mark">W</span><div><strong>Example workspace</strong><small>Browser-only example</small></div><span className="je-workspace-dots">···</span></div>
       <p className="je-nav-label">WORKSPACE</p>
       <nav aria-label="Workspace navigation">
         {([['Overview', 'grid'], ['Review queue', 'clock'], ['Evidence library', 'layers']] as const).map(([label, icon]) => <button key={label} className={`je-nav-item ${view === label ? 'active' : ''}`} onClick={() => navigate(label)} aria-current={view === label ? 'page' : undefined}><Icon name={icon} /><span>{label}</span>{label === 'Review queue' && <small>{reviewCount}</small>}</button>)}
@@ -195,17 +178,17 @@ export const JCEEWorldLabEvidenceEngine = () => {
       <div className="je-sidebar-divider" />
       <p className="je-nav-label">FOUNDATION</p>
       <button className="je-nav-item" onClick={() => setBoundaryOpen(true)}><Icon name="shield" /><span>Evidence boundaries</span></button>
-      <a className="je-nav-item" href="https://jceelabs.com/technology" target="_blank" rel="noreferrer"><Icon name="file" /><span>Engineering reference</span><Icon name="diagonal" size={13} /></a>
-      <div className="je-sidebar-bottom"><Orbit /><p>Intelligence that<br />leaves receipts.</p><div className="je-prototype-label"><span /> INTERFACE STUDY / 001</div><small>Fictional data. No system access.<br />No live or qualified evidence.</small><button onClick={() => setBoundaryOpen(true)}>About this prototype <Icon name="diagonal" size={13} /></button></div>
+      <a className="je-nav-item" href="/technology"><Icon name="file" /><span>Engineering reference</span><Icon name="diagonal" size={13} /></a>
+      <div className="je-sidebar-bottom"><Orbit /><p>Intelligence that<br />leaves receipts.</p><div className="je-prototype-label"><span /> FICTIONAL WORKSPACE</div><small>Fictional data. No system access.<br />No live or qualified evidence.</small><button onClick={() => setBoundaryOpen(true)}>About this prototype <Icon name="diagonal" size={13} /></button></div>
     </aside>
 
     <div className="je-shell">
-      <header className="je-topbar"><div className="je-breadcrumb"><button className="je-menu" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation" aria-expanded={menuOpen}><Icon name="menu" /></button><span>Workspace</span><span className="je-slash">/</span><strong>Evidence Engine</strong></div><div className="je-topbar-right"><span className="je-demo-label"><span /> PROTOTYPE</span><span className="je-avatar" aria-label="WorldLab workspace">W</span></div></header>
+      <header className="je-topbar"><div className="je-breadcrumb"><button className="je-menu" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation" aria-expanded={menuOpen}><Icon name="menu" /></button><span>Workspace</span><span className="je-slash">/</span><strong>Evidence Engine</strong></div><div className="je-topbar-right"><span className="je-demo-label"><span /> PROTOTYPE</span><span className="je-avatar" aria-label="Example workspace">W</span></div></header>
       <main className="je-main">
         <section className="je-title-row"><div><p className="je-eyebrow"><span /> JCEE INFRASTRUCTURE / EVIDENCE ENGINE</p><h1>{view === 'Overview' ? 'Know what happened.' : view === 'Review queue' ? 'Resolve what’s uncertain.' : 'Follow the evidence.'}</h1><p className="je-subtitle">Current authority. Observed effect. An inspectable record.</p></div><button className="je-button je-button-muted je-reset" onClick={reset}><Icon name="refresh" size={15} /> Reset example</button></section>
 
         <div className="je-metrics" aria-label="Fictional example counts">
-          <div><span className="je-metric-icon"><Icon name="layers" /></span><div><p>Example records</p><strong>{records.length.toString().padStart(2, '0')}</strong></div><small>LOCAL FIXTURES</small></div>
+          <div><span className="je-metric-icon"><Icon name="layers" /></span><div><p>Example records</p><strong>{records.length.toString().padStart(2, '0')}</strong></div><small>FICTIONAL DATA</small></div>
           <div><span className="je-metric-icon je-amber"><Icon name="clock" /></span><div><p>Need review</p><strong>{reviewCount.toString().padStart(2, '0')}</strong></div><small>HELD OR UNCERTAIN</small></div>
           <div><span className="je-metric-icon je-mint"><Icon name="check" /></span><div><p>Effect observed</p><strong>{(records.length - reviewCount).toString().padStart(2, '0')}</strong></div><small>ILLUSTRATIVE ONLY</small></div>
         </div>
@@ -233,22 +216,15 @@ export const JCEEWorldLabEvidenceEngine = () => {
             <div className="je-list-footer"><span className="je-square" /> All records are fictional interface examples.</div>
           </section>
 
-          <section className="je-detail-panel" aria-label="Selected record details"><div className="je-detail-header"><div><span className="je-mini-label">RECORD INSPECTOR</span><h2>{selected.id}<span className="je-detail-dot" /></h2></div><button className="je-icon-button" onClick={downloadRecord} aria-label="Download fictional JSON record" title="Download fictional JSON record"><Icon name="download" size={17} /></button></div><div className="je-detail-tabs" role="tablist" aria-label="Record details">{['Trace', 'Record'].map(t => <button key={t} role="tab" aria-selected={detailTab === t} onClick={() => setDetailTab(t)}>{t === 'Trace' && <Icon name="layers" size={14} />} {t === 'Record' && <Icon name="file" size={14} />} {t}</button>)}</div>
-            <div className="je-detail-content" role="tabpanel" aria-label={detailTab}>{detailTab === 'Trace' ? <><div className="je-detail-summary"><span>Observed outcome</span><StatusPill status={selected.status} /></div><ol className="je-timeline">{[['Intent captured', selected.request, 'file'], ['Current authority', selected.authority, 'shield'], [selected.status === 'Uncertain' ? 'Effect unresolved' : selected.status === 'Held' ? 'Action held' : 'Effect observed', selected.effect, selected.status === 'Uncertain' ? 'clock' : selected.status === 'Held' ? 'pause' : 'check']].map(([title, body, icon], i) => <li key={title}><span className={`je-timeline-point ${i === 2 ? selected.status.toLowerCase() : ''}`}><Icon name={icon} size={14} /></span><div><strong>{title}</strong><p>{body}</p></div></li>)}</ol></> : <div className="je-code-record"><span className="je-code-label">BROWSER-LOCAL / JSON EXAMPLE</span><pre>{JSON.stringify({
-                    id: selected.id,
-                    illustrative: true,
-                    status: selected.status.toLowerCase(),
-                    current_authority: selected.authority,
-                    observed_effect: selected.effect,
-                    production_evidence: false
-                  }, null, 2)}</pre></div>}</div>
+          <section className="je-detail-panel" aria-label="Selected record details"><div className="je-detail-header"><div><span className="je-mini-label">RECORD INSPECTOR</span><h2>{selected.id}<span className="je-detail-dot" /></h2></div></div><div className="je-detail-tabs" role="tablist" aria-label="Record details">{['Trace', 'Record'].map(t => <button key={t} role="tab" aria-selected={detailTab === t} onClick={() => setDetailTab(t)}>{t === 'Trace' && <Icon name="layers" size={14} />} {t === 'Record' && <Icon name="file" size={14} />} {t}</button>)}</div>
+            <div className="je-detail-content" role="tabpanel" aria-label={detailTab}>{detailTab === 'Trace' ? <><div className="je-detail-summary"><span>Observed outcome</span><StatusPill status={selected.status} /></div><ol className="je-timeline">{[['Intent captured', selected.request, 'file'], ['Current authority', selected.authority, 'shield'], [selected.status === 'Uncertain' ? 'Effect unresolved' : selected.status === 'Held' ? 'Action held' : 'Effect observed', selected.effect, selected.status === 'Uncertain' ? 'clock' : selected.status === 'Held' ? 'pause' : 'check']].map(([title, body, icon], i) => <li key={title}><span className={`je-timeline-point ${i === 2 ? selected.status.toLowerCase() : ''}`}><Icon name={icon} size={14} /></span><div><strong>{title}</strong><p>{body}</p></div></li>)}</ol></> : <dl className="je-record-summary"><div><dt>Request</dt><dd>{selected.request}</dd></div><div><dt>Permission</dt><dd>{selected.authority}</dd></div><div><dt>Outcome</dt><dd>{selected.effect}</dd></div></dl>}</div>
             <div className="je-detail-boundary"><Icon name="info" size={15} /><p>Example record only. No durable receipt, cryptographic verification, or production qualification.</p></div>
           </section>
         </div>
-        <footer className="je-footer"><span>JCEE WORLDLAB <b>/</b> INTELLIGENCE THAT LEAVES RECEIPTS.</span><button onClick={() => setBoundaryOpen(true)}>Read the evidence boundaries <Icon name="diagonal" size={12} /></button></footer>
+
         <div className="je-announcement" aria-live="polite">{notice}</div>
       </main>
     </div>
-    {boundaryOpen && <div className="je-modal-backdrop" onClick={() => setBoundaryOpen(false)}><section role="dialog" aria-modal="true" aria-labelledby="je-boundary-title" className="je-modal" onClick={e => e.stopPropagation()}><div className="je-modal-head"><span className="je-eyebrow">PROTOTYPE / EVIDENCE BOUNDARY</span><button ref={closeRef} onClick={() => setBoundaryOpen(false)} className="je-icon-button" aria-label="Close evidence boundaries"><Icon name="close" /></button></div><h2 id="je-boundary-title">A concept you can inspect.</h2><p>This interface explores how JCEE could make authority, uncertain outcomes, and evidence easier to review.</p><ul><li>Every record and timestamp is fictional.</li><li>The example check changes browser-local state only.</li><li>No real systems, VOW engine, or live telemetry are connected.</li><li>Downloaded JSON is illustrative. It is not a durable or cryptographically verified receipt.</li><li>This concept does not establish production readiness or customer outcomes.</li></ul><div className="je-modal-bottom"><Icon name="shield" /><span>This is a public browser-only interface study, not a connected or qualified evidence system.</span></div></section></div>}
+    {boundaryOpen && <div className="je-modal-backdrop" onClick={() => setBoundaryOpen(false)}><section role="dialog" aria-modal="true" aria-labelledby="je-boundary-title" className="je-modal" onClick={e => e.stopPropagation()}><div className="je-modal-head"><span className="je-eyebrow">PROTOTYPE / EVIDENCE BOUNDARY</span><button ref={closeRef} onClick={() => setBoundaryOpen(false)} className="je-icon-button" aria-label="Close evidence boundaries"><Icon name="close" /></button></div><h2 id="je-boundary-title">A concept you can inspect.</h2><p>This interface explores how JCEE could make authority, uncertain outcomes, and evidence easier to review.</p><ul><li>Every record and timestamp is fictional.</li><li>The example check changes browser-local state only.</li><li>No real systems, VOW engine, or live telemetry are connected.</li><li>The displayed records are examples, not durable or cryptographically verified receipts.</li><li>This concept does not establish production readiness or customer outcomes.</li></ul><div className="je-modal-bottom"><Icon name="shield" /><span>This is a public browser-only interface study, not a connected or qualified evidence system.</span></div></section></div>}
   </div>;
 };

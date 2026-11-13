@@ -97,6 +97,50 @@
     "title": "Evidence Engine — Interactive Study | JCEE WorldLab",
     "description": "A fictional JCEE WorldLab evidence-review workspace with local sample records, review queue, and record inspector. No real agent execution or telemetry."
   },
+  "/portfolio": {
+    "title": "Engineering Portfolio: Jonathan Chadbourne | JCEE WorldLab",
+    "description": "Explore Jonathan Chadbourne’s selected engineering work, recorded results and current boundaries, with links to research and accountable execution projects."
+  },
+  "/charter": {
+    "title": "The WorldLab Charter: Principles and Purpose | JCEE WorldLab",
+    "description": "Read the principles guiding JCEE WorldLab research and engineering: open inquiry, bounded evidence, authority and responsibility for consequential action."
+  },
+  "/charter/archive/v1.0": {
+    "title": "The Original JCEE Labs Charter — Archive | JCEE WorldLab",
+    "description": "Read the preserved first JCEE Labs charter, including its research principles, engineering commitments and approach to evidence, governance and responsibility."
+  },
+  "/research-evidence": {
+    "title": "Public Research Evidence and Registry | JCEE WorldLab",
+    "description": "Explore the JCEE WorldLab public registry of selected software and research results, with recorded support, known limits and the next gate for each claim."
+  },
+  "/research/jrp-000": {
+    "title": "JRP-000: Understanding the Evidence Boundary | JCEE WorldLab",
+    "description": "Read JRP-000, the public research note on evidence boundaries: how to distinguish a recorded result, its assumptions and the consequential claims it supports."
+  },
+  "/qcs": {
+    "title": "QCS: Authority and Consequential Action | JCEE WorldLab",
+    "description": "Explore QCS authority research and reproduction results, with the assumptions, evidence boundaries and qualification requirements attached to each claim."
+  },
+  "/partners/enterprise": {
+    "title": "Enterprise Collaboration and Workflow Review | JCEE WorldLab",
+    "description": "Bring one operational workflow to JCEE WorldLab for a scoped conversation about uncertain outcomes, permissions, useful evidence and practical next steps."
+  },
+  "/partners/research": {
+    "title": "Research Collaboration and Reproduction | JCEE WorldLab",
+    "description": "Discuss a research question, reproduction proposal or bounded technical claim with JCEE WorldLab, and define the evidence needed for a collaborative test."
+  },
+  "/partners": {
+    "title": "Partner with JCEE WorldLab: Research and Engineering",
+    "description": "Explore enterprise and research collaboration with JCEE WorldLab. Start with a specific workflow or question, define its scope and agree the useful next step."
+  },
+  "/privacy": {
+    "title": "Privacy Policy and Information Practices | JCEE WorldLab",
+    "description": "Read the JCEE WorldLab website privacy policy, including information collection, use, sharing, cookies, third-party services and how to contact the company."
+  },
+  "/terms": {
+    "title": "Website Terms of Service and Conditions | JCEE WorldLab",
+    "description": "Read the JCEE WorldLab terms covering acceptable use, intellectual property, services, responsibilities and the conditions that apply when using this site."
+  },
   "/blog/recovery-with-current-permission": {
     "title": "Recovering Work Without Losing the Permission Boundary — JCEE WorldLab",
     "description": "Our November engineering update adds native interruption tests, installed client qualification and hosted evidence while keeping the full integration gate open.",

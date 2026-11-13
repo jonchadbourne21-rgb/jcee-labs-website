@@ -41,7 +41,9 @@ describe("MagicPath concepts are isolated, bounded public experiences", () => {
   });
   it("retains local-only semantics without connected backend or false publication language", () => {
     for (const s of [forge,engine]) {
-      expect(s).toMatch(/production_evidence:\s*false/);
+      expect(s).toContain('data-demo="browser-only"');
+      expect(s).not.toContain("JSON.stringify");
+      expect(s).not.toContain("createObjectURL");
       expect(s).not.toMatch(/\bfetch\s*\(|\bWebSocket\s*\(/);
       expect(s).not.toContain("JCEE’s live website is unchanged.");
       expect(s).not.toContain("JCEE’s live website has not been changed.");

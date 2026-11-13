@@ -37,7 +37,7 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
     );
     expect(plain(home)).toContain("creates no qualification receipt");
     expect(plain(home)).toContain(
-      "not a customer result or a claim of a deployed identity-system integration"
+      "Recorded tests use defined configurations and fictional data."
     );
     expect(plain(home)).toContain(
       "Production readiness, customer savings, and payment safety have not been established"
