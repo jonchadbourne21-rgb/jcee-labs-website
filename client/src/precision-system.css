@@ -146,7 +146,7 @@ nav a::after {
 .precision-home .hybrid-hero {
   background:
     linear-gradient(90deg, var(--precision-black) 0%, rgba(5, 6, 9, 0.96) 34%, rgba(5, 6, 9, 0.22) 64%, rgba(5, 6, 9, 0.06) 100%),
-    var(--precision-black) url("https://jceelabs.com/manus-storage/01-signature-hero-exposed_8b945d8c.webp") no-repeat center / cover !important;
+    var(--precision-black) url("/visuals/01-signature-hero-exposed.webp") no-repeat center / cover !important;
   color: var(--precision-white) !important;
   display: grid !important;
   gap: 0 !important;
@@ -973,14 +973,14 @@ nav a::after {
 }
 
 .vow-program {
-  background-image: url("https://jceelabs.com/manus-storage/02-vow-receipt_372bf105.webp") !important;
+  background-image: url("/visuals/02-vow-receipt.webp") !important;
   background-position: right center !important;
   background-repeat: no-repeat !important;
   background-size: min(64vw, 980px) auto !important;
 }
 
 .qcs-program {
-  background-image: url("https://jceelabs.com/manus-storage/03-qcs-causal-rail_731e5c1a.webp") !important;
+  background-image: url("/visuals/03-qcs-causal-rail.webp") !important;
   background-position: right center !important;
   background-repeat: no-repeat !important;
   background-size: min(62vw, 940px) auto !important;
@@ -1384,7 +1384,7 @@ nav a::after {
   .precision-home .hybrid-hero {
     background:
       linear-gradient(180deg, rgba(5, 6, 9, 0.04) 0%, rgba(5, 6, 9, 0.28) 28%, rgba(5, 6, 9, 0.84) 48%, rgba(5, 6, 9, 0.98) 64%, var(--precision-black) 100%),
-      var(--precision-black) url("https://jceelabs.com/manus-storage/01-signature-hero-exposed-mobile_1b03fe3f.webp") no-repeat 50% top / auto 54% !important;
+      var(--precision-black) url("/visuals/01-signature-hero-exposed-mobile.webp") no-repeat 50% top / auto 54% !important;
     display: block !important;
     min-height: auto !important;
     padding: 0 20px 28px !important;

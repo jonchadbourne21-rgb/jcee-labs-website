@@ -101,7 +101,7 @@ nav a::after {
   align-items: stretch;
   background:
     linear-gradient(90deg, rgba(8, 8, 7, 0.3) 0%, rgba(8, 8, 7, 0.06) 48%, rgba(8, 8, 7, 0.02) 100%),
-    var(--archive-ink) url("https://jceelabs.com/manus-storage/01-hero-boundary_f53560ae.webp") no-repeat center / cover !important;
+    var(--archive-ink) url("/visuals/01-signature-hero-exposed.webp") no-repeat center / cover !important;
   color: var(--archive-paper) !important;
   display: grid !important;
   gap: clamp(44px, 7vw, 120px) !important;
@@ -704,11 +704,11 @@ nav a::after {
   z-index: 1;
 }
 
-.vow-program { background-image: url("https://jceelabs.com/manus-storage/02-vow-receipt_742d4ab7.webp") !important; }
-.qcs-program { background-image: url("https://jceelabs.com/manus-storage/03-qcs-gate_f2ce0552.webp") !important; }
-.assurance-program { background-image: url("https://jceelabs.com/manus-storage/04-assurance-layers_bdea77ce.webp") !important; }
-.registry-program { background-image: url("https://jceelabs.com/manus-storage/05-registry-drawers_0844a485.webp") !important; }
-.charter-v11-program { background-image: url("https://jceelabs.com/manus-storage/06-charter-threshold_9c5fe973.webp") !important; }
+.vow-program { background-image: url("/visuals/02-vow-receipt.webp") !important; }
+.qcs-program { background-image: url("/visuals/03-qcs-gate.webp") !important; }
+.assurance-program { background-image: url("/visuals/04-assurance-layers.webp") !important; }
+.registry-program { background-image: url("/visuals/05-registry-drawers.webp") !important; }
+.charter-v11-program { background-image: url("/visuals/06-charter-threshold.webp") !important; }
 
 .program-masthead .eyebrow,
 .program-status-row,
@@ -983,7 +983,7 @@ nav a::after {
   .hybrid-home .hybrid-hero {
     background:
       linear-gradient(180deg, rgba(9, 9, 8, 0.2) 0%, rgba(9, 9, 8, 0.78) 64%, var(--archive-ink) 100%),
-      var(--archive-ink) url("https://jceelabs.com/manus-storage/01-hero-boundary-mobile_8dd4b897.webp") no-repeat 66% top / auto 57% !important;
+      var(--archive-ink) url("/visuals/01-hero-boundary-mobile.webp") no-repeat 66% top / auto 57% !important;
     min-height: auto !important;
     padding: 40px 20px 28px !important;
   }

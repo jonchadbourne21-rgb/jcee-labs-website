@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs";
 import express from "express";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { websiteApiBoundary } from "./_core/apiBoundary";
@@ -43,11 +44,27 @@ describe("public website boundaries", () => {
   it("redirects only known public image aliases and denies unknown keys", async () => {
     const app = express(); registerStorageProxy(app);
     const base = await serve(app);
-    const response = await fetch(`${base}/manus-storage/02-vow-receipt_372bf105.webp`, { redirect: "manual" });
-    expect(response.status).toBe(302);
-    expect(response.headers.get("location")).toBe("/visuals/02-vow-receipt.webp");
-    for (const key of ["private/record.json", "constructor", "__proto__", "unknown.webp", "%2e%2e%2fprivate"]) {
-      expect((await fetch(`${base}/manus-storage/${key}`, { redirect: "manual" })).status).toBe(404);
+    const aliases = {
+      "01-signature-hero-exposed_8b945d8c.webp": "01-signature-hero-exposed.webp",
+      "01-signature-hero-exposed-mobile_1b03fe3f.webp": "01-signature-hero-exposed-mobile.webp",
+      "02-vow-receipt_372bf105.webp": "02-vow-receipt.webp",
+      "02-vow-receipt_742d4ab7.webp": "02-vow-receipt.webp",
+      "03-qcs-causal-rail_731e5c1a.webp": "03-qcs-causal-rail.webp",
+      "01-hero-boundary_f53560ae.webp": "01-signature-hero-exposed.webp",
+      "jcee-hero-cubes_002df7db.png": "worldlab-company-v1.webp",
+    };
+    for (const method of ["GET", "HEAD"]) {
+      for (const [key, image] of Object.entries(aliases)) {
+        expect(existsSync(`client/public/visuals/${image}`)).toBe(true);
+        const response = await fetch(`${base}/manus-storage/${key}`, { method, redirect: "manual" });
+        expect(response.status).toBe(302);
+        expect(response.headers.get("location")).toBe(`/visuals/${image}`);
+      }
+      for (const key of ["private/record.json", "constructor", "__proto__", "unknown.webp", "%2e%2e%2fprivate"]) {
+        const response = await fetch(`${base}/manus-storage/${key}`, { method, redirect: "manual" });
+        expect(response.status).toBe(404);
+        expect(response.headers.get("location")).toBeNull();
+      }
     }
   });
   it("denies anonymous and ordinary users pricing and paid model access", async () => {

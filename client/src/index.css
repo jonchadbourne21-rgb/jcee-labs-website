@@ -317,7 +317,7 @@ nav a:hover::after { transform: scaleX(1); }
 .header-contact span { margin-left: 6px; }
 
 .hero {
-  background: #000000 url("/manus-storage/jcee-hero-cubes_002df7db.png") no-repeat center right / 60%;
+  background: #000000 url("/visuals/worldlab-company-v1.webp") no-repeat center right / 60%;
   background-attachment: fixed;
   display: grid;
   gap: 7vw;
@@ -2163,7 +2163,7 @@ html.light .site-header .header-contact {
 }
 
 html.light .hero {
-  background: #f5f7fb url("/manus-storage/jcee-hero-cubes_002df7db.png") no-repeat center right / 60%;
+  background: #f5f7fb url("/visuals/worldlab-company-v1.webp") no-repeat center right / 60%;
   background-blend-mode: screen;
   color: var(--ink);
 }
