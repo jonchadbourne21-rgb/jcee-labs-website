@@ -16,7 +16,7 @@
 
 .company-section::before {
   animation: cubeDrift 11s cubic-bezier(.45,0,.25,1) infinite alternate;
-  background-image: url("/manus-storage/jcee-hero-cubes_002df7db.png");
+  background-image: url("/visuals/worldlab-company-v1.webp");
   background-position: right top;
   background-repeat: no-repeat;
   background-size: contain;

@@ -1,5 +1,6 @@
 // Copyright (c) 2026 Jonathan Chadbourne.
 import fs from "node:fs";
+import { verifyHostBoundary } from "./verify-host-boundary.mjs";
 import path from "node:path";
 import {
   inspectSource,
@@ -42,6 +43,8 @@ if (
 )
   throw new Error("Server artifact changed");
 if (base) {
+  const boundary = await verifyHostBoundary(base);
+  if (!boundary.pass) throw new Error("Live HTTP boundary differs from the public website policy; run scripts/verify-host-boundary.mjs for redacted results");
   const root = new URL(base.endsWith("/") ? base : `${base}/`);
   if (
     !["https:", "http:"].includes(root.protocol) ||
