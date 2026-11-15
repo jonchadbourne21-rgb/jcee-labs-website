@@ -17,7 +17,7 @@ export default function Home() {
         className="customer-shell customer-hero"
         aria-labelledby="hero-title"
       >
-        <p className="customer-kicker wl-hero-kicker"><i aria-hidden="true" /> 02 / ENGINEERING & ASSURANCE</p>
+        <p className="customer-kicker wl-hero-kicker"><i aria-hidden="true" /> 02 / CONTROL THAT SERVES YOUR BUSINESS</p>
         <div className="customer-hero-grid">
           <div className="wl-hero-copy">
             <h2 id="hero-title">
@@ -28,22 +28,22 @@ export default function Home() {
               <span className="wl-receipt-word">receipts<span className="wl-period">.</span></span>
             </h2>
             <p className="customer-deck">
-              Assurance and execution infrastructure between machine
-              intelligence and real-world consequence. Connect the work to
-              current permission, a verifiable result, and a record you can trust.
+              Keep approvals, actions, and outcomes connected. Give your team
+              a clear answer when a workflow pauses, a system times out,
+              or someone asks what changed.
             </p>
           </div>
           <DeferredEvidenceCore />
-          <nav className="hero-trust" aria-label="Explore the engineering foundation">
-            <p>EXPLORE THE ENGINEERING</p>
+          <nav className="hero-trust" aria-label="Explore workflow solutions">
+            <p>BUILT INTO YOUR WORKFLOW</p>
             <div className="hero-trust-links">
-              <a href="/technology#current-integration"><span className="trust-symbol" aria-hidden="true">▱</span><span><strong>PostgreSQL</strong><small>Recorded reference tests</small></span></a>
-              <a href="/vow"><span className="trust-symbol" aria-hidden="true">↻</span><span><strong>JCEE VOW</strong><small>Execution &amp; recovery</small></span></a>
-              <a href="/registry"><span className="trust-symbol" aria-hidden="true">≡</span><span><strong>Evidence</strong><small>Results &amp; boundaries</small></span></a>
+              <a href="/solutions#build"><span className="trust-symbol" aria-hidden="true">▱</span><span><strong>Clear permissions</strong><small>Define who can do what</small></span></a>
+              <a href="/solutions#workflows"><span className="trust-symbol" aria-hidden="true">↻</span><span><strong>Controlled recovery</strong><small>Resolve interrupted work</small></span></a>
+              <a href="/solutions#build"><span className="trust-symbol" aria-hidden="true">≡</span><span><strong>Reviewable records</strong><small>Know what happened</small></span></a>
             </div>
           </nav>
         </div>
-        <div className="wl-hero-baseline"><span>THE ENGINEERING BEHIND CONTROL</span></div>
+        <div className="wl-hero-baseline"><span>PERMISSION. ACTION. A RECORD YOU CAN REVIEW.</span></div>
       </section>
 
       <section
@@ -60,7 +60,7 @@ export default function Home() {
         <div className="customer-story-grid">
           <div>
             <p className="customer-deck">
-              For IT, business-systems, and engineering teams: when an automated
+              For distribution, operations, and IT teams: when an automated
               change crosses several tools, finding out what happened should
               not require hours of investigation.
             </p>
@@ -113,8 +113,8 @@ export default function Home() {
         </h2>
         <TechnicalBento />
         <p className="customer-note">
-          Example engagement areas. Each workflow begins with an assessment of
-          the existing systems and requirements.
+          Order review, connected business applications, and controlled IT changes.
+          We scope the solution around your systems and the people who use them.
         </p>
       </section>
 
@@ -124,7 +124,7 @@ export default function Home() {
         aria-labelledby="services-title"
       >
         <span id="engage" />
-        <p className="customer-kicker">05 / A PRACTICAL FIRST ENGAGEMENT</p>
+        <p className="customer-kicker">05 / BUILD WITH US</p>
         <h2 id="services-title">
           Start with one workflow
           <br />
@@ -136,27 +136,27 @@ export default function Home() {
         </p>
         <div className="customer-offer">
           <div>
-            <h3>Workflow Assurance assessment</h3>
+            <h3>From a practical first step to a working solution</h3>
             <p>
-              A focused services engagement for one workflow. We review your
-              existing tools and controls, identify what remains unresolved,
-              and deliver written findings and a practical next-step plan.
+              Start with a Workflow Assurance Assessment, commission a custom
+              build, or shape a pilot as a design partner. We agree what
+              success looks like, build around your existing systems, and
+              test the result with your team.
             </p>
             <a
               className="customer-link"
-              href="/capabilities/infrastructure#deliverables"
+              href="/solutions"
             >
-              Explore the assessment ↗
+              Compare ways to work with us ↗
             </a>
           </div>
           <ul>
-            <li>Written boundary map and integration requirements</li>
+            <li>Assessment: a workflow map and prioritized remediation plan</li>
             <li>
-              A test plan for interruptions, changed permissions, and uncertain
-              outcomes
+              Implementation: custom software, connected systems, and tests
             </li>
-            <li>Written findings and acceptance criteria for the next step</li>
-            <li>A clear recommendation and delivery plan</li>
+            <li>Design partnership: a focused pilot with agreed success measures</li>
+            <li>Handoff: documentation and a scoped deployment or support plan</li>
           </ul>
         </div>
         <p className="customer-note">
@@ -165,95 +165,25 @@ export default function Home() {
         </p>
       </section>
 
-      <section
-        id="evidence"
-        className="customer-shell customer-section"
-        aria-labelledby="evidence-title"
-      >
-        <span id="evidence-frontier" />
-        <span id="current-progress" />
-        <span id="technology" />
-        <p className="customer-kicker">06 / ENGINEERING YOU CAN EXAMINE</p>
-        <h2 id="evidence-title">See the work behind the promise.</h2>
-        <p className="customer-deck">
-          Explore our recorded software results, execution and recovery
-          mechanisms, and the boundaries of each test.
-        </p>
-        <p>
-          JCEE Infrastructure is in development. Recorded tests use defined
-          configurations and fictional data. Production readiness, customer
-          savings, and payment safety have not been established by those
-          results.
-        </p>
-        <div className="customer-actions">
-          <a className="customer-button" href="/technology#current-integration">
-            Explore our engineering evidence ↗
-          </a>
-          <a className="customer-link" href="/registry">
-            PUBLIC REGISTRY ↗
-          </a>
+      <section id="partnership" className="customer-shell customer-section" aria-labelledby="partner-title">
+        <p className="customer-kicker">06 / DESIGN PARTNERSHIPS</p>
+        <h2 id="partner-title">Bring the problem.<br />Build the next step with us.</h2>
+        <p className="customer-deck">Help shape software around a workflow your team knows inside out. We’re inviting operations and IT teams to work with us on focused, measurable pilots.</p>
+        <div className="customer-offer">
+          <div><h3>See what a pilot can show.</h3><p>Where suitable, begin in shadow mode alongside your existing process. Review discrepancies and records before deciding whether to introduce live controls.</p><a className="customer-link" href="/solutions#design-partners">Explore design partner access ↗</a></div>
+          <ul><li>One workflow and agreed data access</li><li>A defined pilot deliverable and success measures</li><li>Direct collaboration on the next useful improvement</li><li>A joint review before any production rollout</li></ul>
         </div>
-        <div className="customer-cards customer-proof">
-          <article>
-            <span>RECORDED SOFTWARE BEHAVIOR</span>
-            <h3>Recovery after a lost response.</h3>
-            <p>
-              Follow the November update: native recovery tests, installed
-              interfaces and hosted evidence, with the full integration gate open.
-            </p>
-            <a
-              className="customer-link"
-              href="/registry#native-recovery-november"
-            >
-              Result and limits ↗
-            </a>
-          </article>
-          <article>
-            <span>EXPLAINED STEP BY STEP</span>
-            <h3>Follow a request to its record.</h3>
-            <p>
-              Explore the browser illustration below, including held and
-              uncertain outcomes.
-            </p>
-            <a className="customer-link" href="#working-example">
-              Explore the illustration ↓
-            </a>
-          </article>
-          <article>
-            <span>START WITH YOUR SYSTEMS</span>
-            <h3>Define what a useful test proves.</h3>
-            <p>
-              The assessment turns your workflow into a map, findings, and a
-              scoped next step.
-            </p>
-            <a className="customer-link" href="/capabilities/infrastructure">
-              See the engagement ↗
-            </a>
-          </article>
-        </div>
-        <div className="customer-evidence-links">
-          <a href="/technology#infrastructure-build">
-            Infrastructure overview ↗
-          </a>
-          <a href="/vow">VOW / execution &amp; recovery ↗</a>
-          <a href="/qcs">QCS / authority research ↗</a>
-          <a href="/assurance">JCEE Assurance ↗</a>
-          <a href="/experiences/signal-forge">Signal Forge · Try the scenario ↗</a>
-          <a href="/experiences/evidence-engine">Evidence Engine · Explore the interface ↗</a>
-          <a href="/research/evidence-standards#evidence-ladder">
-            Evidence standards ↗
-          </a>
-          <a href="/research/physical-experiments#physical-validation">
-            Physical research ↗
-          </a>
-        </div>
+      </section>
+      <section id="evidence" className="customer-shell customer-section" aria-labelledby="evidence-title">
+        <span id="evidence-frontier" /><span id="current-progress" /><span id="technology" />
+        <p className="customer-kicker">07 / CONFIDENCE IN THE WORK</p>
+        <h2 id="evidence-title">Clear scope. Tested behavior. A useful handoff.</h2>
+        <p className="customer-deck">We use existing software for permission checks, recovery, order comparison, and action records. Each engagement defines the integrations and acceptance tests needed for your workflow.</p>
+        <p>JCEE Infrastructure continues to develop. Recorded tests demonstrate specific configurations; they do not establish readiness for every customer system.</p>
+        <div className="customer-actions"><a className="customer-link" href="/technology#current-integration">See the engineering behind our work ↗</a><a className="customer-link" href="/registry">PUBLIC REGISTRY ↗</a></div>
         <details className="customer-demo" id="working-example">
-          <summary>Explore an illustrative request-to-record workflow</summary>
-          <p>
-            This browser illustration performs no external action, runs no VOW
-            engine, and creates no qualification receipt. It uses fictional
-            order data to explain the control pattern.
-          </p>
+          <summary>See how a request becomes a reviewable record</summary>
+          <p>This browser illustration uses fictional order data. It performs no external action and creates no qualification receipt.</p>
           <EvidenceTrace />
         </details>
       </section>
@@ -265,16 +195,17 @@ export default function Home() {
       >
         <div>
           <p className="customer-kicker">
-            07 / LET’S MAKE THE NEXT STEP USEFUL
+            08 / LET’S BUILD SOMETHING USEFUL
           </p>
           <h2 id="consultation-title">
-            Which workflow needs
+            What would you like
             <br />
-            a clearer outcome?
+            your systems to do better?
           </h2>
           <p>
-            Tell us about the workflow, the systems involved, and what needs to
-            work better. Start with a non-confidential summary.
+            Tell us what you want to build, connect, or improve. We’ll discuss
+            an assessment, implementation, or partnership that fits.
+            Start with a non-confidential summary.
           </p>
         </div>
         <div>

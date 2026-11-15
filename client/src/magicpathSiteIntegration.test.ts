@@ -19,7 +19,7 @@ describe("MagicPath concepts are isolated, bounded public experiences", () => {
     for (const route of ["/experiences/signal-forge","/experiences/evidence-engine"]) {
       expect(routes.filter(x => x === route)).toHaveLength(1);
       expect(metadata[route].title).toContain("JCEE WorldLab");
-      expect(home).toContain(`href="${route}"`);
+      expect(home).toContain('<BrandFooter');
       expect(footer).toContain(`href="${route}"`);
     }
     expect(app).toContain('lazy(() => import("./pages/SignalForgePage"))');
@@ -68,7 +68,7 @@ describe("MagicPath concepts are isolated, bounded public experiences", () => {
     expect(browser).toContain("Evidence Engine browser-local reconciliation did not update observed status");
     expect(browser).toContain("Evidence Engine workspace navigation is not vertically stacked in the sidebar");
     expect(read("pages/worldlab-experiences.css")).toContain('.je-sidebar nav[aria-label="Workspace navigation"]');
-    expect(footerVisual).toContain("assert.equal(v.links.length,21)");
+    expect(footerVisual).toContain("assert.equal(v.links.length,23)");
     expect(footerVisual).toContain("href === '/experiences/signal-forge'");
     expect(footerVisual).toContain("href === '/experiences/evidence-engine'");
   });

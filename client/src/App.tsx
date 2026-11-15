@@ -27,6 +27,7 @@ const EnterprisePartnersPage = lazy(
 const ConsultationPage = lazy(() => import("./pages/ConsultationPreview"));
 const ResearchPartnersPage = lazy(() => import("./pages/ResearchPartnersPage"));
 
+const SolutionsPage = lazy(() => import("./pages/SolutionsPage"));
 const DistributionPage = lazy(() => import("./pages/DistributionPage"));
 const OperatingCloudPage = lazy(() => import("./pages/OperatingCloudPage"));
 const InfrastructurePage = lazy(() => import("./pages/InfrastructurePage"));
@@ -115,6 +116,7 @@ function Router() {
         <Route path="/capabilities/infrastructure" component={InfrastructurePage} />
         <Route path="/capabilities/assurance">{() => <EditorialSite page="assurance" />}</Route>
         <Route path="/capabilities/technology-validation">{() => <EditorialSite page="technology-validation" />}</Route>
+        <Route path="/solutions" component={SolutionsPage} />
         <Route path="/solutions/distribution" component={DistributionPage} />
         <Route path="/operating-cloud" component={OperatingCloudPage} />
         <Route

@@ -52,9 +52,10 @@ try {
     uploadThroughput: 5_000_000,
   });
   const targets = [
-    ["/research/evidence-standards", "evidence-ladder"],
-    ["/research/physical-experiments", "physical-validation"],
-    ["/technology", "infrastructure-build"],
+    ["/solutions", "assessment"],
+    ["/solutions", "build"],
+    ["/solutions", "design-partners"],
+    ["/technology", "current-integration"],
   ];
   let checked = 0;
   async function atTarget(route, id, label) {
@@ -139,6 +140,9 @@ try {
         await sleep(200);
         await atTarget(route, id, `${name}/${reducedMotion} reload`);
       }
+      // Research remains accessible by its durable deep links, outside the buyer path.
+      await send("Page.navigate", { url: `${base}/technology#infrastructure-build` });
+      await atTarget("/technology", "infrastructure-build", `${name} technical direct link`);
       // This URL intentionally redirects to a topic page. atTarget verifies the
       // final path, client readiness, visibility, and stable section position.
       await send("Page.navigate", { url: `${base}/research#evidence-ladder` });

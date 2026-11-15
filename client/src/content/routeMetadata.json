@@ -7,7 +7,7 @@
   },
   "/": {
     "title": "JCEE WorldLab — Intelligence That Leaves Receipts.",
-    "description": "Assurance and execution infrastructure between machine intelligence and real-world consequence. Explore engineering and discuss a workflow with JCEE WorldLab."
+    "description": "Custom software and connected workflows with clear permissions, controlled recovery, and reviewable records. Explore JCEE WorldLab solutions and partnerships."
   },
   "/solutions/distribution": {
     "title": "JCEE Distribution: Order Review & Evidence | JCEE WorldLab",
@@ -140,6 +140,10 @@
   "/terms": {
     "title": "Website Terms of Service and Conditions | JCEE WorldLab",
     "description": "Read the JCEE WorldLab terms covering acceptable use, intellectual property, services, responsibilities and the conditions that apply when using this site."
+  },
+  "/solutions": {
+    "title": "Software, Integration & Partnerships | JCEE WorldLab",
+    "description": "Build custom business software and connect your systems with clear controls. Explore workflow assessments, implementation, and design partnerships."
   },
   "/blog/recovery-with-current-permission": {
     "title": "Recovering Work Without Losing the Permission Boundary — JCEE WorldLab",

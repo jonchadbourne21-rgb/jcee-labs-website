@@ -21,7 +21,7 @@ export default function ProductOverview() {
           <div className="wl-product-stage-copy">
             <p className="wl-product-eyebrow">
               <span aria-hidden="true" className="wl-product-dot" />
-              01 / THE PRODUCT &amp; THE WORK
+              01 / SOFTWARE FOR YOUR OPERATIONS
             </p>
             <h1 id="product-overview-title">
               Put AI to work.
@@ -29,17 +29,18 @@ export default function ProductOverview() {
               Stay in control.
             </h1>
             <p className="wl-product-lead">
-              Bring AI into the workflows your business depends on. We help
-              your team connect systems, define what automation can do, and
-              verify the results.
+              We build custom software and connect the systems your business
+              runs on—with clear permissions, controlled recovery, and
+              a record of what happened. Put AI and automation to work
+              where they can make a practical difference.
             </p>
             <div className="wl-product-actions">
               <a href="/consultation" className="wl-product-primary">
                 Discuss your workflow
                 <ArrowUpRight size={17} strokeWidth={1.8} aria-hidden="true" />
               </a>
-              <a href="/capabilities/infrastructure" className="wl-product-secondary">
-                Explore JCEE Infrastructure
+              <a href="/solutions" className="wl-product-secondary">
+                Explore solutions
                 <ArrowUpRight size={16} strokeWidth={1.8} aria-hidden="true" />
               </a>
             </div>
@@ -91,7 +92,7 @@ export default function ProductOverview() {
         <div className="wl-product-market" aria-label="What JCEE WorldLab offers">
           <div className="wl-product-market-heading">
             <p>START WITH A REAL WORKFLOW</p>
-            <p>One engagement you can scope today. One platform for controlled AI execution.</p>
+            <p>Assess a workflow. Build a solution. Partner on what comes next.</p>
           </div>
           <div className="wl-product-offers">
             <article className="wl-product-offer">
@@ -102,30 +103,36 @@ export default function ProductOverview() {
                 points, and records. Your team receives written findings,
                 acceptance criteria, and a practical next-step plan.
               </p>
-              <a href="/capabilities/infrastructure#deliverables">
+              <a href="/solutions#assessment">
                 See the assessment deliverables
                 <ArrowUpRight size={16} strokeWidth={1.8} aria-hidden="true" />
               </a>
             </article>
             <article className="wl-product-offer wl-product-offer-platform">
-              <p className="wl-product-offer-type">02 / SOFTWARE IN DEVELOPMENT</p>
-              <h3>JCEE Infrastructure</h3>
+              <p className="wl-product-offer-type">02 / CUSTOM SOFTWARE &amp; INTEGRATION</p>
+              <h3>Build around your business</h3>
               <p>
-                We're integrating execution, current authority, recovery, and
-                inspectable evidence for consequential automated actions.
-                Deployment suitability must be qualified for each workflow.
+                Connect business applications, replace manual handoffs, and
+                build the tools your team needs. We bring existing action
+                controls, recovery mechanisms, and evidence records into
+                a solution scoped to your systems.
               </p>
-              <a href="/technology#current-integration">
-                Explore the engineering
+              <a href="/solutions#build">
+                Explore implementation
                 <ArrowUpRight size={16} strokeWidth={1.8} aria-hidden="true" />
               </a>
             </article>
+            <article className="wl-product-offer">
+              <p className="wl-product-offer-type">03 / DESIGN PARTNERSHIPS</p>
+              <h3>Build the next step together</h3>
+              <p>Bring a real operational challenge. Shape a focused pilot with us, review the results, and decide together what is ready to scale.</p>
+              <a href="/solutions#design-partners">Explore a partnership <ArrowUpRight size={16} strokeWidth={1.8} aria-hidden="true" /></a>
+            </article>
           </div>
           <p className="wl-product-limit">
-            Assessments are individually scoped. JCEE Infrastructure remains
-            in development; recorded tests do not establish general production
-            readiness or customer outcomes. The action receipt above is an
-            illustrative design, not an executed customer workflow.
+            Every engagement has an agreed scope, deliverables, and acceptance criteria.
+            Integrations are tested for your workflow before production use.
+            The receipt above is an illustrative design, not an executed customer workflow.
           </p>
         </div>
       </div>

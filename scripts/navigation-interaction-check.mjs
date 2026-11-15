@@ -9,7 +9,7 @@ const base=`http://127.0.0.1:${port}`;
 const profile=path.join(os.tmpdir(),`worldlab-navigation-${process.pid}`);
 const server=start(process.execPath,['dist/index.js'],{env:{...process.env,PORT:String(port),NODE_ENV:'production'}});
 const browser=start(process.env.CHROMIUM_BIN||'chromium',['--headless=new','--no-sandbox','--disable-gpu',`--remote-debugging-port=${debug}`,`--user-data-dir=${profile}`,'about:blank']);
-const links=['/capabilities/infrastructure','/technology','/research','/resources','/company'];
+const links=['/solutions','/technology','/research','/resources','/company'];
 let client;const cases=[];
 try {
  await waitForUrl(base,'navigation test server');client=await connect(debug);const {send}=client;

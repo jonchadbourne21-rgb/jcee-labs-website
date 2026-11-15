@@ -267,6 +267,8 @@ try {
     { name: "Research directory iPhone", route: "/research", selector: ".research-directory", width: 390, height: 844, mobile: true, file: "research-directory-iphone.png" },
     { name: "Evidence transition desktop", route: "/", selector: "#evidence", width: 1440, height: 900, file: "evidence-transition-desktop.png" },
     { name: "Evidence transition iPhone", route: "/", selector: "#evidence", width: 390, height: 844, mobile: true, file: "evidence-transition-iphone.png" },
+    { name: "Solutions desktop", route: "/solutions", selector: ".editorial-masthead", width: 1440, height: 900, file: "solutions-desktop.png" },
+    { name: "Solutions iPhone", route: "/solutions", selector: ".editorial-masthead", width: 390, height: 844, mobile: true, file: "solutions-iphone.png" },
     { name: "Infrastructure service desktop", route: "/capabilities/infrastructure", selector: ".customer-hero", width: 1440, height: 900, file: "infrastructure-desktop.png" },
     { name: "Infrastructure service iPhone", route: "/capabilities/infrastructure", selector: ".customer-hero", width: 390, height: 844, mobile: true, file: "infrastructure-iphone.png" },
     { name: "Workflow inquiry desktop", route: "/consultation", selector: ".preview-consultation-entry", width: 1440, height: 900, file: "workflow-inquiry-desktop.png" },

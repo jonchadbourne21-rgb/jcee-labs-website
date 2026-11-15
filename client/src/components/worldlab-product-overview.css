@@ -441,3 +441,9 @@
     transform: none !important;
   }
 }
+
+/* Three concrete engagement paths; keep a readable measure at every width. */
+#root#root#root .worldlab-home .wl-product-offers { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 1000px) {
+  #root#root#root .worldlab-home .wl-product-offers { grid-template-columns: 1fr; }
+}

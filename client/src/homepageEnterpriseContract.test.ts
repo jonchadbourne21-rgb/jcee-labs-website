@@ -24,16 +24,16 @@ describe("homepage enterprise contract", () => {
     expect(homeSource).toContain("<ProductOverview />");
     expect(homeSource.indexOf("<ProductOverview />")).toBeLessThan(homeSource.indexOf('id="orbital-study"'));
     expect(productSource).toContain("Put AI to work.");
-    expect(productSource).toContain("JCEE Infrastructure");
-    expect(productSource).toContain("SOFTWARE IN DEVELOPMENT");
-    expect(homeSource).toContain("JCEE Infrastructure is in development");
+    expect(productSource).toContain("Build around your business");
+    expect(productSource).toContain("DESIGN PARTNERSHIPS");
+    expect(homeSource).toContain("JCEE Infrastructure continues to develop");
     expect(homeSource).not.toContain("JCEE Distribution");
     expect(homeSource).toContain("Workflow Assurance");
   });
 
   it("keeps interactive explanations available on the program pages", () => {
-    expect(homeSource).toContain('href="/vow"');
-    expect(homeSource).toContain('href="/qcs"');
+    expect(readFileSync(path.join(sourceRoot, "components", "BrandFooter.tsx"), "utf8")).toContain('href="/vow"');
+    expect(readFileSync(path.join(sourceRoot, "components", "BrandFooter.tsx"), "utf8")).toContain('href="/qcs"');
     expect(
       readFileSync(path.join(sourceRoot, "pages", "VowPage.tsx"), "utf8")
     ).toContain("<VowDurabilityDemo />");
