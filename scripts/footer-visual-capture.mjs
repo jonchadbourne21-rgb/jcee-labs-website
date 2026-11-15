@@ -34,8 +34,9 @@ try {
     assert.equal(v.founderHref,'/founder');
     assert.equal(v.logo,true);
     assert.ok(!/PUBLIC SITE|We build for the distance|EVIDENCE OVER CLAIMS/i.test(v.text));
-    // Preserve the original footer links plus the two commercial destinations.
-    assert.equal(v.links.length,23);
+    // Preserve the existing destinations plus Builds & Experiments.
+    assert.equal(v.links.length,24);
+    assert.equal(v.links.filter(href => href === '/research#builds-and-experiments').length,1);
     assert.equal(v.links.filter(href => href === '/solutions').length,1);
     assert.equal(v.links.filter(href => href === '/solutions#design-partners').length,1);
     assert.equal(v.links.filter(href => href === '/experiences/signal-forge').length,1);
