@@ -27,20 +27,20 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
     expect(home.indexOf("<ProductOverview />")).toBeLessThan(home.indexOf('id="orbital-study"'));
     expect(home).toContain('<h2 id="hero-title">');
     expect(home).toContain('href="/consultation"');
-    expect(home).toContain('href="/capabilities/infrastructure#deliverables"');
+    expect(home).toContain('href="/solutions"');
     expect(home).not.toContain("JCEE Distribution");
   });
   it("distinguishes the illustration from qualified customer results", () => {
     expect(home).toContain("<EvidenceTrace />");
     expect(plain(home)).toContain(
-      "performs no external action, runs no VOW engine"
+      "performs no external action"
     );
     expect(plain(home)).toContain("creates no qualification receipt");
     expect(plain(home)).toContain(
-      "Recorded tests use defined configurations and fictional data."
+      "This browser illustration uses fictional order data."
     );
     expect(plain(home)).toContain(
-      "Production readiness, customer savings, and payment safety have not been established"
+      "Recorded tests demonstrate specific configurations; they do not establish readiness for every customer system."
     );
   });
   it("keeps implementation scoped and public evidence reachable", () => {
@@ -49,7 +49,7 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
     );
     expect(home).toContain('href="/technology#current-integration"');
     expect(home).toContain('href="/registry"');
-    expect(home).toContain("Written boundary map");
+    expect(home).toContain("a workflow map and prioritized remediation plan");
   });
   it("presents the problem, customer uses, offer, evidence and inquiry in order", () => {
     const ids = ["story", "fit", "services", "evidence", "consultation"];

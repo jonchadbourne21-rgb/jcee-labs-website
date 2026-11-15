@@ -34,9 +34,10 @@ try {
     assert.equal(v.founderHref,'/founder');
     assert.equal(v.logo,true);
     assert.ok(!/PUBLIC SITE|We build for the distance|EVIDENCE OVER CLAIMS/i.test(v.text));
-    // Exactly two new reviewed experience destinations were added to the
-    // original 19-link footer. Preserve the count AND the exact identities.
-    assert.equal(v.links.length,21);
+    // Preserve the original footer links plus the two commercial destinations.
+    assert.equal(v.links.length,23);
+    assert.equal(v.links.filter(href => href === '/solutions').length,1);
+    assert.equal(v.links.filter(href => href === '/solutions#design-partners').length,1);
     assert.equal(v.links.filter(href => href === '/experiences/signal-forge').length,1);
     assert.equal(v.links.filter(href => href === '/experiences/evidence-engine').length,1);
     assert.ok(v.top.bottom<=v.nav.top+1 && v.nav.bottom<=v.identity.top+1);

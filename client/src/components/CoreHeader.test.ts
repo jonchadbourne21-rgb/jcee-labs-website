@@ -30,7 +30,7 @@ describe("CoreHeader public information architecture", () => {
       "company",
     ]);
     expect(publicNavigationLinks.map(link => link.label)).toEqual([
-      "Infrastructure",
+      "Solutions",
       "Technology",
       "Research",
       "Resources",

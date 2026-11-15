@@ -25,9 +25,7 @@ describe("October evidence and infrastructure claim boundaries", () => {
     expect(ladder).toContain("different kinds of evidence, not a single score");
     expect(research).toContain("<EvidenceLadder />");
     expect(home).toContain('id="evidence-frontier"');
-    expect(home).toContain(
-      'href="/research/evidence-standards#evidence-ladder"'
-    );
+    expect(read("pages/ResearchTopicPage.tsx")).toContain("evidence-standards");
   });
 
   it("names both physical proposals and makes unrun status explicit", () => {
@@ -41,9 +39,7 @@ describe("October evidence and infrastructure claim boundaries", () => {
     expect(research).toContain("WHAT IT WOULD NOT PROVE");
     expect(research).toContain("a rescheduled feasibility discussion is not");
     expect(research).not.toContain("UT Southwestern");
-    expect(home).toContain(
-      'href="/research/physical-experiments#physical-validation"'
-    );
+    expect(read("pages/ResearchTopicPage.tsx")).toContain("physical-experiments");
   });
 
   it("publishes frozen P0, bounded P1/P2, and held P3 without a blanket mandate claim", () => {
@@ -67,7 +63,7 @@ describe("October evidence and infrastructure claim boundaries", () => {
     expect(technology).toContain("No provider");
     expect(technology).toContain("blanket mandate compliance");
     expect(technology).toContain("assessed separately for each deployment");
-    expect(home).toContain('href="/technology#infrastructure-build"');
+    expect(home).toContain('href="/technology#current-integration"');
   });
 
   it("preserves the commercial buyer journey and responsive mobile evidence panels", () => {
@@ -75,7 +71,7 @@ describe("October evidence and infrastructure claim boundaries", () => {
     const evidence = home.indexOf('id="evidence-frontier"');
     expect(offer).toBeGreaterThan(-1);
     expect(evidence).toBeGreaterThan(offer);
-    expect(home.replace(/\s+/g, " ")).toContain("have not been established");
+    expect(home.replace(/\s+/g, " ")).toContain("do not establish readiness for every customer system");
     expect(css).toContain("@media (max-width: 700px)");
     expect(css).toContain(".physical-program-grid");
     expect(css).toContain(".infra-stage-grid");

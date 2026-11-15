@@ -23,7 +23,9 @@ export default function BrandFooter({
           <a href="/charter/archive/v1.0/">Charter v1.0 Archive</a>
         </div>
         <div>
-          <span>TECHNOLOGY</span>
+          <span>SOLUTIONS &amp; TECHNOLOGY</span>
+          <a href="/solutions">Solutions for your operations</a>
+          <a href="/solutions#design-partners">Become a design partner</a>
           <a href="/capabilities/infrastructure">JCEE Infrastructure</a>
           <a href="/vow">JCEE VOW</a>
           <a href="/qcs">QCS</a>

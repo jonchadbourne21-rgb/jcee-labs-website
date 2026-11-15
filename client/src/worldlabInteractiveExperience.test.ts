@@ -44,7 +44,7 @@ describe("JCEE WorldLab pre-publication interactive visual candidate", () => {
 
   it("renders a constrained asymmetrical bento, spotlight tracking and honest demo status", () => {
     expect(home).toContain("<TechnicalBento />");
-    expect(bento).toContain("IT & Business Systems");
+    expect(bento).toContain("Industrial Distribution");
     expect(bento).toContain("Software Operations");
     expect(bento).toContain("Business Operations");
     expect(bento).toContain("--spot-x");

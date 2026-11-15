@@ -25,7 +25,7 @@ type CoreHeaderProps = {
 };
 
 export const publicNavigationLinks = [
-  { id: "solutions", label: "Infrastructure", href: "/capabilities/infrastructure" },
+  { id: "solutions", label: "Solutions", href: "/solutions" },
   { id: "technology", label: "Technology", href: "/technology" },
   { id: "research", label: "Research", href: "/research" },
   { id: "resources", label: "Resources", href: "/resources" },
@@ -152,6 +152,7 @@ export default function CoreHeader({
           <div className="header-company-links">
             <a href="/company">About JCEE WorldLab</a>
             <a href="/resources">Resources</a>
+            <a href="/solutions#design-partners">Design partnerships</a>
           </div>
         </details>}
       </nav>

@@ -36,19 +36,19 @@ describe("homepage binary-first landing", () => {
   it("restores the customer-led wording with real conversion paths", () => {
     expect(section).toContain("Put AI to work.");
     expect(section).toContain("Stay in control.");
-    expect(section).toContain("Bring AI into the workflows your business depends on.");
+    expect(section).toContain("We build custom software and connect the systems your business");
     expect(section).toContain('href="/consultation"');
-    expect(section).toContain('href="/capabilities/infrastructure"');
-    expect(section).toContain('href="/capabilities/infrastructure#deliverables"');
-    expect(section).toContain('href="/technology#current-integration"');
+    expect(section).toContain('href="/solutions"');
+    expect(section).toContain('href="/solutions#assessment"');
+    expect(section).toContain('href="/solutions#build"');
   });
 
-  it("differentiates a currently scoped service from unqualified developing software", () => {
+  it("offers assessment, implementation and partnership with workflow-specific qualification", () => {
     expect(section).toContain("Workflow Assurance assessment");
     expect(section).toContain("SCOPED SERVICE ENGAGEMENT");
-    expect(section).toContain("JCEE Infrastructure");
-    expect(section).toContain("SOFTWARE IN DEVELOPMENT");
-    expect(section).toContain("do not establish general production");
+    expect(section).toContain("Build around your business");
+    expect(section).toContain("DESIGN PARTNERSHIPS");
+    expect(section).toContain("Integrations are tested for your workflow before production use.");
     expect(section).not.toMatch(/production[- ]ready|bank[- ]grade|guaranteed|zero[- ]risk/i);
   });
 
@@ -61,7 +61,7 @@ describe("homepage binary-first landing", () => {
   });
 
   it("restores the original full-section animated hexadecimal field from Rust assets", () => {
-    expect(section).toContain("One engagement you can scope today. One platform for controlled AI execution.");
+    expect(section).toContain("Assess a workflow. Build a solution. Partner on what comes next.");
     expect(section).not.toContain("One platform we're building.");
     expect(section).toContain('import HexWaveField from "./HexWaveField"');
     expect(section).toContain('<HexWaveField variant="worldlab" className="wl-full-hex-field" />');

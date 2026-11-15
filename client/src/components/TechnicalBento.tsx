@@ -2,20 +2,20 @@ import type { PointerEvent } from "react";
 
 const rows = [
   {
-    id: "01", title: "IT & Business Systems", heading: "Resolve uncertain changes.",
-    copy: "Employee access, internal service requests, and approved changes across your service desk and business applications.",
-    start: "Start with: an approved access change whose outcome is unclear.",
+    id: "01", title: "Industrial Distribution", heading: "Catch order mismatches earlier.",
+    copy: "Compare purchase orders with entered orders. Give sales, warehouse, and accounting a shared view of discrepancies that need review.",
+    start: "Start with: a price, quantity, or freight instruction that differs from the order record.",
     state: "ILLUSTRATION / CHECK OUTCOME", code: "AUTHORITY → OBSERVATION", format: "hero",
   },
   {
-    id: "02", title: "Software Operations", heading: "Make changes accountable.",
+    id: "02", title: "IT & Software Operations", heading: "Make changes accountable.",
     copy: "Engineering workflows that need clear permissions, execution records, and recovery procedures.",
     start: "Start with: a deployment that needs an approval and a confirmed result.",
     state: "ILLUSTRATION / REVIEW REQUIRED", code: "REQUEST → EFFECT", format: "compact",
   },
   {
     id: "03", title: "Business Operations", heading: "Connect the process.",
-    copy: "Internal requests and approval processes that cross multiple applications.",
+    copy: "Connect CRM, ERP, and internal tools through custom workflows, approval screens, and reviewable handoffs.",
     start: "Start with: an internal request passed between teams and tools.",
     state: "ILLUSTRATION / RECONCILE", code: "HANDOFF → RECORD", format: "wide",
   },

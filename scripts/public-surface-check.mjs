@@ -357,13 +357,13 @@ try {
       waveCanvasDisplay: waveCanvas ? getComputedStyle(waveCanvas).display : null,
       staticBinaryCount: panel?.querySelectorAll('.wl-binary-wave, .wl-binary-strings').length ?? -1,
       legacyOrbitalCount: panel?.querySelectorAll('.wl-product-orbit, .wl-product-node').length ?? -1,
-      founderCopy: panel?.textContent?.includes('One engagement you can scope today. One platform for controlled AI execution.')
+      founderCopy: panel?.textContent?.includes('Assess a workflow. Build a solution. Partner on what comes next.')
         && !panel?.textContent?.includes("One platform we're building."),
       receiptTitle: receipt?.querySelector('h3')?.textContent,
       receiptState: receipt?.querySelector('.wl-receipt-state')?.textContent?.replace(/\\s+/g, ' ').trim(),
       receiptExample: receipt?.getAttribute('data-demo') === 'illustrative'
         && receipt.textContent?.includes('NOT A LIVE RECEIPT'),
-      scopeDisclosure: !!panel?.textContent?.includes('recorded tests do not establish general production')
+      scopeDisclosure: !!panel?.textContent?.includes('Integrations are tested for your workflow before production use.')
         && !!panel?.textContent?.includes('not an executed customer workflow')
     };
   })()`);
@@ -379,7 +379,8 @@ try {
     productOverview.primaryBackground !== "rgb(106, 184, 255)" ||
     !productOverview.primaryHref?.endsWith("/consultation") ||
     !productOverview.offers?.includes("Workflow Assurance assessment") ||
-    !productOverview.offers?.includes("JCEE Infrastructure") ||
+    !productOverview.offers?.includes("Build around your business") ||
+    !productOverview.offers?.includes("Build the next step together") ||
     !productOverview.offerHeadingColors?.every(color => color === "rgb(240, 245, 251)") ||
     !productOverview.receiptTitle?.includes("AI action receipt") ||
     productOverview.waveCanvasWidth < 100 ||
@@ -457,7 +458,7 @@ try {
       bento: bento.length,
       allBentoDisclosure: bento.length === 3 && bento.every(tile => tile.textContent.includes('NOT LIVE SYSTEM STATUS')),
       scrollStory: !!story,
-      accessibleNav: [...document.querySelectorAll('.desktop-nav a')].some(a => a.textContent.trim() === 'Infrastructure')
+      accessibleNav: [...document.querySelectorAll('.desktop-nav a')].some(a => a.textContent.trim() === 'Solutions')
     };
   })()`);
   if (
@@ -810,6 +811,7 @@ try {
     [articleRoute, "A Confident Model Still Needs Permission"],
     ["/solutions/distribution", "JCEE Distribution: order review"],
     ["/technology", "Intelligence should leave receipts"],
+    ["/solutions", "Make your systems work together."],
     ["/capabilities/infrastructure", "One workflow."],
     ["/research", "Results you can examine"],
     ["/research/publications", "Reports & publications"],

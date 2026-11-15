@@ -7,6 +7,9 @@ export type ConsultationFields = {
 };
 
 export const consultationServices = [
+  "Custom workflow software and integration",
+  "Design partner / shadow-mode pilot",
+  "Distribution and order integrity",
   "AI and software architecture",
   "Custom applications and iOS/mobile",
   "Software testing and verification",
