@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "wouter";
 import EditorialLayout from "@/components/EditorialLayout";
+import BuildsAndExperiments from "@/components/BuildsAndExperiments";
 import { ResearchInvitation } from "@/components/ResearchSections";
 import {
   researchTopics,
@@ -30,10 +31,11 @@ export default function ResearchPage() {
   return (
     <EditorialLayout
       current="research"
-      eyebrow="JCEE RESEARCH / EXPLORE THE RECORD"
-      title="Results you can examine."
-      description="Choose a question to follow. Explore our publications, research programs, and evidence standards in focused sections."
+      eyebrow="JCEE WORLDLAB / BUILDS & EXPERIMENTS"
+      title="Explore what we’re building."
+      description="From business workflows to quantum experiments: discover our software, explore the research behind it, and find a project to build with us."
     >
+      <BuildsAndExperiments />
       <section
         className="editorial-section research-directory"
         aria-label="Research topics"

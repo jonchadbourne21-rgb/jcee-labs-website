@@ -52,6 +52,7 @@ try {
     uploadThroughput: 5_000_000,
   });
   const targets = [
+    ["/research", "builds-and-experiments"],
     ["/solutions", "assessment"],
     ["/solutions", "build"],
     ["/solutions", "design-partners"],

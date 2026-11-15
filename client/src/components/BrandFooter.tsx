@@ -35,6 +35,7 @@ export default function BrandFooter({
           <span>RESOURCES</span>
           <a href="/resources">Blog and resources</a>
           <a href="/research">Research publications</a>
+          <a href="/research#builds-and-experiments">Builds &amp; experiments</a>
           <a href="/research/fields">Research fields</a>
           <a href="/experiences/signal-forge">Signal Forge · Interactive concept</a>
           <a href="/experiences/evidence-engine">Evidence Engine · Interface study</a>

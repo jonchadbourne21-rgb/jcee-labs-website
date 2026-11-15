@@ -81,6 +81,11 @@ export default function ResourcesPage() {
       >
         <h2 id="reference-title">Reference desk</h2>
         <div className="editorial-link-list">
+          <a href="/research#builds-and-experiments">
+            <strong>Builds &amp; experiments</strong>
+            <span>Explore our software, research, and opportunities to collaborate.</span>
+            <span aria-hidden="true">→</span>
+          </a>
           <a href="/registry">
             <strong>Public Registry</strong>
             <span>
