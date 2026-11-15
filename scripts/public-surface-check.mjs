@@ -813,7 +813,7 @@ try {
     ["/technology", "Intelligence should leave receipts"],
     ["/solutions", "Make your systems work together."],
     ["/capabilities/infrastructure", "One workflow."],
-    ["/research", "Results you can examine"],
+    ["/research", "Explore what we’re building"],
     ["/research/publications", "Reports & publications"],
     ["/research/programs", "Research programs"],
     ["/research/measurement", "Measurement & numerical assurance"],

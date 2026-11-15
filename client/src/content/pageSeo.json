@@ -122,5 +122,9 @@
   "/solutions": {
     "title": "Software, Integration & Partnerships | JCEE WorldLab",
     "description": "Build custom business software and connect your systems with clear controls. Explore workflow assessments, implementation, and design partnerships."
+  },
+  "/research": {
+    "title": "Builds & Experiments: Software & Research | JCEE WorldLab",
+    "description": "Explore JCEE WorldLab software, order-review tools, formal research, quantum experiments, and embodied-world plans. Find a project to build with us."
   }
 }

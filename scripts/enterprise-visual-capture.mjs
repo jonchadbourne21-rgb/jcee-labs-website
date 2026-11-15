@@ -263,6 +263,8 @@ try {
     { name: "Founder page iPhone", route: "/founder", selector: ".editorial-masthead", width: 390, height: 844, mobile: true, file: "founder-page-iphone.png", assetUrl: "/visuals/worldlab-company-v1.webp" },
     { name: "Founder introduction desktop", route: "/founder", selector: ".founder-introduction", width: 1440, height: 900, file: "founder-introduction-desktop.png" },
     { name: "Founder introduction iPhone", route: "/founder", selector: ".founder-introduction", width: 390, height: 844, mobile: true, file: "founder-introduction-iphone.png" },
+    { name: "Builds and experiments desktop", route: "/research", selector: "#builds-and-experiments", width: 1440, height: 900, file: "builds-experiments-desktop.png" },
+    { name: "Builds and experiments iPhone", route: "/research", selector: "#builds-and-experiments", width: 390, height: 844, mobile: true, file: "builds-experiments-iphone.png" },
     { name: "Research directory desktop", route: "/research", selector: ".research-directory", width: 1440, height: 900, file: "research-directory-desktop.png" },
     { name: "Research directory iPhone", route: "/research", selector: ".research-directory", width: 390, height: 844, mobile: true, file: "research-directory-iphone.png" },
     { name: "Evidence transition desktop", route: "/", selector: "#evidence", width: 1440, height: 900, file: "evidence-transition-desktop.png" },
