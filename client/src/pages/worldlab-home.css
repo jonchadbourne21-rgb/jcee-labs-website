@@ -138,7 +138,18 @@
 #root#root#root .worldlab-home .brand-footer-meta,
 #root#root#root .worldlab-home .brand-footer-meta span { color:var(--wl-muted)!important; }
 
-#root#root#root .worldlab-home img.wl-fallback-art { inset:0; width:100%; height:100%; object-fit:contain; filter:hue-rotate(115deg) saturate(1.08); }
+/* The Rust SVG poster contains legacy green/teal reflections. Recoloring the
+   entire SVG with hue-rotate creates a purple frame while lazy Canvas initializes.
+   Keep the first frame neutral titanium; fade it out only after the Canvas
+   renderer has drawn and EvidenceCore applies is-interactive. */
+#root#root#root .worldlab-home img.wl-fallback-art {
+  inset:0; width:100%; height:100%; object-fit:contain;
+  filter:grayscale(1) brightness(1.04);
+  opacity:1; transition:opacity 240ms ease-out;
+}
+#root#root#root .worldlab-home .is-interactive img.wl-fallback-art {
+  display:block; opacity:0;
+}
 
 /* Orbital sculpture is secondary: a still image remains while its interactive
    Canvas / WebGL modules are deferred until this section nears the viewport. */
