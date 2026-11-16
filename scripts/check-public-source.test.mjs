@@ -25,3 +25,20 @@ test('detects common credential forms without returning values', () => {
   ];
   for (const [value, kind] of samples) assert.deepEqual(disclosureTypes(value), [kind]);
 });
+
+test('public error fallback never renders exception stacks', async () => {
+  const { readFileSync } = await import('node:fs');
+  const source = readFileSync('client/src/components/ErrorBoundary.tsx', 'utf8');
+  assert.doesNotMatch(source, /this\\.state\\.error\\?\\.stack|error\\.stack/);
+  assert.match(source, /Reload Page/);
+  assert.match(source, /role="alert"/);
+});
+
+test('consultation draft invalidates on any form edit without sending', async () => {
+  const { readFileSync } = await import('node:fs');
+  const source = readFileSync('client/src/pages/ConsultationPreview.tsx', 'utf8');
+  assert.match(source, /onChange=\\{invalidateDraft\\}/);
+  assert.match(source, /setDraft\\(null\\)/);
+  assert.match(source, /setCopyStatus\\(""\\)/);
+  assert.match(source, /mailto:/);
+});
