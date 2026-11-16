@@ -949,7 +949,9 @@ try {
   // State-machine regression: preparing an email does not submit it, and
   // editing a field invalidates the previously prepared snapshot.
   await navigate(page.send, baseUrl, "/consultation");
-  const consultationBefore = await evaluate(page.send, `(() => {
+  // Browser evaluation returns before React's scheduled state commit. Wait for
+  // the DOM transition, rather than treating the event dispatch as its receipt.
+  await evaluate(page.send, `(() => {
     const form = document.querySelector('.preview-consult-form');
     const setField = (id, value) => {
       const el = document.getElementById(id);
@@ -962,21 +964,28 @@ try {
     setField('consult-email', 'fixture@example.invalid');
     setField('consult-summary', 'Initial fixture workflow');
     form.requestSubmit();
-    return { ready: !!document.querySelector('.preview-draft-review'), preview: document.querySelector('.preview-draft-review')?.textContent || '' };
   })()`);
+  await sleep(150);
+  const consultationBefore = await evaluate(page.send,
+    `({ ready: !!document.querySelector('.preview-draft-review'),
+       preview: document.querySelector('.preview-draft-review')?.textContent || '' })`);
   if (!consultationBefore.ready || !consultationBefore.preview.includes('Initial fixture workflow')) {
     failures.push('consultation did not prepare a local reviewable draft');
   }
-  const consultationEdited = await evaluate(page.send, `(() => {
+  await evaluate(page.send, `(() => {
     const el = document.getElementById('consult-summary');
     Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value').set.call(el, 'Revised fixture workflow');
     el.dispatchEvent(new Event('input', { bubbles: true }));
     el.dispatchEvent(new Event('change', { bubbles: true }));
-    return { staleReview: !!document.querySelector('.preview-draft-review') };
   })()`);
+  await sleep(150);
+  const consultationEdited = await evaluate(page.send,
+    `({ staleReview: !!document.querySelector('.preview-draft-review') })`);
   if (consultationEdited.staleReview) failures.push('consultation kept a stale draft after editing');
+  await evaluate(page.send,
+    `document.querySelector('.preview-consult-form').requestSubmit()`);
+  await sleep(150);
   const consultationResubmitted = await evaluate(page.send, `(() => {
-    document.querySelector('.preview-consult-form').requestSubmit();
     const review = document.querySelector('.preview-draft-review');
     return { ready: !!review, updated: review?.textContent?.includes('Revised fixture workflow') || false,
       stale: review?.textContent?.includes('Initial fixture workflow') || false };
