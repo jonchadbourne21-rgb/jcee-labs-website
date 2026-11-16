@@ -29,16 +29,17 @@ test('detects common credential forms without returning values', () => {
 test('public error fallback never renders exception stacks', async () => {
   const { readFileSync } = await import('node:fs');
   const source = readFileSync('client/src/components/ErrorBoundary.tsx', 'utf8');
-  assert.doesNotMatch(source, /this\\.state\\.error\\?\\.stack|error\\.stack/);
-  assert.match(source, /Reload Page/);
-  assert.match(source, /role="alert"/);
+  assert.ok(!source.includes('this.state.error?.stack'));
+  assert.ok(!source.includes('error.stack'));
+  assert.ok(source.includes('Reload Page'));
+  assert.ok(source.includes('role="alert"'));
 });
 
-test('consultation draft invalidates on any form edit without sending', async () => {
+test('consultation draft invalidates on form edits without sending', async () => {
   const { readFileSync } = await import('node:fs');
   const source = readFileSync('client/src/pages/ConsultationPreview.tsx', 'utf8');
-  assert.match(source, /onChange=\\{invalidateDraft\\}/);
-  assert.match(source, /setDraft\\(null\\)/);
-  assert.match(source, /setCopyStatus\\(""\\)/);
-  assert.match(source, /mailto:/);
+  assert.ok(source.includes('onChange={invalidateDraft}'));
+  assert.ok(source.includes('setDraft(null)'));
+  assert.ok(source.includes('setCopyStatus("")'));
+  assert.ok(source.includes('draft.mailto'));
 });
