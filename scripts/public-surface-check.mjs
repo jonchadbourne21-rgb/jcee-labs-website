@@ -308,6 +308,27 @@ try {
     failures.push("homepage still exposes Mirrored");
   }
 
+  // Verify the first (deferred) orbital frame uses a neutral metallic preview,
+  // not the legacy hue-rotation that briefly showed violet before Canvas painted.
+  // The poster remains in the layout for an opacity crossfade when ready.
+  const orbitPreview = await evaluate(page.send, `(() => {
+    const poster = document.querySelector('#orbital-study img.wl-fallback-art');
+    if (!poster) return null;
+    const style = getComputedStyle(poster);
+    return {
+      source: poster.getAttribute('src'),
+      filter: style.filter,
+      display: style.display,
+      interactive: poster.closest('.wl-sculpture')?.classList.contains('is-interactive') ?? false
+    };
+  })()`);
+  if (!orbitPreview ||
+      !orbitPreview.source?.includes('worldlab-sculpture.svg') ||
+      orbitPreview.filter !== 'grayscale(1) brightness(1.04)' ||
+      (orbitPreview.interactive && orbitPreview.display === 'none')) {
+    failures.push('Homepage orbital preview flashes a mismatched palette or skips its fade: ' + JSON.stringify(orbitPreview));
+  }
+
   const commercial = await evaluate(page.send, `({
     title: document.querySelector('h1')?.textContent,
     distributionLink: !!document.querySelector('.site-header a[href="${prefix}/solutions/distribution"]'),
