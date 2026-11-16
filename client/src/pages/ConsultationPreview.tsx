@@ -36,6 +36,15 @@ function ConsultationEntry() {
       summary: String(data.get("summary") || ""),
     }));
   };
+  // The prepared email is a snapshot, not permission to send stale fields.
+  // Any form edit returns the visitor to editing before another draft can be sent.
+  const invalidateDraft = () => {
+    if (draft !== null) {
+      setDraft(null);
+      setCopyStatus("");
+    }
+  };
+
   const copyDraft = async () => {
     if (!draft) return;
     try {
@@ -66,7 +75,7 @@ function ConsultationEntry() {
           <div className="preview-direct-contact"><p className="preview-kicker">PREFER EMAIL?</p><a href="mailto:support+enterprise@jceelabs.com">support+enterprise@jceelabs.com ↗</a><p>Prefer a simple email? Tell us about the workflow and we can arrange a conversation.</p></div>
         </div>
         <div className="preview-form-column">
-          <form className="preview-consult-form" onSubmit={prepareDraft} aria-labelledby="request-title">
+          <form className="preview-consult-form" onSubmit={prepareDraft} onChange={invalidateDraft} aria-labelledby="request-title">
             <div className="preview-panel-top"><span>FIRST CONSULTATION</span><span>10–30 MIN / FREE</span></div>
             <h2 id="request-title">Tell us what you’re working on.</h2>
             <p>Three required fields. No lengthy intake before a first conversation.</p>

@@ -946,6 +946,54 @@ try {
     if (label === "Research" && !cards.text.includes("IBM Results, Models and Next Tests"))
       failures.push("Research filter is missing the November hardware/model update");
   }
+  // State-machine regression: preparing an email does not submit it, and
+  // editing a field invalidates the previously prepared snapshot.
+  await navigate(page.send, baseUrl, "/consultation");
+  // Browser evaluation returns before React's scheduled state commit. Wait for
+  // the DOM transition, rather than treating the event dispatch as its receipt.
+  await evaluate(page.send, `(() => {
+    const form = document.querySelector('.preview-consult-form');
+    const setField = (id, value) => {
+      const el = document.getElementById(id);
+      const proto = el instanceof HTMLTextAreaElement ? HTMLTextAreaElement.prototype : HTMLInputElement.prototype;
+      Object.getOwnPropertyDescriptor(proto, 'value').set.call(el, value);
+      el.dispatchEvent(new Event('input', { bubbles: true }));
+      el.dispatchEvent(new Event('change', { bubbles: true }));
+    };
+    setField('consult-name', 'Fixture Visitor');
+    setField('consult-email', 'fixture@example.invalid');
+    setField('consult-summary', 'Initial fixture workflow');
+    form.requestSubmit();
+  })()`);
+  await sleep(150);
+  const consultationBefore = await evaluate(page.send,
+    `({ ready: !!document.querySelector('.preview-draft-review'),
+       preview: document.querySelector('.preview-draft-review')?.textContent || '' })`);
+  if (!consultationBefore.ready || !consultationBefore.preview.includes('Initial fixture workflow')) {
+    failures.push('consultation did not prepare a local reviewable draft');
+  }
+  await evaluate(page.send, `(() => {
+    const el = document.getElementById('consult-summary');
+    Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value').set.call(el, 'Revised fixture workflow');
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+    el.dispatchEvent(new Event('change', { bubbles: true }));
+  })()`);
+  await sleep(150);
+  const consultationEdited = await evaluate(page.send,
+    `({ staleReview: !!document.querySelector('.preview-draft-review') })`);
+  if (consultationEdited.staleReview) failures.push('consultation kept a stale draft after editing');
+  await evaluate(page.send,
+    `document.querySelector('.preview-consult-form').requestSubmit()`);
+  await sleep(150);
+  const consultationResubmitted = await evaluate(page.send, `(() => {
+    const review = document.querySelector('.preview-draft-review');
+    return { ready: !!review, updated: review?.textContent?.includes('Revised fixture workflow') || false,
+      stale: review?.textContent?.includes('Initial fixture workflow') || false };
+  })()`);
+  if (!consultationResubmitted.ready || !consultationResubmitted.updated || consultationResubmitted.stale) {
+    failures.push('consultation did not regenerate its draft from the current form');
+  }
+
   await navigate(page.send, baseUrl, "/terms");
   const termsText = await readBody(page.send);
   if (termsText.toUpperCase().includes("MIRRORED")) {
