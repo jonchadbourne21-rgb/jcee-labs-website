@@ -59,7 +59,11 @@ describe("WorldLab production orbital-blue identity", () => {
     expect(sculpture).toContain("g = .58 + brightness * .22; b = .92");
     expect(sculpture).not.toContain("rgba(96,145,61,.085)");
     expect(sculptureComponent).toContain("three orbital frames and blue nodes");
-    expect(homepage).toContain("filter:hue-rotate(115deg) saturate(1.08)");
+    expect(homepage).toContain("filter:grayscale(1) brightness(1.04)");
+    expect(homepage).not.toContain("hue-rotate(");
+    expect(homepage).toContain("transition:opacity 240ms ease-out");
+    expect(homepage).toContain(".is-interactive img.wl-fallback-art {");
+    expect(homepage).toContain("display:block; opacity:0;");
   });
 
 });
