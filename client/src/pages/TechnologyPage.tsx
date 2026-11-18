@@ -1,16 +1,18 @@
 import NovemberProgress from "@/components/NovemberProgress";
 import BuildStatusList from "@/components/BuildStatusList";
 import EditorialLayout from "@/components/EditorialLayout";
+import CapabilityCatalog from "@/components/CapabilityCatalog";
 export default function TechnologyPage() {
   return (
     <EditorialLayout
       current="technology"
-      eyebrow="Technology / Execution assurance"
-      title="Intelligence should leave receipts."
-      description="JCEE studies and builds the infrastructure between a proposed action, current permission, the effect, and a reviewable record."
+      eyebrow="Technology / Connected capabilities"
+      title="Intelligence That Leaves Receipts."
+      description="Control what AI can do. Verify what it actually did."
     >
+      <CapabilityCatalog />
       <section className="editorial-section">
-        <h2>Distinct capabilities. Clear evidence.</h2>
+        <h2>Explore the engineering foundations.</h2>
         <div className="editorial-link-list">
           <a href="/vow">
             <strong>JCEE VOW</strong>
