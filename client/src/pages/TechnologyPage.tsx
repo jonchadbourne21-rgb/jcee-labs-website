@@ -6,13 +6,12 @@ export default function TechnologyPage() {
   return (
     <EditorialLayout
       current="technology"
-      eyebrow="Technology / Connected capabilities"
-      title="Intelligence That Leaves Receipts."
-      description="Control what AI can do. Verify what it actually did."
+      eyebrow="Technology / Execution assurance"
+      title="Intelligence should leave receipts."
+      description="JCEE studies and builds the infrastructure between a proposed action, current permission, the effect, and a reviewable record."
     >
-      <CapabilityCatalog />
       <section className="editorial-section">
-        <h2>Explore the engineering foundations.</h2>
+        <h2>Distinct capabilities. Clear evidence.</h2>
         <div className="editorial-link-list">
           <a href="/vow">
             <strong>JCEE VOW</strong>
@@ -40,6 +39,7 @@ export default function TechnologyPage() {
           </a>
         </div>
       </section>
+      <CapabilityCatalog />
       <section className="editorial-section">
         <p className="editorial-kicker">Public integration model</p>
         <h2>Bind the workflow. Keep the competent systems in place.</h2>
