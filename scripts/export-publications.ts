@@ -66,9 +66,9 @@ const routeMetadata: Record<
       "Explore JCEE’s platform direction for accountable AI-assisted operations, its current evidence, and the implementation gates still ahead.",
   },
   "/technology": {
-    title: "Technology — JCEE WorldLab",
+    title: "AI Authorization, Recovery & Evidence Capabilities | JCEE WorldLab",
     description:
-      "Review JCEE WorldLab's native recovery, installed interfaces, hosted evidence and formal research, with the full integration and physical qualification gates still open.",
+      "Explore eight connected JCEE WorldLab capabilities: authorization, consequence control, durable recovery, evidence verification, receipts, governed knowledge, workflows and qualification. Built software with bounded evidence and target-specific qualification.",
   },
   "/research": {
     title: "Research — JCEE WorldLab",
