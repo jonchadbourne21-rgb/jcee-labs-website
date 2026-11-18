@@ -68,6 +68,10 @@ try {
  await evaluate(send,`document.querySelector('.capability-details__related[href="/capabilities/infrastructure"]').scrollIntoView({block:'center',behavior:'instant'})`);
  await activate('.capability-details__related[href="/capabilities/infrastructure"]');
  await arrived('/capabilities/infrastructure');
+ for (let attempt=0;attempt<80;attempt++){
+  if(await evaluate(send,"document.querySelector('h1')?.textContent?.includes('One workflow.')")) break;
+  await sleep(75);
+ }
  const transition=await evaluate(send,`({
    documentPreserved:window.__worldlabNavigationDocumentToken==='route-persistence-check',
    correctHeading:document.querySelector('h1')?.textContent?.includes('One workflow.'),
