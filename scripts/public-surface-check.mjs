@@ -831,7 +831,7 @@ try {
     ["/research/crucible-composition-tax", "testing the cost of composition"],
     [articleRoute, "A Confident Model Still Needs Permission"],
     ["/solutions/distribution", "JCEE Distribution: order review"],
-    ["/technology", "Intelligence should leave receipts"],
+    ["/technology", "Intelligence That Leaves Receipts."],
     ["/solutions", "Make your systems work together."],
     ["/capabilities/infrastructure", "One workflow."],
     ["/research", "Explore what we’re building"],
