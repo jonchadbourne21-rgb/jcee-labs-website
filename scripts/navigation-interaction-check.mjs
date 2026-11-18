@@ -61,6 +61,34 @@ try {
  }
  await navigate(send,base,'/technology');await activate('.wordmark');await arrived('/');
  await activate('.header-contact');await arrived('/consultation');
+ // Regression: public route transitions must not reload the document or
+ // briefly display the homepage while the destination lazy chunk resolves.
+ await navigate(send,base,'/technology');
+ await evaluate(send,"window.__worldlabNavigationDocumentToken='route-persistence-check'");
+ await evaluate(send,`document.querySelector('.capability-details__related[href="/capabilities/infrastructure"]').scrollIntoView({block:'center',behavior:'instant'})`);
+ await activate('.capability-details__related[href="/capabilities/infrastructure"]');
+ await arrived('/capabilities/infrastructure');
+ for (let attempt=0;attempt<80;attempt++){
+  if(await evaluate(send,"document.querySelector('h1')?.textContent?.includes('One workflow.')")) break;
+  await sleep(75);
+ }
+ const transition=await evaluate(send,`({
+   documentPreserved:window.__worldlabNavigationDocumentToken==='route-persistence-check',
+   correctHeading:document.querySelector('h1')?.textContent?.includes('One workflow.'),
+   homepageVisible:!!document.querySelector('.unified-home'),
+   location:location.pathname
+ })`);
+ assert.equal(transition.documentPreserved,true,'Internal navigation unexpectedly reloaded the document');
+ assert.equal(transition.homepageVisible,false,'Homepage appeared during destination route');
+ assert.equal(transition.correctHeading,true,'Infrastructure destination heading missing');
+ cases.push({width:1440,href:'/capabilities/infrastructure',input:'same-document navigation',pass:true});
+ await navigate(send,base,'/solutions');
+ await evaluate(send,"window.__worldlabNavigationDocumentToken='solutions-route-check'");
+ await evaluate(send,`document.querySelector('.editorial-text-link[href="/technology#current-integration"]').scrollIntoView({block:'center',behavior:'instant'})`);
+ await activate('.editorial-text-link[href="/technology#current-integration"]');
+ await arrived('/technology');
+ assert.equal(await evaluate(send,"window.__worldlabNavigationDocumentToken"),'solutions-route-check','Solutions to Technology caused a document reload');
+ cases.push({width:1440,href:'/technology#current-integration',input:'same-document fragment navigation',pass:true});
  // Native anchors remain keyboard-operable, even after a focus excursion.
  await navigate(send,base,'/');await evaluate(send,"document.querySelector('.desktop-nav a[href=\"/technology\"]').focus()");
  await send('Input.dispatchKeyEvent',{type:'keyDown',key:'Enter',code:'Enter',windowsVirtualKeyCode:13});await arrived('/technology');
