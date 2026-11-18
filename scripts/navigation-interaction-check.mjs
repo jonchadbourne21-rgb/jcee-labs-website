@@ -65,6 +65,7 @@ try {
  // briefly display the homepage while the destination lazy chunk resolves.
  await navigate(send,base,'/technology');
  await evaluate(send,"window.__worldlabNavigationDocumentToken='route-persistence-check'");
+ await evaluate(send,`document.querySelector('.capability-details__related[href="/capabilities/infrastructure"]').scrollIntoView({block:'center',behavior:'instant'})`);
  await activate('.capability-details__related[href="/capabilities/infrastructure"]');
  await arrived('/capabilities/infrastructure');
  const transition=await evaluate(send,`({
@@ -79,6 +80,7 @@ try {
  cases.push({width:1440,href:'/capabilities/infrastructure',input:'same-document navigation',pass:true});
  await navigate(send,base,'/solutions');
  await evaluate(send,"window.__worldlabNavigationDocumentToken='solutions-route-check'");
+ await evaluate(send,`document.querySelector('.editorial-text-link[href="/technology#current-integration"]').scrollIntoView({block:'center',behavior:'instant'})`);
  await activate('.editorial-text-link[href="/technology#current-integration"]');
  await arrived('/technology');
  assert.equal(await evaluate(send,"window.__worldlabNavigationDocumentToken"),'solutions-route-check','Solutions to Technology caused a document reload');
