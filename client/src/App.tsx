@@ -2,6 +2,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
+import InternalRouteNavigation from "./components/InternalRouteNavigation";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import EditorialSite from "./pages/EditorialSite";
@@ -107,6 +108,7 @@ function Router() {
   return (
     <Suspense fallback={<RouteShimmer />}>
       <RouteScrollManager />
+      <InternalRouteNavigation />
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/blog/recovery-with-current-permission" component={PublicationPage} />
