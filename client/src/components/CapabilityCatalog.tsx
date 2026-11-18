@@ -12,8 +12,8 @@ export default function CapabilityCatalog() {
  return <>
   <section className="editorial-section capability-catalog" aria-labelledby="capability-catalog-heading">
    <div className="capability-catalog__heading">
-    <div><p className="editorial-kicker">JCEE WORLDLAB / CAPABILITIES</p><h2 id="capability-catalog-heading">Eight capabilities. One accountable action path.</h2></div>
-    <p>Established foundations for keeping intelligence, current permission and observed outcomes connected. Explore the customer value and evidence boundary behind each capability.</p>
+    <div><p className="editorial-kicker">EIGHT CAPABILITIES / ONE CONNECTED SYSTEM</p><h2 id="capability-catalog-heading">Intelligence That Leaves Receipts.</h2></div>
+    <p><strong>Control what AI can do. Verify what it actually did.</strong> Explore the customer value and evidence boundary behind each established capability.</p>
    </div>
    <ul className="capability-catalog__grid" aria-label="JCEE WorldLab capability catalog">
     {publicCapabilities.map((c,index) => {
@@ -44,7 +44,7 @@ export default function CapabilityCatalog() {
       <a className="capability-details__related" href={c.relatedHref}>{c.relatedLabel} <span aria-hidden="true">→</span></a>
      </article>)}
    </div>
-   <div className="capability-details__footer"><p>Selected tests support their declared configurations; they do not establish universal execution protection or production qualification.</p><a href="/consultation">Discuss your workflow <span aria-hidden="true">↗</span></a></div>
+   <div className="capability-details__footer"><p>Selected tests support their declared configurations; they do not establish universal execution protection or production qualification.</p><a className="editorial-button" href="/consultation">Discuss your workflow <span aria-hidden="true">↗</span></a></div>
   </section>
  </>;
 }
