@@ -9,9 +9,11 @@ import { getAllLeads, insertLead, insertBusinessInquiry, getAllBusinessInquiries
 import { getPricing, getAvailableTrades } from "./pricingApi";
 import { syncLeadToLoops, syncInquiryToLoops } from "./emailMarketing";
 import { systemRouter } from "./_core/systemRouter";
+import { signalForgeAgentRouter } from "./signalForgeAgentRouter";
 
 export const appRouter = router({
   system: systemRouter,
+  signalForgeAgent: signalForgeAgentRouter,
 
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
