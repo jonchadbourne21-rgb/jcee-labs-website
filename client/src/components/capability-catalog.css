@@ -34,3 +34,29 @@
 @media(max-width:700px){#root#root .editorial-page .capability-catalog__heading{grid-template-columns:1fr;gap:8px}#root#root .editorial-page .capability-details__grid{grid-template-columns:1fr}#root#root .editorial-page .capability-details__footer{flex-direction:column;align-items:flex-start}#root#root .editorial-page .capability-details__footer a{white-space:normal}}
 @media(max-width:480px){#root#root .editorial-page .capability-catalog__grid{grid-template-columns:1fr}#root#root .editorial-page .capability-catalog__card a{min-height:0;padding:22px}#root#root .editorial-page .capability-catalog__card-top{margin-bottom:22px}#root#root .editorial-page .capability-details__item{padding:23px}}
 @media(prefers-reduced-motion:reduce){#root#root .editorial-page .capability-catalog__card{transition:none}}
+
+/* Homepage placement (directly under the hero). The homepage scope carries
+   stronger, partly !important type rules, so the catalog's measured /technology
+   appearance is restated here at matching strength. Values were measured in CI
+   from the /technology render (scripts/fixtures/capability-catalog-baseline.json). */
+#root#root#root .worldlab-home .capability-catalog{--catalog-bg:var(--worldlab-surface);--catalog-line:var(--jcee-line);--catalog-accent:var(--wl-accent);--catalog-ink:var(--jcee-ink);--catalog-muted:var(--jcee-muted);color:var(--catalog-ink);box-sizing:border-box;width:100%;max-width:1440px;margin:0 auto;padding:56px clamp(22px,5vw,72px);background:transparent;border:0;font-family:var(--worldlab-font)}
+#root#root#root .worldlab-home .capability-catalog .editorial-kicker{margin:0;font-family:var(--worldlab-font)!important;font-size:12px!important;font-weight:600;line-height:1.6!important;letter-spacing:.09em!important;text-transform:uppercase;color:var(--wl-accent)!important;text-shadow:none}
+#root#root#root .worldlab-home .capability-catalog__heading{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(220px,.8fr);gap:clamp(24px,4vw,70px);align-items:end;margin-bottom:28px}
+#root#root#root .worldlab-home .capability-catalog__heading h2{max-width:18ch;margin:8px 0 0;padding:0;font-family:var(--wl-display)!important;font-size:clamp(28px,3vw,42px);font-weight:500!important;line-height:1.15;letter-spacing:-.045em!important;color:var(--jcee-ink)!important;text-shadow:none!important;text-transform:none}
+#root#root#root .worldlab-home .capability-catalog__heading>p{max-width:54ch;margin:0;font-size:16px;font-weight:400;line-height:1.7;color:var(--catalog-muted)!important}
+#root#root#root .worldlab-home .capability-catalog__heading>p strong{font-weight:700;color:inherit}
+#root#root#root .worldlab-home .capability-catalog__grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+#root#root#root .worldlab-home .capability-catalog__card{min-width:0;margin:0;padding:0;line-height:1.75;background:var(--catalog-bg);border:1px solid var(--catalog-line);border-radius:7px;transition:border-color .18s ease,background-color .18s ease}
+#root#root#root .worldlab-home .capability-catalog__card:hover,#root#root#root .worldlab-home .capability-catalog__card:focus-within{border-color:var(--catalog-accent);background:#142335}
+#root#root#root .worldlab-home .capability-catalog__card a{box-sizing:border-box;min-height:245px;padding:24px;display:flex;flex-direction:column;color:var(--catalog-ink)!important;text-decoration:none}
+#root#root#root .worldlab-home .capability-catalog__card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:29px;color:var(--catalog-accent)}
+#root#root#root .worldlab-home .capability-catalog__number{font-size:11px;font-weight:400;letter-spacing:.12em;font-variant-numeric:tabular-nums;color:var(--jcee-muted)}
+#root#root#root .worldlab-home .capability-catalog__card strong{display:block;font-size:clamp(18px,1.65vw,23px);font-weight:600;line-height:1.25;letter-spacing:-.025em;color:var(--catalog-ink)}
+#root#root#root .worldlab-home .capability-catalog__summary{display:block;font-size:13px;font-weight:400;line-height:1.65;color:var(--catalog-muted);margin:9px 0 24px;flex:1}
+#root#root#root .worldlab-home .capability-catalog__link{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12px;font-weight:600;color:var(--catalog-accent);border-top:1px solid var(--catalog-line);padding-top:14px}
+#root#root#root .worldlab-home .capability-catalog__note{margin:22px 0 0;max-width:85ch;font-size:17px;font-weight:400;line-height:1.75;color:var(--catalog-muted)!important}
+#root#root#root .worldlab-home .capability-catalog a:focus-visible{outline:2px solid var(--catalog-accent)!important;outline-offset:4px}
+@media(max-width:1050px){#root#root#root .worldlab-home .capability-catalog__grid{grid-template-columns:repeat(2,minmax(0,1fr))}#root#root#root .worldlab-home .capability-catalog__card a{min-height:215px}}
+@media(max-width:700px){#root#root#root .worldlab-home .capability-catalog{padding-block:36px}#root#root#root .worldlab-home .capability-catalog__heading{grid-template-columns:1fr;gap:8px}}
+@media(max-width:480px){#root#root#root .worldlab-home .capability-catalog__grid{grid-template-columns:1fr}#root#root#root .worldlab-home .capability-catalog__card a{min-height:0;padding:22px}#root#root#root .worldlab-home .capability-catalog__card-top{margin-bottom:22px}}
+@media(prefers-reduced-motion:reduce){#root#root#root .worldlab-home .capability-catalog__card{transition:none}}

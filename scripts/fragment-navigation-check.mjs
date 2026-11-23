@@ -57,6 +57,9 @@ try {
     ["/solutions", "build"],
     ["/solutions", "design-partners"],
     ["/technology", "current-integration"],
+    // Homepage capability cards open their detail entries on /technology.
+    ["/technology", "detail-authorization"],
+    ["/technology", "detail-qualification"],
   ];
   let checked = 0;
   async function atTarget(route, id, label) {
