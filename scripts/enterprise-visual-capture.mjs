@@ -259,6 +259,8 @@ try {
     { name: "Assurance iPhone", route: "/assurance", selector: ".assurance-program", width: 390, height: 844, mobile: true, file: "assurance-iphone.png" },
     { name: "Homepage hero desktop", route: "/", selector: ".customer-hero", width: 1440, height: 900, file: "homepage-hero-desktop.png" },
     { name: "Homepage hero iPhone", route: "/", selector: ".customer-hero", width: 390, height: 844, mobile: true, file: "homepage-hero-iphone.png" },
+    { name: "Homepage capabilities desktop", route: "/", selector: "#capabilities", width: 1440, height: 900, minHeight: 300, file: "homepage-capabilities-desktop.png" },
+    { name: "Homepage capabilities iPhone", route: "/", selector: "#capabilities", width: 390, height: 844, mobile: true, minHeight: 300, file: "homepage-capabilities-iphone.png" },
     { name: "Founder page desktop", route: "/founder", selector: ".editorial-masthead", width: 1440, height: 900, file: "founder-page-desktop.png", assetUrl: "/visuals/worldlab-company-v1.webp" },
     { name: "Founder page iPhone", route: "/founder", selector: ".editorial-masthead", width: 390, height: 844, mobile: true, file: "founder-page-iphone.png", assetUrl: "/visuals/worldlab-company-v1.webp" },
     { name: "Founder introduction desktop", route: "/founder", selector: ".founder-introduction", width: 1440, height: 900, file: "founder-introduction-desktop.png" },

@@ -1,7 +1,7 @@
 import NovemberProgress from "@/components/NovemberProgress";
 import BuildStatusList from "@/components/BuildStatusList";
 import EditorialLayout from "@/components/EditorialLayout";
-import CapabilityCatalog from "@/components/CapabilityCatalog";
+import { CapabilityDetails } from "@/components/CapabilityCatalog";
 export default function TechnologyPage() {
   return (
     <EditorialLayout
@@ -39,7 +39,7 @@ export default function TechnologyPage() {
           </a>
         </div>
       </section>
-      <CapabilityCatalog />
+      <CapabilityDetails />
       <section className="editorial-section">
         <p className="editorial-kicker">Public integration model</p>
         <h2>Bind the workflow. Keep the competent systems in place.</h2>

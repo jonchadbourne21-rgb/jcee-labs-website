@@ -4,6 +4,7 @@ import ProductOverview from "@/components/ProductOverview";
 import TechnicalBento from "@/components/TechnicalBento";
 import EvidenceTrace from "@/components/EvidenceTrace";
 import DeferredEvidenceCore from "@/components/DeferredEvidenceCore";
+import CapabilityCatalog from "@/components/CapabilityCatalog";
 import "./home-editorial-refresh.css";
 
 export default function Home() {
@@ -45,6 +46,8 @@ export default function Home() {
         </div>
         <div className="wl-hero-baseline"><span>PERMISSION. ACTION. A RECORD YOU CAN REVIEW.</span></div>
       </section>
+
+      <CapabilityCatalog />
 
       <section
         id="story"
