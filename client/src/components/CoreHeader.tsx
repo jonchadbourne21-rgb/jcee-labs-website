@@ -24,12 +24,16 @@ type CoreHeaderProps = {
   contactHref?: string;
 };
 
+/**
+ * Buyer-first order. Research stays one click away under Company (desktop
+ * menu) and at the end of the mobile menu.
+ */
 export const publicNavigationLinks = [
   { id: "solutions", label: "Solutions", href: "/solutions" },
-  { id: "technology", label: "Technology", href: "/technology" },
-  { id: "research", label: "Research", href: "/research" },
+  { id: "technology", label: "How it works", href: "/technology" },
   { id: "resources", label: "Resources", href: "/resources" },
   { id: "company", label: "Company", href: "/company" },
+  { id: "research", label: "Research", href: "/research" },
 ] as const;
 
 export const getMobileMenuLabel = (menuOpen: boolean) =>
@@ -113,7 +117,7 @@ export default function CoreHeader({
   }, [menuOpen]);
 
   const renderLinks = (mobile = false) =>
-    publicNavigationLinks.filter(link => mobile || (link.id !== "resources" && link.id !== "company")).map((link, index) => (
+    publicNavigationLinks.filter(link => mobile || (link.id !== "company" && link.id !== "research")).map((link, index) => (
       <a
         key={link.id}
         href={link.href}
@@ -151,7 +155,7 @@ export default function CoreHeader({
           <summary>Company <span aria-hidden="true">⌄</span></summary>
           <div className="header-company-links">
             <a href="/company">About JCEE WorldLab</a>
-            <a href="/resources">Resources</a>
+            <a href="/research">Research</a>
             <a href="/solutions#design-partners">Design partnerships</a>
           </div>
         </details>}

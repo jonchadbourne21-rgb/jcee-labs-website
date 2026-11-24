@@ -27,7 +27,9 @@ try {
   }
  }
  async function arrived(route) {
-  for(let i=0;i<80;i++){
+  // Up to 12s: a cold lazy route chunk on a loaded CI runner occasionally
+  // exceeded the previous 6s budget (seen on unchanged main as well).
+  for(let i=0;i<160;i++){
    if(await evaluate(send,`location.pathname===${JSON.stringify(route)}&&document.querySelector('#root')?.dataset.clientReady==='true'&&!!document.querySelector('h1')`))return;
    await sleep(75);
   }
@@ -56,7 +58,7 @@ try {
  await send('Emulation.setDeviceMetricsOverride',{width:1440,height:1000,deviceScaleFactor:1,mobile:false});
  for(const href of links){
   await navigate(send,base,'/');
-  if(['/company','/resources'].includes(href))await activate('.header-company-menu summary');
+  if(['/company','/research'].includes(href))await activate('.header-company-menu summary');
   await activate(`.desktop-nav a[href="${href}"]`);await arrived(href);cases.push({width:1440,href,input:'mouse',pass:true});
  }
  await navigate(send,base,'/technology');await activate('.wordmark');await arrived('/');
