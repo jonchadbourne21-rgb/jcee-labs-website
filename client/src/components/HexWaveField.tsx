@@ -24,9 +24,11 @@ type HexWaveFieldProps = {
   intensity?: number;
   /** Sends one bright "packet" travelling along a wave, leaving a short trail. */
   pulse?: boolean;
+  /** Overrides the number of waves (e.g. a short footer band). */
+  waveCount?: number;
 };
 
-export default function HexWaveField({ variant = "classic", className = "", seed = 0, intensity = 1, pulse = false }: HexWaveFieldProps) {
+export default function HexWaveField({ variant = "classic", className = "", seed = 0, intensity = 1, pulse = false, waveCount }: HexWaveFieldProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -76,10 +78,11 @@ export default function HexWaveField({ variant = "classic", className = "", seed
       // Density follows the device, so a framed panel on desktop keeps the full field.
       const mobile = (window.innerWidth || width) < 720;
       const worldlab = variant === "worldlab";
-      const waves = worldlab ? (mobile ? rustWave.mobileWaves : rustWave.desktopWaves) : (mobile ? 3 : 5);
+      const waves = waveCount ?? (worldlab ? (mobile ? rustWave.mobileWaves : rustWave.desktopWaves) : (mobile ? 3 : 5));
       const spacing = mobile ? 34 : 28;
       const pointCount = Math.ceil(width / spacing) + 5;
-      const packetWave = Math.abs(seed) % Math.max(1, waves);
+      // Keep the packet off the edge waves, where the frame and readout sit.
+      const packetWave = waves > 4 ? 2 + (Math.abs(seed) % (waves - 4)) : Math.abs(seed) % Math.max(1, waves);
       const packetX = (((time * 0.085 + seed * 0.13) % 1.25) + 1.25) % 1.25 * width - width * 0.12;
 
       for (let wave = 0; wave < waves; wave += 1) {
@@ -190,7 +193,7 @@ export default function HexWaveField({ variant = "classic", className = "", seed
       sizeObserver.disconnect();
       reducedMotion.removeEventListener("change", refresh);
     };
-  }, [variant, seed, intensity, pulse]);
+  }, [variant, seed, intensity, pulse, waveCount]);
 
   return <canvas ref={canvasRef} className={["hex-wave-field", className].filter(Boolean).join(" ")} aria-hidden="true" />;
 }

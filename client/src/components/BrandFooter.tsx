@@ -11,7 +11,7 @@ export default function BrandFooter({
   return (
     <footer className="brand-footer">
       <div className="brand-footer-field" aria-hidden="true">
-        <HexWaveField variant="worldlab" seed={11} intensity={0.8} pulse className="signature-field" />
+        <HexWaveField variant="worldlab" seed={11} intensity={1.1} waveCount={3} pulse className="signature-field" />
       </div>
       <div className="brand-footer-wordmark brand-footer-wordmark--compact">
         Intelligence That Leaves Receipts
