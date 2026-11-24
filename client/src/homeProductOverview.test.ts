@@ -7,6 +7,7 @@ const surfaceCheck = readFileSync(path.join(root, "../../scripts/worldlab-surfac
 const home = readFileSync(path.join(root, "pages/Home.tsx"), "utf8");
 const deferredOrbit = readFileSync(path.join(root, "components/DeferredEvidenceCore.tsx"), "utf8");
 const section = readFileSync(path.join(root, "components/ProductOverview.tsx"), "utf8");
+const replay = readFileSync(path.join(root, "components/ReceiptReplay.tsx"), "utf8");
 const css = readFileSync(path.join(root, "components/worldlab-product-overview.css"), "utf8");
 const waves = readFileSync(path.join(root, "components/HexWaveField.tsx"), "utf8");
 const rustSource = readFileSync(path.join(root, "../../visuals/worldlab/src/main.rs"), "utf8");
@@ -97,12 +98,17 @@ describe("homepage binary-first landing", () => {
     expect(rustPacket.sinLut.every((n: number) => Number.isFinite(n) && Math.abs(n) <= 1)).toBe(true);
   });
 
-  it("shows an explicitly fictional AI action receipt, not a fabricated evidence claim", () => {
-    expect(section).toContain('data-demo="illustrative"');
-    expect(section).toContain("AI action receipt");
-    expect(section).toContain("HELD FOR REVIEW");
-    expect(section).toContain("NO CHANGE EXECUTED");
-    expect(section).toContain("NOT A LIVE RECEIPT");
+  it("replays an explicitly fictional AI action receipt, not a fabricated evidence claim", () => {
+    expect(section).toContain("<ReceiptReplay />");
+    expect(replay).toContain('data-demo="illustrative"');
+    expect(replay).toContain("AI ACTION RECEIPT");
+    expect(replay).toContain("TYPICAL AI AGENT");
+    expect(replay).toContain("WITH JCEE");
+    expect(replay).toContain("NOT A LIVE RECEIPT");
+    // Server render shows the complete story; reduced motion never animates it.
+    expect(replay).toContain("useState(REPLAY_FINAL_STEP)");
+    expect(replay).toContain("prefers-reduced-motion: reduce");
+    expect(replay).not.toMatch(/fetch\s*\(/);
     // The receipt carries its own label; the page keeps one evidence note.
     expect(section).not.toContain("wl-product-limit");
     expect(section).not.toContain("jcee-authority-hero-v3.webp");

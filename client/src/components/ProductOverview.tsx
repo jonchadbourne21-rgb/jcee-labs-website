@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import HexWaveField from "./HexWaveField";
+import ReceiptReplay from "./ReceiptReplay";
 import "./worldlab-product-overview.css";
 
 /**
@@ -46,45 +47,9 @@ export default function ProductOverview() {
             </div>
           </div>
 
-          <figure className="wl-product-visual" aria-label="Illustrative AI action receipt interface, not a record of a real customer action">
-            <div className="wl-receipt" data-demo="illustrative">
-              <div className="wl-receipt-top">
-                <span className="wl-receipt-mark" aria-hidden="true"><i /><i /></span>
-                <span>JCEE WORLDLAB / INTERFACE STUDY</span>
-              </div>
-              <div className="wl-receipt-heading">
-                <p className="wl-receipt-overline">HIGH-IMPACT ACTION / CONTROL RECORD</p>
-                <h3 className="wl-receipt-title">AI action receipt<span className="wl-receipt-period">.</span></h3>
-              </div>
-              <div className="wl-receipt-state">
-                <span className="wl-receipt-led" aria-hidden="true" />
-                <strong>HELD FOR REVIEW</strong>
-                <span className="wl-receipt-no-effect">NO CHANGE EXECUTED</span>
-              </div>
-              <dl className="wl-receipt-entries">
-                <div>
-                  <dt>01 / REQUEST</dt>
-                  <dd>Restart production service</dd>
-                </div>
-                <div>
-                  <dt>02 / PERMISSION</dt>
-                  <dd>Paused pending review</dd>
-                </div>
-                <div>
-                  <dt>03 / RESULT</dt>
-                  <dd>No change executed</dd>
-                </div>
-                <div>
-                  <dt>04 / RECORD</dt>
-                  <dd>Decision and outcome recorded</dd>
-                </div>
-              </dl>
-              <div className="wl-receipt-bottom">
-                <div className="wl-receipt-fingerprint" aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /></div>
-                <span>EXAMPLE INTERFACE<br /><strong>NOT A LIVE RECEIPT</strong></span>
-              </div>
-            </div>
-            <figcaption>EXAMPLE / PERMISSION → ACTION → RECORD</figcaption>
+          <figure className="wl-product-visual" aria-label="Example replay: the same ERP timeout handled by a typical AI agent and with JCEE. Illustrative, not a record of a real customer action.">
+            <ReceiptReplay />
+            <figcaption>EXAMPLE / SAME TIMEOUT, TWO OUTCOMES</figcaption>
           </figure>
         </div>
 

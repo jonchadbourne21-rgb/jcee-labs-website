@@ -32,8 +32,9 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
     expect(home).not.toContain("JCEE Distribution");
   });
   it("labels the illustrative receipt and keeps one evidence note on the page", () => {
-    expect(product).toContain('data-demo="illustrative"');
-    expect(product).toContain("NOT A LIVE RECEIPT");
+    const replay = readFileSync(path.resolve(import.meta.dirname, "components", "ReceiptReplay.tsx"), "utf8");
+    expect(replay).toContain('data-demo="illustrative"');
+    expect(replay).toContain("NOT A LIVE RECEIPT");
     expect(plain(home)).toContain("Integrations are tested for your workflow before production use.");
     expect(plain(home)).toContain("Our published tests cover specific configurations.");
   });

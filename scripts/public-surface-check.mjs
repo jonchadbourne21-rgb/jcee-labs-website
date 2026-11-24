@@ -357,8 +357,8 @@ try {
       legacyOrbitalCount: panel?.querySelectorAll('.wl-product-orbit, .wl-product-node').length ?? -1,
       founderCopy: panel?.textContent?.includes('Assess a workflow. Build a solution. Partner on what comes next.')
         && !panel?.textContent?.includes("One platform we're building."),
-      receiptTitle: receipt?.querySelector('h3')?.textContent,
-      receiptState: receipt?.querySelector('.wl-receipt-state')?.textContent?.replace(/\\s+/g, ' ').trim(),
+      receiptTitle: receipt?.querySelector('.wl-receipt-top')?.textContent,
+      receiptState: receipt?.querySelector('.rr-lanes')?.textContent?.replace(/\\s+/g, ' ').trim(),
       receiptExample: receipt?.getAttribute('data-demo') === 'illustrative'
         && receipt.textContent?.includes('NOT A LIVE RECEIPT'),
       scopeDisclosure: !!document.querySelector('#evidence')?.textContent?.includes('Integrations are tested for your workflow before production use.')
@@ -378,7 +378,7 @@ try {
     !productOverview.offers?.includes("Build around your business") ||
     !productOverview.offers?.includes("Build the next step together") ||
     !productOverview.offerHeadingColors?.every(color => color === "rgb(240, 245, 251)") ||
-    !productOverview.receiptTitle?.includes("AI action receipt") ||
+    !productOverview.receiptTitle?.includes("AI ACTION RECEIPT") ||
     productOverview.waveCanvasWidth < 100 ||
     productOverview.waveCanvasHeight < 200 ||
     !productOverview.waveCanvasCover ||
@@ -388,7 +388,8 @@ try {
     productOverview.staticBinaryCount !== 0 ||
     productOverview.legacyOrbitalCount !== 0 ||
     !productOverview.founderCopy ||
-    !productOverview.receiptState?.includes("HELD FOR REVIEW") ||
+    !productOverview.receiptState?.includes("Two orders in the ERP") ||
+    !productOverview.receiptState?.includes("One order, confirmed") ||
     !productOverview.receiptExample ||
     !productOverview.scopeDisclosure
   ) failures.push("Homepage product section failed: " + JSON.stringify(productOverview));
