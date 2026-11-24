@@ -1,9 +1,8 @@
 import WorldLabMasthead from "@/components/WorldLabMasthead";
-import { FormEvent, useEffect } from "react";
+import { useEffect } from "react";
 import BrandFooter from "@/components/BrandFooter";
 import "./home-editorial-refresh.css";
 import CoreHeader from "@/components/CoreHeader";
-import { buildPartnerInquiryMailto } from "@/lib/partnerInquiry";
 
 const enterpriseFit = [
   ["WORK GETS STUCK", "A recurring workflow needs manual follow-up, repeated checking, or reconstruction before anyone knows it is finished."],
@@ -18,27 +17,6 @@ export default function EnterprisePartnersPage() {
     document.title = "Discuss a Workflow — JCEE WorldLab";
     return () => { document.title = previousTitle; };
   }, []);
-
-  const openInquiryDraft = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    if (!form.reportValidity()) return;
-    const data = new FormData(form);
-    window.location.href = buildPartnerInquiryMailto("enterprise", {
-      name: String(data.get("name") || ""),
-      email: String(data.get("email") || ""),
-      organization: String(data.get("organization") || ""),
-      role: String(data.get("role") || ""),
-      focus: String(data.get("domain") || ""),
-      timeline: String(data.get("timeline") || ""),
-      primaryLabel: "Workflow and where it gets stuck",
-      primary: String(data.get("system") || ""),
-      evidenceLabel: "Current tools, checks, and handoffs",
-      evidence: String(data.get("controls") || ""),
-      outcomeLabel: "What a useful first engagement should establish",
-      outcome: String(data.get("outcome") || ""),
-    });
-  };
 
   return (
     <main className="program-page partner-page partner-path-page enterprise-partner-page" id="top">
@@ -81,32 +59,18 @@ export default function EnterprisePartnersPage() {
       </section>
 
       <section className="partner-inquiry" aria-labelledby="enterprise-inquiry-title">
-        <div className="section-index"><span>03 / WORKFLOW INQUIRY</span><span>REVIEW BEFORE SEND</span></div>
+        <div className="section-index"><span>DESCRIBE THE WORK</span><span>FREE FIRST CONVERSATION</span></div>
         <div className="partner-inquiry-layout">
           <div className="partner-inquiry-copy">
-            <p className="partner-kicker">DESCRIBE THE WORK</p>
             <h2 id="enterprise-inquiry-title">Where does the workflow stop being clear?</h2>
-            <p>This form opens an email draft for you to review and send. It does not create a contract or authorize paid work.</p>
-            <p>Use a non-confidential summary. Do not include credentials, personal customer records, payment details, private source code, or sensitive incident evidence. Agree a secure exchange separately when necessary.</p>
+            <p>Tell us about the workflow on our consultation page. Your request goes straight to our team, and we reply to agree a time.</p>
+            <a className="partner-cta enterprise-inquiry-cta" href="/consultation">Discuss your workflow <span aria-hidden="true">→</span></a>
             <dl>
               <div><dt>FIRST STEP</dt><dd>Workflow Assurance Assessment</dd></div>
               <div><dt>IF THERE IS A FIT</dt><dd>Written scope and commercial proposal before paid work</dd></div>
               <div><dt>DIRECT</dt><dd><a href="mailto:sales@jceelabs.com">sales@jceelabs.com</a></dd></div>
             </dl>
           </div>
-          <form className="partner-form enterprise-partner-form" onSubmit={openInquiryDraft}>
-            <div className="partner-form-route">JCEE / WORKFLOW INQUIRY</div>
-            <div className="partner-form-row"><label><span>NAME *</span><input name="name" autoComplete="name" required /></label><label><span>WORK EMAIL *</span><input name="email" type="email" autoComplete="email" required /></label></div>
-            <div className="partner-form-row"><label><span>COMPANY *</span><input name="organization" autoComplete="organization" required /></label><label><span>ROLE *</span><input name="role" autoComplete="organization-title" required /></label></div>
-            <div className="partner-form-row">
-              <label><span>WORKFLOW AREA *</span><select name="domain" defaultValue="" required><option value="" disabled>Select an area</option><option>Customer or back-office operations</option><option>AI and agent systems</option><option>Payments or financial operations</option><option>Cloud, data, or infrastructure</option><option>Regulated operations</option><option>Enterprise workflow automation</option><option>Other operational workflow</option></select></label>
-              <label><span>TIMELINE</span><input name="timeline" placeholder="e.g. evaluating this quarter" /></label>
-            </div>
-            <label><span>WORKFLOW AND WHERE IT GETS STUCK *</span><textarea name="system" rows={6} required placeholder="What starts the work? Who owns it? Which systems are involved? Where does it stall, repeat, or become unclear?" /></label>
-            <label><span>CURRENT TOOLS, CHECKS, AND HANDOFFS</span><textarea name="controls" rows={4} placeholder="How does your team handle this today? Include the systems, approvals, manual checks, logs, spreadsheets, or follow-up involved." /></label>
-            <label><span>WHAT SHOULD A USEFUL FIRST ENGAGEMENT ESTABLISH? *</span><textarea name="outcome" rows={4} required placeholder="What decision, measurable improvement, or evidence would make the first engagement useful?" /></label>
-            <div className="partner-form-submit"><button type="submit">OPEN EMAIL DRAFT <span aria-hidden="true">→</span></button><p>Review the draft in your email app before sending.</p></div>
-          </form>
         </div>
       </section>
       <BrandFooter backToTopHref="#top" />

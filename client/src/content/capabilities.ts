@@ -23,8 +23,8 @@ export const publicCapabilities: readonly PublicCapability[] = [
     "useCase": "Require the target system's final decision before changing a protected service.",
     "implemented": "Target-native checks and effect-identity binding have been exercised in bounded configurations.",
     "qualification": "Privileged-route bypass and physical durable-authority closure remain unresolved; universal no-bypass protection is not established.",
-    "relatedHref": "/capabilities/infrastructure",
-    "relatedLabel": "Explore JCEE infrastructure"
+    "relatedHref": "/solutions#assessment",
+    "relatedLabel": "See the Workflow Assurance assessment"
   },
   {
     "id": "durable-recovery",
@@ -83,8 +83,8 @@ export const publicCapabilities: readonly PublicCapability[] = [
     "useCase": "Govern an infrastructure-change request from approval to observed outcome.",
     "implemented": "Private installable workflow and interface components have bounded extraction and component-test results.",
     "qualification": "The complete G0 joined admission and production release remain on hold.",
-    "relatedHref": "/capabilities/infrastructure",
-    "relatedLabel": "Explore the connected infrastructure model"
+    "relatedHref": "/solutions#build",
+    "relatedLabel": "See how we build connected workflows"
   },
   {
     "id": "qualification",

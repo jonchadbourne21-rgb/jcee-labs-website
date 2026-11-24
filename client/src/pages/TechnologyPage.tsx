@@ -63,8 +63,8 @@ export default function TechnologyPage() {
           requirements, and the evidence needed for a useful next decision.
         </p>
         <div className="editorial-actions">
-          <a className="editorial-button" href="/capabilities/infrastructure">
-            Explore JCEE Infrastructure →
+          <a className="editorial-button" href="/solutions#assessment">
+            See the Workflow Assurance assessment →
           </a>
           <a className="editorial-text-link" href="/consultation">
             Discuss your workflow →

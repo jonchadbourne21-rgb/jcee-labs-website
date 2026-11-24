@@ -26,7 +26,7 @@ export default function BrandFooter({
           <span>SOLUTIONS &amp; TECHNOLOGY</span>
           <a href="/solutions">Solutions for your operations</a>
           <a href="/solutions#design-partners">Become a design partner</a>
-          <a href="/capabilities/infrastructure">JCEE Infrastructure</a>
+          <a href="/solutions#assessment">Workflow Assurance assessment</a>
           <a href="/vow">JCEE VOW</a>
           <a href="/qcs">QCS</a>
           <a href="/assurance">JCEE Assurance</a>

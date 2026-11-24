@@ -298,7 +298,7 @@ async function evaluateProfile(send, profileName, profile, baseUrl) {
   );
   const enterprise = await readLayout(
     send,
-    ".enterprise-partner-form .partner-form-submit button"
+    ".enterprise-inquiry-cta"
   );
 
   await navigate(

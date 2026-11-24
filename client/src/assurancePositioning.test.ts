@@ -97,11 +97,9 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
     );
   });
 
-  it("keeps inquiry human-reviewed, non-confidential, and separate from execution authority", () => {
-    expect(inquiry).toContain('buildPartnerInquiryMailto("enterprise"');
-    expect(inquiry).toContain("form.reportValidity()");
-    expect(inquiry).toContain("This form opens an email draft");
-    expect(inquiry).toContain("Do not include credentials");
+  it("sends enterprise inquiries through the one consultation path, separate from execution authority", () => {
+    expect(inquiry).toContain('href="/consultation"');
+    expect(inquiry).not.toContain('buildPartnerInquiryMailto("enterprise"');
     expect(plain(inquiry)).toContain(
       "Production changes, software implementation, and deployment remain separately scoped and authorized"
     );
