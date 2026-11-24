@@ -100,9 +100,27 @@
   border-radius: 6px;
 }
 #root .signature-host { min-width: 0; width: 100%; }
+/* Phones: the framed panel would cost a full screen before any content.
+   Collapse it to a thin, edge-faded band (same treatment as the footer). */
 @media (max-width: 700px) {
   #root#root .signature-panel.editorial-hero-art,
-  #root#root .signature-panel.worldlab-masthead-art { max-height: 260px; aspect-ratio: auto; height: 220px; }
+  #root#root .signature-panel.worldlab-masthead-art,
+  #root#root .signature-panel {
+    height: 84px;
+    max-height: 84px;
+    aspect-ratio: auto;
+    margin-block: 4px 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+  #root#root .signature-panel::before,
+  #root#root .signature-panel .signature-tick,
+  #root#root .signature-panel .signature-readout { display: none; }
+  #root#root #root .signature-panel .signature-field {
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  }
 }
 
 /* Legacy rules hide every .hex-wave-field (display:none, opacity 0 + arrive

@@ -1135,6 +1135,27 @@ try {
   }
   if (signatureFailures.length) failures.push("Signature hex-wave panel failed: " + signatureFailures.join("; "));
 
+  // Phones: the masthead panel collapses to a thin band so content comes first.
+  await page.send("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
+  for (const route of ["/solutions", "/resources", "/capabilities/assurance"]) {
+    await navigate(page.send, baseUrl, route);
+    await sleep(800);
+    const band = await evaluate(page.send, `(() => {
+      const panel = document.querySelector('.signature-panel');
+      const canvas = panel?.querySelector('canvas');
+      const r = panel?.getBoundingClientRect();
+      let lit = 0;
+      if (canvas && canvas.width > 50) {
+        const d = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
+        for (let i = 3; i < d.length; i += 32) if (d[i] > 8) lit++;
+      }
+      return { h: r ? Math.round(r.height) : null, w: r ? Math.round(r.width) : null, lit,
+        overflow: document.documentElement.scrollWidth > innerWidth + 1 };
+    })()`);
+    if (!band.h || band.h > 100 || band.lit < 10 || band.overflow) failures.push(`Phone signature band ${route}: ${JSON.stringify(band)}`);
+  }
+  await page.send("Emulation.clearDeviceMetricsOverride", {});
+
   if (page.runtimeErrors.length) {
     failures.push(`runtime errors: ${page.runtimeErrors.join("; ")}`);
   }

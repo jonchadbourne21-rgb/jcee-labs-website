@@ -78,7 +78,8 @@ export default function HexWaveField({ variant = "classic", className = "", seed
       // Density follows the device, so a framed panel on desktop keeps the full field.
       const mobile = (window.innerWidth || width) < 720;
       const worldlab = variant === "worldlab";
-      const waves = waveCount ?? (worldlab ? (mobile ? rustWave.mobileWaves : rustWave.desktopWaves) : (mobile ? 3 : 5));
+      // A short band (phone mastheads, footer) gets three airy waves.
+      const waves = waveCount ?? (height < 140 ? 3 : worldlab ? (mobile ? rustWave.mobileWaves : rustWave.desktopWaves) : (mobile ? 3 : 5));
       const spacing = mobile ? 34 : 28;
       const pointCount = Math.ceil(width / spacing) + 5;
       // Keep the packet off the edge waves, where the frame and readout sit.
