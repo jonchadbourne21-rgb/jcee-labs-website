@@ -59,9 +59,10 @@ const MEASURE = `(() => {
     canvases: document.querySelectorAll('canvas').length,
     signature: [...document.querySelectorAll('.signature-panel, .brand-footer-field')].map(el => {
       const c = el.querySelector('canvas'); const r = el.getBoundingClientRect();
+      const shown = c && getComputedStyle(c).display !== 'none' && Number(getComputedStyle(c).opacity) > 0.3;
       let lit = 0;
       try { const d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data; for (let i = 3; i < d.length; i += 16) if (d[i] > 8) lit++; } catch {}
-      return { cls: el.className.split(' ')[0], w: Math.round(r.width), h: Math.round(r.height), canvas: !!c, lit, seed: el.dataset.signatureSeed || null };
+      return { cls: el.className.split(' ')[0], shown, w: Math.round(r.width), h: Math.round(r.height), canvas: !!c, lit, seed: el.dataset.signatureSeed || null };
     }),
     renders3d: [...document.images].filter(i => /worldlab-(technology|research|company)-v1\.webp/.test(i.currentSrc || i.src)).length,
     runningAnimations: document.getAnimations().filter(a => a.playState === 'running').length,

@@ -104,3 +104,17 @@
   #root#root .signature-panel.editorial-hero-art,
   #root#root .signature-panel.worldlab-masthead-art { max-height: 260px; aspect-ratio: auto; height: 220px; }
 }
+
+/* Legacy rules hide every .hex-wave-field (display:none, opacity 0 + arrive
+   animation). The signature field is the one place it must show. */
+#root#root#root .signature-panel .signature-field,
+#root#root#root .brand-footer .brand-footer-field .signature-field {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1;
+  animation: none;
+}
+#root#root#root .brand-footer .brand-footer-field .signature-field { opacity: .75; }
+@media (prefers-reduced-motion: reduce) {
+  #root#root#root .signature-panel .signature-field { opacity: .85; }
+}
