@@ -56,7 +56,8 @@ try {
     ["/solutions", "assessment"],
     ["/solutions", "build"],
     ["/solutions", "design-partners"],
-    ["/technology", "current-integration"],
+    // The homepage no longer links to /technology#current-integration; that
+    // anchor is still covered by the direct-link check below.
     // Homepage capability cards open their detail entries on /technology.
     ["/technology", "detail-authorization"],
     ["/technology", "detail-qualification"],
