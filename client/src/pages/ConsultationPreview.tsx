@@ -7,7 +7,7 @@ import { buildConsultationDraft, consultationServices } from "@/lib/consultation
 const serviceGroups = [
   ["01", "Architecture & systems", "AI and software architecture, systems analysis, engineering design, and discovery."],
   ["02", "Application engineering", "Custom applications, prototypes, and iOS/mobile development."],
-  ["03", "Testing & verification", "Evidence-backed testing and separately scoped independent validation, with review independence defined."],
+  ["03", "Testing & verification", "Testing of your workflow and its integrations, with results your team can review."],
   ["04", "Research & documentation", "Technical research, research-driven problem solving, and auditable handoff documentation."],
 ] as const;
 
@@ -139,7 +139,7 @@ function ConsultationEntry() {
         <div className="preview-section-label"><span>TECHNICAL SERVICES</span><span>AVAILABLE TO DISCUSS AND SCOPE</span></div>
         <div className="preview-section-heading"><h2 id="services-title">From first question<br /><em>to auditable system.</em></h2><p>JCEE WorldLab provides end-to-end technical services through discovery, architecture, prototyping, implementation, evidence-backed testing, technical documentation, and research-driven problem solving.</p></div>
         <div className="preview-services-grid">{serviceGroups.map(([number, title, copy]) => <article key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></article>)}</div>
-        <p className="preview-boundary-note">The free first call is not an assessment report, certification, implementation, or grant of execution authority. Production changes and paid work remain separately scoped and authorized. Independent validation requires a scope that preserves review independence.</p>
+        <p className="preview-boundary-note">The first call is free. Assessments, builds, and production changes are scoped and agreed in writing first.</p>
       </section>
       <section className="preview-section preview-existing-inquiry" aria-labelledby="workflow-title"><div><p className="preview-kicker">ALREADY HAVE A WORKFLOW TO SCOPE?</p><h2 id="workflow-title">Scope your workflow.</h2><p>Describe the systems, approval requirements, and outcomes that matter to your team. Review your inquiry before sending it.</p></div><a className="preview-secondary-button" href="/solutions">Explore solutions and partnerships ↗</a></section>
       <BrandFooter backToTopHref="#top" />

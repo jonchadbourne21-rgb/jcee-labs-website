@@ -28,32 +28,32 @@ export default function EnterprisePartnersPage() {
         <p className="program-deck">
           Tell us what the work is,
           where it gets stuck or becomes uncertain, which systems are involved, and what your
-          team needs to know at the end. Make consequential software answerable in operation
-          with clear permissions, tested recovery, and a result your team can inspect.
+          team needs to know at the end. Make high-impact software accountable in operation
+          with clear permissions, tested recovery, and a result your team can review.
         </p>
         <div className="program-status-row"><span>FIRST STEP · WORKFLOW ASSURANCE ASSESSMENT</span><span>NO PAID WORK BEFORE AGREED SCOPE</span></div>
       </WorldLabMasthead>
 
       <section className="partner-fit enterprise-fit" aria-labelledby="enterprise-fit-title">
-        <div className="section-index"><span>01 / GOOD FIT</span><span>WORKFLOW · HANDOFF · RECOVERY · EVIDENCE</span></div>
+        <div className="section-index"><span>GOOD FIT</span><span>WORKFLOW · HANDOFF · RECOVERY · EVIDENCE</span></div>
         <div className="partner-fit-intro"><p>START HERE</p><h2 id="enterprise-fit-title">A specific workflow with a specific failure.</h2><p>We are most useful when the problem can be tied to an action, an owner, the systems involved, and an outcome that can be checked.</p></div>
-        <div className="partner-signal-grid">{enterpriseFit.map(([label, copy], index) => <article key={label}><span>0{index + 1} / {label}</span><p>{copy}</p></article>)}</div>
+        <div className="partner-signal-grid">{enterpriseFit.map(([label, copy]) => <article key={label}><span>{label}</span><p>{copy}</p></article>)}</div>
       </section>
 
       <section className="partner-engagement-model" aria-labelledby="enterprise-engagement-title">
-        <div className="section-index light"><span>02 / WHAT HAPPENS NEXT</span><span>CLEAR SCOPE BEFORE COMMITMENT</span></div>
+        <div className="section-index light"><span>WHAT HAPPENS NEXT</span><span>CLEAR SCOPE BEFORE COMMITMENT</span></div>
         <div className="partner-shared-layout">
           <div>
             <p className="partner-kicker">WORKFLOW ASSURANCE ASSESSMENT</p>
             <h2 id="enterprise-engagement-title">Understand the workflow before prescribing software.</h2>
-            <p>The assessment maps one consequential workflow from instruction and evidence through current authority, execution boundary, recovery, and observable result. The deliverable is a written boundary map, findings, unresolved gaps, and the next justified test or implementation step.</p>
-            <p>Production changes, software implementation, and deployment remain separately scoped and authorized. A workflow review does not grant execution authority.</p>
+            <p>The assessment maps one important workflow: the request, the approvals, where it can fail, how it recovers, and how you confirm the result. You receive written findings, open gaps, and a clear next step.</p>
+            <p>Production changes, software implementation, and deployment remain separately scoped and authorized.</p>
           </div>
           <ol className="partner-sequence">
             <li><span>01</span><strong>Review</strong><p>We read the workflow, current tools, owners, checks, and failure mode.</p></li>
             <li><span>02</span><strong>Map</strong><p>We identify the smallest boundary where clearer ownership, evidence, recovery, or software could help.</p></li>
             <li><span>03</span><strong>Scope</strong><p>If there is a fit, we define deliverables, acceptance criteria, required access, exclusions, timing, and commercial terms in writing.</p></li>
-            <li><span>04</span><strong>Deliver</strong><p>You receive the boundary map, evidence and authority findings, unresolved recovery or control gaps, and a bounded recommendation. If JCEE is not useful for the problem, we say so.</p></li>
+            <li><span>04</span><strong>Deliver</strong><p>You receive the workflow map, findings, open gaps, and a clear recommendation. If JCEE is not useful for the problem, we say so.</p></li>
           </ol>
         </div>
       </section>

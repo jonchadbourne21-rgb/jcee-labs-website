@@ -51,10 +51,9 @@ export default function ProductOverview() {
               <div className="wl-receipt-top">
                 <span className="wl-receipt-mark" aria-hidden="true"><i /><i /></span>
                 <span>JCEE WORLDLAB / INTERFACE STUDY</span>
-                <span>FIG. 001</span>
               </div>
               <div className="wl-receipt-heading">
-                <p className="wl-receipt-overline">CONSEQUENTIAL ACTION / CONTROL RECORD</p>
+                <p className="wl-receipt-overline">HIGH-IMPACT ACTION / CONTROL RECORD</p>
                 <h3 className="wl-receipt-title">AI action receipt<span className="wl-receipt-period">.</span></h3>
               </div>
               <div className="wl-receipt-state">
@@ -68,15 +67,15 @@ export default function ProductOverview() {
                   <dd>Restart production service</dd>
                 </div>
                 <div>
-                  <dt>02 / CURRENT AUTHORITY</dt>
+                  <dt>02 / PERMISSION</dt>
                   <dd>Paused pending review</dd>
                 </div>
                 <div>
-                  <dt>03 / OBSERVED EFFECT</dt>
+                  <dt>03 / RESULT</dt>
                   <dd>No change executed</dd>
                 </div>
                 <div>
-                  <dt>04 / EVIDENCE</dt>
+                  <dt>04 / RECORD</dt>
                   <dd>Decision and outcome recorded</dd>
                 </div>
               </dl>
@@ -85,7 +84,7 @@ export default function ProductOverview() {
                 <span>EXAMPLE INTERFACE<br /><strong>NOT A LIVE RECEIPT</strong></span>
               </div>
             </div>
-            <figcaption>CONCEPT / AUTHORITY → EFFECT → EVIDENCE</figcaption>
+            <figcaption>EXAMPLE / PERMISSION → ACTION → RECORD</figcaption>
           </figure>
         </div>
 

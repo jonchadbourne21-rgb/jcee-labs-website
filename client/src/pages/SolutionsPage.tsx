@@ -2,7 +2,7 @@ import EditorialLayout from "@/components/EditorialLayout";
 
 const workflows = [
   ["Order integrity", "A purchase order and the entered order disagree.", "Compare structured order records, flag missing or duplicate entries, and keep the details a person needs to resolve the discrepancy."],
-  ["Pricing & approval workflows", "A requested discount or credit needs the right authority.", "Build explicit approval rules into the action path, with a review step for exceptions and a record of the decision."],
+  ["Pricing & approval workflows", "A requested discount or credit needs the right approval.", "Build explicit approval rules into the action path, with a review step for exceptions and a record of the decision."],
   ["System handoffs & recovery", "An API times out after a change may have happened.", "Check the outcome before retrying. Build recovery around the connected system’s lookup and duplicate-prevention behavior, and escalate unresolved cases."],
   ["IT & service operations", "A change spans several tools and teams.", "Connect the request, permission, execution, and observed result so your team can investigate from one coherent record."],
 ];
@@ -61,7 +61,7 @@ export default function SolutionsPage() {
     <section className="editorial-section editorial-section-muted">
       <p className="editorial-kicker">Engineering behind the offer</p>
       <h2>Built on software you can examine.</h2>
-      <p>Our work includes implemented action controls, recovery, order comparison, and inspectable records. Recorded results describe defined test configurations; customer integrations are qualified against their own requirements.</p>
+      <p>Our work includes built action controls, recovery, order comparison, and reviewable records. Every customer integration is tested against your own requirements before production use.</p>
       <a className="editorial-text-link" href="/technology/engineering-log#current-integration">Explore the software and recorded results →</a>
     </section>
   </EditorialLayout>;
