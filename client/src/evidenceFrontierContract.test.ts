@@ -9,6 +9,8 @@ const read = (relative: string) =>
 const home = read("pages/Home.tsx");
 const research = read("components/ResearchSections.tsx");
 const technology = read("pages/TechnologyPage.tsx");
+// Dated engineering stages moved from /technology to the engineering log.
+const engineeringLog = read("pages/EngineeringLogPage.tsx");
 const ladder = read("components/EvidenceLadder.tsx");
 const css = read("editorial-update.css");
 
@@ -44,25 +46,26 @@ describe("October evidence and infrastructure claim boundaries", () => {
 
   it("publishes frozen P0, bounded P1/P2, and held P3 without a blanket mandate claim", () => {
     expect(technology).toContain('id="infrastructure-build"');
+    expect(engineeringLog).toContain('id="infrastructure-build"');
     for (const stage of [
       "P0 / UNIFIED CONTRACT",
       "P1 / GOLDEN EXECUTION PATH",
       "P2 / HOSTILE CONFORMANCE",
       "P3 / HETEROGENEOUS ADAPTERS",
     ]) {
-      expect(technology).toContain(stage);
+      expect(engineeringLog).toContain(stage);
     }
     // Public badges now use the site-wide four-level taxonomy.
     // Preserve the original P0/P1/P2/P3 scope and explicit P3 hold.
-    expect(technology).toContain('className="infra-stage__status">DEFINED</span>');
-    expect(technology.match(/>TESTED — BOUNDED<\/span>/g)?.length).toBe(2);
-    expect(technology).toContain('className="infra-stage__status infra-stage__status--hold">HOLD / NOT QUALIFIED</span>');
-    expect(technology).toContain("A frozen contract is not proof of full system integration.");
-    expect(technology).toContain("not customer production qualification.");
-    expect(technology).toContain("do not establish universal safety or independent certification.");
-    expect(technology).toContain("No provider");
-    expect(technology).toContain("blanket mandate compliance");
-    expect(technology).toContain("assessed separately for each deployment");
+    expect(engineeringLog).toContain('className="infra-stage__status">DEFINED</span>');
+    expect(engineeringLog.match(/>TESTED — BOUNDED<\/span>/g)?.length).toBe(2);
+    expect(engineeringLog).toContain('className="infra-stage__status infra-stage__status--hold">HOLD / NOT QUALIFIED</span>');
+    expect(engineeringLog).toContain("A frozen contract is not proof of full system integration.");
+    expect(engineeringLog).toContain("not customer production qualification.");
+    expect(engineeringLog).toContain("do not establish universal safety or independent certification.");
+    expect(engineeringLog).toContain("No provider");
+    expect(engineeringLog).toContain("blanket mandate compliance");
+    expect(engineeringLog).toContain("assessed separately for each deployment");
     expect(home).toContain('href="/registry"');
   });
 

@@ -114,7 +114,7 @@ export default function VowPage() {
           </p>
         </div>
         <div className="program-links">
-          <a href="/technology#current-integration">READ THE INTEGRATION UPDATE <span>→</span></a>
+          <a href="/technology/engineering-log#current-integration">READ THE INTEGRATION UPDATE <span>→</span></a>
           <a href="/registry#portable-evidence-november">INSPECT THE RECORDED BOUNDARY <span>→</span></a>
         </div>
       </section>

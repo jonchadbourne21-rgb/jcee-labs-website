@@ -80,7 +80,7 @@ export default function PublicRegistry() {
             bounded as stated in the entry.
           </p>
           <div className="program-links">
-            <a href="/technology#current-integration">
+            <a href="/technology/engineering-log#current-integration">
               CURRENT SOFTWARE RESULTS AND OPEN GATES <span>→</span>
             </a>
             <a href="/JCEE_WorldLab_Public_Registry_v1.6.md" download>

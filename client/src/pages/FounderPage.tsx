@@ -131,7 +131,7 @@ export default function FounderPage() {
             </p>
           </div>
           <div className="editorial-actions">
-            <a className="editorial-text-link" href="/technology#current-integration">
+            <a className="editorial-text-link" href="/technology/engineering-log#current-integration">
               Read the current result →
             </a>
             <a className="editorial-text-link" href="/registry#infra-integrated-software">

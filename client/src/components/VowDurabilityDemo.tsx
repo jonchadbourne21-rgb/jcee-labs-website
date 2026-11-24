@@ -116,7 +116,7 @@ export default function VowDurabilityDemo() {
       </div>
       <p id="durability-description">
         This browser illustration uses example states and performs no external
-        action. <a href="/technology#current-integration">Read the recorded
+        action. <a href="/technology/engineering-log#current-integration">Read the recorded
         software qualification</a> for the tested behavior and its limits.
       </p>
     </section>

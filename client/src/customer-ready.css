@@ -37,3 +37,7 @@
   text-underline-offset: 3px;
 }
 #root#root#root .worldlab-home #fit .customer-actions { margin-top: 28px; }
+
+/* /technology keeps the old engineering anchors; they point to the engineering log. */
+#root .technology-anchor { display: block; height: 0; scroll-margin-top: 100px; }
+#root .technology-engineering-pointer { scroll-margin-top: 100px; }

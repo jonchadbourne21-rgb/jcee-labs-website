@@ -9,7 +9,7 @@ import {
 } from "./browser-test-helpers.mjs";
 
 const ROUTES = [
-  "/", "/solutions", "/solutions/distribution", "/technology", "/research", "/resources",
+  "/", "/solutions", "/solutions/distribution", "/technology", "/technology/engineering-log", "/research", "/resources",
   "/company", "/founder", "/consultation", "/partners", "/partners/enterprise",
   "/capabilities/infrastructure", "/assurance", "/registry", "/operating-cloud", "/vow",
   "/charter", "/experiences/evidence-engine", "/research/fields", "/blog/start-with-the-workflow",

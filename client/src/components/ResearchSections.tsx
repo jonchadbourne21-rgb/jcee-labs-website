@@ -32,13 +32,13 @@ export function ResearchPriority() {
       <div className="editorial-actions">
         <a
           className="editorial-text-link"
-          href="/technology#current-integration"
+          href="/technology/engineering-log#current-integration"
         >
           Integrated software result →
         </a>
         <a
           className="editorial-text-link"
-          href="/technology#physical-commitment"
+          href="/technology/engineering-log#physical-commitment"
         >
           The physical commitment question →
         </a>
