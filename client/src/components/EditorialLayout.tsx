@@ -1,9 +1,16 @@
 import routeMetadata from "@/content/routeMetadata.json";
 import type { ReactNode } from "react";
 import BrandFooter from "./BrandFooter";
+import SignaturePanel from "./SignaturePanel";
 import CoreHeader, { type CoreHeaderCurrent } from "./CoreHeader";
 import { useEffect } from "react";
 import { useLocation } from "wouter";
+
+/** Readout label from the eyebrow, skipping the company name. */
+function signatureLabel(eyebrow: string) {
+  const parts = eyebrow.split("/").map(part => part.trim()).filter(Boolean);
+  return parts.find(part => !/^jcee( worldlab)?$/i.test(part)) ?? "WorldLab";
+}
 
 export default function EditorialLayout({
   title,
@@ -64,14 +71,7 @@ export default function EditorialLayout({
             <h1>{title}</h1>
             <p className="editorial-deck">{description}</p>
           </div>
-          <img
-            className="editorial-hero-art"
-            src={`${import.meta.env.BASE_URL}visuals/worldlab-${current === "research" || current === "resources" ? "research" : current === "company" ? "company" : "technology"}-v1.webp`}
-            width="1536"
-            height="1024"
-            alt=""
-            decoding="async"
-          />
+          <SignaturePanel className="editorial-hero-art" label={signatureLabel(eyebrow)} seedKey={title} />
         </header>
         {children}
       </div>

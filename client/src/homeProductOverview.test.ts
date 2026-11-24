@@ -60,7 +60,7 @@ describe("homepage binary-first landing", () => {
     expect(section).toContain("Assess a workflow. Build a solution. Partner on what comes next.");
     expect(section).not.toContain("One platform we're building.");
     expect(section).toContain('import HexWaveField from "./HexWaveField"');
-    expect(section).toContain('<HexWaveField variant="worldlab" className="wl-full-hex-field" />');
+    expect(section).toContain('<HexWaveField variant="worldlab" pulse className="wl-full-hex-field" />');
     expect(section).toContain('className="wl-hex-background"');
     expect(css).toContain(".wl-hex-background");
     expect(waves).toContain("(canvas.parentElement ?? canvas).getBoundingClientRect()");

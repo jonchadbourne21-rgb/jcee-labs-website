@@ -162,7 +162,7 @@ export default function AssurancePage() {
   return (
     <main className="program-page assurance-program-page" id="top">
       <CoreHeader current="assurance" />
-      <WorldLabMasthead className="assurance-program" artwork="technology">
+      <WorldLabMasthead className="assurance-program" artwork="technology" signature="Assurance method">
         <p className="eyebrow">
           <span /> METHOD · EVIDENCE · BOUNDED CONSEQUENCE
         </p>

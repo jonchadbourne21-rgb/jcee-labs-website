@@ -22,7 +22,7 @@ export default function PartnersPage() {
     <main className="program-page partner-page partner-gateway" id="top">
       <CoreHeader current="partners" />
 
-      <WorldLabMasthead className="partner-masthead" artwork="company">
+      <WorldLabMasthead className="partner-masthead" artwork="company" signature="Partnerships">
         <p className="eyebrow"><span /> JCEE WorldLab PARTNERSHIPS · TWO PATHWAYS</p>
         <div className="program-number">JCEE WorldLab / PARTNERS</div>
         <h1>

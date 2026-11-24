@@ -29,7 +29,7 @@ export default function QcsPage() {
     <main className="program-page qcs-program-page" id="top">
       <CoreHeader current="qcs" />
 
-      <WorldLabMasthead className="qcs-program" artwork="research">
+      <WorldLabMasthead className="qcs-program" artwork="research" signature="QCS research">
         <p className="eyebrow"><span /> RESEARCH PROGRAM · REPRODUCED — BOUNDED</p>
         <div className="program-number">QCS / RESEARCH PROGRAM</div>
         <h1>What evidence justifies<br /><em>the next action?</em></h1>

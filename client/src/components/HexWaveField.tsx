@@ -18,9 +18,15 @@ type HexWaveFieldProps = {
   /** Original August 18 hex wave or the cobalt WorldLab homepage restoration. */
   variant?: "classic" | "worldlab";
   className?: string;
+  /** Per-surface variation: shifts wave phase and glyph order (0 = homepage original). */
+  seed?: number;
+  /** Multiplies glyph and line opacity (1 = homepage original). */
+  intensity?: number;
+  /** Sends one bright "packet" travelling along a wave, leaving a short trail. */
+  pulse?: boolean;
 };
 
-export default function HexWaveField({ variant = "classic", className = "" }: HexWaveFieldProps) {
+export default function HexWaveField({ variant = "classic", className = "", seed = 0, intensity = 1, pulse = false }: HexWaveFieldProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -72,6 +78,8 @@ export default function HexWaveField({ variant = "classic", className = "" }: He
       const waves = worldlab ? (mobile ? rustWave.mobileWaves : rustWave.desktopWaves) : (mobile ? 3 : 5);
       const spacing = mobile ? 34 : 28;
       const pointCount = Math.ceil(width / spacing) + 5;
+      const packetWave = Math.abs(seed) % Math.max(1, waves);
+      const packetX = (((time * 0.085 + seed * 0.13) % 1.25) + 1.25) % 1.25 * width - width * 0.12;
 
       for (let wave = 0; wave < waves; wave += 1) {
         const baseY = worldlab
@@ -80,7 +88,7 @@ export default function HexWaveField({ variant = "classic", className = "" }: He
         const amplitude = worldlab
           ? Math.min(96, height * (0.042 + (wave % 3) * 0.004))
           : height * (0.045 + wave * 0.006);
-        const phase = time * (0.24 + wave * 0.025) + wave * 0.9;
+        const phase = time * (0.24 + wave * 0.025) + wave * 0.9 + seed * 0.61;
         const hue = worldlab
           ? rustWave.colors[wave % rustWave.colors.length]
           : (wave % 2 === 0 ? "90, 255, 138" : "76, 201, 240");
@@ -101,7 +109,7 @@ export default function HexWaveField({ variant = "classic", className = "" }: He
           if (i === 0) ctx.moveTo(x, y);
           else ctx.lineTo(x, y);
         }
-        ctx.strokeStyle = `rgba(${hue}, ${worldlab ? 0.085 : 0.09 + wave * 0.015})`;
+        ctx.strokeStyle = `rgba(${hue}, ${(worldlab ? 0.085 : 0.09 + wave * 0.015) * intensity})`;
         ctx.lineWidth = 1;
         ctx.stroke();
 
@@ -121,10 +129,20 @@ export default function HexWaveField({ variant = "classic", className = "" }: He
               ? rustSin(normalized * Math.PI * 5.1 - phase * 0.42 + Math.PI / 2)
               : Math.cos(normalized * Math.PI * 5.1 - phase * 0.42)) * amplitude * 0.22;
           const alphabet = worldlab ? rustWave.glyphs : GLYPHS.join("");
-          const glyphIndex = (i * 3 + wave * 5 + Math.floor(time * 1.1)) % alphabet.length;
-          const pulse = (worldlab ? 0.15 : 0.16) + (worldlab ? 0.23 : 0.22) * (0.5 + 0.5 * Math.sin(time * 0.8 + i * 0.36 + wave));
-          ctx.fillStyle = `rgba(${hue}, ${pulse})`;
+          const glyphIndex = (i * 3 + wave * 5 + seed + Math.floor(time * 1.1)) % alphabet.length;
+          const shimmer = (worldlab ? 0.15 : 0.16) + (worldlab ? 0.23 : 0.22) * (0.5 + 0.5 * Math.sin(time * 0.8 + i * 0.36 + wave));
+          // Packet: one glyph runs ahead along a single wave with a fading trail.
+          const lag = packetX - x;
+          const onTrail = pulse && wave === packetWave && lag >= 0 && lag < spacing * 5;
+          const trail = onTrail ? 1 - lag / (spacing * 5) : 0;
+          ctx.fillStyle = `rgba(${onTrail ? "156, 211, 255" : hue}, ${Math.min(1, Math.max(shimmer * intensity, onTrail ? 0.28 + 0.7 * trail : 0))})`;
           ctx.fillText(alphabet[glyphIndex], x, y);
+          if (onTrail && lag < spacing) {
+            ctx.beginPath();
+            ctx.arc(x, y, 8.5, 0, Math.PI * 2);
+            ctx.strokeStyle = "rgba(156, 211, 255, 0.55)";
+            ctx.stroke();
+          }
         }
       }
 
@@ -171,7 +189,7 @@ export default function HexWaveField({ variant = "classic", className = "" }: He
       sizeObserver.disconnect();
       reducedMotion.removeEventListener("change", refresh);
     };
-  }, [variant]);
+  }, [variant, seed, intensity, pulse]);
 
   return <canvas ref={canvasRef} className={["hex-wave-field", className].filter(Boolean).join(" ")} aria-hidden="true" />;
 }

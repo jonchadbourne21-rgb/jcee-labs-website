@@ -21,7 +21,7 @@ export default function EnterprisePartnersPage() {
   return (
     <main className="program-page partner-page partner-path-page enterprise-partner-page" id="top">
       <CoreHeader current="partners" />
-      <WorldLabMasthead className="partner-masthead enterprise-partner-masthead" artwork="company">
+      <WorldLabMasthead className="partner-masthead enterprise-partner-masthead" artwork="company" signature="Enterprise pathway">
         <p className="eyebrow"><span /> WORK WITH JCEE · ONE WORKFLOW FIRST</p>
         <div className="program-number">JCEE WorldLab / WORKFLOW INQUIRY</div>
         <h1>Bring us the workflow<br /><em>your team cannot confidently close.</em></h1>

@@ -15,7 +15,7 @@ export default function ProductOverview() {
       aria-labelledby="product-overview-title"
     >
       <div className="wl-hex-background" aria-hidden="true">
-        <HexWaveField variant="worldlab" className="wl-full-hex-field" />
+        <HexWaveField variant="worldlab" pulse className="wl-full-hex-field" />
       </div>
       <div id="page-content" tabIndex={-1} className="customer-shell wl-product-overview-inner">
         <div className="wl-product-stage">

@@ -1,4 +1,6 @@
 import AnimatedBrandLogo from "./AnimatedBrandLogo";
+import HexWaveField from "./HexWaveField";
+import "./signature-panel.css";
 type BrandFooterProps = {
   backToTopHref?: string;
 };
@@ -8,6 +10,9 @@ export default function BrandFooter({
 }: BrandFooterProps) {
   return (
     <footer className="brand-footer">
+      <div className="brand-footer-field" aria-hidden="true">
+        <HexWaveField variant="worldlab" seed={11} intensity={0.8} pulse className="signature-field" />
+      </div>
       <div className="brand-footer-wordmark brand-footer-wordmark--compact">
         Intelligence That Leaves Receipts
       </div>
