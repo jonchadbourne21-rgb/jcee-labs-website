@@ -63,15 +63,16 @@ describe("October evidence and infrastructure claim boundaries", () => {
     expect(technology).toContain("No provider");
     expect(technology).toContain("blanket mandate compliance");
     expect(technology).toContain("assessed separately for each deployment");
-    expect(home).toContain('href="/technology#current-integration"');
+    expect(home).toContain('href="/registry"');
   });
 
   it("preserves the commercial buyer journey and responsive mobile evidence panels", () => {
-    const offer = home.indexOf('id="engage"');
+    expect(read("components/ProductOverview.tsx")).toContain('id="engage"');
+    const offer = home.indexOf("<ProductOverview />");
     const evidence = home.indexOf('id="evidence-frontier"');
     expect(offer).toBeGreaterThan(-1);
     expect(evidence).toBeGreaterThan(offer);
-    expect(home.replace(/\s+/g, " ")).toContain("do not establish readiness for every customer system");
+    expect(home.replace(/\s+/g, " ")).toContain("Our published tests cover specific configurations.");
     expect(css).toContain("@media (max-width: 700px)");
     expect(css).toContain(".physical-program-grid");
     expect(css).toContain(".infra-stage-grid");

@@ -20,7 +20,8 @@ const graph = JSON.parse(read("generated/worldlab-orbit-graph.json"));
 describe("JCEE WorldLab pre-publication interactive visual candidate", () => {
   it("connects the recovered Rust world scene to bounded WebGL2 graph states", () => {
     expect(core).toContain("<OrbitGraphWebGL paused={paused} />");
-    expect(home).toContain("<DeferredEvidenceCore />");
+    // The orbital scene stays available but no longer sits on the buyer homepage.
+    expect(home).not.toContain("<DeferredEvidenceCore />");
     expect(deferred).toContain('lazy(() => import("./EvidenceCore"))');
     expect(deferred).toContain("IntersectionObserver");
     expect(core).toContain("createEvidenceCore");
@@ -42,13 +43,14 @@ describe("JCEE WorldLab pre-publication interactive visual candidate", () => {
     expect(home).toContain("<ProductOverview />");
   });
 
-  it("renders a constrained asymmetrical bento, spotlight tracking and honest demo status", () => {
+  it("renders a constrained asymmetrical bento and spotlight tracking without per-tile status chrome", () => {
     expect(home).toContain("<TechnicalBento />");
     expect(bento).toContain("Industrial Distribution");
     expect(bento).toContain("Software Operations");
     expect(bento).toContain("Business Operations");
     expect(bento).toContain("--spot-x");
-    expect(bento).toContain("NOT LIVE SYSTEM STATUS");
+    expect(bento).not.toContain("NOT LIVE SYSTEM STATUS");
+    expect(bento).not.toContain("wl-bento-signal");
     expect(css).toContain(".wl-bento-hero { grid-row:span 2");
     expect(css).toContain("radial-gradient(360px circle");
   });

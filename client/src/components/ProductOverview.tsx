@@ -21,18 +21,18 @@ export default function ProductOverview() {
           <div className="wl-product-stage-copy">
             <p className="wl-product-eyebrow">
               <span aria-hidden="true" className="wl-product-dot" />
-              01 / SOFTWARE FOR YOUR OPERATIONS
+              SOFTWARE FOR YOUR OPERATIONS
             </p>
             <h1 id="product-overview-title">
               Put AI to work.
               <br />
               Stay in control.
             </h1>
+            <p className="wl-product-tagline">Intelligence that leaves receipts.</p>
             <p className="wl-product-lead">
               We build custom software and connect the systems your business
-              runs on—with clear permissions, controlled recovery, and
-              a record of what happened. Put AI and automation to work
-              where they can make a practical difference.
+              runs on, with clear permissions, controlled recovery, and a
+              record of what happened.
             </p>
             <div className="wl-product-actions">
               <a href="/consultation" className="wl-product-primary">
@@ -89,14 +89,15 @@ export default function ProductOverview() {
           </figure>
         </div>
 
-        <div className="wl-product-market" aria-label="What JCEE WorldLab offers">
+        <div id="services" className="wl-product-market" aria-label="Ways to work with JCEE WorldLab">
+          <span id="engage" />
           <div className="wl-product-market-heading">
-            <p>START WITH A REAL WORKFLOW</p>
+            <p>WAYS TO WORK WITH US</p>
             <p>Assess a workflow. Build a solution. Partner on what comes next.</p>
           </div>
           <div className="wl-product-offers">
             <article className="wl-product-offer">
-              <p className="wl-product-offer-type">01 / SCOPED SERVICE ENGAGEMENT</p>
+              <p className="wl-product-offer-type">SCOPED SERVICE ENGAGEMENT</p>
               <h3>Workflow Assurance assessment</h3>
               <p>
                 We examine one workflow, its existing permissions, failure
@@ -109,13 +110,11 @@ export default function ProductOverview() {
               </a>
             </article>
             <article className="wl-product-offer wl-product-offer-platform">
-              <p className="wl-product-offer-type">02 / CUSTOM SOFTWARE &amp; INTEGRATION</p>
+              <p className="wl-product-offer-type">CUSTOM SOFTWARE &amp; INTEGRATION</p>
               <h3>Build around your business</h3>
               <p>
                 Connect business applications, replace manual handoffs, and
-                build the tools your team needs. We bring existing action
-                controls, recovery mechanisms, and evidence records into
-                a solution scoped to your systems.
+                build the tools your team needs, scoped to your systems.
               </p>
               <a href="/solutions#build">
                 Explore implementation
@@ -123,17 +122,12 @@ export default function ProductOverview() {
               </a>
             </article>
             <article className="wl-product-offer">
-              <p className="wl-product-offer-type">03 / DESIGN PARTNERSHIPS</p>
+              <p className="wl-product-offer-type">DESIGN PARTNERSHIPS</p>
               <h3>Build the next step together</h3>
               <p>Bring a real operational challenge. Shape a focused pilot with us, review the results, and decide together what is ready to scale.</p>
               <a href="/solutions#design-partners">Explore a partnership <ArrowUpRight size={16} strokeWidth={1.8} aria-hidden="true" /></a>
             </article>
           </div>
-          <p className="wl-product-limit">
-            Every engagement has an agreed scope, deliverables, and acceptance criteria.
-            Integrations are tested for your workflow before production use.
-            The receipt above is an illustrative design, not an executed customer workflow.
-          </p>
         </div>
       </div>
     </section>

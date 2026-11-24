@@ -5,19 +5,19 @@ const rows = [
     id: "01", title: "Industrial Distribution", heading: "Catch order mismatches earlier.",
     copy: "Compare purchase orders with entered orders. Give sales, warehouse, and accounting a shared view of discrepancies that need review.",
     start: "Start with: a price, quantity, or freight instruction that differs from the order record.",
-    state: "ILLUSTRATION / CHECK OUTCOME", code: "AUTHORITY → OBSERVATION", format: "hero",
+    format: "hero",
   },
   {
     id: "02", title: "IT & Software Operations", heading: "Make changes accountable.",
     copy: "Engineering workflows that need clear permissions, execution records, and recovery procedures.",
     start: "Start with: a deployment that needs an approval and a confirmed result.",
-    state: "ILLUSTRATION / REVIEW REQUIRED", code: "REQUEST → EFFECT", format: "compact",
+    format: "compact",
   },
   {
     id: "03", title: "Business Operations", heading: "Connect the process.",
     copy: "Connect CRM, ERP, and internal tools through custom workflows, approval screens, and reviewable handoffs.",
     start: "Start with: an internal request passed between teams and tools.",
-    state: "ILLUSTRATION / RECONCILE", code: "HANDOFF → RECORD", format: "wide",
+    format: "wide",
   },
 ] as const;
 
@@ -45,12 +45,6 @@ export default function TechnicalBento() {
             <p>{item.copy}</p>
             <p className="wl-bento-start">{item.start}</p>
           </div>
-          <div className="wl-bento-signal" aria-label="Illustrative status, not live telemetry">
-            <span className="wl-bento-led" aria-hidden="true" />
-            <span>{item.state}</span>
-            <code>{item.code}</code>
-          </div>
-          <p className="wl-bento-disclosure">CONCEPTUAL INTERFACE · NOT LIVE SYSTEM STATUS</p>
         </article>
       ))}
     </div>
