@@ -9,11 +9,16 @@ import {
 } from "@/content/publications";
 
 export default function ResourcesPage() {
-  const [filter, setFilter] = useState("All");
+  // Buyers land on practical articles; papers stay under "Research" and "All".
+  const [filter, setFilter] = useState("For your business");
   const visible = publications.filter(
     p =>
       filter === "All" ||
-      (filter === "Research" ? isResearch(p) : p.kind === filter)
+      (filter === "For your business"
+        ? !isResearch(p)
+        : filter === "Research"
+          ? isResearch(p)
+          : p.kind === filter)
   );
   return (
     <EditorialLayout
@@ -24,7 +29,7 @@ export default function ResourcesPage() {
     >
       <section className="editorial-section" aria-labelledby="library-title">
         <div className="editorial-section-heading">
-          <h2 id="library-title">Latest from the lab</h2>
+          <h2 id="library-title">Latest articles</h2>
           <a href="/registry">Build status ↗</a>
         </div>
         <div
@@ -33,11 +38,12 @@ export default function ResourcesPage() {
           aria-label="Filter resources"
         >
           {[
-            "All",
+            "For your business",
             "From the Founder",
             "Company blog",
             "Engineering blog",
             "Research",
+            "All",
           ].map(label => (
             <button
               type="button"

@@ -56,7 +56,7 @@ try {
  await send('Emulation.setDeviceMetricsOverride',{width:1440,height:1000,deviceScaleFactor:1,mobile:false});
  for(const href of links){
   await navigate(send,base,'/');
-  if(['/company','/resources'].includes(href))await activate('.header-company-menu summary');
+  if(['/company','/research'].includes(href))await activate('.header-company-menu summary');
   await activate(`.desktop-nav a[href="${href}"]`);await arrived(href);cases.push({width:1440,href,input:'mouse',pass:true});
  }
  await navigate(send,base,'/technology');await activate('.wordmark');await arrived('/');

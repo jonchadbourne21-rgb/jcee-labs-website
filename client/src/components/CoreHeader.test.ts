@@ -21,20 +21,20 @@ describe("CoreHeader mobile navigation", () => {
 });
 
 describe("CoreHeader public information architecture", () => {
-  it("exposes the approved research and partnership navigation", () => {
+  it("leads with buyer navigation and keeps research one level down", () => {
     expect(publicNavigationLinks.map(link => link.id)).toEqual([
       "solutions",
       "technology",
-      "research",
       "resources",
       "company",
+      "research",
     ]);
     expect(publicNavigationLinks.map(link => link.label)).toEqual([
       "Solutions",
-      "Technology",
-      "Research",
+      "How it works",
       "Resources",
       "Company",
+      "Research",
     ]);
   });
 
