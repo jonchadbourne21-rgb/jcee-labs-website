@@ -1,0 +1,137 @@
+/* Homepage hero replay: one request, one timeout, two outcomes.
+   Sits inside the existing tilted .wl-receipt card; colors follow the
+   orbital-blue palette with muted status tones. */
+#root#root#root#root .worldlab-home .wl-receipt--replay {
+  width: min(96%, 540px);
+  padding: clamp(20px, 2.4vw, 30px);
+}
+#root#root#root#root .worldlab-home .wl-receipt--replay .wl-receipt-top {
+  padding-bottom: 14px;
+  font-size: 11px !important;
+}
+#root#root#root#root .worldlab-home .rr-label,
+#root#root#root#root .worldlab-home .rr-lane-title {
+  display: block;
+  color: #86B9E7 !important;
+  font: 600 11px/1.5 ui-monospace, SFMono-Regular, monospace !important;
+  letter-spacing: .12em;
+}
+#root#root#root#root .worldlab-home .rr-request { padding: 16px 0 14px; }
+#root#root#root#root .worldlab-home .wl-receipt--replay h3.rr-request-text {
+  margin: 6px 0 0;
+  color: #F0F5FB !important;
+  font-family: var(--wl-display) !important;
+  font-size: clamp(18px, 1.7vw, 22px) !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  letter-spacing: -.02em !important;
+}
+#root#root#root#root .worldlab-home .rr-lanes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+#root#root#root#root .worldlab-home .rr-lane {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #48617a77;
+  border-radius: 7px;
+  background: #0a1420aa;
+}
+#root#root#root#root .worldlab-home .rr-lane--jcee {
+  border-color: #6AB8FF66;
+  background: #10253c99;
+}
+#root#root#root#root .worldlab-home .rr-lane--jcee .rr-lane-title { color: #9CD3FF !important; }
+#root#root#root#root .worldlab-home .rr-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 7px;
+}
+#root#root#root#root .worldlab-home .rr-step {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 6px;
+  align-items: start;
+  margin: 0;
+  color: #DCE7F3 !important;
+  font-size: 12.5px !important;
+  line-height: 1.4 !important;
+  opacity: .22;
+  transform: translateY(3px);
+  transition: opacity .35s ease, transform .35s ease;
+}
+#root#root#root#root .worldlab-home .rr-step[data-on="true"] { opacity: 1; transform: none; }
+#root#root#root#root .worldlab-home .rr-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font: 700 11px/1 ui-monospace, SFMono-Regular, monospace !important;
+  color: #080B12 !important;
+  background: #6AB8FF;
+}
+#root#root#root#root .worldlab-home .rr-step--warn .rr-icon { background: #E9B45F; }
+#root#root#root#root .worldlab-home .rr-step--bad .rr-icon { background: #F07A7A; }
+#root#root#root#root .worldlab-home .rr-step--good .rr-icon { background: #63D39B; }
+#root#root#root#root .worldlab-home .rr-step--bad { color: #FFC2C2 !important; }
+#root#root#root#root .worldlab-home .rr-step--good { color: #C5F2DB !important; }
+#root#root#root#root .worldlab-home .rr-result {
+  margin: auto 0 0;
+  padding-top: 10px;
+  border-top: 1px solid #48617a77;
+  font-size: 12.5px !important;
+  line-height: 1.45 !important;
+  opacity: .22;
+  transition: opacity .45s ease;
+}
+#root#root#root#root .worldlab-home .rr-result[data-on="true"] { opacity: 1; }
+#root#root#root#root .worldlab-home .rr-result--bad { color: #FFB0B0 !important; }
+#root#root#root#root .worldlab-home .rr-result--good { color: #A9EBCB !important; }
+#root#root#root#root .worldlab-home .rr-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+}
+#root#root#root#root .worldlab-home .rr-replay {
+  min-height: 34px;
+  padding: 0 14px;
+  border: 1px solid #6AB8FF88;
+  border-radius: 4px;
+  background: transparent;
+  color: #B7DEFF !important;
+  font-family: var(--worldlab-font) !important;
+  font-size: 12.5px !important;
+  font-weight: 600;
+  cursor: pointer;
+}
+#root#root#root#root .worldlab-home .rr-replay:hover:not(:disabled) { background: #6AB8FF1f; }
+#root#root#root#root .worldlab-home .rr-replay:disabled { opacity: .55; cursor: default; }
+#root#root#root#root .worldlab-home .rr-replay:focus-visible { outline: 2px solid #6AB8FF; outline-offset: 3px; }
+@media (max-width: 520px) {
+  #root#root#root#root .worldlab-home .rr-lanes { grid-template-columns: 1fr; }
+  #root#root#root#root .worldlab-home .wl-receipt--replay .wl-receipt-top { font-size: 11px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #root#root#root#root .worldlab-home .rr-step,
+  #root#root#root#root .worldlab-home .rr-result { transition: none; transform: none; }
+}
+#root#root#root#root .worldlab-home .wl-receipt--replay .wl-receipt-top > span:last-child { font-size: 11px !important; }
+#root#root#root#root .worldlab-home .rr-replay { flex: none; white-space: nowrap; }
+@media (max-width: 520px) {
+  /* The card grows taller than the hero's figure box here, so the caption
+     follows the card instead of overlapping its bottom edge. */
+  #root#root#root#root .worldlab-home .wl-product-visual figcaption {
+    position: static;
+    margin-top: 14px;
+    justify-self: end;
+  }
+}
