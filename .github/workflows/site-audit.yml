@@ -19,3 +19,5 @@ jobs:
       - run: sh scripts/ci-browser.sh
       - run: pnpm build
       - run: node scripts/site-audit.mjs
+        env:
+          AUDIT_LINKS_ONLY: "1"

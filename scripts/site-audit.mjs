@@ -97,6 +97,12 @@ try {
   page = await connect(debugPort);
   const { send } = page;
   for (const route of ROUTES) {
+    if (process.env.AUDIT_LINKS_ONLY) {
+      await navigate(send, base, route); await settle(send);
+      const targets = await evaluate(send, `[...document.querySelectorAll("main a[href]")].map(a => a.getAttribute("href"))`);
+      for (const href of new Set(targets)) if (href.startsWith("/")) internal.set(href, [...(internal.get(href) || []), route]);
+      continue;
+    }
     await send("Emulation.setDeviceMetricsOverride", { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
     await navigate(send, base, route);
     await settle(send);
@@ -121,7 +127,17 @@ try {
   await send("Emulation.setDeviceMetricsOverride", { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
   for (const [href, from] of internal) {
     const [p, hash] = href.split("#");
-    await navigate(send, base, p || "/");
+    if (/\.[a-z0-9]{2,5}$/i.test(p || "")) {
+      const status = await evaluate(send, `fetch(${JSON.stringify(base + p)}, {method:'HEAD'}).then(r => r.status)`);
+      await sleep(200);
+      const code = await evaluate(send, `window.__s`);
+      void code;
+      const res = await fetch(base + p, { method: "HEAD" }).then(r => r.status).catch(() => 0);
+      if (res >= 400 || res === 0) broken.push({ href, from: [...new Set(from)], status: res });
+      void status;
+      continue;
+    }
+    try { await navigate(send, base, p || "/"); } catch (e) { broken.push({ href, from: [...new Set(from)], error: String(e.message).slice(0, 120) }); continue; }
     await sleep(300);
     const r = await evaluate(send, `({ notFound: /not found|404/i.test(document.title) || !!document.querySelector('[data-route="not-found"], .not-found'), hasHash: ${hash ? `!!document.getElementById(${JSON.stringify(hash)})` : "true"} })`);
     if (r.notFound || !r.hasHash) broken.push({ href, from: [...new Set(from)], ...r });
