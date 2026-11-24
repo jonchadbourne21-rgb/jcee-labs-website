@@ -17,7 +17,7 @@ export default function SignaturePanel({ label, seedKey, className = "" }: { lab
   const tag = label.replace(/\s+/g, " ").trim().toUpperCase().slice(0, 32);
   return (
     <div className={`signature-panel ${className}`.trim()} data-signature-seed={seed} aria-hidden="true">
-      <HexWaveField variant="worldlab" seed={seed} pulse className="signature-field" />
+      <HexWaveField variant="worldlab" seed={seed} intensity={1.7} pulse className="signature-field" />
       <span className="signature-tick signature-tick--tl" />
       <span className="signature-tick signature-tick--tr" />
       <span className="signature-tick signature-tick--bl" />

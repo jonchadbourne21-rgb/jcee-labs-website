@@ -73,7 +73,8 @@ export default function HexWaveField({ variant = "classic", className = "", seed
 
       ctx.clearRect(0, 0, width, height);
 
-      const mobile = width < 720;
+      // Density follows the device, so a framed panel on desktop keeps the full field.
+      const mobile = (window.innerWidth || width) < 720;
       const worldlab = variant === "worldlab";
       const waves = worldlab ? (mobile ? rustWave.mobileWaves : rustWave.desktopWaves) : (mobile ? 3 : 5);
       const spacing = mobile ? 34 : 28;

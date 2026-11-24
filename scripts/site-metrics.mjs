@@ -88,6 +88,18 @@ async function settle(send) {
   await evaluate(send, `scrollTo(0, 0)`); await sleep(500);
 }
 
+async function shootEl(send, name, selector) {
+  await evaluate(send, `document.querySelector(${JSON.stringify(selector)})?.scrollIntoView({block:'center'})`);
+  await sleep(1400);
+  const r = await evaluate(send, `(() => { const b = document.querySelector(${JSON.stringify(selector)})?.getBoundingClientRect(); return b && { x: b.x + scrollX, y: b.y + scrollY, w: b.width, h: b.height }; })()`);
+  if (!r) return;
+  const shot = await send("Page.captureScreenshot", { format: "jpeg", quality: 70, captureBeyondViewport: true, clip: { x: r.x, y: r.y, width: r.w, height: r.h, scale: 1 } });
+  const data = shot.data;
+  const parts = Math.ceil(data.length / 16000);
+  for (let p = 0; p < parts; p++) console.log(`IMG ${name}-0 ${p + 1}/${parts} ${data.slice(p * 16000, (p + 1) * 16000)}`);
+  await evaluate(send, `scrollTo(0, 0)`);
+}
+
 async function shoot(send, name, width, height, scale, maxChunks) {
   const total = await evaluate(send, `document.documentElement.scrollHeight`);
   const chunk = 2400;
@@ -120,6 +132,8 @@ try {
     for (const j of m.text.match(JARGON) || []) jargon[j.toLowerCase()] = (jargon[j.toLowerCase()] || 0) + 1;
     for (const href of m.linkTargets) if (href.startsWith("/")) internal.set(href, [...(internal.get(href) || []), route]);
     if (process.env.SITE_METRICS_SHOTS && SHOTS.has(route)) await shoot(send, `desktop${route.replace(/\//g, "_") || "_home"}`, 1440, 900, 0.4, 6);
+    if (process.env.SITE_METRICS_SHOTS && route === "/company") await shootEl(send, "signature-panel", ".signature-panel");
+    if (process.env.SITE_METRICS_SHOTS && route === "/") await shootEl(send, "footer-field", ".brand-footer-field");
     await send("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
     await navigate(send, base, route);
     await settle(send);
