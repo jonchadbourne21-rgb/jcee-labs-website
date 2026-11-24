@@ -91,7 +91,7 @@ export default function EnterprisePartnersPage() {
             <dl>
               <div><dt>FIRST STEP</dt><dd>Workflow Assurance Assessment</dd></div>
               <div><dt>IF THERE IS A FIT</dt><dd>Written scope and commercial proposal before paid work</dd></div>
-              <div><dt>DIRECT</dt><dd><a href="mailto:support+enterprise@jceelabs.com">support+enterprise@jceelabs.com</a></dd></div>
+              <div><dt>DIRECT</dt><dd><a href="mailto:sales@jceelabs.com">sales@jceelabs.com</a></dd></div>
             </dl>
           </div>
           <form className="partner-form enterprise-partner-form" onSubmit={openInquiryDraft}>

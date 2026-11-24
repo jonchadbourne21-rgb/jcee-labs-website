@@ -38,6 +38,6 @@ export function buildConsultationDraft(fields: ConsultationFields) {
   return {
     subject,
     body,
-    mailto: `mailto:support+enterprise@jceelabs.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
+    mailto: `mailto:sales@jceelabs.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
   };
 }

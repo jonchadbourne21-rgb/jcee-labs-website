@@ -13,6 +13,7 @@ const serviceGroups = [
 
 function ConsultationEntry() {
   const [draft, setDraft] = useState<ReturnType<typeof buildConsultationDraft> | null>(null);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
   const [copyStatus, setCopyStatus] = useState("");
   const reviewRef = useRef<HTMLHeadingElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
@@ -22,19 +23,39 @@ function ConsultationEntry() {
     reviewRef.current?.parentElement?.scrollIntoView({ block: "start", behavior: "instant" });
   }, [draft]);
 
-  const prepareDraft = (event: FormEvent<HTMLFormElement>) => {
+  // Send the request to the sales inbox. If the sending service is unavailable
+  // (or this is the static preview build), fall back to a ready-made email draft.
+  const sendRequest = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
-    if (!form.reportValidity()) return;
+    if (!form.reportValidity() || status === "sending") return;
     const data = new FormData(form);
-    setCopyStatus("");
-    setDraft(buildConsultationDraft({
+    const fields = {
       name: String(data.get("name") || ""),
       email: String(data.get("email") || ""),
       organization: String(data.get("organization") || ""),
       service: String(data.get("service") || ""),
       summary: String(data.get("summary") || ""),
-    }));
+    };
+    setCopyStatus("");
+    setDraft(null);
+    setStatus("sending");
+    try {
+      const response = await fetch(`${import.meta.env.BASE_URL}api/consultation`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...fields, website: String(data.get("website") || "") }),
+      });
+      if (response.ok) {
+        setStatus("sent");
+        form.reset();
+        return;
+      }
+    } catch {
+      // Network failure: use the email fallback below.
+    }
+    setStatus("idle");
+    setDraft(buildConsultationDraft(fields));
   };
   // The prepared email is a snapshot, not permission to send stale fields.
   // Any form edit returns the visitor to editing before another draft can be sent.
@@ -43,15 +64,16 @@ function ConsultationEntry() {
       setDraft(null);
       setCopyStatus("");
     }
+    if (status === "sent") setStatus("idle");
   };
 
   const copyDraft = async () => {
     if (!draft) return;
     try {
-      await navigator.clipboard.writeText(`To: support+enterprise@jceelabs.com\nSubject: ${draft.subject}\n\n${draft.body}`);
-      setCopyStatus("Draft copied. Nothing has been sent or booked.");
+      await navigator.clipboard.writeText(`To: sales@jceelabs.com\nSubject: ${draft.subject}\n\n${draft.body}`);
+      setCopyStatus("Request copied. Paste it into an email to sales@jceelabs.com.");
     } catch {
-      setCopyStatus("Clipboard access is unavailable. Select and copy the draft below, then email support+enterprise@jceelabs.com.");
+      setCopyStatus("Clipboard access is unavailable. Select and copy the request below, then email sales@jceelabs.com.");
     }
   };
 
@@ -69,13 +91,13 @@ function ConsultationEntry() {
           </div>
           <ol className="preview-call-process">
             <li><span>01</span><div><h3>Describe the problem.</h3><p>A non-confidential summary is enough. Bring the question, not your credentials or customer records.</p></div></li>
-            <li><span>02</span><div><h3>Review and send your request.</h3><p>Prepare an email draft below. Sending it requests a conversation; it does not confirm an appointment.</p></div></li>
+            <li><span>02</span><div><h3>Send your request.</h3><p>It goes straight to our team. Sending it requests a conversation; it does not confirm an appointment.</p></div></li>
             <li><span>03</span><div><h3>Agree the next step.</h3><p>If there is a fit, any assessment or implementation gets its own written scope, terms, and authorization.</p></div></li>
           </ol>
-          <div className="preview-direct-contact"><p className="preview-kicker">PREFER EMAIL?</p><a href="mailto:support+enterprise@jceelabs.com">support+enterprise@jceelabs.com ↗</a><p>Prefer a simple email? Tell us about the workflow and we can arrange a conversation.</p></div>
+          <div className="preview-direct-contact"><p className="preview-kicker">PREFER EMAIL?</p><a href="mailto:sales@jceelabs.com">sales@jceelabs.com ↗</a><p>Prefer a simple email? Tell us about the workflow and we can arrange a conversation.</p></div>
         </div>
         <div className="preview-form-column">
-          <form className="preview-consult-form" onSubmit={prepareDraft} onChange={invalidateDraft} aria-labelledby="request-title">
+          <form className="preview-consult-form" onSubmit={sendRequest} onChange={invalidateDraft} aria-labelledby="request-title">
             <div className="preview-panel-top"><span>FIRST CONSULTATION</span><span>10–30 MIN / FREE</span></div>
             <h2 id="request-title">Tell us what you’re working on.</h2>
             <p>Three required fields. No lengthy intake before a first conversation.</p>
@@ -87,18 +109,21 @@ function ConsultationEntry() {
             <label htmlFor="consult-service">Service interest <span>(optional)</span><select id="consult-service" name="service" defaultValue=""><option value="">Not sure yet — let’s discuss</option>{consultationServices.map(service => <option key={service}>{service}</option>)}</select></label>
             <label htmlFor="consult-summary">What are you trying to build or resolve? <span>(required)</span><textarea id="consult-summary" name="summary" rows={4} maxLength={2000} required aria-describedby="consult-summary-help" placeholder="For example: an account change crosses our support and billing systems. Timeouts leave the team checking the result manually." /></label>
             <p id="consult-summary-help" className="preview-form-help">Use a non-confidential summary. Do not include credentials, personal customer records, payment details, private source code, or sensitive incident evidence. Agree a secure exchange separately.</p>
-            <button className="preview-button" type="submit">Prepare email draft <span aria-hidden="true">→</span></button>
-            <p className="preview-form-help">Nothing is submitted to a server, saved, sent, or booked by this form. You review the draft and send it yourself.</p>
+            <label className="preview-honeypot" aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}>Website<input name="website" tabIndex={-1} autoComplete="off" /></label>
+            <button className="preview-button" type="submit" disabled={status === "sending"}>{status === "sending" ? "Sending…" : "Send request"} <span aria-hidden="true">→</span></button>
+            <p className="preview-form-help">Your request goes to sales@jceelabs.com. We use these details only to reply to you.</p>
+            {status === "sent" && <p className="preview-copy-status" role="status"><strong>Request sent.</strong> We’ll reply from sales@jceelabs.com to agree a time. This does not confirm an appointment.</p>}
             <a className="preview-text-link" href="/privacy">Privacy information ↗</a>
           </form>
           {draft && <section className="preview-draft-review" aria-labelledby="draft-title">
-            <p className="preview-kicker" role="status">DRAFT READY · NOT SENT</p>
-            <h2 id="draft-title" ref={reviewRef} tabIndex={-1}>Review your request.</h2>
-            <p>To: <strong>support+enterprise@jceelabs.com</strong></p>
+            <p className="preview-kicker" role="status">NOT SENT YET · SEND BY EMAIL</p>
+            <h2 id="draft-title" ref={reviewRef} tabIndex={-1}>Send it from your email.</h2>
+            <p>We couldn’t send this automatically. Your request is ready below.</p>
+            <p>To: <strong>sales@jceelabs.com</strong></p>
             <p className="preview-draft-subject"><strong>Subject:</strong> {draft.subject}</p>
             <pre>{draft.body}</pre>
-            <div className="preview-draft-actions"><a className="preview-button" href={draft.mailto}>Open in email app <span aria-hidden="true">↗</span></a><button type="button" className="preview-secondary-button" onClick={copyDraft}>Copy draft</button></div>
-            <p className="preview-form-help">An email app is required for the mailto link. You can also copy the draft and email it manually. An appointment is not confirmed by preparing or sending this request.</p>
+            <div className="preview-draft-actions"><a className="preview-button" href={draft.mailto}>Open in email app <span aria-hidden="true">↗</span></a><button type="button" className="preview-secondary-button" onClick={copyDraft}>Copy request</button></div>
+            <p className="preview-form-help">No email app? Copy the request and send it to sales@jceelabs.com. Sending it does not confirm an appointment.</p>
             <p className="preview-copy-status" role="status">{copyStatus}</p>
             <button className="preview-text-link" type="button" onClick={() => nameRef.current?.focus()}>Return to the form ↑</button>
           </section>}

@@ -1,0 +1,14 @@
+/* Customer-readiness pass (Nov 2026). Loaded last so these few rules win. */
+
+/* Footer: the tagline is a small sign-off line, not a page-sized wordmark. */
+#root#root#root#root .brand-footer .brand-footer-wordmark--compact {
+  font-size: 15px !important;
+  line-height: 1.4 !important;
+  letter-spacing: 0 !important;
+  font-weight: 500 !important;
+  max-width: none !important;
+  margin: 0 0 28px !important;
+  padding: 0 !important;
+  text-shadow: none !important;
+  color: var(--jcee-muted, #a8b7c8) !important;
+}

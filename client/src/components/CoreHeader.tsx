@@ -41,7 +41,7 @@ export const getMobileMenuState = (menuOpen: boolean) =>
 export default function CoreHeader({
   current,
   integrated = false,
-  contactLabel = "Let’s talk",
+  contactLabel = "Discuss your workflow",
   contactHref = `${import.meta.env.BASE_URL}consultation`,
 }: CoreHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);

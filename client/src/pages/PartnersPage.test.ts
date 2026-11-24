@@ -20,7 +20,7 @@ describe("partner inquiry routing", () => {
   it("routes enterprise inquiries with an enterprise tag and operational brief", () => {
     const url = buildPartnerInquiryMailto("enterprise", baseFields);
 
-    expect(url).toMatch(/^mailto:support\+enterprise@jceelabs\.com\?/);
+    expect(url).toMatch(/^mailto:sales@jceelabs\.com\?/);
     const query = new URLSearchParams(url.split("?")[1]);
     expect(query.get("subject")).toBe("[ENTERPRISE INQUIRY] Analytical Engines");
     expect(query.get("body")).toContain("Routing: ENTERPRISE");
