@@ -103,7 +103,8 @@ describe("homepage binary-first landing", () => {
     expect(section).toContain("HELD FOR REVIEW");
     expect(section).toContain("NO CHANGE EXECUTED");
     expect(section).toContain("NOT A LIVE RECEIPT");
-    expect(section).toContain("not an executed customer workflow");
+    // The receipt carries its own label; the page keeps one evidence note.
+    expect(section).not.toContain("wl-product-limit");
     expect(section).not.toContain("jcee-authority-hero-v3.webp");
     expect(css).toContain("@media (max-width: 780px)");
     expect(css).toContain("prefers-reduced-motion");
