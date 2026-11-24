@@ -1106,6 +1106,35 @@ try {
     );
   }
 
+  // Signature visual: every masthead shows the hex-wave field (not a 3D render)
+  // and it actually paints; every footer opens with the same field.
+  const signatureFailures = [];
+  for (const route of ["/solutions", "/technology", "/company", "/vow", "/capabilities/assurance"]) {
+    await navigate(page.send, baseUrl, route);
+    await sleep(700);
+    const signature = await evaluate(page.send, `(() => {
+      const panel = document.querySelector('.signature-panel');
+      const canvas = panel?.querySelector('canvas.signature-field');
+      let lit = 0;
+      if (canvas && canvas.width > 50) {
+        const d = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
+        for (let i = 3; i < d.length; i += 32) if (d[i] > 8) lit++;
+      }
+      const style = canvas ? getComputedStyle(canvas) : null;
+      const r = panel?.getBoundingClientRect();
+      return {
+        panel: !!panel, lit, shown: !!style && style.display !== 'none' && Number(style.opacity) > 0.3,
+        size: r ? [Math.round(r.width), Math.round(r.height)] : null,
+        renders: [...document.images].filter(i => /worldlab-(technology|research|company)-v1/.test(i.src)).length,
+        footerField: !!document.querySelector('.brand-footer .brand-footer-field canvas'),
+      };
+    })()`);
+    if (!signature.panel || !signature.shown || signature.lit < 30 || signature.renders || !signature.footerField ||
+      !signature.size || signature.size[0] < 200 || signature.size[1] < 120)
+      signatureFailures.push(`${route} ${JSON.stringify(signature)}`);
+  }
+  if (signatureFailures.length) failures.push("Signature hex-wave panel failed: " + signatureFailures.join("; "));
+
   if (page.runtimeErrors.length) {
     failures.push(`runtime errors: ${page.runtimeErrors.join("; ")}`);
   }

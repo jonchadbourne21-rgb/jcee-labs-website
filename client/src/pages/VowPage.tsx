@@ -32,7 +32,7 @@ export default function VowPage() {
     <main className="program-page" id="top">
       <CoreHeader current="vow" />
 
-      <WorldLabMasthead className="vow-program" artwork="technology">
+      <WorldLabMasthead className="vow-program" artwork="technology" signature="VOW runtime">
         <p className="eyebrow">
           <span /> PUBLIC OVERVIEW · ACTIVE
         </p>

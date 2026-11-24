@@ -1,3 +1,4 @@
+import SignaturePanel from "@/components/SignaturePanel";
 import { ArrowUpRight } from "lucide-react";
 import usePageSeo from "@/components/usePageSeo";
 import CoreHeader from "@/components/CoreHeader";
@@ -41,7 +42,7 @@ export default function InfrastructurePage() {
           failed handoff, or uncertain change.
         </p>
         </div>
-        <img className="worldlab-masthead-art" src={`${import.meta.env.BASE_URL}visuals/worldlab-technology-v1.webp`} width={1536} height={1024} alt="" decoding="async" />
+        <SignaturePanel className="worldlab-masthead-art" label="Workflow Assurance" />
       </section>
       <section
         className="customer-shell customer-section"

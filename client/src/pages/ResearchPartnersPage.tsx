@@ -46,7 +46,7 @@ export default function ResearchPartnersPage() {
     <main className="program-page partner-page partner-path-page research-partner-page" id="top">
       <CoreHeader current="partners" />
 
-      <WorldLabMasthead className="partner-masthead research-partner-masthead" artwork="research">
+      <WorldLabMasthead className="partner-masthead research-partner-masthead" artwork="research" signature="Research pathway">
         <p className="eyebrow"><span /> RESEARCH PARTNERSHIPS · CLAIMS + REPRODUCTION</p>
         <div className="program-number">JCEE WorldLab / PARTNERS / RESEARCH</div>
         <h1>

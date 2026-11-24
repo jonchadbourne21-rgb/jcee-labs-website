@@ -1,0 +1,120 @@
+/* Signature visual: the hex-wave field in an instrument frame (mastheads),
+   and as a low band opening every footer. */
+#root .signature-panel {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid #6289af59;
+  border-radius: 6px;
+  background:
+    radial-gradient(ellipse at 50% 46%, #15385c 0%, #0c1a2b 46%, #080b12 100%);
+  box-shadow: 0 18px 48px #0006, inset 0 0 0 1px #9cd3ff0a;
+  object-fit: initial;
+}
+/* Faint measurement grid under the waves. */
+#root .signature-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(#6ab8ff0d 1px, transparent 1px),
+    linear-gradient(90deg, #6ab8ff0d 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse at center, #000 40%, transparent 85%);
+}
+#root .signature-panel .signature-field {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse at center, #000 58%, transparent 100%);
+}
+#root .signature-tick {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 0 solid #6ab8ffaa;
+  pointer-events: none;
+}
+#root .signature-tick--tl { top: 10px; left: 10px; border-top-width: 1px; border-left-width: 1px; }
+#root .signature-tick--tr { top: 10px; right: 10px; border-top-width: 1px; border-right-width: 1px; }
+#root .signature-tick--bl { bottom: 10px; left: 10px; border-bottom-width: 1px; border-left-width: 1px; }
+#root .signature-tick--br { bottom: 10px; right: 10px; border-bottom-width: 1px; border-right-width: 1px; }
+#root .signature-readout {
+  position: absolute;
+  left: 32px;
+  right: 32px;
+  bottom: 13px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #86b9e7;
+  font: 600 11px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .12em;
+  white-space: nowrap;
+  overflow: hidden;
+  pointer-events: none;
+}
+#root .signature-readout > span:last-child { color: #6ab8ff; }
+
+/* Footer band: the same field opens every page's footer. */
+#root .brand-footer .brand-footer-field {
+  position: relative;
+  height: 120px;
+  margin: 0 0 28px;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+  pointer-events: none;
+}
+#root .brand-footer .brand-footer-field .signature-field {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+@media (max-width: 700px) {
+  #root .signature-readout { left: 26px; right: 26px; bottom: 11px; }
+  #root .signature-readout > span:last-child { display: none; }
+  #root .brand-footer .brand-footer-field { height: 88px; margin-bottom: 20px; }
+}
+
+/* Mastheads previously styled the 3D renders; neutralise image-only treatments. */
+#root#root .signature-panel.editorial-hero-art,
+#root#root .signature-panel.worldlab-masthead-art {
+  height: auto;
+  max-height: none;
+  aspect-ratio: 3 / 2;
+  mask-image: none;
+  mix-blend-mode: normal;
+  filter: none;
+  transform: none;
+  animation: none;
+  border-radius: 6px;
+}
+#root .signature-host { min-width: 0; width: 100%; }
+@media (max-width: 700px) {
+  #root#root .signature-panel.editorial-hero-art,
+  #root#root .signature-panel.worldlab-masthead-art { max-height: 260px; aspect-ratio: auto; height: 220px; }
+}
+
+/* Legacy rules hide every .hex-wave-field (display:none, opacity 0 + arrive
+   animation). The signature field is the one place it must show. */
+#root#root#root .signature-panel .signature-field,
+#root#root#root .brand-footer .brand-footer-field .signature-field {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1;
+  animation: none;
+}
+#root#root#root .brand-footer .brand-footer-field .signature-field { opacity: .75; }
+@media (prefers-reduced-motion: reduce) {
+  #root#root#root .signature-panel .signature-field { opacity: .85; }
+}
