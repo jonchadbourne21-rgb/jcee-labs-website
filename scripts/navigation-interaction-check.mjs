@@ -67,23 +67,23 @@ try {
  // briefly display the homepage while the destination lazy chunk resolves.
  await navigate(send,base,'/technology');
  await evaluate(send,"window.__worldlabNavigationDocumentToken='route-persistence-check'");
- await evaluate(send,`document.querySelector('.capability-details__related[href="/capabilities/infrastructure"]').scrollIntoView({block:'center',behavior:'instant'})`);
- await activate('.capability-details__related[href="/capabilities/infrastructure"]');
- await arrived('/capabilities/infrastructure');
+ await evaluate(send,`document.querySelector('.capability-details__related[href="/solutions#assessment"]').scrollIntoView({block:'center',behavior:'instant'})`);
+ await activate('.capability-details__related[href="/solutions#assessment"]');
+ await arrived('/solutions');
  for (let attempt=0;attempt<80;attempt++){
-  if(await evaluate(send,"document.querySelector('h1')?.textContent?.includes('One workflow.')")) break;
+  if(await evaluate(send,"document.querySelector('h1')?.textContent?.includes('Make your systems work together')")) break;
   await sleep(75);
  }
  const transition=await evaluate(send,`({
    documentPreserved:window.__worldlabNavigationDocumentToken==='route-persistence-check',
-   correctHeading:document.querySelector('h1')?.textContent?.includes('One workflow.'),
+   correctHeading:document.querySelector('h1')?.textContent?.includes('Make your systems work together'),
    homepageVisible:!!document.querySelector('.unified-home'),
    location:location.pathname
  })`);
  assert.equal(transition.documentPreserved,true,'Internal navigation unexpectedly reloaded the document');
  assert.equal(transition.homepageVisible,false,'Homepage appeared during destination route');
- assert.equal(transition.correctHeading,true,'Infrastructure destination heading missing');
- cases.push({width:1440,href:'/capabilities/infrastructure',input:'same-document navigation',pass:true});
+ assert.equal(transition.correctHeading,true,'Solutions destination heading missing');
+ cases.push({width:1440,href:'/solutions#assessment',input:'same-document navigation',pass:true});
  await navigate(send,base,'/solutions');
  await evaluate(send,"window.__worldlabNavigationDocumentToken='solutions-route-check'");
  await evaluate(send,`document.querySelector('.editorial-text-link[href="/technology/engineering-log#current-integration"]').scrollIntoView({block:'center',behavior:'instant'})`);

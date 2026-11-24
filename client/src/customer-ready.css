@@ -41,3 +41,12 @@
 /* /technology keeps the old engineering anchors; they point to the engineering log. */
 #root .technology-anchor { display: block; height: 0; scroll-margin-top: 100px; }
 #root .technology-engineering-pointer { scroll-margin-top: 100px; }
+
+/* Enterprise pathway: one button to the consultation page. */
+#root#root .enterprise-partner-page .enterprise-inquiry-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  min-height: 48px; padding: 0 22px; margin: 8px 0 24px;
+  border-radius: 4px; background: var(--wl-accent, #6ab8ff) !important;
+  color: #080b12 !important; font-weight: 600; text-decoration: none;
+}
+#root#root .enterprise-partner-page .enterprise-inquiry-cta:hover { filter: brightness(1.08); }
