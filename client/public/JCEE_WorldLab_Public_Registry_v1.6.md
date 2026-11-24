@@ -446,7 +446,7 @@ A successor numerical checker tests whether submitted calculations, reported met
 
 **Next gate:** Freeze a narrow numerical contract, admit separately supplied unseen cases, and qualify its rules in an independently recorded environment. Unsupported inputs must be distinguished from detected numerical failures.
 
-[Public context](https://jceelabs.com/research#measurement-assurance)
+[Public context](https://jceelabs.com/research/measurement)
 
 ## Wave Assessment 001
 
@@ -460,7 +460,7 @@ The archived wave-discrimination benchmark was reproduced and cross-checked with
 
 **Boundary:** Same-model computational comparison, not external laboratory replication or physical device validation. Device preparation, retention, readout, and noise remain separate requirements. A third-party interim report is a research reference, not endorsement; one cited appendix hash discrepancy remains unresolved.
 
-[Public context](https://jceelabs.com/research#measurement-assurance)
+[Public context](https://jceelabs.com/research/measurement)
 
 ## Granular-measurement software baseline
 
@@ -474,7 +474,7 @@ The ALCHEMY-GRANULAR analysis baseline and deterministic fixture generators were
 
 **Boundary:** Synthetic and offline software evidence, not a granular-material simulation result, qualified instrument, or physical experiment. Equipment, acquisition, and physical measurement remain unqualified.
 
-[Public context](https://jceelabs.com/research#measurement-assurance)
+[Public context](https://jceelabs.com/research/measurement)
 
 ## JCEE Distribution P0.1
 

@@ -101,7 +101,7 @@ export const october2026Registry: RegistryEntry[] = [
       "Finite known fixtures, not general numerical understanding, whole-domain error certification, independent-host reproduction, production adoption, or hardware performance. The legacy consumer refused the new identities as unsupported; that refusal was not detection of a bad calculation.",
     next:
       "Freeze a narrow numerical contract, admit separately supplied unseen cases, and qualify its rules in an independently recorded environment. Unsupported inputs must be distinguished from detected numerical failures.",
-    href: "/research#measurement-assurance",
+    href: "/research/measurement",
   },
   {
     id: "wave-assessment-001",
@@ -117,7 +117,7 @@ export const october2026Registry: RegistryEntry[] = [
       "The unchanged baseline reproduced its frozen output exactly. Ten model configurations met the record's descriptive cross-check criterion.",
     boundary:
       "Same-model computational comparison, not external laboratory replication or physical device validation. Device preparation, retention, readout, and noise remain separate requirements. A third-party interim report is a research reference, not endorsement; one cited appendix hash discrepancy remains unresolved.",
-    href: "/research#measurement-assurance",
+    href: "/research/measurement",
   },
   {
     id: "granular-measurement-software",
@@ -133,6 +133,6 @@ export const october2026Registry: RegistryEntry[] = [
       "The recovery matched 52/52 frozen manifest entries, reproduced 92/92 software tests, and regenerated 8/8 checked fixture files identically.",
     boundary:
       "Synthetic and offline software evidence, not a granular-material simulation result, qualified instrument, or physical experiment. Equipment, acquisition, and physical measurement remain unqualified.",
-    href: "/research#measurement-assurance",
+    href: "/research/measurement",
   },
 ];

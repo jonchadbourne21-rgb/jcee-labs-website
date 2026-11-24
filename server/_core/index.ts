@@ -4,6 +4,7 @@ import { createServer } from "http";
 import net from "net";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { websiteApiBoundary } from "./apiBoundary";
+import { registerConsultationRoute } from "../consultation";
 import { registerOAuthRoutes } from "./oauth";
 import { registerStorageProxy } from "./storageProxy";
 import { appRouter } from "../routers";
@@ -32,6 +33,9 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
 async function startServer() {
   const app = express();
   const server = createServer(app);
+  // The consultation request is the one public write; it is registered
+  // before the boundary so every other /api path stays closed by default.
+  registerConsultationRoute(app);
   app.use("/api", websiteApiBoundary);
   // Marketing requests do not require file-upload-sized bodies.
   app.use(express.json({ limit: "64kb" }));

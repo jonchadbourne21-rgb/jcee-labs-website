@@ -967,8 +967,16 @@ try {
     if (label === "Research" && !cards.text.includes("IBM Results, Models and Next Tests"))
       failures.push("Research filter is missing the November hardware/model update");
   }
-  // State-machine regression: preparing an email does not submit it, and
-  // editing a field invalidates the previously prepared snapshot.
+  // Consultation form: it posts to /api/consultation. CI has no sending
+  // service configured (503), so the page must fall back to a local email
+  // draft addressed to sales@, and editing a field invalidates that draft.
+  const waitForDraft = async expectText => {
+    for (let attempt = 0; attempt < 30; attempt += 1) {
+      const text = await evaluate(page.send, "document.querySelector('.preview-draft-review')?.textContent || ''");
+      if (text.includes(expectText)) return;
+      await sleep(100);
+    }
+  };
   await navigate(page.send, baseUrl, "/consultation");
   // Browser evaluation returns before React's scheduled state commit. Wait for
   // the DOM transition, rather than treating the event dispatch as its receipt.
@@ -986,12 +994,13 @@ try {
     setField('consult-summary', 'Initial fixture workflow');
     form.requestSubmit();
   })()`);
-  await sleep(150);
+  await waitForDraft('Initial fixture workflow');
   const consultationBefore = await evaluate(page.send,
     `({ ready: !!document.querySelector('.preview-draft-review'),
        preview: document.querySelector('.preview-draft-review')?.textContent || '' })`);
-  if (!consultationBefore.ready || !consultationBefore.preview.includes('Initial fixture workflow')) {
-    failures.push('consultation did not prepare a local reviewable draft');
+  if (!consultationBefore.ready || !consultationBefore.preview.includes('Initial fixture workflow') ||
+      !consultationBefore.preview.includes('sales@jceelabs.com')) {
+    failures.push('consultation did not fall back to a reviewable email draft for sales@: ' + JSON.stringify(consultationBefore));
   }
   await evaluate(page.send, `(() => {
     const el = document.getElementById('consult-summary');
@@ -1005,7 +1014,7 @@ try {
   if (consultationEdited.staleReview) failures.push('consultation kept a stale draft after editing');
   await evaluate(page.send,
     `document.querySelector('.preview-consult-form').requestSubmit()`);
-  await sleep(150);
+  await waitForDraft('Revised fixture workflow');
   const consultationResubmitted = await evaluate(page.send, `(() => {
     const review = document.querySelector('.preview-draft-review');
     return { ready: !!review, updated: review?.textContent?.includes('Revised fixture workflow') || false,

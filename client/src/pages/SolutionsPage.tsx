@@ -31,7 +31,7 @@ export default function SolutionsPage() {
       <p>Choose one important workflow: quote-to-order, order review, an internal approval, or a multi-system change. We examine the handoffs, permissions, exception handling, and recovery behavior.</p>
       <div className="resource-grid">
         <article className="resource-card"><h3>Your deliverables</h3><ul><li>A map of the workflow and its system handoffs</li><li>Prioritized failure points and existing safeguards</li><li>Human review rules and proposed action controls</li><li>A remediation blueprint with testable acceptance criteria</li></ul></article>
-        <article className="resource-card"><h3>A defined engagement</h3><p>We agree the workflow, access requirements, deliverables, fee, and schedule before work starts. The findings can guide your own team or a follow-on build with us.</p><a className="editorial-text-link" href="/consultation">Scope an assessment ↗</a></article>
+        <article className="resource-card"><h3>A defined engagement</h3><p>We agree the workflow, access requirements, deliverables, fee, and schedule before work starts. The findings can guide your own team or a follow-on build with us.</p><a className="editorial-text-link" href="/consultation">Discuss your workflow ↗</a></article>
       </div>
     </section>
     <section className="editorial-section editorial-section-dark" id="build">
@@ -44,7 +44,7 @@ export default function SolutionsPage() {
         <article className="resource-card"><h3>Make the result reviewable</h3><p>Check outcomes, handle interrupted work under the target system’s contract, and retain action records for investigation and audit support.</p></article>
       </div>
       <p>Delivery includes the agreed implementation, tests, documentation, and handoff. Deployment and ongoing support are scoped with your team.</p>
-      <a className="editorial-button" href="/consultation">Discuss a build ↗</a>
+      <a className="editorial-button" href="/consultation">Discuss your workflow ↗</a>
     </section>
     <section className="editorial-section" id="design-partners">
       <p className="editorial-kicker">03 / Design partner access</p>
@@ -56,7 +56,7 @@ export default function SolutionsPage() {
         <li><span>03</span><h3>Review the evidence</h3><p>Evaluate discrepancy coverage, review effort, and recovery behavior. Decide what merits a separately tested production integration.</p></li>
       </ol>
       <p>You contribute workflow expertise and feedback; we contribute engineering and a defined pilot deliverable. We agree pricing, data handling, ownership, and acceptance criteria before starting.</p>
-      <a className="editorial-button" href="/consultation">Discuss becoming a design partner ↗</a>
+      <a className="editorial-button" href="/consultation">Discuss your workflow ↗</a>
     </section>
     <section className="editorial-section editorial-section-muted">
       <p className="editorial-kicker">Engineering behind the offer</p>

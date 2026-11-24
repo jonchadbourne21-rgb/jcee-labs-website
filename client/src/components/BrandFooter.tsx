@@ -8,7 +8,7 @@ export default function BrandFooter({
 }: BrandFooterProps) {
   return (
     <footer className="brand-footer">
-      <div className="brand-footer-wordmark">
+      <div className="brand-footer-wordmark brand-footer-wordmark--compact">
         Intelligence That Leaves Receipts
       </div>
 
@@ -47,7 +47,7 @@ export default function BrandFooter({
           <a href="/partners">Partner with JCEE WorldLab</a>
           <a href="/partners/enterprise">Enterprise pathway</a>
           <a href="/partners/research">Research pathway</a>
-          <a href="mailto:support@jceelabs.com">support@jceelabs.com ↗</a>
+          <a href="mailto:sales@jceelabs.com">sales@jceelabs.com ↗</a>
           <a href="/privacy">Privacy</a>
           <a href="/terms">Terms</a>
         </div>

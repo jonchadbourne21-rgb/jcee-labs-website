@@ -49,6 +49,12 @@ jobs:
           pnpm release:check
           pnpm release:verify "$BUILD_SOURCE_COMMIT"
 
+      - name: Customer-readiness metrics (informational)
+        continue-on-error: true
+        env:
+          SITE_METRICS_SHOTS: "1"
+        run: node scripts/site-metrics.mjs
+
       - name: Preserve source and build receipt
         uses: actions/upload-artifact@v7.0.1
         with:

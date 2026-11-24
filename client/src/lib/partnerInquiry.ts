@@ -17,7 +17,7 @@ export type PartnerInquiryPayload = {
 
 const routeConfig = {
   enterprise: {
-    recipient: "support+enterprise@jceelabs.com",
+    recipient: "sales@jceelabs.com",
     subject: "[ENTERPRISE INQUIRY]",
     heading: "JCEE WorldLab enterprise partnership inquiry",
   },

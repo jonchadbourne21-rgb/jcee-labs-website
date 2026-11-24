@@ -10,7 +10,7 @@ import "./home-editorial-refresh.css";
 export default function Home() {
   return (
     <main id="top" className="unified-home customer-home worldlab-home">
-      <CoreHeader integrated contactLabel="Let’s talk" />
+      <CoreHeader integrated />
       <ProductOverview />
       <section
         id="orbital-study"
@@ -213,7 +213,7 @@ export default function Home() {
         </div>
         <div>
           <a className="customer-button" href="/consultation">
-            Tell us about your workflow ↗
+            Discuss your workflow ↗
           </a>
           <p className="customer-note">
             A free first conversation. Paid work follows an agreed scope.

@@ -179,8 +179,8 @@ export default function CompanyPage() {
           <a className="editorial-button" href="/partners">
             Explore partnerships →
           </a>
-          <a className="editorial-text-link" href="mailto:support@jceelabs.com">
-            support@jceelabs.com ↗
+          <a className="editorial-text-link" href="mailto:sales@jceelabs.com">
+            sales@jceelabs.com ↗
           </a>
         </div>
       </section>

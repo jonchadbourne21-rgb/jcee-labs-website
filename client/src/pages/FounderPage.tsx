@@ -202,10 +202,10 @@ export default function FounderPage() {
           </div>
           <div className="editorial-actions">
             <a className="editorial-button" href="/consultation">
-              Talk with Jonathan →
+              Discuss your workflow →
             </a>
-            <a className="editorial-text-link" href="mailto:support@jceelabs.com">
-              support@jceelabs.com ↗
+            <a className="editorial-text-link" href="mailto:sales@jceelabs.com">
+              sales@jceelabs.com ↗
             </a>
           </div>
         </section>

@@ -13,10 +13,10 @@ const base = {
 };
 
 describe("free consultation preview", () => {
-  it("uses the existing enterprise recipient and safely encoded email draft", () => {
+  it("addresses the email fallback to the sales inbox, safely encoded", () => {
     const result = buildConsultationDraft(base);
     const url = new URL(result.mailto);
-    expect(url.pathname).toBe("support+enterprise@jceelabs.com");
+    expect(url.pathname).toBe("sales@jceelabs.com");
     expect(url.searchParams.get("subject")).toBe(result.subject);
     expect(url.searchParams.get("body")).toBe(result.body);
     expect(result.body).toContain(base.name);
@@ -40,7 +40,7 @@ describe("free consultation preview", () => {
     expect(result.body).toContain("Service interest: Not selected");
     expect(result.subject).not.toContain("confirmed");
   });
-  it("keeps the customer story linked to an accurately described email inquiry", () => {
+  it("keeps the customer story linked to an accurately described consultation request", () => {
     const home = readFileSync(
       path.join(import.meta.dirname, "pages/Home.tsx"),
       "utf8"
@@ -50,8 +50,10 @@ describe("free consultation preview", () => {
       "utf8"
     );
     expect(home).toContain('href="/consultation"');
-    expect(inquiry).toContain("Prepare email draft");
-    expect(inquiry).toContain("Nothing is submitted");
+    expect(inquiry).toContain("Send request");
+    expect(inquiry).toContain("api/consultation");
+    expect(inquiry).toContain("sales@jceelabs.com");
+    expect(inquiry).not.toContain("support+enterprise@");
     expect(inquiry).toContain("does not confirm an appointment");
   });
 });
