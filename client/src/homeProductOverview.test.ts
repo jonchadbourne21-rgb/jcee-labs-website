@@ -13,24 +13,19 @@ const rustSource = readFileSync(path.join(root, "../../visuals/worldlab/src/main
 const rustPacket = JSON.parse(readFileSync(path.join(root, "generated/worldlab-hex-wave.json"), "utf8"));
 
 describe("homepage binary-first landing", () => {
-  it("puts the binary landing first and keeps the orbital sculpture deferred and secondary", () => {
-    expect(home).toContain("<DeferredEvidenceCore />");
-    expect(home).toContain("wl-receipt-word");
-    expect(home).toContain('<ProductOverview />');
-    expect(home.indexOf("<ProductOverview />")).toBeLessThan(home.indexOf('id="orbital-study"'));
-    expect(home.indexOf('id="orbital-study"')).toBeLessThan(home.indexOf('id="story"'));
+  it("leads with one hero, then capabilities, how it works, who it is for, and one call to action", () => {
+    expect(home).toContain("<ProductOverview />");
+    expect(home).not.toContain('id="orbital-study"');
+    expect(home).not.toContain("<DeferredEvidenceCore />");
+    const order = ["<ProductOverview />", "<CapabilityCatalog />", 'id="story"', 'id="fit"', 'id="consultation"'].map(token => home.indexOf(token));
+    for (const position of order) expect(position).toBeGreaterThan(-1);
+    expect(order).toEqual([...order].sort((a, b) => a - b));
     expect(section).toContain('<h1 id="product-overview-title">');
     expect(section).toContain('id="page-content" tabIndex={-1}');
-    expect(home).toContain('<h2 id="hero-title">');
-    const originalHero = home.slice(home.indexOf('id="orbital-study"'), home.indexOf('id="story"'));
-    expect(originalHero).not.toContain('className="customer-actions"');
-    expect(originalHero).not.toContain('EXPLORE THE WORK');
+    expect(section).toContain("Intelligence that leaves receipts.");
+    expect(section).toContain('id="services"');
     expect(deferredOrbit).toContain('loading="lazy"');
-    expect(surfaceCheck).toContain("i.loading = 'eager'");
     expect(surfaceCheck).toContain("#product-overview .wl-product-primary");
-    expect(surfaceCheck).toContain("#orbital-study .customer-hero-sculpture");
-    expect(surfaceCheck).toContain("orbital artwork precedes binary landing");
-    expect(surfaceCheck).not.toContain("h.artTop > 680");
   });
 
   it("restores the customer-led wording with real conversion paths", () => {
@@ -48,7 +43,7 @@ describe("homepage binary-first landing", () => {
     expect(section).toContain("SCOPED SERVICE ENGAGEMENT");
     expect(section).toContain("Build around your business");
     expect(section).toContain("DESIGN PARTNERSHIPS");
-    expect(section).toContain("Integrations are tested for your workflow before production use.");
+    expect(home).toContain("Integrations are tested for your workflow before production use.");
     expect(section).not.toMatch(/production[- ]ready|bank[- ]grade|guaranteed|zero[- ]risk/i);
   });
 

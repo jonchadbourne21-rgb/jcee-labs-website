@@ -22,13 +22,13 @@ const protectedProgramPages = [
 describe("homepage enterprise contract", () => {
   it("leads with controlled AI work and keeps Infrastructure availability bounded", () => {
     expect(homeSource).toContain("<ProductOverview />");
-    expect(homeSource.indexOf("<ProductOverview />")).toBeLessThan(homeSource.indexOf('id="orbital-study"'));
+    expect(homeSource).not.toContain('id="orbital-study"');
     expect(productSource).toContain("Put AI to work.");
     expect(productSource).toContain("Build around your business");
     expect(productSource).toContain("DESIGN PARTNERSHIPS");
-    expect(homeSource).toContain("JCEE Infrastructure continues to develop");
+    expect(homeSource).toContain("Our published tests cover specific configurations.");
     expect(homeSource).not.toContain("JCEE Distribution");
-    expect(homeSource).toContain("Workflow Assurance");
+    expect(productSource).toContain("Workflow Assurance");
   });
 
   it("keeps interactive explanations available on the program pages", () => {

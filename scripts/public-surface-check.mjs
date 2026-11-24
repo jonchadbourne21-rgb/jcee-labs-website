@@ -298,7 +298,7 @@ try {
   if (!homepageText.includes("JCEE Assurance")) {
     failures.push("homepage is missing the JCEE Assurance section");
   }
-  if (!homepageText.includes("PUBLIC REGISTRY")) {
+  if (!/public registry/i.test(homepageText)) {
     failures.push("homepage is missing the Public Registry section");
   }
   if (!homepageText.includes("Jonathan Matthew Chadbourne")) {
@@ -306,27 +306,6 @@ try {
   }
   if (homepageText.includes("MIRRORED")) {
     failures.push("homepage still exposes Mirrored");
-  }
-
-  // Verify the first (deferred) orbital frame uses a neutral metallic preview,
-  // not the legacy hue-rotation that briefly showed violet before Canvas painted.
-  // The poster remains in the layout for an opacity crossfade when ready.
-  const orbitPreview = await evaluate(page.send, `(() => {
-    const poster = document.querySelector('#orbital-study img.wl-fallback-art');
-    if (!poster) return null;
-    const style = getComputedStyle(poster);
-    return {
-      source: poster.getAttribute('src'),
-      filter: style.filter,
-      display: style.display,
-      interactive: poster.closest('.wl-sculpture')?.classList.contains('is-interactive') ?? false
-    };
-  })()`);
-  if (!orbitPreview ||
-      !orbitPreview.source?.includes('worldlab-sculpture.svg') ||
-      orbitPreview.filter !== 'grayscale(1) brightness(1.04)' ||
-      (orbitPreview.interactive && orbitPreview.display === 'none')) {
-    failures.push('Homepage orbital preview flashes a mismatched palette or skips its fade: ' + JSON.stringify(orbitPreview));
   }
 
   const commercial = await evaluate(page.send, `({
@@ -340,7 +319,6 @@ try {
   // The product second act must share the orbital-blue canvas and show
   // plainly illustrative authority/effect/evidence receipt content.
   const productOverview = await evaluate(page.send, `(() => {
-    const hero = document.querySelector('.customer-hero');
     const panel = document.querySelector('#product-overview');
     const heading = document.querySelector('#product-overview-title');
     const story = document.querySelector('#story');
@@ -348,16 +326,15 @@ try {
     const offers = [...(panel?.querySelectorAll('.wl-product-offer') ?? [])];
     const receipt = panel?.querySelector('.wl-receipt');
     const waveCanvas = panel?.querySelector('canvas.wl-full-hex-field');
-    const flow = hero && panel && story
-      ? !!(panel.compareDocumentPosition(hero) & Node.DOCUMENT_POSITION_FOLLOWING)
-        && !!(hero.compareDocumentPosition(story) & Node.DOCUMENT_POSITION_FOLLOWING)
+    // One hero: the product section leads and the story follows; no second orbital hero.
+    const flow = panel && story
+      ? !!(panel.compareDocumentPosition(story) & Node.DOCUMENT_POSITION_FOLLOWING)
+        && !document.querySelector('#orbital-study')
       : false;
     return {
       flow,
       isLandingHeading: document.querySelector(".worldlab-home h1") === heading,
       skipTargetInProduct: panel?.contains(document.querySelector("#page-content")),
-      orbitalHeadingIsH2: hero?.querySelector("#hero-title")?.tagName === "H2",
-      redundantOrbitalActions: hero?.querySelectorAll(".customer-actions a").length ?? -1,
       heading: heading?.textContent?.replace(/\\s+/g, ' ').trim(),
       panelBackground: panel ? getComputedStyle(panel).backgroundColor : null,
       headingColor: heading ? getComputedStyle(heading).color : null,
@@ -384,16 +361,14 @@ try {
       receiptState: receipt?.querySelector('.wl-receipt-state')?.textContent?.replace(/\\s+/g, ' ').trim(),
       receiptExample: receipt?.getAttribute('data-demo') === 'illustrative'
         && receipt.textContent?.includes('NOT A LIVE RECEIPT'),
-      scopeDisclosure: !!panel?.textContent?.includes('Integrations are tested for your workflow before production use.')
-        && !!panel?.textContent?.includes('not an executed customer workflow')
+      scopeDisclosure: !!document.querySelector('#evidence')?.textContent?.includes('Integrations are tested for your workflow before production use.')
+        && !!document.querySelector('#evidence a[href$="/registry"]')
     };
   })()`);
   if (
     !productOverview.flow ||
     !productOverview.isLandingHeading ||
     !productOverview.skipTargetInProduct ||
-    !productOverview.orbitalHeadingIsH2 ||
-    productOverview.redundantOrbitalActions !== 0 ||
     !/Put AI to work\.\s*Stay in control\./.test(productOverview.heading ?? "") ||
     productOverview.panelBackground !== "rgb(8, 11, 18)" ||
     productOverview.headingColor !== "rgb(240, 245, 251)" ||
@@ -454,41 +429,27 @@ try {
     failures.push("Animated hex-wave field playback/reduced-motion contract failed: " + JSON.stringify({ waveStart, waveEnd, reducedMotion, waveMeta }));
   }
 
-  // The orbital graph is deferred below the homepage landing section.
-  // Scroll into range before checking its browser controls and demo state.
-  await evaluate(page.send, "document.querySelector('.wl-orbit-mount')?.scrollIntoView({block:'center'})");
-  let orbitReady = false;
-  for (let attempt = 0; attempt < 40; attempt += 1) {
-    orbitReady = await evaluate(page.send, "document.querySelectorAll('.wl-orbit-node-controls button').length === 3");
-    if (orbitReady) break;
-    await sleep(150);
-  }
-  if (!orbitReady) failures.push("Deferred orbital scene did not initialize after scroll");
-
   // Interactive upgrade browser contract: no simulated status is production telemetry.
   const interactive = await evaluate(page.send, `(() => {
-    const graph = document.querySelector('.wl-orbit-webgl');
     const lab = document.querySelector('.wl-receipt-lab');
     const bento = [...document.querySelectorAll('#fit .wl-bento-tile')];
     const story = document.querySelector('.wl-scroll-story');
     return {
-      orbitNodes: graph?.querySelectorAll('.wl-orbit-node-controls button').length,
-      renderer: graph?.getAttribute('data-orbit-renderer'),
+      orbitalScene: !!document.querySelector('.wl-orbit-webgl, .wl-orbit-mount, #orbital-study'),
       lab: !!lab,
       labTrigger: !!lab?.querySelector('.wl-receipt-lab-controls button'),
       bento: bento.length,
-      allBentoDisclosure: bento.length === 3 && bento.every(tile => tile.textContent.includes('NOT LIVE SYSTEM STATUS')),
+      noBentoStatusChrome: bento.length === 3 && bento.every(tile => !tile.querySelector('.wl-bento-signal, .wl-bento-disclosure')),
       scrollStory: !!story,
       accessibleNav: [...document.querySelectorAll('.desktop-nav a')].some(a => a.textContent.trim() === 'Solutions')
     };
   })()`);
   if (
-    interactive.orbitNodes !== 3 ||
-    !["webgl2", "fallback"].includes(interactive.renderer) ||
+    interactive.orbitalScene ||
     interactive.lab ||
     interactive.labTrigger ||
     interactive.bento !== 3 ||
-    !interactive.allBentoDisclosure ||
+    !interactive.noBentoStatusChrome ||
     interactive.scrollStory ||
     !interactive.accessibleNav
   ) failures.push("Interactive homepage upgrade contract failed: " + JSON.stringify(interactive));
@@ -498,51 +459,6 @@ try {
   await sleep(120);
   const navAfter = await evaluate(page.send, "document.querySelector('.desktop-nav a')?.textContent");
   if (navBefore !== navAfter) failures.push("Navigation words changed during hover");
-  await evaluate(page.send, "document.querySelector('#working-example').open = true");
-  // The homepage illustration is browser-local and must show all four bounded outcomes.
-  for (const [scenario, expected] of [
-    ["authorized", "Confirmed in the target record"],
-    ["revoked", "Held — no release attempted"],
-    ["lost", "Existing effect reconciled"],
-    ["conflict", "Unresolved — review required"],
-  ]) {
-    await evaluate(
-      page.send,
-      `document.querySelector('[data-scenario="${scenario}"]').click()`
-    );
-    for (let step = 0; step < 3; step++) {
-      await evaluate(
-        page.send,
-        "document.querySelector('#trace-next').click()"
-      );
-      await sleep(60);
-    }
-    const state = await evaluate(
-      page.send,
-      `({
-      outcome: document.querySelector('[data-stage="3"] strong')?.textContent,
-      count: document.querySelector('#trace-count')?.textContent,
-      focus: document.activeElement?.id,
-      pressed: document.querySelector('[data-scenario="${scenario}"]')?.getAttribute('aria-pressed')
-    })`
-    );
-    if (
-      state.outcome !== expected ||
-      state.count !== "STEP 4 OF 4" ||
-      state.pressed !== "true" ||
-      state.focus !== "trace-reset"
-    )
-      failures.push(`Homepage scenario ${scenario}: ${JSON.stringify(state)}`);
-    await evaluate(page.send, "document.querySelector('#trace-reset').click()");
-    await sleep(60);
-    const reset = await evaluate(
-      page.send,
-      "({count: document.querySelector('#trace-count')?.textContent, focus: document.activeElement?.id})"
-    );
-    if (reset.count !== "STEP 1 OF 4" || reset.focus !== "trace-next")
-      failures.push(`Homepage reset ${scenario}: ${JSON.stringify(reset)}`);
-  }
-
   const footer = await evaluate(
     page.send,
     `(() => {

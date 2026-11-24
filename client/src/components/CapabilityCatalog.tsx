@@ -26,8 +26,8 @@ const detailLinks: Record<CapabilityId, { href: string }> = {
 export default function CapabilityCatalog() {
  return <section id="capabilities" className="editorial-section capability-catalog" aria-labelledby="capability-catalog-heading">
    <div className="capability-catalog__heading">
-    <div><p className="editorial-kicker">EIGHT CAPABILITIES / ONE CONNECTED SYSTEM</p><h2 id="capability-catalog-heading">Intelligence That Leaves Receipts.</h2></div>
-    <p><strong>Control what AI can do. Verify what it actually did.</strong> Explore the customer value and evidence boundary behind each established capability.</p>
+    <div><p className="editorial-kicker">WHAT WE BUILD WITH</p><h2 id="capability-catalog-heading">Control what AI can do. Verify what it did.</h2></div>
+    <p><strong>Eight connected capabilities.</strong> Each one opens the details: what it does for your team and how it works in practice.</p>
    </div>
    <ul className="capability-catalog__grid" aria-label="JCEE WorldLab capability catalog">
     {publicCapabilities.map((c,index) => {
@@ -42,7 +42,6 @@ export default function CapabilityCatalog() {
      </li>;
     })}
    </ul>
-   <p className="capability-catalog__note">These categories describe connected capabilities of existing JCEE systems, not eight independently released products. Qualification is specific to the target and configuration.</p>
   </section>;
 }
 /** Detail entries on /technology; the homepage grid links to each `#detail-…` target. */

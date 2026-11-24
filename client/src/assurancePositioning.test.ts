@@ -5,6 +5,10 @@ import { describe, expect, it } from "vitest";
 const read = (name: string) =>
   readFileSync(path.resolve(import.meta.dirname, "pages", name), "utf8");
 const home = read("Home.tsx");
+const product = readFileSync(
+  path.resolve(import.meta.dirname, "components", "ProductOverview.tsx"),
+  "utf8"
+);
 const assurance = read("AssurancePage.tsx");
 const inquiry = read("EnterprisePartnersPage.tsx");
 const technology = read("TechnologyPage.tsx");
@@ -20,44 +24,30 @@ const plain = (source: string) => source.replace(/\s+/g, " ");
 
 describe("buyer-readable public positioning with Assurance Playbook control", () => {
   it("leads with the customer workflow and a concrete inquiry", () => {
-    expect(plain(home)).toContain("Intelligence");
-    expect(plain(home)).toContain("that leaves");
-    expect(home).toContain("wl-receipt-word");
-    expect(home).toContain("<DeferredEvidenceCore />");
-    expect(home.indexOf("<ProductOverview />")).toBeLessThan(home.indexOf('id="orbital-study"'));
-    expect(home).toContain('<h2 id="hero-title">');
+    expect(plain(product)).toContain("Intelligence that leaves receipts.");
+    expect(home).not.toContain('id="orbital-study"');
+    expect(home.indexOf("<ProductOverview />")).toBeLessThan(home.indexOf('id="story"'));
     expect(home).toContain('href="/consultation"');
-    expect(home).toContain('href="/solutions"');
+    expect(product).toContain('href="/solutions"');
     expect(home).not.toContain("JCEE Distribution");
   });
-  it("distinguishes the illustration from qualified customer results", () => {
-    expect(home).toContain("<EvidenceTrace />");
-    expect(plain(home)).toContain(
-      "performs no external action"
-    );
-    expect(plain(home)).toContain("creates no qualification receipt");
-    expect(plain(home)).toContain(
-      "This browser illustration uses fictional order data."
-    );
-    expect(plain(home)).toContain(
-      "Recorded tests demonstrate specific configurations; they do not establish readiness for every customer system."
-    );
+  it("labels the illustrative receipt and keeps one evidence note on the page", () => {
+    expect(product).toContain('data-demo="illustrative"');
+    expect(product).toContain("NOT A LIVE RECEIPT");
+    expect(plain(home)).toContain("Integrations are tested for your workflow before production use.");
+    expect(plain(home)).toContain("Our published tests cover specific configurations.");
   });
   it("keeps implementation scoped and public evidence reachable", () => {
-    expect(plain(home)).toContain(
-      "require their own written scope and authorization"
-    );
-    expect(home).toContain('href="/technology#current-integration"');
+    expect(plain(home)).toContain("paid work follows an agreed scope");
     expect(home).toContain('href="/registry"');
-    expect(home).toContain("a workflow map and prioritized remediation plan");
+    expect(plain(product)).toContain("written findings, acceptance criteria, and a practical next-step plan");
   });
-  it("presents the problem, customer uses, offer, evidence and inquiry in order", () => {
-    const ids = ["story", "fit", "services", "evidence", "consultation"];
-    const positions = ids.map(id => home.indexOf(`id="${id}"`));
+  it("presents the offer, capabilities, problem, customer uses and inquiry in order", () => {
+    const tokens = ["<ProductOverview />", "<CapabilityCatalog />", 'id="story"', 'id="fit"', 'id="consultation"', 'id="evidence"'];
+    const positions = tokens.map(token => home.indexOf(token));
     for (const position of positions) expect(position).toBeGreaterThan(-1);
     expect(positions).toEqual([...positions].sort((a, b) => a - b));
   });
-
   it("keeps the Who This Is For surface readable without changing its background or type system", () => {
     expect(whoThisIsFor).toContain("who-this-is-for");
     expect(editorialCss).toContain(".who-this-is-for > h2");

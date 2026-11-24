@@ -12,3 +12,29 @@
   text-shadow: none !important;
   color: var(--jcee-muted, #a8b7c8) !important;
 }
+
+/* Homepage: the brand line sits under the main headline as a tagline. */
+#root#root#root#root .worldlab-home .wl-product-tagline {
+  margin: 14px 0 0 !important;
+  font-family: var(--wl-display, "Space Grotesk", Arial, sans-serif) !important;
+  font-size: clamp(18px, 1.6vw, 22px) !important;
+  font-weight: 500 !important;
+  line-height: 1.3 !important;
+  letter-spacing: -0.01em !important;
+  color: var(--wl-accent, #6ab8ff) !important;
+  max-width: none !important;
+}
+
+/* Homepage: the page's one evidence note, under the closing call to action. */
+#root#root#root#root .worldlab-home .customer-evidence-note {
+  margin-top: 18px !important;
+  max-width: 46ch !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+}
+#root#root#root#root .worldlab-home .customer-evidence-note a {
+  color: var(--wl-accent, #6ab8ff) !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+#root#root#root .worldlab-home #fit .customer-actions { margin-top: 28px; }

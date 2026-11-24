@@ -142,7 +142,12 @@ try {
     );
     const ids = ["authorization","consequence-control","durable-recovery","evidence-verification","receipts-and-audit","governed-knowledge","connected-workflows","qualification"];
     const differences = [];
+    // The heading copy was rewritten for buyers and the closing note removed
+    // (customer-readiness pass), so text and text-driven box sizes are not
+    // compared; every style value and all card geometry still are.
+    const textDriven = /^(desktop|tablet|iPhone)\.((kicker|heading|lede|ledeStrong|note)\.(width|height)|(section|headingBlock)\.height|note(\..*)?|(kicker|heading|lede|note)Text)$/;
     const compare = (label, expected, actual) => {
+      if (textDriven.test(label)) return;
       if (typeof expected === "number" && typeof actual === "number") {
         if (Math.abs(expected - actual) > 1) differences.push({ label, expected, actual });
       } else if (expected && typeof expected === "object" && !Array.isArray(expected)) {
@@ -155,7 +160,7 @@ try {
       const { name, result } = await measure(send, "/", "#capabilities", viewport);
       assert.ok(result, `homepage catalog missing at ${name}`);
       const order = await evaluate(send, `(() => {
-        const hero = document.querySelector('#orbital-study');
+        const hero = document.querySelector('#product-overview');
         const catalog = document.querySelector('#capabilities');
         return { afterHero: hero?.nextElementSibling === catalog,
           beforeStory: catalog?.nextElementSibling?.id ?? null,
