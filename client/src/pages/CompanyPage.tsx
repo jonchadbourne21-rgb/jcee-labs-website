@@ -55,7 +55,7 @@ export default function CompanyPage() {
           physical commitment still require their own evidence. The long-term direction remains a reusable assurance core,
           repeatable qualification, and business claims bounded by results.
         </p>
-        <a className="editorial-text-link" href="/technology#current-integration">Current result and open gates →</a>
+        <a className="editorial-text-link" href="/technology/engineering-log#current-integration">Current result and open gates →</a>
       </section>
       <section className="editorial-section">
         <p className="editorial-kicker">Our direction</p>

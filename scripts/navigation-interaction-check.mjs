@@ -86,11 +86,11 @@ try {
  cases.push({width:1440,href:'/capabilities/infrastructure',input:'same-document navigation',pass:true});
  await navigate(send,base,'/solutions');
  await evaluate(send,"window.__worldlabNavigationDocumentToken='solutions-route-check'");
- await evaluate(send,`document.querySelector('.editorial-text-link[href="/technology#current-integration"]').scrollIntoView({block:'center',behavior:'instant'})`);
- await activate('.editorial-text-link[href="/technology#current-integration"]');
- await arrived('/technology');
- assert.equal(await evaluate(send,"window.__worldlabNavigationDocumentToken"),'solutions-route-check','Solutions to Technology caused a document reload');
- cases.push({width:1440,href:'/technology#current-integration',input:'same-document fragment navigation',pass:true});
+ await evaluate(send,`document.querySelector('.editorial-text-link[href="/technology/engineering-log#current-integration"]').scrollIntoView({block:'center',behavior:'instant'})`);
+ await activate('.editorial-text-link[href="/technology/engineering-log#current-integration"]');
+ await arrived('/technology/engineering-log');
+ assert.equal(await evaluate(send,"window.__worldlabNavigationDocumentToken"),'solutions-route-check','Solutions to the engineering log caused a document reload');
+ cases.push({width:1440,href:'/technology/engineering-log#current-integration',input:'same-document fragment navigation',pass:true});
  // Native anchors remain keyboard-operable, even after a focus excursion.
  await navigate(send,base,'/');await evaluate(send,"document.querySelector('.desktop-nav a[href=\"/technology\"]').focus()");
  await send('Input.dispatchKeyEvent',{type:'keyDown',key:'Enter',code:'Enter',windowsVirtualKeyCode:13});await arrived('/technology');

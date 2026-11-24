@@ -62,7 +62,7 @@ export default function SolutionsPage() {
       <p className="editorial-kicker">Engineering behind the offer</p>
       <h2>Built on software you can examine.</h2>
       <p>Our work includes implemented action controls, recovery, order comparison, and inspectable records. Recorded results describe defined test configurations; customer integrations are qualified against their own requirements.</p>
-      <a className="editorial-text-link" href="/technology#current-integration">Explore the software and recorded results →</a>
+      <a className="editorial-text-link" href="/technology/engineering-log#current-integration">Explore the software and recorded results →</a>
     </section>
   </EditorialLayout>;
 }

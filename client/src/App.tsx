@@ -33,6 +33,7 @@ const DistributionPage = lazy(() => import("./pages/DistributionPage"));
 const OperatingCloudPage = lazy(() => import("./pages/OperatingCloudPage"));
 const InfrastructurePage = lazy(() => import("./pages/InfrastructurePage"));
 const TechnologyPage = lazy(() => import("./pages/TechnologyPage"));
+const EngineeringLogPage = lazy(() => import("./pages/EngineeringLogPage"));
 const ResearchTopicPage = lazy(() => import("./pages/ResearchTopicPage"));
 const ResearchPage = lazy(() => import("./pages/ResearchPage"));
 const ResearchFieldsPage = lazy(() => import("./pages/ResearchFieldsPage"));
@@ -157,6 +158,7 @@ function Router() {
           component={PublicationPage}
         />
         <Route path="/technology" component={TechnologyPage} />
+        <Route path="/technology/engineering-log" component={EngineeringLogPage} />
         <Route path="/experiences/signal-forge" component={SignalForgePage} />
         <Route path="/experiences/evidence-engine" component={EvidenceEnginePage} />
         <Route path="/research/fields" component={ResearchFieldsPage} />

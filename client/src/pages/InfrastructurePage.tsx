@@ -149,7 +149,7 @@ export default function InfrastructurePage() {
               Read the November progress in recovery, installed interfaces and
               hosted evidence, with each result attached to its limits.
             </p>
-            <a className="customer-link" href="/technology#current-integration">
+            <a className="customer-link" href="/technology/engineering-log#current-integration">
               Read the engineering evidence ↗
             </a>
           </article>

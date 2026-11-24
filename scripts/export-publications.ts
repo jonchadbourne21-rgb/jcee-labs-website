@@ -65,6 +65,11 @@ const routeMetadata: Record<
     description:
       "Explore JCEE’s platform direction for accountable AI-assisted operations, its current evidence, and the implementation gates still ahead.",
   },
+  "/technology/engineering-log": {
+    title: "Engineering Log: Dated Results and Open Gates | JCEE WorldLab",
+    description:
+      "Dated engineering results behind JCEE WorldLab software, with the tested configuration and the open gates recorded for each.",
+  },
   "/technology": {
     title: "AI Authorization, Recovery & Evidence Capabilities | JCEE WorldLab",
     description:

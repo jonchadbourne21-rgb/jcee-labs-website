@@ -73,7 +73,7 @@ export default function OperatingCloudPage() {
           That working integration does not establish a production platform or
           customer operating improvement.
         </p>
-        <a className="editorial-text-link" href="/technology#current-integration">Review the connected software result →</a>
+        <a className="editorial-text-link" href="/technology/engineering-log#current-integration">Review the connected software result →</a>
         <div className="editorial-actions">
           <a className="editorial-text-link" href="/technology">
             Explore the components →
