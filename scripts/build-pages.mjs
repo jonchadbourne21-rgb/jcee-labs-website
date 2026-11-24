@@ -30,10 +30,11 @@ if (exported.status !== 0) throw new Error("Publication export failed");
 const routeMetadata = JSON.parse(
   fs.readFileSync("client/src/content/routeMetadata.json", "utf8")
 );
+// Static hosting has no server routes; the consultation form uses its email fallback.
 const built = spawnSync(
   "pnpm",
   ["exec", "vite", "build", `--base=${prefix}/`],
-  { stdio: "inherit" }
+  { stdio: "inherit", env: { ...process.env, VITE_STATIC_SITE: "1" } }
 );
 if (built.status !== 0)
   throw new Error(`Vite build failed: ${built.error || built.status}`);

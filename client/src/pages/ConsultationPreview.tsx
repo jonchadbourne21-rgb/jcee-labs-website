@@ -39,6 +39,12 @@ function ConsultationEntry() {
     };
     setCopyStatus("");
     setDraft(null);
+    // Static hosting (GitHub Pages fallback) has no server: go straight to email.
+    if (import.meta.env.VITE_STATIC_SITE === "1") {
+      setStatus("idle");
+      setDraft(buildConsultationDraft(fields));
+      return;
+    }
     setStatus("sending");
     try {
       const response = await fetch(`${import.meta.env.BASE_URL}api/consultation`, {
