@@ -124,3 +124,14 @@
   #root#root#root#root .worldlab-home .rr-step,
   #root#root#root#root .worldlab-home .rr-result { transition: none; transform: none; }
 }
+#root#root#root#root .worldlab-home .wl-receipt--replay .wl-receipt-top > span:last-child { font-size: 11px !important; }
+#root#root#root#root .worldlab-home .rr-replay { flex: none; white-space: nowrap; }
+@media (max-width: 520px) {
+  /* The card grows taller than the hero's figure box here, so the caption
+     follows the card instead of overlapping its bottom edge. */
+  #root#root#root#root .worldlab-home .wl-product-visual figcaption {
+    position: static;
+    margin-top: 14px;
+    justify-self: end;
+  }
+}
