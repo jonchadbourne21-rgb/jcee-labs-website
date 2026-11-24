@@ -50,3 +50,21 @@
   color: #080b12 !important; font-weight: 600; text-decoration: none;
 }
 #root#root .enterprise-partner-page .enterprise-inquiry-cta:hover { filter: brightness(1.08); }
+
+/* Type floor on customer pages: labels and kickers no smaller than 12px.
+   The example receipt on the homepage is an illustration and keeps its scale. */
+#root#root#root#root .worldlab-home :is(
+  .wl-product-eyebrow, .wl-product-offer-type, .wl-product-market-heading p,
+  .customer-kicker, .wl-bento-top, .wl-bento-top span, .customer-steps li > span,
+  .capability-catalog__number, .customer-note
+) { font-size: 12px !important; }
+#root#root#root .jcee-preview :is(
+  .preview-kicker, .preview-panel-top, .preview-panel-top span, .preview-call-facts span,
+  .preview-call-process li > span, .preview-section-label, .preview-section-label span,
+  .preview-services-grid article > span, .preview-form-help, .preview-notice
+) { font-size: 12px !important; }
+#root#root#root .enterprise-partner-page :is(
+  .section-index, .section-index span, .program-status-row span, .program-number,
+  .partner-signal-grid span, .partner-sequence li > span, .partner-sequence strong,
+  .partner-kicker, .eyebrow, dt, dd
+) { font-size: 12px !important; }

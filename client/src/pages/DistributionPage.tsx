@@ -36,8 +36,7 @@ export default function DistributionPage() {
           </p>
           <p>
             The proposed first evaluation is a read-only shadow of an existing
-            order workflow. Your team keeps control of order entry and every
-            consequential action.
+            order workflow. Your team keeps control of order entry and every high-impact action.
           </p>
           <a className="editorial-button" href="/partners/enterprise">
             Discuss your workflow →
@@ -94,10 +93,9 @@ export default function DistributionPage() {
           </div>
         </div>
         <p className="editorial-intro">
-          These results establish comparison mechanics on the tested cases:
-          the expected classifications were produced without external effects.
-          They do not establish customer ROI, live integration, or production
-          readiness. The next commercial gate is a limited, approved shadow evaluation.
+          On the test cases, the comparison produced the expected results
+          without touching any live system. The next step is a limited,
+          approved shadow evaluation alongside your existing process.
         </p>
         <a
           className="editorial-text-link"
@@ -143,8 +141,8 @@ export default function DistributionPage() {
           ))}
         </ol>
         <p>
-          This is the product roadmap. Progress depends on observed operating
-          value and explicit authority at each stage.
+          This is the product roadmap. Each stage starts only when the last
+          one has shown real value and you approve the next.
         </p>
       </section>
       <section className="editorial-section">

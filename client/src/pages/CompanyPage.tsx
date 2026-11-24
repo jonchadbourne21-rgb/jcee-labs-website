@@ -54,7 +54,7 @@ export default function CompanyPage() {
             </p>
           </article>
           <article className="resource-card">
-            <h3>Current authority</h3>
+            <h3>Permission before action</h3>
             <p>
               A useful idea or recommendation does not create permission to act.
             </p>
@@ -69,8 +69,8 @@ export default function CompanyPage() {
           <article className="resource-card">
             <h3>Human responsibility</h3>
             <p>
-              Support people making consequential decisions with evidence they
-              can inspect.
+              Support people making high-impact decisions with evidence they
+              can review.
             </p>
           </article>
         </div>

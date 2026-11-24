@@ -11,56 +11,40 @@ export default function TechnologyPage() {
     >
       <CapabilityDetails />
       <section className="editorial-section">
-        <p className="editorial-kicker">Public integration model</p>
-        <h2>Bind the workflow. Keep the competent systems in place.</h2>
+        <p className="editorial-kicker">How an integration works</p>
+        <h2>Connect the workflow. Keep your systems in charge.</h2>
         <p className="editorial-intro">
-          JCEE has implemented reference software; this is not a generic public
-          SDK announcement. Private work begins with one bounded workflow and
-          connects to the systems that already hold evidence, permission, and
-          the external result.
+          We start with one workflow and connect to the systems that already
+          hold your records, your approvals, and the final result.
         </p>
-        <ol className="binding-strip" aria-label="JCEE public integration binding path">
-          <li><span>01</span><h3>Claim + evidence</h3><p>Bind the proposed conclusion to the source record, observation, and evidence revision that support it.</p></li>
-          <li><span>02</span><h3>Current authority</h3><p>Check the competent source of permission at action time. A proposal is not authority. Entitlement is not execution.</p></li>
-          <li><span>03</span><h3>Consequence</h3><p>The target system retains authority over the real-world effect. JCEE does not invent permission.</p></li>
-          <li><span>04</span><h3>Recovery</h3><p>Preserve durable intent, effect identity, and uncertainty. Missing evidence stays unknown; recovery is not blind retry.</p></li>
-          <li><span>05</span><h3>System of record</h3><p>Reconcile against the existing competent external record rather than treating an internal model assertion as the result.</p></li>
-          <li><span>06</span><h3>Receipt</h3><p>Preserve an inspectable record of the authorized occurrence, its evidence basis, and unresolved state.</p></li>
+        <ol className="binding-strip" aria-label="How a JCEE integration handles one request">
+          <li><span>01</span><h3>Request + evidence</h3><p>Link the proposed change to the records and observations behind it.</p></li>
+          <li><span>02</span><h3>Permission</h3><p>Check who may approve it at the moment it runs. A suggestion is not permission.</p></li>
+          <li><span>03</span><h3>The change</h3><p>Your system makes the final call on the real-world change. We never invent permission.</p></li>
+          <li><span>04</span><h3>Recovery</h3><p>If something times out, check what actually happened before retrying, instead of guessing.</p></li>
+          <li><span>05</span><h3>System of record</h3><p>Confirm the result against your existing records, not an AI's say-so.</p></li>
+          <li><span>06</span><h3>Receipt</h3><p>Keep a record your team can review: what was approved, what happened, and anything still open.</p></li>
         </ol>
-        <p className="binding-note">
-          Each arrow is a binding between evidence, authority, and external
-          systems—not a library call.
-        </p>
-        <div className="resource-grid integration-posture-grid" aria-label="Current JCEE integration posture">
+        <div className="resource-grid integration-posture-grid" aria-label="How we work with you">
           <article className="resource-card">
-            <p className="editorial-kicker">CURRENTLY PUBLIC</p>
-            <h3>Method, reference behavior, and evidence.</h3>
-            <p>Public pages describe the semantic boundary, selected tested behavior, and registry status without publishing private implementation mechanics.</p>
-          </article>
-          <article className="resource-card">
-            <p className="editorial-kicker">PRIVATE INTEGRATION</p>
+            <p className="editorial-kicker">HOW WE WORK</p>
             <h3>One workflow at a time.</h3>
-            <p>Integration is scoped around the buyer's existing evidence sources, authority systems, consequence boundary, recovery path, and system of record.</p>
+            <p>We scope each integration around your existing systems, approvals, and records, and test it with your team before production use.</p>
           </article>
           <article className="resource-card">
-            <p className="editorial-kicker">NOT OFFERED AS PUBLIC PRODUCT</p>
-            <h3>Private interfaces; scoped integration.</h3>
-            <p>Private SDK, CLI and service distributions have bounded component results. Public package availability and production admission remain separate decisions.</p>
+            <p className="editorial-kicker">WHAT WE PUBLISH</p>
+            <h3>Our approach and dated test results.</h3>
+            <p>The method and selected results are public in the engineering log and Public Registry. Implementation details stay private.</p>
           </article>
         </div>
-        <p className="editorial-intro">
-          This public semantic contract does not publish the internal recovery
-          law, verifier algorithms, receipt encoding, hostile-test corpora,
-          adapter mechanics, or bypass analysis; those remain private.
-        </p>
       </section>
       <section className="editorial-section editorial-section-muted">
-        <p className="editorial-kicker">Applied development</p>
-        <h2>From engineering evidence to your workflow.</h2>
+        <p className="editorial-kicker">Getting started</p>
+        <h2>Start with one workflow.</h2>
         <p className="editorial-intro">
           Start with the business process you want to improve. A Workflow
-          Assurance assessment maps your systems, permissions, recovery
-          requirements, and the evidence needed for a useful next decision.
+          Assurance assessment maps your systems, permissions, and recovery
+          needs, and ends with a practical next-step plan.
         </p>
         <div className="editorial-actions">
           <a className="editorial-button" href="/solutions#assessment">
@@ -70,16 +54,9 @@ export default function TechnologyPage() {
             Discuss your workflow →
           </a>
         </div>
-        <details>
-          <summary>Earlier applied workflow studies</summary>
-          <p>Distribution's synthetic order-review study and AP Gate's payment
-          research retain their original scope and limits. They are not current
-          production service claims.</p>
-          <div className="editorial-actions">
-            <a className="editorial-text-link" href="/solutions/distribution">Order-review study →</a>
-            <a className="editorial-text-link" href="/registry#ap-gate">AP Gate status →</a>
-          </div>
-        </details>
+        <p>
+          <a className="editorial-text-link" href="/solutions/distribution">See the distribution example →</a>
+        </p>
       </section>
       <section className="editorial-section">
         <p className="editorial-kicker">The software behind it</p>
@@ -96,16 +73,16 @@ export default function TechnologyPage() {
           <a href="/qcs">
             <strong>QCS</strong>
             <span>
-              Transition research. Ask whether current authoritative evidence
-              justifies the next action.
+              Decision research. Check whether the latest evidence supports the
+              next action.
             </span>
             <span aria-hidden="true">→</span>
           </a>
           <a href="/assurance">
             <strong>JCEE Assurance</strong>
             <span>
-              Portable evidence and verification. Inspect what supports a
-              bounded conclusion.
+              Evidence and verification. See what supports a conclusion, and
+              what does not.
             </span>
             <span aria-hidden="true">→</span>
           </a>

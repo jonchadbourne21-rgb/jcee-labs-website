@@ -5,7 +5,7 @@ export const publicCapabilities: readonly PublicCapability[] = [
   {
     "id": "authorization",
     "title": "Authorization",
-    "summary": "Check current authority before an AI action proceeds.",
+    "summary": "Check current permission before an AI action proceeds.",
     "customerNeed": "A previous approval or an agent's confidence is not permission for a change now.",
     "architecture": "JCEE-INFRA and QCS connect the proposed effect to declared identity, authority, policy and current evidence.",
     "useCase": "Recheck a service owner's approval before an AI-initiated infrastructure change.",
@@ -17,7 +17,7 @@ export const publicCapabilities: readonly PublicCapability[] = [
   {
     "id": "consequence-control",
     "title": "Consequence Control",
-    "summary": "Keep the target system in control of consequential changes.",
+    "summary": "Keep your own system in control of high-impact changes.",
     "customerNeed": "An agent's recommendation must not become unrestricted permission to mutate production systems.",
     "architecture": "JCEE-INFRA and JCEE-CAB bind the requested effect to a target-owned consequence boundary.",
     "useCase": "Require the target system's final decision before changing a protected service.",
@@ -29,7 +29,7 @@ export const publicCapabilities: readonly PublicCapability[] = [
   {
     "id": "durable-recovery",
     "title": "Durable Recovery",
-    "summary": "Reconcile uncertain outcomes before deciding whether to retry.",
+    "summary": "Check what really happened before deciding whether to retry.",
     "customerNeed": "When a remote call times out, blind replay may duplicate the actual external effect.",
     "architecture": "JCEE VOW preserves effect intent, stable identity and typed recovery decisions, consulting competent external records where available.",
     "useCase": "Investigate a deployment that committed before its acknowledgement was lost.",
@@ -41,7 +41,7 @@ export const publicCapabilities: readonly PublicCapability[] = [
   {
     "id": "evidence-verification",
     "title": "Evidence Verification",
-    "summary": "Determine what available evidence supports—and what remains unknown.",
+    "summary": "Show what the evidence supports, and what is still unknown.",
     "customerNeed": "A signed record or confident conclusion is not automatically proof of what happened outside the model.",
     "architecture": "JCEE Assurance, JA, JEC and QCS separate assertions, evidence, authority and verdicts.",
     "useCase": "Evaluate conflicting incident records before closing an investigation.",
@@ -53,7 +53,7 @@ export const publicCapabilities: readonly PublicCapability[] = [
   {
     "id": "receipts-and-audit",
     "title": "Receipts & Audit",
-    "summary": "Reconstruct what was proposed, permitted and observed.",
+    "summary": "Rebuild what was proposed, approved and actually done.",
     "customerNeed": "Audit teams need more than a tool-call success message after an important change.",
     "architecture": "JA and JCEE Evidence Engine connect provenance, verification results and inspectable action records.",
     "useCase": "Investigate who approved a service restart and what the system of record confirmed.",
@@ -65,7 +65,7 @@ export const publicCapabilities: readonly PublicCapability[] = [
   {
     "id": "governed-knowledge",
     "title": "Governed Knowledge",
-    "summary": "Connect agent context to source identity, revisions and authority.",
+    "summary": "Tie the AI's context to its sources, versions and approvals.",
     "customerNeed": "An outdated policy document can look persuasive after the actual controlling information changes.",
     "architecture": "JCEE Knowledge Retrieval relates retrieved context to source and revision identity.",
     "useCase": "Review which policy version supported an AI-generated operational recommendation.",
@@ -77,7 +77,7 @@ export const publicCapabilities: readonly PublicCapability[] = [
   {
     "id": "connected-workflows",
     "title": "Connected Workflows",
-    "summary": "Bring authorization, execution, recovery and evidence together.",
+    "summary": "Bring approval, action, recovery and records together.",
     "customerNeed": "Business actions cross tools and providers; control meaning must survive each handoff.",
     "architecture": "JCEE Workflow, JCEE-INFRA and private client/service interfaces compose established assurance components.",
     "useCase": "Govern an infrastructure-change request from approval to observed outcome.",
@@ -89,7 +89,7 @@ export const publicCapabilities: readonly PublicCapability[] = [
   {
     "id": "qualification",
     "title": "Qualification",
-    "summary": "Challenge consequential action paths before promotion.",
+    "summary": "Test high-impact action paths before they go live.",
     "customerNeed": "A successful demonstration cannot prove behavior under revocation, duplication, crash and conflicting evidence.",
     "architecture": "JCEE qualification tooling tests bounded contracts, hostile cases and observed evidence.",
     "useCase": "Challenge expiry, response loss and duplicate requests before enabling an automated change.",

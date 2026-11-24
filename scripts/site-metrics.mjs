@@ -24,7 +24,7 @@ const MEASURE = `(() => {
   const clone = main;
   const exclude = el => el.closest('header, .site-header, footer, .brand-footer, nav[aria-label="Main navigation"], nav[aria-label="Mobile navigation"]');
   const walker = document.createTreeWalker(clone, NodeFilter.SHOW_TEXT);
-  let text = ''; let tiny = 0; let caps = 0;
+  let text = ''; let tiny = 0; let caps = 0; const tinySamples = [];
   while (walker.nextNode()) {
     const n = walker.currentNode; const el = n.parentElement;
     if (!el || exclude(el)) continue;
@@ -32,7 +32,10 @@ const MEASURE = `(() => {
     const s = getComputedStyle(el);
     if (s.display === 'none' || s.visibility === 'hidden' || el.closest('details:not([open]) > :not(summary)')) continue;
     text += ' ' + t;
-    if (parseFloat(s.fontSize) < 12) tiny++;
+    if (parseFloat(s.fontSize) < 12) {
+      tiny++;
+      if (tinySamples.length < 25) tinySamples.push({ el: el.tagName.toLowerCase() + (el.className && typeof el.className === 'string' ? '.' + el.className.trim().split(/\s+/).join('.') : ''), parent: el.parentElement?.className?.toString().slice(0, 40) || '', size: s.fontSize, text: t.slice(0, 32) });
+    }
     if (s.textTransform === 'uppercase' || (t.length > 6 && t === t.toUpperCase() && /[A-Z]/.test(t))) caps++;
   }
   text = text.replace(/\\s+/g, ' ').trim();
@@ -52,7 +55,7 @@ const MEASURE = `(() => {
     ctaLabels: ctas.map(label),
     contactLinks: links.filter(a => /consultation|mailto:/.test(a.getAttribute('href'))).map(label),
     numberedLabels: (text.match(/\\b0\\d ?\\/ /g) || []).length,
-    tinyTextNodes: tiny, uppercaseTextNodes: caps,
+    tinyTextNodes: tiny, tinySamples, uppercaseTextNodes: caps,
     canvases: document.querySelectorAll('canvas').length,
     runningAnimations: document.getAnimations().filter(a => a.playState === 'running').length,
     details: main.querySelectorAll('details').length,
@@ -115,7 +118,8 @@ try {
     const mobileHeight = await evaluate(send, `document.documentElement.scrollHeight`);
     const overflow = await evaluate(send, `document.documentElement.scrollWidth > innerWidth + 1`);
     if (process.env.SITE_METRICS_SHOTS && (route === "/" || route === "/solutions")) await shoot(send, `mobile${route.replace(/\//g, "_") || "_home"}`, 390, 844, 1, 1);
-    const { text, linkTargets, ...rest } = m;
+    const { text, linkTargets, tinySamples, ...rest } = m;
+    if (tinySamples.length) console.log(`AUDITTINY ${JSON.stringify({ route, tinySamples })}`);
     console.log(`AUDIT ${JSON.stringify({ route, ...rest, uniqueLinkTargets: linkTargets.length, disclaimers, jargon, mobileHeight, mobileOverflow: overflow, firstWords: text.slice(0, 600) })}`);
     console.log(`AUDITTEXT ${JSON.stringify({ route, text })}`);
     summary.push({ route, words: m.words, phoneScreens: +(mobileHeight / 844).toFixed(1), disclaimers, internalTerms: Object.values(jargon).reduce((a, b) => a + b, 0), contactLabels: [...new Set(m.contactLinks)].length });

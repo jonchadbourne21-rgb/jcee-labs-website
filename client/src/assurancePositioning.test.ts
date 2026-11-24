@@ -103,7 +103,7 @@ describe("buyer-readable public positioning with Assurance Playbook control", ()
     expect(plain(inquiry)).toContain(
       "Production changes, software implementation, and deployment remain separately scoped and authorized"
     );
-    expect(inquiry).toContain("Make consequential software");
+    expect(inquiry).toContain("Make high-impact software");
     expect(inquiry).not.toMatch(/fetch\s*\(/);
   });
 });

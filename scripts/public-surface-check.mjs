@@ -544,7 +544,7 @@ try {
     ["/assurance", "The JCEE Assurance Method"],
     ["/charter", "Hypotheses may"],
     ["/partners", "Choose the boundary"],
-    ["/partners/enterprise", "Make consequential software"],
+    ["/partners/enterprise", "Make high-impact software"],
     ["/partners/research", "Put the claim where"],
   ]) {
     await navigate(page.send, baseUrl, route);
