@@ -2,7 +2,7 @@
  * Static authored markup only; no user-provided HTML or scripts.
  * Preserve existing routes, public evidence limits and inquiry surfaces.
  */
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import CoreHeader from "@/components/CoreHeader";
 import BrandFooter from "@/components/BrandFooter";
@@ -199,15 +199,17 @@ export default function EditorialSite({page}: {page: EditorialPage}) {
       document.removeEventListener("keydown", handleKeys);
     };
   }, [page]);
-  const content = PAGES[page]
+  // Stable object: React 19 rewrites innerHTML when this prop's identity
+  // changes, which would detach the signature panel's portal host.
+  const markup = useMemo(() => ({ __html: PAGES[page]
     .replace(/<header class="site-header">[\s\S]*?<\/header>/, "")
     .replace(/<footer[\s\S]*?<\/footer>/, "")
     .replace('id="main"', 'id="page-content" tabindex="-1"')
     .replaceAll('/#capabilities', '/capabilities/infrastructure')
-    .replaceAll('/#work', '/#evidence');
+    .replaceAll('/#work', '/#evidence') }), [page]);
   return <div className="jcee-editorial" ref={ref}>
     <CoreHeader current="solutions" />
-    <div dangerouslySetInnerHTML={{ __html: content }} />
+    <div dangerouslySetInnerHTML={markup} />
     {signatureHost && createPortal(
       <SignaturePanel className="worldlab-masthead-art" label={SIGNATURE_LABELS[page]} />,
       signatureHost,
