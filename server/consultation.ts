@@ -54,7 +54,7 @@ export function validateConsultation(body: unknown): Validation {
 
 export function formatConsultationEmail(request: ConsultationRequest) {
   const company = request.organization || "Not provided";
-  const subject = `Consultation request: ${request.organization || request.name}`.slice(0, 160);
+  const subject = oneLine(`Consultation request: ${request.organization || request.name}`).slice(0, 160);
   const text = [
     "New free-consultation request from jceelabs.com",
     "",
