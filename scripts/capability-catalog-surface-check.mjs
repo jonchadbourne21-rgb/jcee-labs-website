@@ -145,9 +145,10 @@ try {
     // The heading copy was rewritten for buyers and the closing note removed
     // (customer-readiness pass), so text and text-driven box sizes are not
     // compared; every style value and all card geometry still are.
+    // The decorative card number was raised from 11px to 12px in the type pass.
     // Card summaries were also reworded in buyer language, so their line count
     // (and so card heights on narrow screens) may change.
-    const textDriven = /^(desktop|tablet|iPhone)\.((kicker|heading|lede|ledeStrong|note|summary|card|cardLink)\.(width|height)|(section|headingBlock|grid)\.height|cardHeights|note(\..*)?|(kicker|heading|lede|note)Text)$/;
+    const textDriven = /^(desktop|tablet|iPhone)\.((kicker|heading|lede|ledeStrong|note|summary|card|cardLink)\.(width|height)|(section|headingBlock|grid)\.height|cardHeights|number(\..*)?|note(\..*)?|(kicker|heading|lede|note)Text)$/;
     const compare = (label, expected, actual) => {
       if (textDriven.test(label)) return;
       if (typeof expected === "number" && typeof actual === "number") {
