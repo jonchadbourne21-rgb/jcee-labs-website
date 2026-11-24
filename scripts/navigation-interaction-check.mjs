@@ -27,7 +27,9 @@ try {
   }
  }
  async function arrived(route) {
-  for(let i=0;i<80;i++){
+  // Up to 12s: a cold lazy route chunk on a loaded CI runner occasionally
+  // exceeded the previous 6s budget (seen on unchanged main as well).
+  for(let i=0;i<160;i++){
    if(await evaluate(send,`location.pathname===${JSON.stringify(route)}&&document.querySelector('#root')?.dataset.clientReady==='true'&&!!document.querySelector('h1')`))return;
    await sleep(75);
   }
