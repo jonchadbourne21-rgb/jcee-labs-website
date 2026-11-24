@@ -6,12 +6,6 @@ import CoreHeader, { type CoreHeaderCurrent } from "./CoreHeader";
 import { useEffect } from "react";
 import { useLocation } from "wouter";
 
-/** Readout label from the eyebrow, skipping the company name. */
-function signatureLabel(eyebrow: string) {
-  const parts = eyebrow.split("/").map(part => part.trim()).filter(Boolean);
-  return parts.find(part => !/^jcee( worldlab)?$/i.test(part)) ?? "WorldLab";
-}
-
 export default function EditorialLayout({
   title,
   eyebrow,
@@ -71,7 +65,7 @@ export default function EditorialLayout({
             <h1>{title}</h1>
             <p className="editorial-deck">{description}</p>
           </div>
-          <SignaturePanel className="editorial-hero-art" label={signatureLabel(eyebrow)} seedKey={title} />
+          <SignaturePanel className="editorial-hero-art" label={eyebrow} seedKey={title} />
         </header>
         {children}
       </div>

@@ -8,13 +8,20 @@ export function signatureSeed(label: string) {
   return (hash % 97) + 1;
 }
 
+/** Short readout label: first meaningful part of an eyebrow, without a repeated "JCEE". */
+export function signatureLabel(text: string) {
+  const parts = text.split(/[\/·|]/).map(part => part.trim()).filter(Boolean);
+  const part = parts.find(p => !/^(the\s+)?jcee(\s+worldlab)?$/i.test(p)) ?? "WorldLab";
+  return part.replace(/^the\s+/i, "").replace(/^jcee\s+(worldlab\s+)?/i, "").replace(/\s+/g, " ").trim() || "WorldLab";
+}
+
 /**
  * The site's one signature visual: the Rust-driven hex-wave field in an
  * instrument frame. Replaces the per-page 3D renders. Decorative only.
  */
 export default function SignaturePanel({ label, seedKey, className = "" }: { label: string; seedKey?: string; className?: string }) {
   const seed = signatureSeed(seedKey ?? label);
-  const tag = label.replace(/\s+/g, " ").trim().toUpperCase().slice(0, 32);
+  const tag = signatureLabel(label).toUpperCase().slice(0, 28);
   return (
     <div className={`signature-panel ${className}`.trim()} data-signature-seed={seed} aria-hidden="true">
       <HexWaveField variant="worldlab" seed={seed} intensity={1.7} pulse className="signature-field" />
