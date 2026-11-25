@@ -2,12 +2,16 @@ FROM node:22.23.4-bookworm-slim AS build
 WORKDIR /app
 ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
 COPY . .
+# The host stages the context without this Dockerfile (and .gitignore), but
+# both are tracked, so source parity needs them: restore both byte-for-byte
+# from the approved release bundle before building.
 RUN apt-get update \
   && apt-get install -y --no-install-recommends git \
   && rm -rf /var/lib/apt/lists/* \
   && git clone --no-checkout release-source.bundle /tmp/jcee-canonical \
-  && git -C /tmp/jcee-canonical checkout HEAD -- .gitignore \
+  && git -C /tmp/jcee-canonical checkout HEAD -- .gitignore Dockerfile \
   && cp /tmp/jcee-canonical/.gitignore .gitignore \
+  && cp /tmp/jcee-canonical/Dockerfile Dockerfile \
   && rm -rf /tmp/jcee-canonical \
   && corepack enable \
   && BUILD_SOURCE_COMMIT="$(node -e 'process.stdout.write(JSON.parse(require("fs").readFileSync("release-source.json", "utf8")).source)')" \
