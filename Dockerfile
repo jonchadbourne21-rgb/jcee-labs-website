@@ -9,7 +9,6 @@ RUN apt-get update \
   && git -C /tmp/jcee-canonical checkout HEAD -- .gitignore \
   && cp /tmp/jcee-canonical/.gitignore .gitignore \
   && rm -rf /tmp/jcee-canonical \
-  && rm -f Dockerfile \
   && corepack enable \
   && BUILD_SOURCE_COMMIT="$(node -e 'process.stdout.write(JSON.parse(require("fs").readFileSync("release-source.json", "utf8")).source)')" \
      sh scripts/manus-build.sh --pinned-runtime
